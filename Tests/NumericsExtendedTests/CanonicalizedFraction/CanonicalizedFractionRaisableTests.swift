@@ -7,6 +7,7 @@
 // See CONTRIBUTORS.txt for the list of Numerics Extended project authors
 
 import Testing
+
 @testable import NumericsExtended
 
 @Suite("Canonicalized Fraction Raisable Tests")
@@ -49,8 +50,11 @@ internal struct CanonicalizedFractionRaisableTests {
         exponent: Fraction<Int>.Exponent,
         power: Fraction<Int>
     ) {
-        @Canonicalized var runningPower: Fraction<Int> = base
+        @Canonicalized
+        var runningPower: Fraction<Int> = base
+
         runningPower **= exponent
+
         #expect(runningPower == power)
     }
 
@@ -63,8 +67,11 @@ internal struct CanonicalizedFractionRaisableTests {
         exponent: Fraction<Int>.Exponent,
         power: Fraction<Int>
     ) {
-        @Canonicalized var runningPower: Fraction<Int> = base
+        @Canonicalized
+        var runningPower: Fraction<Int> = base
+
         runningPower.raise(to: exponent)
+
         #expect(runningPower == power)
     }
 
@@ -76,8 +83,11 @@ internal struct CanonicalizedFractionRaisableTests {
         base: Fraction<Int>,
         power: Fraction<Int>
     ) {
-        @Canonicalized var value: Fraction<Int> = base
+        @Canonicalized
+        var value: Fraction<Int> = base
+
         value.square()
+
         #expect(value == power)
     }
 
@@ -89,8 +99,11 @@ internal struct CanonicalizedFractionRaisableTests {
         base: Fraction<Int>,
         power: Fraction<Int>
     ) {
-        @Canonicalized var value: Fraction<Int> = base
+        @Canonicalized
+        var value: Fraction<Int> = base
+
         value.cube()
+
         #expect(value == power)
     }
 }

@@ -28,8 +28,9 @@ public protocol Divisible: Equatable {
 
     /// Returns the quotient of dividing the first specified value by the second.
     ///
-    /// - Parameter lhs: The dividend.
-    /// - Parameter rhs: The divisor.
+    /// - Parameters:
+    ///   - lhs: The dividend.
+    ///   - rhs: The divisor.
     /// - Returns: The quotient.
     static func / (
         _ lhs: Self,
@@ -38,8 +39,9 @@ public protocol Divisible: Equatable {
 
     /// Returns the remainder of dividing the first specified value by the second.
     ///
-    /// - Parameter lhs: The dividend.
-    /// - Parameter rhs: The divisor.
+    /// - Parameters:
+    ///   - lhs: The dividend.
+    ///   - rhs: The divisor.
     /// - Returns: The remainder.
     static func % (
         _ lhs: Self,
@@ -58,8 +60,9 @@ extension Divisible {
 
     /// Divides the first specified value by the second and stores the quotient in the left-hand-side variable.
     ///
-    /// - Parameter lhs: The dividend.
-    /// - Parameter rhs: The divisor.
+    /// - Parameters:
+    ///   - lhs: The dividend.
+    ///   - rhs: The divisor.
     public static func /= (
         _ lhs: inout Self,
         _ rhs: Self
@@ -69,8 +72,9 @@ extension Divisible {
 
     /// Divides the first specified value by the second and stores the remainder in the left-hand-side variable.
     ///
-    /// - Parameter lhs: The dividend.
-    /// - Parameter rhs: The divisor.
+    /// - Parameters:
+    ///   - lhs: The dividend.
+    ///   - rhs: The divisor.
     public static func %= (
         _ lhs: inout Self,
         _ rhs: Self

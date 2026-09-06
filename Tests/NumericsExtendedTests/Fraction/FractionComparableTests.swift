@@ -7,6 +7,7 @@
 // See CONTRIBUTORS.txt for the list of Numerics Extended project authors
 
 import Testing
+
 @testable import NumericsExtended
 
 @Suite("Fraction Comparable Tests")
@@ -108,7 +109,7 @@ internal struct FractionComparableTests {
         lowerBound: Fraction<Int>,
         upperBound: Fraction<Int>
     ) {
-        let range: ClosedRange<Fraction<Int>> = lowerBound...upperBound
+        let range: ClosedRange<Fraction<Int>> = lowerBound ... upperBound
         #expect(value.isWithin(range) == range.contains(value))
     }
 

@@ -115,10 +115,8 @@ internal struct RomanNumeralParser {
         for (lhs, rhs) in zip(
             symbols.dropLast(),
             symbols.dropFirst()
-        ) {
-            if lhs < rhs {
-                return false
-            }
+        ) where lhs < rhs {
+            return false
         }
 
         return true
@@ -138,7 +136,7 @@ internal struct RomanNumeralParser {
         }
 
         for index in symbols.indices.dropFirst(3) {
-            let sequence: ArraySlice<RomanSymbol> = symbols[index - 3...index]
+            let sequence: ArraySlice<RomanSymbol> = symbols[index - 3 ... index]
             let repeatedSymbol: RomanSymbol = sequence[sequence.startIndex]
 
             if sequence.dropFirst().allSatisfy({ $0 == repeatedSymbol }) {
@@ -158,7 +156,8 @@ internal struct RomanNumeralParser {
             symbols.dropFirst()
         ) {
             guard let separatedSymbols: Array<RomanSymbol> = try? rhs.separate(),
-                  let subtractingSymbol: RomanSymbol = separatedSymbols.first else {
+                let subtractingSymbol: RomanSymbol = separatedSymbols.first
+            else {
                 continue
             }
 
@@ -179,7 +178,8 @@ internal struct RomanNumeralParser {
             symbols.dropFirst()
         ) {
             guard let separatedSymbols: Array<RomanSymbol> = try? lhs.separate(),
-                  let subtractingSymbol: RomanSymbol = separatedSymbols.first else {
+                let subtractingSymbol: RomanSymbol = separatedSymbols.first
+            else {
                 continue
             }
 

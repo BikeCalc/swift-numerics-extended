@@ -7,6 +7,7 @@
 // See CONTRIBUTORS.txt for the list of Numerics Extended project authors
 
 import Testing
+
 @testable import NumericsExtended
 
 @Suite("Fraction Rational Tests")
@@ -139,7 +140,6 @@ internal struct FractionRationalTests {
     ) {
         #expect(lhs.isLike(rhs) == result)
     }
-
 }
 
 // MARK: - IntMin

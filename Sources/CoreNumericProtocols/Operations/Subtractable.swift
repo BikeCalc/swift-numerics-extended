@@ -10,8 +10,9 @@
 public protocol Subtractable: Equatable {
     /// Returns the difference of subtracting the second specified value from the first.
     ///
-    /// - Parameter lhs: The minuend.
-    /// - Parameter rhs: The subtrahend.
+    /// - Parameters:
+    ///   - lhs: The minuend.
+    ///   - rhs: The subtrahend.
     /// - Returns: The difference.
     static func - (
         _ lhs: Self,
@@ -22,8 +23,9 @@ public protocol Subtractable: Equatable {
 extension Subtractable {
     /// Subtracts the second specified value from the first and stores the difference in the left-hand-side variable.
     ///
-    /// - Parameter lhs: The minuend.
-    /// - Parameter rhs: The subtrahend.
+    /// - Parameters:
+    ///   - lhs: The minuend.
+    ///   - rhs: The subtrahend.
     public static func -= (
         _ lhs: inout Self,
         _ rhs: Self

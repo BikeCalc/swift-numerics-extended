@@ -7,6 +7,7 @@
 // See CONTRIBUTORS.txt for the list of Numerics Extended project authors
 
 import Testing
+
 @testable import NumericsExtended
 
 @Suite("Canonicalized Fraction Multipliable Tests")
@@ -27,8 +28,11 @@ internal struct CanonicalizedFractionMultipliableTests {
         multiplier: Fraction<Int>,
         product: Fraction<Int>
     ) {
-        @Canonicalized var runningProduct: Fraction<Int> = multiplicand
+        @Canonicalized
+        var runningProduct: Fraction<Int> = multiplicand
+
         runningProduct *= multiplier
+        
         #expect(runningProduct == product)
     }
 
@@ -41,8 +45,11 @@ internal struct CanonicalizedFractionMultipliableTests {
         multiplier: Fraction<Int>,
         product: Fraction<Int>
     ) {
-        @Canonicalized var runningProduct: Fraction<Int> = multiplicand
+        @Canonicalized
+        var runningProduct: Fraction<Int> = multiplicand
+
         runningProduct.multiply(by: multiplier)
+
         #expect(runningProduct == product)
     }
 }

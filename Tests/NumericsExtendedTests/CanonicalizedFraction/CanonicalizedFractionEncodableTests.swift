@@ -9,6 +9,7 @@
 #if canImport(Foundation)
 import Foundation
 import Testing
+
 @testable import NumericsExtended
 
 @Suite("Canonicalized Fraction Encodable Tests")
@@ -25,7 +26,9 @@ internal struct CanonicalizedFractionEncodableTests {
         value: Fraction<Int>,
         json: String
     ) throws {
-        @Canonicalized var canonicalizedValue: Fraction<Int> = value
+        @Canonicalized
+        var canonicalizedValue: Fraction<Int> = value
+
         let encoder: JSONEncoder = .init()
         encoder.outputFormatting = .sortedKeys
 
@@ -41,7 +44,9 @@ internal struct CanonicalizedFractionEncodableTests {
 extension CanonicalizedFractionEncodableTests {
     @Test("NaN encodes to JSON")
     internal func nanEncodesToJSON() throws {
-        @Canonicalized var value: Fraction<Int> = .nan
+        @Canonicalized
+        var value: Fraction<Int> = .nan
+
         let encoder: JSONEncoder = .init()
         encoder.outputFormatting = .sortedKeys
 
@@ -57,7 +62,9 @@ extension CanonicalizedFractionEncodableTests {
 extension CanonicalizedFractionEncodableTests {
     @Test("Negative infinity encodes to JSON")
     internal func negativeInfinityEncodesToJSON() throws {
-        @Canonicalized var value: Fraction<Int> = .negativeInfinity
+        @Canonicalized
+        var value: Fraction<Int> = .negativeInfinity
+
         let encoder: JSONEncoder = .init()
         encoder.outputFormatting = .sortedKeys
 
@@ -73,7 +80,9 @@ extension CanonicalizedFractionEncodableTests {
 extension CanonicalizedFractionEncodableTests {
     @Test("Negative zero encodes to JSON")
     internal func negativeZeroEncodesToJSON() throws {
-        @Canonicalized var value: Fraction<Int> = .init(0, -2)
+        @Canonicalized
+        var value: Fraction<Int> = .init(0, -2)
+
         let encoder: JSONEncoder = .init()
         encoder.outputFormatting = .sortedKeys
 
@@ -89,7 +98,9 @@ extension CanonicalizedFractionEncodableTests {
 extension CanonicalizedFractionEncodableTests {
     @Test("Positive infinity encodes to JSON")
     internal func positiveInfinityEncodesToJSON() throws {
-        @Canonicalized var value: Fraction<Int> = .infinity
+        @Canonicalized
+        var value: Fraction<Int> = .infinity
+
         let encoder: JSONEncoder = .init()
         encoder.outputFormatting = .sortedKeys
 
@@ -105,7 +116,9 @@ extension CanonicalizedFractionEncodableTests {
 extension CanonicalizedFractionEncodableTests {
     @Test("Positive zero encodes to JSON")
     internal func positiveZeroEncodesToJSON() throws {
-        @Canonicalized var value: Fraction<Int> = .init(0, 2)
+        @Canonicalized
+        var value: Fraction<Int> = .init(0, 2)
+        
         let encoder: JSONEncoder = .init()
         encoder.outputFormatting = .sortedKeys
 

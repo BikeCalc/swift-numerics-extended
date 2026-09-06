@@ -5,6 +5,9 @@ import PackageDescription
 let package = Package(
     name: "swift-numerics-extended",
     defaultLocalization: "en",
+    platforms: [
+        .macOS(.v13)
+    ],
     products: [
         .library(
             name: "NumericsExtended",
@@ -21,7 +24,7 @@ let package = Package(
         .package(
             url: "https://github.com/swiftlang/swift-format.git",
             from: "603.0.0"
-        ),
+        )
     ],
     targets: [
         .executableTarget(

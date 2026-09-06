@@ -16,8 +16,9 @@ public protocol Multipliable: Equatable {
 
     /// Returns the product of multiplying the two specified values.
     ///
-    /// - Parameter lhs: The multiplicand.
-    /// - Parameter rhs: The multiplier.
+    /// - Parameters:
+    ///   - lhs: The multiplicand.
+    ///   - rhs: The multiplier.
     /// - Returns: The product.
     static func * (
         _ lhs: Self,
@@ -28,8 +29,9 @@ public protocol Multipliable: Equatable {
 extension Multipliable {
     /// Multiplies the two specified values and stores the product in the left-hand-side variable.
     ///
-    /// - Parameter lhs: The multiplicand.
-    /// - Parameter rhs: The multiplier.
+    /// - Parameters:
+    ///   - lhs: The multiplicand.
+    ///   - rhs: The multiplier.
     public static func *= (
         _ lhs: inout Self,
         _ rhs: Self

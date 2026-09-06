@@ -7,6 +7,7 @@
 // See CONTRIBUTORS.txt for the list of Numerics Extended project authors
 
 import Testing
+
 @testable import NumericsExtended
 
 @Suite("Int4 Comparable Tests")
@@ -106,7 +107,7 @@ internal struct Int4ComparableTests {
         lowerBound: Int4,
         upperBound: Int4
     ) {
-        let range: ClosedRange<Int4> = lowerBound...upperBound
+        let range: ClosedRange<Int4> = lowerBound ... upperBound
         #expect(value.isWithin(range) == range.contains(value))
     }
 

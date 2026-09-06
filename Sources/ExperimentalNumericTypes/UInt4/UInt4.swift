@@ -144,7 +144,7 @@ public struct UInt4 {
     /// - Precondition: `value` must be in the range `0...15`.
     internal init(value: Self.Value) {
         precondition(
-            0...15 ~= value,
+            0 ... 15 ~= value,
             "UInt4 value must be between \(Self.min) and \(Self.max)."
         )
         self.value = value
@@ -254,7 +254,7 @@ extension UInt4: BinaryInteger {
         ) -> Int {
             let newIndex: Int = index + distance
             precondition(
-                self.startIndex...self.endIndex ~= newIndex,
+                self.startIndex ... self.endIndex ~= newIndex,
                 "UInt4 words index must be within bounds."
             )
 
@@ -281,7 +281,7 @@ extension UInt4: BinaryInteger {
     public init<T>(_ source: T)
     where T: BinaryInteger {
         guard let value: Self.Value = .init(exactly: source),
-              Self.min.value...Self.max.value ~= value else {
+            Self.min.value ... Self.max.value ~= value
             preconditionFailure("UInt4 value must be between \(Self.min) and \(Self.max).")
         }
 
@@ -377,7 +377,7 @@ extension UInt4: Decodable {
         let container: SingleValueDecodingContainer = try decoder.singleValueContainer()
         let value: Self.Value = try container.decode(Self.Value.self)
 
-        guard Self.min.value...Self.max.value ~= value else {
+        guard Self.min.value ... Self.max.value ~= value else {
             let debugDescription: String = "UInt4 value must be between \(Self.min) and \(Self.max)."
             throw DecodingError.dataCorruptedError(
                 in: container,
@@ -475,7 +475,7 @@ extension UInt4: ExpressibleByIntegerLiteral {
     /// - Precondition: `value` must be in the range `0...15`.
     public init(integerLiteral value: Self.IntegerLiteralType) {
         precondition(
-            0...15 ~= value,
+            0 ... 15 ~= value,
             "UInt4 integer literal must be between \(Self.min) and \(Self.max)."
         )
 
@@ -612,7 +612,8 @@ extension UInt4: Hashable {
 extension UInt4: LosslessStringConvertible {
     public init?(_ description: String) {
         guard let value: Self.Value = .init(description),
-              Self.min.value...Self.max.value ~= value else {
+            Self.min.value ... Self.max.value ~= value
+        else {
             return nil
         }
 
@@ -640,7 +641,8 @@ extension UInt4: Numeric {
     public init?<Source>(exactly source: Source)
     where Source: BinaryInteger {
         guard let value: Self.Value = .init(exactly: source),
-              Self.min.value...Self.max.value ~= value else {
+            Self.min.value ... Self.max.value ~= value
+        else {
             return nil
         }
 

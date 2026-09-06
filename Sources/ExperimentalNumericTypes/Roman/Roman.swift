@@ -162,7 +162,7 @@ public struct Roman {
     /// - Precondition: `value` must be in the range `0...3_999`.
     private init(value: Self.Value) {
         precondition(
-            0...3_999 ~= value,
+            0 ... 3_999 ~= value,
             "Roman value must be between \(Self.min) and \(Self.max)."
         )
         self.value = value
@@ -403,7 +403,7 @@ extension Roman: ExpressibleByIntegerLiteral {
     /// - Precondition: `value` must be in the range `0...3_999`.
     public init(integerLiteral value: Self.IntegerLiteralType) {
         precondition(
-            0...3_999 ~= value,
+            0 ... 3_999 ~= value,
             "Roman integer literal must be between \(Self.min) and \(Self.max)."
         )
 
@@ -480,7 +480,8 @@ extension Roman: Numeric {
     public init?<Source>(exactly source: Source)
     where Source: BinaryInteger {
         guard let value: Self.Value = .init(exactly: source),
-              Self.min.value...Self.max.value ~= value else {
+            Self.min.value ... Self.max.value ~= value
+        else {
             return nil
         }
 

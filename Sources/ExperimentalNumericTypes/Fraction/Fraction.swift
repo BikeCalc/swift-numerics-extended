@@ -163,7 +163,8 @@ where Term: BinaryInteger {
 
         while numerator != 1 || denominator != 1 {
             guard numerator % baseNumerator == 0,
-                  denominator % baseDenominator == 0 else {
+                denominator % baseDenominator == 0
+            else {
                 return nil
             }
 
@@ -558,9 +559,10 @@ extension Fraction: Divisible {
         _ rhs: Self
     ) -> Self {
         guard lhs.isNaN == false,
-              rhs.isNaN == false,
-              lhs.isInfinite == false,
-              rhs.isZero == false else {
+            rhs.isNaN == false,
+            lhs.isInfinite == false,
+            rhs.isZero == false
+        else {
             return .nan
         }
 
@@ -727,7 +729,8 @@ where Term: LosslessStringConvertible {
             self.init(numerator)
         case 2:
             guard let numerator: Term = .init(String(terms[0])),
-                  let denominator: Term = .init(String(terms[1])) else {
+                let denominator: Term = .init(String(terms[1]))
+            else {
                 return nil
             }
 
@@ -756,8 +759,6 @@ extension Fraction: Multipliable {
         }
 
         guard self.isFinite,
-              other.isFinite,
-              other.isZero == false else {
             return false
         }
 
@@ -969,7 +970,8 @@ extension Fraction: Raisable {
         }
 
         guard self.isFinite,
-              self.isZero == false else {
+            self.isZero == false
+        else {
             return false
         }
 

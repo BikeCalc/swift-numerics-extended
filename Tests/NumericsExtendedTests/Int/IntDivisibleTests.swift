@@ -7,6 +7,7 @@
 // See CONTRIBUTORS.txt for the list of Numerics Extended project authors
 
 import Testing
+
 @testable import NumericsExtended
 
 @Suite("Int Divisible Tests")
@@ -327,7 +328,6 @@ extension IntDivisibleTests {
     internal func dividingNegativeZeroByNonzeroValueReturnsNegativeZero(divisor: Int) {
         #expect(Int.negativeZero / divisor == Int.negativeZero)
     }
-
 }
 
 // MARK: - Positive One

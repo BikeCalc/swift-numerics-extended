@@ -49,8 +49,9 @@ extension Comparable {
 
     /// Returns a boolean value indicating whether this value is within two specified values.
     ///
-    /// - Parameter lowerBound: The lower bound value.
-    /// - Parameter upperBound: The upper bound value.
+    /// - Parameters:
+    ///   - lowerBound: The lower bound value.
+    ///   - upperBound: The upper bound value.
     /// - Returns: A boolean value.
     /// - Precondition: `lowerBound` must be less than `upperBound`.
     public func isWithin(
@@ -62,15 +63,16 @@ extension Comparable {
             "Lower bound must be less than upper bound."
         )
 
-        let closedRange: ClosedRange<Self> = lowerBound...upperBound
+        let closedRange: ClosedRange<Self> = lowerBound ... upperBound
 
         return self.isWithin(closedRange) == true
     }
 
     /// Returns a boolean value indicating whether this value is between two specified values.
     ///
-    /// - Parameter lowerBound: The lower bound value.
-    /// - Parameter upperBound: The upper bound value.
+    /// - Parameters:
+    ///   - lowerBound: The lower bound value.
+    ///   - upperBound: The upper bound value.
     /// - Returns: A boolean value.
     /// - Precondition: `lowerBound` must be less than `upperBound`.
     public func isBetween(

@@ -7,6 +7,7 @@
 // See CONTRIBUTORS.txt for the list of Numerics Extended project authors
 
 import Testing
+
 @testable import NumericsExtended
 
 @Suite("Int4 FixedWidthInteger Tests")
@@ -99,7 +100,7 @@ internal struct Int4FixedWidthIntegerTests {
             (6, 6),
             (7, Int4.max),
             (8, Int4.min),
-            (9, -7),
+            (9, -7)
         ] as Array<(Int, Int4)>
     )
     internal func initializedTruncatingIfNeededSucceeds(
@@ -135,7 +136,7 @@ internal struct Int4FixedWidthIntegerTests {
             (4, 4, 1, 0),
             (7, 7, 3, 1),
             (-2, 3, -1, 10),
-            (-3, -4, 0, 12),
+            (-3, -4, 0, 12)
         ] as Array<(Int4, Int4, Int4, UInt4)>
     )
     internal func multipliedFullWidthSucceeds(

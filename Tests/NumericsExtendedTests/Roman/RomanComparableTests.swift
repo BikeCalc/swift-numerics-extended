@@ -7,6 +7,7 @@
 // See CONTRIBUTORS.txt for the list of Numerics Extended project authors
 
 import Testing
+
 @testable import NumericsExtended
 
 @Suite("Roman Comparable Tests")
@@ -98,7 +99,7 @@ internal struct RomanComparableTests {
         lowerBound: Roman,
         upperBound: Roman
     ) {
-        let range: ClosedRange<Roman> = lowerBound...upperBound
+        let range: ClosedRange<Roman> = lowerBound ... upperBound
         #expect(value.isWithin(range) == range.contains(value))
     }
 
