@@ -14,6 +14,8 @@ internal struct FractionComparableTests {
     private static let comparisonArguments: [(Fraction<Int>, Fraction<Int>, Bool, Bool, Bool, Bool)] = [
         (Fraction<Int>(1, 2), Fraction<Int>(1, 2), false, true, false, true),
         (Fraction<Int>(-1, 2), Fraction<Int>(-1, 2), false, true, false, true),
+        (Fraction<Int>(1, 2), Fraction<Int>(2, 4), true, true, false, false),
+        (Fraction<Int>(2, 4), Fraction<Int>(1, 2), false, false, true, true),
         (Fraction<Int>(2, 2), Fraction<Int>(3, 2), true, true, false, false),
         (Fraction<Int>(3, 2), Fraction<Int>(2, 2), false, false, true, true),
         (Fraction<Int>(-2, 2), Fraction<Int>(3, 2), true, true, false, false),
@@ -143,18 +145,6 @@ internal struct FractionComparableTests {
 
         #expect(isBetween == (value > lowerBound && value < upperBound))
     }
-
-    @Test("Equivalent representations use stored terms as tie-breakers")
-    internal func equivalentRepresentationsUseStoredTermsAsTieBreakers() {
-        let reduced: Fraction<Int> = .init(1, 2)
-        let unreduced: Fraction<Int> = .init(2, 4)
-
-        #expect(reduced < unreduced)
-        #expect(unreduced > reduced)
-        #expect(reduced != unreduced)
-        #expect(reduced.isCanonicallyEquatable(to: unreduced) == true)
-    }
-
 }
 
 // MARK: - IntMin

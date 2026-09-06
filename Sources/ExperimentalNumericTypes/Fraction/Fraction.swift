@@ -65,7 +65,7 @@ import StandardNumericTypes
 /// - Note: `Fraction` is intentionally experimental. Its API may evolve across major releases.
 public struct Fraction<Term>
 where Term: BinaryInteger {
-    /// The keys used to encode and decode a rational value.
+    /// The keys used to encode and decode a fraction.
     private enum CodingKeys: String, CodingKey {
         case numerator = "num"
         case denominator = "den"

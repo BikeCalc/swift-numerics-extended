@@ -13,7 +13,7 @@ permissions:
 concurrency:
   group: "pages"
   cancel-in-progress: true
-  
+
 jobs:
   deploy:
     name: Deploy Documentation
