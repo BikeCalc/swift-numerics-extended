@@ -96,7 +96,7 @@ internal struct CanonicalizedFractionDivisibleTests {
         var runningQuotient: Fraction<Int> = dividend
 
         runningQuotient.halve()
-        
+
         #expect(runningQuotient == quotient)
     }
 }

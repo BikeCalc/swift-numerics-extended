@@ -56,7 +56,7 @@ extension Comparable {
     /// - Precondition: `lowerBound` must be less than `upperBound`.
     public func isWithin(
         _ lowerBound: Self,
-        through upperBound: Self
+        _ upperBound: Self
     ) -> Bool {
         precondition(
             lowerBound < upperBound,
@@ -77,7 +77,7 @@ extension Comparable {
     /// - Precondition: `lowerBound` must be less than `upperBound`.
     public func isBetween(
         _ lowerBound: Self,
-        and upperBound: Self
+        _ upperBound: Self
     ) -> Bool {
         precondition(
             lowerBound < upperBound,

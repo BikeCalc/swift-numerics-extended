@@ -108,6 +108,7 @@ internal struct Int4ComparableTests {
         upperBound: Int4
     ) {
         let range: ClosedRange<Int4> = lowerBound ... upperBound
+
         #expect(value.isWithin(range) == range.contains(value))
     }
 
@@ -120,11 +121,9 @@ internal struct Int4ComparableTests {
         lowerBound: Int4,
         upperBound: Int4
     ) {
-        let isWithin: Bool = value.isWithin(
-            lowerBound,
-            through: upperBound
-        ) == true
-        #expect(isWithin == (value >= lowerBound && value <= upperBound))
+        let valueIsWithinBounds: Bool = value.isWithin(lowerBound, upperBound) == true
+
+        #expect(valueIsWithinBounds == (value >= lowerBound && value <= upperBound))
     }
 
     @Test(
@@ -136,10 +135,8 @@ internal struct Int4ComparableTests {
         lowerBound: Int4,
         upperBound: Int4
     ) {
-        let isBetween: Bool = value.isBetween(
-            lowerBound,
-            and: upperBound
-        ) == true
-        #expect(isBetween == (value > lowerBound && value < upperBound))
+        let valueIsBetweenBounds: Bool = value.isBetween(lowerBound, upperBound) == true
+
+        #expect(valueIsBetweenBounds == (value > lowerBound && value < upperBound))
     }
 }

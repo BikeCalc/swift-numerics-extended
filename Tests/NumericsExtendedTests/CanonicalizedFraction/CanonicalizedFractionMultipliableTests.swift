@@ -32,7 +32,7 @@ internal struct CanonicalizedFractionMultipliableTests {
         var runningProduct: Fraction<Int> = multiplicand
 
         runningProduct *= multiplier
-        
+
         #expect(runningProduct == product)
     }
 

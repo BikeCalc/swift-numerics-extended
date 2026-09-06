@@ -32,8 +32,9 @@ package enum RationalComparator {
     /// This comparison evaluates continued-fraction terms using unsigned magnitudes rather than cross-multiplying the
     /// stored terms. NaN is unordered and produces `nil`.
     ///
-    /// - Parameter lhs: The first rational value.
-    /// - Parameter rhs: The second rational value.
+    /// - Parameters:
+    ///   - lhs: The first rational value.
+    ///   - rhs: The second rational value.
     /// - Returns: The ordering of the values, or `nil` when either value is NaN.
     package static func compare<Value>(
         _ lhs: Value,
@@ -60,11 +61,13 @@ package enum RationalComparator {
         }
 
         // Treat every finite zero as nonnegative; otherwise, exactly one negative term makes the value negative.
-        let lhsIsNegative: Bool = lhs.numerator != 0
-            && (lhs.numerator < 0) != (lhs.denominator < 0)
+        let lhsIsNonzero: Bool = lhs.numerator != 0
+        let lhsTermsHaveDifferentSigns: Bool = (lhs.numerator < 0) != (lhs.denominator < 0)
+        let lhsIsNegative: Bool = lhsIsNonzero && lhsTermsHaveDifferentSigns
 
-        let rhsIsNegative: Bool = rhs.numerator != 0
-            && (rhs.numerator < 0) != (rhs.denominator < 0)
+        let rhsIsNonzero: Bool = rhs.numerator != 0
+        let rhsTermsHaveDifferentSigns: Bool = (rhs.numerator < 0) != (rhs.denominator < 0)
+        let rhsIsNegative: Bool = rhsIsNonzero && rhsTermsHaveDifferentSigns
 
         if lhsIsNegative != rhsIsNegative {
             return lhsIsNegative ? .ascending : .descending
@@ -80,8 +83,9 @@ package enum RationalComparator {
 
     /// Returns the ordering of two nonnegative rational magnitudes.
     ///
-    /// - Parameter lhs: The first numerator and denominator magnitudes.
-    /// - Parameter rhs: The second numerator and denominator magnitudes.
+    /// - Parameters:
+    ///   - lhs: The first numerator and denominator magnitudes.
+    ///   - rhs: The second numerator and denominator magnitudes.
     /// - Returns: The ordering of the two rational magnitudes.
     /// - Precondition: Both denominators must be greater than zero.
     private static func compareMagnitudes<Magnitude>(
@@ -108,9 +112,7 @@ package enum RationalComparator {
             let rhsRemainder: Magnitude = rhsDividend % rhsDivisor
 
             if lhsQuotient != rhsQuotient {
-                let ordering: Ordering = lhsQuotient < rhsQuotient
-                    ? .ascending
-                    : .descending
+                let ordering: Ordering = lhsQuotient < rhsQuotient ? .ascending : .descending
 
                 return isReversed ? ordering.reversed : ordering
             }

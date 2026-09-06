@@ -60,7 +60,7 @@
     "ReplaceForEachWithForLoop" : true,
     "ReturnVoidInsteadOfEmptyTuple" : true,
     "TypeNamesShouldBeCapitalized" : true,
-    "UseEarlyExits" : true,
+    "UseEarlyExits" : false,
     "UseExplicitNilCheckInConditions" : true,
     "UseLetInEveryBoundCaseVariable" : true,
     "UseShorthandTypeNames" : false,

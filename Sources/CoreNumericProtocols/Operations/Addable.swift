@@ -30,7 +30,8 @@ extension Addable {
         _ lhs: inout Self,
         _ rhs: Self
     ) {
-        lhs = lhs + rhs
+        let sum: Self = lhs + rhs
+        lhs = sum
     }
 
     /// Returns the sum of this value and the specified value.

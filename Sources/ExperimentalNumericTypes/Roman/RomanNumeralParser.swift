@@ -55,8 +55,8 @@ internal struct RomanNumeralParser {
             return nil
         }
 
-        guard self.string.contains(where: { String($0) == RomanSymbol.N.description }) == false else {
-            return self.string == RomanSymbol.N.description ? [.N] : nil
+        guard self.string.contains(where: { String($0) == RomanSymbol.n.description }) == false else {
+            return self.string == RomanSymbol.n.description ? [.n] : nil
         }
 
         guard let symbols: Array<RomanSymbol> = self.tokenizeSymbols() else {
@@ -93,8 +93,7 @@ internal struct RomanNumeralParser {
                 return nil
             }
 
-            if let previousSymbol = symbols.last,
-               previousSymbol.isSubtractable(from: symbol) == true {
+            if let previousSymbol = symbols.last, previousSymbol.isSubtractable(from: symbol) == true {
                 do {
                     let concatenatedSymbol: RomanSymbol = try previousSymbol.concatenate(with: symbol)
                     symbols.removeLast()

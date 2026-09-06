@@ -21,8 +21,9 @@ public protocol Raisable: Equatable {
 
     /// Returns the power of raising the first specified value to the second.
     ///
-    /// - Parameter lhs: The base.
-    /// - Parameter rhs: The exponent.
+    /// - Parameters:
+    ///   - lhs: The base.
+    ///   - rhs: The exponent.
     /// - Returns: The power.
     static func ** (
         _ lhs: Self,
@@ -33,13 +34,15 @@ public protocol Raisable: Equatable {
 extension Raisable {
     /// Raises the first specified value to the second and stores the power in the left-hand-side variable.
     ///
-    /// - Parameter lhs: The base.
-    /// - Parameter rhs: The exponent.
+    /// - Parameters:
+    ///   - lhs: The base.
+    ///   - rhs: The exponent.
     public static func **= (
         _ lhs: inout Self,
         _ rhs: Self.Exponent
     ) {
-        lhs = lhs ** rhs
+        let power: Self = lhs ** rhs
+        lhs = power
     }
 
     /// Returns the power of raising this value to the specified value.

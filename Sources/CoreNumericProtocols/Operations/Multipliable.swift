@@ -36,7 +36,8 @@ extension Multipliable {
         _ lhs: inout Self,
         _ rhs: Self
     ) {
-        lhs = lhs * rhs
+        let product: Self = lhs * rhs
+        lhs = product
     }
 
     /// Returns the product of multiplying this value by the specified value.

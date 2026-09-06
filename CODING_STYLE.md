@@ -69,7 +69,6 @@ Swift Format also removes trailing whitespace as part of its standard formatting
 - `ReplaceForEachWithForLoop`: Use a `for` loop instead of `forEach`, except when passing a function reference.
 - `ReturnVoidInsteadOfEmptyTuple`: Use `Void` rather than `()` where an explicit void type is required.
 - `TypeNamesShouldBeCapitalized`: Structure, class, enumeration, and protocol names begin with a capital letter.
-- `UseEarlyExits`: Replace an `if`/`else` whose alternative exits the scope with an equivalent early-exit `guard`.
 - `UseExplicitNilCheckInConditions`: Use `value != nil` when an optional binding would immediately discard its value.
 - `UseLetInEveryBoundCaseVariable`: Put `let` or `var` beside every value bound in a case pattern.
 - `UseSingleLinePropertyGetter`: Read-only computed properties omit an unnecessary explicit `get` block.
@@ -91,6 +90,8 @@ Disabled rules represent intentional style choices rather than omissions:
   only to communicate access level.
 - `OmitExplicitReturns`: Explicit `return` statements are preferred because they make control flow easier to identify,
   including in single-expression declarations and closures.
+- `UseEarlyExits`: Choose between `guard` and `if`/`else` based on which form makes the control flow clearest; do not
+  rewrite an `if`/`else` statement solely to introduce an early exit.
 - `UseShorthandTypeNames`: Full generic type names such as `Array<Element>` are preferred when they make the type clear.
 - `UseSynthesizedInitializer`: An explicit initializer may remain when it makes construction requirements clearer, even
   if Swift could synthesize an equivalent initializer.

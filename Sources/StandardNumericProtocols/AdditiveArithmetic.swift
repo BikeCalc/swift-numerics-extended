@@ -14,7 +14,8 @@ where Self: Addable {
         _ lhs: inout Self,
         _ rhs: Self
     ) {
-        lhs = lhs + rhs
+        let sum: Self = lhs + rhs
+        lhs = sum
     }
 }
 
@@ -24,6 +25,7 @@ where Self: Subtractable {
         _ lhs: inout Self,
         _ rhs: Self
     ) {
-        lhs = lhs - rhs
+        let difference: Self = lhs - rhs
+        lhs = difference
     }
 }

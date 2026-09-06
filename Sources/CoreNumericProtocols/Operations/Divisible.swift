@@ -67,7 +67,8 @@ extension Divisible {
         _ lhs: inout Self,
         _ rhs: Self
     ) {
-        lhs = lhs / rhs
+        let quotient: Self = lhs / rhs
+        lhs = quotient
     }
 
     /// Divides the first specified value by the second and stores the remainder in the left-hand-side variable.
@@ -79,7 +80,8 @@ extension Divisible {
         _ lhs: inout Self,
         _ rhs: Self
     ) {
-        lhs = lhs % rhs
+        let remainder: Self = lhs % rhs
+        lhs = remainder
     }
 
     /// Returns the quotient of dividing this value by the specified value.

@@ -177,8 +177,9 @@ where Self: Raisable, Self.Exponent: BinaryInteger {
     ///
     /// A negative exponent returns the reciprocal power.
     ///
-    /// - Parameter lhs: The base.
-    /// - Parameter rhs: The exponent.
+    /// - Parameters:
+    ///   - lhs: The base.
+    ///   - rhs: The exponent.
     /// - Returns: The power.
     public static func ** (
         _ lhs: Self,

@@ -30,7 +30,8 @@ extension Subtractable {
         _ lhs: inout Self,
         _ rhs: Self
     ) {
-        lhs = lhs - rhs
+        let difference: Self = lhs - rhs
+        lhs = difference
     }
 
     /// Returns the difference of this value and the specified value.

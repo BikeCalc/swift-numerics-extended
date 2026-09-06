@@ -118,7 +118,7 @@ extension CanonicalizedFractionNegateableTests {
     internal func negatingPositiveZeroPreservesCanonicalRepresentation(value: Fraction<Int>) {
         @Canonicalized
         var runningValue: Fraction<Int> = value
-        
+
         runningValue.negate()
 
         #expect(runningValue == .zero)

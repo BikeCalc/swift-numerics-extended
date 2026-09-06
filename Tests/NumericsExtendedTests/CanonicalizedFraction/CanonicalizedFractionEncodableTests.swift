@@ -118,7 +118,7 @@ extension CanonicalizedFractionEncodableTests {
     internal func positiveZeroEncodesToJSON() throws {
         @Canonicalized
         var value: Fraction<Int> = .init(0, 2)
-        
+
         let encoder: JSONEncoder = .init()
         encoder.outputFormatting = .sortedKeys
 

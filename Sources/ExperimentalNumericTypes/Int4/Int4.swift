@@ -162,11 +162,12 @@ public struct Int4 {
     private init(bitPattern bits: UInt8) {
         let nibble: UInt8 = bits & 0b1111
         let modulus: Self.Value = 16
-        let value: Self.Value = if nibble >= 0b1000 {
-            .init(nibble) - .init(modulus)
-        } else {
-            .init(nibble)
-        }
+        let value: Self.Value =
+            if nibble >= 0b1000 {
+                .init(nibble) - .init(modulus)
+            } else {
+                .init(nibble)
+            }
 
         self.init(value: value)
     }
@@ -270,8 +271,9 @@ extension Int4: BinaryInteger {
 
         /// Returns an index offset from the specified index.
         ///
-        /// - Parameter index: The index to offset.
-        /// - Parameter distance: The distance to offset `index` by.
+        /// - Parameters:
+        ///   - index: The index to offset.
+        ///   - distance: The distance to offset `index` by.
         /// - Returns: An index offset by `distance`.
         /// - Precondition: The resulting index must be between `startIndex` and `endIndex`, inclusive.
         public func index(
@@ -289,8 +291,9 @@ extension Int4: BinaryInteger {
 
         /// Returns the distance between two indices.
         ///
-        /// - Parameter start: The starting index.
-        /// - Parameter end: The ending index.
+        /// - Parameters:
+        ///   - start: The starting index.
+        ///   - end: The ending index.
         /// - Returns: The distance from `start` to `end`.
         public func distance(
             from start: Int,
@@ -331,8 +334,9 @@ extension Int4: BinaryInteger {
 
     /// Stores the bitwise AND of the two specified values in the left-hand-side variable.
     ///
-    /// - Parameter lhs: The left-hand-side value.
-    /// - Parameter rhs: The right-hand-side value.
+    /// - Parameters:
+    ///   - lhs: The left-hand-side value.
+    ///   - rhs: The right-hand-side value.
     public static func &= (
         _ lhs: inout Self,
         _ rhs: Self
@@ -342,8 +346,9 @@ extension Int4: BinaryInteger {
 
     /// Stores the bitwise OR of the two specified values in the left-hand-side variable.
     ///
-    /// - Parameter lhs: The left-hand-side value.
-    /// - Parameter rhs: The right-hand-side value.
+    /// - Parameters:
+    ///   - lhs: The left-hand-side value.
+    ///   - rhs: The right-hand-side value.
     public static func |= (
         _ lhs: inout Self,
         _ rhs: Self
@@ -353,8 +358,9 @@ extension Int4: BinaryInteger {
 
     /// Stores the bitwise XOR of the two specified values in the left-hand-side variable.
     ///
-    /// - Parameter lhs: The left-hand-side value.
-    /// - Parameter rhs: The right-hand-side value.
+    /// - Parameters:
+    ///   - lhs: The left-hand-side value.
+    ///   - rhs: The right-hand-side value.
     public static func ^= (
         _ lhs: inout Self,
         _ rhs: Self
@@ -431,8 +437,9 @@ extension Int4: Divisible {
     /// // Prints "3"
     /// ```
     ///
-    /// - Parameter lhs: The dividend.
-    /// - Parameter rhs: The divisor.
+    /// - Parameters:
+    ///   - lhs: The dividend.
+    ///   - rhs: The divisor.
     /// - Returns: The quotient.
     /// - Precondition: `rhs` must not be zero and the quotient must be representable as `Int4`.
     public static func / (
@@ -455,8 +462,9 @@ extension Int4: Divisible {
     /// // Prints "1"
     /// ```
     ///
-    /// - Parameter lhs: The dividend.
-    /// - Parameter rhs: The divisor.
+    /// - Parameters:
+    ///   - lhs: The dividend.
+    ///   - rhs: The divisor.
     /// - Returns: The remainder.
     /// - Precondition: `rhs` must not be zero and the operation must not overflow.
     public static func % (
@@ -697,13 +705,14 @@ extension Int4: ReportableAsOverflow {
         let sum: Self.Value = self.value &+ rhs.value
         let partialValue: Self = .init(truncatingIfNeeded: sum)
 
-        let overflow: Bool = if rhs.value > 0 {
-            self.value > Self.max.value - rhs.value
-        } else if rhs.value < 0 {
-            self.value < Self.min.value - rhs.value
-        } else {
-            false
-        }
+        let overflow: Bool =
+            if rhs.value > 0 {
+                self.value > Self.max.value - rhs.value
+            } else if rhs.value < 0 {
+                self.value < Self.min.value - rhs.value
+            } else {
+                false
+            }
 
         return (
             partialValue: partialValue,
@@ -715,13 +724,14 @@ extension Int4: ReportableAsOverflow {
         let difference: Self.Value = self.value &- rhs.value
         let partialValue: Self = .init(truncatingIfNeeded: difference)
 
-        let overflow: Bool = if rhs.value > 0 {
-            self.value < Self.min.value + rhs.value
-        } else if rhs.value < 0 {
-            self.value > Self.max.value + rhs.value
-        } else {
-            false
-        }
+        let overflow: Bool =
+            if rhs.value > 0 {
+                self.value < Self.min.value + rhs.value
+            } else if rhs.value < 0 {
+                self.value > Self.max.value + rhs.value
+            } else {
+                false
+            }
 
         return (
             partialValue: partialValue,
@@ -733,17 +743,18 @@ extension Int4: ReportableAsOverflow {
         let product: Self.Value = self.value &* rhs.value
         let partialValue: Self = .init(truncatingIfNeeded: product)
 
-        let overflow: Bool = if self.value == 0 || rhs.value == 0 {
-            false
-        } else if self.value > 0 && rhs.value > 0 {
-            self.value > Self.max.value / rhs.value
-        } else if self.value > 0 && rhs.value < 0 {
-            rhs.value < Self.min.value / self.value
-        } else if self.value < 0 && rhs.value > 0 {
-            self.value < Self.min.value / rhs.value
-        } else {
-            self.value < Self.max.value / rhs.value
-        }
+        let overflow: Bool =
+            if self.value == 0 || rhs.value == 0 {
+                false
+            } else if self.value > 0 && rhs.value > 0 {
+                self.value > Self.max.value / rhs.value
+            } else if self.value > 0 && rhs.value < 0 {
+                rhs.value < Self.min.value / self.value
+            } else if self.value < 0 && rhs.value > 0 {
+                self.value < Self.min.value / rhs.value
+            } else {
+                self.value < Self.max.value / rhs.value
+            }
 
         return (
             partialValue: partialValue,
