@@ -1,0 +1,21 @@
+name: Format
+
+on:
+  push:
+    branches: ["main", "release/**"]
+  pull_request:
+    branches: ["main", "release/**"]
+    types: ["opened", "edited", "reopened", "synchronize"]
+
+jobs:
+  lint:
+    name: Lint Source Formatting
+    runs-on: macos-26
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+      - name: Get Swift Version
+        run: swift --version
+      - name: Lint Source Formatting
+        continue-on-error: true
+        run: swift format lint --strict --recursive --parallel Sources Tests Package.swift
