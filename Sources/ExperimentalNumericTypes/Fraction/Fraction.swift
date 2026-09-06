@@ -82,8 +82,9 @@ where Term: BinaryInteger {
     /// Finite terms are stored as supplied, including zero numerators. A nonzero numerator with a zero denominator is
     /// stored canonically as `1/0` or `-1/0`. The representation `0/0` is stored unchanged as NaN.
     ///
-    /// - Parameter numerator: The numerator.
-    /// - Parameter denominator: The denominator. Zero creates infinity or NaN.
+    /// - Parameters:
+    ///   - numerator: The numerator.
+    ///   - denominator: The denominator. Zero creates infinity or NaN.
     public init(
         _ numerator: Term,
         _ denominator: Term
@@ -111,8 +112,9 @@ where Term: BinaryInteger {
 
     /// Returns the specified term divided by an unsigned divisor while preserving its sign.
     ///
-    /// - Parameter value: The term to reduce.
-    /// - Parameter divisor: The unsigned divisor.
+    /// - Parameters:
+    ///   - value: The term to reduce.
+    ///   - divisor: The unsigned divisor.
     /// - Returns: The reduced term.
     /// - Precondition: `divisor` must be greater than one and divide `value` exactly.
     private static func reducedTerm(
@@ -163,7 +165,8 @@ where Term: BinaryInteger {
 
         while numerator != 1 || denominator != 1 {
             guard numerator % baseNumerator == 0,
-                  denominator % baseDenominator == 0 else {
+                denominator % baseDenominator == 0
+            else {
                 return nil
             }
 
@@ -221,8 +224,9 @@ extension Fraction: Addable {
     /// // Prints "2/2"
     /// ```
     ///
-    /// - Parameter lhs: The first value to add.
-    /// - Parameter rhs: The second value to add.
+    /// - Parameters:
+    ///   - lhs: The first value to add.
+    ///   - rhs: The second value to add.
     /// - Returns: The sum, or NaN when the operation is indeterminate.
     public static func + (
         _ lhs: Self,
@@ -325,8 +329,9 @@ extension Fraction: Comparable {
     /// // Prints "true"
     /// ```
     ///
-    /// - Parameter lhs: The first value to compare.
-    /// - Parameter rhs: The second value to compare.
+    /// - Parameters:
+    ///   - lhs: The first value to compare.
+    ///   - rhs: The second value to compare.
     /// - Returns: `true` when the first value precedes the second, and `false` otherwise.
     public static func < (
         _ lhs: Self,
@@ -353,8 +358,9 @@ extension Fraction: Comparable {
     /// when their stored representations are equal; otherwise, the stored-term tie-breakers used by `<` determine their
     /// order.
     ///
-    /// - Parameter lhs: The first value to compare.
-    /// - Parameter rhs: The second value to compare.
+    /// - Parameters:
+    ///   - lhs: The first value to compare.
+    ///   - rhs: The second value to compare.
     /// - Returns: `true` when the first value precedes or equals the second, and `false` otherwise.
     public static func <= (
         _ lhs: Self,
@@ -374,8 +380,9 @@ extension Fraction: Comparable {
     /// when their stored representations are equal; otherwise, the stored-term tie-breakers used by `<` determine their
     /// order.
     ///
-    /// - Parameter lhs: The first value to compare.
-    /// - Parameter rhs: The second value to compare.
+    /// - Parameters:
+    ///   - lhs: The first value to compare.
+    ///   - rhs: The second value to compare.
     /// - Returns: `true` when the first value follows or equals the second, and `false` otherwise.
     public static func >= (
         _ lhs: Self,
@@ -507,8 +514,9 @@ extension Fraction: Divisible {
     /// // Prints "3/2"
     /// ```
     ///
-    /// - Parameter lhs: The dividend.
-    /// - Parameter rhs: The divisor.
+    /// - Parameters:
+    ///   - lhs: The dividend.
+    ///   - rhs: The divisor.
     /// - Returns: The quotient, or NaN for indeterminate forms such as zero divided by zero or infinity divided by
     ///            infinity.
     public static func / (
@@ -550,17 +558,19 @@ extension Fraction: Divisible {
     /// // Prints "1/2"
     /// ```
     ///
-    /// - Parameter lhs: The dividend.
-    /// - Parameter rhs: The divisor.
+    /// - Parameters:
+    ///   - lhs: The dividend.
+    ///   - rhs: The divisor.
     /// - Returns: The remainder, or NaN when the dividend is infinite, the divisor is zero, or either operand is NaN.
     public static func % (
         _ lhs: Self,
         _ rhs: Self
     ) -> Self {
         guard lhs.isNaN == false,
-              rhs.isNaN == false,
-              lhs.isInfinite == false,
-              rhs.isZero == false else {
+            rhs.isNaN == false,
+            lhs.isInfinite == false,
+            rhs.isZero == false
+        else {
             return .nan
         }
 
@@ -575,8 +585,7 @@ extension Fraction: Divisible {
             newNumerator = lhs.numerator % rhs.numerator
             newDenominator = lhs.denominator
         } else {
-            newNumerator = (lhs.numerator * rhs.denominator)
-                % (lhs.denominator * rhs.numerator)
+            newNumerator = (lhs.numerator * rhs.denominator) % (lhs.denominator * rhs.numerator)
             newDenominator = lhs.denominator * rhs.denominator
         }
 
@@ -618,8 +627,9 @@ extension Fraction: Equatable {
     /// but are not equal because their stored terms differ. Use `isCanonicallyEquatable(to:)` to compare their
     /// canonical values instead. NaN is not equal to any value, including itself.
     ///
-    /// - Parameter lhs: A value to compare.
-    /// - Parameter rhs: Another value to compare.
+    /// - Parameters:
+    ///   - lhs: A value to compare.
+    ///   - rhs: Another value to compare.
     /// - Returns: `true` when both stored terms are equal and neither value is NaN; otherwise, `false`.
     public static func == (
         _ lhs: Self,
@@ -727,7 +737,8 @@ where Term: LosslessStringConvertible {
             self.init(numerator)
         case 2:
             guard let numerator: Term = .init(String(terms[0])),
-                  let denominator: Term = .init(String(terms[1])) else {
+                let denominator: Term = .init(String(terms[1]))
+            else {
                 return nil
             }
 
@@ -756,8 +767,9 @@ extension Fraction: Multipliable {
         }
 
         guard self.isFinite,
-              other.isFinite,
-              other.isZero == false else {
+            other.isFinite,
+            other.isZero == false
+        else {
             return false
         }
 
@@ -782,8 +794,9 @@ extension Fraction: Multipliable {
     /// // Prints "6/12"
     /// ```
     ///
-    /// - Parameter lhs: The first value to multiply.
-    /// - Parameter rhs: The second value to multiply.
+    /// - Parameters:
+    ///   - lhs: The first value to multiply.
+    ///   - rhs: The second value to multiply.
     /// - Returns: The product, or NaN when the operation is indeterminate.
     public static func * (
         _ lhs: Self,
@@ -877,9 +890,9 @@ extension Fraction: Normalizable {
             return true
         }
 
-        let isNumeratorNegatable: Bool = self.numerator >= 0
-            || Term(exactly: self.numerator.magnitude) != nil
-
+        let isNumeratorNonnegative: Bool = self.numerator >= 0
+        let isNumeratorMagnitudeRepresentable: Bool = Term(exactly: self.numerator.magnitude) != nil
+        let isNumeratorNegatable: Bool = isNumeratorNonnegative || isNumeratorMagnitudeRepresentable
         let isDenominatorNegatable: Bool = Term(exactly: self.denominator.magnitude) != nil
 
         return isNumeratorNegatable && isDenominatorNegatable
@@ -969,7 +982,8 @@ extension Fraction: Raisable {
         }
 
         guard self.isFinite,
-              self.isZero == false else {
+            self.isZero == false
+        else {
             return false
         }
 
@@ -1013,8 +1027,7 @@ extension Fraction: Raisable {
             return false
         }
 
-        let isExpectedNegative: Bool = other.hasNegativeSign
-            && isExponentOdd
+        let isExpectedNegative: Bool = other.hasNegativeSign && isExponentOdd
 
         return self.hasNegativeSign == isExpectedNegative
     }
@@ -1037,8 +1050,9 @@ extension Fraction: Raisable {
     /// // Prints "9/4"
     /// ```
     ///
-    /// - Parameter lhs: The base.
-    /// - Parameter rhs: The exponent.
+    /// - Parameters:
+    ///   - lhs: The base.
+    ///   - rhs: The exponent.
     /// - Returns: The power.
     public static func ** (
         _ lhs: Self,
@@ -1058,8 +1072,17 @@ extension Fraction: Raisable {
             return .infinity(withNegativeSign: lhs.hasNegativeSign && rhs.isMultiple(of: 2) == false)
         }
 
-        // Zero and NaN were handled above, so every remaining negative-exponent base has a reciprocal.
-        var base: Self = rhs < 0 ? lhs.reciprocal! : lhs
+        var base: Self = lhs
+
+        if rhs < 0 {
+            // The checks above ensure that a negative-exponent base has a reciprocal.
+            guard let reciprocal: Self = lhs.reciprocal else {
+                preconditionFailure("A nonzero, non-NaN fraction must have a reciprocal.")
+            }
+
+            base = reciprocal
+        }
+
         // The unsigned magnitude represents every Int exponent, including Int.min.
         var exponent: UInt = rhs.magnitude
         var result: Self = 1
@@ -1177,8 +1200,9 @@ extension Fraction: Subtractable {
     /// // Prints "2/4"
     /// ```
     ///
-    /// - Parameter lhs: The value to subtract from.
-    /// - Parameter rhs: The value to subtract.
+    /// - Parameters:
+    ///   - lhs: The value to subtract from.
+    ///   - rhs: The value to subtract.
     /// - Returns: The difference, or NaN when the operation is indeterminate or requires an unrepresentable negative
     ///            infinity.
     public static func - (

@@ -135,8 +135,9 @@ where Self: Raisable, Self.Exponent: BinaryInteger {
     /// A negative exponent returns `0` for every base except `1` and `-1` because integer division discards the
     /// fractional part. Powers of `1` and `-1` remain exactly representable.
     ///
-    /// - Parameter lhs: The base.
-    /// - Parameter rhs: The exponent.
+    /// - Parameters:
+    ///   - lhs: The base.
+    ///   - rhs: The exponent.
     /// - Precondition: The base must not be zero when the exponent is negative.
     /// - Returns: The power.
     public static func ** (

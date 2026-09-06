@@ -48,8 +48,9 @@ where Self: Divisible {
     ///   otherwise.
     public func isDivisible(by other: Self) -> Bool {
         guard self.isFinite == true,
-              other.isFinite == true,
-              other.isZero == false else {
+            other.isFinite == true,
+            other.isZero == false
+        else {
             return false
         }
 
@@ -176,8 +177,9 @@ where Self: Raisable, Self.Exponent: BinaryInteger {
     ///
     /// A negative exponent returns the reciprocal power.
     ///
-    /// - Parameter lhs: The base.
-    /// - Parameter rhs: The exponent.
+    /// - Parameters:
+    ///   - lhs: The base.
+    ///   - rhs: The exponent.
     /// - Returns: The power.
     public static func ** (
         _ lhs: Self,

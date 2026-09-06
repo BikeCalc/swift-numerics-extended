@@ -7,6 +7,7 @@
 // See CONTRIBUTORS.txt for the list of Numerics Extended project authors
 
 import Testing
+
 @testable import NumericsExtended
 
 @Suite("Double Comparable Tests")
@@ -120,7 +121,8 @@ internal struct DoubleComparableTests {
         lowerBound: Double,
         upperBound: Double
     ) {
-        let range: ClosedRange<Double> = lowerBound...upperBound
+        let range: ClosedRange<Double> = lowerBound ... upperBound
+
         #expect(value.isWithin(range) == range.contains(value))
     }
 
@@ -133,11 +135,9 @@ internal struct DoubleComparableTests {
         lowerBound: Double,
         upperBound: Double
     ) {
-        let isWithin: Bool = value.isWithin(
-            lowerBound,
-            through: upperBound
-        ) == true
-        #expect(isWithin == (value >= lowerBound && value <= upperBound))
+        let valueIsWithinBounds: Bool = value.isWithin(lowerBound, upperBound) == true
+
+        #expect(valueIsWithinBounds == (value >= lowerBound && value <= upperBound))
     }
 
     @Test(
@@ -149,11 +149,9 @@ internal struct DoubleComparableTests {
         lowerBound: Double,
         upperBound: Double
     ) {
-        let isBetween: Bool = value.isBetween(
-            lowerBound,
-            and: upperBound
-        ) == true
-        #expect(isBetween == (value > lowerBound && value < upperBound))
+        let valueIsBetweenBounds: Bool = value.isBetween(lowerBound, upperBound) == true
+
+        #expect(valueIsBetweenBounds == (value > lowerBound && value < upperBound))
     }
 }
 

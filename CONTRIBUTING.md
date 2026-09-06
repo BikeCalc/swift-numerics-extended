@@ -1,19 +1,18 @@
 # Contributing
 
-Everyone is welcome to contribute to Numerics Extended. Contributing does not just mean submitting pull requests. There
+Everyone is welcome to contribute to this project. Contributing does not just mean submitting pull requests. There
 are many different ways for you to get involved, including participating in discussions, reporting or triaging bugs, and
 contributing code.
 
 No matter how you want to get involved, please first learn what is expected of anyone who participates in this project.
 If you are contributing code, you should also be comfortable writing Swift and working with Swift Package Manager.
 
-By submitting a pull request, you represent that you have the right to license your contribution and agree that your
-contribution is licensed under the Apache License v2.0 with Runtime Library Exception. See `LICENSE.md` for license
-information.
+By submitting a pull request, you represent that you have the right to license your contribution and agree that it is
+licensed under the terms described in `LICENSE.md`.
 
 ## Reporting Bugs
 
-Reporting bugs is a great way for anyone to help improve Numerics Extended. This open source project uses GitHub issues
+Reporting bugs is a great way for anyone to help improve the project. This open source project uses GitHub issues
 for tracking bugs.
 
 When opening an issue, please use the bug report issue template and include the following:
@@ -36,8 +35,7 @@ Security vulnerabilities should not be reported through public issues. Follow th
 Reporting bugs is an important part of improving software. Nearly as important is triaging those bugs to ensure that
 they are reproducible, small, and unique.
 
-There are a number of things you can do to help triage bugs in the repository's
-[issues](https://github.com/bikecalc/swift-numerics-extended/issues).
+There are a number of things you can do to help triage bugs in the repository's Issues page.
 
 - **Reproduce bugs.** For a bug to be actionable, it needs to be reproducible. If you cannot reproduce the bug, try to
   figure out why. Get in touch with the submitter if you need more information.
@@ -152,10 +150,10 @@ sub-issues.
 
 Branch names should follow [Conventional Branch](https://conventionalbranch.org/).
 
-Use lowercase branch names in the form:
+Use lowercase branch names with hyphen-separated words in the form:
 
 ```text
-<type>/<description>
+<type>/<short-description>
 ```
 
 The `main` branch is protected and represents the released package history. Release branches are also protected and
@@ -189,173 +187,66 @@ to test files by matching each filename to its test suite.
 
 #### File Headers
 
-The license and copyright protections for Numerics Extended code are called out at the top of every source code file. On
-the rare occasion you contribute a change that includes a new source file, ensure that the header is filled out
-appropriately.
+The license and copyright protections for the project are called out at the top of every source code file. When adding
+a source file, copy the current header from a neighboring file. When adapting this guide for a repository, replace each
+placeholder in the following template with that repository's values.
 
 For Swift source files the code header should look like this:
 
 ```swift
-// This source file is part of the Numerics Extended open source project
+// This source file is part of the <project name> open source project
 //
-// Copyright (c) 2021-2026 A. H. de Quatre Ltd. and the Numerics Extended project authors
-// Licensed under Apache License v2.0 with Runtime Library Exception
+// Copyright (c) <start year>-<current year> <copyright holder> and the <project name> project authors
+// Licensed under <license type>
 //
 // See LICENSE.md for license information
-// See CONTRIBUTORS.txt for the list of Numerics Extended project authors
+// See CONTRIBUTORS.txt for the list of <project name> project authors
 ```
 
 `Package.swift` must keep the Swift tools version declaration as the first line.
 
-#### Line Length
-
-Limit text-based project files to 120 characters per line, including source code, tests, documentation, and
-configuration. An indivisible token, such as a literal URL, may exceed the limit when it cannot be represented safely
-within it.
-
 ### Source Code
 
-#### Imports
+Read and follow [Coding Style](CODING_STYLE.md) for source code, tests, documentation, and configuration files. It
+documents the repository's coding conventions and every rule configured in `.swift-format`.
 
-Avoid importing Foundation unless it is required. When Foundation is only needed for a specific platform or feature,
-prefer wrapping the import with `#if canImport(Foundation)`.
+#### Formatting Tools
 
-#### APIs
+Use the Swift Format lint plugin to report formatting issues without changing source files:
 
-Prefer Swift standard-library types and Swift-native API overlays when they provide equivalent behavior. Use Objective-C
-types and APIs only when required for interoperability or when no suitable Swift-native alternative exists. Prefer
-current, nondeprecated APIs that support the package's deployment targets.
-
-#### Indentation
-
-Indent Swift source code with four spaces per level. Do not use tabs for indentation.
-
-#### Numeric Formatting
-
-Use a period as the decimal separator. In Swift numeric literals, group thousands with underscores, such as `1_000.25`.
-In prose and explanatory tables, group thousands with commas, such as `1,000.25`.
-
-#### Declaration Layout
-
-Expand parameter and argument lists that contain more than one item. Keep the opening parenthesis on the declaration
-line, place each parameter or argument on its own line, and place the closing parenthesis on its own line.
-
-A short call to an initializer designed as tuple-like value construction may remain on one line when its unlabeled
-arguments fit comfortably within the line limit, such as `Fraction(1, 2)`. Keep the initializer declaration expanded so
-that its parameter names remain visible.
-
-Keep tuple types and tuple literals on one line when they fit within the 120-character limit and remain readable. Expand
-them only when their labels, types, or expressions make the single-line form difficult to understand.
-
-Keep a short collection literal on the same line as its argument when it remains readable. Expand a longer collection
-literal vertically, placing each element on its own line.
-
-For example:
-
-```swift
-func foo(bar: String) {
-    print(bar)
-}
-
-func foo(
-    bar: String,
-    baz: Array<String>
-) {
-    print([bar] + baz)
-}
-
-foo(bar: "foo")
-
-foo(
-    bar: "foo",
-    baz: ["foo", "bar", "baz"]
-)
-
-foo(
-    bar: "foo",
-    baz: [
-        "foo",
-        "bar",
-        "baz",
-        "qux",
-        "quux",
-        "quuz",
-        "corge",
-        "grault",
-        "garply",
-        "waldo",
-        "fred",
-        "plugh",
-        "xyzzy",
-        "thud"
-    ]
-)
+```text
+swift package plugin lint-source-code
 ```
 
-#### Declaration Order
+The plugin is also available from Xcode's package commands. Formatting remains an explicit action; the repository does
+not automatically format files when they are saved or committed. When you intend to apply the configured formatting to
+the package's source targets, run the Format Source Code package command in Xcode or use:
 
-Organize declarations by their role and relationship rather than alphabetically or by access level. Use the following
-order as a baseline, but keep closely related declarations, overloads, and paired operations together when that makes
-the API easier to understand. Within each category, place fundamental behavior before convenience behavior.
+```text
+swift package plugin --allow-writing-to-package-directory format-source-code
+```
 
-Within a concrete type, use the following order when applicable:
-
-1. Enumeration cases
-2. Type aliases
-3. Nested types
-4. Stored instance properties
-5. Initializers
-6. Deinitializers
-7. Computed instance properties
-8. Type properties
-9. Instance subscripts
-10. Type subscripts
-11. Instance functions
-12. Type functions and operators
-
-Apply the same relative order to protocols and extensions, omitting categories that do not apply. Protocols place
-associated types alongside type aliases at the beginning. Order protocol-conformance extensions alphabetically by
-protocol name, and follow the applicable declaration order within each extension while keeping related requirements and
-implementations together.
+The `.swift-format` file at the package root is the authoritative automated formatting configuration.
 
 ### Tests
 
-Changes to numeric behavior should include tests. New tests should use Swift Testing. Do not add new XCTest suites.
-Prefer focused Swift Testing suites that match the existing structure by numeric type and protocol.
+Behavior changes should include tests. New tests should use Swift Testing. Do not add new XCTest suites. Prefer focused
+Swift Testing suites that match the existing project structure.
 
 When adding argument-based tests, keep the existing conventions in mind:
 
 - Use small, readable values.
-- Keep signed and unsigned examples aligned where possible.
-- Keep floating-point and binary integer examples aligned where possible.
-- Put special values such as zero, one, minimum, maximum, infinity, and NaN in rule-specific tests.
+- Keep related examples aligned where possible.
+- Put boundary values, failure conditions, and other exceptional inputs in focused tests.
 - Prefer explicit expected results over deriving expectations from the implementation being tested.
 - Compare Boolean properties and function results explicitly with `true`, `false`, or an argument-provided expected
   result.
 
 ### Docs
 
-Public APIs should have clear documentation comments. User-facing concepts, tutorials, and guides should be documented
-with DocC in the `NumericsExtended.docc` catalog.
-
-Protocol and protocol-extension documentation should describe requirements and guarantees without Swift examples that
-assume a particular conforming type's behavior. Place examples only on public concrete types and their public
-declarations, where their results are guaranteed. Keep examples short and focused on illustrating ordinary usage; use
-tests instead for comprehensive cases and edge conditions. Introduce every example with `For example:` on its own
-documentation line. Print the demonstrated value and show the expected output with a `// Prints "..."` comment.
-
-For example, document a public declaration as follows:
-
-````text
-/// For example:
-///
-/// ```swift
-/// let value = 2 + 2
-///
-/// print(value)
-/// // Prints "4"
-/// ```
-````
+Document new and changed public APIs and user-facing behavior as part of the same change. Use documentation comments for
+APIs and the DocC catalog for concepts, tutorials, and guides. Follow [Coding Style](CODING_STYLE.md) for
+documentation structure, formatting, and examples.
 
 ### Commits
 
@@ -385,8 +276,7 @@ Use the Conventional Commit form described above for the pull request title:
 <type>[optional scope]: <description>
 ```
 
-Link the pull request to its issue in GitHub. Configured workflows run automatically, and their results appear on the
-pull request, so do not repeat them in its description.
+Link the pull request to its issue in GitHub.
 
 Each issue included in a release should normally have its own pull request into the release branch. If work is already
 present without a dedicated pull request, create or update the issue to document the delivered outcome, assign it to the
@@ -396,7 +286,17 @@ create a retrospective pull request solely to reproduce a relationship that did 
 Once the release checklist is complete and its sub-issues are closed, open a pull request from the release branch into
 `main` and link it to the release issue.
 
-Pull requests must target a branch allowed by the branch routing rules.
+### Workflows
+
+Configured workflows run automatically for pull requests and publish their checks on the pull request. Review their
+results, address reported failures, and ensure every required check passes before merging.
+
+### Rule Sets
+
+Repository rule sets protect the main and release branches, enforce the allowed pull request routes, and require
+applicable checks and review conversations to be resolved before a pull request can be merged. In exceptional cases
+where a requirement cannot reasonably be satisfied, contact a repository administrator. Administrators may override a
+rule set when necessary, but an override should not replace the normal review and validation process.
 
 ### Code Reviews
 

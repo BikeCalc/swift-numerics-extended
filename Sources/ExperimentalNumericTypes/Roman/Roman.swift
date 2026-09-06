@@ -162,7 +162,7 @@ public struct Roman {
     /// - Precondition: `value` must be in the range `0...3_999`.
     private init(value: Self.Value) {
         precondition(
-            0...3_999 ~= value,
+            0 ... 3_999 ~= value,
             "Roman value must be between \(Self.min) and \(Self.max)."
         )
         self.value = value
@@ -238,7 +238,7 @@ extension Roman: CustomDebugStringConvertible {
 extension Roman: CustomStringConvertible {
     public var description: String {
         guard self.value != 0 else {
-            return RomanSymbol.N.description
+            return RomanSymbol.n.description
         }
 
         let symbols: Array<RomanSymbol> = RomanSymbol.allCases.reversed()
@@ -275,11 +275,9 @@ extension Roman: Decodable {
     public init(from decoder: any Decoder) throws {
         let container: SingleValueDecodingContainer = try decoder.singleValueContainer()
 
-        if let description: String = try? container.decode(String.self),
-           let value: Self = .init(description) {
+        if let description = try? container.decode(String.self), let value: Self = .init(description) {
             self = value
-        } else if let value: Self.Value = try? container.decode(Self.Value.self),
-           Self.min.value...Self.max.value ~= value {
+        } else if let value = try? container.decode(Self.Value.self), Self.min.value ... Self.max.value ~= value {
             self.init(value: value)
         } else {
             let range: String = "\(Self.min) and \(Self.max)"
@@ -330,8 +328,9 @@ extension Roman: Divisible {
     /// // Prints "III"
     /// ```
     ///
-    /// - Parameter lhs: The dividend.
-    /// - Parameter rhs: The divisor.
+    /// - Parameters:
+    ///   - lhs: The dividend.
+    ///   - rhs: The divisor.
     /// - Returns: The quotient.
     /// - Precondition: `rhs` must not be zero.
     public static func / (
@@ -354,8 +353,9 @@ extension Roman: Divisible {
     /// // Prints "I"
     /// ```
     ///
-    /// - Parameter lhs: The dividend.
-    /// - Parameter rhs: The divisor.
+    /// - Parameters:
+    ///   - lhs: The dividend.
+    ///   - rhs: The divisor.
     /// - Returns: The remainder.
     /// - Precondition: `rhs` must not be zero.
     public static func % (
@@ -403,7 +403,7 @@ extension Roman: ExpressibleByIntegerLiteral {
     /// - Precondition: `value` must be in the range `0...3_999`.
     public init(integerLiteral value: Self.IntegerLiteralType) {
         precondition(
-            0...3_999 ~= value,
+            0 ... 3_999 ~= value,
             "Roman integer literal must be between \(Self.min) and \(Self.max)."
         )
 
@@ -480,7 +480,8 @@ extension Roman: Numeric {
     public init?<Source>(exactly source: Source)
     where Source: BinaryInteger {
         guard let value: Self.Value = .init(exactly: source),
-              Self.min.value...Self.max.value ~= value else {
+            Self.min.value ... Self.max.value ~= value
+        else {
             return nil
         }
 
@@ -580,7 +581,6 @@ extension Roman: ReportableAsOverflow {
                 overflow: true
             )
         }
-
     }
 
     public func multipliedReportingOverflow(by rhs: Self) -> Self.OverflowReport {

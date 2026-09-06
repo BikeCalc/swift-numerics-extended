@@ -7,6 +7,7 @@
 // See CONTRIBUTORS.txt for the list of Numerics Extended project authors
 
 import Testing
+
 @testable import NumericsExtended
 
 @Suite("Fraction Numeric Tests")
@@ -18,7 +19,7 @@ internal struct FractionNumericTests {
             (2, Fraction<Int>(2, 1)),
             (3, Fraction<Int>(3, 1)),
             (-2, Fraction<Int>(-2, 1)),
-            (-3, Fraction<Int>(-3, 1)),
+            (-3, Fraction<Int>(-3, 1))
         ] as Array<(Int, Fraction<Int>)>
     )
     internal func initializedExactlySucceeds(
@@ -46,7 +47,6 @@ internal struct FractionNumericTests {
     ) {
         #expect(value.magnitude == magnitude)
     }
-
 }
 
 // MARK: - IntMin

@@ -12,89 +12,89 @@ import StandardNumericProtocols
 /// A representation of a Roman symbol.
 internal enum RomanSymbol: String, RawRepresentable, CaseIterable {
     /// The symbol representing the Arabic numeral zero, or nulla.
-    case N
+    case n = "N"
 
     /// The symbol representing the Arabic numeral one.
-    case I
+    case i = "I"
 
     /// The symbol representing the Arabic numeral four.
-    case IV
+    case iv = "IV"
 
     /// The symbol representing the Arabic numeral five.
-    case V
+    case v = "V"
 
     /// The symbol representing the Arabic numeral nine.
-    case IX
+    case ix = "IX"
 
     /// The symbol representing the Arabic numeral ten.
-    case X
+    case x = "X"
 
     /// The symbol representing the Arabic numeral forty.
-    case XL
+    case xl = "XL"
 
     /// The symbol representing the Arabic numeral fifty.
-    case L
+    case l = "L"
 
     /// The symbol representing the Arabic numeral ninety.
-    case XC
+    case xc = "XC"
 
     /// The symbol representing the Arabic numeral one hundred.
-    case C
+    case c = "C"
 
     /// The symbol representing the Arabic numeral four hundred.
-    case CD
+    case cd = "CD"
 
     /// The symbol representing the Arabic numeral five hundred.
-    case D
+    case d = "D"
 
     /// The symbol representing the Arabic numeral nine hundred.
-    case CM
+    case cm = "CM"
 
     /// The symbol representing the Arabic numeral one thousand.
-    case M
+    case m = "M"
 
     /// The underlying value of this type.
     internal var value: Roman.Value {
         switch self {
-        case .N:
+        case .n:
             return 0
-        case .I:
+        case .i:
             return 1
-        case .IV:
-            let five: Roman.Value = Self.V.value
-            let one: Roman.Value = Self.I.value
+        case .iv:
+            let five: Roman.Value = Self.v.value
+            let one: Roman.Value = Self.i.value
             return five - one
-        case .V:
+        case .v:
             return 5
-        case .IX:
-            let ten: Roman.Value = Self.X.value
-            let one: Roman.Value = Self.I.value
+        case .ix:
+            let ten: Roman.Value = Self.x.value
+            let one: Roman.Value = Self.i.value
             return ten - one
-        case .X:
+        case .x:
             return 10
-        case .XL:
-            let fifty: Roman.Value = Self.L.value
-            let ten: Roman.Value = Self.X.value
+        case .xl:
+            let fifty: Roman.Value = Self.l.value
+            let ten: Roman.Value = Self.x.value
             return fifty - ten
-        case .L:
+        case .l:
             return 50
-        case .XC:
-            let oneHundred: Roman.Value = Self.C.value
-            let ten: Roman.Value = Self.X.value
+        case .xc:
+            let oneHundred: Roman.Value = Self.c.value
+            let ten: Roman.Value = Self.x.value
             return oneHundred - ten
-        case .C:
+        case .c:
             return 100
-        case .CD:
-            let fiveHundred: Roman.Value = Self.D.value
-            let oneHundred: Roman.Value = Self.C.value
+        case .cd:
+            let fiveHundred: Roman.Value = Self.d.value
+            let oneHundred: Roman.Value = Self.c.value
             return fiveHundred - oneHundred
-        case .D:
+        case .d:
             return 500
-        case .CM:
-            let oneThousand: Roman.Value = Self.M.value
-            let oneHundred: Roman.Value = Self.C.value
+        case .cm:
+            let oneThousand: Roman.Value = Self.m.value
+            let oneHundred: Roman.Value = Self.c.value
             return oneThousand - oneHundred
-        case .M:
+        case .m:
             return 1_000
         }
     }
@@ -102,7 +102,7 @@ internal enum RomanSymbol: String, RawRepresentable, CaseIterable {
     /// A boolean value indicating whether this case is repeatable.
     internal var isRepeatable: Bool {
         switch self {
-        case .I, .X, .C, .M:
+        case .i, .x, .c, .m:
             return true
         default:
             return false
@@ -116,18 +116,18 @@ internal enum RomanSymbol: String, RawRepresentable, CaseIterable {
     /// - Returns: A concatenated value.
     internal func concatenate(with rhs: Self) throws -> Self {
         switch (self, rhs) {
-        case (.I, .V):
-            return .IV
-        case (.I, .X):
-            return .IX
-        case (.X, .L):
-            return .XL
-        case (.X, .C):
-            return .XC
-        case (.C, .D):
-            return .CD
-        case (.C, .M):
-            return .CM
+        case (.i, .v):
+            return .iv
+        case (.i, .x):
+            return .ix
+        case (.x, .l):
+            return .xl
+        case (.x, .c):
+            return .xc
+        case (.c, .d):
+            return .cd
+        case (.c, .m):
+            return .cm
         default:
             throw RomanSymbolError.isUnconcatenable
         }
@@ -139,18 +139,18 @@ internal enum RomanSymbol: String, RawRepresentable, CaseIterable {
     /// - Returns: An array of separated values.
     internal func separate() throws -> Array<Self> {
         switch self {
-        case .IV:
-            return [.I, .V]
-        case .IX:
-            return [.I, .X]
-        case .XL:
-            return [.X, .L]
-        case .XC:
-            return [.X, .C]
-        case .CD:
-            return [.C, .D]
-        case .CM:
-            return [.C, .M]
+        case .iv:
+            return [.i, .v]
+        case .ix:
+            return [.i, .x]
+        case .xl:
+            return [.x, .l]
+        case .xc:
+            return [.x, .c]
+        case .cd:
+            return [.c, .d]
+        case .cm:
+            return [.c, .m]
         default:
             throw RomanSymbolError.isInseparable
         }
@@ -165,12 +165,12 @@ internal enum RomanSymbol: String, RawRepresentable, CaseIterable {
     /// - Returns: A boolean value.
     internal func isSubtractable(from rhs: Self) -> Bool {
         switch self {
-        case .I:
-            return rhs == .V || rhs == .X
-        case .X:
-            return rhs == .L || rhs == .C
-        case .C:
-            return rhs == .D || rhs == .M
+        case .i:
+            return rhs == .v || rhs == .x
+        case .x:
+            return rhs == .l || rhs == .c
+        case .c:
+            return rhs == .d || rhs == .m
         default:
             return false
         }
@@ -183,8 +183,9 @@ extension RomanSymbol: Comparable {
     /// Returns a boolean value indicating whether the value of the first argument is less than that of the second
     /// argument.
     ///
-    /// - Parameter lhs: A value to compare.
-    /// - Parameter rhs: Another value to compare.
+    /// - Parameters:
+    ///   - lhs: A value to compare.
+    ///   - rhs: Another value to compare.
     /// - Returns: `true` if lhs is smaller, and `false` otherwise.
     internal static func < (
         _ lhs: Self,

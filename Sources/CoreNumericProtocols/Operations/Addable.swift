@@ -10,8 +10,9 @@
 public protocol Addable: Equatable {
     /// Returns the sum of adding the two specified values.
     ///
-    /// - Parameter lhs: The augend.
-    /// - Parameter rhs: The addend.
+    /// - Parameters:
+    ///   - lhs: The augend.
+    ///   - rhs: The addend.
     /// - Returns: The sum.
     static func + (
         _ lhs: Self,
@@ -22,13 +23,15 @@ public protocol Addable: Equatable {
 extension Addable {
     /// Adds the two specified values and stores the sum in the left-hand-side variable.
     ///
-    /// - Parameter lhs: The augend.
-    /// - Parameter rhs: The addend.
+    /// - Parameters:
+    ///   - lhs: The augend.
+    ///   - rhs: The addend.
     public static func += (
         _ lhs: inout Self,
         _ rhs: Self
     ) {
-        lhs = lhs + rhs
+        let sum: Self = lhs + rhs
+        lhs = sum
     }
 
     /// Returns the sum of this value and the specified value.

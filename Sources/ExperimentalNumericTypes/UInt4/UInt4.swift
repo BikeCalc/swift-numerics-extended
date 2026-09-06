@@ -144,7 +144,7 @@ public struct UInt4 {
     /// - Precondition: `value` must be in the range `0...15`.
     internal init(value: Self.Value) {
         precondition(
-            0...15 ~= value,
+            0 ... 15 ~= value,
             "UInt4 value must be between \(Self.min) and \(Self.max)."
         )
         self.value = value
@@ -244,8 +244,9 @@ extension UInt4: BinaryInteger {
 
         /// Returns an index offset from the specified index.
         ///
-        /// - Parameter index: The index to offset.
-        /// - Parameter distance: The distance to offset `index` by.
+        /// - Parameters:
+        ///   - index: The index to offset.
+        ///   - distance: The distance to offset `index` by.
         /// - Returns: An index offset by `distance`.
         /// - Precondition: The resulting index must be between `startIndex` and `endIndex`, inclusive.
         public func index(
@@ -254,7 +255,7 @@ extension UInt4: BinaryInteger {
         ) -> Int {
             let newIndex: Int = index + distance
             precondition(
-                self.startIndex...self.endIndex ~= newIndex,
+                self.startIndex ... self.endIndex ~= newIndex,
                 "UInt4 words index must be within bounds."
             )
 
@@ -263,8 +264,9 @@ extension UInt4: BinaryInteger {
 
         /// Returns the distance between two indices.
         ///
-        /// - Parameter start: The starting index.
-        /// - Parameter end: The ending index.
+        /// - Parameters:
+        ///   - start: The starting index.
+        ///   - end: The ending index.
         /// - Returns: The distance from `start` to `end`.
         public func distance(
             from start: Int,
@@ -281,7 +283,8 @@ extension UInt4: BinaryInteger {
     public init<T>(_ source: T)
     where T: BinaryInteger {
         guard let value: Self.Value = .init(exactly: source),
-              Self.min.value...Self.max.value ~= value else {
+            Self.min.value ... Self.max.value ~= value
+        else {
             preconditionFailure("UInt4 value must be between \(Self.min) and \(Self.max).")
         }
 
@@ -304,8 +307,9 @@ extension UInt4: BinaryInteger {
 
     /// Stores the bitwise AND of the two specified values in the left-hand-side variable.
     ///
-    /// - Parameter lhs: The left-hand-side value.
-    /// - Parameter rhs: The right-hand-side value.
+    /// - Parameters:
+    ///   - lhs: The left-hand-side value.
+    ///   - rhs: The right-hand-side value.
     public static func &= (
         _ lhs: inout Self,
         _ rhs: Self
@@ -315,8 +319,9 @@ extension UInt4: BinaryInteger {
 
     /// Stores the bitwise OR of the two specified values in the left-hand-side variable.
     ///
-    /// - Parameter lhs: The left-hand-side value.
-    /// - Parameter rhs: The right-hand-side value.
+    /// - Parameters:
+    ///   - lhs: The left-hand-side value.
+    ///   - rhs: The right-hand-side value.
     public static func |= (
         _ lhs: inout Self,
         _ rhs: Self
@@ -326,8 +331,9 @@ extension UInt4: BinaryInteger {
 
     /// Stores the bitwise XOR of the two specified values in the left-hand-side variable.
     ///
-    /// - Parameter lhs: The left-hand-side value.
-    /// - Parameter rhs: The right-hand-side value.
+    /// - Parameters:
+    ///   - lhs: The left-hand-side value.
+    ///   - rhs: The right-hand-side value.
     public static func ^= (
         _ lhs: inout Self,
         _ rhs: Self
@@ -377,7 +383,7 @@ extension UInt4: Decodable {
         let container: SingleValueDecodingContainer = try decoder.singleValueContainer()
         let value: Self.Value = try container.decode(Self.Value.self)
 
-        guard Self.min.value...Self.max.value ~= value else {
+        guard Self.min.value ... Self.max.value ~= value else {
             let debugDescription: String = "UInt4 value must be between \(Self.min) and \(Self.max)."
             throw DecodingError.dataCorruptedError(
                 in: container,
@@ -404,8 +410,9 @@ extension UInt4: Divisible {
     /// // Prints "3"
     /// ```
     ///
-    /// - Parameter lhs: The dividend.
-    /// - Parameter rhs: The divisor.
+    /// - Parameters:
+    ///   - lhs: The dividend.
+    ///   - rhs: The divisor.
     /// - Returns: The quotient.
     /// - Precondition: `rhs` must not be zero.
     public static func / (
@@ -428,8 +435,9 @@ extension UInt4: Divisible {
     /// // Prints "1"
     /// ```
     ///
-    /// - Parameter lhs: The dividend.
-    /// - Parameter rhs: The divisor.
+    /// - Parameters:
+    ///   - lhs: The dividend.
+    ///   - rhs: The divisor.
     /// - Returns: The remainder.
     /// - Precondition: `rhs` must not be zero.
     public static func % (
@@ -475,7 +483,7 @@ extension UInt4: ExpressibleByIntegerLiteral {
     /// - Precondition: `value` must be in the range `0...15`.
     public init(integerLiteral value: Self.IntegerLiteralType) {
         precondition(
-            0...15 ~= value,
+            0 ... 15 ~= value,
             "UInt4 integer literal must be between \(Self.min) and \(Self.max)."
         )
 
@@ -612,7 +620,8 @@ extension UInt4: Hashable {
 extension UInt4: LosslessStringConvertible {
     public init?(_ description: String) {
         guard let value: Self.Value = .init(description),
-              Self.min.value...Self.max.value ~= value else {
+            Self.min.value ... Self.max.value ~= value
+        else {
             return nil
         }
 
@@ -640,7 +649,8 @@ extension UInt4: Numeric {
     public init?<Source>(exactly source: Source)
     where Source: BinaryInteger {
         guard let value: Self.Value = .init(exactly: source),
-              Self.min.value...Self.max.value ~= value else {
+            Self.min.value ... Self.max.value ~= value
+        else {
             return nil
         }
 

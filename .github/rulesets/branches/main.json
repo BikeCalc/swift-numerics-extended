@@ -31,6 +31,8 @@
       "type": "pull_request",
       "parameters": {
         "allowed_merge_methods": [
+          "merge",
+          "squash",
           "rebase"
         ],
         "dismiss_stale_reviews_on_push": true,
@@ -50,13 +52,16 @@
         "do_not_enforce_on_create": true,
         "required_status_checks": [
           {
-            "context": "Validate Branch Route"
-          },
-          {
             "context": "Build and Test Package"
           },
           {
             "context": "Compare Benchmarks"
+          },
+          {
+            "context": "Lint Source Formatting"
+          },
+          {
+            "context": "Validate Branch Route"
           },
           {
             "context": "Validate Pull Request Title"

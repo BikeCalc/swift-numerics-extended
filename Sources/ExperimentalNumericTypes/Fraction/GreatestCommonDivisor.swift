@@ -13,8 +13,9 @@
 /// mathematically nonnegative divisor even when that value cannot be represented by `Value`, such as the magnitude of a
 /// signed minimum value.
 ///
-/// - Parameter lhs: The first value.
-/// - Parameter rhs: The second value.
+/// - Parameters:
+///   - lhs: The first value.
+///   - rhs: The second value.
 /// - Returns: The nonnegative greatest common divisor.
 internal func gcd<Value>(
     _ lhs: Value,

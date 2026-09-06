@@ -43,8 +43,9 @@ public protocol Rational:
     /// conforming type determines whether it preserves the supplied terms or converts them to another equivalent
     /// representation.
     ///
-    /// - Parameter numerator: The numerator.
-    /// - Parameter denominator: The denominator. Zero creates a nonfinite value.
+    /// - Parameters:
+    ///   - numerator: The numerator.
+    ///   - denominator: The denominator. Zero creates a nonfinite value.
     init(
         _ numerator: Self.Term,
         _ denominator: Self.Term
@@ -85,11 +86,13 @@ extension Rational {
             return false
         }
 
-        let isNonnegative: Bool = self.numerator == 0
-            || (self.numerator < 0) == (self.denominator < 0)
+        let isNumeratorZero: Bool = self.numerator == 0
+        let termsHaveMatchingSigns: Bool = (self.numerator < 0) == (self.denominator < 0)
+        let isNonnegative: Bool = isNumeratorZero || termsHaveMatchingSigns
 
-        let isInteger: Bool = self.denominator.magnitude == 1
-            || self.numerator.magnitude % self.denominator.magnitude == 0
+        let isDenominatorMagnitudeOne: Bool = self.denominator.magnitude == 1
+        let isEvenlyDivisible: Bool = self.numerator.magnitude % self.denominator.magnitude == 0
+        let isInteger: Bool = isDenominatorMagnitudeOne || isEvenlyDivisible
 
         return isNonnegative && isInteger
     }

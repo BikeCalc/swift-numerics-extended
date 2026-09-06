@@ -7,6 +7,7 @@
 // See CONTRIBUTORS.txt for the list of Numerics Extended project authors
 
 import Testing
+
 @testable import NumericsExtended
 
 @Suite("Canonicalized Fraction Comparable Tests")
@@ -121,7 +122,7 @@ internal struct CanonicalizedFractionComparableTests {
         let valueWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: value)
         let lowerBoundWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lowerBound)
         let upperBoundWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: upperBound)
-        let range: ClosedRange<Canonicalized<Fraction<Int>>> = lowerBoundWrapper...upperBoundWrapper
+        let range: ClosedRange<Canonicalized<Fraction<Int>>> = lowerBoundWrapper ... upperBoundWrapper
 
         #expect(valueWrapper.isWithin(range) == range.contains(valueWrapper))
     }
@@ -138,12 +139,9 @@ internal struct CanonicalizedFractionComparableTests {
         let valueWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: value)
         let lowerBoundWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lowerBound)
         let upperBoundWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: upperBound)
-        let isWithin: Bool = valueWrapper.isWithin(
-            lowerBoundWrapper,
-            through: upperBoundWrapper
-        )
+        let valueIsWithinBounds: Bool = valueWrapper.isWithin(lowerBoundWrapper, upperBoundWrapper) == true
 
-        #expect(isWithin == (valueWrapper >= lowerBoundWrapper && valueWrapper <= upperBoundWrapper))
+        #expect(valueIsWithinBounds == (valueWrapper >= lowerBoundWrapper && valueWrapper <= upperBoundWrapper))
     }
 
     @Test(
@@ -158,12 +156,9 @@ internal struct CanonicalizedFractionComparableTests {
         let valueWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: value)
         let lowerBoundWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lowerBound)
         let upperBoundWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: upperBound)
-        let isBetween: Bool = valueWrapper.isBetween(
-            lowerBoundWrapper,
-            and: upperBoundWrapper
-        )
+        let valueIsBetweenBounds: Bool = valueWrapper.isBetween(lowerBoundWrapper, upperBoundWrapper) == true
 
-        #expect(isBetween == (valueWrapper > lowerBoundWrapper && valueWrapper < upperBoundWrapper))
+        #expect(valueIsBetweenBounds == (valueWrapper > lowerBoundWrapper && valueWrapper < upperBoundWrapper))
     }
 }
 

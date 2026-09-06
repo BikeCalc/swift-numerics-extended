@@ -9,6 +9,7 @@
 #if canImport(Foundation)
 import Foundation
 import Testing
+
 @testable import NumericsExtended
 
 @Suite("Fraction Encodable Tests")
