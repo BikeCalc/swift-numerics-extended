@@ -1,0 +1,40 @@
+name: Contributors
+
+on:
+  push:
+    branches: ["main", "release/**"]
+  pull_request:
+    branches: ["main", "release/**"]
+    types: ["opened", "edited", "reopened", "synchronize"]
+  workflow_dispatch:
+
+jobs:
+  contributors:
+    name: Validate Contributors
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Generate Expected Contributors
+        env:
+          TARGET_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          git log \
+            --format='- %aN <%aE>' \
+            "$TARGET_SHA" |
+            awk '$0 !~ /\[bot\]@users\.noreply\.github\.com>$/' |
+            LC_ALL=C sort --unique \
+            > "$RUNNER_TEMP/CONTRIBUTORS.txt"
+      - name: Validate Contributors
+        run: |
+          if cmp --silent CONTRIBUTORS.txt "$RUNNER_TEMP/CONTRIBUTORS.txt"; then
+            exit 0
+          fi
+
+          echo "CONTRIBUTORS.txt is not up to date."
+          echo "Apply the following changes:"
+          diff --unified CONTRIBUTORS.txt "$RUNNER_TEMP/CONTRIBUTORS.txt" || true
+          exit 1

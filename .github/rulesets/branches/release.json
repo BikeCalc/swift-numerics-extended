@@ -61,6 +61,9 @@
             "context": "Validate Branch Route"
           },
           {
+            "context": "Validate Contributors"
+          },
+          {
             "context": "Validate Pull Request Title"
           }
         ],
