@@ -1,6 +1,6 @@
 # Formatting
 
-Learn how to apply and validate the project's coding style.
+Apply and validate a consistent coding style.
 
 ## Overview
 
@@ -27,6 +27,14 @@ or use:
 ```shell
 swift package plugin --allow-writing-to-package-directory format-source-code
 ```
+
+## Continuous Integration
+
+The `Format` workflow invokes the linter plugin for pushes to `main` and release branches and for pull requests that
+target either. It uses the same package-pinned formatter and configuration as local development.
+
+The workflow is informational: formatting findings do not fail the job. Build and execution failures do fail the
+required `Lint Source Formatting` check.
 
 ## Swift Format
 

@@ -1,6 +1,6 @@
 # Benchmarking
 
-Learn how to measure and compare `Fraction` performance with and without automatic canonicalization.
+Measure and compare performance across revisions.
 
 ## Overview
 
@@ -98,4 +98,4 @@ executable target exists in the baseline, both revisions use the current benchma
 measurements remain comparable.
 
 The workflow is informational: performance differences do not fail the job. Build failures, execution failures, and
-invalid reports do fail it.
+invalid reports do fail the required `Compare Benchmarks` check.
