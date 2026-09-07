@@ -163,14 +163,14 @@ should use the form:
 release/<semantic version>
 ```
 
-Use `feature`, `bugfix`, `chore`, `docs`, or `test` branches for regular work. These branches should be merged into a
-release branch. Use `hotfix` branches only for urgent fixes that need to be merged directly into `main`.
+Use `feature`, `bugfix`, `chore`, `docs`, or `test` branches for regular work. These branches may be merged directly
+into `main` or included in a release branch. Use `hotfix` branches for urgent fixes.
 
 Delete short-lived branches after they are merged.
 
 Allowed pull request routes are:
 
-- `release/*` or `hotfix/*` into `main`.
+- Any branch into `main`.
 - `feature/*`, `bugfix/*`, `chore/*`, `docs/*`, or `test/*` into `release/*`.
 
 ### Files
@@ -281,10 +281,11 @@ results, address reported failures, and ensure every required check passes befor
 
 ### Rule Sets
 
-Repository rule sets protect the main and release branches, enforce the allowed pull request routes, and require
-applicable checks and review conversations to be resolved before a pull request can be merged. In exceptional cases
-where a requirement cannot reasonably be satisfied, contact a repository administrator. Administrators may override a
-rule set when necessary, but an override should not replace the normal review and validation process.
+Repository rule sets protect the main and release branches, enforce the allowed pull request routes into release
+branches, and require applicable checks and review conversations to be resolved before a pull request can be merged. In
+exceptional cases where a requirement cannot reasonably be satisfied, contact a repository administrator.
+Administrators may override a rule set when necessary, but an override should not replace the normal review and
+validation process.
 
 ### Code Reviews
 

@@ -17,11 +17,7 @@ jobs:
 
           case "$base" in
             main)
-              case "$head" in
-                release/*|hotfix/*)
-                  exit 0
-                  ;;
-              esac
+              exit 0
               ;;
             release/*)
               case "$head" in
@@ -34,6 +30,6 @@ jobs:
 
           echo "Invalid branch route: $head -> $base"
           echo "Allowed routes:"
-          echo "- release/* or hotfix/* -> main"
+          echo "- Any branch -> main"
           echo "- feature/*, bugfix/*, chore/*, docs/*, or test/* -> release/*"
           exit 1
