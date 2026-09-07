@@ -6,8 +6,12 @@
 // See LICENSE.md for license information
 // See CONTRIBUTORS.txt for the list of Numerics Extended project authors
 
+/// An error produced while preparing or starting a benchmark run.
 internal enum BenchmarkCommandError {
+    /// The command-line arguments do not match the supported syntax.
     case invalidArguments
+
+    /// The current platform version does not provide the clock required for measurement.
     case unsupportedPlatform
 }
 

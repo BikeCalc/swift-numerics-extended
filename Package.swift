@@ -32,7 +32,37 @@ let package = Package(
             dependencies: [
                 "NumericsExtended"
             ],
-            path: "Benchmarks/NumericsExtendedBenchmarks"
+            path: "Tools/NumericsExtendedBenchmarks"
+        ),
+        .plugin(
+            name: "NumericsExtendedBenchmarksPlugin",
+            capability: .command(
+                intent: .custom(
+                    verb: "benchmark",
+                    description: "Run and compare the Numerics Extended benchmarks"
+                ),
+                permissions: [
+                    .allowNetworkConnections(
+                        scope: .all(),
+                        reason: "Resolve dependencies while building benchmark revisions"
+                    )
+                ]
+            )
+        ),
+        .plugin(
+            name: "NumericsExtendedLinterPlugin",
+            capability: .command(
+                intent: .custom(
+                    verb: "lint",
+                    description: "Lint all Numerics Extended Swift source files"
+                )
+            ),
+            dependencies: [
+                .product(
+                    name: "swift-format",
+                    package: "swift-format"
+                )
+            ]
         ),
         .target(
             name: "CoreNumericOperators"

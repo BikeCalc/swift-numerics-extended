@@ -8,6 +8,7 @@
 
 import NumericsExtended
 
+/// The arithmetic and comparison benchmarks for canonicalized `Fraction` values.
 internal let canonicalizedFractionBenchmarks: Array<Benchmark> = {
     let lhs: Canonicalized<Fraction<Int>> = .init(wrappedValue: .init(1_234, 5_679))
     let rhs: Fraction<Int> = .init(8_765, 4_321)

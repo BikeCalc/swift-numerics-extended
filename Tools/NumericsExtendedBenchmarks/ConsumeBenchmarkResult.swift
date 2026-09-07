@@ -12,6 +12,8 @@
 /// determine that producing a result has no observable effect and remove some or all of the operation being measured.
 /// The non-inlined function boundary helps prevent the benchmark closure from making that assumption, while
 /// `extendLifetime` keeps the value alive through the call without requiring an empty closure.
+///
+/// - Parameter value: The computed benchmark result to keep alive through the call.
 @inline(never)
 internal func consumeBenchmarkResult<Value>(_ value: borrowing Value) {
     extendLifetime(value)
