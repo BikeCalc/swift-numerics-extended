@@ -30,7 +30,7 @@ internal struct BenchmarkRunner {
     internal init(
         iterationsPerSample: Int = 10_000,
         measuredSamples: Int = 10,
-        warmupSamples: Int = 1
+        warmupSamples: Int = 10
     ) {
         self.iterationsPerSample = iterationsPerSample
         self.measuredSamples = measuredSamples

@@ -9,7 +9,7 @@ plugin is the convenient interface for developers, the `NumericsExtendedBenchmar
 lower-level measurement engine, and `Scripts/CompareBenchmarkResults.swift` compares previously generated reports.
 Performance measurements run only when one of these tools is invoked.
 
-Each benchmark performs 10,000 operations per sample after one warm-up sample. The reported value is the median
+Each benchmark performs 10,000 operations per sample after ten warm-up samples. The reported value is the median
 duration per operation across ten measured samples. Always use a release build when measuring performance; debug builds
 are not representative of optimized package performance. In comparisons, positive percentage changes indicate slower
 performance, while negative percentage changes indicate faster performance.
