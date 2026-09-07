@@ -1,11 +1,32 @@
-# Coding Style
+# Formatting
 
-This guide describes the project's coding style. Follow it when changing source code, tests, documentation, and
-configuration files.
+Learn how to apply and validate the project's coding style.
+
+## Overview
 
 The `.swift-format` file is authoritative for formatting that Swift Format can enforce. The Swift Format section
 explains its configuration and rules. The Project Conventions section defines requirements that Swift Format cannot
 fully enforce.
+
+## Command Plugin
+
+Use the provided linter plugin to report formatting issues as warnings across the whole package without changing source
+files:
+
+```shell
+swift package plugin lint
+```
+
+The plugin is also available from Xcode's package commands and checks the whole package regardless of the target
+selected in Xcode. Formatting remains an explicit action; the repository does not automatically format files when they
+are saved or committed.
+
+To apply the configured formatting to the package's source targets, run the Format Source Code package command in Xcode
+or use:
+
+```shell
+swift package plugin --allow-writing-to-package-directory format-source-code
+```
 
 ## Swift Format
 

@@ -49,6 +49,21 @@ let package = Package(
                 ]
             )
         ),
+        .plugin(
+            name: "NumericsExtendedLinterPlugin",
+            capability: .command(
+                intent: .custom(
+                    verb: "lint",
+                    description: "Lint all Numerics Extended Swift source files"
+                )
+            ),
+            dependencies: [
+                .product(
+                    name: "swift-format",
+                    package: "swift-format"
+                )
+            ]
+        ),
         .target(
             name: "CoreNumericOperators"
         ),

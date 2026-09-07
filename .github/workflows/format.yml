@@ -17,4 +17,4 @@ jobs:
       - name: Get Swift Version
         run: swift --version
       - name: Lint Source Formatting
-        run: swift format lint --recursive --parallel Sources Tests Package.swift
+        run: swift package plugin lint
