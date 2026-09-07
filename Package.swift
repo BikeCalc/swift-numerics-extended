@@ -32,7 +32,22 @@ let package = Package(
             dependencies: [
                 "NumericsExtended"
             ],
-            path: "Benchmarks/NumericsExtendedBenchmarks"
+            path: "Tools/NumericsExtendedBenchmarks"
+        ),
+        .plugin(
+            name: "NumericsExtendedBenchmarksPlugin",
+            capability: .command(
+                intent: .custom(
+                    verb: "benchmark",
+                    description: "Run and compare the Numerics Extended benchmarks"
+                ),
+                permissions: [
+                    .allowNetworkConnections(
+                        scope: .all(),
+                        reason: "Resolve dependencies while building benchmark revisions"
+                    )
+                ]
+            )
         ),
         .target(
             name: "CoreNumericOperators"

@@ -8,37 +8,79 @@
 
 import Foundation
 
+// MARK: - Comparison Error
+
+/// An error produced while parsing or comparing benchmark reports.
 fileprivate enum ComparisonError {
-    case duplicateBenchmark(String, URL)
-    case incompatibleConfiguration(URL, URL)
-    case incompatibleFormat(URL)
+    /// A report contains more than one result for the same benchmark.
+    ///
+    /// - Parameters:
+    ///   - name: The name shared by the duplicate benchmark results.
+    ///   - url: The location of the report containing the duplicate results.
+    case duplicateBenchmark(
+        name: String,
+        url: URL
+    )
+
+    /// The baseline and current reports were produced with different configurations.
+    ///
+    /// - Parameters:
+    ///   - baselineURL: The location of the baseline report.
+    ///   - currentURL: The location of the current report.
+    case incompatibleConfiguration(
+        baselineURL: URL,
+        currentURL: URL
+    )
+
+    /// A report uses an unsupported format version.
+    ///
+    /// - Parameter url: The location of the report using the unsupported format.
+    case incompatibleFormat(url: URL)
+
+    /// The command-line arguments are missing or invalid.
     case invalidArguments
 }
 
+// MARK: - CustomStringConvertible
+
 extension ComparisonError: CustomStringConvertible {
+    /// A human-readable explanation of the comparison error.
     fileprivate var description: String {
         switch self {
         case .duplicateBenchmark(let name, let url):
             return "Duplicate benchmark '\(name)' in \(url.path)"
-        case .incompatibleConfiguration(let currentURL, let baselineURL):
-            return "Benchmark configurations differ between \(currentURL.path) and \(baselineURL.path)"
+        case .incompatibleConfiguration(let baselineURL, let currentURL):
+            return "Benchmark configurations differ between \(baselineURL.path) and \(currentURL.path)"
         case .incompatibleFormat(let url):
             return "Unsupported benchmark report format in \(url.path)"
         case .invalidArguments:
-            return "Usage: CompareBenchmarkResults.swift --current <path> [--baseline <path>]"
+            return "Usage: CompareBenchmarkResults.swift [--baseline <path>] --current <path>"
         }
     }
 }
 
+// MARK: - Error
+
 extension ComparisonError: Error {}
 
+// MARK: - Arguments
+
+/// The command-line arguments used to locate the benchmark reports.
 fileprivate struct Arguments {
-    fileprivate let currentURL: URL
+    /// The location of the report used as the baseline, if one was provided.
     fileprivate let baselineURL: URL?
 
+    /// The location of the report for the current revision.
+    fileprivate let currentURL: URL
+
+    /// Parses the command-line arguments used by the comparison script.
+    ///
+    /// - Parameter arguments: The arguments following the script name.
+    /// - Throws: ``ComparisonError/invalidArguments`` if the arguments do not contain, optionally, one baseline
+    ///   report and exactly one current report.
     fileprivate init(_ arguments: Array<String>) throws {
-        var currentURL: URL?
         var baselineURL: URL?
+        var currentURL: URL?
         var index: Int = 0
 
         while index < arguments.count {
@@ -49,10 +91,10 @@ fileprivate struct Arguments {
             let url: URL = .init(fileURLWithPath: arguments[index + 1])
 
             switch arguments[index] {
-            case "--current" where currentURL == nil:
-                currentURL = url
             case "--baseline" where baselineURL == nil:
                 baselineURL = url
+            case "--current" where currentURL == nil:
+                currentURL = url
             default:
                 throw ComparisonError.invalidArguments
             }
@@ -64,17 +106,34 @@ fileprivate struct Arguments {
             throw ComparisonError.invalidArguments
         }
 
-        self.currentURL = currentURL
         self.baselineURL = baselineURL
+        self.currentURL = currentURL
     }
 }
 
+// MARK: - Benchmark Report
+
+/// A decoded benchmark report used in a performance comparison.
 fileprivate struct BenchmarkReport {
+    /// The version of the benchmark report format.
     fileprivate let formatVersion: Int
+
+    /// The number of benchmark iterations included in each sample.
     fileprivate let iterationsPerSample: Int
+
+    /// The number of measured samples collected for each benchmark.
     fileprivate let measuredSamples: Int
+
+    /// The individual benchmark results contained in the report.
     fileprivate let results: Array<BenchmarkResult>
 
+    /// Creates a benchmark report.
+    ///
+    /// - Parameters:
+    ///   - formatVersion: The version of the benchmark report format.
+    ///   - iterationsPerSample: The number of benchmark iterations included in each sample.
+    ///   - measuredSamples: The number of measured samples collected for each benchmark.
+    ///   - results: The individual benchmark results contained in the report.
     fileprivate init(
         formatVersion: Int,
         iterationsPerSample: Int,
@@ -88,12 +147,26 @@ fileprivate struct BenchmarkReport {
     }
 }
 
+// MARK: - Decodable
+
+/// Supports decoding a benchmark report from JSON.
 extension BenchmarkReport: Decodable {}
 
+// MARK: - Benchmark Result
+
+/// The measured performance of an individual benchmark.
 fileprivate struct BenchmarkResult {
+    /// The name of the benchmark.
     fileprivate let name: String
+
+    /// The median duration of one operation, measured in nanoseconds.
     fileprivate let medianNanosecondsPerOperation: Double
 
+    /// Creates an individual benchmark result.
+    ///
+    /// - Parameters:
+    ///   - name: The name of the benchmark.
+    ///   - medianNanosecondsPerOperation: The median duration of one operation, measured in nanoseconds.
     fileprivate init(
         name: String,
         medianNanosecondsPerOperation: Double
@@ -103,32 +176,43 @@ fileprivate struct BenchmarkResult {
     }
 }
 
+// MARK: - Decodable
+
+/// Supports decoding an individual benchmark result from JSON.
 extension BenchmarkResult: Decodable {}
 
-fileprivate struct BenchmarkComparator {
-    private let current: Dictionary<String, Double>
-    private let baseline: Dictionary<String, Double>?
-    private let measuredSamples: Int
+// MARK: - Benchmark Comparator
 
+/// Produces a Markdown comparison between baseline and current benchmark results.
+fileprivate struct BenchmarkComparator {
+    /// The baseline median duration for each benchmark, indexed by name, if available.
+    private let baseline: Dictionary<String, Double>?
+
+    /// The current median duration for each benchmark, indexed by name.
+    private let current: Dictionary<String, Double>
+
+    /// Loads the benchmark reports to compare.
+    ///
+    /// - Parameters:
+    ///   - baselineURL: The location of the report used as the baseline, if available.
+    ///   - currentURL: The location of the report for the current revision.
+    /// - Throws: An error if a report cannot be loaded or the reports cannot be compared.
     fileprivate init(
-        currentURL: URL,
-        baselineURL: URL?
+        baselineURL: URL?,
+        currentURL: URL
     ) throws {
+        let baselineReport: BenchmarkReport? = try baselineURL.map { try Self.report(at: $0) }
         let currentReport: BenchmarkReport = try Self.report(at: currentURL)
 
-        self.current = try Self.results(
-            in: currentReport,
-            at: currentURL
-        )
-        self.measuredSamples = currentReport.measuredSamples
-
-        if let baselineURL {
-            let baselineReport: BenchmarkReport = try Self.report(at: baselineURL)
-
-            guard currentReport.iterationsPerSample == baselineReport.iterationsPerSample
-                && currentReport.measuredSamples == baselineReport.measuredSamples
+        if let baselineReport, let baselineURL {
+            guard
+                baselineReport.iterationsPerSample == currentReport.iterationsPerSample
+                    && baselineReport.measuredSamples == currentReport.measuredSamples
             else {
-                throw ComparisonError.incompatibleConfiguration(currentURL, baselineURL)
+                throw ComparisonError.incompatibleConfiguration(
+                    baselineURL: baselineURL,
+                    currentURL: currentURL
+                )
             }
 
             self.baseline = try Self.results(
@@ -138,20 +222,19 @@ fileprivate struct BenchmarkComparator {
         } else {
             self.baseline = nil
         }
+
+        self.current = try Self.results(
+            in: currentReport,
+            at: currentURL
+        )
     }
 
+    /// Prints the benchmark comparison as a Markdown table.
     fileprivate func print() {
         Swift.print("## Benchmark performance comparison")
         Swift.print()
-        Swift.print(
-            "Each value is the median duration per operation across \(self.measuredSamples) measured "
-                + "\(self.measuredSamples == 1 ? "sample" : "samples")."
-        )
-        Swift.print()
 
         guard let baseline else {
-            Swift.print("No comparable baseline measurement is available, so only the current revision is shown.")
-            Swift.print()
             Swift.print("| Benchmark | Current |")
             Swift.print("|---|---:|")
 
@@ -166,14 +249,12 @@ fileprivate struct BenchmarkComparator {
             return
         }
 
-        Swift.print("Positive changes are slower; negative changes are faster.")
-        Swift.print()
         Swift.print("| Benchmark | Baseline | Current | Change |")
         Swift.print("|---|---:|---:|---:|")
 
-        for name in Set(self.current.keys).union(baseline.keys).sorted() {
-            let currentValue: Double? = self.current[name]
+        for name in Set(baseline.keys).union(self.current.keys).sorted() {
             let baselineValue: Double? = baseline[name]
+            let currentValue: Double? = self.current[name]
 
             switch (baselineValue, currentValue) {
             case (.some(let baselineValue), nil):
@@ -200,6 +281,11 @@ fileprivate struct BenchmarkComparator {
         }
     }
 
+    /// Loads and decodes a benchmark report.
+    ///
+    /// - Parameter url: The location of the benchmark report.
+    /// - Returns: The decoded benchmark report.
+    /// - Throws: An error if the report cannot be read, decoded, or uses an unsupported format.
     private static func report(at url: URL) throws -> BenchmarkReport {
         let data: Data = try .init(contentsOf: url)
         let decoder: JSONDecoder = .init()
@@ -209,12 +295,19 @@ fileprivate struct BenchmarkComparator {
         )
 
         guard report.formatVersion == 1 else {
-            throw ComparisonError.incompatibleFormat(url)
+            throw ComparisonError.incompatibleFormat(url: url)
         }
 
         return report
     }
 
+    /// Indexes the results in a benchmark report by name.
+    ///
+    /// - Parameters:
+    ///   - report: The benchmark report whose results to index.
+    ///   - url: The location of the report, used to identify it in errors.
+    /// - Returns: Each benchmark's median duration, indexed by benchmark name.
+    /// - Throws: ``ComparisonError/duplicateBenchmark(name:url:)`` if a benchmark name occurs more than once.
     private static func results(
         in report: BenchmarkReport,
         at url: URL
@@ -223,7 +316,7 @@ fileprivate struct BenchmarkComparator {
 
         for result in report.results {
             guard results.updateValue(result.medianNanosecondsPerOperation, forKey: result.name) == nil else {
-                throw ComparisonError.duplicateBenchmark(result.name, url)
+                throw ComparisonError.duplicateBenchmark(name: result.name, url: url)
             }
         }
 
@@ -231,11 +324,13 @@ fileprivate struct BenchmarkComparator {
     }
 }
 
+// MARK: - Comparison
+
 do {
     let arguments: Arguments = try .init(Array(CommandLine.arguments.dropFirst()))
     let comparator: BenchmarkComparator = try .init(
-        currentURL: arguments.currentURL,
-        baselineURL: arguments.baselineURL
+        baselineURL: arguments.baselineURL,
+        currentURL: arguments.currentURL
     )
 
     comparator.print()

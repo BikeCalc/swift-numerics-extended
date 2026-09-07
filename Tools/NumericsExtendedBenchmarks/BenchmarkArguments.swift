@@ -8,9 +8,15 @@
 
 import Foundation
 
+/// The command-line configuration for a benchmark run.
 internal struct BenchmarkArguments {
+    /// The destination for the encoded report, or `nil` when the report should be printed to standard output.
     internal let outputURL: URL?
 
+    /// Parses the command-line arguments accepted by the benchmark executable.
+    ///
+    /// - Parameter arguments: The arguments to parse, excluding the executable name.
+    /// - Throws: `BenchmarkCommandError.invalidArguments` when the arguments do not match the supported syntax.
     internal init(_ arguments: Array<String>) throws {
         switch arguments.count {
         case 0:

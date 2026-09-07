@@ -6,11 +6,23 @@
 // See LICENSE.md for license information
 // See CONTRIBUTORS.txt for the list of Numerics Extended project authors
 
+/// The measured timing information for one benchmark operation.
 internal struct BenchmarkResult {
+    /// The name that identifies the measured operation.
     internal let name: String
+
+    /// The median duration per operation, measured in nanoseconds.
     internal let medianNanosecondsPerOperation: Double
+
+    /// The duration per operation for each measured sample, expressed in nanoseconds.
     internal let samplesNanosecondsPerOperation: Array<Double>
 
+    /// Creates a benchmark result from its measured samples and median.
+    ///
+    /// - Parameters:
+    ///   - name: The name that identifies the measured operation.
+    ///   - medianNanosecondsPerOperation: The median duration per operation, measured in nanoseconds.
+    ///   - samplesNanosecondsPerOperation: The duration per operation for each sample, expressed in nanoseconds.
     internal init(
         name: String,
         medianNanosecondsPerOperation: Double,

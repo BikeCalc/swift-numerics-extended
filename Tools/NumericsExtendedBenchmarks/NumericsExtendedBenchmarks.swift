@@ -9,6 +9,7 @@
 import Foundation
 
 @main
+/// The command-line entry point for running the Numerics Extended benchmarks.
 internal enum NumericsExtendedBenchmarks {
     internal static func main() {
         do {

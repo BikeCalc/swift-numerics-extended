@@ -6,10 +6,19 @@
 // See LICENSE.md for license information
 // See CONTRIBUTORS.txt for the list of Numerics Extended project authors
 
+/// A named operation measured by the benchmark runner.
 internal struct Benchmark {
+    /// The name that identifies the operation in benchmark reports.
     internal let name: String
+
+    /// The operation to measure.
     internal let operation: @Sendable () -> Void
 
+    /// Creates a benchmark for a named operation.
+    ///
+    /// - Parameters:
+    ///   - name: The name that identifies the operation in benchmark reports.
+    ///   - operation: The operation to measure.
     internal init(
         name: String,
         operation: @escaping @Sendable () -> Void
