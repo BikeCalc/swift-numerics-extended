@@ -2,9 +2,10 @@ name: Benchmark
 
 on:
   push:
-    branches: ["main", "release/**"]
+    branches: ["main"]
   pull_request:
     branches: ["main", "release/**"]
+    types: ["opened", "reopened", "synchronize"]
   workflow_dispatch:
 
 concurrency:
