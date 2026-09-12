@@ -1,6 +1,6 @@
 ![](Assets/GitHubBanner.png)
 
-# swift-numerics-extended
+# Swift Numerics Extended
 
 A Swift package extending numeric protocols, standard numeric types, and experimental numeric types.
 
@@ -71,16 +71,16 @@ You can read more about this package by visiting the
 
 ## Contributing
 
-Everyone is welcome to contribute to Numerics Extended. See `CONTRIBUTING.md` for contribution guidelines, branch
+Everyone is welcome to contribute to Numerics Extended. See the [contribution guidelines](CONTRIBUTING.md) for branch
 conventions, pull request expectations, and testing instructions.
 
 If you find a bug, please create an [issue](https://github.com/bikecalc/swift-numerics-extended/issues). Security
-vulnerabilities should be reported using the instructions in `SECURITY.md`.
+vulnerabilities should be reported using the [security policy](SECURITY.md).
 
 ## Code of Conduct
 
-This project follows a code of conduct. See `CODE_OF_CONDUCT.md` for more information.
+This project follows a [code of conduct](CODE_OF_CONDUCT.md).
 
 ## License
 
-Distributed under Apache License v2.0 with Runtime Library Exception. See `LICENSE.md` for more information.
+Distributed under Apache License v2.0 with Runtime Library Exception. See the [license](LICENSE.md) for more information.

@@ -8,7 +8,7 @@
 
 import Foundation
 
-// MARK: - Comparison Error
+// MARK: - ComparisonError
 
 /// An error produced while parsing or comparing benchmark reports.
 fileprivate enum ComparisonError {
@@ -111,7 +111,7 @@ fileprivate struct Arguments {
     }
 }
 
-// MARK: - Benchmark Report
+// MARK: - BenchmarkReport
 
 /// A decoded benchmark report used in a performance comparison.
 fileprivate struct BenchmarkReport {
@@ -152,7 +152,7 @@ fileprivate struct BenchmarkReport {
 /// Supports decoding a benchmark report from JSON.
 extension BenchmarkReport: Decodable {}
 
-// MARK: - Benchmark Result
+// MARK: - BenchmarkResult
 
 /// The measured performance of an individual benchmark.
 fileprivate struct BenchmarkResult {
@@ -181,7 +181,7 @@ fileprivate struct BenchmarkResult {
 /// Supports decoding an individual benchmark result from JSON.
 extension BenchmarkResult: Decodable {}
 
-// MARK: - Benchmark Comparator
+// MARK: - BenchmarkComparator
 
 /// Produces a Markdown comparison between baseline and current benchmark results.
 fileprivate struct BenchmarkComparator {
