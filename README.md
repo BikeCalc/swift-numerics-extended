@@ -64,6 +64,28 @@ Numerics Extended is written in Swift and avoids platform-specific APIs where po
     import NumericsExtended
     ```
 
+## Demonstration
+
+Keep a fraction in canonical form while doing arithmetic:
+
+```swift
+@Canonicalized
+var value: Fraction<Int> = .init(2, 4)
+print(value)
+// Prints "1/2"
+
+value += .init(1, 4)
+print(value)
+// Prints "3/4"
+
+value *= .init(2, 3)
+print(value)
+// Prints "1/2"
+```
+
+`Fraction` conforms to `Rational`, which builds on Swift's numeric protocols. Beyond the operations shown here, it 
+supports subtraction, division, exponentiation, and comparisons.
+
 ## Documentation
 
 You can read more about this package by visiting the
