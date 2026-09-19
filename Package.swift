@@ -39,7 +39,7 @@ let package = Package(
             capability: .command(
                 intent: .custom(
                     verb: "benchmark",
-                    description: "Run and compare the Numerics Extended benchmarks"
+                    description: "Run and compare the benchmarks"
                 ),
                 permissions: [
                     .allowNetworkConnections(
@@ -54,7 +54,7 @@ let package = Package(
             capability: .command(
                 intent: .custom(
                     verb: "lint",
-                    description: "Lint all Numerics Extended Swift source files"
+                    description: "Lint all Swift source files"
                 )
             ),
             dependencies: [

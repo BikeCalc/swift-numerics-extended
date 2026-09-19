@@ -21,6 +21,11 @@ The plugin is also available from Xcode's package commands and checks the whole 
 selected in Xcode. Formatting remains an explicit action; the repository does not automatically format files when they
 are saved or committed.
 
+The linter uses Git to discover all tracked and nonignored untracked `.swift` files throughout the repository, including
+scripts, plugins, and tutorial samples. Deleted files are skipped. Ignored untracked files, such as build outputs and
+checked-out dependencies under `.build`, are excluded. Run the plugin from a Git checkout; new source directories are
+included automatically.
+
 To apply the configured formatting to the package's source targets, run the Format Source Code package command in Xcode
 or use:
 
@@ -30,8 +35,8 @@ swift package plugin --allow-writing-to-package-directory format-source-code
 
 ## Continuous Integration
 
-The `Format` workflow invokes the linter plugin for pushes to `main` and release branches and for pull requests that
-target either. It uses the same package-pinned formatter and configuration as local development.
+The `Format` workflow invokes the linter plugin for pushes to `main` and pull requests targeting `main` or release
+branches. It uses the same package-pinned formatter and configuration as local development.
 
 The workflow is informational: formatting findings do not fail the job. Build and execution failures do fail the
 required `Lint Source Formatting` check.
