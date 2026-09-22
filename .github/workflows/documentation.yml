@@ -27,25 +27,9 @@ jobs:
         with:
           fetch-depth: 0
       - name: Get Swift Version
-        run: |
-          swift --version
+        run: swift --version
       - name: Build Documentation
-        run: |
-          swift package --allow-writing-to-directory ./docs \
-            generate-documentation \
-            --enable-experimental-combined-documentation \
-            --target CoreNumericOperators \
-            --target CoreNumericProtocols \
-            --target ExperimentalNumericConstants \
-            --target ExperimentalNumericProtocols \
-            --target ExperimentalNumericTypes \
-            --target StandardNumericProtocols \
-            --target StandardNumericTypes \
-            --target NumericsExtended \
-            --output-path ./docs \
-            --transform-for-static-hosting \
-            --hosting-base-path "swift-numerics-extended"
-          echo '<meta http-equiv="refresh" content="0; url=documentation/">' > docs/index.html
+        run: swift Scripts/BuildDocumentation.swift
       - name: Setup GitHub Pages
         id: pages
         uses: actions/configure-pages@v5
