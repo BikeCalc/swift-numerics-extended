@@ -17,26 +17,10 @@ jobs:
     name: Validate Branch Route
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
       - name: Check Branch Route
-        run: |
-          base="${{ github.base_ref }}"
-          head="${{ github.head_ref }}"
-
-          case "$base" in
-            main)
-              exit 0
-              ;;
-            release/*)
-              case "$head" in
-                feature/*|bugfix/*|chore/*|docs/*|test/*)
-                  exit 0
-                  ;;
-              esac
-              ;;
-          esac
-
-          echo "Invalid branch route: $head -> $base"
-          echo "Allowed routes:"
-          echo "- Any branch -> main"
-          echo "- feature/*, bugfix/*, chore/*, docs/*, or test/* -> release/*"
-          exit 1
+        env:
+          BASE_REF: ${{ github.base_ref }}
+          HEAD_REF: ${{ github.head_ref }}
+        run: swift Scripts/ValidateBranchRoute.swift "$BASE_REF" "$HEAD_REF"
