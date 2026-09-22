@@ -23,7 +23,27 @@ jobs:
         uses: actions/checkout@v6
       - name: Get Swift Version
         run: swift --version
-      - name: Build Package
-        run: swift build --target NumericsExtended
       - name: Test Package
-        run: swift test
+        run: swift test --enable-code-coverage
+      - name: Generate Code Coverage Report
+        id: code-coverage
+        shell: bash
+        run: |
+          coverage_report=$(find .build -type f -path "*/codecov/*.json" -print -quit)
+
+          if [[ -z "$coverage_report" ]]; then
+              echo "Code coverage report not found."
+              exit 1
+          fi
+
+          report_directory="$RUNNER_TEMP/code-coverage"
+          mkdir -p "$report_directory"
+          cp "$coverage_report" "$report_directory/code-coverage.json"
+          swift Scripts/GenerateCodeCoverageReport.swift \
+            --report "$coverage_report" \
+            --sources "$GITHUB_WORKSPACE/Sources" \
+            | tee "$report_directory/code-coverage.md" >> "$GITHUB_STEP_SUMMARY"
+
+          echo "directory=$report_directory" >> "$GITHUB_OUTPUT"
+      - name: Upload Code Coverage Report
+        uses: actions/upload-artifact@v4
