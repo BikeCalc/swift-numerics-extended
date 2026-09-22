@@ -27,17 +27,12 @@ jobs:
           fetch-depth: 0
       - name: Get Swift Version
         run: swift --version
-      - name: Select Comparison Revision
-        id: comparison
+      - name: Compare Benchmarks
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           BEFORE_SHA: ${{ github.event.before }}
           EVENT_NAME: ${{ github.event_name }}
           REF_NAME: ${{ github.ref_name }}
-        run: |
-          baseline_sha=$(swift Scripts/SelectBenchmarkBaseline.swift "$EVENT_NAME" "$BASE_SHA" "$BEFORE_SHA" "$REF_NAME")
-          echo "baseline_sha=$baseline_sha" >> "$GITHUB_OUTPUT"
-      - name: Compare Benchmarks
-        env:
-          BASELINE_SHA: ${{ steps.comparison.outputs.baseline_sha }}
-        run: swift Scripts/RunBenchmarks.swift "$BASELINE_SHA" >> "$GITHUB_STEP_SUMMARY"
+        run: >-
+          swift Scripts/RunBenchmarks.swift --event "$EVENT_NAME" "$BASE_SHA" "$BEFORE_SHA" "$REF_NAME"
+          >> "$GITHUB_STEP_SUMMARY"

@@ -6,8 +6,8 @@
 // See LICENSE.md for license information
 // See CONTRIBUTORS.txt for the list of Numerics Extended project authors
 
-@available(iOS 16.0, macCatalyst 16.0, macOS 13.0, tvOS 16.0, visionOS 1.0, watchOS 9.0, *)
 /// Measures benchmark operations after warming them up and reports their median duration per operation.
+@available(iOS 16.0, macCatalyst 16.0, macOS 13.0, tvOS 16.0, visionOS 1.0, watchOS 9.0, *)
 internal struct BenchmarkRunner {
     /// The monotonic clock used to measure each sample.
     private let clock: ContinuousClock = .init()

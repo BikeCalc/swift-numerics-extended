@@ -8,12 +8,69 @@
 
 import Foundation
 
-guard CommandLine.arguments.count <= 2 else {
-    print("Usage: RunBenchmarks.swift [baseline-sha]")
-    exit(EXIT_FAILURE)
+/// Selects the benchmark baseline from an explicit revision or workflow event arguments.
+///
+/// - Parameter arguments: No arguments, `--baseline <revision>`, or
+///   `--event <event> <base-sha> <before-sha> <ref-name>`.
+/// - Returns: The baseline revision, or an empty string when no comparison applies.
+/// - Throws: An error if Git cannot be launched to resolve the release-branch baseline.
+fileprivate func selectBaseline(from arguments: Array<String>) throws -> String {
+    if arguments.isEmpty {
+        return ""
+    }
+
+    if arguments.count == 2 && arguments[0] == "--baseline" {
+        return arguments[1]
+    }
+
+    guard arguments.count == 5 && arguments[0] == "--event" else {
+        let data: Data = .init(
+            ("Usage: RunBenchmarks.swift [--baseline <revision>]\n"
+                + "Usage: RunBenchmarks.swift --event <event> <base-sha> <before-sha> <ref-name>\n").utf8
+        )
+        FileHandle.standardError.write(data)
+        exit(EXIT_FAILURE)
+    }
+
+    let event: String = arguments[1]
+    let baseSHA: String = arguments[2]
+    let beforeSHA: String = arguments[3]
+    let refName: String = arguments[4]
+
+    if event == "pull_request" {
+        return baseSHA
+    }
+
+    if event == "push" && refName == "main" && !beforeSHA.allSatisfy({ $0 == "0" }) {
+        return beforeSHA
+    }
+
+    if event == "push" && refName.hasPrefix("release/") {
+        let output: Pipe = .init()
+        let git: Process = .init()
+        git.executableURL = .init(fileURLWithPath: "/usr/bin/env")
+        git.arguments = ["git", "rev-parse", "refs/remotes/origin/main"]
+        git.standardOutput = output
+
+        try git.run()
+        let data: Data = output.fileHandleForReading.readDataToEndOfFile()
+        git.waitUntilExit()
+
+        guard git.terminationReason == .exit && git.terminationStatus == EXIT_SUCCESS else {
+            exit(git.terminationReason == .exit ? git.terminationStatus : EXIT_FAILURE)
+        }
+
+        // Capture Git's revision instead of including it in the benchmark report on standard output.
+        return String(decoding: data, as: UTF8.self).trimmingCharacters(in: .newlines)
+    }
+
+    return ""
 }
 
 do {
+    let arguments: Array<String> = Array(CommandLine.arguments.dropFirst())
+    let baselineSHA: String = try selectBaseline(from: arguments)
+
     let process: Process = .init()
     process.executableURL = .init(fileURLWithPath: "/usr/bin/env")
     process.arguments = [
@@ -21,7 +78,7 @@ do {
     ]
 
     // An omitted or empty baseline requests a report for the current revision alone.
-    if let baselineSHA = CommandLine.arguments.dropFirst().first, !baselineSHA.isEmpty {
+    if !baselineSHA.isEmpty {
         process.arguments?.append(contentsOf: ["--baseline", baselineSHA])
     }
 
