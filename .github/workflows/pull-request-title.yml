@@ -17,19 +17,9 @@ jobs:
     name: Validate Pull Request Title
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
       - name: Validate Conventional Commit Title
         env:
           PR_TITLE: ${{ github.event.pull_request.title }}
-        run: |
-          pattern='^(fix|feat|build|chore|ci|docs|style|refactor|perf|test)(\([^()]+\))?!?: .+$'
-
-          if [[ "$PR_TITLE" =~ $pattern ]]; then
-            exit 0
-          fi
-
-          echo "Invalid pull request title: $PR_TITLE"
-          echo "Use the Conventional Commit form:"
-          echo "<type>[optional scope]: <description>"
-          echo "Parentheses around a scope are required. Append ! after the type or scope for a breaking change."
-          echo "Allowed types: fix, feat, build, chore, ci, docs, style, refactor, perf, test"
-          exit 1
+        run: swift Scripts/ValidatePullRequestTitle.swift "$PR_TITLE"
