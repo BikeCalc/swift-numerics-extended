@@ -94,7 +94,7 @@ internal enum ProcessRunner {
     private static func validate(
         _ process: Process,
         command: String
-    ) throws {
+    ) throws(NumericsExtendedBenchmarksPluginError) {
         guard process.terminationReason == .exit && process.terminationStatus == EXIT_SUCCESS else {
             throw NumericsExtendedBenchmarksPluginError.commandFailed(
                 command: command,

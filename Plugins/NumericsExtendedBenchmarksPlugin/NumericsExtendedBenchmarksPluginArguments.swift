@@ -18,7 +18,7 @@ internal struct NumericsExtendedBenchmarksPluginArguments {
     ///
     /// - Parameter arguments: The arguments to parse, excluding the plugin verb.
     /// - Throws: `NumericsExtendedBenchmarksPluginError.invalidArguments` when the arguments are unsupported.
-    internal init(_ arguments: Array<String>) throws {
+    internal init(_ arguments: Array<String>) throws(NumericsExtendedBenchmarksPluginError) {
         if arguments == ["--help"] || arguments == ["-h"] {
             self.baselineRevision = "main"
             self.showsHelp = true

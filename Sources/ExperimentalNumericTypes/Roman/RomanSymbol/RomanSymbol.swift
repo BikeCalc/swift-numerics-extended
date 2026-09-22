@@ -112,9 +112,9 @@ internal enum RomanSymbol: String, RawRepresentable, CaseIterable {
     /// Concatenates this case with the specified value.
     ///
     /// - Parameter rhs: The value on the right hand side.
-    /// - Throws: A Roman symbol error if is unconcatenable.
+    /// - Throws: `RomanSymbolError.isUnconcatenable` if the symbols cannot be concatenated.
     /// - Returns: A concatenated value.
-    internal func concatenate(with rhs: Self) throws -> Self {
+    internal func concatenate(with rhs: Self) throws(RomanSymbolError) -> Self {
         switch (self, rhs) {
         case (.i, .v):
             return .iv
@@ -135,9 +135,9 @@ internal enum RomanSymbol: String, RawRepresentable, CaseIterable {
 
     /// Separates this case into an array of cases.
     ///
-    /// - Throws: A Roman symbol error if is inseparable.
+    /// - Throws: `RomanSymbolError.isInseparable` if the symbol cannot be separated.
     /// - Returns: An array of separated values.
-    internal func separate() throws -> Array<Self> {
+    internal func separate() throws(RomanSymbolError) -> Array<Self> {
         switch self {
         case .iv:
             return [.i, .v]

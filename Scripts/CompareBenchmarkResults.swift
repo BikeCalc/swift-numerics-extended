@@ -8,10 +8,10 @@
 
 import Foundation
 
-// MARK: - ComparisonError
+// MARK: - BenchmarkReportError
 
 /// An error produced while parsing or comparing benchmark reports.
-fileprivate enum ComparisonError {
+fileprivate enum BenchmarkReportError {
     /// A report contains more than one result for the same benchmark.
     ///
     /// - Parameters:
@@ -37,16 +37,39 @@ fileprivate enum ComparisonError {
     /// - Parameter url: The location of the report using the unsupported format.
     case incompatibleFormat(url: URL)
 
+    /// A report could not be read from disk.
+    ///
+    /// - Parameters:
+    ///   - url: The location of the report.
+    ///   - underlyingError: The original file-reading error.
+    case reportReadFailed(
+        url: URL,
+        underlyingError: any Error
+    )
+
+    /// A report could not be decoded from JSON.
+    ///
+    /// - Parameters:
+    ///   - url: The location of the report.
+    ///   - underlyingError: The original decoding error.
+    case reportDecodingFailed(
+        url: URL,
+        underlyingError: any Error
+    )
+
     /// The command-line arguments are missing or invalid.
     case invalidArguments
 }
 
 // MARK: - CustomStringConvertible
 
-extension ComparisonError: CustomStringConvertible {
-    /// A human-readable explanation of the comparison error.
+extension BenchmarkReportError: CustomStringConvertible {
     fileprivate var description: String {
         switch self {
+        case .reportReadFailed(let url, let underlyingError):
+            return "Could not read report at \(url.path): \(underlyingError)"
+        case .reportDecodingFailed(let url, let underlyingError):
+            return "Could not decode report at \(url.path): \(underlyingError)"
         case .duplicateBenchmark(let name, let url):
             return "Duplicate benchmark '\(name)' in \(url.path)"
         case .incompatibleConfiguration(let baselineURL, let currentURL):
@@ -61,7 +84,7 @@ extension ComparisonError: CustomStringConvertible {
 
 // MARK: - Error
 
-extension ComparisonError: Error {}
+extension BenchmarkReportError: Error {}
 
 // MARK: - Arguments
 
@@ -76,16 +99,16 @@ fileprivate struct Arguments {
     /// Parses the command-line arguments used by the comparison script.
     ///
     /// - Parameter arguments: The arguments following the script name.
-    /// - Throws: ``ComparisonError/invalidArguments`` if the arguments do not contain, optionally, one baseline
+    /// - Throws: `BenchmarkReportError.invalidArguments` if the arguments do not contain, optionally, one baseline
     ///   report and exactly one current report.
-    fileprivate init(_ arguments: Array<String>) throws {
+    fileprivate init(_ arguments: Array<String>) throws(BenchmarkReportError) {
         var baselineURL: URL?
         var currentURL: URL?
         var index: Int = 0
 
         while index < arguments.count {
             guard index + 1 < arguments.count else {
-                throw ComparisonError.invalidArguments
+                throw BenchmarkReportError.invalidArguments
             }
 
             let url: URL = .init(fileURLWithPath: arguments[index + 1])
@@ -96,14 +119,14 @@ fileprivate struct Arguments {
             case "--current" where currentURL == nil:
                 currentURL = url
             default:
-                throw ComparisonError.invalidArguments
+                throw BenchmarkReportError.invalidArguments
             }
 
             index += 2
         }
 
         guard let currentURL else {
-            throw ComparisonError.invalidArguments
+            throw BenchmarkReportError.invalidArguments
         }
 
         self.baselineURL = baselineURL
@@ -196,20 +219,27 @@ fileprivate struct BenchmarkComparator {
     /// - Parameters:
     ///   - baselineURL: The location of the report used as the baseline, if available.
     ///   - currentURL: The location of the report for the current revision.
-    /// - Throws: An error if a report cannot be loaded or the reports cannot be compared.
+    /// - Throws: `BenchmarkReportError` if a report cannot be loaded or the reports cannot be compared.
     fileprivate init(
         baselineURL: URL?,
         currentURL: URL
-    ) throws {
-        let baselineReport: BenchmarkReport? = try baselineURL.map { try Self.report(at: $0) }
-        let currentReport: BenchmarkReport = try Self.report(at: currentURL)
+    ) throws(BenchmarkReportError) {
+        let baselineReport: BenchmarkReport?
+
+        if let baselineURL {
+            baselineReport = try Self.loadReport(at: baselineURL)
+        } else {
+            baselineReport = nil
+        }
+
+        let currentReport: BenchmarkReport = try Self.loadReport(at: currentURL)
 
         if let baselineReport, let baselineURL {
             guard
                 baselineReport.iterationsPerSample == currentReport.iterationsPerSample
                     && baselineReport.measuredSamples == currentReport.measuredSamples
             else {
-                throw ComparisonError.incompatibleConfiguration(
+                throw BenchmarkReportError.incompatibleConfiguration(
                     baselineURL: baselineURL,
                     currentURL: currentURL
                 )
@@ -230,27 +260,27 @@ fileprivate struct BenchmarkComparator {
     }
 
     /// Prints the benchmark comparison as a Markdown table.
-    fileprivate func print() {
-        Swift.print("## Benchmark performance comparison")
-        Swift.print()
+    fileprivate func printReport() {
+        print("## Benchmark performance comparison")
+        print()
 
         guard let baseline else {
-            Swift.print("| Benchmark | Current |")
-            Swift.print("|---|---:|")
+            print("| Benchmark | Current |")
+            print("|---|---:|")
 
             for name in self.current.keys.sorted() {
                 guard let currentValue = self.current[name] else {
                     continue
                 }
 
-                Swift.print("| `\(name)` | \(String(format: "%.2f ns", currentValue)) |")
+                print("| `\(name)` | \(String(format: "%.2f ns", currentValue)) |")
             }
 
             return
         }
 
-        Swift.print("| Benchmark | Baseline | Current | Change |")
-        Swift.print("|---|---:|---:|---:|")
+        print("| Benchmark | Baseline | Current | Change |")
+        print("|---|---:|---:|---:|")
 
         for name in Set(baseline.keys).union(self.current.keys).sorted() {
             let baselineValue: Double? = baseline[name]
@@ -258,9 +288,9 @@ fileprivate struct BenchmarkComparator {
 
             switch (baselineValue, currentValue) {
             case (.some(let baselineValue), nil):
-                Swift.print("| `\(name)` | \(String(format: "%.2f ns", baselineValue)) | — | Removed |")
+                print("| `\(name)` | \(String(format: "%.2f ns", baselineValue)) | — | Removed |")
             case (nil, .some(let currentValue)):
-                Swift.print("| `\(name)` | — | \(String(format: "%.2f ns", currentValue)) | Added |")
+                print("| `\(name)` | — | \(String(format: "%.2f ns", currentValue)) | Added |")
             case (.some(let baselineValue), .some(let currentValue)):
                 let difference: String
 
@@ -271,7 +301,7 @@ fileprivate struct BenchmarkComparator {
                     difference = String(format: "%+.2f%%", percentage)
                 }
 
-                Swift.print(
+                print(
                     "| `\(name)` | \(String(format: "%.2f ns", baselineValue)) | "
                         + "\(String(format: "%.2f ns", currentValue)) | \(difference) |"
                 )
@@ -285,17 +315,36 @@ fileprivate struct BenchmarkComparator {
     ///
     /// - Parameter url: The location of the benchmark report.
     /// - Returns: The decoded benchmark report.
-    /// - Throws: An error if the report cannot be read, decoded, or uses an unsupported format.
-    private static func report(at url: URL) throws -> BenchmarkReport {
-        let data: Data = try .init(contentsOf: url)
+    /// - Throws: `BenchmarkReportError` if the report cannot be read, decoded, or uses an unsupported format.
+    private static func loadReport(at url: URL) throws(BenchmarkReportError) -> BenchmarkReport {
+        let data: Data
+
+        do {
+            data = try .init(contentsOf: url)
+        } catch let error {
+            throw BenchmarkReportError.reportReadFailed(
+                url: url,
+                underlyingError: error
+            )
+        }
+
         let decoder: JSONDecoder = .init()
-        let report: BenchmarkReport = try decoder.decode(
-            BenchmarkReport.self,
-            from: data
-        )
+        let report: BenchmarkReport
+
+        do {
+            report = try decoder.decode(
+                BenchmarkReport.self,
+                from: data
+            )
+        } catch let error {
+            throw BenchmarkReportError.reportDecodingFailed(
+                url: url,
+                underlyingError: error
+            )
+        }
 
         guard report.formatVersion == 1 else {
-            throw ComparisonError.incompatibleFormat(url: url)
+            throw BenchmarkReportError.incompatibleFormat(url: url)
         }
 
         return report
@@ -307,16 +356,16 @@ fileprivate struct BenchmarkComparator {
     ///   - report: The benchmark report whose results to index.
     ///   - url: The location of the report, used to identify it in errors.
     /// - Returns: Each benchmark's median duration, indexed by benchmark name.
-    /// - Throws: ``ComparisonError/duplicateBenchmark(name:url:)`` if a benchmark name occurs more than once.
+    /// - Throws: `BenchmarkReportError.duplicateBenchmark` if a benchmark name occurs more than once.
     private static func results(
         in report: BenchmarkReport,
         at url: URL
-    ) throws -> Dictionary<String, Double> {
+    ) throws(BenchmarkReportError) -> Dictionary<String, Double> {
         var results: Dictionary<String, Double> = [:]
 
         for result in report.results {
             guard results.updateValue(result.medianNanosecondsPerOperation, forKey: result.name) == nil else {
-                throw ComparisonError.duplicateBenchmark(name: result.name, url: url)
+                throw BenchmarkReportError.duplicateBenchmark(name: result.name, url: url)
             }
         }
 
@@ -324,7 +373,7 @@ fileprivate struct BenchmarkComparator {
     }
 }
 
-// MARK: - Comparison
+// MARK: - Report Generation
 
 do {
     let arguments: Arguments = try .init(Array(CommandLine.arguments.dropFirst()))
@@ -333,7 +382,7 @@ do {
         currentURL: arguments.currentURL
     )
 
-    comparator.print()
+    comparator.printReport()
 } catch let error {
     FileHandle.standardError.write(Data("\(error)\n".utf8))
     exit(EXIT_FAILURE)

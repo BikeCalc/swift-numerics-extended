@@ -17,7 +17,7 @@ internal struct BenchmarkArguments {
     ///
     /// - Parameter arguments: The arguments to parse, excluding the executable name.
     /// - Throws: `BenchmarkCommandError.invalidArguments` when the arguments do not match the supported syntax.
-    internal init(_ arguments: Array<String>) throws {
+    internal init(_ arguments: Array<String>) throws(BenchmarkCommandError) {
         switch arguments.count {
         case 0:
             self.outputURL = nil
