@@ -35,29 +35,9 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           REF_NAME: ${{ github.ref_name }}
         run: |
-          baseline_sha=""
-
-          if [ "$EVENT_NAME" = "pull_request" ]; then
-            baseline_sha="$BASE_SHA"
-          elif [ "$EVENT_NAME" = "push" ] && [ "$REF_NAME" = "main" ] \
-            && ! printf '%s' "$BEFORE_SHA" | grep -q '^0*$'; then
-            baseline_sha="$BEFORE_SHA"
-          elif [ "$EVENT_NAME" = "push" ] && [[ "$REF_NAME" == release/* ]]; then
-            baseline_sha="$(git rev-parse refs/remotes/origin/main)"
-          fi
-
+          baseline_sha=$(swift Scripts/SelectBenchmarkBaseline.swift "$EVENT_NAME" "$BASE_SHA" "$BEFORE_SHA" "$REF_NAME")
           echo "baseline_sha=$baseline_sha" >> "$GITHUB_OUTPUT"
       - name: Compare Benchmarks
         env:
           BASELINE_SHA: ${{ steps.comparison.outputs.baseline_sha }}
-        run: |
-          benchmark_arguments=()
-
-          if [ -n "$BASELINE_SHA" ]; then
-            benchmark_arguments+=(
-              --baseline "$BASELINE_SHA"
-            )
-          fi
-
-          swift package plugin --allow-network-connections all benchmark \
-            "${benchmark_arguments[@]}" >> "$GITHUB_STEP_SUMMARY"
+        run: swift Scripts/RunBenchmarks.swift "$BASELINE_SHA" >> "$GITHUB_STEP_SUMMARY"
