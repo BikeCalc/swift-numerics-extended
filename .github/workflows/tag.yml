@@ -16,14 +16,9 @@ jobs:
     name: Validate Tag
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
       - name: Validate Semantic Version Tag
-        run: |
-          tag="${{ github.ref_name }}"
-          pattern='^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$'
-
-          if [[ "$tag" =~ $pattern ]]; then
-            exit 0
-          fi
-
-          echo "Invalid semantic version tag: $tag"
-          exit 1
+        env:
+          TAG: ${{ github.ref_name }}
+        run: swift Scripts/ValidateTag.swift "$TAG"
