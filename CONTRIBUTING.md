@@ -276,6 +276,8 @@ Once the release checklist is complete and its sub-issues are closed, open a pul
 
 ### Workflows
 
+See the [workflow documentation](Docs/Workflows.md) to run workflow scripts locally.
+
 Configured workflows run automatically for pull requests and publish their checks on the pull request. Review their
 results, address reported failures, and ensure every required check passes before merging.
 

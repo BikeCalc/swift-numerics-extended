@@ -77,7 +77,7 @@ extension BenchmarkReportError: CustomStringConvertible {
         case .incompatibleFormat(let url):
             return "Unsupported benchmark report format in \(url.path)"
         case .invalidArguments:
-            return "Usage: CompareBenchmarkResults.swift [--baseline <path>] --current <path>"
+            return "Usage: GenerateBenchmarkReport.swift [--baseline <path>] --current <path>"
         }
     }
 }

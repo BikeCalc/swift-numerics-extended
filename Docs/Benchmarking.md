@@ -6,7 +6,7 @@ Measure and compare performance across revisions.
 
 Numerics Extended provides three ways to work with its benchmarks. The `NumericsExtendedBenchmarksPlugin` command
 plugin is the convenient interface for developers, the `NumericsExtendedBenchmarks` executable target is the
-lower-level measurement engine, and `Scripts/CompareBenchmarkResults.swift` compares previously generated reports.
+lower-level measurement engine, and `Scripts/GenerateBenchmarkReport.swift` compares previously generated reports.
 Performance measurements run only when one of these tools is invoked.
 
 Each benchmark performs 10,000 operations per sample after ten warm-up samples. The reported value is the median
@@ -71,11 +71,11 @@ prints the resolved path of the generated report.
 
 ## Comparison Script
 
-`Scripts/CompareBenchmarkResults.swift` compares two previously generated JSON reports and prints the resulting
+`Scripts/GenerateBenchmarkReport.swift` compares two previously generated JSON reports and prints the resulting
 Markdown table:
 
 ```shell
-swift Scripts/CompareBenchmarkResults.swift \
+swift Scripts/GenerateBenchmarkReport.swift \
     --baseline baseline-results.json \
     --current current-results.json
 ```
@@ -83,7 +83,7 @@ swift Scripts/CompareBenchmarkResults.swift \
 The baseline report is optional. Without one, the script prints only the current measurements:
 
 ```shell
-swift Scripts/CompareBenchmarkResults.swift \
+swift Scripts/GenerateBenchmarkReport.swift \
     --current current-results.json
 ```
 

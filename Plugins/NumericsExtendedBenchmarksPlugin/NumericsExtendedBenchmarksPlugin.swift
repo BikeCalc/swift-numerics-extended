@@ -198,7 +198,7 @@ extension NumericsExtendedBenchmarksPlugin: CommandPlugin {
         )
 
         var comparisonArguments: Array<String> = [
-            packageURL.appendingPathComponent("Scripts/CompareBenchmarkResults.swift").path,
+            packageURL.appendingPathComponent("Scripts/GenerateBenchmarkReport.swift").path,
             "--current",
             currentReportURL.path
         ]

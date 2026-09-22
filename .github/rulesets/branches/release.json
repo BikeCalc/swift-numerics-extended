@@ -45,7 +45,7 @@
         "do_not_enforce_on_create": true,
         "required_status_checks": [
           {
-            "context": "Build and Test Package"
+            "context": "Run Unit Tests"
           },
           {
             "context": "Compare Benchmarks"

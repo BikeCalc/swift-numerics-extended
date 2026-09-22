@@ -1,4 +1,4 @@
-name: Test
+name: Unit Tests
 
 on:
   push:
@@ -16,14 +16,14 @@ concurrency:
 
 jobs:
   build:
-    name: Build and Test Package
+    name: Run Unit Tests
     runs-on: macos-26
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v6
       - name: Get Swift Version
         run: swift --version
-      - name: Test Package
+      - name: Run Unit Tests
         run: swift test --enable-code-coverage
       - name: Generate Code Coverage Report
         id: code-coverage
