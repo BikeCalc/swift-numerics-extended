@@ -29,10 +29,10 @@ jobs:
         id: code-coverage
         shell: bash
         run: |
-          coverage_report=$(find .build -type f -path "*/codecov/*.json" -print -quit)
+          coverage_report=$(swift test --show-codecov-path)
 
-          if [[ -z "$coverage_report" ]]; then
-              echo "Code coverage report not found."
+          if [[ ! -f "$coverage_report" ]]; then
+              echo "Code coverage report not found: $coverage_report"
               exit 1
           fi
 
