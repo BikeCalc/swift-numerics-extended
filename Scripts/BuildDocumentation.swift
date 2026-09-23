@@ -17,15 +17,15 @@ guard CommandLine.arguments.count == 1 else {
 fileprivate let redirectHTML: String = "<meta http-equiv=\"refresh\" content=\"0; url=documentation/\">\n"
 
 /// The output path of the documentation site's landing page.
-fileprivate let landingPagePath: String = "docs/index.html"
+fileprivate let landingPagePath: String = ".build/github-pages/index.html"
 
 do {
     let process: Process = .init()
     process.executableURL = .init(fileURLWithPath: "/usr/bin/env")
 
-    // Keep the generated site rooted at docs/ for the workflow's Pages artifact upload.
+    // Keep the generated site rooted at .build/github-pages/ for the workflow's Pages artifact upload.
     process.arguments = [
-        "swift", "package", "--allow-writing-to-directory", "./docs", "generate-documentation",
+        "swift", "package", "--allow-writing-to-directory", ".build/github-pages", "generate-documentation",
         "--enable-experimental-combined-documentation",
         "--target", "CoreNumericOperators",
         "--target", "CoreNumericProtocols",
@@ -35,7 +35,7 @@ do {
         "--target", "StandardNumericProtocols",
         "--target", "StandardNumericTypes",
         "--target", "NumericsExtended",
-        "--output-path", "./docs",
+        "--output-path", ".build/github-pages",
         "--transform-for-static-hosting",
         "--hosting-base-path", "swift-numerics-extended"
     ]

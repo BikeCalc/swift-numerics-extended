@@ -24,8 +24,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
       - name: Get Swift Version
         run: swift --version
       - name: Build Documentation
@@ -36,7 +34,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: "docs"
+          path: ".build/github-pages"
       - name: Deploy Documentation
         id: deployment
         uses: actions/deploy-pages@v4

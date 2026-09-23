@@ -19,7 +19,7 @@ Build the combined DocC website:
 swift Scripts/BuildDocumentation.swift
 ```
 
-This generates the site in `docs/` inside the repository and adds its landing-page redirect after a successful build.
+This generates the site in `.build/github-pages/` inside the repository and adds its landing-page redirect after a successful build.
 GitHub Pages setup, artifact upload, and deployment remain in the documentation workflow.
 
 ## GenerateBenchmarkReport.swift
