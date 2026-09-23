@@ -73,6 +73,11 @@ does. Pull requests select their base SHA; pushes to `main` select the previous 
 release-branch pushes select `origin/main`. When no revision is selected, the script omits the plugin's baseline
 argument, leaving its default in effect. The workflow's configured triggers determine which events actually run.
 
+For a selected baseline, the script checks that the commit exists locally before invoking the plugin. If missing, it
+fetches the revision from `origin` and checks again. This supports previous commits replaced by an amended or
+force-pushed history while the remote still makes them available. An unavailable baseline fails the run with a clear
+diagnostic; it does not silently skip the comparison.
+
 Use either `--baseline` or `--event`; the two modes cannot be combined. The workflow redirects the report to the GitHub
 Actions summary. See [Benchmarking](Benchmarking.md) for the plugin's options and baseline compatibility behavior.
 
