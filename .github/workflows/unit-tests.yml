@@ -24,30 +24,11 @@ jobs:
       - name: Get Swift Version
         run: swift --version
       - name: Run Unit Tests
-        run: swift test --enable-code-coverage
-      - name: Generate Code Coverage Report
-        id: code-coverage
-        shell: bash
-        run: |
-          coverage_report=$(swift test --show-codecov-path)
-
-          if [[ ! -f "$coverage_report" ]]; then
-              echo "Code coverage report not found: $coverage_report"
-              exit 1
-          fi
-
-          report_directory="$RUNNER_TEMP/code-coverage"
-          mkdir -p "$report_directory"
-          cp "$coverage_report" "$report_directory/code-coverage.json"
-          swift Scripts/GenerateCodeCoverageReport.swift \
-            --report "$coverage_report" \
-            --sources "$GITHUB_WORKSPACE/Sources" \
-            | tee "$report_directory/code-coverage.md" >> "$GITHUB_STEP_SUMMARY"
-
-          echo "directory=$report_directory" >> "$GITHUB_OUTPUT"
+        run: swift Scripts/RunUnitTests.swift >> "$GITHUB_STEP_SUMMARY"
       - name: Upload Code Coverage Report
         uses: actions/upload-artifact@v7
         with:
           name: code-coverage
-          path: ${{ steps.code-coverage.outputs.directory }}
+          path: .build/code-coverage/
+          include-hidden-files: true
           if-no-files-found: error
