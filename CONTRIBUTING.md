@@ -1,19 +1,19 @@
 # Contributing
 
-Everyone is welcome to contribute to this project. Contributing does not just mean submitting pull requests. There
-are many different ways for you to get involved, including participating in discussions, reporting or triaging bugs, and
+Everyone is welcome to contribute to this project. Contributing does not just mean submitting pull requests. There are
+many different ways for you to get involved, including participating in discussions, reporting or triaging bugs, and
 contributing code.
 
 No matter how you want to get involved, please first learn what is expected of anyone who participates in this project.
 If you are contributing code, you should also be comfortable writing Swift and working with Swift Package Manager.
 
 By submitting a pull request, you represent that you have the right to license your contribution and agree that it is
-licensed under the terms described in `LICENSE.md`.
+licensed under the terms described in the [License](/LICENSE.md).
 
 ## Reporting Bugs
 
-Reporting bugs is a great way for anyone to help improve the project. This open source project uses GitHub issues
-for tracking bugs.
+Reporting bugs is a great way for anyone to help improve the project. This open source project uses GitHub issues for
+tracking bugs.
 
 When opening an issue, please use the bug report issue template and include the following:
 
@@ -28,7 +28,8 @@ When opening an issue, please use the bug report issue template and include the 
   platform and platform version, deployment target if explicitly set, package tag, branch, or commit, and Xcode version
   if relevant.
 
-Security vulnerabilities should not be reported through public issues. Follow the instructions in `SECURITY.md` instead.
+Security vulnerabilities should not be reported through public issues. Follow the instructions in
+[Security Policy](/SECURITY.md) instead.
 
 ## Triaging Bugs
 
@@ -203,7 +204,7 @@ For Swift source files the code header should look like this:
 // See CONTRIBUTORS.txt for the list of <project name> project authors
 ```
 
-`Package.swift` must keep the Swift tools version declaration as the first line.
+The [Package Manifest](/Package.swift) must keep the Swift tools version declaration as the first line.
 
 ### Tests
 
@@ -224,17 +225,11 @@ When adding argument-based tests, keep the existing conventions in mind:
 Document new and changed public APIs and user-facing behavior as part of the same change. Use documentation comments for
 APIs and the DocC catalog for concepts, tutorials, and guides.
 
-### Tools
+### Coding Style
 
-#### Formatting
-
-The package provides a plugin for checking formatting. See the
-[formatting documentation](Docs/Formatting.md) for additional details.
-
-#### Benchmarking
-
-The package provides a plugin for measuring and comparing performance. See the
-[benchmarking documentation](Docs/Benchmarking.md) for additional details.
+Follow the [Coding Style](/Docs/CodingStyle.md) when changing source code, tests, documentation, or configuration files.
+It documents the Swift Format rules, project conventions, and formatting exceptions. See Workflows below for tool
+commands and continuous integration behavior.
 
 ### Commits
 
@@ -276,7 +271,15 @@ Once the release checklist is complete and its sub-issues are closed, open a pul
 
 ### Workflows
 
-See the [workflow documentation](Docs/Workflows.md) to run workflow scripts locally.
+See the developer documentation for CI behavior and local commands:
+
+- [Documentation](/Docs/Documentation.md)
+- [Testing](/Docs/Testing.md)
+- [Formatting](/Docs/Formatting.md)
+- [Validation](/Docs/Validation.md)
+- [Benchmarking](/Docs/Benchmarking.md)
+
+Use the [Documents Template](/.github/DOCUMENTS_TEMPLATE.md) when adding or updating developer documentation.
 
 Configured workflows run automatically for pull requests and publish their checks on the pull request. Review their
 results, address reported failures, and ensure every required check passes before merging.
@@ -297,8 +300,8 @@ declined or redirected if it does not fit the project's goals.
 
 ### Attribution of Changes
 
-Contributors are credited through the Git history. Contributors may also be listed in `CONTRIBUTORS.txt` when
-appropriate.
+Contributors are credited through the Git history. Contributors may also be listed in the
+[Contributors List](/CONTRIBUTORS.txt) when appropriate.
 
 ## Releasing Changes
 
