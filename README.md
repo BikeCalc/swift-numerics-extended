@@ -93,8 +93,7 @@ You can read more about this package by visiting the
 
 ## Contributing
 
-Everyone is welcome to contribute to Numerics Extended. See the [Contributing](/CONTRIBUTING.md) for branch
-conventions, pull request expectations, and testing instructions.
+Everyone is welcome to contribute to Numerics Extended. See the [Contributing](/CONTRIBUTING.md) guide to get started.
 
 If you find a bug, please create an [issue](https://github.com/bikecalc/swift-numerics-extended/issues). Security
 vulnerabilities should be reported using the [Security Policy](/SECURITY.md).
