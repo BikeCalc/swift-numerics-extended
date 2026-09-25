@@ -375,7 +375,7 @@ fileprivate struct BenchmarkComparator {
 
 // MARK: - Report Generation
 
-do {
+do throws(BenchmarkReportError) {
     let arguments: Arguments = try .init(Array(CommandLine.arguments.dropFirst()))
     let comparator: BenchmarkComparator = try .init(
         baselineURL: arguments.baselineURL,

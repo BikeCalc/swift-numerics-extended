@@ -8,19 +8,143 @@
 
 import Foundation
 
+// MARK: - BenchmarkRunnerError
+
+/// An error produced while validating inputs or running a command.
+fileprivate enum BenchmarkRunnerError {
+    /// Unsupported command-line arguments were supplied.
+    case invalidArguments
+
+    /// A process could not be started.
+    ///
+    /// - Parameter underlyingError: The original process-launch error.
+    case launchFailed(underlyingError: any Error)
+
+    /// A command exited unsuccessfully.
+    ///
+    /// - Parameter status: The command's exit status.
+    case commandFailed(status: Int32)
+
+    /// A command was terminated by a signal.
+    ///
+    /// - Parameter signal: The terminating signal.
+    case commandInterrupted(signal: Int32)
+
+    /// The selected baseline could not be recovered from origin.
+    ///
+    /// - Parameter revision: The unavailable revision.
+    case unavailableBaseline(revision: String)
+
+    /// The command-line status, preserving unsuccessful subprocess exit codes.
+    fileprivate var exitStatus: Int32 {
+        switch self {
+        case .commandFailed(let status):
+            return status
+        default:
+            return EXIT_FAILURE
+        }
+    }
+}
+
+// MARK: - CustomStringConvertible
+
+extension BenchmarkRunnerError: CustomStringConvertible {
+    fileprivate var description: String {
+        switch self {
+        case .unavailableBaseline(let revision):
+            return "error: Benchmark baseline \(revision) is unavailable after fetching from origin."
+        case .invalidArguments:
+            return "Usage: RunBenchmarks.swift [--baseline <revision>]\n"
+                + "Usage: RunBenchmarks.swift --event <event> <base-sha> <before-sha> <ref-name>"
+        case .launchFailed(let underlyingError):
+            return "Could not start command: \(underlyingError)"
+        case .commandFailed(let status):
+            return "Command failed with exit status \(status)."
+        case .commandInterrupted(let signal):
+            return "Command was terminated by signal \(signal)."
+        }
+    }
+}
+
+// MARK: - Error
+
+extension BenchmarkRunnerError: Error {}
+
+// MARK: - Arguments
+
+/// The baseline selection requested locally or by continuous integration.
+fileprivate struct Arguments {
+    /// A supported way to select the comparison baseline.
+    fileprivate enum Selection {
+        /// Uses the benchmark plugin's default baseline.
+        case automatic
+
+        /// Uses an explicitly supplied revision.
+        ///
+        /// - Parameter revision: The baseline revision, or an empty string for the plugin default.
+        case baseline(revision: String)
+
+        /// Selects a baseline from GitHub Actions event metadata.
+        ///
+        /// - Parameters:
+        ///   - event: The workflow event name.
+        ///   - baseSHA: The pull request base commit.
+        ///   - beforeSHA: The previous commit for a push.
+        ///   - refName: The branch receiving the push.
+        case event(
+            event: String,
+            baseSHA: String,
+            beforeSHA: String,
+            refName: String
+        )
+    }
+
+    /// The validated selection to resolve before invoking the plugin.
+    fileprivate let selection: Selection
+
+    /// Parses local baseline options or workflow event arguments.
+    ///
+    /// - Parameter arguments: Arguments following the script name.
+    /// - Throws: `BenchmarkRunnerError.invalidArguments` if the argument shape is unsupported.
+    fileprivate init(_ arguments: Array<String>) throws(BenchmarkRunnerError) {
+        if arguments.isEmpty {
+            self.selection = .automatic
+        } else if arguments.count == 2 && arguments[0] == "--baseline" {
+            self.selection = .baseline(revision: arguments[1])
+        } else if arguments.count == 5 && arguments[0] == "--event" {
+            self.selection = .event(
+                event: arguments[1],
+                baseSHA: arguments[2],
+                beforeSHA: arguments[3],
+                refName: arguments[4]
+            )
+        } else {
+            throw BenchmarkRunnerError.invalidArguments
+        }
+    }
+}
+
+// MARK: - BenchmarkRunner
+
 /// Selects and prepares a baseline before running the benchmark plugin.
 fileprivate struct BenchmarkRunner {
-    /// Creates a benchmark runner.
-    fileprivate init() {}
+    /// The baseline selection supplied by the caller.
+    private let arguments: Arguments
+
+    /// Creates a runner for the validated baseline selection.
+    ///
+    /// - Parameter arguments: The local options or workflow metadata.
+    fileprivate init(arguments: Arguments) {
+        self.arguments = arguments
+    }
 
     /// Runs the benchmark plugin using the script's command-line arguments.
     ///
-    /// Exits with the plugin's status, or a failure status when baseline preparation fails.
+    /// Preserves the plugin's failure status, or reports a failure when baseline preparation fails.
     ///
-    /// - Throws: An error if Git or the Swift process cannot be launched.
-    fileprivate func run() throws {
-        let arguments: Array<String> = Array(CommandLine.arguments.dropFirst())
-        let baselineSHA: String = try self.selectBaseline(from: arguments)
+    /// - Throws: `BenchmarkRunnerError` if a command cannot start, a baseline is unavailable, or the plugin fails.
+    fileprivate func run() throws(BenchmarkRunnerError) {
+        let baselineSHA: String = try self.selectBaseline()
         if baselineSHA.isEmpty == false {
             try self.prepareBaseline(baselineSHA)
         }
@@ -36,70 +160,69 @@ fileprivate struct BenchmarkRunner {
             process.arguments?.append(contentsOf: ["--baseline", baselineSHA])
         }
 
-        try process.run()
+        do {
+            try process.run()
+        } catch let error {
+            throw BenchmarkRunnerError.launchFailed(underlyingError: error)
+        }
         process.waitUntilExit()
 
         // Preserve the plugin's exit status and treat signal termination as failure.
-        exit(process.terminationReason == .exit ? process.terminationStatus : EXIT_FAILURE)
+        guard process.terminationReason == .exit else {
+            throw BenchmarkRunnerError.commandInterrupted(signal: process.terminationStatus)
+        }
+        guard process.terminationStatus == EXIT_SUCCESS else {
+            throw BenchmarkRunnerError.commandFailed(status: process.terminationStatus)
+        }
     }
 
-    /// Selects the benchmark baseline from an explicit revision or workflow event arguments.
+    /// Resolves the validated selection to a baseline commit.
     ///
-    /// - Parameter arguments: No arguments, `--baseline <revision>`, or
-    ///   `--event <event> <base-sha> <before-sha> <ref-name>`.
-    /// - Returns: The baseline revision, or an empty string when no comparison applies.
-    /// - Throws: An error if Git cannot be launched to resolve the release-branch baseline.
-    private func selectBaseline(from arguments: Array<String>) throws -> String {
-        if arguments.isEmpty {
+    /// - Returns: The baseline revision, or an empty string for the plugin default.
+    /// - Throws: `BenchmarkRunnerError` if Git cannot resolve the release-branch baseline.
+    private func selectBaseline() throws(BenchmarkRunnerError) -> String {
+        switch self.arguments.selection {
+        case .automatic:
             return ""
-        }
-
-        if arguments.count == 2 && arguments[0] == "--baseline" {
-            return arguments[1]
-        }
-
-        guard arguments.count == 5 && arguments[0] == "--event" else {
-            let data: Data = .init(
-                ("Usage: RunBenchmarks.swift [--baseline <revision>]\n"
-                    + "Usage: RunBenchmarks.swift --event <event> <base-sha> <before-sha> <ref-name>\n").utf8
-            )
-            FileHandle.standardError.write(data)
-            exit(EXIT_FAILURE)
-        }
-
-        let event: String = arguments[1]
-        let baseSHA: String = arguments[2]
-        let beforeSHA: String = arguments[3]
-        let refName: String = arguments[4]
-
-        if event == "pull_request" {
-            return baseSHA
-        }
-
-        if event == "push" && refName == "main" && beforeSHA.allSatisfy({ $0 == "0" }) == false {
-            return beforeSHA
-        }
-
-        if event == "push" && refName.hasPrefix("release/") {
-            let output: Pipe = .init()
-            let git: Process = .init()
-            git.executableURL = .init(fileURLWithPath: "/usr/bin/env")
-            git.arguments = ["git", "rev-parse", "refs/remotes/origin/main"]
-            git.standardOutput = output
-
-            try git.run()
-            let data: Data = output.fileHandleForReading.readDataToEndOfFile()
-            git.waitUntilExit()
-
-            guard git.terminationReason == .exit && git.terminationStatus == EXIT_SUCCESS else {
-                exit(git.terminationReason == .exit ? git.terminationStatus : EXIT_FAILURE)
+        case .baseline(let revision):
+            return revision
+        case .event(let event, let baseSHA, let beforeSHA, let refName):
+            if event == "pull_request" {
+                return baseSHA
             }
 
-            // Capture Git's revision instead of including it in the benchmark report on standard output.
-            return String(decoding: data, as: UTF8.self).trimmingCharacters(in: .newlines)
-        }
+            if event == "push" && refName == "main" && beforeSHA.allSatisfy({ return $0 == "0" }) == false {
+                return beforeSHA
+            }
 
-        return ""
+            if event == "push" && refName.hasPrefix("release/") {
+                let output: Pipe = .init()
+                let git: Process = .init()
+                git.executableURL = .init(fileURLWithPath: "/usr/bin/env")
+                git.arguments = ["git", "rev-parse", "refs/remotes/origin/main"]
+                git.standardOutput = output
+
+                do {
+                    try git.run()
+                } catch let error {
+                    throw BenchmarkRunnerError.launchFailed(underlyingError: error)
+                }
+                let data: Data = output.fileHandleForReading.readDataToEndOfFile()
+                git.waitUntilExit()
+
+                guard git.terminationReason == .exit && git.terminationStatus == EXIT_SUCCESS else {
+                    if git.terminationReason != .exit {
+                        throw BenchmarkRunnerError.commandInterrupted(signal: git.terminationStatus)
+                    }
+                    throw BenchmarkRunnerError.commandFailed(status: git.terminationStatus)
+                }
+
+                // Capture Git's revision instead of including it in the benchmark report on standard output.
+                return String(decoding: data, as: UTF8.self).trimmingCharacters(in: .newlines)
+            }
+
+            return ""
+        }
     }
 
     /// Checks that a baseline commit is available locally, fetching it from origin when necessary.
@@ -108,29 +231,33 @@ fileprivate struct BenchmarkRunner {
     /// may omit that commit because it is no longer reachable from the remote branches or tags. Fetching the selected
     /// revision explicitly can recover it while origin still makes it available.
     ///
-    /// Exits with a failure diagnostic if fetching fails or the selected revision still cannot be resolved to a commit.
+    /// Throws a validation error if fetching fails or the selected revision still cannot be resolved to a commit.
     /// This prevents the benchmark comparison from silently using a different baseline or skipping the comparison.
     ///
     /// - Parameter revision: The selected baseline revision.
-    /// - Throws: An error if Git cannot be launched.
-    private func prepareBaseline(_ revision: String) throws {
+    /// - Throws: `BenchmarkRunnerError` if Git cannot start or the baseline cannot be prepared.
+    private func prepareBaseline(_ revision: String) throws(BenchmarkRunnerError) {
         /// Runs Git with diagnostics directed to standard error rather than the Markdown report.
         ///
         /// - Parameters:
         ///   - arguments: Git's command and arguments.
         ///   - quiet: Whether to suppress output from an availability check.
         /// - Returns: Whether Git completed successfully.
-        /// - Throws: An error if Git cannot be launched.
+        /// - Throws: `BenchmarkRunnerError.launchFailed` if Git cannot start.
         func runGit(
             _ arguments: Array<String>,
             quiet: Bool = false
-        ) throws -> Bool {
+        ) throws(BenchmarkRunnerError) -> Bool {
             let process: Process = .init()
             process.executableURL = .init(fileURLWithPath: "/usr/bin/env")
             process.arguments = ["git"] + arguments
             process.standardOutput = quiet ? FileHandle.nullDevice : FileHandle.standardError
             process.standardError = quiet ? FileHandle.nullDevice : FileHandle.standardError
-            try process.run()
+            do {
+                try process.run()
+            } catch let error {
+                throw BenchmarkRunnerError.launchFailed(underlyingError: error)
+            }
             process.waitUntilExit()
             return process.terminationReason == .exit && process.terminationStatus == EXIT_SUCCESS
         }
@@ -143,23 +270,25 @@ fileprivate struct BenchmarkRunner {
         }
 
         FileHandle.standardError.write(Data("Fetching missing benchmark baseline \(revision) from origin.\n".utf8))
-        // First retrieve the missing revision, then verify that the exact revision passed to the plugin resolves locally.
+        // First retrieve the missing revision, then verify that the exact revision passed to the plugin resolves
+        // locally.
         // Fetch success alone does not guarantee that the requested revision name is resolvable in this checkout.
         // The guard evaluates these checks in order and skips verification if fetching fails; both must succeed.
         guard try runGit(["fetch", "--no-tags", "origin", revision]),
             try runGit(checkArguments, quiet: true)
         else {
-            FileHandle.standardError.write(
-                Data("error: Benchmark baseline \(revision) is unavailable after fetching from origin.\n".utf8)
-            )
-            exit(EXIT_FAILURE)
+            throw BenchmarkRunnerError.unavailableBaseline(revision: revision)
         }
     }
 }
 
-do {
-    try BenchmarkRunner().run()
+// MARK: - Benchmark Execution
+
+do throws(BenchmarkRunnerError) {
+    let arguments: Arguments = try .init(Array(CommandLine.arguments.dropFirst()))
+    let runner: BenchmarkRunner = .init(arguments: arguments)
+    try runner.run()
 } catch let error {
     FileHandle.standardError.write(Data("\(error)\n".utf8))
-    exit(EXIT_FAILURE)
+    exit(error.exitStatus)
 }

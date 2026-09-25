@@ -486,7 +486,7 @@ fileprivate struct CodeCoverageReporter {
 
 // MARK: - Report Generation
 
-do {
+do throws(CodeCoverageReportError) {
     let arguments: Arguments = try .init(Array(CommandLine.arguments.dropFirst()))
     let reporter: CodeCoverageReporter = try .init(
         reportURL: arguments.reportURL,

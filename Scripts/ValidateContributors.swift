@@ -8,92 +8,263 @@
 
 import Foundation
 
-guard CommandLine.arguments.count <= 2 else {
-    print("Usage: ValidateContributors.swift [revision]")
-    exit(EXIT_FAILURE)
+// MARK: - ContributorValidationError
+
+/// An error produced while checking contributor attribution.
+fileprivate enum ContributorValidationError {
+    /// More than one revision was supplied.
+    case invalidArguments
+
+    /// The contributor file is absent from the current directory.
+    case missingContributorsFile
+
+    /// The contributor file differs from the Git history.
+    ///
+    /// - Parameter difference: The unified diff needed to update the file.
+    case contributorsOutOfDate(difference: String)
+
+    /// A subprocess could not be started.
+    ///
+    /// - Parameters:
+    ///   - command: The subprocess name.
+    ///   - underlyingError: The original process-launch error.
+    case commandLaunchFailed(
+        command: String,
+        underlyingError: any Error
+    )
+
+    /// A file-system operation could not be completed.
+    ///
+    /// - Parameters:
+    ///   - operation: The operation being performed.
+    ///   - path: The file or directory involved.
+    ///   - underlyingError: The original file-system error.
+    case fileOperationFailed(
+        operation: String,
+        path: String,
+        underlyingError: any Error
+    )
+
+    /// A subprocess failed or was terminated by a signal.
+    ///
+    /// - Parameters:
+    ///   - command: The subprocess name.
+    ///   - status: The exit status or terminating signal.
+    case commandFailed(
+        command: String,
+        status: Int32
+    )
 }
 
-/// The revision whose reachable commits define the expected contributors, defaulting to HEAD.
-fileprivate let revision: String = CommandLine.arguments.dropFirst().first ?? "HEAD"
+// MARK: - CustomStringConvertible
 
-/// The name of the contributor file maintained at the repository root.
-fileprivate let contributorsFileName: String = "CONTRIBUTORS.txt"
+extension ContributorValidationError: CustomStringConvertible {
+    fileprivate var description: String {
+        switch self {
+        case .invalidArguments:
+            return "Usage: ValidateContributors.swift [revision]"
+        case .missingContributorsFile:
+            return "CONTRIBUTORS.txt is missing. Run this script from the repository root."
+        case .contributorsOutOfDate(let difference):
+            return "CONTRIBUTORS.txt is not up to date.\nApply the following changes:\n\(difference)"
+        case .commandLaunchFailed(let command, let underlyingError):
+            return "Could not start \(command): \(underlyingError)"
+        case .fileOperationFailed(let operation, let path, let underlyingError):
+            return "Could not \(operation) at \(path): \(underlyingError)"
+        case .commandFailed(let command, let status):
+            return "\(command) failed with termination status \(status)."
+        }
+    }
+}
 
-do {
-    let output: Pipe = .init()
+// MARK: - Error
 
-    let git: Process = .init()
-    git.executableURL = .init(fileURLWithPath: "/usr/bin/env")
+extension ContributorValidationError: Error {}
 
-    // Uppercase author placeholders honor Git's mailmap when normalizing names and email addresses.
-    git.arguments = ["git", "log", "--format=- %aN <%aE>", revision, "--"]
-    git.standardOutput = output
+// MARK: - Arguments
 
-    try git.run()
+/// The command-line arguments used to select contributor history.
+fileprivate struct Arguments {
+    /// The revision whose reachable commits define the expected contributors.
+    fileprivate let revision: String
 
-    // Drain the pipe before waiting so large histories cannot block on a full output buffer.
-    let data: Data = output.fileHandleForReading.readDataToEndOfFile()
-    git.waitUntilExit()
+    /// Parses an optional revision, defaulting to HEAD.
+    ///
+    /// - Parameter arguments: The arguments following the script name.
+    /// - Throws: `ContributorValidationError.invalidArguments` if more than one revision is supplied.
+    fileprivate init(_ arguments: Array<String>) throws(ContributorValidationError) {
+        guard arguments.count <= 1 else {
+            throw ContributorValidationError.invalidArguments
+        }
 
-    guard git.terminationReason == .exit && git.terminationStatus == EXIT_SUCCESS else {
-        exit(EXIT_FAILURE)
+        self.revision = arguments.first ?? "HEAD"
+    }
+}
+
+// MARK: - ContributorValidator
+
+/// Checks the contributor file against the authors recorded in Git history.
+fileprivate struct ContributorValidator {
+    /// The revision to validate.
+    private let arguments: Arguments
+
+    /// Creates a validator for the selected history.
+    ///
+    /// - Parameter arguments: The revision to validate.
+    fileprivate init(arguments: Arguments) {
+        self.arguments = arguments
     }
 
-    // Exclude GitHub bot addresses and compare UTF-8 bytes to preserve the workflow's LC_ALL=C sorting and uniqueness rules.
-    let authors: Array<Array<UInt8>> = Set(
-        String(decoding: data, as: UTF8.self)
-            .split(separator: "\n")
-            .filter { !$0.hasSuffix("[bot]@users.noreply.github.com>") }
-            .map { Array($0.utf8) }
-    )
-    .sorted { $0.lexicographicallyPrecedes($1) }
+    /// The contributor file maintained at the repository root.
+    private let contributorsFileName: String = "CONTRIBUTORS.txt"
 
-    // Match the generated file byte for byte, including the final newline for each contributor.
-    let expected: Data = Data(authors.flatMap { $0 + [10] })
-    let current: Data
+    /// Validates contributor attribution without changing the contributor file.
+    ///
+    /// Git mailmap entries normalize author identities, and GitHub bot addresses are excluded.
+    /// A mismatch includes a unified diff in the validation error.
+    ///
+    /// - Throws: `ContributorValidationError` if arguments, history, or attribution are invalid, or a
+    ///   subprocess cannot start or a file cannot be read or written.
+    fileprivate func run() throws(ContributorValidationError) {
+        let expected: Data = try self.expectedContributors()
+        let current: Data
 
-    do {
-        current = try .init(contentsOf: URL(fileURLWithPath: contributorsFileName))
-    } catch let error as CocoaError where error.code == .fileReadNoSuchFile {
-        FileHandle.standardError.write(
-            Data("\(contributorsFileName) is missing. Run this script from the repository root.\n".utf8)
+        do {
+            current = try .init(contentsOf: URL(fileURLWithPath: self.contributorsFileName))
+        } catch let error as CocoaError where error.code == .fileReadNoSuchFile {
+            throw ContributorValidationError.missingContributorsFile
+        } catch let error {
+            throw ContributorValidationError.fileOperationFailed(
+                operation: "read the contributor file",
+                path: self.contributorsFileName,
+                underlyingError: error
+            )
+        }
+
+        guard current != expected else {
+            return
+        }
+
+        let difference: String = try self.contributorDifference(expected: expected)
+        throw ContributorValidationError.contributorsOutOfDate(difference: difference)
+    }
+
+    /// Reads and normalizes the authors reachable from the selected revision.
+    ///
+    /// - Returns: The sorted, unique contributor lines encoded as UTF-8 with a final newline.
+    /// - Throws: `ContributorValidationError` if Git cannot start or history cannot be read.
+    private func expectedContributors() throws(ContributorValidationError) -> Data {
+        let output: Pipe = .init()
+        let git: Process = .init()
+        git.executableURL = .init(fileURLWithPath: "/usr/bin/env")
+        // Uppercase author placeholders honor Git's mailmap when normalizing names and email addresses.
+        git.arguments = ["git", "log", "--format=- %aN <%aE>", self.arguments.revision, "--"]
+        git.standardOutput = output
+
+        do {
+            try git.run()
+        } catch let error {
+            throw ContributorValidationError.commandLaunchFailed(
+                command: "git",
+                underlyingError: error
+            )
+        }
+
+        // Drain the pipe before waiting so large histories cannot block on a full output buffer.
+        let data: Data = output.fileHandleForReading.readDataToEndOfFile()
+        git.waitUntilExit()
+
+        guard git.terminationReason == .exit && git.terminationStatus == EXIT_SUCCESS else {
+            throw ContributorValidationError.commandFailed(
+                command: "git",
+                status: git.terminationStatus
+            )
+        }
+
+        // Compare UTF-8 bytes to preserve the workflow's LC_ALL=C sorting and uniqueness rules.
+        let authors: Array<Array<UInt8>> = Set(
+            String(decoding: data, as: UTF8.self)
+                .split(separator: "\n")
+                .filter { $0.hasSuffix("[bot]@users.noreply.github.com>") == false }
+                .map { Array($0.utf8) }
         )
-        exit(EXIT_FAILURE)
+        .sorted { $0.lexicographicallyPrecedes($1) }
+
+        return Data(authors.flatMap { $0 + [10] })
     }
 
-    if current == expected {
-        exit(EXIT_SUCCESS)
+    /// Compares the contributor file with a temporary copy of the expected contents.
+    ///
+    /// - Parameter expected: The normalized contributor file contents.
+    /// - Returns: The unified diff produced by the comparison.
+    /// - Throws: `ContributorValidationError` if temporary files cannot be created or the comparison cannot run.
+    private func contributorDifference(expected: Data) throws(ContributorValidationError) -> String {
+        let temporaryURL: URL = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        do {
+            try FileManager.default.createDirectory(
+                at: temporaryURL,
+                withIntermediateDirectories: true
+            )
+        } catch let error {
+            throw ContributorValidationError.fileOperationFailed(
+                operation: "create the temporary directory",
+                path: temporaryURL.path,
+                underlyingError: error
+            )
+        }
+
+        defer {
+            try? FileManager.default.removeItem(at: temporaryURL)
+        }
+
+        let expectedURL: URL = temporaryURL.appendingPathComponent(self.contributorsFileName)
+        do {
+            try expected.write(to: expectedURL)
+        } catch let error {
+            throw ContributorValidationError.fileOperationFailed(
+                operation: "write the expected contributors",
+                path: expectedURL.path,
+                underlyingError: error
+            )
+        }
+
+        let output: Pipe = .init()
+        let diff: Process = .init()
+        diff.executableURL = .init(fileURLWithPath: "/usr/bin/env")
+        diff.arguments = ["diff", "-u", self.contributorsFileName, expectedURL.path]
+        diff.standardOutput = output
+
+        do {
+            try diff.run()
+        } catch let error {
+            throw ContributorValidationError.commandLaunchFailed(
+                command: "diff",
+                underlyingError: error
+            )
+        }
+
+        let data: Data = output.fileHandleForReading.readDataToEndOfFile()
+        diff.waitUntilExit()
+
+        // diff returns 1 for differences; other nonzero statuses indicate a comparison failure.
+        guard diff.terminationReason == .exit && (diff.terminationStatus == 0 || diff.terminationStatus == 1) else {
+            throw ContributorValidationError.commandFailed(
+                command: "diff",
+                status: diff.terminationStatus
+            )
+        }
+
+        return String(decoding: data, as: UTF8.self)
     }
+}
 
-    FileHandle.standardOutput.write(
-        Data("\(contributorsFileName) is not up to date.\nApply the following changes:\n".utf8)
-    )
+// MARK: - Validation
 
-    // Give diff a temporary expected file and remove it after comparison, including on thrown errors.
-    let temporaryURL: URL = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
-
-    try FileManager.default.createDirectory(
-        at: temporaryURL,
-        withIntermediateDirectories: true
-    )
-
-    defer {
-        try? FileManager.default.removeItem(at: temporaryURL)
-    }
-
-    let expectedURL: URL = temporaryURL.appendingPathComponent(contributorsFileName)
-    try expected.write(to: expectedURL)
-
-    let diff: Process = .init()
-    diff.executableURL = .init(fileURLWithPath: "/usr/bin/env")
-    diff.arguments = ["diff", "-u", contributorsFileName, expectedURL.path]
-
-    try diff.run()
-    diff.waitUntilExit()
-
-    // A mismatch always fails validation, regardless of whether diff can display it.
+do throws(ContributorValidationError) {
+    let arguments: Arguments = try .init(Array(CommandLine.arguments.dropFirst()))
+    let validator: ContributorValidator = .init(arguments: arguments)
+    try validator.run()
 } catch let error {
     FileHandle.standardError.write(Data("\(error)\n".utf8))
+    exit(EXIT_FAILURE)
 }
-
-exit(EXIT_FAILURE)
