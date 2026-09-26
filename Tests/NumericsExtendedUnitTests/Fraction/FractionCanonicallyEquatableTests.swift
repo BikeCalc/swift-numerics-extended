@@ -26,7 +26,7 @@ internal struct FractionCanonicallyEquatableTests {
         rhs: Fraction<Int>,
         result: Bool
     ) {
-        #expect(lhs.isCanonicallyEquatable(to: rhs) == result)
+        #expect(lhs.isCanonicallyEqual(to: rhs) == result)
     }
 }
 
@@ -37,7 +37,7 @@ extension FractionCanonicallyEquatableTests {
     internal func canonicalEqualityHandlesIntMinimumDenominator() {
         let value: Fraction<Int> = .init(1, Int.min)
 
-        #expect(value.isCanonicallyEquatable(to: value) == true)
+        #expect(value.isCanonicallyEqual(to: value) == true)
     }
 }
 
@@ -57,7 +57,7 @@ extension FractionCanonicallyEquatableTests {
         rhs: Fraction<Int>,
         result: Bool
     ) {
-        #expect(lhs.isCanonicallyEquatable(to: rhs) == result)
+        #expect(lhs.isCanonicallyEqual(to: rhs) == result)
     }
 }
 
@@ -76,7 +76,7 @@ extension FractionCanonicallyEquatableTests {
         rhs: Fraction<Int>,
         result: Bool
     ) {
-        #expect(lhs.isCanonicallyEquatable(to: rhs) == result)
+        #expect(lhs.isCanonicallyEqual(to: rhs) == result)
     }
 }
 
@@ -97,7 +97,7 @@ extension FractionCanonicallyEquatableTests {
         rhs: Fraction<Int>,
         result: Bool
     ) {
-        #expect(lhs.isCanonicallyEquatable(to: rhs) == result)
+        #expect(lhs.isCanonicallyEqual(to: rhs) == result)
     }
 }
 
@@ -116,7 +116,7 @@ extension FractionCanonicallyEquatableTests {
         rhs: Fraction<Int>,
         result: Bool
     ) {
-        #expect(lhs.isCanonicallyEquatable(to: rhs) == result)
+        #expect(lhs.isCanonicallyEqual(to: rhs) == result)
     }
 }
 
@@ -137,6 +137,6 @@ extension FractionCanonicallyEquatableTests {
         rhs: Fraction<Int>,
         result: Bool
     ) {
-        #expect(lhs.isCanonicallyEquatable(to: rhs) == result)
+        #expect(lhs.isCanonicallyEqual(to: rhs) == result)
     }
 }

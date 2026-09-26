@@ -478,7 +478,7 @@ extension FractionDivisibleTests {
         quotient: Fraction<Int>
     ) {
         #expect(dividend / -1 == quotient)
-        #expect(quotient.isCanonicallyEquatable(to: -dividend) == true)
+        #expect(quotient.isCanonicallyEqual(to: -dividend) == true)
     }
 }
 

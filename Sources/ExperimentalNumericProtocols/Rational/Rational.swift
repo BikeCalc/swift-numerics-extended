@@ -159,7 +159,7 @@ extension Rational {
     ///
     /// - Parameter rhs: The value to compare.
     /// - Returns: `true` if both values have the same canonical representation, and `false` otherwise.
-    public func isCanonicallyEquatable(to rhs: Self) -> Bool {
+    public func isCanonicallyEqual(to rhs: Self) -> Bool {
         return RationalComparator.compare(self, rhs) == .equivalent
     }
 }

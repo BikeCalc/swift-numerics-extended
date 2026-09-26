@@ -12,5 +12,5 @@ public protocol CanonicallyEquatable {
     ///
     /// - Parameter rhs: The value to compare.
     /// - Returns: `true` if this value is canonically equal to the specified value, and `false` otherwise.
-    func isCanonicallyEquatable(to rhs: Self) -> Bool
+    func isCanonicallyEqual(to rhs: Self) -> Bool
 }

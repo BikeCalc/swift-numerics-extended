@@ -624,8 +624,8 @@ extension Fraction: Equatable {
     /// Returns a boolean value indicating whether two values have the same stored representation.
     ///
     /// Ordinary equality is representation-sensitive. For example, `1/2` and `2/4` represent the same canonical value
-    /// but are not equal because their stored terms differ. Use `isCanonicallyEquatable(to:)` to compare their
-    /// canonical values instead. NaN is not equal to any value, including itself.
+    /// but are not equal because their stored terms differ. Use `isCanonicallyEqual(to:)` to compare their canonical
+    /// values instead. NaN is not equal to any value, including itself.
     ///
     /// - Parameters:
     ///   - lhs: A value to compare.
