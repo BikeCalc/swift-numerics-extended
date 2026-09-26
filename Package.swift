@@ -18,6 +18,10 @@ let package = Package(
     ],
     dependencies: [
         .package(
+            url: "https://github.com/apple/swift-numerics.git",
+            from: "1.1.1"
+        ),
+        .package(
             url: "https://github.com/swiftlang/swift-docc-plugin.git",
             from: "1.5.0"
         ),
@@ -122,6 +126,16 @@ let package = Package(
             name: "NumericsExtendedUnitTests",
             dependencies: [
                 "NumericsExtended"
+            ]
+        ),
+        .testTarget(
+            name: "NumericsIntegrationTests",
+            dependencies: [
+                "NumericsExtended",
+                .product(
+                    name: "Numerics",
+                    package: "swift-numerics"
+                )
             ]
         )
     ],

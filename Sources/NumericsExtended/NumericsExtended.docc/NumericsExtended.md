@@ -38,6 +38,7 @@ releases.
 
 ### Relations
 
+- ``/CoreNumericProtocols/ApproximatelyEquatable``
 - ``/CoreNumericProtocols/CanonicallyEquatable``
 
 ### Representations

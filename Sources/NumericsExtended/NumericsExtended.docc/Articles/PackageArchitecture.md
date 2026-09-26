@@ -8,13 +8,13 @@ Numerics Extended separates fundamental operators and protocols from standard-li
 APIs. Core operators and protocols form the foundation; the standard and experimental protocol layers build reusable
 numeric behavior above them, and the type layers provide concrete conformances and implementations.
 
-The package also contains command plugins, an executable benchmark target, and a test target. These targets support
+The package also contains command plugins, an executable benchmark target, and test targets. These targets support
 development and validation without becoming part of the public library product.
 
 ## Package Tooling
 
 The benchmarks plugin invokes the executable benchmark target, which depends on the public library. The linter plugin
-invokes Swift Format, while the test target depends on the public library.
+invokes Swift Format. The unit tests depend on the public library; the integration tests also depend on Swift Numerics.
 
 ```text
 NumericsExtendedBenchmarksPlugin
@@ -26,6 +26,9 @@ NumericsExtendedLinterPlugin
 
 NumericsExtendedUnitTests
 └─> depends on NumericsExtended
+
+NumericsIntegrationTests
+└─> depends on Numerics and NumericsExtended
 ```
 
 ## Library Targets
@@ -74,3 +77,10 @@ Read each arrow downward from a target to one of its direct dependencies. Some d
 routes readable, so the absence of an arrow does not prove that two targets are unrelated. Vertical placement keeps the
 dependency flow clear rather than assigning targets to semantic tiers; consult the package manifest for the complete,
 authoritative definitions.
+
+## Swift Numerics Compatibility
+
+`NumericsIntegrationTests` checks our approximate-equality protocol against Apple’s
+[Swift Numerics](https://github.com/apple/swift-numerics). Only this test target depends on its `Numerics` product;
+library targets remain independent. These checks cover approximate comparison, not compatibility between every API in
+both packages.
