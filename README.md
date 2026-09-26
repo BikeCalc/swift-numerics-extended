@@ -66,25 +66,53 @@ Numerics Extended is written in Swift and avoids platform-specific APIs where po
 
 ## Demonstration
 
-Keep a fraction in canonical form while doing arithmetic:
+- Combine `Addable` and `RepresentableByZero` to total a sequence of values, starting from zero or an initial value:
 
-```swift
-@Canonicalized
-var value: Fraction<Int> = .init(2, 4)
-print(value)
-// Prints "1/2"
+  ```swift
+  func total<Value>(
+      _ values: some Sequence<Value>,
+      startingAt initialValue: Value = .zero
+  ) -> Value
+  where Value: Addable & RepresentableByZero {
+      var result = initialValue
 
-value += .init(1, 4)
-print(value)
-// Prints "3/4"
+      for value in values {
+          result += value
+      }
 
-value *= .init(2, 3)
-print(value)
-// Prints "1/2"
-```
+      return result
+  }
 
-`Fraction` conforms to `Rational`, which builds on Swift's numeric protocols. Beyond the operations shown here, it 
-supports subtraction, division, exponentiation, and comparisons.
+  print(total([1, 2, 3]))
+  // Prints "6"
+
+  print(total([2.5, 3.5]))
+  // Prints "6.0"
+  ```
+
+  The package provides small, composable protocols and extends Swift’s standard numeric types to conform where
+  appropriate. Combine these protocols to require only the capabilities your algorithm needs, without requiring
+  broader numeric protocols such as Swift’s `BinaryInteger` or `FloatingPoint`.
+
+- Keep a `Fraction` in canonical form while doing arithmetic:
+
+  ```swift
+  @Canonicalized
+  var value: Fraction<Int> = .init(2, 4)
+  print(value)
+  // Prints "1/2"
+
+  value += .init(1, 4)
+  print(value)
+  // Prints "3/4"
+
+  value *= .init(2, 3)
+  print(value)
+  // Prints "1/2"
+  ```
+
+  `Fraction` conforms to `Rational`, which builds on Swift's numeric protocols. Beyond the operations shown here, it
+  supports subtraction, division, exponentiation, and comparisons.
 
 ## Documentation
 
