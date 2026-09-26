@@ -24,7 +24,7 @@ NumericsExtendedBenchmarksPlugin
 NumericsExtendedLinterPlugin
 └─> invokes swift-format
 
-NumericsExtendedTests
+NumericsExtendedUnitTests
 └─> depends on NumericsExtended
 ```
 

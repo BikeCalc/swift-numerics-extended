@@ -119,7 +119,7 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: "NumericsExtendedTests",
+            name: "NumericsExtendedUnitTests",
             dependencies: [
                 "NumericsExtended"
             ]
