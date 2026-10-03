@@ -11,7 +11,9 @@ import StandardNumericProtocols
 
 // MARK: - Addable
 
-extension Int16: Addable {}
+extension Int16: Addable {
+    public typealias Addend = Self
+}
 
 // MARK: - Divisible
 

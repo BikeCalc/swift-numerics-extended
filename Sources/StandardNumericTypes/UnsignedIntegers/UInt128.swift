@@ -12,7 +12,9 @@ import StandardNumericProtocols
 // MARK: - Addable
 
 @available(iOS 18.0, macCatalyst 18.0, macOS 15.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
-extension UInt128: Addable {}
+extension UInt128: Addable {
+    public typealias Addend = Self
+}
 
 // MARK: - Divisible
 

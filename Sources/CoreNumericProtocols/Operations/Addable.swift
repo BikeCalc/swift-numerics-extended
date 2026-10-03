@@ -8,6 +8,9 @@
 
 /// A type that supports addition.
 public protocol Addable: Equatable {
+    /// The type used to represent addends.
+    associatedtype Addend
+
     /// Returns the sum of adding the two specified values.
     ///
     /// - Parameters:
@@ -16,7 +19,7 @@ public protocol Addable: Equatable {
     /// - Returns: The sum.
     static func + (
         _ lhs: Self,
-        _ rhs: Self
+        _ rhs: Self.Addend
     ) -> Self
 
     /// Returns the sum of this value and the specified value.
@@ -24,7 +27,7 @@ public protocol Addable: Equatable {
     /// - Parameter addend: The addend.
     /// - Returns: The sum.
     /// - Throws: An error if the conforming type cannot perform the addition.
-    func adding(_ addend: Self) throws -> Self
+    func adding(_ addend: Self.Addend) throws -> Self
 }
 
 extension Addable {
@@ -35,7 +38,7 @@ extension Addable {
     ///   - rhs: The addend.
     public static func += (
         _ lhs: inout Self,
-        _ rhs: Self
+        _ rhs: Self.Addend
     ) {
         let sum: Self = lhs + rhs
         lhs = sum
@@ -46,7 +49,7 @@ extension Addable {
     /// - Parameter addend: The addend.
     /// - Returns: The sum.
     /// - Throws: An error if the conforming type cannot perform the addition.
-    public func adding(_ addend: Self) throws -> Self {
+    public func adding(_ addend: Self.Addend) throws -> Self {
         return self + addend
     }
 
@@ -54,7 +57,7 @@ extension Addable {
     ///
     /// - Parameter addend: The addend.
     /// - Throws: An error if the conforming type cannot perform the addition.
-    public mutating func add(_ addend: Self) throws  {
+    public mutating func add(_ addend: Self.Addend) throws  {
         self = try self.adding(addend)
     }
 }

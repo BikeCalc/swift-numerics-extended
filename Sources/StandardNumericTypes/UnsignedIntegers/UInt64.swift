@@ -11,7 +11,9 @@ import StandardNumericProtocols
 
 // MARK: - Addable
 
-extension UInt64: Addable {}
+extension UInt64: Addable {
+    public typealias Addend = Self
+}
 
 // MARK: - Divisible
 

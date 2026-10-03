@@ -206,6 +206,8 @@ where Term: BinaryInteger {
 // MARK: - Addable
 
 extension Fraction: Addable {
+    public typealias Addend = Self
+
     /// Returns the sum of the specified values.
     ///
     /// Fractions with the same stored denominator retain that denominator. Other finite fractions use
@@ -230,7 +232,7 @@ extension Fraction: Addable {
     /// - Returns: The sum, or NaN when the operation is indeterminate.
     public static func + (
         _ lhs: Self,
-        _ rhs: Self
+        _ rhs: Self.Addend
     ) -> Self {
         guard lhs.isNaN == false && rhs.isNaN == false else {
             return .nan

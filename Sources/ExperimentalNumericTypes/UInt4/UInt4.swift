@@ -154,9 +154,11 @@ public struct UInt4 {
 // MARK: - Addable
 
 extension UInt4: Addable {
+    public typealias Addend = Self
+
     public static func + (
         _ lhs: Self,
-        _ rhs: Self
+        _ rhs: Self.Addend
     ) -> Self {
         let newValue: Self.Value = lhs.value + rhs.value
         return .init(value: newValue)
@@ -671,7 +673,7 @@ extension UInt4: Raisable {
 // MARK: - ReportableAsOverflow
 
 extension UInt4: ReportableAsOverflow {
-    public func addingReportingOverflow(_ rhs: Self) -> Self.OverflowReport {
+    public func addingReportingOverflow(_ rhs: Self.Addend) -> Self.OverflowReport {
         let sum: Self.Value = self.value + rhs.value
         let partialValue: Self = .init(truncatingIfNeeded: sum)
 

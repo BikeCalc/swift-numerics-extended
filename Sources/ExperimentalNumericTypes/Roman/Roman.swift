@@ -200,9 +200,11 @@ extension Roman {
 // MARK: - Addable
 
 extension Roman: Addable {
+    public typealias Addend = Self
+
     public static func + (
         _ lhs: Self,
-        _ rhs: Self
+        _ rhs: Self.Addend
     ) -> Self {
         let newValue: Self.Value = lhs.value + rhs.value
         return .init(value: newValue)
@@ -547,7 +549,7 @@ extension Roman: Raisable {
 // MARK: - ReportableAsOverflow
 
 extension Roman: ReportableAsOverflow {
-    public func addingReportingOverflow(_ rhs: Self) -> Self.OverflowReport {
+    public func addingReportingOverflow(_ rhs: Self.Addend) -> Self.OverflowReport {
         let sum: Self.Value = self.value + rhs.value
         let modulus: Self.Value = Self.max.value + 1
         let partialValue: Self = .init(value: sum % modulus)

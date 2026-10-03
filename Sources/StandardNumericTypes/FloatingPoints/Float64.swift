@@ -11,7 +11,9 @@ import StandardNumericProtocols
 
 // MARK: - Addable
 
-extension Float64: Addable {}
+extension Float64: Addable {
+    public typealias Addend = Self
+}
 
 // MARK: - Decreasable
 

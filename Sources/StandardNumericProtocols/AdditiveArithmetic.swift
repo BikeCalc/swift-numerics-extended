@@ -12,7 +12,7 @@ extension AdditiveArithmetic
 where Self: Addable {
     public static func += (
         _ lhs: inout Self,
-        _ rhs: Self
+        _ rhs: Self.Addend
     ) {
         let sum: Self = lhs + rhs
         lhs = sum
