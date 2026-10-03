@@ -296,6 +296,9 @@ extension Roman: Decodable {
 // MARK: - Divisible
 
 extension Roman: Divisible {
+    public typealias Divisor = Self
+    public typealias RemainderDivisor = Self
+
     public var reciprocal: Self? {
         guard self.isInvertible == true else {
             return nil
@@ -337,7 +340,7 @@ extension Roman: Divisible {
     /// - Precondition: `rhs` must not be zero.
     public static func / (
         _ lhs: Self,
-        _ rhs: Self
+        _ rhs: Self.Divisor
     ) -> Self {
         let newValue: Self.Value = lhs.value / rhs.value
         return .init(value: newValue)
@@ -362,7 +365,7 @@ extension Roman: Divisible {
     /// - Precondition: `rhs` must not be zero.
     public static func % (
         _ lhs: Self,
-        _ rhs: Self
+        _ rhs: Self.RemainderDivisor
     ) -> Self {
         let newValue: Self.Value = lhs.value % rhs.value
         return .init(value: newValue)
@@ -613,7 +616,7 @@ extension Roman: ReportableAsOverflow {
         )
     }
 
-    public func dividedReportingOverflow(by rhs: Self) -> Self.OverflowReport {
+    public func dividedReportingOverflow(by rhs: Self.Divisor) -> Self.OverflowReport {
         guard rhs.value != 0 else {
             return (
                 partialValue: self,
@@ -630,7 +633,7 @@ extension Roman: ReportableAsOverflow {
         )
     }
 
-    public func remainderReportingOverflow(dividingBy rhs: Self) -> Self.OverflowReport {
+    public func remainderReportingOverflow(dividingBy rhs: Self.RemainderDivisor) -> Self.OverflowReport {
         guard rhs.value != 0 else {
             return (
                 partialValue: self,

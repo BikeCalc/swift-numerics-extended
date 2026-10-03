@@ -400,6 +400,9 @@ extension UInt4: Decodable {
 // MARK: - Divisible
 
 extension UInt4: Divisible {
+    public typealias Divisor = Self
+    public typealias RemainderDivisor = Self
+
     /// Returns the quotient of dividing the first specified value by the second.
     ///
     /// For example:
@@ -419,7 +422,7 @@ extension UInt4: Divisible {
     /// - Precondition: `rhs` must not be zero.
     public static func / (
         _ lhs: Self,
-        _ rhs: Self
+        _ rhs: Self.Divisor
     ) -> Self {
         let newValue: Self.Value = lhs.value / rhs.value
         return .init(value: newValue)
@@ -444,7 +447,7 @@ extension UInt4: Divisible {
     /// - Precondition: `rhs` must not be zero.
     public static func % (
         _ lhs: Self,
-        _ rhs: Self
+        _ rhs: Self.RemainderDivisor
     ) -> Self {
         let newValue: Self.Value = lhs.value % rhs.value
         return .init(value: newValue)
@@ -724,7 +727,7 @@ extension UInt4: ReportableAsOverflow {
         )
     }
 
-    public func dividedReportingOverflow(by rhs: Self) -> Self.OverflowReport {
+    public func dividedReportingOverflow(by rhs: Self.Divisor) -> Self.OverflowReport {
         guard rhs.value != 0 else {
             return (
                 partialValue: self,
@@ -741,7 +744,7 @@ extension UInt4: ReportableAsOverflow {
         )
     }
 
-    public func remainderReportingOverflow(dividingBy rhs: Self) -> Self.OverflowReport {
+    public func remainderReportingOverflow(dividingBy rhs: Self.RemainderDivisor) -> Self.OverflowReport {
         guard rhs.value != 0 else {
             return (
                 partialValue: self,

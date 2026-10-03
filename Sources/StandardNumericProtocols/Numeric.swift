@@ -10,7 +10,7 @@ import CoreNumericOperators
 import CoreNumericProtocols
 
 extension Numeric
-where Self: Divisible {
+where Self: Divisible, Self.Divisor: ExpressibleByIntegerLiteral {
     /// Returns this value halved.
     ///
     /// - Returns: The value halved.

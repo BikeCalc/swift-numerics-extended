@@ -17,7 +17,10 @@ extension UInt32: Addable {
 
 // MARK: - Divisible
 
-extension UInt32: Divisible {}
+extension UInt32: Divisible {
+    public typealias Divisor = Self
+    public typealias RemainderDivisor = Self
+}
 
 // MARK: - Multipliable
 

@@ -17,7 +17,10 @@ extension Int16: Addable {
 
 // MARK: - Divisible
 
-extension Int16: Divisible {}
+extension Int16: Divisible {
+    public typealias Divisor = Self
+    public typealias RemainderDivisor = Self
+}
 
 // MARK: - Multipliable
 

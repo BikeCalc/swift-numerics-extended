@@ -459,6 +459,9 @@ where Term: Decodable {
 // MARK: - Divisible
 
 extension Fraction: Divisible {
+    public typealias Divisor = Self
+    public typealias RemainderDivisor = Self
+
     /// The reciprocal of this value, or `nil` when this value is zero or NaN.
     ///
     /// A finite reciprocal exchanges the stored numerator and denominator. The reciprocal of positive or negative
@@ -523,7 +526,7 @@ extension Fraction: Divisible {
     ///            infinity.
     public static func / (
         _ lhs: Self,
-        _ rhs: Self
+        _ rhs: Self.Divisor
     ) -> Self {
         guard lhs.isNaN == false && rhs.isNaN == false else {
             return .nan
@@ -566,7 +569,7 @@ extension Fraction: Divisible {
     /// - Returns: The remainder, or NaN when the dividend is infinite, the divisor is zero, or either operand is NaN.
     public static func % (
         _ lhs: Self,
-        _ rhs: Self
+        _ rhs: Self.RemainderDivisor
     ) -> Self {
         guard lhs.isNaN == false,
             rhs.isNaN == false,

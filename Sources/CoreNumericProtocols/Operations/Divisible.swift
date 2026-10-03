@@ -8,6 +8,12 @@
 
 /// A type that supports division.
 public protocol Divisible: Equatable {
+    /// The type used to represent divisors for quotient operations.
+    associatedtype Divisor
+
+    /// The type used to represent divisors for remainder operations.
+    associatedtype RemainderDivisor
+
     /// Returns the reciprocal of this instance.
     var reciprocal: Self? { get }
 
@@ -34,7 +40,7 @@ public protocol Divisible: Equatable {
     /// - Returns: The quotient.
     static func / (
         _ lhs: Self,
-        _ rhs: Self
+        _ rhs: Self.Divisor
     ) -> Self
 
     /// Returns the remainder of dividing the first specified value by the second.
@@ -45,7 +51,7 @@ public protocol Divisible: Equatable {
     /// - Returns: The remainder.
     static func % (
         _ lhs: Self,
-        _ rhs: Self
+        _ rhs: Self.RemainderDivisor
     ) -> Self
 
     /// Returns the quotient of dividing this value by the specified value.
@@ -53,7 +59,7 @@ public protocol Divisible: Equatable {
     /// - Parameter divisor: The divisor.
     /// - Returns: The quotient.
     /// - Throws: An error if the conforming type cannot perform the division.
-    func dividing(by divisor: Self) throws -> Self
+    func dividing(by divisor: Self.Divisor) throws -> Self
 }
 
 extension Divisible {
@@ -72,7 +78,7 @@ extension Divisible {
     ///   - rhs: The divisor.
     public static func /= (
         _ lhs: inout Self,
-        _ rhs: Self
+        _ rhs: Self.Divisor
     ) {
         let quotient: Self = lhs / rhs
         lhs = quotient
@@ -85,7 +91,7 @@ extension Divisible {
     ///   - rhs: The divisor.
     public static func %= (
         _ lhs: inout Self,
-        _ rhs: Self
+        _ rhs: Self.RemainderDivisor
     ) {
         let remainder: Self = lhs % rhs
         lhs = remainder
@@ -96,7 +102,7 @@ extension Divisible {
     /// - Parameter divisor: The divisor.
     /// - Returns: The quotient.
     /// - Throws: An error if the conforming type cannot perform the division.
-    public func dividing(by divisor: Self) throws -> Self {
+    public func dividing(by divisor: Self.Divisor) throws -> Self {
         return self / divisor
     }
 
@@ -104,7 +110,7 @@ extension Divisible {
     ///
     /// - Parameter divisor: The divisor.
     /// - Throws: An error if the conforming type cannot perform the division.
-    public mutating func divide(by divisor: Self) throws {
+    public mutating func divide(by divisor: Self.Divisor) throws {
         self = try self.dividing(by: divisor)
     }
 }

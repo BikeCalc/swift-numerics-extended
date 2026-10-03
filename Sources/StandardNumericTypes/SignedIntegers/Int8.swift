@@ -17,7 +17,10 @@ extension Int8: Addable {
 
 // MARK: - Divisible
 
-extension Int8: Divisible {}
+extension Int8: Divisible {
+    public typealias Divisor = Self
+    public typealias RemainderDivisor = Self
+}
 
 // MARK: - Multipliable
 

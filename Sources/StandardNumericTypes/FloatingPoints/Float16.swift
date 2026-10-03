@@ -20,7 +20,13 @@ extension Float16: Decreasable {}
 
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: Divisible {
-    public static func % (_ lhs: Self, _ rhs: Self) -> Self {
+    public typealias Divisor = Self
+    public typealias RemainderDivisor = Self
+
+    public static func % (
+        _ lhs: Self,
+        _ rhs: Self.RemainderDivisor
+    ) -> Self {
         return lhs.truncatingRemainder(dividingBy: rhs)
     }
 }

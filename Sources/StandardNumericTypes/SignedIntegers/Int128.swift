@@ -19,7 +19,10 @@ extension Int128: Addable {
 // MARK: - Divisible
 
 @available(iOS 18.0, macCatalyst 18.0, macOS 15.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
-extension Int128: Divisible {}
+extension Int128: Divisible {
+    public typealias Divisor = Self
+    public typealias RemainderDivisor = Self
+}
 
 // MARK: - Multipliable
 

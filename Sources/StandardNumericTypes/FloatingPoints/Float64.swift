@@ -22,9 +22,12 @@ extension Float64: Decreasable {}
 // MARK: - Divisible
 
 extension Float64: Divisible {
+    public typealias Divisor = Self
+    public typealias RemainderDivisor = Self
+
     public static func % (
         _ lhs: Self,
-        _ rhs: Self
+        _ rhs: Self.RemainderDivisor
     ) -> Self {
         return lhs.truncatingRemainder(dividingBy: rhs)
     }
