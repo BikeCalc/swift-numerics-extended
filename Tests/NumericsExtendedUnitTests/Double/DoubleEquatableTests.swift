@@ -30,9 +30,9 @@ internal struct DoubleEquatableTests {
     internal func equalityPredicates(
         lhs: Double,
         rhs: Double
-    ) {
-        #expect(lhs.isEqual(to: rhs) == (lhs == rhs))
-        #expect(lhs.isUnequal(to: rhs) == (lhs != rhs))
+    ) throws {
+        #expect(try lhs.isEqual(to: rhs) == (lhs == rhs))
+        #expect(try lhs.isUnequal(to: rhs) == (lhs != rhs))
     }
 }
 
@@ -50,11 +50,11 @@ extension DoubleEquatableTests {
     internal func nanEqualityFollowsFloatingPointRules(
         lhs: Double,
         rhs: Double
-    ) {
+    ) throws {
         #expect((lhs == rhs) == false)
         #expect((lhs != rhs) == true)
-        #expect(lhs.isEqual(to: rhs) == false)
-        #expect(lhs.isUnequal(to: rhs) == true)
+        #expect(try lhs.isEqual(to: rhs) == false)
+        #expect(try lhs.isUnequal(to: rhs) == true)
     }
 }
 
@@ -72,11 +72,11 @@ extension DoubleEquatableTests {
         lhs: Double,
         rhs: Double,
         result: Bool
-    ) {
+    ) throws {
         #expect((lhs == rhs) == result)
         #expect((lhs != rhs) == !result)
-        #expect(lhs.isEqual(to: rhs) == result)
-        #expect(lhs.isUnequal(to: rhs) == !result)
+        #expect(try lhs.isEqual(to: rhs) == result)
+        #expect(try lhs.isUnequal(to: rhs) == !result)
     }
 }
 
@@ -95,11 +95,11 @@ extension DoubleEquatableTests {
         lhs: Double,
         rhs: Double,
         result: Bool
-    ) {
+    ) throws {
         #expect((lhs == rhs) == result)
         #expect((lhs != rhs) == !result)
-        #expect(lhs.isEqual(to: rhs) == result)
-        #expect(lhs.isUnequal(to: rhs) == !result)
+        #expect(try lhs.isEqual(to: rhs) == result)
+        #expect(try lhs.isUnequal(to: rhs) == !result)
     }
 }
 
@@ -117,11 +117,11 @@ extension DoubleEquatableTests {
         lhs: Double,
         rhs: Double,
         result: Bool
-    ) {
+    ) throws {
         #expect((lhs == rhs) == result)
         #expect((lhs != rhs) == !result)
-        #expect(lhs.isEqual(to: rhs) == result)
-        #expect(lhs.isUnequal(to: rhs) == !result)
+        #expect(try lhs.isEqual(to: rhs) == result)
+        #expect(try lhs.isUnequal(to: rhs) == !result)
     }
 }
 
@@ -140,10 +140,10 @@ extension DoubleEquatableTests {
         lhs: Double,
         rhs: Double,
         result: Bool
-    ) {
+    ) throws {
         #expect((lhs == rhs) == result)
         #expect((lhs != rhs) == !result)
-        #expect(lhs.isEqual(to: rhs) == result)
-        #expect(lhs.isUnequal(to: rhs) == !result)
+        #expect(try lhs.isEqual(to: rhs) == result)
+        #expect(try lhs.isUnequal(to: rhs) == !result)
     }
 }
