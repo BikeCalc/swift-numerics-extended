@@ -99,8 +99,8 @@ internal struct FractionRaisableTests {
         base: Fraction<Int>,
         exponent: Fraction<Int>.Exponent,
         power: Fraction<Int>
-    ) {
-        #expect(base.raising(to: exponent) == power)
+    ) throws {
+        #expect(try base.raising(to: exponent) == power)
     }
 
     @Test(
@@ -111,9 +111,9 @@ internal struct FractionRaisableTests {
         base: Fraction<Int>,
         exponent: Fraction<Int>.Exponent,
         power: Fraction<Int>
-    ) {
+    ) throws {
         var runningPower: Fraction<Int> = base
-        runningPower.raise(to: exponent)
+        try runningPower.raise(to: exponent)
         #expect(runningPower == power)
     }
 

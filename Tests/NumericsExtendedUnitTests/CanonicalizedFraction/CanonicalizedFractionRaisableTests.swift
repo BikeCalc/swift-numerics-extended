@@ -42,10 +42,10 @@ internal struct CanonicalizedFractionRaisableTests {
     ]
 
     @Test(
-        "Exponentiation equal canonicalizes result",
+        "Exponentiation succeeds",
         arguments: Self.exponentiationArguments
     )
-    internal func exponentiationEqualCanonicalizesResult(
+    internal func exponentiationSucceeds(
         base: Fraction<Int>,
         exponent: Fraction<Int>.Exponent,
         power: Fraction<Int>
@@ -59,18 +59,18 @@ internal struct CanonicalizedFractionRaisableTests {
     }
 
     @Test(
-        "Raise canonicalizes result",
+        "Raise succeeds",
         arguments: Self.exponentiationArguments
     )
-    internal func raiseCanonicalizesResult(
+    internal func raiseSucceeds(
         base: Fraction<Int>,
         exponent: Fraction<Int>.Exponent,
         power: Fraction<Int>
-    ) {
+    ) throws {
         @Canonicalized
         var runningPower: Fraction<Int> = base
 
-        runningPower.raise(to: exponent)
+        try runningPower.raise(to: exponent)
 
         #expect(runningPower == power)
     }

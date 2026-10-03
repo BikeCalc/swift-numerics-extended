@@ -91,8 +91,8 @@ internal struct Int4RaisableTests {
         base: Int4,
         exponent: Int4.Exponent,
         power: Int4
-    ) {
-        #expect(base.raising(to: exponent) == power)
+    ) throws {
+        #expect(try base.raising(to: exponent) == power)
     }
 
     @Test(
@@ -103,9 +103,9 @@ internal struct Int4RaisableTests {
         base: Int4,
         exponent: Int4.Exponent,
         power: Int4
-    ) {
+    ) throws {
         var runningPower: Int4 = base
-        runningPower.raise(to: exponent)
+        try runningPower.raise(to: exponent)
         #expect(runningPower == power)
     }
 
