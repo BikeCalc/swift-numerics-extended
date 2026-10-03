@@ -132,6 +132,32 @@ In standalone scripts, use `fileprivate` for file-scoped types and declarations 
 Their initializers and members accessed elsewhere in the same file should also be `fileprivate`. Use `private` for
 implementation details needed only within their enclosing type. Do not use `internal` merely because it is the default.
 
+### Explicit Self
+
+Always use explicit `self.` when accessing the current instance's properties or calling its methods, even when Swift
+allows it to be omitted. Apply this rule in initializers, computed properties, methods, and closures.
+
+For example:
+
+```swift
+internal func foo(bar: String) {
+    self.bar = bar
+    self.baz()
+}
+```
+
+Use `Self` rather than repeating the enclosing type's name when referring to the current type, wherever Swift permits
+it and it preserves the intended meaning. Qualify its type properties, type methods, nested types, type aliases, and
+associated types with `Self.` rather than leaving them unqualified.
+
+For example:
+
+```swift
+internal func foo(bar: Self) -> Self {
+    return Self.baz(bar: bar)
+}
+```
+
 ### Identifier Naming
 
 #### Acronyms
