@@ -51,8 +51,8 @@ internal struct RomanAddableTests {
         augend: Roman,
         addend: Roman,
         sum: Roman
-    ) {
-        #expect(augend.adding(addend) == sum)
+    ) throws {
+        #expect(try augend.adding(addend) == sum)
     }
 
     @Test(
@@ -63,9 +63,9 @@ internal struct RomanAddableTests {
         augend: Roman,
         addend: Roman,
         sum: Roman
-    ) {
+    ) throws {
         var runningSum: Roman = augend
-        runningSum.add(addend)
+        try runningSum.add(addend)
         #expect(runningSum == sum)
     }
 }

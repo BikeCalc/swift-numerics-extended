@@ -57,8 +57,8 @@ internal struct DoubleAddableTests {
         augend: Double,
         addend: Double,
         sum: Double
-    ) {
-        #expect(augend.adding(addend) == sum)
+    ) throws {
+        #expect(try augend.adding(addend) == sum)
     }
 
     @Test(
@@ -69,9 +69,9 @@ internal struct DoubleAddableTests {
         augend: Double,
         addend: Double,
         sum: Double
-    ) {
+    ) throws {
         var runningSum: Double = augend
-        runningSum.add(addend)
+        try runningSum.add(addend)
         #expect(runningSum == sum)
     }
 }

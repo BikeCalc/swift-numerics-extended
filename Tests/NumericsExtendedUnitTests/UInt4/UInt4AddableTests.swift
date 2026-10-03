@@ -51,8 +51,8 @@ internal struct UInt4AddableTests {
         augend: UInt4,
         addend: UInt4,
         sum: UInt4
-    ) {
-        #expect(augend.adding(addend) == sum)
+    ) throws {
+        #expect(try augend.adding(addend) == sum)
     }
 
     @Test(
@@ -63,9 +63,9 @@ internal struct UInt4AddableTests {
         augend: UInt4,
         addend: UInt4,
         sum: UInt4
-    ) {
+    ) throws {
         var runningSum: UInt4 = augend
-        runningSum.add(addend)
+        try runningSum.add(addend)
         #expect(runningSum == sum)
     }
 }
