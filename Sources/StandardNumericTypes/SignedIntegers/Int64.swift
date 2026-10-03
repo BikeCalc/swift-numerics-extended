@@ -24,7 +24,9 @@ extension Int64: Divisible {
 
 // MARK: - Multipliable
 
-extension Int64: Multipliable {}
+extension Int64: Multipliable {
+    public typealias Multiplier = Self
+}
 
 // MARK: - Negateable
 

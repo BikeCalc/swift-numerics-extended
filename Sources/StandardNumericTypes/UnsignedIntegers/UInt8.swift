@@ -24,7 +24,9 @@ extension UInt8: Divisible {
 
 // MARK: - Multipliable
 
-extension UInt8: Multipliable {}
+extension UInt8: Multipliable {
+    public typealias Multiplier = Self
+}
 
 // MARK: - Raisable
 

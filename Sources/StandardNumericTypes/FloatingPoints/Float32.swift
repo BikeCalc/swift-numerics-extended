@@ -39,7 +39,9 @@ extension Float32: Increasable {}
 
 // MARK: - Multipliable
 
-extension Float32: Multipliable {}
+extension Float32: Multipliable {
+    public typealias Multiplier = Self
+}
 
 // MARK: - Negateable
 

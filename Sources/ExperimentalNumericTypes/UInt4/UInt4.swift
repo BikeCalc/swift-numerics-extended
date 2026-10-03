@@ -637,9 +637,11 @@ extension UInt4: LosslessStringConvertible {
 // MARK: - Multipliable
 
 extension UInt4: Multipliable {
+    public typealias Multiplier = Self
+
     public static func * (
         _ lhs: Self,
-        _ rhs: Self
+        _ rhs: Self.Multiplier
     ) -> Self {
         let newValue: Self.Value = lhs.value * rhs.value
         return .init(value: newValue)
@@ -710,7 +712,7 @@ extension UInt4: ReportableAsOverflow {
         )
     }
 
-    public func multipliedReportingOverflow(by rhs: Self) -> Self.OverflowReport {
+    public func multipliedReportingOverflow(by rhs: Self.Multiplier) -> Self.OverflowReport {
         let product: Self.Value = self.value * rhs.value
         let partialValue: Self = .init(truncatingIfNeeded: product)
 

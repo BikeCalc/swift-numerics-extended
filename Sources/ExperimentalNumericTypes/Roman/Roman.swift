@@ -456,6 +456,8 @@ extension Roman: LosslessStringConvertible {
 // MARK: - Multipliable
 
 extension Roman: Multipliable {
+    public typealias Multiplier = Self
+
     public func isMultiple(of other: Roman) -> Bool {
         if self == 0 && other == 0 {
             return true
@@ -470,7 +472,7 @@ extension Roman: Multipliable {
 
     public static func * (
         _ lhs: Self,
-        _ rhs: Self
+        _ rhs: Self.Multiplier
     ) -> Self {
         let newValue: Self.Value = lhs.value * rhs.value
         return .init(value: newValue)
@@ -591,7 +593,7 @@ extension Roman: ReportableAsOverflow {
         }
     }
 
-    public func multipliedReportingOverflow(by rhs: Self) -> Self.OverflowReport {
+    public func multipliedReportingOverflow(by rhs: Self.Multiplier) -> Self.OverflowReport {
         let overflow: Bool = rhs.value != 0 && self.value > Self.max.value / rhs.value
         let modulus: Self.Value = Self.max.value + 1
 

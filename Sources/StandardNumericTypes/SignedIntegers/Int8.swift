@@ -24,7 +24,9 @@ extension Int8: Divisible {
 
 // MARK: - Multipliable
 
-extension Int8: Multipliable {}
+extension Int8: Multipliable {
+    public typealias Multiplier = Self
+}
 
 // MARK: - Negateable
 

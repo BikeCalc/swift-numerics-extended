@@ -8,6 +8,9 @@
 
 /// A type that supports multiplication.
 public protocol Multipliable: Equatable {
+    /// The type used to represent multipliers.
+    associatedtype Multiplier
+
     /// Returns a boolean value indicating whether this value is a multiple of the specified value.
     ///
     /// - Parameter other: The value to test.
@@ -22,7 +25,7 @@ public protocol Multipliable: Equatable {
     /// - Returns: The product.
     static func * (
         _ lhs: Self,
-        _ rhs: Self
+        _ rhs: Self.Multiplier
     ) -> Self
 
     /// Returns the product of multiplying this value by the specified value.
@@ -30,7 +33,7 @@ public protocol Multipliable: Equatable {
     /// - Parameter multiplier: The multiplier.
     /// - Returns: The product.
     /// - Throws: An error if the conforming type cannot perform the multiplication.
-    func multiplying(by multiplier: Self) throws -> Self
+    func multiplying(by multiplier: Self.Multiplier) throws -> Self
 }
 
 extension Multipliable {
@@ -41,7 +44,7 @@ extension Multipliable {
     ///   - rhs: The multiplier.
     public static func *= (
         _ lhs: inout Self,
-        _ rhs: Self
+        _ rhs: Self.Multiplier
     ) {
         let product: Self = lhs * rhs
         lhs = product
@@ -52,7 +55,7 @@ extension Multipliable {
     /// - Parameter multiplier: The multiplier.
     /// - Returns: The product.
     /// - Throws: An error if the conforming type cannot perform the multiplication.
-    public func multiplying(by multiplier: Self) throws -> Self {
+    public func multiplying(by multiplier: Self.Multiplier) throws -> Self {
         return self * multiplier
     }
 
@@ -60,7 +63,7 @@ extension Multipliable {
     ///
     /// - Parameter multiplier: The multiplier.
     /// - Throws: An error if the conforming type cannot perform the multiplication.
-    public mutating func multiply(by multiplier: Self) throws {
+    public mutating func multiply(by multiplier: Self.Multiplier) throws {
         self = try self.multiplying(by: multiplier)
     }
 }

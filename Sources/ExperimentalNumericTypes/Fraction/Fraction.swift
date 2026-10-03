@@ -757,6 +757,8 @@ where Term: LosslessStringConvertible {
 // MARK: - Multipliable
 
 extension Fraction: Multipliable {
+    public typealias Multiplier = Self
+
     /// Returns a boolean value indicating whether this value is an exact multiple of the specified value.
     ///
     /// Zero is considered a multiple of zero. Otherwise, both values must be finite, the specified value must be
@@ -805,7 +807,7 @@ extension Fraction: Multipliable {
     /// - Returns: The product, or NaN when the operation is indeterminate.
     public static func * (
         _ lhs: Self,
-        _ rhs: Self
+        _ rhs: Self.Multiplier
     ) -> Self {
         guard lhs.isNaN == false && rhs.isNaN == false else {
             return .nan

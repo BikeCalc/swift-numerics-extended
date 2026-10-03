@@ -39,7 +39,9 @@ extension Float64: Increasable {}
 
 // MARK: - Multipliable
 
-extension Float64: Multipliable {}
+extension Float64: Multipliable {
+    public typealias Multiplier = Self
+}
 
 // MARK: - Negateable
 

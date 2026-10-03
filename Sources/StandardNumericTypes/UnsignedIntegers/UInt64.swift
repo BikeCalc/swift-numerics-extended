@@ -24,7 +24,9 @@ extension UInt64: Divisible {
 
 // MARK: - Multipliable
 
-extension UInt64: Multipliable {}
+extension UInt64: Multipliable {
+    public typealias Multiplier = Self
+}
 
 // MARK: - Raisable
 

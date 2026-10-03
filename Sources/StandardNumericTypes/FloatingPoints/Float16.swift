@@ -35,7 +35,9 @@ extension Float16: Divisible {
 extension Float16: Increasable {}
 
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
-extension Float16: Multipliable {}
+extension Float16: Multipliable {
+    public typealias Multiplier = Self
+}
 
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: Negateable {}

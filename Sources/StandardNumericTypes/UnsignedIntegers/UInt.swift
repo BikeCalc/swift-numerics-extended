@@ -24,7 +24,9 @@ extension UInt: Divisible {
 
 // MARK: - Multipliable
 
-extension UInt: Multipliable {}
+extension UInt: Multipliable {
+    public typealias Multiplier = Self
+}
 
 // MARK: - Raisable
 
