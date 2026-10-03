@@ -19,7 +19,6 @@ where Self: Divisible, Self.Divisor: ExpressibleByIntegerLiteral {
     }
 
     /// Halves this value.
-    ///
     public mutating func halve() {
         self = self.halved()
     }
@@ -35,7 +34,6 @@ where Self: Multipliable {
     }
 
     /// Doubles this value.
-    ///
     public mutating func double() {
         self = self.doubled()
     }
@@ -52,7 +50,6 @@ where Self: Raisable {
     }
 
     /// Raises this value to its square.
-    ///
     public mutating func square()
     where Self.Exponent: ExpressibleByIntegerLiteral {
         self **= 2
@@ -67,7 +64,6 @@ where Self: Raisable {
     }
 
     /// Raises this value to its cube.
-    ///
     public mutating func cube()
     where Self.Exponent: ExpressibleByIntegerLiteral {
         self **= 3

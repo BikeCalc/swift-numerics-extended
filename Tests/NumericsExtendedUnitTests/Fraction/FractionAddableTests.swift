@@ -12,7 +12,7 @@ import Testing
 
 @Suite("Fraction Addable Tests")
 internal struct FractionAddableTests {
-    private static let additionArguments: [(Fraction<Int>, Fraction<Int>, Fraction<Int>)] = [
+    private static let additionArguments: [(Fraction<Int>, Fraction<Int>.Addend, Fraction<Int>)] = [
         (Fraction<Int>(1, 2), Fraction<Int>(1, 2), Fraction<Int>(2, 2)),
         (Fraction<Int>(1, 2), Fraction<Int>(2, 3), Fraction<Int>(7, 6)),
         (Fraction<Int>(-1, 2), Fraction<Int>(1, 2), Fraction<Int>(0, 2)),
@@ -25,7 +25,7 @@ internal struct FractionAddableTests {
     )
     internal func additionSucceeds(
         augend: Fraction<Int>,
-        addend: Fraction<Int>,
+        addend: Fraction<Int>.Addend,
         sum: Fraction<Int>
     ) {
         #expect(augend + addend == sum)
@@ -37,7 +37,7 @@ internal struct FractionAddableTests {
     )
     internal func additionEqualSucceeds(
         augend: Fraction<Int>,
-        addend: Fraction<Int>,
+        addend: Fraction<Int>.Addend,
         sum: Fraction<Int>
     ) {
         var runningSum: Fraction<Int> = augend
@@ -51,7 +51,7 @@ internal struct FractionAddableTests {
     )
     internal func addingSucceeds(
         augend: Fraction<Int>,
-        addend: Fraction<Int>,
+        addend: Fraction<Int>.Addend,
         sum: Fraction<Int>
     ) throws {
         #expect(try augend.adding(addend) == sum)
@@ -63,7 +63,7 @@ internal struct FractionAddableTests {
     )
     internal func addSucceeds(
         augend: Fraction<Int>,
-        addend: Fraction<Int>,
+        addend: Fraction<Int>.Addend,
         sum: Fraction<Int>
     ) throws {
         var runningSum: Fraction<Int> = augend
@@ -79,7 +79,7 @@ extension FractionAddableTests {
     )
     internal func additionIsCommutative(
         augend: Fraction<Int>,
-        addend: Fraction<Int>,
+        addend: Fraction<Int>.Addend,
         sum _: Fraction<Int>
     ) {
         #expect(augend + addend == addend + augend)
@@ -110,7 +110,7 @@ extension FractionAddableTests {
             Fraction<Int>.negativeInfinity
         ]
     )
-    internal func addingToNaNReturnsNaN(addend: Fraction<Int>) {
+    internal func addingToNaNReturnsNaN(addend: Fraction<Int>.Addend) {
         #expect((Fraction<Int>.nan + addend).isNaN == true)
     }
 
@@ -141,7 +141,7 @@ extension FractionAddableTests {
             Fraction<Int>(-1, 1)
         ]
     )
-    internal func addingToNegativeInfinityFollowsRationalRules(addend: Fraction<Int>) {
+    internal func addingToNegativeInfinityFollowsRationalRules(addend: Fraction<Int>.Addend) {
         #expect(Fraction<Int>.negativeInfinity + addend == .negativeInfinity)
     }
 }
@@ -159,7 +159,7 @@ extension FractionAddableTests {
         ]
     )
     internal func addingToNegativeZeroFollowsStoredRepresentationRules(
-        addend: Fraction<Int>,
+        addend: Fraction<Int>.Addend,
         sum: Fraction<Int>
     ) {
         #expect(Fraction<Int>.negativeZero + addend == sum)
@@ -177,7 +177,7 @@ extension FractionAddableTests {
             Fraction<Int>(-1, 1)
         ]
     )
-    internal func addingToPositiveInfinityFollowsRationalRules(addend: Fraction<Int>) {
+    internal func addingToPositiveInfinityFollowsRationalRules(addend: Fraction<Int>.Addend) {
         #expect(Fraction<Int>.infinity + addend == .infinity)
     }
 }
@@ -196,7 +196,7 @@ extension FractionAddableTests {
     )
     internal func addingOppositeValuesReturnsPositiveZero(
         augend: Fraction<Int>,
-        addend: Fraction<Int>
+        addend: Fraction<Int>.Addend
     ) {
         let sum: Fraction<Int> = augend + addend
         #expect(sum.isZero == true)
@@ -226,7 +226,7 @@ extension FractionAddableTests {
         ]
     )
     internal func addingToPositiveZeroFollowsStoredRepresentationRules(
-        addend: Fraction<Int>,
+        addend: Fraction<Int>.Addend,
         sum: Fraction<Int>
     ) {
         #expect(Fraction<Int>.zero + addend == sum)

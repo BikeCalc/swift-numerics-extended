@@ -12,12 +12,12 @@ import Testing
 
 @Suite("Roman Divisible Tests")
 internal struct RomanDivisibleTests {
-    private static let divisionArguments: [(Roman, Roman, Roman)] = [
+    private static let divisionArguments: [(Roman, Roman.Divisor, Roman)] = [
         (6, 2, 3),
         (6, 3, 2)
     ]
 
-    private static let remainderArguments: [(Roman, Roman, Roman)] = [
+    private static let remainderArguments: [(Roman, Roman.RemainderDivisor, Roman)] = [
         (4, 2, 0),
         (5, 2, 1)
     ]
@@ -94,7 +94,7 @@ internal struct RomanDivisibleTests {
     )
     internal func divisionSucceeds(
         dividend: Roman,
-        divisor: Roman,
+        divisor: Roman.Divisor,
         quotient: Roman
     ) {
         #expect(dividend / divisor == quotient)
@@ -106,7 +106,7 @@ internal struct RomanDivisibleTests {
     )
     internal func divisionEqualSucceeds(
         dividend: Roman,
-        divisor: Roman,
+        divisor: Roman.Divisor,
         quotient: Roman
     ) {
         var runningQuotient: Roman = dividend
@@ -120,7 +120,7 @@ internal struct RomanDivisibleTests {
     )
     internal func remainderSucceeds(
         dividend: Roman,
-        divisor: Roman,
+        divisor: Roman.RemainderDivisor,
         remainder: Roman
     ) {
         #expect(dividend % divisor == remainder)
@@ -132,7 +132,7 @@ internal struct RomanDivisibleTests {
     )
     internal func remainderEqualSucceeds(
         dividend: Roman,
-        divisor: Roman,
+        divisor: Roman.RemainderDivisor,
         remainder: Roman
     ) {
         var runningRemainder: Roman = dividend
@@ -146,7 +146,7 @@ internal struct RomanDivisibleTests {
     )
     internal func dividingBySucceeds(
         dividend: Roman,
-        divisor: Roman,
+        divisor: Roman.Divisor,
         quotient: Roman
     ) throws {
         #expect(try dividend.dividing(by: divisor) == quotient)
@@ -158,7 +158,7 @@ internal struct RomanDivisibleTests {
     )
     internal func divideBySucceeds(
         dividend: Roman,
-        divisor: Roman,
+        divisor: Roman.Divisor,
         quotient: Roman
     ) throws {
         var runningQuotient: Roman = dividend
@@ -198,7 +198,7 @@ extension RomanDivisibleTests {
     )
     internal func divisionIsNotCommutative(
         dividend: Roman,
-        divisor: Roman,
+        divisor: Roman.Divisor,
         quotient _: Roman
     ) {
         #expect(dividend / divisor != divisor / dividend)
@@ -273,9 +273,9 @@ extension RomanDivisibleTests {
         arguments: [
             2,
             3
-        ] as Array<Roman>
+        ] as Array<Roman.Divisor>
     )
-    internal func dividingPositiveZeroByNonzeroValueReturnsPositiveZero(divisor: Roman) {
+    internal func dividingPositiveZeroByNonzeroValueReturnsPositiveZero(divisor: Roman.Divisor) {
         #expect(Roman.zero / divisor == Roman.zero)
     }
 

@@ -12,7 +12,7 @@ import Testing
 
 @Suite("UInt4 Addable Tests")
 internal struct UInt4AddableTests {
-    private static let additionArguments: [(UInt4, UInt4, UInt4)] = [
+    private static let additionArguments: [(UInt4, UInt4.Addend, UInt4)] = [
         (2, 3, 5),
         (3, 4, 7)
     ]
@@ -23,7 +23,7 @@ internal struct UInt4AddableTests {
     )
     internal func additionSucceeds(
         augend: UInt4,
-        addend: UInt4,
+        addend: UInt4.Addend,
         sum: UInt4
     ) {
         #expect(augend + addend == sum)
@@ -35,7 +35,7 @@ internal struct UInt4AddableTests {
     )
     internal func additionEqualSucceeds(
         augend: UInt4,
-        addend: UInt4,
+        addend: UInt4.Addend,
         sum: UInt4
     ) {
         var runningSum: UInt4 = augend
@@ -49,7 +49,7 @@ internal struct UInt4AddableTests {
     )
     internal func addingSucceeds(
         augend: UInt4,
-        addend: UInt4,
+        addend: UInt4.Addend,
         sum: UInt4
     ) throws {
         #expect(try augend.adding(addend) == sum)
@@ -61,7 +61,7 @@ internal struct UInt4AddableTests {
     )
     internal func addSucceeds(
         augend: UInt4,
-        addend: UInt4,
+        addend: UInt4.Addend,
         sum: UInt4
     ) throws {
         var runningSum: UInt4 = augend
@@ -77,7 +77,7 @@ extension UInt4AddableTests {
     )
     internal func additionIsCommutative(
         augend: UInt4,
-        addend: UInt4,
+        addend: UInt4.Addend,
         sum _: UInt4
     ) {
         #expect(augend + addend == addend + augend)

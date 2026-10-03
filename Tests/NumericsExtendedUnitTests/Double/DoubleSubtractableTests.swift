@@ -12,7 +12,7 @@ import Testing
 
 @Suite("Double Subtractable Tests")
 internal struct DoubleSubtractableTests {
-    private static let subtractionArguments: [(Double, Double, Double)] = [
+    private static let subtractionArguments: [(Double, Double.Subtrahend, Double)] = [
         (3.0, 2.0, 1.0),
         (5.0, 3.0, 2.0),
         (-3.0, 2.0, -5.0),
@@ -29,7 +29,7 @@ internal struct DoubleSubtractableTests {
     )
     internal func subtractionSucceeds(
         minuend: Double,
-        subtrahend: Double,
+        subtrahend: Double.Subtrahend,
         difference: Double
     ) {
         #expect(minuend - subtrahend == difference)
@@ -41,7 +41,7 @@ internal struct DoubleSubtractableTests {
     )
     internal func subtractionEqualSucceeds(
         minuend: Double,
-        subtrahend: Double,
+        subtrahend: Double.Subtrahend,
         difference: Double
     ) {
         var runningDifference: Double = minuend
@@ -55,7 +55,7 @@ internal struct DoubleSubtractableTests {
     )
     internal func subtractingSucceeds(
         minuend: Double,
-        subtrahend: Double,
+        subtrahend: Double.Subtrahend,
         difference: Double
     ) throws {
         #expect(try minuend.subtracting(subtrahend) == difference)
@@ -67,7 +67,7 @@ internal struct DoubleSubtractableTests {
     )
     internal func subtractSucceeds(
         minuend: Double,
-        subtrahend: Double,
+        subtrahend: Double.Subtrahend,
         difference: Double
     ) throws {
         var runningDifference: Double = minuend
@@ -83,7 +83,7 @@ extension DoubleSubtractableTests {
     )
     internal func subtractionIsNotCommutative(
         minuend: Double,
-        subtrahend: Double,
+        subtrahend: Double.Subtrahend,
         difference _: Double
     ) {
         #expect(minuend - subtrahend != subtrahend - minuend)
@@ -114,7 +114,7 @@ extension DoubleSubtractableTests {
             Double.negativeInfinity
         ]
     )
-    internal func subtractingFromNaNReturnsNaN(subtrahend: Double) {
+    internal func subtractingFromNaNReturnsNaN(subtrahend: Double.Subtrahend) {
         #expect((Double.nan - subtrahend).isNaN == true)
     }
 
@@ -147,7 +147,7 @@ extension DoubleSubtractableTests {
     )
     internal func subtractingNegativeInfinityFollowsFloatingPointRules(
         minuend: Double,
-        subtrahend: Double,
+        subtrahend: Double.Subtrahend,
         difference: Double
     ) {
         #expect(minuend - subtrahend == difference)
@@ -167,7 +167,7 @@ extension DoubleSubtractableTests {
         ]
     )
     internal func subtractingFromNegativeZeroFollowsFloatingPointRules(
-        subtrahend: Double,
+        subtrahend: Double.Subtrahend,
         difference: Double
     ) {
         let result: Double = Double.negativeZero - subtrahend
@@ -190,7 +190,7 @@ extension DoubleSubtractableTests {
     )
     internal func subtractingPositiveInfinityFollowsFloatingPointRules(
         minuend: Double,
-        subtrahend: Double,
+        subtrahend: Double.Subtrahend,
         difference: Double
     ) {
         #expect(minuend - subtrahend == difference)
@@ -227,7 +227,7 @@ extension DoubleSubtractableTests {
         ]
     )
     internal func subtractingFromPositiveZeroFollowsFloatingPointRules(
-        subtrahend: Double,
+        subtrahend: Double.Subtrahend,
         difference: Double
     ) {
         let result: Double = Double.zero - subtrahend

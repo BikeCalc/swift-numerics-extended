@@ -12,14 +12,14 @@ import Testing
 
 @Suite("Int4 Divisible Tests")
 internal struct Int4DivisibleTests {
-    private static let divisionArguments: [(Int4, Int4, Int4)] = [
+    private static let divisionArguments: [(Int4, Int4.Divisor, Int4)] = [
         (6, 2, 3),
         (6, 3, 2),
         (-6, 2, -3),
         (-6, -3, 2)
     ]
 
-    private static let remainderArguments: [(Int4, Int4, Int4)] = [
+    private static let remainderArguments: [(Int4, Int4.RemainderDivisor, Int4)] = [
         (4, 2, 0),
         (5, 2, 1),
         (5, -2, 1),
@@ -110,7 +110,7 @@ internal struct Int4DivisibleTests {
     )
     internal func divisionSucceeds(
         dividend: Int4,
-        divisor: Int4,
+        divisor: Int4.Divisor,
         quotient: Int4
     ) {
         #expect(dividend / divisor == quotient)
@@ -122,7 +122,7 @@ internal struct Int4DivisibleTests {
     )
     internal func divisionEqualSucceeds(
         dividend: Int4,
-        divisor: Int4,
+        divisor: Int4.Divisor,
         quotient: Int4
     ) {
         var runningQuotient: Int4 = dividend
@@ -136,7 +136,7 @@ internal struct Int4DivisibleTests {
     )
     internal func dividingBySucceeds(
         dividend: Int4,
-        divisor: Int4,
+        divisor: Int4.Divisor,
         quotient: Int4
     ) throws {
         #expect(try dividend.dividing(by: divisor) == quotient)
@@ -148,7 +148,7 @@ internal struct Int4DivisibleTests {
     )
     internal func divideBySucceeds(
         dividend: Int4,
-        divisor: Int4,
+        divisor: Int4.Divisor,
         quotient: Int4
     ) throws {
         var runningQuotient: Int4 = dividend
@@ -162,7 +162,7 @@ internal struct Int4DivisibleTests {
     )
     internal func remainderSucceeds(
         dividend: Int4,
-        divisor: Int4,
+        divisor: Int4.RemainderDivisor,
         remainder: Int4
     ) {
         #expect(dividend % divisor == remainder)
@@ -174,7 +174,7 @@ internal struct Int4DivisibleTests {
     )
     internal func remainderEqualSucceeds(
         dividend: Int4,
-        divisor: Int4,
+        divisor: Int4.RemainderDivisor,
         remainder: Int4
     ) {
         var runningRemainder: Int4 = dividend
@@ -214,7 +214,7 @@ extension Int4DivisibleTests {
     )
     internal func divisionIsNotCommutative(
         dividend: Int4,
-        divisor: Int4,
+        divisor: Int4.Divisor,
         quotient _: Int4
     ) {
         #expect(dividend / divisor != divisor / dividend)
@@ -245,11 +245,11 @@ extension Int4DivisibleTests {
             (-7, 3, -2),
             (7, -3, -2),
             (-7, -3, 2)
-        ] as Array<(Int4, Int4, Int4)>
+        ] as Array<(Int4, Int4.Divisor, Int4)>
     )
     internal func integerDivisionTruncatesTowardZero(
         dividend: Int4,
-        divisor: Int4,
+        divisor: Int4.Divisor,
         quotient: Int4
     ) {
         #expect(dividend / divisor == quotient)
@@ -323,9 +323,9 @@ extension Int4DivisibleTests {
             2,
             -3,
             3
-        ] as Array<Int4>
+        ] as Array<Int4.Divisor>
     )
-    internal func dividingNegativeZeroByNonzeroValueReturnsNegativeZero(divisor: Int4) {
+    internal func dividingNegativeZeroByNonzeroValueReturnsNegativeZero(divisor: Int4.Divisor) {
         #expect(Int4.negativeZero / divisor == Int4.negativeZero)
     }
 }
@@ -394,9 +394,9 @@ extension Int4DivisibleTests {
             2,
             -3,
             3
-        ] as Array<Int4>
+        ] as Array<Int4.Divisor>
     )
-    internal func dividingPositiveZeroByNonzeroValueReturnsPositiveZero(divisor: Int4) {
+    internal func dividingPositiveZeroByNonzeroValueReturnsPositiveZero(divisor: Int4.Divisor) {
         #expect(Int4.zero / divisor == Int4.zero)
     }
 

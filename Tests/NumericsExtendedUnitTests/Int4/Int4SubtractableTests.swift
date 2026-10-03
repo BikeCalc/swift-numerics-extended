@@ -12,7 +12,7 @@ import Testing
 
 @Suite("Int4 Subtractable Tests")
 internal struct Int4SubtractableTests {
-    private static let subtractionArguments: [(Int4, Int4, Int4)] = [
+    private static let subtractionArguments: [(Int4, Int4.Subtrahend, Int4)] = [
         (3, 2, 1),
         (5, 3, 2),
         (-3, 2, -5),
@@ -25,7 +25,7 @@ internal struct Int4SubtractableTests {
     )
     internal func subtractionSucceeds(
         minuend: Int4,
-        subtrahend: Int4,
+        subtrahend: Int4.Subtrahend,
         difference: Int4
     ) {
         #expect(minuend - subtrahend == difference)
@@ -37,7 +37,7 @@ internal struct Int4SubtractableTests {
     )
     internal func subtractionEqualSucceeds(
         minuend: Int4,
-        subtrahend: Int4,
+        subtrahend: Int4.Subtrahend,
         difference: Int4
     ) {
         var runningDifference: Int4 = minuend
@@ -51,7 +51,7 @@ internal struct Int4SubtractableTests {
     )
     internal func subtractingSucceeds(
         minuend: Int4,
-        subtrahend: Int4,
+        subtrahend: Int4.Subtrahend,
         difference: Int4
     ) throws {
         #expect(try minuend.subtracting(subtrahend) == difference)
@@ -63,7 +63,7 @@ internal struct Int4SubtractableTests {
     )
     internal func subtractSucceeds(
         minuend: Int4,
-        subtrahend: Int4,
+        subtrahend: Int4.Subtrahend,
         difference: Int4
     ) throws {
         var runningDifference: Int4 = minuend
@@ -79,7 +79,7 @@ extension Int4SubtractableTests {
     )
     internal func subtractionIsNotCommutative(
         minuend: Int4,
-        subtrahend: Int4,
+        subtrahend: Int4.Subtrahend,
         difference _: Int4
     ) {
         #expect(minuend - subtrahend != subtrahend - minuend)

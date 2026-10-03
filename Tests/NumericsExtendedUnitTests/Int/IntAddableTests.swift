@@ -12,7 +12,7 @@ import Testing
 
 @Suite("Int Addable Tests")
 internal struct IntAddableTests {
-    private static let additionArguments: [(Int, Int, Int)] = [
+    private static let additionArguments: [(Int, Int.Addend, Int)] = [
         (2, 3, 5),
         (3, 4, 7),
         (-2, 3, 1),
@@ -25,7 +25,7 @@ internal struct IntAddableTests {
     )
     internal func additionSucceeds(
         augend: Int,
-        addend: Int,
+        addend: Int.Addend,
         sum: Int
     ) {
         #expect(augend + addend == sum)
@@ -37,7 +37,7 @@ internal struct IntAddableTests {
     )
     internal func additionEqualSucceeds(
         augend: Int,
-        addend: Int,
+        addend: Int.Addend,
         sum: Int
     ) {
         var runningSum: Int = augend
@@ -51,7 +51,7 @@ internal struct IntAddableTests {
     )
     internal func addingSucceeds(
         augend: Int,
-        addend: Int,
+        addend: Int.Addend,
         sum: Int
     ) throws {
         #expect(try augend.adding(addend) == sum)
@@ -63,7 +63,7 @@ internal struct IntAddableTests {
     )
     internal func addSucceeds(
         augend: Int,
-        addend: Int,
+        addend: Int.Addend,
         sum: Int
     ) throws {
         var runningSum: Int = augend
@@ -79,7 +79,7 @@ extension IntAddableTests {
     )
     internal func additionIsCommutative(
         augend: Int,
-        addend: Int,
+        addend: Int.Addend,
         sum _: Int
     ) {
         #expect(augend + addend == addend + augend)
@@ -117,7 +117,7 @@ extension IntAddableTests {
     )
     internal func addingOppositeValuesReturnsPositiveZero(
         augend: Int,
-        addend: Int
+        addend: Int.Addend
     ) {
         #expect(augend + addend == Int.zero)
     }

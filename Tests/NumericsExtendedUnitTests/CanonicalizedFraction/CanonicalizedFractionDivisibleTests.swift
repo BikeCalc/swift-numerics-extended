@@ -12,14 +12,14 @@ import Testing
 
 @Suite("Canonicalized Fraction Divisible Tests")
 internal struct CanonicalizedFractionDivisibleTests {
-    private static let divisionArguments: [(Fraction<Int>, Fraction<Int>, Fraction<Int>)] = [
+    private static let divisionArguments: [(Fraction<Int>, Fraction<Int>.Divisor, Fraction<Int>)] = [
         (Fraction<Int>(1, 2), Fraction<Int>(1, 2), Fraction<Int>(1, 1)),
         (Fraction<Int>(1, 2), Fraction<Int>(2, 3), Fraction<Int>(3, 4)),
         (Fraction<Int>(-1, 2), Fraction<Int>(1, 2), Fraction<Int>(-1, 1)),
         (Fraction<Int>(-1, 2), Fraction<Int>(-2, 3), Fraction<Int>(3, 4))
     ]
 
-    private static let remainderArguments: [(Fraction<Int>, Fraction<Int>, Fraction<Int>)] = [
+    private static let remainderArguments: [(Fraction<Int>, Fraction<Int>.RemainderDivisor, Fraction<Int>)] = [
         (Fraction<Int>(1, 2), Fraction<Int>(1, 2), Fraction<Int>(0, 1)),
         (Fraction<Int>(2, 3), Fraction<Int>(1, 2), Fraction<Int>(1, 6)),
         (Fraction<Int>(-2, 3), Fraction<Int>(1, 2), Fraction<Int>(-1, 6)),
@@ -39,7 +39,7 @@ internal struct CanonicalizedFractionDivisibleTests {
     )
     internal func divisionSucceeds(
         dividend: Fraction<Int>,
-        divisor: Fraction<Int>,
+        divisor: Fraction<Int>.Divisor,
         quotient: Fraction<Int>
     ) {
         @Canonicalized
@@ -56,7 +56,7 @@ internal struct CanonicalizedFractionDivisibleTests {
     )
     internal func divideSucceeds(
         dividend: Fraction<Int>,
-        divisor: Fraction<Int>,
+        divisor: Fraction<Int>.Divisor,
         quotient: Fraction<Int>
     ) throws {
         @Canonicalized
@@ -73,7 +73,7 @@ internal struct CanonicalizedFractionDivisibleTests {
     )
     internal func remainderEqualCanonicalizesResult(
         dividend: Fraction<Int>,
-        divisor: Fraction<Int>,
+        divisor: Fraction<Int>.RemainderDivisor,
         remainder: Fraction<Int>
     ) {
         @Canonicalized

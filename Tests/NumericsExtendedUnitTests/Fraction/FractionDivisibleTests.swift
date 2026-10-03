@@ -12,14 +12,14 @@ import Testing
 
 @Suite("Fraction Divisible Tests")
 internal struct FractionDivisibleTests {
-    private static let divisionArguments: [(Fraction<Int>, Fraction<Int>, Fraction<Int>)] = [
+    private static let divisionArguments: [(Fraction<Int>, Fraction<Int>.Divisor, Fraction<Int>)] = [
         (Fraction<Int>(1, 2), Fraction<Int>(1, 2), Fraction<Int>(2, 2)),
         (Fraction<Int>(1, 2), Fraction<Int>(2, 3), Fraction<Int>(3, 4)),
         (Fraction<Int>(-1, 2), Fraction<Int>(1, 2), Fraction<Int>(-2, 2)),
         (Fraction<Int>(-1, 2), Fraction<Int>(-2, 3), Fraction<Int>(-3, -4))
     ]
 
-    private static let remainderArguments: [(Fraction<Int>, Fraction<Int>, Fraction<Int>)] = [
+    private static let remainderArguments: [(Fraction<Int>, Fraction<Int>.RemainderDivisor, Fraction<Int>)] = [
         (Fraction<Int>(1, 2), Fraction<Int>(1, 2), Fraction<Int>(0, 2)),
         (Fraction<Int>(2, 3), Fraction<Int>(1, 2), Fraction<Int>(1, 6)),
         (Fraction<Int>(2, 3), Fraction<Int>(-1, 2), Fraction<Int>(1, 6)),
@@ -90,7 +90,7 @@ internal struct FractionDivisibleTests {
     )
     internal func divisionSucceeds(
         dividend: Fraction<Int>,
-        divisor: Fraction<Int>,
+        divisor: Fraction<Int>.Divisor,
         quotient: Fraction<Int>
     ) {
         #expect(dividend / divisor == quotient)
@@ -102,7 +102,7 @@ internal struct FractionDivisibleTests {
     )
     internal func divisionEqualSucceeds(
         dividend: Fraction<Int>,
-        divisor: Fraction<Int>,
+        divisor: Fraction<Int>.Divisor,
         quotient: Fraction<Int>
     ) {
         var runningQuotient: Fraction<Int> = dividend
@@ -116,7 +116,7 @@ internal struct FractionDivisibleTests {
     )
     internal func remainderSucceeds(
         dividend: Fraction<Int>,
-        divisor: Fraction<Int>,
+        divisor: Fraction<Int>.RemainderDivisor,
         remainder: Fraction<Int>
     ) {
         #expect(dividend % divisor == remainder)
@@ -128,7 +128,7 @@ internal struct FractionDivisibleTests {
     )
     internal func remainderEqualSucceeds(
         dividend: Fraction<Int>,
-        divisor: Fraction<Int>,
+        divisor: Fraction<Int>.RemainderDivisor,
         remainder: Fraction<Int>
     ) {
         var runningRemainder: Fraction<Int> = dividend
@@ -142,7 +142,7 @@ internal struct FractionDivisibleTests {
     )
     internal func dividingBySucceeds(
         dividend: Fraction<Int>,
-        divisor: Fraction<Int>,
+        divisor: Fraction<Int>.Divisor,
         quotient: Fraction<Int>
     ) throws {
         #expect(try dividend.dividing(by: divisor) == quotient)
@@ -154,7 +154,7 @@ internal struct FractionDivisibleTests {
     )
     internal func divideBySucceeds(
         dividend: Fraction<Int>,
-        divisor: Fraction<Int>,
+        divisor: Fraction<Int>.Divisor,
         quotient: Fraction<Int>
     ) throws {
         var runningQuotient: Fraction<Int> = dividend
@@ -198,7 +198,7 @@ extension FractionDivisibleTests {
     )
     internal func divisionIsNotCommutative(
         dividend: Fraction<Int>,
-        divisor: Fraction<Int>
+        divisor: Fraction<Int>.Divisor
     ) {
         #expect(dividend / divisor != divisor / dividend)
     }
@@ -239,7 +239,7 @@ extension FractionDivisibleTests {
             Fraction<Int>.negativeZero
         ]
     )
-    internal func dividingPositiveZeroByPositiveOrNegativeZeroReturnsNaN(divisor: Fraction<Int>) {
+    internal func dividingPositiveZeroByPositiveOrNegativeZeroReturnsNaN(divisor: Fraction<Int>.Divisor) {
         #expect((Fraction<Int>.zero / divisor).isNaN == true)
     }
 
@@ -250,7 +250,7 @@ extension FractionDivisibleTests {
             Fraction<Int>.negativeZero
         ]
     )
-    internal func dividingNegativeZeroByPositiveOrNegativeZeroReturnsNaN(divisor: Fraction<Int>) {
+    internal func dividingNegativeZeroByPositiveOrNegativeZeroReturnsNaN(divisor: Fraction<Int>.Divisor) {
         #expect((Fraction<Int>.negativeZero / divisor).isNaN == true)
     }
 
@@ -261,7 +261,7 @@ extension FractionDivisibleTests {
             Fraction<Int>.negativeInfinity
         ]
     )
-    internal func dividingPositiveInfinityByInfinityReturnsNaN(divisor: Fraction<Int>) {
+    internal func dividingPositiveInfinityByInfinityReturnsNaN(divisor: Fraction<Int>.Divisor) {
         #expect((Fraction<Int>.infinity / divisor).isNaN == true)
     }
 
@@ -272,7 +272,7 @@ extension FractionDivisibleTests {
             Fraction<Int>.negativeInfinity
         ]
     )
-    internal func dividingNegativeInfinityByInfinityReturnsNaN(divisor: Fraction<Int>) {
+    internal func dividingNegativeInfinityByInfinityReturnsNaN(divisor: Fraction<Int>.Divisor) {
         #expect((Fraction<Int>.negativeInfinity / divisor).isNaN == true)
     }
 
@@ -288,7 +288,7 @@ extension FractionDivisibleTests {
             Fraction<Int>.negativeInfinity
         ]
     )
-    internal func dividingNaNReturnsNaN(divisor: Fraction<Int>) {
+    internal func dividingNaNReturnsNaN(divisor: Fraction<Int>.Divisor) {
         #expect((Fraction<Int>.nan / divisor).isNaN == true)
     }
 
@@ -318,7 +318,7 @@ extension FractionDivisibleTests {
             Fraction<Int>.negativeInfinity
         ]
     )
-    internal func remainderOfPositiveInfinityReturnsNaN(divisor: Fraction<Int>) {
+    internal func remainderOfPositiveInfinityReturnsNaN(divisor: Fraction<Int>.RemainderDivisor) {
         #expect((Fraction<Int>.infinity % divisor).isNaN == true)
     }
 
@@ -333,7 +333,7 @@ extension FractionDivisibleTests {
             Fraction<Int>.negativeInfinity
         ]
     )
-    internal func remainderOfNegativeInfinityReturnsNaN(divisor: Fraction<Int>) {
+    internal func remainderOfNegativeInfinityReturnsNaN(divisor: Fraction<Int>.RemainderDivisor) {
         #expect((Fraction<Int>.negativeInfinity % divisor).isNaN == true)
     }
 
@@ -371,7 +371,7 @@ extension FractionDivisibleTests {
             Fraction<Int>.negativeInfinity
         ]
     )
-    internal func remainderOfNaNReturnsNaN(divisor: Fraction<Int>) {
+    internal func remainderOfNaNReturnsNaN(divisor: Fraction<Int>.RemainderDivisor) {
         #expect((Fraction<Int>.nan % divisor).isNaN == true)
     }
 
@@ -427,7 +427,7 @@ extension FractionDivisibleTests {
         ]
     )
     internal func dividingNegativeInfinityFollowsRationalRules(
-        divisor: Fraction<Int>,
+        divisor: Fraction<Int>.Divisor,
         quotient: Fraction<Int>
     ) {
         #expect(Fraction<Int>.negativeInfinity / divisor == quotient)
@@ -522,7 +522,7 @@ extension FractionDivisibleTests {
         ]
     )
     internal func dividingNegativeZeroFollowsRationalRules(
-        divisor: Fraction<Int>,
+        divisor: Fraction<Int>.Divisor,
         quotient: Fraction<Int>
     ) {
         #expect(Fraction<Int>.negativeZero / divisor == quotient)
@@ -579,7 +579,7 @@ extension FractionDivisibleTests {
         ]
     )
     internal func dividingPositiveInfinityFollowsRationalRules(
-        divisor: Fraction<Int>,
+        divisor: Fraction<Int>.Divisor,
         quotient: Fraction<Int>
     ) {
         #expect(Fraction<Int>.infinity / divisor == quotient)
@@ -641,7 +641,7 @@ extension FractionDivisibleTests {
             Fraction<Int>(3, 1)
         ]
     )
-    internal func dividingPositiveZeroByNonzeroValueReturnsPositiveOrNegativeZero(divisor: Fraction<Int>) {
+    internal func dividingPositiveZeroByNonzeroValueReturnsPositiveOrNegativeZero(divisor: Fraction<Int>.Divisor) {
         #expect((Fraction<Int>.zero / divisor).isZero == true)
     }
 
@@ -682,7 +682,7 @@ extension FractionDivisibleTests {
         ]
     )
     internal func dividingPositiveZeroFollowsRationalRules(
-        divisor: Fraction<Int>,
+        divisor: Fraction<Int>.Divisor,
         quotient: Fraction<Int>
     ) {
         #expect(Fraction<Int>.zero / divisor == quotient)

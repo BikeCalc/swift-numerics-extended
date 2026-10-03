@@ -12,7 +12,7 @@ import Testing
 
 @Suite("Int Subtractable Tests")
 internal struct IntSubtractableTests {
-    private static let subtractionArguments: [(Int, Int, Int)] = [
+    private static let subtractionArguments: [(Int, Int.Subtrahend, Int)] = [
         (3, 2, 1),
         (5, 3, 2),
         (-3, 2, -5),
@@ -25,7 +25,7 @@ internal struct IntSubtractableTests {
     )
     internal func subtractionSucceeds(
         minuend: Int,
-        subtrahend: Int,
+        subtrahend: Int.Subtrahend,
         difference: Int
     ) {
         #expect(minuend - subtrahend == difference)
@@ -37,7 +37,7 @@ internal struct IntSubtractableTests {
     )
     internal func subtractionEqualSucceeds(
         minuend: Int,
-        subtrahend: Int,
+        subtrahend: Int.Subtrahend,
         difference: Int
     ) {
         var runningDifference: Int = minuend
@@ -51,7 +51,7 @@ internal struct IntSubtractableTests {
     )
     internal func subtractingSucceeds(
         minuend: Int,
-        subtrahend: Int,
+        subtrahend: Int.Subtrahend,
         difference: Int
     ) throws {
         #expect(try minuend.subtracting(subtrahend) == difference)
@@ -63,7 +63,7 @@ internal struct IntSubtractableTests {
     )
     internal func subtractSucceeds(
         minuend: Int,
-        subtrahend: Int,
+        subtrahend: Int.Subtrahend,
         difference: Int
     ) throws {
         var runningDifference: Int = minuend
@@ -79,7 +79,7 @@ extension IntSubtractableTests {
     )
     internal func subtractionIsNotCommutative(
         minuend: Int,
-        subtrahend: Int,
+        subtrahend: Int.Subtrahend,
         difference _: Int
     ) {
         #expect(minuend - subtrahend != subtrahend - minuend)
