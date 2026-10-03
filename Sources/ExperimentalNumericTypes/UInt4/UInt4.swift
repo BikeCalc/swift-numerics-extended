@@ -695,7 +695,7 @@ extension UInt4: ReportableAsOverflow {
         )
     }
 
-    public func subtractingReportingOverflow(_ rhs: Self) -> Self.OverflowReport {
+    public func subtractingReportingOverflow(_ rhs: Self.Subtrahend) -> Self.OverflowReport {
         let difference: Self.Value = self.value &- rhs.value
         let partialValue: Self = .init(truncatingIfNeeded: difference)
 
@@ -833,9 +833,11 @@ extension UInt4: Strideable {}
 // MARK: - Subtractable
 
 extension UInt4: Subtractable {
+    public typealias Subtrahend = Self
+
     public static func - (
         _ lhs: Self,
-        _ rhs: Self
+        _ rhs: Self.Subtrahend
     ) -> Self {
         let newValue: Self.Value = lhs.value - rhs.value
         return .init(value: newValue)

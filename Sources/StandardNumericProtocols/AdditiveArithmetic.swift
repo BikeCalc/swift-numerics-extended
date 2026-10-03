@@ -23,7 +23,7 @@ extension AdditiveArithmetic
 where Self: Subtractable {
     public static func -= (
         _ lhs: inout Self,
-        _ rhs: Self
+        _ rhs: Self.Subtrahend
     ) {
         let difference: Self = lhs - rhs
         lhs = difference

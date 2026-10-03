@@ -1187,6 +1187,8 @@ extension Fraction: Simplifiable {
 // MARK: - Subtractable
 
 extension Fraction: Subtractable {
+    public typealias Subtrahend = Self
+
     /// Returns the difference between the specified values.
     ///
     /// Fractions with the same stored denominator retain that denominator. Other finite fractions use
@@ -1214,7 +1216,7 @@ extension Fraction: Subtractable {
     ///            infinity.
     public static func - (
         _ lhs: Self,
-        _ rhs: Self
+        _ rhs: Self.Subtrahend
     ) -> Self {
         guard lhs.isNaN == false && rhs.isNaN == false else {
             return .nan

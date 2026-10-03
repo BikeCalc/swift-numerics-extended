@@ -44,4 +44,6 @@ extension UInt: RepresentableByZero {}
 
 // MARK: - Subtractable
 
-extension UInt: Subtractable {}
+extension UInt: Subtractable {
+    public typealias Subtrahend = Self
+}

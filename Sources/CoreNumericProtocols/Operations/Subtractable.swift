@@ -8,6 +8,9 @@
 
 /// A type that supports subtraction.
 public protocol Subtractable: Equatable {
+    /// The type used to represent subtrahends.
+    associatedtype Subtrahend
+
     /// Returns the difference of subtracting the second specified value from the first.
     ///
     /// - Parameters:
@@ -16,7 +19,7 @@ public protocol Subtractable: Equatable {
     /// - Returns: The difference.
     static func - (
         _ lhs: Self,
-        _ rhs: Self
+        _ rhs: Self.Subtrahend
     ) -> Self
 
     /// Returns the difference of this value and the specified value.
@@ -24,7 +27,7 @@ public protocol Subtractable: Equatable {
     /// - Parameter subtrahend: The subtrahend.
     /// - Returns: The difference.
     /// - Throws: An error if the conforming type cannot perform the subtraction.
-    func subtracting(_ subtrahend: Self) throws -> Self
+    func subtracting(_ subtrahend: Self.Subtrahend) throws -> Self
 }
 
 extension Subtractable {
@@ -35,7 +38,7 @@ extension Subtractable {
     ///   - rhs: The subtrahend.
     public static func -= (
         _ lhs: inout Self,
-        _ rhs: Self
+        _ rhs: Self.Subtrahend
     ) {
         let difference: Self = lhs - rhs
         lhs = difference
@@ -46,7 +49,7 @@ extension Subtractable {
     /// - Parameter subtrahend: The subtrahend.
     /// - Returns: The difference.
     /// - Throws: An error if the conforming type cannot perform the subtraction.
-    public func subtracting(_ subtrahend: Self) throws -> Self {
+    public func subtracting(_ subtrahend: Self.Subtrahend) throws -> Self {
         return self - subtrahend
     }
 
@@ -55,7 +58,7 @@ extension Subtractable {
     /// - Parameter subtrahend: The subtrahend.
     /// - Throws: Any error thrown by `subtracting(_:)`.
     /// - Throws: An error if the conforming type cannot perform the subtraction.
-    public mutating func subtract(_ subtrahend: Self) throws {
+    public mutating func subtract(_ subtrahend: Self.Subtrahend) throws {
         self = try self.subtracting(subtrahend)
     }
 }

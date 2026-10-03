@@ -572,7 +572,7 @@ extension Roman: ReportableAsOverflow {
         )
     }
 
-    public func subtractingReportingOverflow(_ rhs: Self) -> Self.OverflowReport {
+    public func subtractingReportingOverflow(_ rhs: Self.Subtrahend) -> Self.OverflowReport {
         if self.value >= rhs.value {
             let difference: Self.Value = self.value - rhs.value
             let partialValue: Self = .init(value: difference)
@@ -733,9 +733,11 @@ extension Roman: Strideable {
 // MARK: - Subtractable
 
 extension Roman: Subtractable {
+    public typealias Subtrahend = Self
+
     public static func - (
         _ lhs: Self,
-        _ rhs: Self
+        _ rhs: Self.Subtrahend
     ) -> Self {
         let newValue: Self.Value = lhs.value - rhs.value
         return .init(value: newValue)

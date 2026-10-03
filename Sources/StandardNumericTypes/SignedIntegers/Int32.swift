@@ -48,4 +48,6 @@ extension Int32: RepresentableByZero {}
 
 // MARK: - Subtractable
 
-extension Int32: Subtractable {}
+extension Int32: Subtractable {
+    public typealias Subtrahend = Self
+}

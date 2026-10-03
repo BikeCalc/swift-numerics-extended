@@ -73,7 +73,9 @@ extension Float32: Roundable {
 
 // MARK: - Subtractable
 
-extension Float32: Subtractable {}
+extension Float32: Subtractable {
+    public typealias Subtrahend = Self
+}
 
 // MARK: - Subtractable
 
