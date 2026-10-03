@@ -14,7 +14,9 @@ import Testing
 internal struct RomanRaisableTests {
     private static let exponentiationArguments: [(Roman, Roman.Exponent, Roman)] = [
         (2, 2, 4),
-        (2, 3, 8)
+        (2, 3, 8),
+        (0, Roman.max, 0),
+        (1, Roman.max, 1)
     ]
 
     private static let squaringArguments: [(Roman, Roman)] = [

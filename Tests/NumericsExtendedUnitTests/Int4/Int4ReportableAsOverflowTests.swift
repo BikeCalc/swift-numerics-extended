@@ -168,7 +168,10 @@ internal struct Int4ReportableAsOverflowTests {
             (Int4.max, 2, 1, true),
             (Int4.max, 3, 1, true),
             (Int4.min, 1, Int4.min, false),
-            (Int4.min, 2, 0, true)
+            (Int4.min, 2, 0, true),
+            (0, Int4.max, 0, false),
+            (1, Int4.max, 1, false),
+            (-1, Int4.max, -1, false)
         ] as Array<(Int4, Int4.Exponent, Int4, Bool)>
     )
     internal func raisedReportingOverflow(

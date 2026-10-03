@@ -140,7 +140,9 @@ internal struct UInt4ReportableAsOverflowTests {
             (UInt4.max, 1, UInt4.max, false),
             (UInt4.max, 2, 1, true),
             (UInt4.max, 3, 1, true),
-            (4, 2, 0, true)
+            (4, 2, 0, true),
+            (0, UInt4.max, 0, false),
+            (1, UInt4.max, 1, false)
         ] as Array<(UInt4, UInt4.Exponent, UInt4, Bool)>
     )
     internal func raisedReportingOverflow(

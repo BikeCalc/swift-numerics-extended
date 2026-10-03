@@ -140,7 +140,9 @@ internal struct RomanReportableAsOverflowTests {
             (Roman.max, 1, Roman.max, false),
             (Roman.max, 2, 1, true),
             (Roman.max, 3, 1, true),
-            (16, 3, 96, true)
+            (16, 3, 96, true),
+            (0, Roman.max, 0, false),
+            (1, Roman.max, 1, false)
         ] as Array<(Roman, Roman.Exponent, Roman, Bool)>
     )
     internal func raisedReportingOverflow(

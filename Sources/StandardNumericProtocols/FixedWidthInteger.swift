@@ -62,9 +62,9 @@ where Self: ReportableAsOverflow {
             )
         default:
             var result: Self = self
-            var exponent: Self.Exponent = 2
+            var exponent: Self.Exponent = 1
 
-            while exponent <= rhs {
+            while exponent < rhs {
                 let report: Self.OverflowReport = result.multipliedReportingOverflow(by: self)
 
                 guard report.overflow == false else {
