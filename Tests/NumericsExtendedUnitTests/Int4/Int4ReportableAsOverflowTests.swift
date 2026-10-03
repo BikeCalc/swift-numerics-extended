@@ -160,6 +160,8 @@ internal struct Int4ReportableAsOverflowTests {
             (3, 2, -7, true),
             (0, 0, 1, false),
             (0, 1, 0, false),
+            (0, -2, 0, true),
+            (0, -3, 0, true),
             (1, 0, 1, false),
             (1, 1, 1, false),
             (Int4.max, 1, Int4.max, false),

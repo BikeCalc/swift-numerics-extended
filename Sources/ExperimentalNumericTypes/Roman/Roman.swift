@@ -638,9 +638,10 @@ extension Roman: ReportableAsOverflow {
 
     public func raisedReportingOverflow(to rhs: Self.Exponent) -> Self.OverflowReport {
         switch rhs {
-        case ..<2:
-            let result: Self = self ** rhs
-            return (partialValue: result, overflow: false)
+        case 0:
+            return (partialValue: 1, overflow: false)
+        case 1:
+            return (partialValue: self, overflow: false)
         default:
             var result: Self = self
             var exponent: Self.Exponent = 2
@@ -656,10 +657,7 @@ extension Roman: ReportableAsOverflow {
                 exponent += 1
             }
 
-            return (
-                partialValue: result,
-                overflow: false
-            )
+            return (partialValue: result, overflow: false)
         }
     }
 }

@@ -771,10 +771,7 @@ extension UInt4: ReportableAsOverflow {
                 exponent += 1
             }
 
-            return (
-                partialValue: result,
-                overflow: false
-            )
+            return (partialValue: result, overflow: false)
         }
     }
 }
