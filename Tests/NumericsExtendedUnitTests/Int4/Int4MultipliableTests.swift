@@ -75,8 +75,8 @@ internal struct Int4MultipliableTests {
         multiplicand: Int4,
         multiplier: Int4,
         product: Int4
-    ) {
-        #expect(multiplicand.multiplying(by: multiplier) == product)
+    ) throws {
+        #expect(try multiplicand.multiplying(by: multiplier) == product)
     }
 
     @Test(
@@ -87,9 +87,9 @@ internal struct Int4MultipliableTests {
         multiplicand: Int4,
         multiplier: Int4,
         product: Int4
-    ) {
+    ) throws {
         var runningProduct: Int4 = multiplicand
-        runningProduct.multiply(by: multiplier)
+        try runningProduct.multiply(by: multiplier)
         #expect(runningProduct == product)
     }
 

@@ -24,6 +24,13 @@ public protocol Multipliable: Equatable {
         _ lhs: Self,
         _ rhs: Self
     ) -> Self
+
+    /// Returns the product of multiplying this value by the specified value.
+    ///
+    /// - Parameter multiplier: The multiplier.
+    /// - Returns: The product.
+    /// - Throws: An error if the conforming type cannot perform the multiplication.
+    func multiplying(by multiplier: Self) throws -> Self
 }
 
 extension Multipliable {
@@ -44,14 +51,16 @@ extension Multipliable {
     ///
     /// - Parameter multiplier: The multiplier.
     /// - Returns: The product.
-    public func multiplying(by multiplier: Self) -> Self {
+    /// - Throws: An error if the conforming type cannot perform the multiplication.
+    public func multiplying(by multiplier: Self) throws -> Self {
         return self * multiplier
     }
 
     /// Multiplies this value by the specified value.
     ///
     /// - Parameter multiplier: The multiplier.
-    public mutating func multiply(by multiplier: Self) {
-        self *= multiplier
+    /// - Throws: An error if the conforming type cannot perform the multiplication.
+    public mutating func multiply(by multiplier: Self) throws {
+        self = try self.multiplying(by: multiplier)
     }
 }
