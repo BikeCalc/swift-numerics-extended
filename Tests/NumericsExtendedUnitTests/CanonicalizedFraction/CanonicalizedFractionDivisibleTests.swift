@@ -34,10 +34,10 @@ internal struct CanonicalizedFractionDivisibleTests {
     ]
 
     @Test(
-        "Division equal canonicalizes result",
+        "Division succeeds",
         arguments: Self.divisionArguments
     )
-    internal func divisionEqualCanonicalizesResult(
+    internal func divisionSucceeds(
         dividend: Fraction<Int>,
         divisor: Fraction<Int>,
         quotient: Fraction<Int>
@@ -51,18 +51,18 @@ internal struct CanonicalizedFractionDivisibleTests {
     }
 
     @Test(
-        "Divide canonicalizes result",
+        "Divide succeeds",
         arguments: Self.divisionArguments
     )
-    internal func divideCanonicalizesResult(
+    internal func divideSucceeds(
         dividend: Fraction<Int>,
         divisor: Fraction<Int>,
         quotient: Fraction<Int>
-    ) {
+    ) throws {
         @Canonicalized
         var runningQuotient: Fraction<Int> = dividend
 
-        runningQuotient.divide(by: divisor)
+        try runningQuotient.divide(by: divisor)
 
         #expect(runningQuotient == quotient)
     }

@@ -144,8 +144,8 @@ internal struct FractionDivisibleTests {
         dividend: Fraction<Int>,
         divisor: Fraction<Int>,
         quotient: Fraction<Int>
-    ) {
-        #expect(dividend.dividing(by: divisor) == quotient)
+    ) throws {
+        #expect(try dividend.dividing(by: divisor) == quotient)
     }
 
     @Test(
@@ -156,9 +156,9 @@ internal struct FractionDivisibleTests {
         dividend: Fraction<Int>,
         divisor: Fraction<Int>,
         quotient: Fraction<Int>
-    ) {
+    ) throws {
         var runningQuotient: Fraction<Int> = dividend
-        runningQuotient.divide(by: divisor)
+        try runningQuotient.divide(by: divisor)
         #expect(runningQuotient == quotient)
     }
 
