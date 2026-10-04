@@ -532,9 +532,9 @@ extension Roman: Raisable {
             return lhs
         default:
             var result: Self = lhs
-            var exponent: Self = 2
+            var exponent: Self = 1
 
-            while exponent <= rhs {
+            while exponent < rhs {
                 result *= lhs
                 exponent += 1
             }
@@ -659,9 +659,9 @@ extension Roman: ReportableAsOverflow {
             )
         default:
             var result: Self = self
-            var exponent: Self.Exponent = 2
+            var exponent: Self.Exponent = 1
 
-            while exponent <= rhs {
+            while exponent < rhs {
                 let report: Self.OverflowReport = result.multipliedReportingOverflow(by: self)
 
                 guard report.overflow == false else {

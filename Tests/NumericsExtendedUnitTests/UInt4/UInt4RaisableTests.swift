@@ -14,7 +14,9 @@ import Testing
 internal struct UInt4RaisableTests {
     private static let exponentiationArguments: [(UInt4, UInt4.Exponent, UInt4)] = [
         (2, 2, 4),
-        (2, 3, 8)
+        (2, 3, 8),
+        (0, UInt4.max, 0),
+        (1, UInt4.max, 1)
     ]
 
     private static let squaringArguments: [(UInt4, UInt4)] = [

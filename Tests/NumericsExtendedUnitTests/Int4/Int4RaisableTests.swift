@@ -23,7 +23,10 @@ internal struct Int4RaisableTests {
         (1, -2, 1),
         (1, -3, 1),
         (-1, -2, 1),
-        (-1, -3, -1)
+        (-1, -3, -1),
+        (0, Int4.max, 0),
+        (1, Int4.max, 1),
+        (-1, Int4.max, -1)
     ]
 
     private static let squaringArguments: [(Int4, Int4)] = [

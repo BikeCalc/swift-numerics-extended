@@ -203,9 +203,9 @@ where Self: Raisable, Self.Exponent: BinaryInteger {
             return lhs
         default:
             var result = lhs
-            var exponent: Self.Exponent = 2
+            var exponent: Self.Exponent = 1
 
-            while exponent <= rhs {
+            while exponent < rhs {
                 result *= lhs
                 exponent += 1
             }
