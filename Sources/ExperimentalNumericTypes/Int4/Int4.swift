@@ -764,11 +764,17 @@ extension Int4: ReportableAsOverflow {
 
     public func dividedReportingOverflow(by rhs: Self) -> Self.OverflowReport {
         guard rhs.value != 0 else {
-            return (partialValue: self, overflow: true)
+            return (
+                partialValue: self,
+                overflow: true
+            )
         }
 
         guard self.value != Self.min.value || rhs.value != -1 else {
-            return (partialValue: self, overflow: true)
+            return (
+                partialValue: self,
+                overflow: true
+            )
         }
 
         let quotient: Self.Value = self.value / rhs.value
@@ -782,11 +788,17 @@ extension Int4: ReportableAsOverflow {
 
     public func remainderReportingOverflow(dividingBy rhs: Self) -> Self.OverflowReport {
         guard rhs.value != 0 else {
-            return (partialValue: self, overflow: true)
+            return (
+                partialValue: self,
+                overflow: true
+            )
         }
 
         guard self.value != Self.min.value || rhs.value != -1 else {
-            return (partialValue: 0, overflow: true)
+            return (
+                partialValue: 0,
+                overflow: true
+            )
         }
 
         let remainder: Self.Value = self.value % rhs.value
@@ -800,12 +812,26 @@ extension Int4: ReportableAsOverflow {
 
     public func raisedReportingOverflow(to rhs: Self.Exponent) -> Self.OverflowReport {
         switch rhs {
+        case ..<0 where self == 0:
+            return (
+                partialValue: 0,
+                overflow: true
+            )
         case ..<0:
-            return (partialValue: 0, overflow: false)
+            return (
+                partialValue: self ** rhs,
+                overflow: false
+            )
         case 0:
-            return (partialValue: 1, overflow: false)
+            return (
+                partialValue: 1,
+                overflow: false
+            )
         case 1:
-            return (partialValue: self, overflow: false)
+            return (
+                partialValue: self,
+                overflow: false
+            )
         default:
             var result: Self = self
             var exponent: Self.Exponent = 2
@@ -821,7 +847,10 @@ extension Int4: ReportableAsOverflow {
                 exponent += 1
             }
 
-            return (partialValue: result, overflow: false)
+            return (
+                partialValue: result,
+                overflow: false
+            )
         }
     }
 }

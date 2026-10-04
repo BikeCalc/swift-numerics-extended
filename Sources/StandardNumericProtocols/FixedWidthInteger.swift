@@ -37,18 +37,29 @@ extension FixedWidthInteger {
 
 extension FixedWidthInteger
 where Self: ReportableAsOverflow {
-    /// Returns the power after raising this instance to the specified value, along with a boolean value indicating
-    /// whether overflow occurred in the operation.
-    ///
-    /// - Parameter rhs: The value to raise this instance to.
-    /// - Returns: A tuple containing the result of the exponentiation along with a boolean value indicating whether
-    ///   overflow occurred.
     public func raisedReportingOverflow(to rhs: Self.Exponent) -> Self.OverflowReport
     where Self.Exponent: BinaryInteger {
         switch rhs {
-        case ..<2:
-            let result: Self = self ** rhs
-            return (result, false)
+        case ..<0 where self == 0:
+            return (
+                partialValue: 0,
+                overflow: true
+            )
+        case ..<0:
+            return (
+                partialValue: self ** rhs,
+                overflow: false
+            )
+        case 0:
+            return (
+                partialValue: 1,
+                overflow: false
+            )
+        case 1:
+            return (
+                partialValue: self,
+                overflow: false
+            )
         default:
             var result: Self = self
             var exponent: Self.Exponent = 2
@@ -64,7 +75,10 @@ where Self: ReportableAsOverflow {
                 exponent += 1
             }
 
-            return (result, false)
+            return (
+                partialValue: result,
+                overflow: false
+            )
         }
     }
 }

@@ -570,7 +570,10 @@ extension Roman: ReportableAsOverflow {
             let difference: Self.Value = self.value - rhs.value
             let partialValue: Self = .init(value: difference)
 
-            return (partialValue: partialValue, overflow: false)
+            return (
+                partialValue: partialValue,
+                overflow: false
+            )
         } else {
             let modulus: Self.Value = Self.max.value + 1
             let distance: Self.Value = rhs.value - self.value
@@ -610,7 +613,10 @@ extension Roman: ReportableAsOverflow {
 
     public func dividedReportingOverflow(by rhs: Self) -> Self.OverflowReport {
         guard rhs.value != 0 else {
-            return (partialValue: self, overflow: true)
+            return (
+                partialValue: self,
+                overflow: true
+            )
         }
 
         let quotient: Self.Value = self.value / rhs.value
@@ -624,7 +630,10 @@ extension Roman: ReportableAsOverflow {
 
     public func remainderReportingOverflow(dividingBy rhs: Self) -> Self.OverflowReport {
         guard rhs.value != 0 else {
-            return (partialValue: self, overflow: true)
+            return (
+                partialValue: self,
+                overflow: true
+            )
         }
 
         let remainder: Self.Value = self.value % rhs.value
@@ -638,9 +647,16 @@ extension Roman: ReportableAsOverflow {
 
     public func raisedReportingOverflow(to rhs: Self.Exponent) -> Self.OverflowReport {
         switch rhs {
-        case ..<2:
-            let result: Self = self ** rhs
-            return (partialValue: result, overflow: false)
+        case 0:
+            return (
+                partialValue: 1,
+                overflow: false
+            )
+        case 1:
+            return (
+                partialValue: self,
+                overflow: false
+            )
         default:
             var result: Self = self
             var exponent: Self.Exponent = 2

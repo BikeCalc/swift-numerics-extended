@@ -48,12 +48,17 @@ public protocol ReportableAsOverflow: Operatable, Raisable {
     ///   occurred.
     func remainderReportingOverflow(dividingBy rhs: Self) -> Self.OverflowReport
 
-    /// Returns the power after raising this instance to the specified value, along with a boolean value indicating
-    /// whether overflow occurred in the operation.
+    /// Returns the partial value of raising this instance to the specified exponent, along with a boolean value
+    /// indicating whether the operation overflowed or was invalid.
     ///
-    /// - Parameter rhs: The value to raise this instance to.
-    /// - Returns: A tuple containing the result of the exponentiation along with a boolean value indicating whether
-    ///   overflow occurred.
+    /// For integer arithmetic with signed exponents, negative powers follow integer division: powers of `1` and `-1`
+    /// remain exact, while other nonzero bases produce zero. A zero base with a negative exponent returns a partial
+    /// value of zero and reports overflow. An exponent of zero returns one, including when the base is zero.
+    ///
+    /// When overflow is reported, the partial value is not guaranteed to represent the final mathematical power.
+    ///
+    /// - Parameter rhs: The exponent.
+    /// - Returns: The partial value and a boolean indicating whether the operation overflowed or was invalid.
     func raisedReportingOverflow(to rhs: Self.Exponent) -> Self.OverflowReport
 }
 
