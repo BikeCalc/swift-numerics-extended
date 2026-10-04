@@ -22,8 +22,7 @@ extension Comparable {
     /// - Returns: A boolean indicating whether this value is less than or equal to the specified value.
     /// - Throws: An error if the conforming type cannot perform the comparison.
     public func isLessThanOrEqual(to rhs: Self) throws -> Bool {
-        return try self.isLess(than: rhs)
-            || self.isEqual(to: rhs)
+        return self <= rhs
     }
 
     /// Returns a boolean value indicating whether this value is greater than the specified value.
@@ -32,7 +31,7 @@ extension Comparable {
     /// - Returns: A boolean indicating whether this value is greater than the specified value.
     /// - Throws: An error if the conforming type cannot perform the comparison.
     public func isGreater(than rhs: Self) throws -> Bool {
-        return try rhs.isLess(than: self)
+        return self > rhs
     }
 
     /// Returns a boolean value indicating whether this value is greater than or equal to the specified value.
@@ -41,8 +40,7 @@ extension Comparable {
     /// - Returns: A boolean indicating whether this value is greater than or equal to the specified value.
     /// - Throws: An error if the conforming type cannot perform the comparison.
     public func isGreaterThanOrEqual(to rhs: Self) throws -> Bool {
-        return try rhs.isLess(than: self)
-            || self.isEqual(to: rhs)
+        return self >= rhs
     }
 
     /// Returns a boolean value indicating whether this value is within a specified closed range.
