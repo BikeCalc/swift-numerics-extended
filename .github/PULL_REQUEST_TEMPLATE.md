@@ -12,10 +12,6 @@ Updated: for modified existing code, behavior, documentation, workflows, or test
 Removed: for deleted files, APIs, obsolete behavior, or unused code.
 -->
 
-- Added:
-- Updated:
-- Removed:
-
 ## Additional Information
 
 <!-- Add anything useful for developers, testers, or future readers. -->

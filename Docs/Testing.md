@@ -34,7 +34,7 @@ without including test logs. Test or report-generation failures fail the script.
 
 To run unit tests without generating the report, use `swift test` or the package's tests in Xcode.
 
-### Code Coverage Report Script
+## Code Coverage Report Script
 
 [GenerateCodeCoverageReport.swift](/Scripts/GenerateCodeCoverageReport.swift) regenerates the report from existing
 coverage data without rerunning tests:

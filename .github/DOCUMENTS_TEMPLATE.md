@@ -15,7 +15,8 @@ Move, repeat, or omit tool sections as needed; do not invent a plugin, script, o
 For example: workflow → plugin → script, or workflow → script → plugin → executable → report script.
 The two Script sections are intentional: one can coordinate CI, while another can be invoked by a plugin or executable.
 Rename them for their roles, such as Snapshot Test Runner, Recording Script, or Comparison Script.
-Nest supporting scripts beneath their caller. Describe a shared helper once and link to it from its other callers.
+Use level-two headings for supporting scripts, at the same level as their callers.
+Describe a shared helper once and link to it from its other callers.
 Separate alternative paths, such as CI comparison and local recording; do not imply that every tool calls the next one.
 Keep every line within 120 characters, including authoring comments and command examples.
 Document local commands with the tool they invoke, rather than repeating them in a separate local-usage section.
@@ -65,9 +66,9 @@ Describe its inputs, output locations, file changes, and failure behavior withou
 Include Xcode instructions here or in a named subsection when they provide an alternative entry point.
 -->
 
-### Supporting Script
+## Supporting Script
 
-<!-- Optional: repeat for helpers used by the parent script, or use a top-level section if called by another tool. -->
+<!-- Optional: repeat for helpers after their caller in the invocation order. Name each section for its role. -->
 
 <!--
 Name and link to the helper and explain its specific role, such as host generation or report generation.
@@ -112,9 +113,9 @@ Describe its inputs, output locations, file changes, and failure behavior withou
 Include Xcode instructions here or in a named subsection when they provide an alternative entry point.
 -->
 
-### Supporting Script
+## Supporting Script
 
-<!-- Optional: repeat for helpers used by the parent script, or use a top-level section if called by another tool. -->
+<!-- Optional: repeat for helpers after their caller in the invocation order. Name each section for its role. -->
 
 <!--
 Name and link to the helper and explain its specific role, such as host generation or report generation.
