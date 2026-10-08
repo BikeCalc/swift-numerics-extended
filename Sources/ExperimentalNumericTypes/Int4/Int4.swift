@@ -656,12 +656,13 @@ extension Int4: LosslessStringConvertible {
 // MARK: - Multipliable
 
 extension Int4: Multipliable {
+    public typealias Product = Self
     public typealias Multiplier = Self
 
     public static func * (
         _ lhs: Self,
         _ rhs: Self.Multiplier
-    ) -> Self {
+    ) -> Self.Product {
         let newValue: Self.Value = lhs.value * rhs.value
         return .init(value: newValue)
     }

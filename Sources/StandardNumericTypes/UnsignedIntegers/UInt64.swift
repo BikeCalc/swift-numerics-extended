@@ -28,6 +28,7 @@ extension UInt64: Divisible {
 // MARK: - Multipliable
 
 extension UInt64: Multipliable {
+    public typealias Product = Self
     public typealias Multiplier = Self
 }
 

@@ -459,6 +459,7 @@ extension Roman: LosslessStringConvertible {
 // MARK: - Multipliable
 
 extension Roman: Multipliable {
+    public typealias Product = Self
     public typealias Multiplier = Self
 
     public func isMultiple(of other: Roman) -> Bool {
@@ -476,7 +477,7 @@ extension Roman: Multipliable {
     public static func * (
         _ lhs: Self,
         _ rhs: Self.Multiplier
-    ) -> Self {
+    ) -> Self.Product {
         let newValue: Self.Value = lhs.value * rhs.value
         return .init(value: newValue)
     }

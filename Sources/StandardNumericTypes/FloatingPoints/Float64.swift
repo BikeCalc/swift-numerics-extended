@@ -43,6 +43,7 @@ extension Float64: Increasable {}
 // MARK: - Multipliable
 
 extension Float64: Multipliable {
+    public typealias Product = Self
     public typealias Multiplier = Self
 }
 

@@ -26,16 +26,17 @@ where Self: Divisible, Self.Divisor: ExpressibleByIntegerLiteral {
 }
 
 extension Numeric
-where Self: Multipliable {
+where Self: Multipliable, Self.Multiplier: ExpressibleByIntegerLiteral {
     /// Returns this value doubled.
     ///
     ///  - Returns: The value doubled.
-    public func doubled() -> Self {
+    public func doubled() -> Self.Product {
         return self * 2
     }
 
     /// Doubles this value.
-    public mutating func double() {
+    public mutating func double()
+    where Self.Product == Self {
         self = self.doubled()
     }
 }

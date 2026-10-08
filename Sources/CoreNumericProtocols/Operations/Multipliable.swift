@@ -11,6 +11,9 @@ public protocol Multipliable: Equatable {
     /// The type used to represent multipliers.
     associatedtype Multiplier
 
+    /// The type used to represent the result of multiplication.
+    associatedtype Product
+
     /// Returns a boolean value indicating whether this value is a multiple of the specified value.
     ///
     /// - Parameter other: The value to test.
@@ -26,17 +29,29 @@ public protocol Multipliable: Equatable {
     static func * (
         _ lhs: Self,
         _ rhs: Self.Multiplier
-    ) -> Self
+    ) -> Self.Product
 
     /// Returns the product of multiplying this value by the specified value.
     ///
     /// - Parameter multiplier: The multiplier.
     /// - Returns: The product.
     /// - Throws: An error if the conforming type cannot perform the multiplication.
-    func multiplying(by multiplier: Self.Multiplier) throws -> Self
+    func multiplying(by multiplier: Self.Multiplier) throws -> Self.Product
 }
 
 extension Multipliable {
+    /// Returns the product of multiplying this value by the specified value.
+    ///
+    /// - Parameter multiplier: The multiplier.
+    /// - Returns: The product.
+    /// - Throws: An error if the conforming type cannot perform the multiplication.
+    public func multiplying(by multiplier: Self.Multiplier) throws -> Self.Product {
+        return self * multiplier
+    }
+}
+
+extension Multipliable
+where Self.Product == Self {
     /// Multiplies the two specified values and stores the product in the left-hand-side variable.
     ///
     /// - Parameters:
@@ -46,17 +61,8 @@ extension Multipliable {
         _ lhs: inout Self,
         _ rhs: Self.Multiplier
     ) {
-        let product: Self = lhs * rhs
+        let product: Self.Product = lhs * rhs
         lhs = product
-    }
-
-    /// Returns the product of multiplying this value by the specified value.
-    ///
-    /// - Parameter multiplier: The multiplier.
-    /// - Returns: The product.
-    /// - Throws: An error if the conforming type cannot perform the multiplication.
-    public func multiplying(by multiplier: Self.Multiplier) throws -> Self {
-        return self * multiplier
     }
 
     /// Multiplies this value by the specified value.

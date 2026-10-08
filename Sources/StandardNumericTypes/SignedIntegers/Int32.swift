@@ -28,6 +28,7 @@ extension Int32: Divisible {
 // MARK: - Multipliable
 
 extension Int32: Multipliable {
+    public typealias Product = Self
     public typealias Multiplier = Self
 }
 
