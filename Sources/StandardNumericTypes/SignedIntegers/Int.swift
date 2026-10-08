@@ -54,5 +54,6 @@ extension Int: RepresentableByZero {}
 // MARK: - Subtractable
 
 extension Int: Subtractable {
+    public typealias Difference = Self
     public typealias Subtrahend = Self
 }

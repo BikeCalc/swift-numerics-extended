@@ -20,12 +20,12 @@ where Self: Addable, Self.Sum == Self {
 }
 
 extension AdditiveArithmetic
-where Self: Subtractable {
+where Self: Subtractable, Self.Difference == Self {
     public static func -= (
         _ lhs: inout Self,
         _ rhs: Self.Subtrahend
     ) {
-        let difference: Self = lhs - rhs
+        let difference: Self.Difference = lhs - rhs
         lhs = difference
     }
 }

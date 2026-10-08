@@ -57,5 +57,6 @@ extension UInt128: RepresentableByZero {}
 
 @available(iOS 18.0, macCatalyst 18.0, macOS 15.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
 extension UInt128: Subtractable {
+    public typealias Difference = Self
     public typealias Subtrahend = Self
 }

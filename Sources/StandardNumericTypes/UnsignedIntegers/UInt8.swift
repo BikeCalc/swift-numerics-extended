@@ -50,5 +50,6 @@ extension UInt8: RepresentableByZero {}
 // MARK: - Subtractable
 
 extension UInt8: Subtractable {
+    public typealias Difference = Self
     public typealias Subtrahend = Self
 }

@@ -910,12 +910,13 @@ extension Int4: Strideable {}
 // MARK: - Subtractable
 
 extension Int4: Subtractable {
+    public typealias Difference = Self
     public typealias Subtrahend = Self
 
     public static func - (
         _ lhs: Self,
         _ rhs: Self.Subtrahend
-    ) -> Self {
+    ) -> Self.Difference {
         let newValue: Self.Value = lhs.value - rhs.value
         return .init(value: newValue)
     }

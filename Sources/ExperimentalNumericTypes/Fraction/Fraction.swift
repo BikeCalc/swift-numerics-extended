@@ -1192,6 +1192,7 @@ extension Fraction: Simplifiable {
 // MARK: - Subtractable
 
 extension Fraction: Subtractable {
+    public typealias Difference = Self
     public typealias Subtrahend = Self
 
     /// Returns the difference between the specified values.
@@ -1222,7 +1223,7 @@ extension Fraction: Subtractable {
     public static func - (
         _ lhs: Self,
         _ rhs: Self.Subtrahend
-    ) -> Self {
+    ) -> Self.Difference {
         guard lhs.isNaN == false && rhs.isNaN == false else {
             return .nan
         }

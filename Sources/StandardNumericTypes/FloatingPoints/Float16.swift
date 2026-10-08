@@ -114,6 +114,7 @@ extension Float16: Roundable {
 #if !((os(macOS) || targetEnvironment(macCatalyst)) && arch(x86_64))
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: Subtractable {
+    public typealias Difference = Self
     public typealias Subtrahend = Self
 }
 #endif

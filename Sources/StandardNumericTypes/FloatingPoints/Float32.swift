@@ -79,6 +79,7 @@ extension Float32: Roundable {
 // MARK: - Subtractable
 
 extension Float32: Subtractable {
+    public typealias Difference = Self
     public typealias Subtrahend = Self
 }
 
