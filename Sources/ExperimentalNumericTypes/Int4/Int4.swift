@@ -706,6 +706,7 @@ extension Int4: Numeric {
 // MARK: - Raisable
 
 extension Int4: Raisable {
+    public typealias Power = Self
     public typealias Exponent = Self
 }
 

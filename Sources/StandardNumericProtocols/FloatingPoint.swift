@@ -173,7 +173,7 @@ where Self: Increasable {
 }
 
 extension FloatingPoint
-where Self: Raisable, Self.Exponent: BinaryInteger {
+where Self: Raisable, Self.Exponent: BinaryInteger, Self.Power == Self {
     /// Returns the power of raising the first specified value to the second.
     ///
     /// A negative exponent returns the reciprocal power.
@@ -185,7 +185,7 @@ where Self: Raisable, Self.Exponent: BinaryInteger {
     public static func ** (
         _ lhs: Self,
         _ rhs: Self.Exponent
-    ) -> Self {
+    ) -> Self.Power {
         switch rhs {
         case ..<0:
             var result: Self = 1

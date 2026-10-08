@@ -54,6 +54,7 @@ extension Float64: Negateable {}
 // MARK: - Raisable
 
 extension Float64: Raisable {
+    public typealias Power = Self
     public typealias Exponent = Int
 }
 

@@ -39,6 +39,7 @@ extension Int64: Negateable {}
 // MARK: - Raisable
 
 extension Int64: Raisable {
+    public typealias Power = Self
     public typealias Exponent = Self
 }
 

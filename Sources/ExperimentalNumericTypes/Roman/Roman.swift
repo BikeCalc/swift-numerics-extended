@@ -507,6 +507,7 @@ extension Roman: Numeric {
 // MARK: - Raisable
 
 extension Roman: Raisable {
+    public typealias Power = Self
     public typealias Exponent = Self
 
     public func isPower(of other: Self) -> Bool {
@@ -535,7 +536,7 @@ extension Roman: Raisable {
     public static func ** (
         _ lhs: Self,
         _ rhs: Self.Exponent
-    ) -> Self {
+    ) -> Self.Power {
         switch rhs {
         case 0:
             return 1

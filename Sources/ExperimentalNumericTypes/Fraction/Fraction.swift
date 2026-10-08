@@ -942,6 +942,7 @@ extension Fraction: Normalizable {
 // MARK: - Raisable
 
 extension Fraction: Raisable {
+    public typealias Power = Self
     /// The integer type used to represent an exponent.
     public typealias Exponent = Int
 
@@ -1068,7 +1069,7 @@ extension Fraction: Raisable {
     public static func ** (
         _ lhs: Self,
         _ rhs: Self.Exponent
-    ) -> Self {
+    ) -> Self.Power {
         // Zero exponents return one before handling NaN.
         if rhs == 0 {
             return 1

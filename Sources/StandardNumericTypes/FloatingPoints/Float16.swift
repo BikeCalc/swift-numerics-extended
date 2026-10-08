@@ -74,6 +74,7 @@ extension Float16: Negateable {}
 #if !((os(macOS) || targetEnvironment(macCatalyst)) && arch(x86_64))
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: Raisable {
+    public typealias Power = Self
     public typealias Exponent = Int
 }
 #endif

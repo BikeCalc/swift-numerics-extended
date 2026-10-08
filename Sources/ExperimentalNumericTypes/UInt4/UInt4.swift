@@ -676,6 +676,7 @@ extension UInt4: Numeric {
 // MARK: - Raisable
 
 extension UInt4: Raisable {
+    public typealias Power = Self
     public typealias Exponent = Self
 }
 

@@ -39,6 +39,7 @@ extension UInt128: Multipliable {
 
 @available(iOS 18.0, macCatalyst 18.0, macOS 15.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
 extension UInt128: Raisable {
+    public typealias Power = Self
     public typealias Exponent = Self
 }
 

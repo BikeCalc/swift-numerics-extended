@@ -35,6 +35,7 @@ extension UInt: Multipliable {
 // MARK: - Raisable
 
 extension UInt: Raisable {
+    public typealias Power = Self
     public typealias Exponent = Self
 }
 

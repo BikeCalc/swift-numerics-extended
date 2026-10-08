@@ -46,28 +46,28 @@ where Self: Raisable {
     /// Returns the result of raising this value to its square.
     ///
     /// - Returns: The square.
-    public func squared() -> Self
+    public func squared() -> Self.Power
     where Self.Exponent: ExpressibleByIntegerLiteral {
         return self ** 2
     }
 
     /// Raises this value to its square.
     public mutating func square()
-    where Self.Exponent: ExpressibleByIntegerLiteral {
+    where Self.Exponent: ExpressibleByIntegerLiteral, Self.Power == Self {
         self **= 2
     }
 
     /// Returns the result of raising this value to its cube.
     ///
     /// - Returns: The cube.
-    public func cubed() -> Self
+    public func cubed() -> Self.Power
     where Self.Exponent: ExpressibleByIntegerLiteral {
         return self ** 3
     }
 
     /// Raises this value to its cube.
     public mutating func cube()
-    where Self.Exponent: ExpressibleByIntegerLiteral {
+    where Self.Exponent: ExpressibleByIntegerLiteral, Self.Power == Self {
         self **= 3
     }
 }
