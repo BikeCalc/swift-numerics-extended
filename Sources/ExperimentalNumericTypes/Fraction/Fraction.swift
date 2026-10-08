@@ -460,6 +460,8 @@ where Term: Decodable {
 // MARK: - Divisible
 
 extension Fraction: Divisible {
+    public typealias Remainder = Self
+    public typealias Quotient = Self
     public typealias Divisor = Self
     public typealias RemainderDivisor = Self
 
@@ -528,7 +530,7 @@ extension Fraction: Divisible {
     public static func / (
         _ lhs: Self,
         _ rhs: Self.Divisor
-    ) -> Self {
+    ) -> Self.Quotient {
         guard lhs.isNaN == false && rhs.isNaN == false else {
             return .nan
         }
@@ -571,7 +573,7 @@ extension Fraction: Divisible {
     public static func % (
         _ lhs: Self,
         _ rhs: Self.RemainderDivisor
-    ) -> Self {
+    ) -> Self.Remainder {
         guard lhs.isNaN == false,
             rhs.isNaN == false,
             lhs.isInfinite == false,

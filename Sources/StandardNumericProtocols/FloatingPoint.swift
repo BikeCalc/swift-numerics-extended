@@ -47,7 +47,7 @@ where Self: Divisible {
     /// - Returns: `true` if dividing this value by the specified value produces an exactly zero remainder, and `false`
     ///   otherwise.
     public func isDivisible(by other: Self) -> Bool
-    where Self.RemainderDivisor == Self {
+    where Self.RemainderDivisor == Self, Self.Remainder == Self {
         guard self.isFinite == true,
             other.isFinite == true,
             other.isZero == false
@@ -60,7 +60,7 @@ where Self: Divisible {
 }
 
 extension FloatingPoint
-where Self: Divisible & Multipliable, Self.RemainderDivisor == Self {
+where Self: Divisible & Multipliable, Self.RemainderDivisor == Self, Self.Remainder == Self {
     /// Returns a boolean value indicating whether this value is a multiple of the specified value.
     ///
     /// Because floating-point values are approximate, values that appear to be multiples in decimal notation may not

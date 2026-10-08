@@ -19,6 +19,8 @@ extension Int: Addable {
 // MARK: - Divisible
 
 extension Int: Divisible {
+    public typealias Remainder = Self
+    public typealias Quotient = Self
     public typealias Divisor = Self
     public typealias RemainderDivisor = Self
 }

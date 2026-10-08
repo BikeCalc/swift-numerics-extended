@@ -401,6 +401,8 @@ extension UInt4: Decodable {
 // MARK: - Divisible
 
 extension UInt4: Divisible {
+    public typealias Remainder = Self
+    public typealias Quotient = Self
     public typealias Divisor = Self
     public typealias RemainderDivisor = Self
 
@@ -424,7 +426,7 @@ extension UInt4: Divisible {
     public static func / (
         _ lhs: Self,
         _ rhs: Self.Divisor
-    ) -> Self {
+    ) -> Self.Quotient {
         let newValue: Self.Value = lhs.value / rhs.value
         return .init(value: newValue)
     }
@@ -449,7 +451,7 @@ extension UInt4: Divisible {
     public static func % (
         _ lhs: Self,
         _ rhs: Self.RemainderDivisor
-    ) -> Self {
+    ) -> Self.Remainder {
         let newValue: Self.Value = lhs.value % rhs.value
         return .init(value: newValue)
     }
