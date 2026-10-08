@@ -155,11 +155,12 @@ public struct UInt4 {
 
 extension UInt4: Addable {
     public typealias Addend = Self
+    public typealias Sum = Self
 
     public static func + (
         _ lhs: Self,
         _ rhs: Self.Addend
-    ) -> Self {
+    ) -> Self.Sum {
         let newValue: Self.Value = lhs.value + rhs.value
         return .init(value: newValue)
     }

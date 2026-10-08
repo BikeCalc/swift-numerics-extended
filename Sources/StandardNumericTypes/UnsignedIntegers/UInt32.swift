@@ -13,6 +13,7 @@ import StandardNumericProtocols
 
 extension UInt32: Addable {
     public typealias Addend = Self
+    public typealias Sum = Self
 }
 
 // MARK: - Divisible

@@ -207,6 +207,7 @@ where Term: BinaryInteger {
 
 extension Fraction: Addable {
     public typealias Addend = Self
+    public typealias Sum = Self
 
     /// Returns the sum of the specified values.
     ///
@@ -233,7 +234,7 @@ extension Fraction: Addable {
     public static func + (
         _ lhs: Self,
         _ rhs: Self.Addend
-    ) -> Self {
+    ) -> Self.Sum {
         guard lhs.isNaN == false && rhs.isNaN == false else {
             return .nan
         }

@@ -13,6 +13,7 @@ import StandardNumericProtocols
 
 extension Int64: Addable {
     public typealias Addend = Self
+    public typealias Sum = Self
 }
 
 // MARK: - Divisible

@@ -13,6 +13,7 @@ import StandardNumericProtocols
 
 extension Float32: Addable {
     public typealias Addend = Self
+    public typealias Sum = Self
 }
 
 // MARK: - Decreasable
@@ -77,6 +78,6 @@ extension Float32: Subtractable {
     public typealias Subtrahend = Self
 }
 
-// MARK: - Subtractable
+// MARK: - Truncatable
 
 extension Float32: Truncatable {}

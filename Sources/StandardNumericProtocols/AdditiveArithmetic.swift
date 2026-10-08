@@ -9,12 +9,12 @@
 import CoreNumericProtocols
 
 extension AdditiveArithmetic
-where Self: Addable {
+where Self: Addable, Self.Sum == Self {
     public static func += (
         _ lhs: inout Self,
         _ rhs: Self.Addend
     ) {
-        let sum: Self = lhs + rhs
+        let sum: Self.Sum = lhs + rhs
         lhs = sum
     }
 }
