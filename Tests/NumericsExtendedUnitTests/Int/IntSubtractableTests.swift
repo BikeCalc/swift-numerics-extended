@@ -53,8 +53,8 @@ internal struct IntSubtractableTests {
         minuend: Int,
         subtrahend: Int,
         difference: Int
-    ) {
-        #expect(minuend.subtracting(subtrahend) == difference)
+    ) throws {
+        #expect(try minuend.subtracting(subtrahend) == difference)
     }
 
     @Test(
@@ -65,9 +65,9 @@ internal struct IntSubtractableTests {
         minuend: Int,
         subtrahend: Int,
         difference: Int
-    ) {
+    ) throws {
         var runningDifference: Int = minuend
-        runningDifference.subtract(subtrahend)
+        try runningDifference.subtract(subtrahend)
         #expect(runningDifference == difference)
     }
 }

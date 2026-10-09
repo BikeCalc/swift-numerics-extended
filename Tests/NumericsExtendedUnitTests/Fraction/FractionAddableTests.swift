@@ -53,8 +53,8 @@ internal struct FractionAddableTests {
         augend: Fraction<Int>,
         addend: Fraction<Int>,
         sum: Fraction<Int>
-    ) {
-        #expect(augend.adding(addend) == sum)
+    ) throws {
+        #expect(try augend.adding(addend) == sum)
     }
 
     @Test(
@@ -65,9 +65,9 @@ internal struct FractionAddableTests {
         augend: Fraction<Int>,
         addend: Fraction<Int>,
         sum: Fraction<Int>
-    ) {
+    ) throws {
         var runningSum: Fraction<Int> = augend
-        runningSum.add(addend)
+        try runningSum.add(addend)
         #expect(runningSum == sum)
     }
 }

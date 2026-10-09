@@ -29,6 +29,13 @@ public protocol Raisable: Equatable {
         _ lhs: Self,
         _ rhs: Self.Exponent
     ) -> Self
+
+    /// Returns the power of raising this value to the specified value.
+    ///
+    /// - Parameter exponent: The exponent.
+    /// - Returns: The power.
+    /// - Throws: An error if the conforming type cannot perform the exponentiation.
+    func raising(to exponent: Self.Exponent) throws -> Self
 }
 
 extension Raisable {
@@ -49,14 +56,16 @@ extension Raisable {
     ///
     /// - Parameter exponent: The exponent.
     /// - Returns: The power.
-    public func raising(to exponent: Self.Exponent) -> Self {
+    /// - Throws: An error if the conforming type cannot perform the exponentiation.
+    public func raising(to exponent: Self.Exponent) throws -> Self {
         return self ** exponent
     }
 
     /// Raises this value to the specified exponent.
     ///
     /// - Parameter exponent: The exponent.
-    public mutating func raise(to exponent: Self.Exponent) {
-        self **= exponent
+    /// - Throws: An error if the conforming type cannot perform the exponentiation.
+    public mutating func raise(to exponent: Self.Exponent) throws {
+        self = try self.raising(to: exponent)
     }
 }

@@ -71,8 +71,8 @@ internal struct RomanMultipliableTests {
         multiplicand: Roman,
         multiplier: Roman,
         product: Roman
-    ) {
-        #expect(multiplicand.multiplying(by: multiplier) == product)
+    ) throws {
+        #expect(try multiplicand.multiplying(by: multiplier) == product)
     }
 
     @Test(
@@ -83,9 +83,9 @@ internal struct RomanMultipliableTests {
         multiplicand: Roman,
         multiplier: Roman,
         product: Roman
-    ) {
+    ) throws {
         var runningProduct: Roman = multiplicand
-        runningProduct.multiply(by: multiplier)
+        try runningProduct.multiply(by: multiplier)
         #expect(runningProduct == product)
     }
 

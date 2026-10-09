@@ -18,6 +18,13 @@ public protocol Addable: Equatable {
         _ lhs: Self,
         _ rhs: Self
     ) -> Self
+
+    /// Returns the sum of this value and the specified value.
+    ///
+    /// - Parameter addend: The addend.
+    /// - Returns: The sum.
+    /// - Throws: An error if the conforming type cannot perform the addition.
+    func adding(_ addend: Self) throws -> Self
 }
 
 extension Addable {
@@ -38,14 +45,16 @@ extension Addable {
     ///
     /// - Parameter addend: The addend.
     /// - Returns: The sum.
-    public func adding(_ addend: Self) -> Self {
+    /// - Throws: An error if the conforming type cannot perform the addition.
+    public func adding(_ addend: Self) throws -> Self {
         return self + addend
     }
 
     /// Adds the specified value to this value.
     ///
     /// - Parameter addend: The addend.
-    public mutating func add(_ addend: Self) {
-        self += addend
+    /// - Throws: An error if the conforming type cannot perform the addition.
+    public mutating func add(_ addend: Self) throws  {
+        self = try self.adding(addend)
     }
 }

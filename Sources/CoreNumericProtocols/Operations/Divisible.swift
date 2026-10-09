@@ -47,6 +47,13 @@ public protocol Divisible: Equatable {
         _ lhs: Self,
         _ rhs: Self
     ) -> Self
+
+    /// Returns the quotient of dividing this value by the specified value.
+    ///
+    /// - Parameter divisor: The divisor.
+    /// - Returns: The quotient.
+    /// - Throws: An error if the conforming type cannot perform the division.
+    func dividing(by divisor: Self) throws -> Self
 }
 
 extension Divisible {
@@ -88,14 +95,16 @@ extension Divisible {
     ///
     /// - Parameter divisor: The divisor.
     /// - Returns: The quotient.
-    public func dividing(by divisor: Self) -> Self {
+    /// - Throws: An error if the conforming type cannot perform the division.
+    public func dividing(by divisor: Self) throws -> Self {
         return self / divisor
     }
 
     /// Divides this value by the specified value.
     ///
     /// - Parameter divisor: The divisor.
-    public mutating func divide(by divisor: Self) {
-        self /= divisor
+    /// - Throws: An error if the conforming type cannot perform the division.
+    public mutating func divide(by divisor: Self) throws {
+        self = try self.dividing(by: divisor)
     }
 }

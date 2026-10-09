@@ -18,6 +18,13 @@ public protocol Subtractable: Equatable {
         _ lhs: Self,
         _ rhs: Self
     ) -> Self
+
+    /// Returns the difference of this value and the specified value.
+    ///
+    /// - Parameter subtrahend: The subtrahend.
+    /// - Returns: The difference.
+    /// - Throws: An error if the conforming type cannot perform the subtraction.
+    func subtracting(_ subtrahend: Self) throws -> Self
 }
 
 extension Subtractable {
@@ -38,14 +45,17 @@ extension Subtractable {
     ///
     /// - Parameter subtrahend: The subtrahend.
     /// - Returns: The difference.
-    public func subtracting(_ subtrahend: Self) -> Self {
+    /// - Throws: An error if the conforming type cannot perform the subtraction.
+    public func subtracting(_ subtrahend: Self) throws -> Self {
         return self - subtrahend
     }
 
     /// Subtracts the specified value from this value.
     ///
     /// - Parameter subtrahend: The subtrahend.
-    public mutating func subtract(_ subtrahend: Self) {
-        self -= subtrahend
+    /// - Throws: Any error thrown by `subtracting(_:)`.
+    /// - Throws: An error if the conforming type cannot perform the subtraction.
+    public mutating func subtract(_ subtrahend: Self) throws {
+        self = try self.subtracting(subtrahend)
     }
 }

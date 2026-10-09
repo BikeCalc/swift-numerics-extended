@@ -148,8 +148,8 @@ internal struct RomanDivisibleTests {
         dividend: Roman,
         divisor: Roman,
         quotient: Roman
-    ) {
-        #expect(dividend.dividing(by: divisor) == quotient)
+    ) throws {
+        #expect(try dividend.dividing(by: divisor) == quotient)
     }
 
     @Test(
@@ -160,9 +160,9 @@ internal struct RomanDivisibleTests {
         dividend: Roman,
         divisor: Roman,
         quotient: Roman
-    ) {
+    ) throws {
         var runningQuotient: Roman = dividend
-        runningQuotient.divide(by: divisor)
+        try runningQuotient.divide(by: divisor)
         #expect(runningQuotient == quotient)
     }
 

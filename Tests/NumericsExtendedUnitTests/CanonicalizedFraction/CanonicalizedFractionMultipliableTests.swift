@@ -20,10 +20,10 @@ internal struct CanonicalizedFractionMultipliableTests {
     ]
 
     @Test(
-        "Multiplication equal canonicalizes result",
+        "Multiplication succeeds",
         arguments: Self.multiplicationArguments
     )
-    internal func multiplicationEqualCanonicalizesResult(
+    internal func multiplicationSucceeds(
         multiplicand: Fraction<Int>,
         multiplier: Fraction<Int>,
         product: Fraction<Int>
@@ -37,18 +37,18 @@ internal struct CanonicalizedFractionMultipliableTests {
     }
 
     @Test(
-        "Multiply canonicalizes result",
+        "Multiply succeeds",
         arguments: Self.multiplicationArguments
     )
-    internal func multiplyCanonicalizesResult(
+    internal func multiplySucceeds(
         multiplicand: Fraction<Int>,
         multiplier: Fraction<Int>,
         product: Fraction<Int>
-    ) {
+    ) throws {
         @Canonicalized
         var runningProduct: Fraction<Int> = multiplicand
 
-        runningProduct.multiply(by: multiplier)
+        try runningProduct.multiply(by: multiplier)
 
         #expect(runningProduct == product)
     }

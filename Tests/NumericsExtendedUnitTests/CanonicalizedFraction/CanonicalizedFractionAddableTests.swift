@@ -20,10 +20,10 @@ internal struct CanonicalizedFractionAddableTests {
     ]
 
     @Test(
-        "Addition equal canonicalizes result",
+        "Addition succeeds",
         arguments: Self.additionArguments
     )
-    internal func additionEqualCanonicalizesResult(
+    internal func additionSucceeds(
         augend: Fraction<Int>,
         addend: Fraction<Int>,
         sum: Fraction<Int>
@@ -37,18 +37,18 @@ internal struct CanonicalizedFractionAddableTests {
     }
 
     @Test(
-        "Add canonicalizes result",
+        "Add succeeds",
         arguments: Self.additionArguments
     )
-    internal func addCanonicalizesResult(
+    internal func addSucceeds(
         augend: Fraction<Int>,
         addend: Fraction<Int>,
         sum: Fraction<Int>
-    ) {
+    ) throws {
         @Canonicalized
         var runningSum: Fraction<Int> = augend
 
-        runningSum.add(addend)
+        try runningSum.add(addend)
 
         #expect(runningSum == sum)
     }
