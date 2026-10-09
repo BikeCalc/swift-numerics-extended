@@ -46,7 +46,8 @@ where Self: Divisible {
     /// - Parameter other: The value to test.
     /// - Returns: `true` if dividing this value by the specified value produces an exactly zero remainder, and `false`
     ///   otherwise.
-    public func isDivisible(by other: Self) -> Bool {
+    public func isDivisible(by other: Self) -> Bool
+    where Self.RemainderDivisor == Self, Self.Remainder == Self {
         guard self.isFinite == true,
             other.isFinite == true,
             other.isZero == false
@@ -59,7 +60,7 @@ where Self: Divisible {
 }
 
 extension FloatingPoint
-where Self: Divisible & Multipliable {
+where Self: Divisible & Multipliable, Self.RemainderDivisor == Self, Self.Remainder == Self {
     /// Returns a boolean value indicating whether this value is a multiple of the specified value.
     ///
     /// Because floating-point values are approximate, values that appear to be multiples in decimal notation may not
@@ -172,7 +173,7 @@ where Self: Increasable {
 }
 
 extension FloatingPoint
-where Self: Raisable, Self.Exponent: BinaryInteger {
+where Self: Raisable, Self.Exponent: BinaryInteger, Self.Power == Self {
     /// Returns the power of raising the first specified value to the second.
     ///
     /// A negative exponent returns the reciprocal power.
@@ -184,7 +185,7 @@ where Self: Raisable, Self.Exponent: BinaryInteger {
     public static func ** (
         _ lhs: Self,
         _ rhs: Self.Exponent
-    ) -> Self {
+    ) -> Self.Power {
         switch rhs {
         case ..<0:
             var result: Self = 1

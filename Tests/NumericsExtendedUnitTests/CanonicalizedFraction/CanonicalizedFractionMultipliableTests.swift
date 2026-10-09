@@ -12,7 +12,7 @@ import Testing
 
 @Suite("Canonicalized Fraction Multipliable Tests")
 internal struct CanonicalizedFractionMultipliableTests {
-    private static let multiplicationArguments: [(Fraction<Int>, Fraction<Int>, Fraction<Int>)] = [
+    private static let multiplicationArguments: [(Fraction<Int>, Fraction<Int>.Multiplier, Fraction<Int>)] = [
         (Fraction<Int>(1, 2), Fraction<Int>(1, 2), Fraction<Int>(1, 4)),
         (Fraction<Int>(1, 2), Fraction<Int>(2, 3), Fraction<Int>(1, 3)),
         (Fraction<Int>(-1, 2), Fraction<Int>(1, 2), Fraction<Int>(-1, 4)),
@@ -25,7 +25,7 @@ internal struct CanonicalizedFractionMultipliableTests {
     )
     internal func multiplicationSucceeds(
         multiplicand: Fraction<Int>,
-        multiplier: Fraction<Int>,
+        multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
     ) {
         @Canonicalized
@@ -42,7 +42,7 @@ internal struct CanonicalizedFractionMultipliableTests {
     )
     internal func multiplySucceeds(
         multiplicand: Fraction<Int>,
-        multiplier: Fraction<Int>,
+        multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
     ) throws {
         @Canonicalized

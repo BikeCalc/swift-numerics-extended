@@ -12,7 +12,7 @@ import Testing
 
 @Suite("Roman Multipliable Tests")
 internal struct RomanMultipliableTests {
-    private static let multiplicationArguments: [(Roman, Roman, Roman)] = [
+    private static let multiplicationArguments: [(Roman, Roman.Multiplier, Roman)] = [
         (2, 3, 6),
         (3, 4, 12)
     ]
@@ -43,7 +43,7 @@ internal struct RomanMultipliableTests {
     )
     internal func multiplicationSucceeds(
         multiplicand: Roman,
-        multiplier: Roman,
+        multiplier: Roman.Multiplier,
         product: Roman
     ) {
         #expect(multiplicand * multiplier == product)
@@ -55,7 +55,7 @@ internal struct RomanMultipliableTests {
     )
     internal func multiplicationEqualSucceeds(
         multiplicand: Roman,
-        multiplier: Roman,
+        multiplier: Roman.Multiplier,
         product: Roman
     ) {
         var runningProduct: Roman = multiplicand
@@ -69,7 +69,7 @@ internal struct RomanMultipliableTests {
     )
     internal func multiplyingBySucceeds(
         multiplicand: Roman,
-        multiplier: Roman,
+        multiplier: Roman.Multiplier,
         product: Roman
     ) throws {
         #expect(try multiplicand.multiplying(by: multiplier) == product)
@@ -81,7 +81,7 @@ internal struct RomanMultipliableTests {
     )
     internal func multiplyBySucceeds(
         multiplicand: Roman,
-        multiplier: Roman,
+        multiplier: Roman.Multiplier,
         product: Roman
     ) throws {
         var runningProduct: Roman = multiplicand
@@ -121,7 +121,7 @@ extension RomanMultipliableTests {
     )
     internal func multiplicationIsCommutative(
         multiplicand: Roman,
-        multiplier: Roman,
+        multiplier: Roman.Multiplier,
         product _: Roman
     ) {
         #expect(multiplicand * multiplier == multiplier * multiplicand)

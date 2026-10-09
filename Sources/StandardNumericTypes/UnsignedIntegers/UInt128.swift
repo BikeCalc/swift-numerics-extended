@@ -12,23 +12,35 @@ import StandardNumericProtocols
 // MARK: - Addable
 
 @available(iOS 18.0, macCatalyst 18.0, macOS 15.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
-extension UInt128: Addable {}
+extension UInt128: Addable {
+    public typealias Addend = Self
+    public typealias Sum = Self
+}
 
 // MARK: - Divisible
 
 @available(iOS 18.0, macCatalyst 18.0, macOS 15.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
-extension UInt128: Divisible {}
+extension UInt128: Divisible {
+    public typealias Divisor = Self
+    public typealias Quotient = Self
+    public typealias RemainderDivisor = Self
+    public typealias Remainder = Self
+}
 
 // MARK: - Multipliable
 
 @available(iOS 18.0, macCatalyst 18.0, macOS 15.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
-extension UInt128: Multipliable {}
+extension UInt128: Multipliable {
+    public typealias Multiplier = Self
+    public typealias Product = Self
+}
 
 // MARK: - Raisable
 
 @available(iOS 18.0, macCatalyst 18.0, macOS 15.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
 extension UInt128: Raisable {
     public typealias Exponent = Self
+    public typealias Power = Self
 }
 
 // MARK: - ReportableAsOverflow
@@ -44,4 +56,7 @@ extension UInt128: RepresentableByZero {}
 // MARK: - Subtractable
 
 @available(iOS 18.0, macCatalyst 18.0, macOS 15.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
-extension UInt128: Subtractable {}
+extension UInt128: Subtractable {
+    public typealias Subtrahend = Self
+    public typealias Difference = Self
+}

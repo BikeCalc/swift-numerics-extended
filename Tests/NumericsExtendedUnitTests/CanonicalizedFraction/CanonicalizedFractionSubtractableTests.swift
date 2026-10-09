@@ -12,7 +12,7 @@ import Testing
 
 @Suite("Canonicalized Fraction Subtractable Tests")
 internal struct CanonicalizedFractionSubtractableTests {
-    private static let subtractionArguments: [(Fraction<Int>, Fraction<Int>, Fraction<Int>)] = [
+    private static let subtractionArguments: [(Fraction<Int>, Fraction<Int>.Subtrahend, Fraction<Int>)] = [
         (Fraction<Int>(2, 3), Fraction<Int>(1, 2), Fraction<Int>(1, 6)),
         (Fraction<Int>(3, 4), Fraction<Int>(1, 2), Fraction<Int>(1, 4)),
         (Fraction<Int>(-2, 3), Fraction<Int>(1, 2), Fraction<Int>(-7, 6)),
@@ -25,7 +25,7 @@ internal struct CanonicalizedFractionSubtractableTests {
     )
     internal func subtractionSucceeds(
         minuend: Fraction<Int>,
-        subtrahend: Fraction<Int>,
+        subtrahend: Fraction<Int>.Subtrahend,
         difference: Fraction<Int>
     ) {
         @Canonicalized
@@ -42,7 +42,7 @@ internal struct CanonicalizedFractionSubtractableTests {
     )
     internal func subtractSucceeds(
         minuend: Fraction<Int>,
-        subtrahend: Fraction<Int>,
+        subtrahend: Fraction<Int>.Subtrahend,
         difference: Fraction<Int>
     ) throws {
         @Canonicalized

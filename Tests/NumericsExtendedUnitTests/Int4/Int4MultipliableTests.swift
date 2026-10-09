@@ -12,7 +12,7 @@ import Testing
 
 @Suite("Int4 Multipliable Tests")
 internal struct Int4MultipliableTests {
-    private static let multiplicationArguments: [(Int4, Int4, Int4)] = [
+    private static let multiplicationArguments: [(Int4, Int4.Multiplier, Int4)] = [
         (2, 3, 6),
         (-2, 3, -6)
     ]
@@ -47,7 +47,7 @@ internal struct Int4MultipliableTests {
     )
     internal func multiplicationSucceeds(
         multiplicand: Int4,
-        multiplier: Int4,
+        multiplier: Int4.Multiplier,
         product: Int4
     ) {
         #expect(multiplicand * multiplier == product)
@@ -59,7 +59,7 @@ internal struct Int4MultipliableTests {
     )
     internal func multiplicationEqualSucceeds(
         multiplicand: Int4,
-        multiplier: Int4,
+        multiplier: Int4.Multiplier,
         product: Int4
     ) {
         var runningProduct: Int4 = multiplicand
@@ -73,7 +73,7 @@ internal struct Int4MultipliableTests {
     )
     internal func multiplyingBySucceeds(
         multiplicand: Int4,
-        multiplier: Int4,
+        multiplier: Int4.Multiplier,
         product: Int4
     ) throws {
         #expect(try multiplicand.multiplying(by: multiplier) == product)
@@ -85,7 +85,7 @@ internal struct Int4MultipliableTests {
     )
     internal func multiplyBySucceeds(
         multiplicand: Int4,
-        multiplier: Int4,
+        multiplier: Int4.Multiplier,
         product: Int4
     ) throws {
         var runningProduct: Int4 = multiplicand
@@ -125,7 +125,7 @@ extension Int4MultipliableTests {
     )
     internal func multiplicationIsCommutative(
         multiplicand: Int4,
-        multiplier: Int4,
+        multiplier: Int4.Multiplier,
         product _: Int4
     ) {
         #expect(multiplicand * multiplier == multiplier * multiplicand)

@@ -9,51 +9,119 @@
 import CoreNumericProtocols
 import StandardNumericProtocols
 
+// MARK: - Addable
+
 #if !((os(macOS) || targetEnvironment(macCatalyst)) && arch(x86_64))
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
-extension Float16: Addable {}
+extension Float16: Addable {
+    public typealias Addend = Self
+    public typealias Sum = Self
+}
+#endif
 
+// MARK: - Decreasable
+
+#if !((os(macOS) || targetEnvironment(macCatalyst)) && arch(x86_64))
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: Decreasable {}
+#endif
 
+// MARK: - Divisible
+
+#if !((os(macOS) || targetEnvironment(macCatalyst)) && arch(x86_64))
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: Divisible {
-    public static func % (_ lhs: Self, _ rhs: Self) -> Self {
+    public typealias Divisor = Self
+    public typealias Quotient = Self
+    public typealias RemainderDivisor = Self
+    public typealias Remainder = Self
+
+    public static func % (
+        _ lhs: Self,
+        _ rhs: Self.RemainderDivisor
+    ) -> Self.Remainder {
         return lhs.truncatingRemainder(dividingBy: rhs)
     }
 }
+#endif
 
+// MARK: - Increasable
+
+#if !((os(macOS) || targetEnvironment(macCatalyst)) && arch(x86_64))
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: Increasable {}
+#endif
 
+// MARK: - Multipliable
+
+#if !((os(macOS) || targetEnvironment(macCatalyst)) && arch(x86_64))
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
-extension Float16: Multipliable {}
+extension Float16: Multipliable {
+    public typealias Multiplier = Self
+    public typealias Product = Self
+}
+#endif
 
+// MARK: - Negateable
+
+#if !((os(macOS) || targetEnvironment(macCatalyst)) && arch(x86_64))
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: Negateable {}
+#endif
 
+// MARK: - Raisable
+
+#if !((os(macOS) || targetEnvironment(macCatalyst)) && arch(x86_64))
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: Raisable {
     public typealias Exponent = Int
+    public typealias Power = Self
 }
+#endif
 
+// MARK: - RepresentableByInfinity
+
+#if !((os(macOS) || targetEnvironment(macCatalyst)) && arch(x86_64))
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: RepresentableByInfinity {}
+#endif
 
+// MARK: - RepresentableByNaN
+
+#if !((os(macOS) || targetEnvironment(macCatalyst)) && arch(x86_64))
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: RepresentableByNaN {}
+#endif
 
+// MARK: - RepresentableByZero
+
+#if !((os(macOS) || targetEnvironment(macCatalyst)) && arch(x86_64))
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: RepresentableByZero {}
+#endif
 
+// MARK: - Roundable
+
+#if !((os(macOS) || targetEnvironment(macCatalyst)) && arch(x86_64))
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: Roundable {
     public typealias DecimalPlace = UInt
 }
+#endif
 
+// MARK: - Subtractable
+
+#if !((os(macOS) || targetEnvironment(macCatalyst)) && arch(x86_64))
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
-extension Float16: Subtractable {}
+extension Float16: Subtractable {
+    public typealias Subtrahend = Self
+    public typealias Difference = Self
+}
+#endif
 
+// MARK: - Truncatable
+
+#if !((os(macOS) || targetEnvironment(macCatalyst)) && arch(x86_64))
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: Truncatable {}
 #endif

@@ -12,7 +12,7 @@ import Testing
 
 @Suite("Double Addable Tests")
 internal struct DoubleAddableTests {
-    private static let additionArguments: Array<(Double, Double, Double)> = [
+    private static let additionArguments: Array<(Double, Double.Addend, Double)> = [
         (2.0, 3.0, 5.0),
         (3.0, 4.0, 7.0),
         (-2.0, 3.0, 1.0),
@@ -29,7 +29,7 @@ internal struct DoubleAddableTests {
     )
     internal func additionSucceeds(
         augend: Double,
-        addend: Double,
+        addend: Double.Addend,
         sum: Double
     ) {
         #expect(augend + addend == sum)
@@ -41,7 +41,7 @@ internal struct DoubleAddableTests {
     )
     internal func additionEqualSucceeds(
         augend: Double,
-        addend: Double,
+        addend: Double.Addend,
         sum: Double
     ) {
         var runningSum: Double = augend
@@ -55,7 +55,7 @@ internal struct DoubleAddableTests {
     )
     internal func addingSucceeds(
         augend: Double,
-        addend: Double,
+        addend: Double.Addend,
         sum: Double
     ) throws {
         #expect(try augend.adding(addend) == sum)
@@ -67,7 +67,7 @@ internal struct DoubleAddableTests {
     )
     internal func addSucceeds(
         augend: Double,
-        addend: Double,
+        addend: Double.Addend,
         sum: Double
     ) throws {
         var runningSum: Double = augend
@@ -83,7 +83,7 @@ extension DoubleAddableTests {
     )
     internal func additionIsCommutative(
         augend: Double,
-        addend: Double,
+        addend: Double.Addend,
         sum _: Double
     ) {
         #expect(augend + addend == addend + augend)
@@ -114,7 +114,7 @@ extension DoubleAddableTests {
             Double.negativeInfinity
         ]
     )
-    internal func addingToNaNReturnsNaN(addend: Double) {
+    internal func addingToNaNReturnsNaN(addend: Double.Addend) {
         #expect((Double.nan + addend).isNaN == true)
     }
 
@@ -145,7 +145,7 @@ extension DoubleAddableTests {
             -1.0
         ]
     )
-    internal func addingToNegativeInfinityFollowsFloatingPointRules(addend: Double) {
+    internal func addingToNegativeInfinityFollowsFloatingPointRules(addend: Double.Addend) {
         #expect(Double.negativeInfinity + addend == .negativeInfinity)
     }
 }
@@ -163,7 +163,7 @@ extension DoubleAddableTests {
         ]
     )
     internal func addingToNegativeZeroFollowsFloatingPointRules(
-        addend: Double,
+        addend: Double.Addend,
         sum: Double
     ) {
         let result: Double = Double.negativeZero + addend
@@ -184,7 +184,7 @@ extension DoubleAddableTests {
             -1.0
         ]
     )
-    internal func addingToPositiveInfinityFollowsFloatingPointRules(addend: Double) {
+    internal func addingToPositiveInfinityFollowsFloatingPointRules(addend: Double.Addend) {
         #expect(Double.infinity + addend == .infinity)
     }
 }
@@ -207,7 +207,7 @@ extension DoubleAddableTests {
     )
     internal func addingOppositeValuesReturnsPositiveZero(
         augend: Double,
-        addend: Double
+        addend: Double.Addend
     ) {
         let sum: Double = augend + addend
         #expect(sum == Double.zero)
@@ -241,7 +241,7 @@ extension DoubleAddableTests {
         ]
     )
     internal func addingToPositiveZeroFollowsFloatingPointRules(
-        addend: Double,
+        addend: Double.Addend,
         sum: Double
     ) {
         let result: Double = Double.zero + addend

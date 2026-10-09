@@ -12,7 +12,7 @@ import Testing
 
 @Suite("UInt4 Subtractable Tests")
 internal struct UInt4SubtractableTests {
-    private static let subtractionArguments: [(UInt4, UInt4, UInt4)] = [
+    private static let subtractionArguments: [(UInt4, UInt4.Subtrahend, UInt4)] = [
         (3, 2, 1),
         (5, 3, 2)
     ]
@@ -23,7 +23,7 @@ internal struct UInt4SubtractableTests {
     )
     internal func subtractionSucceeds(
         minuend: UInt4,
-        subtrahend: UInt4,
+        subtrahend: UInt4.Subtrahend,
         difference: UInt4
     ) {
         #expect(minuend - subtrahend == difference)
@@ -35,7 +35,7 @@ internal struct UInt4SubtractableTests {
     )
     internal func subtractionEqualSucceeds(
         minuend: UInt4,
-        subtrahend: UInt4,
+        subtrahend: UInt4.Subtrahend,
         difference: UInt4
     ) {
         var runningDifference: UInt4 = minuend
@@ -49,7 +49,7 @@ internal struct UInt4SubtractableTests {
     )
     internal func subtractingSucceeds(
         minuend: UInt4,
-        subtrahend: UInt4,
+        subtrahend: UInt4.Subtrahend,
         difference: UInt4
     ) throws {
         #expect(try minuend.subtracting(subtrahend) == difference)
@@ -61,7 +61,7 @@ internal struct UInt4SubtractableTests {
     )
     internal func subtractSucceeds(
         minuend: UInt4,
-        subtrahend: UInt4,
+        subtrahend: UInt4.Subtrahend,
         difference: UInt4
     ) throws {
         var runningDifference: UInt4 = minuend
@@ -77,10 +77,12 @@ extension UInt4SubtractableTests {
     )
     internal func subtractionIsNotCommutative(
         minuend: UInt4,
-        subtrahend: UInt4,
+        subtrahend: UInt4.Subtrahend,
         difference: UInt4
     ) {
-        let reversedDifferenceReport: UInt4.OverflowReport = subtrahend.subtractingReportingOverflow(minuend)
+        let reversedDifferenceReport: UInt4.OverflowReport<UInt4.Difference> = subtrahend.subtractingReportingOverflow(
+            minuend
+        )
 
         #expect(minuend - subtrahend == difference)
         #expect(reversedDifferenceReport.partialValue != difference)

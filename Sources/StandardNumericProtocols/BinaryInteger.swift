@@ -129,7 +129,7 @@ where Self: Divisible & Negateable & Raisable {
 }
 
 extension BinaryInteger
-where Self: Raisable, Self.Exponent: BinaryInteger {
+where Self: Raisable, Self.Exponent: BinaryInteger, Self.Power == Self {
     /// Returns the power of raising the first specified value to the second.
     ///
     /// A negative exponent returns `0` for every base except `1` and `-1` because integer division discards the
@@ -143,7 +143,7 @@ where Self: Raisable, Self.Exponent: BinaryInteger {
     public static func ** (
         _ lhs: Self,
         _ rhs: Self.Exponent
-    ) -> Self {
+    ) -> Self.Power {
         switch rhs {
         case ..<0:
             precondition(

@@ -37,8 +37,8 @@ extension FixedWidthInteger {
 
 extension FixedWidthInteger
 where Self: ReportableAsOverflow {
-    public func raisedReportingOverflow(to rhs: Self.Exponent) -> Self.OverflowReport
-    where Self.Exponent: BinaryInteger {
+    public func raisedReportingOverflow(to rhs: Self.Exponent) -> Self.OverflowReport<Self.Power>
+    where Self.Exponent: BinaryInteger, Self.Power == Self, Self.Product == Self {
         switch rhs {
         case ..<0 where self == 0:
             return (
@@ -65,7 +65,7 @@ where Self: ReportableAsOverflow {
             var exponent: Self.Exponent = 1
 
             while exponent < rhs {
-                let report: Self.OverflowReport = result.multipliedReportingOverflow(by: self)
+                let report: Self.OverflowReport<Self.Product> = result.multipliedReportingOverflow(by: self)
 
                 guard report.overflow == false else {
                     return report

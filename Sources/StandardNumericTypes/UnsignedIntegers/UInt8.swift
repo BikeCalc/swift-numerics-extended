@@ -11,20 +11,32 @@ import StandardNumericProtocols
 
 // MARK: - Addable
 
-extension UInt8: Addable {}
+extension UInt8: Addable {
+    public typealias Addend = Self
+    public typealias Sum = Self
+}
 
 // MARK: - Divisible
 
-extension UInt8: Divisible {}
+extension UInt8: Divisible {
+    public typealias Divisor = Self
+    public typealias Quotient = Self
+    public typealias RemainderDivisor = Self
+    public typealias Remainder = Self
+}
 
 // MARK: - Multipliable
 
-extension UInt8: Multipliable {}
+extension UInt8: Multipliable {
+    public typealias Multiplier = Self
+    public typealias Product = Self
+}
 
 // MARK: - Raisable
 
 extension UInt8: Raisable {
     public typealias Exponent = Self
+    public typealias Power = Self
 }
 
 // MARK: - ReportableAsOverflow
@@ -37,4 +49,7 @@ extension UInt8: RepresentableByZero {}
 
 // MARK: - Subtractable
 
-extension UInt8: Subtractable {}
+extension UInt8: Subtractable {
+    public typealias Subtrahend = Self
+    public typealias Difference = Self
+}

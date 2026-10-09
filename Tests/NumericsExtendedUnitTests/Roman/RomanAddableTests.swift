@@ -12,7 +12,7 @@ import Testing
 
 @Suite("Roman Addable Tests")
 internal struct RomanAddableTests {
-    private static let additionArguments: [(Roman, Roman, Roman)] = [
+    private static let additionArguments: [(Roman, Roman.Addend, Roman)] = [
         (2, 3, 5),
         (3, 4, 7)
     ]
@@ -23,7 +23,7 @@ internal struct RomanAddableTests {
     )
     internal func additionSucceeds(
         augend: Roman,
-        addend: Roman,
+        addend: Roman.Addend,
         sum: Roman
     ) {
         #expect(augend + addend == sum)
@@ -35,7 +35,7 @@ internal struct RomanAddableTests {
     )
     internal func additionEqualSucceeds(
         augend: Roman,
-        addend: Roman,
+        addend: Roman.Addend,
         sum: Roman
     ) {
         var runningSum: Roman = augend
@@ -49,7 +49,7 @@ internal struct RomanAddableTests {
     )
     internal func addingSucceeds(
         augend: Roman,
-        addend: Roman,
+        addend: Roman.Addend,
         sum: Roman
     ) throws {
         #expect(try augend.adding(addend) == sum)
@@ -61,7 +61,7 @@ internal struct RomanAddableTests {
     )
     internal func addSucceeds(
         augend: Roman,
-        addend: Roman,
+        addend: Roman.Addend,
         sum: Roman
     ) throws {
         var runningSum: Roman = augend
@@ -77,7 +77,7 @@ extension RomanAddableTests {
     )
     internal func additionIsCommutative(
         augend: Roman,
-        addend: Roman,
+        addend: Roman.Addend,
         sum _: Roman
     ) {
         #expect(augend + addend == addend + augend)

@@ -17,7 +17,6 @@ public protocol Negateable: Equatable {
 
 extension Negateable {
     /// A boolean value indicating whether this value is signed.
-    ///
     public var isSigned: Bool {
         return true
     }
@@ -38,7 +37,6 @@ extension Negateable {
     }
 
     /// Replaces this value with its additive inverse.
-    ///
     public mutating func negate() {
         self = self.negating()
     }
@@ -47,13 +45,11 @@ extension Negateable {
 extension Negateable
 where Self: Comparable & RepresentableByZero {
     /// A boolean value indicating whether this value is negative.
-    ///
     public var isNegative: Bool {
         return self < Self.zero
     }
 
     /// A boolean value indicating whether this value is positive.
-    ///
     public var isPositive: Bool {
         return Self.zero < self
     }

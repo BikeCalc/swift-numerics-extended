@@ -13,6 +13,9 @@ public protocol Raisable: Equatable {
     /// The type used to represent exponents.
     associatedtype Exponent
 
+    /// The type used to represent the result of exponentiation.
+    associatedtype Power
+
     /// Returns a boolean value indicating whether this value is a power of the specified value.
     ///
     /// - Parameter other: The value to test.
@@ -28,17 +31,29 @@ public protocol Raisable: Equatable {
     static func ** (
         _ lhs: Self,
         _ rhs: Self.Exponent
-    ) -> Self
+    ) -> Self.Power
 
     /// Returns the power of raising this value to the specified value.
     ///
     /// - Parameter exponent: The exponent.
     /// - Returns: The power.
     /// - Throws: An error if the conforming type cannot perform the exponentiation.
-    func raising(to exponent: Self.Exponent) throws -> Self
+    func raising(to exponent: Self.Exponent) throws -> Self.Power
 }
 
 extension Raisable {
+    /// Returns the power of raising this value to the specified value.
+    ///
+    /// - Parameter exponent: The exponent.
+    /// - Returns: The power.
+    /// - Throws: An error if the conforming type cannot perform the exponentiation.
+    public func raising(to exponent: Self.Exponent) throws -> Self.Power {
+        return self ** exponent
+    }
+}
+
+extension Raisable
+where Self.Power == Self {
     /// Raises the first specified value to the second and stores the power in the left-hand-side variable.
     ///
     /// - Parameters:
@@ -48,17 +63,8 @@ extension Raisable {
         _ lhs: inout Self,
         _ rhs: Self.Exponent
     ) {
-        let power: Self = lhs ** rhs
+        let power: Self.Power = lhs ** rhs
         lhs = power
-    }
-
-    /// Returns the power of raising this value to the specified value.
-    ///
-    /// - Parameter exponent: The exponent.
-    /// - Returns: The power.
-    /// - Throws: An error if the conforming type cannot perform the exponentiation.
-    public func raising(to exponent: Self.Exponent) throws -> Self {
-        return self ** exponent
     }
 
     /// Raises this value to the specified exponent.

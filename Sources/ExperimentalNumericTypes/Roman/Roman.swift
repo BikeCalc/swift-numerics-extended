@@ -200,10 +200,13 @@ extension Roman {
 // MARK: - Addable
 
 extension Roman: Addable {
+    public typealias Addend = Self
+    public typealias Sum = Self
+
     public static func + (
         _ lhs: Self,
-        _ rhs: Self
-    ) -> Self {
+        _ rhs: Self.Addend
+    ) -> Self.Sum {
         let newValue: Self.Value = lhs.value + rhs.value
         return .init(value: newValue)
     }
@@ -248,7 +251,9 @@ extension Roman: CustomStringConvertible {
 
         while number > 0 {
             for symbol in symbols {
-                let report: Self.Value.OverflowReport = number.subtractingReportingOverflow(symbol.value)
+                let report: Self.Value.OverflowReport<Self.Value.Difference> = number.subtractingReportingOverflow(
+                    symbol.value
+                )
 
                 if report.overflow == false && report.partialValue >= 0 {
                     number -= symbol.value
@@ -294,6 +299,11 @@ extension Roman: Decodable {
 // MARK: - Divisible
 
 extension Roman: Divisible {
+    public typealias Divisor = Self
+    public typealias Quotient = Self
+    public typealias RemainderDivisor = Self
+    public typealias Remainder = Self
+
     public var reciprocal: Self? {
         guard self.isInvertible == true else {
             return nil
@@ -335,8 +345,8 @@ extension Roman: Divisible {
     /// - Precondition: `rhs` must not be zero.
     public static func / (
         _ lhs: Self,
-        _ rhs: Self
-    ) -> Self {
+        _ rhs: Self.Divisor
+    ) -> Self.Quotient {
         let newValue: Self.Value = lhs.value / rhs.value
         return .init(value: newValue)
     }
@@ -360,8 +370,8 @@ extension Roman: Divisible {
     /// - Precondition: `rhs` must not be zero.
     public static func % (
         _ lhs: Self,
-        _ rhs: Self
-    ) -> Self {
+        _ rhs: Self.RemainderDivisor
+    ) -> Self.Remainder {
         let newValue: Self.Value = lhs.value % rhs.value
         return .init(value: newValue)
     }
@@ -451,6 +461,9 @@ extension Roman: LosslessStringConvertible {
 // MARK: - Multipliable
 
 extension Roman: Multipliable {
+    public typealias Multiplier = Self
+    public typealias Product = Self
+
     public func isMultiple(of other: Roman) -> Bool {
         if self == 0 && other == 0 {
             return true
@@ -465,8 +478,8 @@ extension Roman: Multipliable {
 
     public static func * (
         _ lhs: Self,
-        _ rhs: Self
-    ) -> Self {
+        _ rhs: Self.Multiplier
+    ) -> Self.Product {
         let newValue: Self.Value = lhs.value * rhs.value
         return .init(value: newValue)
     }
@@ -497,6 +510,7 @@ extension Roman: Numeric {
 
 extension Roman: Raisable {
     public typealias Exponent = Self
+    public typealias Power = Self
 
     public func isPower(of other: Self) -> Bool {
         switch other {
@@ -524,7 +538,7 @@ extension Roman: Raisable {
     public static func ** (
         _ lhs: Self,
         _ rhs: Self.Exponent
-    ) -> Self {
+    ) -> Self.Power {
         switch rhs {
         case 0:
             return 1
@@ -547,7 +561,7 @@ extension Roman: Raisable {
 // MARK: - ReportableAsOverflow
 
 extension Roman: ReportableAsOverflow {
-    public func addingReportingOverflow(_ rhs: Self) -> Self.OverflowReport {
+    public func addingReportingOverflow(_ rhs: Self.Addend) -> Self.OverflowReport<Self.Sum> {
         let sum: Self.Value = self.value + rhs.value
         let modulus: Self.Value = Self.max.value + 1
         let partialValue: Self = .init(value: sum % modulus)
@@ -565,7 +579,7 @@ extension Roman: ReportableAsOverflow {
         )
     }
 
-    public func subtractingReportingOverflow(_ rhs: Self) -> Self.OverflowReport {
+    public func subtractingReportingOverflow(_ rhs: Self.Subtrahend) -> Self.OverflowReport<Self.Difference> {
         if self.value >= rhs.value {
             let difference: Self.Value = self.value - rhs.value
             let partialValue: Self = .init(value: difference)
@@ -586,7 +600,7 @@ extension Roman: ReportableAsOverflow {
         }
     }
 
-    public func multipliedReportingOverflow(by rhs: Self) -> Self.OverflowReport {
+    public func multipliedReportingOverflow(by rhs: Self.Multiplier) -> Self.OverflowReport<Self.Product> {
         let overflow: Bool = rhs.value != 0 && self.value > Self.max.value / rhs.value
         let modulus: Self.Value = Self.max.value + 1
 
@@ -611,7 +625,7 @@ extension Roman: ReportableAsOverflow {
         )
     }
 
-    public func dividedReportingOverflow(by rhs: Self) -> Self.OverflowReport {
+    public func dividedReportingOverflow(by rhs: Self.Divisor) -> Self.OverflowReport<Self.Quotient> {
         guard rhs.value != 0 else {
             return (
                 partialValue: self,
@@ -628,7 +642,8 @@ extension Roman: ReportableAsOverflow {
         )
     }
 
-    public func remainderReportingOverflow(dividingBy rhs: Self) -> Self.OverflowReport {
+    public func remainderReportingOverflow(dividingBy rhs: Self.RemainderDivisor) -> Self.OverflowReport<Self.Remainder>
+    {
         guard rhs.value != 0 else {
             return (
                 partialValue: self,
@@ -645,7 +660,7 @@ extension Roman: ReportableAsOverflow {
         )
     }
 
-    public func raisedReportingOverflow(to rhs: Self.Exponent) -> Self.OverflowReport {
+    public func raisedReportingOverflow(to rhs: Self.Exponent) -> Self.OverflowReport<Self.Power> {
         switch rhs {
         case 0:
             return (
@@ -662,7 +677,7 @@ extension Roman: ReportableAsOverflow {
             var exponent: Self.Exponent = 1
 
             while exponent < rhs {
-                let report: Self.OverflowReport = result.multipliedReportingOverflow(by: self)
+                let report: Self.OverflowReport<Self.Product> = result.multipliedReportingOverflow(by: self)
 
                 guard report.overflow == false else {
                     return report
@@ -726,10 +741,13 @@ extension Roman: Strideable {
 // MARK: - Subtractable
 
 extension Roman: Subtractable {
+    public typealias Subtrahend = Self
+    public typealias Difference = Self
+
     public static func - (
         _ lhs: Self,
-        _ rhs: Self
-    ) -> Self {
+        _ rhs: Self.Subtrahend
+    ) -> Self.Difference {
         let newValue: Self.Value = lhs.value - rhs.value
         return .init(value: newValue)
     }
