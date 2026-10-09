@@ -80,7 +80,9 @@ extension RomanSubtractableTests {
         subtrahend: Roman.Subtrahend,
         difference: Roman
     ) {
-        let reversedDifferenceReport: Roman.OverflowReport = subtrahend.subtractingReportingOverflow(minuend)
+        let reversedDifferenceReport: Roman.OverflowReport<Roman.Difference> = subtrahend.subtractingReportingOverflow(
+            minuend
+        )
 
         #expect(minuend - subtrahend == difference)
         #expect(reversedDifferenceReport.partialValue != difference)

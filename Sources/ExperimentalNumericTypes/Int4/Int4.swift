@@ -713,7 +713,7 @@ extension Int4: Raisable {
 // MARK: - ReportableAsOverflow
 
 extension Int4: ReportableAsOverflow {
-    public func addingReportingOverflow(_ rhs: Self.Addend) -> Self.OverflowReport {
+    public func addingReportingOverflow(_ rhs: Self.Addend) -> Self.OverflowReport<Self.Sum> {
         let sum: Self.Value = self.value &+ rhs.value
         let partialValue: Self = .init(truncatingIfNeeded: sum)
 
@@ -732,7 +732,7 @@ extension Int4: ReportableAsOverflow {
         )
     }
 
-    public func subtractingReportingOverflow(_ rhs: Self.Subtrahend) -> Self.OverflowReport {
+    public func subtractingReportingOverflow(_ rhs: Self.Subtrahend) -> Self.OverflowReport<Self.Difference> {
         let difference: Self.Value = self.value &- rhs.value
         let partialValue: Self = .init(truncatingIfNeeded: difference)
 
@@ -751,7 +751,7 @@ extension Int4: ReportableAsOverflow {
         )
     }
 
-    public func multipliedReportingOverflow(by rhs: Self.Multiplier) -> Self.OverflowReport {
+    public func multipliedReportingOverflow(by rhs: Self.Multiplier) -> Self.OverflowReport<Self.Product> {
         let product: Self.Value = self.value &* rhs.value
         let partialValue: Self = .init(truncatingIfNeeded: product)
 
@@ -774,7 +774,7 @@ extension Int4: ReportableAsOverflow {
         )
     }
 
-    public func dividedReportingOverflow(by rhs: Self.Divisor) -> Self.OverflowReport {
+    public func dividedReportingOverflow(by rhs: Self.Divisor) -> Self.OverflowReport<Self.Quotient> {
         guard rhs.value != 0 else {
             return (
                 partialValue: self,
@@ -798,7 +798,8 @@ extension Int4: ReportableAsOverflow {
         )
     }
 
-    public func remainderReportingOverflow(dividingBy rhs: Self.RemainderDivisor) -> Self.OverflowReport {
+    public func remainderReportingOverflow(dividingBy rhs: Self.RemainderDivisor) -> Self.OverflowReport<Self.Remainder>
+    {
         guard rhs.value != 0 else {
             return (
                 partialValue: self,
@@ -822,7 +823,7 @@ extension Int4: ReportableAsOverflow {
         )
     }
 
-    public func raisedReportingOverflow(to rhs: Self.Exponent) -> Self.OverflowReport {
+    public func raisedReportingOverflow(to rhs: Self.Exponent) -> Self.OverflowReport<Self.Power> {
         switch rhs {
         case ..<0 where self == 0:
             return (
@@ -849,7 +850,7 @@ extension Int4: ReportableAsOverflow {
             var exponent: Self.Exponent = 1
 
             while exponent < rhs {
-                let report: Self.OverflowReport = result.multipliedReportingOverflow(by: self)
+                let report: Self.OverflowReport<Self.Product> = result.multipliedReportingOverflow(by: self)
 
                 guard report.overflow == false else {
                     return report
