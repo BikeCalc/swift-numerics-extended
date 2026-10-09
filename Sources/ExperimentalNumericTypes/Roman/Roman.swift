@@ -299,10 +299,10 @@ extension Roman: Decodable {
 // MARK: - Divisible
 
 extension Roman: Divisible {
-    public typealias Remainder = Self
-    public typealias Quotient = Self
     public typealias Divisor = Self
+    public typealias Quotient = Self
     public typealias RemainderDivisor = Self
+    public typealias Remainder = Self
 
     public var reciprocal: Self? {
         guard self.isInvertible == true else {
@@ -461,8 +461,8 @@ extension Roman: LosslessStringConvertible {
 // MARK: - Multipliable
 
 extension Roman: Multipliable {
-    public typealias Product = Self
     public typealias Multiplier = Self
+    public typealias Product = Self
 
     public func isMultiple(of other: Roman) -> Bool {
         if self == 0 && other == 0 {
@@ -509,8 +509,8 @@ extension Roman: Numeric {
 // MARK: - Raisable
 
 extension Roman: Raisable {
-    public typealias Power = Self
     public typealias Exponent = Self
+    public typealias Power = Self
 
     public func isPower(of other: Self) -> Bool {
         switch other {
@@ -741,8 +741,8 @@ extension Roman: Strideable {
 // MARK: - Subtractable
 
 extension Roman: Subtractable {
-    public typealias Difference = Self
     public typealias Subtrahend = Self
+    public typealias Difference = Self
 
     public static func - (
         _ lhs: Self,

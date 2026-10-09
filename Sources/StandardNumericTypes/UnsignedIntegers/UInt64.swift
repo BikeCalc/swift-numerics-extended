@@ -19,24 +19,24 @@ extension UInt64: Addable {
 // MARK: - Divisible
 
 extension UInt64: Divisible {
-    public typealias Remainder = Self
-    public typealias Quotient = Self
     public typealias Divisor = Self
+    public typealias Quotient = Self
     public typealias RemainderDivisor = Self
+    public typealias Remainder = Self
 }
 
 // MARK: - Multipliable
 
 extension UInt64: Multipliable {
-    public typealias Product = Self
     public typealias Multiplier = Self
+    public typealias Product = Self
 }
 
 // MARK: - Raisable
 
 extension UInt64: Raisable {
-    public typealias Power = Self
     public typealias Exponent = Self
+    public typealias Power = Self
 }
 
 // MARK: - ReportableAsOverflow
@@ -50,6 +50,6 @@ extension UInt64: RepresentableByZero {}
 // MARK: - Subtractable
 
 extension UInt64: Subtractable {
-    public typealias Difference = Self
     public typealias Subtrahend = Self
+    public typealias Difference = Self
 }

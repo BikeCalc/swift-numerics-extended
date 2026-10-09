@@ -460,10 +460,10 @@ where Term: Decodable {
 // MARK: - Divisible
 
 extension Fraction: Divisible {
-    public typealias Remainder = Self
-    public typealias Quotient = Self
     public typealias Divisor = Self
+    public typealias Quotient = Self
     public typealias RemainderDivisor = Self
+    public typealias Remainder = Self
 
     /// The reciprocal of this value, or `nil` when this value is zero or NaN.
     ///
@@ -760,8 +760,8 @@ where Term: LosslessStringConvertible {
 // MARK: - Multipliable
 
 extension Fraction: Multipliable {
-    public typealias Product = Self
     public typealias Multiplier = Self
+    public typealias Product = Self
 
     /// Returns a boolean value indicating whether this value is an exact multiple of the specified value.
     ///
@@ -942,9 +942,8 @@ extension Fraction: Normalizable {
 // MARK: - Raisable
 
 extension Fraction: Raisable {
-    public typealias Power = Self
-    /// The integer type used to represent an exponent.
     public typealias Exponent = Int
+    public typealias Power = Self
 
     /// Returns a boolean value indicating whether this value is a power of the specified value.
     ///
@@ -1192,8 +1191,8 @@ extension Fraction: Simplifiable {
 // MARK: - Subtractable
 
 extension Fraction: Subtractable {
-    public typealias Difference = Self
     public typealias Subtrahend = Self
+    public typealias Difference = Self
 
     /// Returns the difference between the specified values.
     ///

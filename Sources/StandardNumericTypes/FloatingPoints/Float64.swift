@@ -23,10 +23,10 @@ extension Float64: Decreasable {}
 // MARK: - Divisible
 
 extension Float64: Divisible {
-    public typealias Remainder = Self
-    public typealias Quotient = Self
     public typealias Divisor = Self
+    public typealias Quotient = Self
     public typealias RemainderDivisor = Self
+    public typealias Remainder = Self
 
     public static func % (
         _ lhs: Self,
@@ -43,8 +43,8 @@ extension Float64: Increasable {}
 // MARK: - Multipliable
 
 extension Float64: Multipliable {
-    public typealias Product = Self
     public typealias Multiplier = Self
+    public typealias Product = Self
 }
 
 // MARK: - Negateable
@@ -54,8 +54,8 @@ extension Float64: Negateable {}
 // MARK: - Raisable
 
 extension Float64: Raisable {
-    public typealias Power = Self
     public typealias Exponent = Int
+    public typealias Power = Self
 }
 
 // MARK: - RepresentableByInfinity
@@ -79,8 +79,8 @@ extension Float64: Roundable {
 // MARK: - Subtractable
 
 extension Float64: Subtractable {
-    public typealias Difference = Self
     public typealias Subtrahend = Self
+    public typealias Difference = Self
 }
 
 // MARK: - Truncatable

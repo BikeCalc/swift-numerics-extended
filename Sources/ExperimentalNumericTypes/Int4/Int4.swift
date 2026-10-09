@@ -428,10 +428,10 @@ extension Int4: Decodable {
 // MARK: - Divisible
 
 extension Int4: Divisible {
-    public typealias Remainder = Self
-    public typealias Quotient = Self
     public typealias Divisor = Self
+    public typealias Quotient = Self
     public typealias RemainderDivisor = Self
+    public typealias Remainder = Self
 
     /// Returns the quotient of dividing the first specified value by the second.
     ///
@@ -656,8 +656,8 @@ extension Int4: LosslessStringConvertible {
 // MARK: - Multipliable
 
 extension Int4: Multipliable {
-    public typealias Product = Self
     public typealias Multiplier = Self
+    public typealias Product = Self
 
     public static func * (
         _ lhs: Self,
@@ -706,8 +706,8 @@ extension Int4: Numeric {
 // MARK: - Raisable
 
 extension Int4: Raisable {
-    public typealias Power = Self
     public typealias Exponent = Self
+    public typealias Power = Self
 }
 
 // MARK: - ReportableAsOverflow
@@ -911,8 +911,8 @@ extension Int4: Strideable {}
 // MARK: - Subtractable
 
 extension Int4: Subtractable {
-    public typealias Difference = Self
     public typealias Subtrahend = Self
+    public typealias Difference = Self
 
     public static func - (
         _ lhs: Self,

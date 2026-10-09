@@ -31,10 +31,10 @@ extension Float16: Decreasable {}
 #if !((os(macOS) || targetEnvironment(macCatalyst)) && arch(x86_64))
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: Divisible {
-    public typealias Remainder = Self
-    public typealias Quotient = Self
     public typealias Divisor = Self
+    public typealias Quotient = Self
     public typealias RemainderDivisor = Self
+    public typealias Remainder = Self
 
     public static func % (
         _ lhs: Self,
@@ -57,8 +57,8 @@ extension Float16: Increasable {}
 #if !((os(macOS) || targetEnvironment(macCatalyst)) && arch(x86_64))
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: Multipliable {
-    public typealias Product = Self
     public typealias Multiplier = Self
+    public typealias Product = Self
 }
 #endif
 
@@ -74,8 +74,8 @@ extension Float16: Negateable {}
 #if !((os(macOS) || targetEnvironment(macCatalyst)) && arch(x86_64))
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: Raisable {
-    public typealias Power = Self
     public typealias Exponent = Int
+    public typealias Power = Self
 }
 #endif
 
@@ -114,8 +114,8 @@ extension Float16: Roundable {
 #if !((os(macOS) || targetEnvironment(macCatalyst)) && arch(x86_64))
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: Subtractable {
-    public typealias Difference = Self
     public typealias Subtrahend = Self
+    public typealias Difference = Self
 }
 #endif
 

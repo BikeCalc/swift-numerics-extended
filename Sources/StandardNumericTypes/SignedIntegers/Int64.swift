@@ -19,17 +19,17 @@ extension Int64: Addable {
 // MARK: - Divisible
 
 extension Int64: Divisible {
-    public typealias Remainder = Self
-    public typealias Quotient = Self
     public typealias Divisor = Self
+    public typealias Quotient = Self
     public typealias RemainderDivisor = Self
+    public typealias Remainder = Self
 }
 
 // MARK: - Multipliable
 
 extension Int64: Multipliable {
-    public typealias Product = Self
     public typealias Multiplier = Self
+    public typealias Product = Self
 }
 
 // MARK: - Negateable
@@ -39,8 +39,8 @@ extension Int64: Negateable {}
 // MARK: - Raisable
 
 extension Int64: Raisable {
-    public typealias Power = Self
     public typealias Exponent = Self
+    public typealias Power = Self
 }
 
 // MARK: - ReportableAsOverflow
@@ -54,6 +54,6 @@ extension Int64: RepresentableByZero {}
 // MARK: - Subtractable
 
 extension Int64: Subtractable {
-    public typealias Difference = Self
     public typealias Subtrahend = Self
+    public typealias Difference = Self
 }
