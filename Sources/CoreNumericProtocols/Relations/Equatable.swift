@@ -22,6 +22,6 @@ extension Equatable {
     /// - Returns: A boolean indicating whether the two values are unequal.
     /// - Throws: An error if the conforming type cannot perform the equality comparison.
     public func isUnequal(to rhs: Self) throws -> Bool {
-        return try self.isEqual(to: rhs) == false
+        return self != rhs
     }
 }
