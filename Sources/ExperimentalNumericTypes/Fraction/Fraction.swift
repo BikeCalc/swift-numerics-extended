@@ -295,6 +295,7 @@ extension Fraction: Canonicalizable {
     /// Canonicalization first removes common factors and then moves any negative sign to the numerator. Simplifying
     /// first can make normalization representable for values whose original terms cannot both be negated.
     ///
+    /// - Returns: The simplified and normalized representation of this value.
     /// - Precondition: `isCanonicalizable` is `true`.
     public func canonicalized() -> Self {
         let simplified: Self = self.simplified()
@@ -1161,6 +1162,8 @@ extension Fraction: Simplifiable {
     ///
     /// Simplification divides both terms by their greatest common divisor without changing sign placement. A fraction
     /// that is already simplified is returned unchanged.
+    ///
+    /// - Returns: The fraction with common factors removed, preserving sign placement. Nonfinite values are unchanged.
     package func simplified() -> Self {
         guard self.isNaN == false && self.isInfinite == false else {
             return self
