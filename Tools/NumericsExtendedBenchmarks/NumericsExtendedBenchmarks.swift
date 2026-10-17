@@ -37,7 +37,7 @@ internal enum NumericsExtendedBenchmarks {
         ]
         let data: Data = try encoder.encode(report)
 
-        if let outputURL = arguments.outputURL {
+        if let outputURL: URL = arguments.outputURL {
             try data.write(to: outputURL)
 
             for result in report.results {

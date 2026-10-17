@@ -122,7 +122,7 @@ fileprivate struct UnitTestRunner {
             arguments: ["test", "--show-codecov-path"],
             captureOutput: true
         )
-        let reportPath: String = String(decoding: pathData, as: UTF8.self)
+        let reportPath: String = .init(decoding: pathData, as: UTF8.self)
             .trimmingCharacters(in: .whitespacesAndNewlines)
 
         guard reportPath.isEmpty == false && FileManager.default.fileExists(atPath: reportPath) else {

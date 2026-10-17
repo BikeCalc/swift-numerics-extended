@@ -35,10 +35,10 @@ import StandardNumericTypes
 ///
 /// ```swift
 /// let literal: Roman = 2_026
-/// let exact = Roman(exactly: 3_999)
-/// let decimal = Roman("44")
-/// let numeral = Roman("XLIV")
-/// let invalid = Roman("ABC")
+/// let exact: Roman? = .init(exactly: 3_999)
+/// let decimal: Roman? = .init("44")
+/// let numeral: Roman? = .init("XLIV")
+/// let invalid: Roman? = .init("ABC")
 ///
 /// print(literal)
 /// // Prints "MMXXVI"
@@ -57,8 +57,8 @@ import StandardNumericTypes
 /// For example:
 ///
 /// ```swift
-/// let nine = Roman("IX")!
-/// let ten = Roman("X")!
+/// let nine: Roman = .init("IX")!
+/// let ten: Roman = .init("X")!
 ///
 /// print(nine < ten)
 /// // Prints "true"
@@ -92,7 +92,7 @@ import StandardNumericTypes
 /// For example:
 ///
 /// ```swift
-/// let report = Roman.max.addingReportingOverflow(1)
+/// let report: Roman.OverflowReport = Roman.max.addingReportingOverflow(1)
 ///
 /// print(report.partialValue)
 /// // Prints "N"
@@ -109,10 +109,10 @@ import StandardNumericTypes
 /// import Foundation
 ///
 /// let value: Roman = 44
-/// let encoder = JSONEncoder()
-/// let data = try encoder.encode(value)
+/// let encoder: JSONEncoder = .init()
+/// let data: Data = try encoder.encode(value)
 ///
-/// let description = String(
+/// let description: String = .init(
 ///     data: data,
 ///     encoding: .utf8
 /// )!
@@ -128,15 +128,15 @@ import StandardNumericTypes
 /// ```swift
 /// import Foundation
 ///
-/// let stringData = Data(#""XLIV""#.utf8)
-/// let integerData = Data(#"44"#.utf8)
-/// let decoder = JSONDecoder()
+/// let stringData: Data = .init(#""XLIV""#.utf8)
+/// let integerData: Data = .init(#"44"#.utf8)
+/// let decoder: JSONDecoder = .init()
 ///
-/// let stringValue = try decoder.decode(
+/// let stringValue: Roman = try decoder.decode(
 ///     Roman.self,
 ///     from: stringData
 /// )
-/// let integerValue = try decoder.decode(
+/// let integerValue: Roman = try decoder.decode(
 ///     Roman.self,
 ///     from: integerData
 /// )
@@ -280,9 +280,11 @@ extension Roman: Decodable {
     public init(from decoder: any Decoder) throws {
         let container: SingleValueDecodingContainer = try decoder.singleValueContainer()
 
-        if let description = try? container.decode(String.self), let value: Self = .init(description) {
+        if let description: String = try? container.decode(String.self), let value: Self = .init(description) {
             self = value
-        } else if let value = try? container.decode(Self.Value.self), Self.min.value ... Self.max.value ~= value {
+        } else if let value: Self.Value = try? container.decode(Self.Value.self),
+            Self.min.value ... Self.max.value ~= value
+        {
             self.init(value: value)
         } else {
             let range: String = "\(Self.min) and \(Self.max)"
@@ -450,8 +452,8 @@ extension Roman: LosslessStringConvertible {
             }
 
             self.init(value: value)
-        } else if let result = RomanNumeralParser(description).parse() {
-            self.init(value: result.value)
+        } else if let value: Self.Value = RomanNumeralParser(description).parse() {
+            self.init(value: value)
         } else {
             return nil
         }

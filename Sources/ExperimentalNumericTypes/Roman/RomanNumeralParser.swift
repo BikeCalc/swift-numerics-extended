@@ -25,10 +25,10 @@ internal struct RomanNumeralParser {
         self.string = string
     }
 
-    /// Parses this string into canonical Roman symbols and their numeric value.
+    /// Parses a canonical Roman numeral string into its numeric value.
     ///
-    /// - Returns: The parsed symbols and value, or `nil` if the string is not a valid Roman numeral.
-    internal func parse() -> (symbols: Array<RomanSymbol>, value: Roman.Value)? {
+    /// - Returns: The numeric value, or `nil` if the string is not a valid Roman numeral.
+    internal func parse() -> Roman.Value? {
         guard let symbols: Array<RomanSymbol> = self.parseSymbols() else {
             return nil
         }
@@ -43,7 +43,7 @@ internal struct RomanNumeralParser {
             value += symbol.value
         }
 
-        return (symbols, value)
+        return value
     }
 
     /// Parses this string into canonical Roman symbols.
@@ -93,7 +93,7 @@ internal struct RomanNumeralParser {
                 return nil
             }
 
-            if let previousSymbol = symbols.last, previousSymbol.isSubtractable(from: symbol) == true {
+            if let previousSymbol: RomanSymbol = symbols.last, previousSymbol.isSubtractable(from: symbol) == true {
                 do {
                     let concatenatedSymbol: RomanSymbol = try previousSymbol.concatenate(with: symbol)
                     symbols.removeLast()

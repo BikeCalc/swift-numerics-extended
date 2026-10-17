@@ -21,7 +21,7 @@ import StandardNumericTypes
 /// For example:
 ///
 /// ```swift
-/// let value = Fraction<Int>(2, 4)
+/// let value: Fraction<Int> = .init(2, 4)
 ///
 /// print(value)
 /// // Prints "2/4"
@@ -32,8 +32,8 @@ import StandardNumericTypes
 /// For example:
 ///
 /// ```swift
-/// let oneHalf = Fraction<Int>(1, 2)
-/// let oneThird = Fraction<Int>(1, 3)
+/// let oneHalf: Fraction<Int> = .init(1, 2)
+/// let oneThird: Fraction<Int> = .init(1, 3)
 /// let one: Fraction<Int> = 1
 ///
 /// print(oneHalf + oneThird)
@@ -220,8 +220,8 @@ extension Fraction: Addable {
     /// For example:
     ///
     /// ```swift
-    /// let lhs = Fraction<Int>(1, 2)
-    /// let rhs = Fraction<Int>(1, 2)
+    /// let lhs: Fraction<Int> = .init(1, 2)
+    /// let rhs: Fraction<Int> = .init(1, 2)
     ///
     /// print(lhs + rhs)
     /// // Prints "2/2"
@@ -326,8 +326,8 @@ extension Fraction: Comparable {
     /// For example:
     ///
     /// ```swift
-    /// let reduced = Fraction<Int>(1, 2)
-    /// let unreduced = Fraction<Int>(2, 4)
+    /// let reduced: Fraction<Int> = .init(1, 2)
+    /// let unreduced: Fraction<Int> = .init(2, 4)
     ///
     /// print(reduced < unreduced)
     /// // Prints "true"
@@ -407,8 +407,8 @@ extension Fraction: CustomDebugStringConvertible {
     ///
     /// The representation includes the concrete term type and both stored terms, including for nonfinite values.
     public var debugDescription: String {
-        let numerator: String = String(reflecting: self.numerator)
-        let denominator: String = String(reflecting: self.denominator)
+        let numerator: String = .init(reflecting: self.numerator)
+        let denominator: String = .init(reflecting: self.denominator)
 
         return "Fraction<\(Term.self)>(\(numerator), \(denominator))"
     }
@@ -516,8 +516,8 @@ extension Fraction: Divisible {
     /// For example:
     ///
     /// ```swift
-    /// let dividend = Fraction<Int>(1, 2)
-    /// let divisor = Fraction<Int>(1, 3)
+    /// let dividend: Fraction<Int> = .init(1, 2)
+    /// let divisor: Fraction<Int> = .init(1, 3)
     ///
     /// print(dividend / divisor)
     /// // Prints "3/2"
@@ -560,8 +560,8 @@ extension Fraction: Divisible {
     /// For example:
     ///
     /// ```swift
-    /// let dividend = Fraction<Int>(7, 2)
-    /// let divisor = Fraction<Int>(3, 2)
+    /// let dividend: Fraction<Int> = .init(7, 2)
+    /// let divisor: Fraction<Int> = .init(3, 2)
     ///
     /// print(dividend % divisor)
     /// // Prints "1/2"
@@ -731,7 +731,7 @@ where Term: LosslessStringConvertible {
             break
         }
 
-        let terms = description.split(
+        let terms: Array<Substring> = description.split(
             separator: "/",
             maxSplits: 1,
             omittingEmptySubsequences: false
@@ -799,8 +799,8 @@ extension Fraction: Multipliable {
     /// For example:
     ///
     /// ```swift
-    /// let lhs = Fraction<Int>(2, 3)
-    /// let rhs = Fraction<Int>(3, 4)
+    /// let lhs: Fraction<Int> = .init(2, 3)
+    /// let rhs: Fraction<Int> = .init(3, 4)
     ///
     /// print(lhs * rhs)
     /// // Prints "6/12"
@@ -846,7 +846,7 @@ where Term: Negateable {
     /// For example:
     ///
     /// ```swift
-    /// let value = Fraction<Int>(1, 2)
+    /// let value: Fraction<Int> = .init(1, 2)
     ///
     /// print(-value)
     /// // Prints "-1/2"
@@ -959,8 +959,8 @@ extension Fraction: Raisable {
     /// For example:
     ///
     /// ```swift
-    /// let value = Fraction<Int>(1, 4)
-    /// let base = Fraction<Int>(2)
+    /// let value: Fraction<Int> = .init(1, 4)
+    /// let base: Fraction<Int> = .init(2)
     ///
     /// print(value.isPower(of: base))
     /// // Prints "true"
@@ -999,14 +999,11 @@ extension Fraction: Raisable {
             return false
         }
 
-        let valueTerms = Self.reducedMagnitudes(
-            numerator: self.numerator,
-            denominator: self.denominator
-        )
-        let baseTerms = Self.reducedMagnitudes(
-            numerator: other.numerator,
-            denominator: other.denominator
-        )
+        let valueTerms: (numerator: Term.Magnitude, denominator: Term.Magnitude) =
+            Self.reducedMagnitudes(numerator: self.numerator, denominator: self.denominator)
+
+        let baseTerms: (numerator: Term.Magnitude, denominator: Term.Magnitude) =
+            Self.reducedMagnitudes(numerator: other.numerator, denominator: other.denominator)
 
         // Only one and negative one can be powers of a base with magnitude one.
         guard baseTerms.numerator != 1 || baseTerms.denominator != 1 else {
@@ -1056,7 +1053,7 @@ extension Fraction: Raisable {
     /// For example:
     ///
     /// ```swift
-    /// let value = Fraction<Int>(2, 3)
+    /// let value: Fraction<Int> = .init(2, 3)
     ///
     /// print(value ** -2)
     /// // Prints "9/4"
@@ -1210,8 +1207,8 @@ extension Fraction: Subtractable {
     /// For example:
     ///
     /// ```swift
-    /// let lhs = Fraction<Int>(3, 4)
-    /// let rhs = Fraction<Int>(1, 4)
+    /// let lhs: Fraction<Int> = .init(3, 4)
+    /// let rhs: Fraction<Int> = .init(1, 4)
     ///
     /// print(lhs - rhs)
     /// // Prints "2/4"
