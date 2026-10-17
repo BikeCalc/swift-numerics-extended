@@ -188,7 +188,7 @@ where Self: Raisable, Self.Exponent: BinaryInteger {
         switch rhs {
         case ..<0:
             var result: Self = 1
-            var exponent = rhs
+            var exponent: Self.Exponent = rhs
 
             // Count toward zero instead of negating the exponent, which may overflow.
             while exponent < 0 {
@@ -202,7 +202,7 @@ where Self: Raisable, Self.Exponent: BinaryInteger {
         case 1:
             return lhs
         default:
-            var result = lhs
+            var result: Self = lhs
             var exponent: Self.Exponent = 1
 
             while exponent < rhs {
@@ -226,7 +226,7 @@ where Self: Roundable, Self.DecimalPlace: UnsignedInteger {
     /// - Returns: This instance rounded.
     public func rounded(to decimalPlace: Self.DecimalPlace) -> Self {
         var divisor: Self = 1
-        var remaining = decimalPlace
+        var remaining: Self.DecimalPlace = decimalPlace
 
         while remaining > 0 {
             divisor *= 10
@@ -248,7 +248,7 @@ where Self: Truncatable, Self.DecimalPlace: UnsignedInteger {
     /// - Returns: This instance truncated.
     public func truncated(to decimalPlace: Self.DecimalPlace) -> Self {
         var divisor: Self = 1
-        var remaining = decimalPlace
+        var remaining: Self.DecimalPlace = decimalPlace
 
         while remaining > 0 {
             divisor *= 10

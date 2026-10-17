@@ -32,9 +32,9 @@ import StandardNumericTypes
 ///
 /// ```swift
 /// let literal: Int4 = -8
-/// let exact = Int4(exactly: 7)
-/// let string = Int4("-8")
-/// let invalid = Int4(exactly: 8)
+/// let exact: Int4? = .init(exactly: 7)
+/// let string: Int4? = .init("-8")
+/// let invalid: Int4? = .init(exactly: 8)
 ///
 /// print(literal)
 /// // Prints "-8"
@@ -77,7 +77,7 @@ import StandardNumericTypes
 /// For example:
 ///
 /// ```swift
-/// let report = Int4.max.addingReportingOverflow(1)
+/// let report: Int4.OverflowReport = Int4.max.addingReportingOverflow(1)
 ///
 /// print(report.partialValue)
 /// // Prints "-8"
@@ -102,10 +102,10 @@ import StandardNumericTypes
 /// import Foundation
 ///
 /// let value: Int4 = -8
-/// let encoder = JSONEncoder()
-/// let data = try encoder.encode(value)
+/// let encoder: JSONEncoder = .init()
+/// let data: Data = try encoder.encode(value)
 ///
-/// let description = String(
+/// let description: String = .init(
 ///     data: data,
 ///     encoding: .utf8
 /// )!
@@ -121,10 +121,10 @@ import StandardNumericTypes
 /// ```swift
 /// import Foundation
 ///
-/// let data = Data(#"-8"#.utf8)
-/// let decoder = JSONDecoder()
+/// let data: Data = .init(#"-8"#.utf8)
+/// let decoder: JSONDecoder = .init()
 ///
-/// let value = try decoder.decode(
+/// let value: Int4 = try decoder.decode(
 ///     Int4.self,
 ///     from: data
 /// )

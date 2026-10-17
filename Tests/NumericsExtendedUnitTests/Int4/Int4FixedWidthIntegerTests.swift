@@ -145,7 +145,7 @@ internal struct Int4FixedWidthIntegerTests {
         high: Int4,
         low: UInt4
     ) {
-        let result = lhs.multipliedFullWidth(by: rhs)
+        let result: Int4.FullWidthProduct = lhs.multipliedFullWidth(by: rhs)
 
         #expect(result.high == high)
         #expect(result.low == low)
@@ -171,7 +171,7 @@ internal struct Int4FixedWidthIntegerTests {
         quotient: Int4,
         remainder: Int4
     ) {
-        let result = divisor.dividingFullWidth((high: high, low: low))
+        let result: Int4.QuotientAndRemainder = divisor.dividingFullWidth((high: high, low: low))
 
         #expect(result.quotient == quotient)
         #expect(result.remainder == remainder)

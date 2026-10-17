@@ -74,7 +74,7 @@ Numerics Extended is written in Swift and avoids platform-specific APIs where po
       startingAt initialValue: Value = .zero
   ) -> Value
   where Value: Addable & RepresentableByZero {
-      var result = initialValue
+      var result: Value = initialValue
 
       for value in values {
           result += value

@@ -31,9 +31,9 @@ import StandardNumericTypes
 ///
 /// ```swift
 /// let literal: UInt4 = 15
-/// let exact = UInt4(exactly: 15)
-/// let string = UInt4("15")
-/// let invalid = UInt4(exactly: 16)
+/// let exact: UInt4? = .init(exactly: 15)
+/// let string: UInt4? = .init("15")
+/// let invalid: UInt4? = .init(exactly: 16)
 ///
 /// print(literal)
 /// // Prints "15"
@@ -80,7 +80,7 @@ import StandardNumericTypes
 /// For example:
 ///
 /// ```swift
-/// let report = UInt4.max.addingReportingOverflow(1)
+/// let report: UInt4.OverflowReport = UInt4.max.addingReportingOverflow(1)
 ///
 /// print(report.partialValue)
 /// // Prints "0"
@@ -96,10 +96,10 @@ import StandardNumericTypes
 /// import Foundation
 ///
 /// let value: UInt4 = 15
-/// let encoder = JSONEncoder()
-/// let data = try encoder.encode(value)
+/// let encoder: JSONEncoder = .init()
+/// let data: Data = try encoder.encode(value)
 ///
-/// let description = String(
+/// let description: String = .init(
 ///     data: data,
 ///     encoding: .utf8
 /// )!
@@ -115,10 +115,10 @@ import StandardNumericTypes
 /// ```swift
 /// import Foundation
 ///
-/// let data = Data(#"15"#.utf8)
-/// let decoder = JSONDecoder()
+/// let data: Data = .init(#"15"#.utf8)
+/// let decoder: JSONDecoder = .init()
 ///
-/// let value = try decoder.decode(
+/// let value: UInt4 = try decoder.decode(
 ///     UInt4.self,
 ///     from: data
 /// )

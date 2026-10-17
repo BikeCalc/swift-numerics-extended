@@ -158,6 +158,29 @@ internal func foo(bar: Self) -> Self {
 }
 ```
 
+### Type Annotations and Initialization
+
+Declare variable and constant types explicitly wherever Swift permits a type annotation.
+
+When the declared type provides sufficient context, use `.init(...)` instead of repeating the type name, and omit
+redundant type names from static members.
+
+For example:
+
+```swift
+let foo: Foo<Bar> = .init(2, .baz)
+let bar: Bar = .baz
+```
+
+Keep explicit type names where they are required for inference. A generic initializer may still need the argument's
+type even when the constructed type is known:
+
+```swift
+let foo: Foo = .init(Bar.baz)
+```
+
+Keep the initializer's type name when it differs from the variable's declared type.
+
 ### Identifier Naming
 
 #### Acronyms
@@ -177,8 +200,8 @@ Functions, properties, parameters, local variables, and enum cases use lowerCame
 beginning of one of these names, but keep it uppercase when it appears at the end:
 
 ```swift
-let httpRequest = "HTTP Client"
-let remoteURL = "Remote URL"
+let httpRequest: String = "HTTP Client"
+let remoteURL: String = "Remote URL"
 func httpRequest() {}
 func remoteURL() {}
 ```
@@ -192,7 +215,7 @@ type-style names, `userId` in value-style names, and `id` when it is the complet
 
 ```swift
 struct UserId {}
-let userId = "User Identifier"
+let userId: String = "User Identifier"
 func userId() {}
 ```
 
@@ -244,7 +267,7 @@ internal init(
     self.baz = baz
 }
 
-let foo = Foo(
+let foo: Foo = .init(
     bar: "bar",
     baz: "baz"
 )
@@ -378,7 +401,7 @@ For example, document a public declaration as follows:
 /// For example:
 ///
 /// ```swift
-/// let value = 2 + 2
+/// let value: Int = 2 + 2
 ///
 /// print(value)
 /// // Prints "4"

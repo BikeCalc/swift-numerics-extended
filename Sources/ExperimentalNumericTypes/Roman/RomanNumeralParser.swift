@@ -93,7 +93,7 @@ internal struct RomanNumeralParser {
                 return nil
             }
 
-            if let previousSymbol = symbols.last, previousSymbol.isSubtractable(from: symbol) == true {
+            if let previousSymbol: RomanSymbol = symbols.last, previousSymbol.isSubtractable(from: symbol) == true {
                 do {
                     let concatenatedSymbol: RomanSymbol = try previousSymbol.concatenate(with: symbol)
                     symbols.removeLast()

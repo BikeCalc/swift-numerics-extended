@@ -269,7 +269,7 @@ fileprivate struct BenchmarkComparator {
             print("|---|---:|")
 
             for name in self.current.keys.sorted() {
-                guard let currentValue = self.current[name] else {
+                guard let currentValue: Double = self.current[name] else {
                     continue
                 }
 
