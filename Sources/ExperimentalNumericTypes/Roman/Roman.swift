@@ -440,8 +440,8 @@ extension Roman: LosslessStringConvertible {
             }
 
             self.init(value: value)
-        } else if let result = RomanNumeralParser(description).parse() {
-            self.init(value: result.value)
+        } else if let value: Self.Value = RomanNumeralParser(description).parse() {
+            self.init(value: value)
         } else {
             return nil
         }
