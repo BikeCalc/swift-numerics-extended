@@ -17,7 +17,7 @@ let package: Package = .init(
     dependencies: [
         .package(
             url: "https://github.com/bikecalc/swift-numerics-extended.git",
-            from: "2.0.0"
+            from: "3.0.0"
         )
     ],
     ...

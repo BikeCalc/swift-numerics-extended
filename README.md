@@ -30,7 +30,7 @@ Numerics Extended is written in Swift and avoids platform-specific APIs where po
         dependencies: [
             .package(
                 url: "https://github.com/bikecalc/swift-numerics-extended.git",
-                from: "2.0.0"
+                from: "3.0.0"
             )
         ],
         ...
@@ -73,7 +73,7 @@ Numerics Extended is written in Swift and avoids platform-specific APIs where po
       _ values: some Sequence<Value>,
       startingAt initialValue: Value = .zero
   ) -> Value
-  where Value: Addable & RepresentableByZero {
+  where Value: Addable & RepresentableByZero, Value.Addend == Value, Value.Sum == Value {
       var result: Value = initialValue
 
       for value in values {
