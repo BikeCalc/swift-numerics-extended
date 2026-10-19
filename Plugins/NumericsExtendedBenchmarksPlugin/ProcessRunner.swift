@@ -33,12 +33,13 @@ internal enum ProcessRunner {
                 workingDirectoryURL: workingDirectoryURL
             )
             process.standardOutput = pipe
-
             try process.run()
             let output: Data = pipe.fileHandleForReading.readDataToEndOfFile()
             process.waitUntilExit()
-            try Self.validate(process, command: command)
-
+            try Self.validate(
+                process,
+                command: command
+            )
             return output
         } catch let error as NumericsExtendedBenchmarksPluginError {
             throw error
@@ -66,11 +67,12 @@ internal enum ProcessRunner {
                 workingDirectoryURL: workingDirectoryURL
             )
             process.standardOutput = FileHandle.standardError
-
             try process.run()
             process.waitUntilExit()
-
-            try Self.validate(process, command: command)
+            try Self.validate(
+                process,
+                command: command
+            )
         } catch let error as NumericsExtendedBenchmarksPluginError {
             throw error
         } catch let error {
@@ -94,7 +96,6 @@ internal enum ProcessRunner {
         process.executableURL = .init(fileURLWithPath: "/usr/bin/env")
         process.arguments = [command] + arguments
         process.currentDirectoryURL = workingDirectoryURL
-
         return process
     }
 

@@ -11,7 +11,6 @@ extension Duration {
     /// The complete duration expressed as a fractional number of nanoseconds.
     internal var nanoseconds: Double {
         let components: (seconds: Int64, attoseconds: Int64) = self.components
-
         return Double(components.seconds) * 1_000_000_000
             + Double(components.attoseconds) / 1_000_000_000
     }

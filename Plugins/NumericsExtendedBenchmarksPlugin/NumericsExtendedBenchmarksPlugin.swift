@@ -12,6 +12,8 @@ import PackagePlugin
 /// Runs and compares Numerics Extended benchmarks through Swift Package Manager.
 @main
 internal struct NumericsExtendedBenchmarksPlugin {
+    internal init() {}
+
     /// Extracts, prepares, and measures an optional baseline revision.
     ///
     /// The current benchmark definitions replace those in the baseline so both revisions measure the same operations.
@@ -37,7 +39,8 @@ internal struct NumericsExtendedBenchmarksPlugin {
             let fileManager: FileManager = .default
             let archiveURL: URL = baselinePackageURL.deletingLastPathComponent().appendingPathComponent("baseline.tar")
 
-            for url in [baselinePackageURL, archiveURL] where fileManager.fileExists(atPath: url.path) {
+            for url in [baselinePackageURL, archiveURL]
+            where fileManager.fileExists(atPath: url.path) {
                 try fileManager.removeItem(at: url)
             }
 
@@ -45,9 +48,7 @@ internal struct NumericsExtendedBenchmarksPlugin {
                 at: baselinePackageURL,
                 withIntermediateDirectories: true
             )
-
             Diagnostics.remark("Preparing baseline revision \(revision)")
-
             try ProcessRunner.run(
                 command: "git",
                 arguments: [
@@ -60,7 +61,6 @@ internal struct NumericsExtendedBenchmarksPlugin {
                 ],
                 workingDirectoryURL: packageURL
             )
-
             try ProcessRunner.run(
                 command: "tar",
                 arguments: [
@@ -72,9 +72,7 @@ internal struct NumericsExtendedBenchmarksPlugin {
                 ],
                 workingDirectoryURL: packageURL
             )
-
             try fileManager.removeItem(at: archiveURL)
-
             let manifestURL: URL = baselinePackageURL.appendingPathComponent("Package.swift")
             let manifest: String = try .init(contentsOf: manifestURL, encoding: .utf8)
             let baselineBenchmarksPath: String
@@ -89,9 +87,7 @@ internal struct NumericsExtendedBenchmarksPlugin {
             }
 
             let currentBenchmarksURL: URL = packageURL.appendingPathComponent("Tools/NumericsExtendedBenchmarks")
-            let baselineBenchmarksURL: URL = baselinePackageURL.appendingPathComponent(
-                baselineBenchmarksPath
-            )
+            let baselineBenchmarksURL: URL = baselinePackageURL.appendingPathComponent(baselineBenchmarksPath)
 
             if fileManager.fileExists(atPath: baselineBenchmarksURL.path) {
                 try fileManager.removeItem(at: baselineBenchmarksURL)
@@ -105,7 +101,6 @@ internal struct NumericsExtendedBenchmarksPlugin {
                 at: currentBenchmarksURL,
                 to: baselineBenchmarksURL
             )
-
             Diagnostics.remark("Running baseline benchmarks")
             try ProcessRunner.run(
                 command: "swift",
@@ -124,7 +119,6 @@ internal struct NumericsExtendedBenchmarksPlugin {
                 ],
                 workingDirectoryURL: baselinePackageURL
             )
-
             return true
         } catch let error as NumericsExtendedBenchmarksPluginError {
             throw error
@@ -173,12 +167,10 @@ extension NumericsExtendedBenchmarksPlugin: CommandPlugin {
                 "--security-path",
                 swiftPMStorageURL.appendingPathComponent("security").path
             ]
-
             try FileManager.default.createDirectory(
                 at: workURL,
                 withIntermediateDirectories: true
             )
-
             let baselineIsAvailable: Bool = try self.prepareBaseline(
                 revision: arguments.baselineRevision,
                 packageURL: packageURL,
@@ -187,7 +179,6 @@ extension NumericsExtendedBenchmarksPlugin: CommandPlugin {
                 baselineReportURL: baselineReportURL,
                 swiftPMArguments: swiftPMArguments
             )
-
             Diagnostics.remark("Running current benchmarks")
             try ProcessRunner.run(
                 command: "swift",
@@ -206,7 +197,6 @@ extension NumericsExtendedBenchmarksPlugin: CommandPlugin {
                 ],
                 workingDirectoryURL: packageURL
             )
-
             var comparisonArguments: Array<String> = [
                 packageURL.appendingPathComponent("Scripts/GenerateBenchmarkReport.swift").path,
                 "--current",
@@ -222,7 +212,6 @@ extension NumericsExtendedBenchmarksPlugin: CommandPlugin {
                 arguments: comparisonArguments,
                 workingDirectoryURL: packageURL
             )
-
             FileHandle.standardOutput.write(summary)
         } catch let error as NumericsExtendedBenchmarksPluginError {
             throw error

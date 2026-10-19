@@ -16,7 +16,6 @@ internal let fractionBenchmarks: Array<Benchmark> = {
     let base: Fraction<Int> = .init(12, 17)
     let exponent: Int = 5
     let noncanonicalValue: Fraction<Int> = .init(123_456, -789_012)
-
     return [
         .init(name: "Fraction.addition") {
             consumeBenchmarkResult(lhs + rhs)

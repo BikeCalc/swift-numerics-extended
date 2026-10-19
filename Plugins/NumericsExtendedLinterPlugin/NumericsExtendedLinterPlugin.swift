@@ -11,7 +11,9 @@ import PackagePlugin
 
 /// Lints every Swift source file in the Numerics Extended package.
 @main
-internal struct NumericsExtendedLinterPlugin {}
+internal struct NumericsExtendedLinterPlugin {
+    internal init() {}
+}
 
 // MARK: - CommandPlugin
 
@@ -34,7 +36,7 @@ extension NumericsExtendedLinterPlugin: CommandPlugin {
             let configurationURL: URL = packageURL.appendingPathComponent(".swift-format")
             let output: Pipe = .init()
             let git: Process = .init()
-            git.executableURL = URL(fileURLWithPath: "/usr/bin/env")
+            git.executableURL = .init(fileURLWithPath: "/usr/bin/env")
             git.arguments = ["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z", "--", "*.swift"]
             git.currentDirectoryURL = packageURL
             git.standardOutput = output
@@ -60,17 +62,14 @@ extension NumericsExtendedLinterPlugin: CommandPlugin {
 
             let lintArguments: Array<String> =
                 ["lint"] + sourcePaths + ["--parallel", "--configuration", configurationURL.path]
-
             let process: Process = try .run(
                 swiftFormat.url,
                 arguments: lintArguments
             )
-
             process.waitUntilExit()
 
             guard process.terminationReason == .exit && process.terminationStatus == 0 else {
                 let problem: String = "\(process.terminationReason):\(process.terminationStatus)"
-
                 Diagnostics.error(
                     "Swift Format could not complete: \(problem)"
                 )

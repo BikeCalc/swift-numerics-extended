@@ -242,7 +242,6 @@ extension Roman: CustomStringConvertible {
         }
 
         let symbols: Array<RomanSymbol> = RomanSymbol.allCases.reversed()
-
         var number: Self.Value = self.value
         var result: String = ""
 
@@ -408,9 +407,7 @@ extension Roman: ExpressibleByIntegerLiteral {
             0 ... 3_999 ~= value,
             "Roman integer literal must be between \(Self.min) and \(Self.max)."
         )
-
         let newValue: Self.Value = .init(value)
-
         self.init(value: newValue)
     }
 }
@@ -571,7 +568,6 @@ extension Roman: ReportableAsOverflow {
         if self.value >= rhs.value {
             let difference: Self.Value = self.value - rhs.value
             let partialValue: Self = .init(value: difference)
-
             return (
                 partialValue: partialValue,
                 overflow: false
@@ -580,7 +576,6 @@ extension Roman: ReportableAsOverflow {
             let modulus: Self.Value = Self.max.value + 1
             let distance: Self.Value = rhs.value - self.value
             let partialValue: Self = .init(value: modulus - distance)
-
             return (
                 partialValue: partialValue,
                 overflow: true
@@ -591,7 +586,6 @@ extension Roman: ReportableAsOverflow {
     public func multipliedReportingOverflow(by rhs: Self) -> Self.OverflowReport {
         let overflow: Bool = rhs.value != 0 && self.value > Self.max.value / rhs.value
         let modulus: Self.Value = Self.max.value + 1
-
         var product: Self.Value = 0
         var addend: Self.Value = self.value
         var multiplier: Self.Value = rhs.value
@@ -606,7 +600,6 @@ extension Roman: ReportableAsOverflow {
         }
 
         let partialValue: Self = .init(value: product)
-
         return (
             partialValue: partialValue,
             overflow: overflow
@@ -623,7 +616,6 @@ extension Roman: ReportableAsOverflow {
 
         let quotient: Self.Value = self.value / rhs.value
         let partialValue: Self = .init(value: quotient)
-
         return (
             partialValue: partialValue,
             overflow: false
@@ -640,7 +632,6 @@ extension Roman: ReportableAsOverflow {
 
         let remainder: Self.Value = self.value % rhs.value
         let partialValue: Self = .init(value: remainder)
-
         return (
             partialValue: partialValue,
             overflow: false

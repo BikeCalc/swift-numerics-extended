@@ -125,7 +125,6 @@ where Term: BinaryInteger {
             divisor > 1 && value.magnitude % divisor == 0,
             "The divisor must reduce the term exactly."
         )
-
         let reducedMagnitude: Term.Magnitude = value.magnitude / divisor
 
         guard let reducedTerm: Term = .init(exactly: reducedMagnitude) else {
@@ -144,7 +143,6 @@ where Term: BinaryInteger {
             numerator,
             denominator
         )
-
         return (
             numerator: numerator.magnitude / divisor,
             denominator: denominator.magnitude / divisor
@@ -295,12 +293,10 @@ extension Fraction: Canonicalizable {
     /// - Precondition: `isCanonicalizable` is `true`.
     public func canonicalized() -> Self {
         let simplified: Self = self.simplified()
-
         precondition(
             simplified.isNormalizable,
             "The fraction must be canonicalizable."
         )
-
         return simplified.normalized()
     }
 }
@@ -405,7 +401,6 @@ extension Fraction: CustomDebugStringConvertible {
     public var debugDescription: String {
         let numerator: String = .init(reflecting: self.numerator)
         let denominator: String = .init(reflecting: self.denominator)
-
         return "Fraction<\(Term.self)>(\(numerator), \(denominator))"
     }
 }
@@ -449,7 +444,6 @@ where Term: Decodable {
             Term.self,
             forKey: .denominator
         )
-
         self.init(numerator, denominator)
     }
 }
@@ -606,7 +600,6 @@ where Term: Encodable {
     /// - Throws: Any error encountered while encoding the numerator or denominator.
     public func encode(to encoder: any Encoder) throws {
         var container: KeyedEncodingContainer<Self.CodingKeys> = encoder.container(keyedBy: Self.CodingKeys.self)
-
         try container.encode(
             self.numerator,
             forKey: .numerator
@@ -762,13 +755,11 @@ extension Fraction: Multipliable {
     /// - Parameter other: The value to test as a factor.
     /// - Returns: `true` when this value is an exact multiple of the specified value, and `false` otherwise.
     public func isMultiple(of other: Self) -> Bool {
-        if self.isZero && other.isZero {
+        if self.isZero, other.isZero {
             return true
         }
 
-        guard self.isFinite,
-            other.isFinite,
-            other.isZero == false
+        guard self.isFinite, other.isFinite, other.isZero == false
         else {
             return false
         }
@@ -806,10 +797,7 @@ extension Fraction: Multipliable {
             return .nan
         }
 
-        switch (
-            lhs.isInfinite || rhs.isInfinite,
-            lhs.isZero || rhs.isZero
-        ) {
+        switch (lhs.isInfinite || rhs.isInfinite, lhs.isZero || rhs.isZero) {
         case (true, true):
             return .nan
         case (true, false):
@@ -894,7 +882,6 @@ extension Fraction: Normalizable {
         let isNumeratorMagnitudeRepresentable: Bool = Term(exactly: self.numerator.magnitude) != nil
         let isNumeratorNegatable: Bool = isNumeratorNonnegative || isNumeratorMagnitudeRepresentable
         let isDenominatorNegatable: Bool = Term(exactly: self.denominator.magnitude) != nil
-
         return isNumeratorNegatable && isDenominatorNegatable
     }
 
@@ -923,7 +910,6 @@ extension Fraction: Normalizable {
             self.isNormalizable,
             "The fraction must be normalizable."
         )
-
         return .init(0 - self.numerator, 0 - self.denominator)
     }
 }
@@ -987,11 +973,14 @@ extension Fraction: Raisable {
             return false
         }
 
-        let valueTerms: (numerator: Term.Magnitude, denominator: Term.Magnitude) =
-            Self.reducedMagnitudes(numerator: self.numerator, denominator: self.denominator)
-
-        let baseTerms: (numerator: Term.Magnitude, denominator: Term.Magnitude) =
-            Self.reducedMagnitudes(numerator: other.numerator, denominator: other.denominator)
+        let valueTerms: (numerator: Term.Magnitude, denominator: Term.Magnitude) = Self.reducedMagnitudes(
+            numerator: self.numerator,
+            denominator: self.denominator
+        )
+        let baseTerms: (numerator: Term.Magnitude, denominator: Term.Magnitude) = Self.reducedMagnitudes(
+            numerator: other.numerator,
+            denominator: other.denominator
+        )
 
         // Only one and negative one can be powers of a base with magnitude one.
         guard baseTerms.numerator != 1 || baseTerms.denominator != 1 else {
@@ -1025,7 +1014,6 @@ extension Fraction: Raisable {
         }
 
         let isExpectedNegative: Bool = other.hasNegativeSign && isExponentOdd
-
         return self.hasNegativeSign == isExpectedNegative
     }
 
@@ -1139,7 +1127,6 @@ extension Fraction: Simplifiable {
             self.numerator,
             self.denominator
         )
-
         return divisor <= 1
     }
 

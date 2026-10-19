@@ -68,6 +68,6 @@ extension Float64: Roundable {
 
 extension Float64: Subtractable {}
 
-// MARK: - Subtractable
+// MARK: - Truncatable
 
 extension Float64: Truncatable {}

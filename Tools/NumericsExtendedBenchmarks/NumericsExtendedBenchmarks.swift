@@ -16,7 +16,7 @@ internal enum NumericsExtendedBenchmarks {
             let arguments: BenchmarkArguments = try .init(Array(CommandLine.arguments.dropFirst()))
 
             if #available(iOS 16.0, macCatalyst 16.0, macOS 13.0, tvOS 16.0, visionOS 1.0, watchOS 9.0, *) {
-                try self.runBenchmarks(arguments: arguments)
+                try Self.runBenchmarks(arguments: arguments)
             } else {
                 throw BenchmarkCommandError.unsupportedPlatform
             }
@@ -35,13 +35,11 @@ internal enum NumericsExtendedBenchmarks {
         do {
             let benchmarks: Array<Benchmark> = fractionBenchmarks + canonicalizedFractionBenchmarks
             let report: BenchmarkReport = BenchmarkRunner().run(benchmarks)
-
             let encoder: JSONEncoder = .init()
             encoder.outputFormatting = [
                 .prettyPrinted,
                 .sortedKeys
             ]
-
             let data: Data = try encoder.encode(report)
 
             if let outputURL: URL = arguments.outputURL {
