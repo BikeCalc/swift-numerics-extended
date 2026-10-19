@@ -18,6 +18,11 @@ internal enum NumericsExtendedBenchmarksPluginError {
         status: Int
     )
 
+    /// A process, file-system, or package operation failed.
+    ///
+    /// - Parameter error: The original failure from the underlying API.
+    case operationFailed(error: any Error)
+
     /// The command-line arguments do not match the supported syntax.
     case invalidArguments
 
@@ -32,6 +37,8 @@ extension NumericsExtendedBenchmarksPluginError: CustomStringConvertible {
         switch self {
         case .commandFailed(let command, let status):
             return "Command '\(command)' failed with termination status \(status)"
+        case .operationFailed(let error):
+            return "Benchmark operation failed: \(error)"
         case .invalidArguments:
             return Self.usage
         }

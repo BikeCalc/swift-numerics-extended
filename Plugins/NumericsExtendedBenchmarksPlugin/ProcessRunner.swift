@@ -19,26 +19,32 @@ internal enum ProcessRunner {
     ///   - arguments: The arguments to pass to the command.
     ///   - workingDirectoryURL: The directory in which to run the command.
     /// - Returns: The data written by the command to standard output.
-    /// - Throws: An error when the process cannot start or terminates unsuccessfully.
+    /// - Throws: `NumericsExtendedBenchmarksPluginError` when the process cannot start or terminates unsuccessfully.
     internal static func output(
         command: String,
         arguments: Array<String>,
         workingDirectoryURL: URL
-    ) throws -> Data {
-        let pipe: Pipe = .init()
-        let process: Process = Self.process(
-            command: command,
-            arguments: arguments,
-            workingDirectoryURL: workingDirectoryURL
-        )
-        process.standardOutput = pipe
+    ) throws(NumericsExtendedBenchmarksPluginError) -> Data {
+        do {
+            let pipe: Pipe = .init()
+            let process: Process = Self.process(
+                command: command,
+                arguments: arguments,
+                workingDirectoryURL: workingDirectoryURL
+            )
+            process.standardOutput = pipe
 
-        try process.run()
-        let output: Data = pipe.fileHandleForReading.readDataToEndOfFile()
-        process.waitUntilExit()
-        try Self.validate(process, command: command)
+            try process.run()
+            let output: Data = pipe.fileHandleForReading.readDataToEndOfFile()
+            process.waitUntilExit()
+            try Self.validate(process, command: command)
 
-        return output
+            return output
+        } catch let error as NumericsExtendedBenchmarksPluginError {
+            throw error
+        } catch let error {
+            throw NumericsExtendedBenchmarksPluginError.operationFailed(error: error)
+        }
     }
 
     /// Runs a command while forwarding its output to the plugin's standard error stream.
@@ -47,22 +53,29 @@ internal enum ProcessRunner {
     ///   - command: The executable command to locate through the environment.
     ///   - arguments: The arguments to pass to the command.
     ///   - workingDirectoryURL: The directory in which to run the command.
-    /// - Throws: An error when the process cannot start or terminates unsuccessfully.
+    /// - Throws: `NumericsExtendedBenchmarksPluginError` when the process cannot start or terminates unsuccessfully.
     internal static func run(
         command: String,
         arguments: Array<String>,
         workingDirectoryURL: URL
-    ) throws {
-        let process: Process = Self.process(
-            command: command,
-            arguments: arguments,
-            workingDirectoryURL: workingDirectoryURL
-        )
-        process.standardOutput = FileHandle.standardError
+    ) throws(NumericsExtendedBenchmarksPluginError) {
+        do {
+            let process: Process = Self.process(
+                command: command,
+                arguments: arguments,
+                workingDirectoryURL: workingDirectoryURL
+            )
+            process.standardOutput = FileHandle.standardError
 
-        try process.run()
-        process.waitUntilExit()
-        try Self.validate(process, command: command)
+            try process.run()
+            process.waitUntilExit()
+
+            try Self.validate(process, command: command)
+        } catch let error as NumericsExtendedBenchmarksPluginError {
+            throw error
+        } catch let error {
+            throw NumericsExtendedBenchmarksPluginError.operationFailed(error: error)
+        }
     }
 
     /// Creates a process configured to locate a command through the environment.

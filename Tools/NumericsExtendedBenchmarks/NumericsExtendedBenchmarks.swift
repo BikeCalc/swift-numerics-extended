@@ -12,7 +12,7 @@ import Foundation
 @main
 internal enum NumericsExtendedBenchmarks {
     internal static func main() {
-        do {
+        do throws(BenchmarkCommandError) {
             let arguments: BenchmarkArguments = try .init(Array(CommandLine.arguments.dropFirst()))
 
             if #available(iOS 16.0, macCatalyst 16.0, macOS 13.0, tvOS 16.0, visionOS 1.0, watchOS 9.0, *) {
@@ -26,28 +26,40 @@ internal enum NumericsExtendedBenchmarks {
         }
     }
 
+    /// Runs the benchmarks and exports their results as JSON.
+    ///
+    /// - Parameter arguments: The output destination selected by the caller.
+    /// - Throws: `BenchmarkCommandError.operationFailed` if the report cannot be encoded or written.
     @available(iOS 16.0, macCatalyst 16.0, macOS 13.0, tvOS 16.0, visionOS 1.0, watchOS 9.0, *)
-    private static func runBenchmarks(arguments: BenchmarkArguments) throws {
-        let benchmarks: Array<Benchmark> = fractionBenchmarks + canonicalizedFractionBenchmarks
-        let report: BenchmarkReport = BenchmarkRunner().run(benchmarks)
-        let encoder: JSONEncoder = .init()
-        encoder.outputFormatting = [
-            .prettyPrinted,
-            .sortedKeys
-        ]
-        let data: Data = try encoder.encode(report)
+    private static func runBenchmarks(arguments: BenchmarkArguments) throws(BenchmarkCommandError) {
+        do {
+            let benchmarks: Array<Benchmark> = fractionBenchmarks + canonicalizedFractionBenchmarks
+            let report: BenchmarkReport = BenchmarkRunner().run(benchmarks)
 
-        if let outputURL: URL = arguments.outputURL {
-            try data.write(to: outputURL)
+            let encoder: JSONEncoder = .init()
+            encoder.outputFormatting = [
+                .prettyPrinted,
+                .sortedKeys
+            ]
 
-            for result in report.results {
-                print("\(result.name): \(String(format: "%.2f ns", result.medianNanosecondsPerOperation))")
+            let data: Data = try encoder.encode(report)
+
+            if let outputURL: URL = arguments.outputURL {
+                try data.write(to: outputURL)
+
+                for result in report.results {
+                    print("\(result.name): \(String(format: "%.2f ns", result.medianNanosecondsPerOperation))")
+                }
+
+                print("\nWrote benchmark report to \(outputURL.path)")
+            } else {
+                FileHandle.standardOutput.write(data)
+                FileHandle.standardOutput.write(Data("\n".utf8))
             }
-
-            print("\nWrote benchmark report to \(outputURL.path)")
-        } else {
-            FileHandle.standardOutput.write(data)
-            FileHandle.standardOutput.write(Data("\n".utf8))
+        } catch let error as BenchmarkCommandError {
+            throw error
+        } catch let error {
+            throw BenchmarkCommandError.operationFailed(error: error)
         }
     }
 }
