@@ -376,7 +376,7 @@ fileprivate struct CodeCoverageReporter {
             .compactMap { file -> SourceCodeCoverage? in
                 let fileURL: URL = URL(fileURLWithPath: file.filename).standardizedFileURL
 
-                guard fileURL.path.hasPrefix(sourcePathPrefix) else {
+                guard fileURL.path.hasPrefix(sourcePathPrefix) == true else {
                     return nil
                 }
 

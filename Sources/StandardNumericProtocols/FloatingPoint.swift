@@ -134,7 +134,7 @@ where Self: Divisible & Negateable & Raisable {
         var power: Self = 1
 
         while true {
-            let nextPower: Self = usesPositiveExponent ? power * other : power / other
+            let nextPower: Self = usesPositiveExponent == true ? power * other : power / other
 
             guard nextPower != self else {
                 return true

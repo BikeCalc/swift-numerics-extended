@@ -53,7 +53,7 @@ extension NumericsExtendedLinterPlugin: CommandPlugin {
                 String(decoding: data, as: UTF8.self)
                     .split(separator: "\0")
                     .map { packageURL.appendingPathComponent(String($0)).path }
-                    .filter { FileManager.default.fileExists(atPath: $0) }
+                    .filter { FileManager.default.fileExists(atPath: $0) == true }
             ).sorted()
 
             guard sourcePaths.isEmpty == false else {

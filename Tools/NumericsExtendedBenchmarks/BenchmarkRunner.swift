@@ -90,7 +90,7 @@ internal struct BenchmarkRunner {
         let sortedValues: Array<Double> = values.sorted()
         let middleIndex: Int = sortedValues.count / 2
 
-        if sortedValues.count.isMultiple(of: 2) {
+        if sortedValues.count.isMultiple(of: 2) == true {
             return (sortedValues[middleIndex - 1] + sortedValues[middleIndex]) / 2
         }
 

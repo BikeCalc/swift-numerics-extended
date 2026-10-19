@@ -63,19 +63,19 @@ internal struct RomanNumeralParser {
             return nil
         }
 
-        guard self.hasValidOrder(symbols) else {
+        guard self.hasValidOrder(symbols) == true else {
             return nil
         }
 
-        guard self.hasValidRecurrences(symbols) else {
+        guard self.hasValidRecurrences(symbols) == true else {
             return nil
         }
 
-        guard self.hasValidSubtractivePrefixes(symbols) else {
+        guard self.hasValidSubtractivePrefixes(symbols) == true else {
             return nil
         }
 
-        guard self.hasValidSubtractiveSuffixes(symbols) else {
+        guard self.hasValidSubtractiveSuffixes(symbols) == true else {
             return nil
         }
 
@@ -133,7 +133,7 @@ internal struct RomanNumeralParser {
             let sequence: ArraySlice<RomanSymbol> = symbols[index - 3 ... index]
             let repeatedSymbol: RomanSymbol = sequence[sequence.startIndex]
 
-            if sequence.dropFirst().allSatisfy({ $0 == repeatedSymbol }) {
+            if sequence.dropFirst().allSatisfy({ $0 == repeatedSymbol }) == true {
                 return false
             }
         }

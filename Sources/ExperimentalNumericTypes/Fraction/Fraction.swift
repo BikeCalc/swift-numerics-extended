@@ -103,7 +103,7 @@ where Term: BinaryInteger {
 
     /// A boolean value indicating whether this value carries a negative sign.
     private var hasNegativeSign: Bool {
-        if self.isInfinite {
+        if self.isInfinite == true {
             return self.numerator < 0
         } else {
             return (self.numerator < 0) != (self.denominator < 0)
@@ -180,11 +180,11 @@ where Term: BinaryInteger {
     ///
     /// An unsigned term cannot represent negative infinity, so that case produces NaN.
     private static func infinity(withNegativeSign isNegative: Bool) -> Self {
-        guard isNegative else {
+        guard isNegative == true else {
             return .infinity
         }
 
-        guard Term.isSigned else {
+        guard Term.isSigned == true else {
             return .nan
         }
 
@@ -193,7 +193,7 @@ where Term: BinaryInteger {
 
     /// Returns zero with the specified sign when the term can represent it.
     private static func zero(withNegativeSign isNegative: Bool) -> Self {
-        guard isNegative && Term.isSigned else {
+        guard isNegative == true && Term.isSigned == true else {
             return .zero
         }
 
@@ -248,7 +248,7 @@ extension Fraction: Addable {
         let newNumerator: Term
         let newDenominator: Term
 
-        if lhs.isLike(rhs) {
+        if lhs.isLike(rhs) == true {
             newNumerator = lhs.numerator + rhs.numerator
             newDenominator = lhs.denominator
         } else {
@@ -274,7 +274,7 @@ extension Fraction: Canonicalizable {
     /// when the resulting simplified fraction can be normalized without arithmetic overflow.
     public var isCanonicalizable: Bool {
         let simplified: Self = self.simplified()
-        return simplified.isNormalizable
+        return simplified.isNormalizable == true
     }
 
     /// A boolean value indicating whether this value is in its canonicalized representation.
@@ -282,7 +282,7 @@ extension Fraction: Canonicalizable {
     /// A canonical fraction is both simplified and normalized. Its numerator and denominator have no common factor
     /// greater than one, and its denominator is nonnegative. Nonfinite fractions are already canonicalized.
     public var isCanonicalized: Bool {
-        return self.isSimplified && self.isNormalized
+        return self.isSimplified == true && self.isNormalized == true
     }
 
     /// Returns the canonicalized representation of this value.
@@ -294,7 +294,7 @@ extension Fraction: Canonicalizable {
     public func canonicalized() -> Self {
         let simplified: Self = self.simplified()
         precondition(
-            simplified.isNormalizable,
+            simplified.isNormalizable == true,
             "The fraction must be canonicalizable."
         )
         return simplified.normalized()
@@ -413,10 +413,10 @@ extension Fraction: CustomStringConvertible {
     /// Finite values contain both stored terms separated by a slash, including whole and zero values. Nonfinite values
     /// use `"inf"`, `"-inf"`, or `"nan"`.
     public var description: String {
-        if self.isNaN {
+        if self.isNaN == true {
             return "nan"
-        } else if self.isInfinite {
-            return self.hasNegativeSign ? "-inf" : "inf"
+        } else if self.isInfinite == true {
+            return self.hasNegativeSign == true ? "-inf" : "inf"
         } else {
             return "\(self.numerator)/\(self.denominator)"
         }
@@ -456,7 +456,7 @@ extension Fraction: Divisible {
     /// A finite reciprocal exchanges the stored numerator and denominator. The reciprocal of positive or negative
     /// infinity is zero with the corresponding sign.
     public var reciprocal: Self? {
-        guard self.isInvertible else {
+        guard self.isInvertible == true else {
             return nil
         }
 
@@ -482,11 +482,11 @@ extension Fraction: Divisible {
     /// - Parameter other: The value to test as a divisor.
     /// - Returns: `true` when the remainder is zero, and `false` otherwise.
     public func isDivisible(by other: Self) -> Bool {
-        guard self.isFinite, other.isFinite, other.isZero == false else {
+        guard self.isFinite == true, other.isFinite == true, other.isZero == false else {
             return false
         }
 
-        return (self % other).isZero
+        return (self % other).isZero == true
     }
 
     /// Returns the quotient of dividing the first specified value by the second.
@@ -521,13 +521,13 @@ extension Fraction: Divisible {
             return .nan
         }
 
-        if lhs.isInfinite && rhs.isInfinite {
+        if lhs.isInfinite == true && rhs.isInfinite == true {
             return .nan
-        } else if lhs.isZero && rhs.isZero {
+        } else if lhs.isZero == true && rhs.isZero == true {
             return .nan
-        } else if rhs.isZero || lhs.isInfinite {
+        } else if rhs.isZero == true || lhs.isInfinite == true {
             return .infinity(withNegativeSign: lhs.hasNegativeSign != rhs.hasNegativeSign)
-        } else if rhs.isInfinite {
+        } else if rhs.isInfinite == true {
             return .zero(withNegativeSign: lhs.hasNegativeSign != rhs.hasNegativeSign)
         } else {
             return .init(lhs.numerator * rhs.denominator, lhs.denominator * rhs.numerator)
@@ -575,7 +575,7 @@ extension Fraction: Divisible {
         let newNumerator: Term
         let newDenominator: Term
 
-        if lhs.isLike(rhs) {
+        if lhs.isLike(rhs) == true {
             newNumerator = lhs.numerator % rhs.numerator
             newDenominator = lhs.denominator
         } else {
@@ -685,7 +685,7 @@ where Term: LosslessStringConvertible {
     public init?(_ description: String) {
         switch description.lowercased() {
         case "-0":
-            guard Term.isSigned else {
+            guard Term.isSigned == true else {
                 return nil
             }
 
@@ -695,7 +695,7 @@ where Term: LosslessStringConvertible {
             self = .infinity
             return
         case "-inf", "-infinity":
-            guard Term.isSigned else {
+            guard Term.isSigned == true else {
                 return nil
             }
 
@@ -705,7 +705,7 @@ where Term: LosslessStringConvertible {
             self = .nan
             return
         case "-nan":
-            guard Term.isSigned else {
+            guard Term.isSigned == true else {
                 return nil
             }
 
@@ -755,16 +755,16 @@ extension Fraction: Multipliable {
     /// - Parameter other: The value to test as a factor.
     /// - Returns: `true` when this value is an exact multiple of the specified value, and `false` otherwise.
     public func isMultiple(of other: Self) -> Bool {
-        if self.isZero, other.isZero {
+        if self.isZero == true, other.isZero == true {
             return true
         }
 
-        guard self.isFinite, other.isFinite, other.isZero == false
+        guard self.isFinite == true, other.isFinite == true, other.isZero == false
         else {
             return false
         }
 
-        return (self % other).isZero
+        return (self % other).isZero == true
     }
 
     /// Returns the product of the specified values.
@@ -797,7 +797,7 @@ extension Fraction: Multipliable {
             return .nan
         }
 
-        switch (lhs.isInfinite || rhs.isInfinite, lhs.isZero || rhs.isZero) {
+        switch (lhs.isInfinite == true || rhs.isInfinite == true, lhs.isZero == true || rhs.isZero == true) {
         case (true, true):
             return .nan
         case (true, false):
@@ -880,9 +880,9 @@ extension Fraction: Normalizable {
 
         let isNumeratorNonnegative: Bool = self.numerator >= 0
         let isNumeratorMagnitudeRepresentable: Bool = Term(exactly: self.numerator.magnitude) != nil
-        let isNumeratorNegatable: Bool = isNumeratorNonnegative || isNumeratorMagnitudeRepresentable
+        let isNumeratorNegatable: Bool = isNumeratorNonnegative == true || isNumeratorMagnitudeRepresentable == true
         let isDenominatorNegatable: Bool = Term(exactly: self.denominator.magnitude) != nil
-        return isNumeratorNegatable && isDenominatorNegatable
+        return isNumeratorNegatable == true && isDenominatorNegatable == true
     }
 
     /// A boolean value indicating whether this value is in its normalized representation.
@@ -907,7 +907,7 @@ extension Fraction: Normalizable {
         }
 
         precondition(
-            self.isNormalizable,
+            self.isNormalizable == true,
             "The fraction must be normalizable."
         )
         return .init(0 - self.numerator, 0 - self.denominator)
@@ -957,17 +957,17 @@ extension Fraction: Raisable {
         }
 
         // Handle zero and infinity without reducing their terms.
-        if other.isZero || other.isInfinite {
-            guard self.isZero || self.isInfinite else {
+        if other.isZero == true || other.isInfinite == true {
+            guard self.isZero == true || self.isInfinite == true else {
                 return false
             }
 
-            return self.isZero
-                || other.hasNegativeSign
+            return self.isZero == true
+                || other.hasNegativeSign == true
                 || self.hasNegativeSign == false
         }
 
-        guard self.isFinite,
+        guard self.isFinite == true,
             self.isZero == false
         else {
             return false
@@ -984,8 +984,8 @@ extension Fraction: Raisable {
 
         // Only one and negative one can be powers of a base with magnitude one.
         guard baseTerms.numerator != 1 || baseTerms.denominator != 1 else {
-            return other.hasNegativeSign
-                && self.hasNegativeSign
+            return other.hasNegativeSign == true
+                && self.hasNegativeSign == true
                 && valueTerms.numerator == 1
                 && valueTerms.denominator == 1
         }
@@ -1013,7 +1013,7 @@ extension Fraction: Raisable {
             return false
         }
 
-        let isExpectedNegative: Bool = other.hasNegativeSign && isExponentOdd
+        let isExpectedNegative: Bool = other.hasNegativeSign == true && isExponentOdd == true
         return self.hasNegativeSign == isExpectedNegative
     }
 
@@ -1053,8 +1053,8 @@ extension Fraction: Raisable {
         }
 
         // A negative exponent of signed zero produces infinity with the corresponding parity sign.
-        if lhs.isZero && rhs < 0 {
-            return .infinity(withNegativeSign: lhs.hasNegativeSign && rhs.isMultiple(of: 2) == false)
+        if lhs.isZero == true && rhs < 0 {
+            return .infinity(withNegativeSign: lhs.hasNegativeSign == true && rhs.isMultiple(of: 2) == false)
         }
 
         var base: Self = lhs
@@ -1205,7 +1205,7 @@ extension Fraction: Subtractable {
         case (true, false):
             return .infinity(withNegativeSign: lhs.hasNegativeSign)
         case (false, true):
-            return .infinity(withNegativeSign: rhs.hasNegativeSign == false)
+            return .infinity(withNegativeSign: !rhs.hasNegativeSign)
         case (false, false):
             break
         }
@@ -1213,7 +1213,7 @@ extension Fraction: Subtractable {
         let newNumerator: Term
         let newDenominator: Term
 
-        if lhs.isLike(rhs) {
+        if lhs.isLike(rhs) == true {
             newNumerator = lhs.numerator - rhs.numerator
             newDenominator = lhs.denominator
         } else {

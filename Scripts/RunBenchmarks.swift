@@ -107,7 +107,7 @@ fileprivate struct Arguments {
     /// - Parameter arguments: Arguments following the script name.
     /// - Throws: `BenchmarkRunnerError.invalidArguments` if the argument shape is unsupported.
     fileprivate init(_ arguments: Array<String>) throws(BenchmarkRunnerError) {
-        if arguments.isEmpty {
+        if arguments.isEmpty == true {
             self.selection = .automatic
         } else if arguments.count == 2 && arguments[0] == "--baseline" {
             self.selection = .baseline(revision: arguments[1])
@@ -198,7 +198,7 @@ fileprivate struct BenchmarkRunner {
                 return beforeSHA
             }
 
-            if event == "push" && refName.hasPrefix("release/") {
+            if event == "push" && refName.hasPrefix("release/") == true {
                 let output: Pipe = .init()
                 let git: Process = .init()
                 git.executableURL = .init(fileURLWithPath: "/usr/bin/env")
@@ -256,8 +256,8 @@ fileprivate struct BenchmarkRunner {
             let process: Process = .init()
             process.executableURL = .init(fileURLWithPath: "/usr/bin/env")
             process.arguments = ["git"] + arguments
-            process.standardOutput = quiet ? FileHandle.nullDevice : FileHandle.standardError
-            process.standardError = quiet ? FileHandle.nullDevice : FileHandle.standardError
+            process.standardOutput = quiet == true ? FileHandle.nullDevice : FileHandle.standardError
+            process.standardError = quiet == true ? FileHandle.nullDevice : FileHandle.standardError
 
             do {
                 try process.run()
@@ -273,7 +273,7 @@ fileprivate struct BenchmarkRunner {
         // initial error while deciding whether recovery is needed.
         let checkArguments: Array<String> = ["rev-parse", "--verify", "--end-of-options", "\(revision)^{commit}"]
 
-        if try runGit(checkArguments, quiet: true) {
+        if try runGit(checkArguments, quiet: true) == true {
             return
         }
 
@@ -283,8 +283,8 @@ fileprivate struct BenchmarkRunner {
         // locally.
         // Fetch success alone does not guarantee that the requested revision name is resolvable in this checkout.
         // The guard evaluates these checks in order and skips verification if fetching fails; both must succeed.
-        guard try runGit(["fetch", "--no-tags", "origin", revision]),
-            try runGit(checkArguments, quiet: true)
+        guard try runGit(["fetch", "--no-tags", "origin", revision]) == true,
+            try runGit(checkArguments, quiet: true) == true
         else {
             throw BenchmarkRunnerError.unavailableBaseline(revision: revision)
         }

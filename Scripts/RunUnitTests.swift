@@ -90,7 +90,7 @@ fileprivate struct Arguments {
     /// - Parameter arguments: The arguments following the script name.
     /// - Throws: `UnitTestRunnerError.invalidArguments` if any arguments are supplied.
     fileprivate init(_ arguments: Array<String>) throws(UnitTestRunnerError) {
-        guard arguments.isEmpty else {
+        guard arguments.isEmpty == true else {
             throw UnitTestRunnerError.invalidArguments
         }
     }
@@ -147,7 +147,7 @@ fileprivate struct UnitTestRunner {
         let reportPath: String = .init(decoding: pathData, as: UTF8.self)
             .trimmingCharacters(in: .whitespacesAndNewlines)
 
-        guard reportPath.isEmpty == false && FileManager.default.fileExists(atPath: reportPath) else {
+        guard reportPath.isEmpty == false && FileManager.default.fileExists(atPath: reportPath) == true else {
             throw UnitTestRunnerError.missingCoverageReport(path: reportPath)
         }
 
@@ -202,7 +202,7 @@ fileprivate struct UnitTestRunner {
         arguments: Array<String>,
         captureOutput: Bool = false
     ) throws(UnitTestRunnerError) -> Data {
-        let output: Pipe? = captureOutput ? .init() : nil
+        let output: Pipe? = captureOutput == true ? .init() : nil
         let process: Process = .init()
         process.executableURL = .init(fileURLWithPath: "/usr/bin/env")
         process.arguments = ["swift"] + arguments

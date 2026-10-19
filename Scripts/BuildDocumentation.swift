@@ -83,7 +83,7 @@ fileprivate struct Arguments {
     /// - Parameter arguments: The arguments following the script name.
     /// - Throws: `DocumentationBuildError.invalidArguments` if any arguments are supplied.
     fileprivate init(_ arguments: Array<String>) throws(DocumentationBuildError) {
-        guard arguments.isEmpty else {
+        guard arguments.isEmpty == true else {
             throw DocumentationBuildError.invalidArguments
         }
     }

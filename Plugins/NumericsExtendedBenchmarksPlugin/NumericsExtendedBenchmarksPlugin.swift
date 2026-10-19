@@ -40,7 +40,7 @@ internal struct NumericsExtendedBenchmarksPlugin {
             let archiveURL: URL = baselinePackageURL.deletingLastPathComponent().appendingPathComponent("baseline.tar")
 
             for url in [baselinePackageURL, archiveURL]
-            where fileManager.fileExists(atPath: url.path) {
+            where fileManager.fileExists(atPath: url.path) == true {
                 try fileManager.removeItem(at: url)
             }
 
@@ -77,9 +77,9 @@ internal struct NumericsExtendedBenchmarksPlugin {
             let manifest: String = try .init(contentsOf: manifestURL, encoding: .utf8)
             let baselineBenchmarksPath: String
 
-            if manifest.contains("path: \"Tools/NumericsExtendedBenchmarks\"") {
+            if manifest.contains("path: \"Tools/NumericsExtendedBenchmarks\"") == true {
                 baselineBenchmarksPath = "Tools/NumericsExtendedBenchmarks"
-            } else if manifest.contains("path: \"Benchmarks/NumericsExtendedBenchmarks\"") {
+            } else if manifest.contains("path: \"Benchmarks/NumericsExtendedBenchmarks\"") == true {
                 baselineBenchmarksPath = "Benchmarks/NumericsExtendedBenchmarks"
             } else {
                 Diagnostics.remark("The baseline predates the benchmark target; reporting the current revision only")
@@ -89,7 +89,7 @@ internal struct NumericsExtendedBenchmarksPlugin {
             let currentBenchmarksURL: URL = packageURL.appendingPathComponent("Tools/NumericsExtendedBenchmarks")
             let baselineBenchmarksURL: URL = baselinePackageURL.appendingPathComponent(baselineBenchmarksPath)
 
-            if fileManager.fileExists(atPath: baselineBenchmarksURL.path) {
+            if fileManager.fileExists(atPath: baselineBenchmarksURL.path) == true {
                 try fileManager.removeItem(at: baselineBenchmarksURL)
             }
 
@@ -146,7 +146,7 @@ extension NumericsExtendedBenchmarksPlugin: CommandPlugin {
             _ = argumentExtractor.extractOption(named: "target")
             let arguments: NumericsExtendedBenchmarksPluginArguments = try .init(argumentExtractor.remainingArguments)
 
-            if arguments.showsHelp {
+            if arguments.showsHelp == true {
                 print(NumericsExtendedBenchmarksPluginError.usage)
                 return
             }
@@ -203,7 +203,7 @@ extension NumericsExtendedBenchmarksPlugin: CommandPlugin {
                 currentReportURL.path
             ]
 
-            if baselineIsAvailable {
+            if baselineIsAvailable == true {
                 comparisonArguments.append(contentsOf: ["--baseline", baselineReportURL.path])
             }
 

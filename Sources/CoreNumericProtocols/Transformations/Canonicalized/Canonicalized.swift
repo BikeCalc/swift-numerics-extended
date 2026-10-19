@@ -19,7 +19,7 @@ where Value: Canonicalizable {
     /// - Precondition: `wrappedValue.isCanonicalizable` is `true`.
     public init(wrappedValue: Value) {
         precondition(
-            wrappedValue.isCanonicalizable,
+            wrappedValue.isCanonicalizable == true,
             "The wrapped value must be canonicalizable."
         )
         self.value = wrappedValue.canonicalized()
@@ -34,7 +34,7 @@ where Value: Canonicalizable {
         }
         set(newValue) {
             precondition(
-                newValue.isCanonicalizable,
+                newValue.isCanonicalizable == true,
                 "The wrapped value must be canonicalizable."
             )
             self.value = newValue.canonicalized()
@@ -111,7 +111,7 @@ where Value: Decodable {
     public init(from decoder: any Decoder) throws {
         let value: Value = try .init(from: decoder)
 
-        guard value.isCanonicalizable else {
+        guard value.isCanonicalizable == true else {
             throw DecodingError.dataCorrupted(
                 .init(
                     codingPath: decoder.codingPath,
