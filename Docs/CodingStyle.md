@@ -158,6 +158,20 @@ internal func foo(bar: Self) -> Self {
 }
 ```
 
+### Typed Throws
+
+When possible, specify a concrete thrown error type when the API guarantees that only that type can be thrown.
+Use untyped `throws` when an API must propagate arbitrary error types. Do not wrap errors solely to introduce a concrete
+thrown error type.
+
+For example:
+
+```swift
+internal func foo() throws(BarError) {
+    throw BarError.baz
+}
+```
+
 ### Explicit Error and Accessor Bindings
 
 Explicitly bind values that Swift otherwise provides through implicit names whenever the body uses them.
