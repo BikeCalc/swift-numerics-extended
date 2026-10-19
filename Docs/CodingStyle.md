@@ -207,15 +207,15 @@ redundant type names from static members.
 For example:
 
 ```swift
-let foo: Foo<Bar> = .init(2, .baz)
-let bar: Bar = .baz
+internal let bar: Bar<Baz> = .init(2, .foo)
+internal let baz: Baz = .foo
 ```
 
 Keep explicit type names where they are required for inference. A generic initializer may still need the argument's
 type even when the constructed type is known:
 
 ```swift
-let foo: Foo = .init(Bar.baz)
+internal let foo: Foo = .init(Baz.foo)
 ```
 
 Keep the initializer's type name when it differs from the variable's declared type.
@@ -231,18 +231,18 @@ Types, protocols, type aliases, associated types, and their matching filenames u
 uppercase whether it appears at the beginning or end of one of these names:
 
 ```swift
-protocol HTTPRequest {}
-struct RemoteURL {}
+internal protocol HTTPRequest {}
+internal struct RemoteURL {}
 ```
 
 Functions, properties, parameters, local variables, and enum cases use lowerCamelCase. Lowercase an acronym at the
 beginning of one of these names, but keep it uppercase when it appears at the end:
 
 ```swift
-let httpRequest: String = "HTTP Client"
-let remoteURL: String = "Remote URL"
-func httpRequest() {}
-func remoteURL() {}
+internal let httpRequest: String = "HTTP Client"
+internal let remoteURL: String = "Remote URL"
+internal func httpRequest() {}
+internal func remoteURL() {}
 ```
 
 When an acronym is the complete value name, write the entire name in lowercase, such as `url` or `http`.
@@ -253,9 +253,9 @@ Some shortened words are not acronyms. For example, treat `Id` as a shortened fo
 type-style names, `userId` in value-style names, and `id` when it is the complete value name:
 
 ```swift
-struct UserId {}
-let userId: String = "User Identifier"
-func userId() {}
+internal struct UserId {}
+internal let userId: String = "User Identifier"
+internal func userId() {}
 ```
 
 ### Declaration Order
@@ -306,7 +306,7 @@ internal init(
     self.baz = baz
 }
 
-let foo: Foo = .init(
+internal let foo: Foo = .init(
     bar: "bar",
     baz: "baz"
 )
@@ -319,14 +319,14 @@ For example:
 
 ```swift
 internal init(
-    _ bar: String
-    _ baz: String,
+    _ bar: String,
+    _ baz: String
 ) {
     self.bar = bar
     self.baz = baz
 }
 
-let foo: Foo = .init("bar", "baz")
+internal let foo: Foo = .init("bar", "baz")
 ```
 
 #### Tuple Types and Literals
@@ -355,7 +355,7 @@ Expand them when their types or expressions make the single-line form difficult 
 For example:
 
 ```swift
-let foo: (String, String) = ("bar", "baz")
+internal let foo: (String, String) = ("bar", "baz")
 ```
 
 #### Function Declarations and Calls
@@ -394,9 +394,9 @@ call. Expand longer literals vertically, placing each element on its own line.
 For example:
 
 ```swift
-let bar: Array<String> = ["foo", "bar", "baz"]
+internal let bar: Array<String> = ["foo", "bar", "baz"]
 
-let baz: Array<String> = [
+internal let baz: Array<String> = [
     "foo",
     "bar",
     "baz"
@@ -411,8 +411,22 @@ initializer. Apply the access-control and documentation conventions to its initi
 
 ### Return Statements
 
-Use an explicit `return` when returning a value from a function, closure, or computed-property getter, even when Swift
-permits an implicit return. This includes single-expression and one-line declarations.
+Use an explicit `return` when returning a value from a function or computed-property getter, even when Swift permits
+an implicit return. This includes single-expression and one-line declarations.
+
+For closures, omit `return` when the closure consists of a single expression on one line, such as a short `map` closure.
+Use explicit `return` statements in multiline closures that return values.
+
+For example:
+
+```swift
+internal let bar: Array<Bar> = foo.map { $0 }
+
+internal let baz: Array<Baz> = foo.map { value in
+    let baz: Baz = value
+    return baz
+}
+```
 
 Use implicit expressions in Swift DSLs that rely on result builders, where expressions contribute to the DSL's result
 rather than returning directly from the enclosing declaration.
