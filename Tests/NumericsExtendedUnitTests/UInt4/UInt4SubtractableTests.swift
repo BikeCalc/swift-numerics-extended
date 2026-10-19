@@ -12,6 +12,8 @@ import Testing
 
 @Suite("UInt4 Subtractable Tests")
 internal struct UInt4SubtractableTests {
+    internal init() {}
+
     private static let subtractionArguments: [(UInt4, UInt4, UInt4)] = [
         (3, 2, 1),
         (5, 3, 2)

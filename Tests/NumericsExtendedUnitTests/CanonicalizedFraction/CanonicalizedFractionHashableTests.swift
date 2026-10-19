@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Canonicalized Fraction Hashable Tests")
 internal struct CanonicalizedFractionHashableTests {
+    internal init() {}
+
     @Test(
         "Equivalent representations produce equal hashes",
         arguments: [

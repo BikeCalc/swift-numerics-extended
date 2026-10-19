@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Roman ReportableAsOverflow Tests")
 internal struct RomanReportableAsOverflowTests {
+    internal init() {}
+
     @Test(
         "Adding reporting overflow",
         arguments: [

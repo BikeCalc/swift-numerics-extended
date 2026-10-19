@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Double ApproximatelyEquatable Tests")
 internal struct DoubleApproximatelyEquatableTests {
+    internal init() {}
+
     @Test(
         "Approximate equality follows the specified tolerances",
         arguments: [

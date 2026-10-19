@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Fraction Canonicalizable Tests")
 internal struct FractionCanonicalizableTests {
+    internal init() {}
+
     private static let canonicalizationArguments: [(Fraction<Int>, Fraction<Int>)] = [
         (Fraction<Int>(2, 4), Fraction<Int>(1, 2)),
         (Fraction<Int>(-2, 4), Fraction<Int>(-1, 2)),

@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Fraction Tests")
 internal struct FractionTests {
+    internal init() {}
+
     @Test(
         "Initialization preserves finite terms",
         arguments: [

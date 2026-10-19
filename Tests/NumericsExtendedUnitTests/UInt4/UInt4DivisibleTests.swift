@@ -12,6 +12,8 @@ import Testing
 
 @Suite("UInt4 Divisible Tests")
 internal struct UInt4DivisibleTests {
+    internal init() {}
+
     private static let divisionArguments: [(UInt4, UInt4, UInt4)] = [
         (6, 2, 3),
         (6, 3, 2)

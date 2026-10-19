@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Roman String Tests")
 internal struct RomanStringTests {
+    internal init() {}
+
     @Test(
         "Is Roman symbol",
         arguments: [

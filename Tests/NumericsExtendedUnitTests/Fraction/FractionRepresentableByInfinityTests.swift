@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Fraction RepresentableByInfinity Tests")
 internal struct FractionRepresentableByInfinityTests {
+    internal init() {}
+
     @Test(
         "Finite values are finite",
         arguments: [

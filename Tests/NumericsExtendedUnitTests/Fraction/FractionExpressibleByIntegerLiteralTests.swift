@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Fraction ExpressibleByIntegerLiteral Tests")
 internal struct FractionExpressibleByIntegerLiteralTests {
+    internal init() {}
+
     @Test(
         "Integer literal initialization succeeds",
         arguments: [

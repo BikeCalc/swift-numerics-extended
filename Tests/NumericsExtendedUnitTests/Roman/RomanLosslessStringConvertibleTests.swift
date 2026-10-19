@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Roman LosslessStringConvertible Tests")
 internal struct RomanLosslessStringConvertibleTests {
+    internal init() {}
+
     @Test(
         "Decimal String initialization succeeds",
         arguments: [

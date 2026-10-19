@@ -12,6 +12,8 @@ import Testing
 
 @Suite("UInt4 BinaryInteger Tests")
 internal struct UInt4BinaryIntegerTests {
+    internal init() {}
+
     @Test(
         "Words succeeds",
         arguments: [

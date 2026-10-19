@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Fraction Simplifiable Tests")
 internal struct FractionSimplifiableTests {
+    internal init() {}
+
     private static let simplificationArguments: [(Fraction<Int>, Fraction<Int>)] = [
         (Fraction<Int>(2, 4), Fraction<Int>(1, 2)),
         (Fraction<Int>(-2, 4), Fraction<Int>(-1, 2)),

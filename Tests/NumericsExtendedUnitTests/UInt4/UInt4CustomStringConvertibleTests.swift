@@ -12,6 +12,8 @@ import Testing
 
 @Suite("UInt4 CustomStringConvertible Tests")
 internal struct UInt4CustomStringConvertibleTests {
+    internal init() {}
+
     @Test(
         "Description succeeds",
         arguments: [

@@ -191,7 +191,7 @@ fileprivate struct BenchmarkRunner {
                 return baseSHA
             }
 
-            if event == "push" && refName == "main" && beforeSHA.allSatisfy({ return $0 == "0" }) == false {
+            if event == "push" && refName == "main" && beforeSHA.allSatisfy({ $0 == "0" }) == false {
                 return beforeSHA
             }
 

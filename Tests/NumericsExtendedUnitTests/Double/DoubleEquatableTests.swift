@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Double Equatable Tests")
 internal struct DoubleEquatableTests {
+    internal init() {}
+
     private static let equalityArguments: Array<(Double, Double)> = [
         (1.0, 1.0),
         (1.0, 2.0),

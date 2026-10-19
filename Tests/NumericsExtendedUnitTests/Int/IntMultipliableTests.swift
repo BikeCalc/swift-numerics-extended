@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Int Multipliable Tests")
 internal struct IntMultipliableTests {
+    internal init() {}
+
     private static let multiplicationArguments: [(Int, Int, Int)] = [
         (2, 3, 6),
         (3, 4, 12),

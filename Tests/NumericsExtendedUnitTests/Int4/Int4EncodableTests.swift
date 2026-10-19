@@ -14,6 +14,8 @@ import Testing
 
 @Suite("Int4 Encodable Tests")
 internal struct Int4EncodableTests {
+    internal init() {}
+
     @Test(
         "Encode to JSON succeeds",
         arguments: [

@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Roman Numeric Tests")
 internal struct RomanNumericTests {
+    internal init() {}
+
     @Test(
         "Initialized exactly succeeds",
         arguments: [

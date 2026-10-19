@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Int4 CustomDebugStringConvertible Tests")
 internal struct Int4CustomDebugStringConvertibleTests {
+    internal init() {}
+
     @Test(
         "Debug description succeeds",
         arguments: [

@@ -14,6 +14,8 @@ import Testing
 
 @Suite("Roman Encodable Tests")
 internal struct RomanEncodableTests {
+    internal init() {}
+
     @Test(
         "Encode to JSON succeeds",
         arguments: [

@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Fraction Numeric Tests")
 internal struct FractionNumericTests {
+    internal init() {}
+
     @Test(
         "Initialized exactly succeeds",
         arguments: [

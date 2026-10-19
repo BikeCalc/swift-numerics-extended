@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Int ReportableAsOverflow Tests")
 internal struct IntReportableAsOverflowTests {
+    internal init() {}
+
     @Test(
         "Adding reporting overflow",
         arguments: [

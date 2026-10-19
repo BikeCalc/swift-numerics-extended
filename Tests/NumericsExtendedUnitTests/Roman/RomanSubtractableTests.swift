@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Roman Subtractable Tests")
 internal struct RomanSubtractableTests {
+    internal init() {}
+
     private static let subtractionArguments: [(Roman, Roman, Roman)] = [
         (3, 2, 1),
         (5, 3, 2)

@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Roman Comparable Tests")
 internal struct RomanComparableTests {
+    internal init() {}
+
     private static let comparisonArguments: Array<(Roman, Roman, Bool, Bool, Bool, Bool)> = [
         (1, 1, false, true, false, true),
         (2, 3, true, true, false, false),

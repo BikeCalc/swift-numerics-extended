@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Roman Hashable Tests")
 internal struct RomanHashableTests {
+    internal init() {}
+
     @Test(
         "Equal values produce equal hashes",
         arguments: [

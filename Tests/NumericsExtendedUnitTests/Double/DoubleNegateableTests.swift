@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Double Negateable Tests")
 internal struct DoubleNegateableTests {
+    internal init() {}
+
     private static let negationArguments: Array<(Double, Double)> = [
         (1.0, -1.0),
         (-1.0, 1.0),

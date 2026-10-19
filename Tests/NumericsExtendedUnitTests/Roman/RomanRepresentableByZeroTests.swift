@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Roman RepresentableByZero Tests")
 internal struct RomanRepresentableByZeroTests {
+    internal init() {}
+
     @Test(
         "Nonzero values are not zero",
         arguments: [

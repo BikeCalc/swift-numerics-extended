@@ -12,6 +12,8 @@ import Testing
 
 @Suite("UInt4 ExpressibleByIntegerLiteral Tests")
 internal struct UInt4ExpressibleByIntegerLiteralTests {
+    internal init() {}
+
     @Test(
         "Integer literal initialization succeeds",
         arguments: [

@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Double Increasable Tests")
 internal struct DoubleIncreasableTests {
+    internal init() {}
+
     @Test(
         "Increasing by succeeds",
         arguments: [

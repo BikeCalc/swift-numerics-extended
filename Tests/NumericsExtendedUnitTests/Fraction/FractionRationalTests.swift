@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Fraction Rational Tests")
 internal struct FractionRationalTests {
+    internal init() {}
+
     @Test(
         "Whole initialization uses denominator one",
         arguments: [

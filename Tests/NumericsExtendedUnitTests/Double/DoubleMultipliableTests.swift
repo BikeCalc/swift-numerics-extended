@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Double Multipliable Tests")
 internal struct DoubleMultipliableTests {
+    internal init() {}
+
     private static let multiplicationArguments: [(Double, Double, Double)] = [
         (2.0, 3.0, 6.0),
         (3.0, 4.0, 12.0),

@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Double Addable Tests")
 internal struct DoubleAddableTests {
+    internal init() {}
+
     private static let additionArguments: Array<(Double, Double, Double)> = [
         (2.0, 3.0, 5.0),
         (3.0, 4.0, 7.0),

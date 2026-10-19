@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Canonicalized Fraction Comparable Tests")
 internal struct CanonicalizedFractionComparableTests {
+    internal init() {}
+
     private static let comparisonArguments: [(Fraction<Int>, Fraction<Int>, Bool, Bool, Bool, Bool)] = [
         (Fraction<Int>(1, 2), Fraction<Int>(1, 2), false, true, false, true),
         (Fraction<Int>(1, 2), Fraction<Int>(2, 4), false, true, false, true),

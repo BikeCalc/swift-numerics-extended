@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Fraction RepresentableByZero Tests")
 internal struct FractionRepresentableByZeroTests {
+    internal init() {}
+
     @Test(
         "Nonzero values are not zero",
         arguments: [

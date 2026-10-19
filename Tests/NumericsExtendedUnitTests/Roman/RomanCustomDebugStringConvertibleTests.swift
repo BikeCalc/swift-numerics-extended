@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Roman CustomDebugStringConvertible Tests")
 internal struct RomanCustomDebugStringConvertibleTests {
+    internal init() {}
+
     @Test(
         "Debug description succeeds",
         arguments: [

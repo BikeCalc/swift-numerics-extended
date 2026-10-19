@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Canonicalized Fraction Negateable Tests")
 internal struct CanonicalizedFractionNegateableTests {
+    internal init() {}
+
     private static let negationArguments: [(Fraction<Int>, Fraction<Int>)] = [
         (Fraction<Int>(1, 2), Fraction<Int>(-1, 2)),
         (Fraction<Int>(-1, 2), Fraction<Int>(1, 2)),

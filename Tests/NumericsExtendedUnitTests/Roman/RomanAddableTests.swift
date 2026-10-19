@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Roman Addable Tests")
 internal struct RomanAddableTests {
+    internal init() {}
+
     private static let additionArguments: [(Roman, Roman, Roman)] = [
         (2, 3, 5),
         (3, 4, 7)

@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Roman Strideable Tests")
 internal struct RomanStrideableTests {
+    internal init() {}
+
     @Test(
         "Advanced by succeeds",
         arguments: [

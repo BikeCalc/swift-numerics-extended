@@ -14,6 +14,8 @@ import Testing
 
 @Suite("UInt4 Decodable Tests")
 internal struct UInt4DecodableTests {
+    internal init() {}
+
     @Test(
         "Decode from JSON succeeds",
         arguments: [

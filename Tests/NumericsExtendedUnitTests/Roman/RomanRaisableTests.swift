@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Roman Raisable Tests")
 internal struct RomanRaisableTests {
+    internal init() {}
+
     private static let exponentiationArguments: [(Roman, Roman.Exponent, Roman)] = [
         (2, 2, 4),
         (2, 3, 8),

@@ -232,7 +232,9 @@ uppercase whether it appears at the beginning or end of one of these names:
 
 ```swift
 internal protocol HTTPRequest {}
-internal struct RemoteURL {}
+internal struct RemoteURL {
+    internal init() {}
+}
 ```
 
 Functions, properties, parameters, local variables, and enum cases use lowerCamelCase. Lowercase an acronym at the
@@ -253,7 +255,9 @@ Some shortened words are not acronyms. For example, treat `Id` as a shortened fo
 type-style names, `userId` in value-style names, and `id` when it is the complete value name:
 
 ```swift
-internal struct UserId {}
+internal struct UserId {
+    internal init() {}
+}
 internal let userId: String = "User Identifier"
 internal func userId() {}
 ```

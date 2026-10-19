@@ -14,6 +14,8 @@ import Testing
 
 @Suite("Canonicalized Fraction Encodable Tests")
 internal struct CanonicalizedFractionEncodableTests {
+    internal init() {}
+
     @Test(
         "Encode to JSON succeeds",
         arguments: [

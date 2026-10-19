@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Int Hashable Tests")
 internal struct IntHashableTests {
+    internal init() {}
+
     @Test(
         "Equal values produce equal hashes",
         arguments: [

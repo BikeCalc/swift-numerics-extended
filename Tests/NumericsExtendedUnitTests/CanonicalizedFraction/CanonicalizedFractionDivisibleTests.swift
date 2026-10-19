@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Canonicalized Fraction Divisible Tests")
 internal struct CanonicalizedFractionDivisibleTests {
+    internal init() {}
+
     private static let divisionArguments: [(Fraction<Int>, Fraction<Int>, Fraction<Int>)] = [
         (Fraction<Int>(1, 2), Fraction<Int>(1, 2), Fraction<Int>(1, 1)),
         (Fraction<Int>(1, 2), Fraction<Int>(2, 3), Fraction<Int>(3, 4)),

@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Int4 Comparable Tests")
 internal struct Int4ComparableTests {
+    internal init() {}
+
     private static let comparisonArguments: Array<(Int4, Int4, Bool, Bool, Bool, Bool)> = [
         (1, 1, false, true, false, true),
         (-1, -1, false, true, false, true),

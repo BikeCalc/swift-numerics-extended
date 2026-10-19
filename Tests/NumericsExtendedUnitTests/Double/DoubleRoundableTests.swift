@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Double Roundable Tests")
 internal struct DoubleRoundableTests {
+    internal init() {}
+
     private static let roundingArguments: Array<(Double, Double.DecimalPlace, Double)> = [
         (1.2345, Double.DecimalPlace(0), 1.0),
         (-1.2345, Double.DecimalPlace(0), -1.0),

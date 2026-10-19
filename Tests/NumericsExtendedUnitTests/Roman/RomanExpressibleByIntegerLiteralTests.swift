@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Roman ExpressibleByIntegerLiteral Tests")
 internal struct RomanExpressibleByIntegerLiteralTests {
+    internal init() {}
+
     @Test(
         "Integer literal initialization succeeds",
         arguments: [

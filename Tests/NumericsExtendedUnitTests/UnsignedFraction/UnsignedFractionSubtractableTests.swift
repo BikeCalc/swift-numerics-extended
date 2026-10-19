@@ -11,7 +11,9 @@ import Testing
 @testable import NumericsExtended
 
 @Suite("Unsigned Fraction Subtractable Tests")
-internal struct UnsignedFractionSubtractableTests {}
+internal struct UnsignedFractionSubtractableTests {
+    internal init() {}
+}
 
 // MARK: - NaN
 

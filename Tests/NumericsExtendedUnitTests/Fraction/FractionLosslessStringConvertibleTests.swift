@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Fraction LosslessStringConvertible Tests")
 internal struct FractionLosslessStringConvertibleTests {
+    internal init() {}
+
     @Test(
         "String initialization succeeds",
         arguments: [

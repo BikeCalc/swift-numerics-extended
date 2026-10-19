@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Canonicalized Fraction Raisable Tests")
 internal struct CanonicalizedFractionRaisableTests {
+    internal init() {}
+
     private static let exponentiationArguments: [(Fraction<Int>, Fraction<Int>.Exponent, Fraction<Int>)] = [
         (Fraction<Int>(2, 3), 2, Fraction<Int>(4, 9)),
         (Fraction<Int>(2, 3), 3, Fraction<Int>(8, 27)),

@@ -14,6 +14,8 @@ import Testing
 
 @Suite("Roman Decodable Tests")
 internal struct RomanDecodableTests {
+    internal init() {}
+
     @Test(
         "Decode from JSON string succeeds",
         arguments: [

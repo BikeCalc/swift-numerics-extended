@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Fraction CanonicallyEquatable Tests")
 internal struct FractionCanonicallyEquatableTests {
+    internal init() {}
+
     @Test(
         "Canonical equality",
         arguments: [

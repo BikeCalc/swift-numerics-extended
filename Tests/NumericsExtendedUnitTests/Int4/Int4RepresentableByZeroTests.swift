@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Int4 RepresentableByZero Tests")
 internal struct Int4RepresentableByZeroTests {
+    internal init() {}
+
     @Test(
         "Nonzero values are not zero",
         arguments: [

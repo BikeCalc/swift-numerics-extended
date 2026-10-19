@@ -12,6 +12,8 @@ import Testing
 
 @Suite("UInt4 FixedWidthInteger Tests")
 internal struct UInt4FixedWidthIntegerTests {
+    internal init() {}
+
     @Test("Has four bits")
     internal func hasFourBits() {
         #expect(UInt4.bitWidth == 4)

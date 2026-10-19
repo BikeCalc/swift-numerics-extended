@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Double Truncatable Tests")
 internal struct DoubleTruncatableTests {
+    internal init() {}
+
     private static let truncationArguments: Array<(Double, Double.DecimalPlace, Double)> = [
         (1.2345, Double.DecimalPlace(0), 1.0),
         (-1.2345, Double.DecimalPlace(0), -1.0),

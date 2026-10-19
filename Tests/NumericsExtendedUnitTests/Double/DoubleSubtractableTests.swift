@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Double Subtractable Tests")
 internal struct DoubleSubtractableTests {
+    internal init() {}
+
     private static let subtractionArguments: [(Double, Double, Double)] = [
         (3.0, 2.0, 1.0),
         (5.0, 3.0, 2.0),

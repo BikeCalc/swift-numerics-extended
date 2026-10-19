@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Fraction Hashable Tests")
 internal struct FractionHashableTests {
+    internal init() {}
+
     @Test(
         "Equal stored values produce equal hashes",
         arguments: [

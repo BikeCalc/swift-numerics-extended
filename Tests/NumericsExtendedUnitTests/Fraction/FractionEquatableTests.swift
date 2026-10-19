@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Fraction Equatable Tests")
 internal struct FractionEquatableTests {
+    internal init() {}
+
     private static let equalityArguments: [(Fraction<Int>, Fraction<Int>, Bool)] = [
         (Fraction<Int>(1, 2), Fraction<Int>(1, 2), true),
         (Fraction<Int>(1, 2), Fraction<Int>(2, 3), false),

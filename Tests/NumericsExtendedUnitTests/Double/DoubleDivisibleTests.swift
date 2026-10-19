@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Double Divisible Tests")
 internal struct DoubleDivisibleTests {
+    internal init() {}
+
     private static let divisionArguments: [(Double, Double, Double)] = [
         (6.0, 2.0, 3.0),
         (6.0, 3.0, 2.0),

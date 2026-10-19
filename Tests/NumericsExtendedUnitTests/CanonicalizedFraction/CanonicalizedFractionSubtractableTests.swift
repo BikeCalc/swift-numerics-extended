@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Canonicalized Fraction Subtractable Tests")
 internal struct CanonicalizedFractionSubtractableTests {
+    internal init() {}
+
     private static let subtractionArguments: [(Fraction<Int>, Fraction<Int>, Fraction<Int>)] = [
         (Fraction<Int>(2, 3), Fraction<Int>(1, 2), Fraction<Int>(1, 6)),
         (Fraction<Int>(3, 4), Fraction<Int>(1, 2), Fraction<Int>(1, 4)),

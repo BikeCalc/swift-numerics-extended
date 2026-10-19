@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Canonicalized Fraction Multipliable Tests")
 internal struct CanonicalizedFractionMultipliableTests {
+    internal init() {}
+
     private static let multiplicationArguments: [(Fraction<Int>, Fraction<Int>, Fraction<Int>)] = [
         (Fraction<Int>(1, 2), Fraction<Int>(1, 2), Fraction<Int>(1, 4)),
         (Fraction<Int>(1, 2), Fraction<Int>(2, 3), Fraction<Int>(1, 3)),

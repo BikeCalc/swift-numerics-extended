@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Int4 Equatable Tests")
 internal struct Int4EquatableTests {
+    internal init() {}
+
     private static let equalityArguments: Array<(Int4, Int4, Bool)> = [
         (1, 1, true),
         (1, 2, false),

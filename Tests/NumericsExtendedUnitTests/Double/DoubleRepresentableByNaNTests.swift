@@ -11,7 +11,9 @@ import Testing
 @testable import NumericsExtended
 
 @Suite("Double RepresentableByNaN Tests")
-internal struct DoubleRepresentableByNaNTests {}
+internal struct DoubleRepresentableByNaNTests {
+    internal init() {}
+}
 
 // MARK: - NaN
 
