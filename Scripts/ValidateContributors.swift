@@ -189,7 +189,6 @@ fileprivate struct ContributorValidator {
                 .map { Array($0.utf8) }
         )
         .sorted { $0.lexicographicallyPrecedes($1) }
-
         return Data(authors.flatMap { $0 + [10] })
     }
 
@@ -200,6 +199,7 @@ fileprivate struct ContributorValidator {
     /// - Throws: `ContributorValidationError` if temporary files cannot be created or the comparison cannot run.
     private func contributorDifference(expected: Data) throws(ContributorValidationError) -> String {
         let temporaryURL: URL = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+
         do {
             try FileManager.default.createDirectory(
                 at: temporaryURL,
@@ -218,6 +218,7 @@ fileprivate struct ContributorValidator {
         }
 
         let expectedURL: URL = temporaryURL.appendingPathComponent(self.contributorsFileName)
+
         do {
             try expected.write(to: expectedURL)
         } catch let error {

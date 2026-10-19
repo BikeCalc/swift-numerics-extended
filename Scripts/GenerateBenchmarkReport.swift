@@ -381,7 +381,6 @@ do throws(BenchmarkReportError) {
         baselineURL: arguments.baselineURL,
         currentURL: arguments.currentURL
     )
-
     comparator.printReport()
 } catch let error {
     FileHandle.standardError.write(Data("\(error)\n".utf8))

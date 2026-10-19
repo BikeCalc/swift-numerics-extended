@@ -365,6 +365,7 @@ fileprivate struct CodeCoverageReporter {
                 underlyingError: error
             )
         }
+
         let standardizedSourcesURL: URL = sourcesURL.standardizedFileURL
         let sourcePathPrefix: String = standardizedSourcesURL.path + "/"
 
@@ -397,7 +398,6 @@ fileprivate struct CodeCoverageReporter {
     fileprivate func printReport() {
         print("## Code Coverage")
         print()
-
         self.printTargets()
         print()
         self.printFiles()
@@ -479,7 +479,6 @@ fileprivate struct CodeCoverageReporter {
         formatter.numberStyle = .decimal
         formatter.usesGroupingSeparator = true
         formatter.maximumFractionDigits = 0
-
         return formatter.string(from: NSNumber(value: value)) ?? String(value)
     }
 }
@@ -492,7 +491,6 @@ do throws(CodeCoverageReportError) {
         reportURL: arguments.reportURL,
         sourcesURL: arguments.sourcesURL
     )
-
     reporter.printReport()
 } catch let error {
     FileHandle.standardError.write(Data("\(error)\n".utf8))

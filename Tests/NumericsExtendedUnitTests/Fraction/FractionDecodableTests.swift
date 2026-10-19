@@ -33,7 +33,6 @@ internal struct FractionDecodableTests {
             Fraction<Int>.self,
             from: data
         )
-
         #expect(result == value)
     }
 
@@ -49,7 +48,6 @@ internal struct FractionDecodableTests {
     )
     internal func decodeFromJSONThrows(json: String) throws {
         let data: Data = try #require(json.data(using: .utf8))
-
         #expect(throws: DecodingError.self) {
             try JSONDecoder().decode(
                 Fraction<Int>.self,

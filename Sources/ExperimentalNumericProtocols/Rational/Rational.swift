@@ -29,7 +29,8 @@ public protocol Rational:
     Operatable,
     RepresentableByInfinity,
     RepresentableByNaN,
-    RepresentableByZero {
+    RepresentableByZero
+{
     /// The integer type used for the numerator and denominator.
     ///
     /// A signed term type permits negative rational representations, including negative zero and negative infinity.
@@ -89,11 +90,9 @@ extension Rational {
         let isNumeratorZero: Bool = self.numerator == 0
         let termsHaveMatchingSigns: Bool = (self.numerator < 0) == (self.denominator < 0)
         let isNonnegative: Bool = isNumeratorZero || termsHaveMatchingSigns
-
         let isDenominatorMagnitudeOne: Bool = self.denominator.magnitude == 1
         let isEvenlyDivisible: Bool = self.numerator.magnitude % self.denominator.magnitude == 0
         let isInteger: Bool = isDenominatorMagnitudeOne || isEvenlyDivisible
-
         return isNonnegative && isInteger
     }
 

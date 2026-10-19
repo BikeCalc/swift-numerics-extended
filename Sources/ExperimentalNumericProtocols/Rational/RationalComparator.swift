@@ -64,7 +64,6 @@ package enum RationalComparator {
         let lhsIsNonzero: Bool = lhs.numerator != 0
         let lhsTermsHaveDifferentSigns: Bool = (lhs.numerator < 0) != (lhs.denominator < 0)
         let lhsIsNegative: Bool = lhsIsNonzero && lhsTermsHaveDifferentSigns
-
         let rhsIsNonzero: Bool = rhs.numerator != 0
         let rhsTermsHaveDifferentSigns: Bool = (rhs.numerator < 0) != (rhs.denominator < 0)
         let rhsIsNegative: Bool = rhsIsNonzero && rhsTermsHaveDifferentSigns
@@ -77,7 +76,6 @@ package enum RationalComparator {
             (numerator: lhs.numerator.magnitude, denominator: lhs.denominator.magnitude),
             (numerator: rhs.numerator.magnitude, denominator: rhs.denominator.magnitude)
         )
-
         return lhsIsNegative ? ordering.reversed : ordering
     }
 
@@ -97,7 +95,6 @@ package enum RationalComparator {
             lhs.denominator > 0 && rhs.denominator > 0,
             "Rational comparison denominators must be positive."
         )
-
         var lhsDividend: Magnitude = lhs.numerator
         var lhsDivisor: Magnitude = lhs.denominator
         var rhsDividend: Magnitude = rhs.numerator
@@ -113,7 +110,6 @@ package enum RationalComparator {
 
             if lhsQuotient != rhsQuotient {
                 let ordering: Ordering = lhsQuotient < rhsQuotient ? .ascending : .descending
-
                 return isReversed ? ordering.reversed : ordering
             }
 
@@ -130,7 +126,6 @@ package enum RationalComparator {
                 lhsDivisor = lhsRemainder
                 rhsDividend = rhsDivisor
                 rhsDivisor = rhsRemainder
-
                 // Taking reciprocals reverses the ordering at every continued-fraction step.
                 isReversed.toggle()
             }

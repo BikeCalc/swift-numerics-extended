@@ -161,6 +161,7 @@ fileprivate struct DocumentationBuilder {
         guard process.terminationReason == .exit else {
             throw DocumentationBuildError.buildInterrupted(signal: process.terminationStatus)
         }
+
         guard process.terminationStatus == EXIT_SUCCESS else {
             throw DocumentationBuildError.buildFailed(status: process.terminationStatus)
         }

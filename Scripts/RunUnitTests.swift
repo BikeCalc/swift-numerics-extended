@@ -117,7 +117,6 @@ fileprivate struct UnitTestRunner {
     /// - Throws: `UnitTestRunnerError` if a command fails or coverage artifacts cannot be exported.
     fileprivate func run() throws(UnitTestRunnerError) {
         try self.runSwift(arguments: ["test", "--enable-code-coverage"])
-
         try self.exportCoverage(
             packagePath: ".",
             sourcesPath: "Sources",
@@ -141,12 +140,10 @@ fileprivate struct UnitTestRunner {
             of: " ",
             with: "-"
         )
-
         let pathData: Data = try self.runSwift(
             arguments: ["test", "--package-path", packagePath, "--show-codecov-path"],
             captureOutput: true
         )
-
         let reportPath: String = .init(decoding: pathData, as: UTF8.self)
             .trimmingCharacters(in: .whitespacesAndNewlines)
 
@@ -206,7 +203,6 @@ fileprivate struct UnitTestRunner {
         captureOutput: Bool = false
     ) throws(UnitTestRunnerError) -> Data {
         let output: Pipe? = captureOutput ? .init() : nil
-
         let process: Process = .init()
         process.executableURL = .init(fileURLWithPath: "/usr/bin/env")
         process.arguments = ["swift"] + arguments
@@ -225,7 +221,6 @@ fileprivate struct UnitTestRunner {
 
         // Drain captured output before waiting so a large report cannot block the subprocess.
         let data: Data = output?.fileHandleForReading.readDataToEndOfFile() ?? .init()
-
         process.waitUntilExit()
 
         guard process.terminationReason == .exit else {
