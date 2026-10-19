@@ -26,7 +26,8 @@ See [Formatting](/Docs/Formatting.md) for local commands, the command plugin, an
 - `lineBreakBeforeControlFlowKeywords`: Keywords such as `else` remain beside the preceding closing brace.
 - `lineBreakBeforeEachArgument`: Once an argument list is multiline, every argument begins on its own line.
 - `lineBreakBeforeEachGenericRequirement`: Generic requirements may remain together where they fit.
-- `lineBreakBetweenDeclarationAttributes`: Each declaration attribute begins on its own line.
+- `lineBreakBetweenDeclarationAttributes`: Attributes may share a line with their declaration, allowing inline
+  property wrappers. See [Property Wrappers and Attributes](#property-wrappers-and-attributes).
 - `maximumBlankLines`: At most one consecutive blank line is permitted.
 - `multiElementCollectionTrailingCommas`: Multiline collection literals do not use trailing commas.
 - `noAssignmentInExpressions`: No function is exempt from the prohibition on assignments inside expressions.
@@ -109,6 +110,33 @@ These conventions cover project-wide or judgment-based requirements that `.swift
 ### Numeric Formatting
 
 Use a period as the decimal separator. In prose and explanatory tables, group thousands with commas, such as `1,000.25`.
+
+### Boolean Comparisons
+
+Throughout the repository, including source code, scripts, plugins, tools, tests, and code examples, compare Boolean
+values, properties, and function results explicitly with `true` or `false` when checking them. Write `value == true`
+even when the comparison could be omitted, and write `value == false` instead of prefix negation such as `!value`.
+Apply this convention within compound conditions as well.
+
+For example:
+
+```swift
+if self.bar == true {
+    return
+}
+
+guard self.bar == false else {
+    return
+}
+```
+
+Use prefix `!` when computing the opposite Boolean value, rather than checking whether a value is false. For example,
+write `#expect((lhs != rhs) == !result)` when the expected inequality result is the opposite of the expected equality
+result. This exception also applies outside tests when producing an inverted Boolean value; conditions still use
+explicit comparisons.
+
+Comparisons such as `count > 0` or `lhs == rhs` already express a condition explicitly and do not need an additional
+`== true`. Conditional compilation directives use Swift's required syntax, such as `#if !os(macOS)`.
 
 ### Imports and APIs
 
@@ -302,12 +330,69 @@ associated types alongside type aliases at the beginning. Order protocol-conform
 protocol name, and follow the applicable declaration order within each extension while keeping related requirements and
 implementations together.
 
+### Vertical Spacing
+
+Do not insert a blank line immediately after an opening brace or immediately before a closing brace. The first member
+or statement begins directly inside its enclosing block, including any documentation or comments attached to it.
+
+Separate member declarations with one blank line, including consecutive `typealias` declarations. Type aliases each
+receive their own separation even when they are short and closely related. Keep documentation comments and attributes
+attached to the declaration they describe. Apply the same separation around local function and type declarations,
+including type aliases, inside executable code.
+
+Inside functions, initializers, accessors, and closures, keep consecutive ordinary statements together without blank
+lines. This includes variable declarations, assignments, calls, and returns. Apply the same convention to test methods.
+A multiline call or expression does not require surrounding blank lines solely because it spans several lines.
+
+Separate control-flow blocks from surrounding statements with one blank line. This applies to `if`, `guard`, `switch`,
+`for`, `while`, `repeat`, `do`, and `defer` statements. Omit the preceding blank line when the statement is first in its
+body, including a switch case body. Omit the following blank line when the enclosing body ends immediately afterward.
+Apply these rules recursively inside nested blocks. The same spacing applies when a control-flow keyword and its
+condition are on separate lines. In particular, leave a blank line after a multiline `guard` statement's closing brace
+when another statement follows in the same body.
+
+Treat an `if`/`else if`/`else`, `do`/`catch`, or `repeat`/`while` chain as one statement: do not insert blank lines between
+its connected clauses. A standalone `try` expression does not introduce a block and follows ordinary statement spacing.
+Switch case labels do not themselves require blank lines; keep the first statement attached to its case label.
+
+Comments inside executable code do not introduce additional vertical spacing. Treat a comment or comment group as
+attached to the statement it explains, with no blank line between them. When ordinary statements surround the comment,
+do not insert a blank line above it. Preserve the blank line required after a preceding control-flow block, such as
+`do`/`catch` or `guard`. If the comment introduces a control-flow block or local declaration that requires separation,
+place the required blank line before the comment. Omit it when the comment and statement are first in their enclosing
+body. Preserve paragraphs within documentation comments.
+
+Treat `get` and `set` accessors in a computed property or subscript as one block: do not insert a blank line between
+the closing brace of `get` and `set`. Likewise, treat `willSet` and `didSet` property observers as one block, with no
+blank line between them. These are exceptions to the separation between member declarations. Apply the ordinary
+statement-spacing rules inside each accessor or observer.
+
+Do not change blank lines within multiline string literals: they are part of the string value.
+
+For example:
+
+```swift
+internal func foo() -> Int {
+    var newValue: Int = self.value
+    newValue *= 2
+    newValue *= 3
+
+    guard newValue > 0 else {
+        return 0
+    }
+
+    // Some documentation here.
+    newValue *= 4
+    return newValue
+}
+```
+
 ### Declaration Layout
 
 Expand parameter and argument lists that contain more than one item, even when Swift Format could keep them on one
 line. Keep the opening parenthesis on the declaration or call line, place each parameter or argument on its own line,
 and place the closing parenthesis on its own line. The examples below distinguish this rule from the exceptions for
-unlabeled initializer calls, unlabeled tuples, and collection literals.
+calls with unlabeled arguments, unlabeled tuples, and collection literals.
 
 #### Initializer Declarations and Calls
 
@@ -378,8 +463,10 @@ internal let foo: (String, String) = ("bar", "baz")
 
 #### Function Declarations and Calls
 
-A single parameter or argument may remain on the same line. Expand declarations and calls with multiple parameters or
-arguments.
+A single parameter or argument may remain on the same line. Expand declarations with multiple parameters, including
+operator declarations and declarations whose parameters have no argument labels. Expand calls with multiple arguments
+when any argument is labeled. Calls with only unlabeled arguments may stay on one line when they fit within the line
+limit and remain readable.
 
 For example:
 
@@ -414,11 +501,58 @@ For example:
 ```swift
 internal let bar: Array<String> = ["foo", "bar", "baz"]
 
-internal let baz: Array<String> = [
+internal let bar: Array<String> = [
     "foo",
     "bar",
     "baz"
 ]
+```
+
+### Property Wrappers and Attributes
+
+Place property-wrapper attributes on the same line as the property or local variable declaration they decorate.
+For example, write `@PropertyWrapper var foo: Foo = "Foo"`.
+
+Keep attributes on functions and types, including `@Suite`, `@Test`, and `@propertyWrapper`, on separate lines above
+the declaration. Preserve these line breaks even though Swift Format permits inline attributes.
+
+### Where Clauses
+
+Declare generic parameter constraints in a `where` clause rather than inline in the generic parameter list. For example,
+use `<Value>` with `where Value: BinaryInteger`, rather than `<Value: BinaryInteger>`. Apply this convention to generic
+type, initializer, and function declarations, even when there is only one constraint.
+
+Keep direct conformances and inheritance in the declaration's colon clause, such as `associatedtype Value: BinaryInteger`
+or `protocol Foo: Equatable`. Do not move these into a `where` clause solely for style. Associated types and protocols
+may still use `where` for additional constraints, such as requirements on nested associated types or same-type relations.
+
+Normally place `where` on a new line, aligned with the declaration, statement, or case label it qualifies, rather than
+keeping it on the preceding line. Apply this layout wherever a `where` clause is used, including generic declarations,
+extensions, protocols, associated types, `for` loop filters, and `switch` case conditions, even when the
+complete header would fit on one line. If the preceding line contains only the closing parenthesis of a multiline
+header, append `where` to that line instead of placing it on another line. Keep the opening brace or case-label colon
+after the final requirement or condition.
+
+For `catch` clauses, keep `where` and its condition on the same line as the `catch` pattern when they fit within the
+line limit. This exception reflects the layout `} catch`: unlike declarations, case labels, accessors, and observers,
+`catch` follows the preceding block's closing brace rather than starting on its own line. Keeping its pattern and
+condition together makes that continuation easier to read. Wrap only when needed for readability or length. `else`
+also follows a closing brace, but does not take a `where` clause.
+
+For example:
+
+```swift
+internal func foo<Value>(_ bar: Value)
+where Value: BinaryInteger {
+    print(bar)
+}
+
+internal func foo<Value>(
+    _ bar: Value,
+    _ baz: Value
+) where Value: BinaryInteger {
+    print(bar + baz)
+}
 ```
 
 ### Initializers

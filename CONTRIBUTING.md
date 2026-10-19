@@ -217,8 +217,6 @@ When adding argument-based tests, keep the existing conventions in mind:
 - Keep related examples aligned where possible.
 - Put boundary values, failure conditions, and other exceptional inputs in focused tests.
 - Prefer explicit expected results over deriving expectations from the implementation being tested.
-- Compare Boolean properties and function results explicitly with `true`, `false`, or an argument-provided expected
-  result.
 
 ### Docs
 
