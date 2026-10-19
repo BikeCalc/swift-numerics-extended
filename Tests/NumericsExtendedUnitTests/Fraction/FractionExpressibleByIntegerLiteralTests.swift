@@ -27,7 +27,6 @@ internal struct FractionExpressibleByIntegerLiteralTests {
         integer: Int
     ) throws {
         let expected: Fraction<Int> = try #require(Fraction<Int>(exactly: integer))
-
         #expect(value == expected)
     }
 }

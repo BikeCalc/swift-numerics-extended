@@ -35,7 +35,6 @@ internal struct Int4ReportableAsOverflowTests {
         overflow: Bool
     ) {
         let report: Int4.OverflowReport = augend.addingReportingOverflow(addend)
-
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }
@@ -61,7 +60,6 @@ internal struct Int4ReportableAsOverflowTests {
         overflow: Bool
     ) {
         let report: Int4.OverflowReport = minuend.subtractingReportingOverflow(subtrahend)
-
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }
@@ -87,7 +85,6 @@ internal struct Int4ReportableAsOverflowTests {
         overflow: Bool
     ) {
         let report: Int4.OverflowReport = multiplicand.multipliedReportingOverflow(by: multiplier)
-
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }
@@ -113,7 +110,6 @@ internal struct Int4ReportableAsOverflowTests {
         overflow: Bool
     ) {
         let report: Int4.OverflowReport = dividend.dividedReportingOverflow(by: divisor)
-
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }
@@ -139,7 +135,6 @@ internal struct Int4ReportableAsOverflowTests {
         overflow: Bool
     ) {
         let report: Int4.OverflowReport = dividend.remainderReportingOverflow(dividingBy: divisor)
-
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }
@@ -183,7 +178,6 @@ internal struct Int4ReportableAsOverflowTests {
         overflow: Bool
     ) {
         let report: Int4.OverflowReport = base.raisedReportingOverflow(to: exponent)
-
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }

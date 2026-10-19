@@ -97,8 +97,7 @@ Numerics Extended is written in Swift and avoids platform-specific APIs where po
 - Keep a `Fraction` in canonical form while doing arithmetic:
 
   ```swift
-  @Canonicalized
-  var value: Fraction<Int> = .init(2, 4)
+  @Canonicalized var value: Fraction<Int> = .init(2, 4)
   print(value)
   // Prints "1/2"
 

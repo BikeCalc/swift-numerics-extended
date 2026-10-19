@@ -124,7 +124,6 @@ internal struct DoubleComparableTests {
         upperBound: Double
     ) {
         let range: ClosedRange<Double> = lowerBound ... upperBound
-
         #expect(value.isWithin(range) == range.contains(value))
     }
 
@@ -138,7 +137,6 @@ internal struct DoubleComparableTests {
         upperBound: Double
     ) {
         let valueIsWithinBounds: Bool = value.isWithin(lowerBound, upperBound) == true
-
         #expect(valueIsWithinBounds == (value >= lowerBound && value <= upperBound))
     }
 
@@ -152,7 +150,6 @@ internal struct DoubleComparableTests {
         upperBound: Double
     ) {
         let valueIsBetweenBounds: Bool = value.isBetween(lowerBound, upperBound) == true
-
         #expect(valueIsBetweenBounds == (value > lowerBound && value < upperBound))
     }
 }

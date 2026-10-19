@@ -100,7 +100,6 @@ internal struct FractionCanonicalizableTests {
     )
     internal func canonicalizationIsIdempotent(value: Fraction<Int>) {
         let result: Fraction<Int> = value.canonicalized().canonicalized()
-
         #expect(result == value.canonicalized())
     }
 }
@@ -112,7 +111,6 @@ extension FractionCanonicalizableTests {
     internal func reducibleIntMinimumDenominatorIsCanonicalizable() {
         let value: Fraction<Int> = .init(2, Int.min)
         let expected: Fraction<Int> = .init(-1, Int.zero - (Int.min / 2))
-
         #expect(value.isCanonicalizable == true)
         #expect(value.canonicalized() == expected)
     }
@@ -120,7 +118,6 @@ extension FractionCanonicalizableTests {
     @Test("Irreducible Int minimum denominator is not canonicalizable")
     internal func irreducibleIntMinimumDenominatorIsNotCanonicalizable() {
         let value: Fraction<Int> = .init(1, Int.min)
-
         #expect(value.isCanonicalizable == false)
         #expect(value.isCanonicalized == false)
     }

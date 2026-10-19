@@ -29,7 +29,6 @@ internal struct UInt4EncodableTests {
     ) throws {
         let result: Data = try JSONEncoder().encode(value)
         let expected: Data = try #require(json.data(using: .utf8))
-
         #expect(result == expected)
     }
 }
@@ -41,7 +40,6 @@ extension UInt4EncodableTests {
     internal func positiveZeroEncodesToJSON() throws {
         let result: Data = try JSONEncoder().encode(UInt4.zero)
         let expected: Data = try #require("0".data(using: .utf8))
-
         #expect(result == expected)
     }
 }

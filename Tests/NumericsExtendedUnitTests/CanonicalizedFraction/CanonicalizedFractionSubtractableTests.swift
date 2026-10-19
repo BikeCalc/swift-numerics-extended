@@ -30,11 +30,8 @@ internal struct CanonicalizedFractionSubtractableTests {
         subtrahend: Fraction<Int>,
         difference: Fraction<Int>
     ) {
-        @Canonicalized
-        var runningDifference: Fraction<Int> = minuend
-
+        @Canonicalized var runningDifference: Fraction<Int> = minuend
         runningDifference -= subtrahend
-
         #expect(runningDifference == difference)
     }
 
@@ -47,11 +44,8 @@ internal struct CanonicalizedFractionSubtractableTests {
         subtrahend: Fraction<Int>,
         difference: Fraction<Int>
     ) {
-        @Canonicalized
-        var runningDifference: Fraction<Int> = minuend
-
+        @Canonicalized var runningDifference: Fraction<Int> = minuend
         runningDifference.subtract(subtrahend)
-
         #expect(runningDifference == difference)
     }
 }

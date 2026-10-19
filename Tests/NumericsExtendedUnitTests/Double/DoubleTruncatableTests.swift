@@ -139,7 +139,6 @@ extension DoubleTruncatableTests {
         decimalPlace: Double.DecimalPlace
     ) {
         let truncatedValue: Double = value.truncated(to: decimalPlace)
-
         #expect(truncatedValue == Double.zero)
         #expect(truncatedValue.sign == .minus)
     }
@@ -175,7 +174,6 @@ extension DoubleTruncatableTests {
         decimalPlace: Double.DecimalPlace
     ) {
         let truncatedValue: Double = value.truncated(to: decimalPlace)
-
         #expect(truncatedValue == Double.zero)
         #expect(truncatedValue.sign == .plus)
     }

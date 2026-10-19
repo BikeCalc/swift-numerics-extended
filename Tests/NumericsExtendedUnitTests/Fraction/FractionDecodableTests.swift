@@ -68,7 +68,6 @@ extension FractionDecodableTests {
             Fraction<Int>.self,
             from: data
         )
-
         #expect(result.isNaN == true)
     }
 }
@@ -84,7 +83,6 @@ extension FractionDecodableTests {
             Fraction<Int>.self,
             from: data
         )
-
         #expect(result == .negativeInfinity)
     }
 }
@@ -100,7 +98,6 @@ extension FractionDecodableTests {
             Fraction<Int>.self,
             from: data
         )
-
         #expect(result == Fraction<Int>(0, -2))
     }
 }
@@ -116,7 +113,6 @@ extension FractionDecodableTests {
             Fraction<Int>.self,
             from: data
         )
-
         #expect(result == .infinity)
     }
 }
@@ -132,7 +128,6 @@ extension FractionDecodableTests {
             Fraction<Int>.self,
             from: data
         )
-
         #expect(result == Fraction<Int>(0, 2))
     }
 }

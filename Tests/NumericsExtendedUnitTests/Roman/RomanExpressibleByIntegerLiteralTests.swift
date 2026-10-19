@@ -27,7 +27,6 @@ internal struct RomanExpressibleByIntegerLiteralTests {
         integer: Int
     ) throws {
         let expected: Roman = try #require(Roman(exactly: integer))
-
         #expect(value == expected)
     }
 }

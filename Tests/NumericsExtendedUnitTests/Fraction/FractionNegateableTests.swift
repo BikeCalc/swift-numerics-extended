@@ -187,7 +187,6 @@ extension FractionNegateableTests {
         let methodNegation: Fraction<Int> = Fraction<Int>.nan.negating()
         var mutatingNegation: Fraction<Int> = Fraction<Int>.nan
         mutatingNegation.negate()
-
         #expect(operatorNegation.isNaN == true)
         #expect(methodNegation.isNaN == true)
         #expect(mutatingNegation.isNaN == true)
@@ -224,7 +223,6 @@ extension FractionNegateableTests {
         let methodNegation: Fraction<Int> = Fraction<Int>.negativeInfinity.negating()
         var mutatingNegation: Fraction<Int> = Fraction<Int>.negativeInfinity
         mutatingNegation.negate()
-
         #expect(operatorNegation == .infinity)
         #expect(methodNegation == .infinity)
         #expect(mutatingNegation == .infinity)
@@ -275,7 +273,6 @@ extension FractionNegateableTests {
         let methodNegation: Fraction<Int> = value.negating()
         var mutatingNegation: Fraction<Int> = value
         mutatingNegation.negate()
-
         #expect(operatorNegation == value)
         #expect(methodNegation == value)
         #expect(mutatingNegation == value)
@@ -312,7 +309,6 @@ extension FractionNegateableTests {
         let methodNegation: Fraction<Int> = Fraction<Int>.infinity.negating()
         var mutatingNegation: Fraction<Int> = Fraction<Int>.infinity
         mutatingNegation.negate()
-
         #expect(operatorNegation == .negativeInfinity)
         #expect(methodNegation == .negativeInfinity)
         #expect(mutatingNegation == .negativeInfinity)
@@ -371,7 +367,6 @@ extension FractionNegateableTests {
         let methodNegation: Fraction<Int> = value.negating()
         var mutatingNegation: Fraction<Int> = value
         mutatingNegation.negate()
-
         #expect(operatorNegation == value)
         #expect(methodNegation == value)
         #expect(mutatingNegation == value)

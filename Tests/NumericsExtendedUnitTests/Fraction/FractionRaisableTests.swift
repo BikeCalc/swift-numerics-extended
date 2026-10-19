@@ -242,14 +242,12 @@ extension FractionRaisableTests {
     @Test("NaN raised to positive zero returns one")
     internal func nanRaisedToPositiveZeroReturnsOne() {
         let power: Fraction<Int> = .nan ** .zero
-
         #expect(power == .one)
     }
 
     @Test("NaN raised to negative zero returns one")
     internal func nanRaisedToNegativeZeroReturnsOne() {
         let power: Fraction<Int> = .nan ** Fraction<Int>.Exponent.negativeZero
-
         #expect(power == .one)
     }
 }

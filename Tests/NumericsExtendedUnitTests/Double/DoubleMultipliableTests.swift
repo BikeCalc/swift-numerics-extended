@@ -338,7 +338,6 @@ extension DoubleMultipliableTests {
         product: Double
     ) {
         let result: Double = Double.negativeZero * multiplier
-
         #expect(result == product)
         #expect(result.sign == product.sign)
     }
@@ -467,7 +466,6 @@ extension DoubleMultipliableTests {
         product: Double
     ) {
         let result: Double = Double.zero * multiplier
-
         #expect(result == product)
         #expect(result.sign == product.sign)
     }

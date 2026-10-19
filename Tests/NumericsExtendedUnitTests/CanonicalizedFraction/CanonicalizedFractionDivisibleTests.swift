@@ -44,11 +44,8 @@ internal struct CanonicalizedFractionDivisibleTests {
         divisor: Fraction<Int>,
         quotient: Fraction<Int>
     ) {
-        @Canonicalized
-        var runningQuotient: Fraction<Int> = dividend
-
+        @Canonicalized var runningQuotient: Fraction<Int> = dividend
         runningQuotient /= divisor
-
         #expect(runningQuotient == quotient)
     }
 
@@ -61,11 +58,8 @@ internal struct CanonicalizedFractionDivisibleTests {
         divisor: Fraction<Int>,
         quotient: Fraction<Int>
     ) {
-        @Canonicalized
-        var runningQuotient: Fraction<Int> = dividend
-
+        @Canonicalized var runningQuotient: Fraction<Int> = dividend
         runningQuotient.divide(by: divisor)
-
         #expect(runningQuotient == quotient)
     }
 
@@ -78,11 +72,8 @@ internal struct CanonicalizedFractionDivisibleTests {
         divisor: Fraction<Int>,
         remainder: Fraction<Int>
     ) {
-        @Canonicalized
-        var runningRemainder: Fraction<Int> = dividend
-
+        @Canonicalized var runningRemainder: Fraction<Int> = dividend
         runningRemainder %= divisor
-
         #expect(runningRemainder == remainder)
     }
 
@@ -94,11 +85,8 @@ internal struct CanonicalizedFractionDivisibleTests {
         dividend: Fraction<Int>,
         quotient: Fraction<Int>
     ) {
-        @Canonicalized
-        var runningQuotient: Fraction<Int> = dividend
-
+        @Canonicalized var runningQuotient: Fraction<Int> = dividend
         runningQuotient.halve()
-
         #expect(runningQuotient == quotient)
     }
 }

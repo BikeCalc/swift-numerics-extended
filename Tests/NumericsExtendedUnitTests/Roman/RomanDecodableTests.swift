@@ -34,7 +34,6 @@ internal struct RomanDecodableTests {
             Roman.self,
             from: data
         )
-
         #expect(result == value)
     }
 
@@ -56,7 +55,6 @@ internal struct RomanDecodableTests {
             Roman.self,
             from: data
         )
-
         #expect(result == value)
     }
 
@@ -76,7 +74,6 @@ internal struct RomanDecodableTests {
     )
     internal func decodeFromJSONThrows(json: String) throws {
         let data: Data = try #require(json.data(using: .utf8))
-
         #expect(throws: DecodingError.self) {
             try JSONDecoder().decode(
                 Roman.self,
@@ -96,7 +93,6 @@ extension RomanDecodableTests {
             Roman.self,
             from: data
         )
-
         #expect(result == .zero)
     }
 
@@ -107,7 +103,6 @@ extension RomanDecodableTests {
             Roman.self,
             from: data
         )
-
         #expect(result == .zero)
     }
 }

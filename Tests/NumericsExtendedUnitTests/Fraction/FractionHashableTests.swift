@@ -56,7 +56,6 @@ extension FractionHashableTests {
     @Test("NaN values remain distinct hash keys")
     internal func nanValuesRemainDistinctHashKeys() {
         let value: Fraction<Int> = .nan
-
         #expect(Set([value, value]).count == 2)
     }
 }

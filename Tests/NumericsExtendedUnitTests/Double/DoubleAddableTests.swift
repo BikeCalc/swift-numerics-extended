@@ -169,7 +169,6 @@ extension DoubleAddableTests {
         sum: Double
     ) {
         let result: Double = Double.negativeZero + addend
-
         #expect(result == sum)
         #expect(result.sign == sum.sign)
     }
@@ -247,7 +246,6 @@ extension DoubleAddableTests {
         sum: Double
     ) {
         let result: Double = Double.zero + addend
-
         #expect(result == sum)
         #expect(result.sign == sum.sign)
     }

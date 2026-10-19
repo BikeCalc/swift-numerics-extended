@@ -14,6 +14,7 @@ import NumericsExtended
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: ApproximatelyEquatable {
     public typealias AbsoluteTolerance = Self
+
     public typealias RelativeTolerance = Self
 }
 #endif

@@ -62,9 +62,7 @@ extension Comparable {
             lowerBound < upperBound,
             "Lower bound must be less than upper bound."
         )
-
         let closedRange: ClosedRange<Self> = lowerBound ... upperBound
-
         return self.isWithin(closedRange) == true
     }
 
@@ -83,7 +81,6 @@ extension Comparable {
             lowerBound < upperBound,
             "Lower bound must be less than upper bound."
         )
-
         return lowerBound < self && self < upperBound
     }
 }

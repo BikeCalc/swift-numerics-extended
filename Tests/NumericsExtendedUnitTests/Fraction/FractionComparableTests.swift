@@ -112,7 +112,6 @@ internal struct FractionComparableTests {
         upperBound: Fraction<Int>
     ) {
         let range: ClosedRange<Fraction<Int>> = lowerBound ... upperBound
-
         #expect(value.isWithin(range) == range.contains(value))
     }
 
@@ -126,7 +125,6 @@ internal struct FractionComparableTests {
         upperBound: Fraction<Int>
     ) {
         let valueIsWithinBounds: Bool = value.isWithin(lowerBound, upperBound) == true
-
         #expect(valueIsWithinBounds == (value >= lowerBound && value <= upperBound))
     }
 
@@ -140,7 +138,6 @@ internal struct FractionComparableTests {
         upperBound: Fraction<Int>
     ) {
         let valueIsBetweenBounds: Bool = value.isBetween(lowerBound, upperBound) == true
-
         #expect(valueIsBetweenBounds == (value > lowerBound && value < upperBound))
     }
 }
@@ -151,7 +148,6 @@ extension FractionComparableTests {
     @Test("Comparison handles an Int minimum denominator")
     internal func comparisonHandlesIntMinimumDenominator() {
         let value: Fraction<Int> = .init(1, Int.min)
-
         #expect(value < .zero)
     }
 
@@ -159,7 +155,6 @@ extension FractionComparableTests {
     internal func comparisonHandlesIntMinimumNumerator() {
         let value: Fraction<Int> = .init(Int.min, -1)
         let maximum: Fraction<Int> = .init(Int.max, 1)
-
         #expect(value > maximum)
     }
 }

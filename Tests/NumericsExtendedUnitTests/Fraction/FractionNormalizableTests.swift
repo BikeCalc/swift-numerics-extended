@@ -100,7 +100,6 @@ internal struct FractionNormalizableTests {
     )
     internal func normalizationIsIdempotent(value: Fraction<Int>) {
         let result: Fraction<Int> = value.normalized().normalized()
-
         #expect(result == value.normalized())
     }
 }

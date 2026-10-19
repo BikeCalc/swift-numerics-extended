@@ -165,7 +165,6 @@ extension IntNegateableTests {
         let methodNegation: Int = Int.negativeZero.negating()
         var mutatingNegation: Int = Int.negativeZero
         mutatingNegation.negate()
-
         #expect(operatorNegation == .negativeZero)
         #expect(methodNegation == .negativeZero)
         #expect(mutatingNegation == .negativeZero)
@@ -201,7 +200,6 @@ extension IntNegateableTests {
         let methodNegation: Int = Int.zero.negating()
         var mutatingNegation: Int = Int.zero
         mutatingNegation.negate()
-
         #expect(operatorNegation == .zero)
         #expect(methodNegation == .zero)
         #expect(mutatingNegation == .zero)

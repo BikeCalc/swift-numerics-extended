@@ -173,7 +173,6 @@ extension DoubleSubtractableTests {
         difference: Double
     ) {
         let result: Double = Double.negativeZero - subtrahend
-
         #expect(result == difference)
         #expect(result.sign == difference.sign)
     }
@@ -233,7 +232,6 @@ extension DoubleSubtractableTests {
         difference: Double
     ) {
         let result: Double = Double.zero - subtrahend
-
         #expect(result == difference)
         #expect(result.sign == difference.sign)
     }

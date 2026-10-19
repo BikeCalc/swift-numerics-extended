@@ -22,7 +22,6 @@ where Value: Canonicalizable {
             wrappedValue.isCanonicalizable,
             "The wrapped value must be canonicalizable."
         )
-
         self.value = wrappedValue.canonicalized()
     }
 
@@ -38,7 +37,6 @@ where Value: Canonicalizable {
                 newValue.isCanonicalizable,
                 "The wrapped value must be canonicalizable."
             )
-
             self.value = newValue.canonicalized()
         }
     }

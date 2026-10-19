@@ -196,7 +196,6 @@ extension DoubleNegateableTests {
         let methodNegation: Double = Double.nan.negating()
         var mutatingNegation: Double = Double.nan
         mutatingNegation.negate()
-
         #expect(operatorNegation.isNaN == true)
         #expect(methodNegation.isNaN == true)
         #expect(mutatingNegation.isNaN == true)
@@ -233,7 +232,6 @@ extension DoubleNegateableTests {
         let methodNegation: Double = Double.negativeInfinity.negating()
         var mutatingNegation: Double = Double.negativeInfinity
         mutatingNegation.negate()
-
         #expect(operatorNegation == .infinity)
         #expect(methodNegation == .infinity)
         #expect(mutatingNegation == .infinity)
@@ -270,7 +268,6 @@ extension DoubleNegateableTests {
         let methodNegation: Double = Double.negativeZero.negating()
         var mutatingNegation: Double = Double.negativeZero
         mutatingNegation.negate()
-
         #expect(operatorNegation == .zero)
         #expect(operatorNegation.sign == .plus)
         #expect(methodNegation == .zero)
@@ -310,7 +307,6 @@ extension DoubleNegateableTests {
         let methodNegation: Double = Double.infinity.negating()
         var mutatingNegation: Double = Double.infinity
         mutatingNegation.negate()
-
         #expect(operatorNegation == .negativeInfinity)
         #expect(methodNegation == .negativeInfinity)
         #expect(mutatingNegation == .negativeInfinity)
@@ -357,7 +353,6 @@ extension DoubleNegateableTests {
         let methodNegation: Double = Double.zero.negating()
         var mutatingNegation: Double = Double.zero
         mutatingNegation.negate()
-
         #expect(operatorNegation == .zero)
         #expect(operatorNegation.sign == .minus)
         #expect(methodNegation == .zero)

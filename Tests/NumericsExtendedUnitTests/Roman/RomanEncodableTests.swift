@@ -31,7 +31,6 @@ internal struct RomanEncodableTests {
     ) throws {
         let result: Data = try JSONEncoder().encode(value)
         let expected: Data = try #require(json.data(using: .utf8))
-
         #expect(result == expected)
     }
 }
@@ -43,7 +42,6 @@ extension RomanEncodableTests {
     internal func positiveZeroEncodesToJSON() throws {
         let result: Data = try JSONEncoder().encode(Roman.zero)
         let expected: Data = try #require("\"N\"".data(using: .utf8))
-
         #expect(result == expected)
     }
 }

@@ -30,11 +30,8 @@ internal struct CanonicalizedFractionAddableTests {
         addend: Fraction<Int>,
         sum: Fraction<Int>
     ) {
-        @Canonicalized
-        var runningSum: Fraction<Int> = augend
-
+        @Canonicalized var runningSum: Fraction<Int> = augend
         runningSum += addend
-
         #expect(runningSum == sum)
     }
 
@@ -47,11 +44,8 @@ internal struct CanonicalizedFractionAddableTests {
         addend: Fraction<Int>,
         sum: Fraction<Int>
     ) {
-        @Canonicalized
-        var runningSum: Fraction<Int> = augend
-
+        @Canonicalized var runningSum: Fraction<Int> = augend
         runningSum.add(addend)
-
         #expect(runningSum == sum)
     }
 }

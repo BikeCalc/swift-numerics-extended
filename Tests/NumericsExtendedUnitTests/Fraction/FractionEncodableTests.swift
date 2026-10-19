@@ -30,10 +30,8 @@ internal struct FractionEncodableTests {
     ) throws {
         let encoder: JSONEncoder = .init()
         encoder.outputFormatting = .sortedKeys
-
         let result: Data = try encoder.encode(value)
         let expected: Data = try #require(json.data(using: .utf8))
-
         #expect(result == expected)
     }
 }
@@ -45,10 +43,8 @@ extension FractionEncodableTests {
     internal func nanEncodesToJSON() throws {
         let encoder: JSONEncoder = .init()
         encoder.outputFormatting = .sortedKeys
-
         let result: Data = try encoder.encode(Fraction<Int>.nan)
         let expected: Data = try #require(#"{"den":0,"num":0}"#.data(using: .utf8))
-
         #expect(result == expected)
     }
 }
@@ -60,10 +56,8 @@ extension FractionEncodableTests {
     internal func negativeInfinityEncodesToJSON() throws {
         let encoder: JSONEncoder = .init()
         encoder.outputFormatting = .sortedKeys
-
         let result: Data = try encoder.encode(Fraction<Int>.negativeInfinity)
         let expected: Data = try #require(#"{"den":0,"num":-1}"#.data(using: .utf8))
-
         #expect(result == expected)
     }
 }
@@ -75,10 +69,8 @@ extension FractionEncodableTests {
     internal func negativeZeroEncodesToJSON() throws {
         let encoder: JSONEncoder = .init()
         encoder.outputFormatting = .sortedKeys
-
         let result: Data = try encoder.encode(Fraction<Int>(0, -2))
         let expected: Data = try #require(#"{"den":-2,"num":0}"#.data(using: .utf8))
-
         #expect(result == expected)
     }
 }
@@ -90,10 +82,8 @@ extension FractionEncodableTests {
     internal func positiveInfinityEncodesToJSON() throws {
         let encoder: JSONEncoder = .init()
         encoder.outputFormatting = .sortedKeys
-
         let result: Data = try encoder.encode(Fraction<Int>.infinity)
         let expected: Data = try #require(#"{"den":0,"num":1}"#.data(using: .utf8))
-
         #expect(result == expected)
     }
 }
@@ -105,10 +95,8 @@ extension FractionEncodableTests {
     internal func positiveZeroEncodesToJSON() throws {
         let encoder: JSONEncoder = .init()
         encoder.outputFormatting = .sortedKeys
-
         let result: Data = try encoder.encode(Fraction<Int>(0, 2))
         let expected: Data = try #require(#"{"den":2,"num":0}"#.data(using: .utf8))
-
         #expect(result == expected)
     }
 }

@@ -108,7 +108,6 @@ extension DoubleIncreasableTests {
         sign: FloatingPointSign
     ) {
         let increasedValue: Double = Double.negativeZero.increasing(by: percentage)
-
         #expect(increasedValue == Double.zero)
         #expect(increasedValue.sign == sign)
     }

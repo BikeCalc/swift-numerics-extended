@@ -33,7 +33,6 @@ internal struct CanonicalizedFractionDecodableTests {
             Canonicalized<Fraction<Int>>.self,
             from: data
         )
-
         #expect(result.wrappedValue == value)
     }
 
@@ -49,7 +48,6 @@ internal struct CanonicalizedFractionDecodableTests {
     )
     internal func decodeFromJSONThrows(json: String) throws {
         let data: Data = try #require(json.data(using: .utf8))
-
         #expect(throws: DecodingError.self) {
             try JSONDecoder().decode(
                 Canonicalized<Fraction<Int>>.self,
@@ -66,7 +64,6 @@ extension CanonicalizedFractionDecodableTests {
     internal func intMinimumDenominatorDecodingThrows() throws {
         let json: String = #"{"num":1,"den":\#(Int.min)}"#
         let data: Data = try #require(json.data(using: .utf8))
-
         #expect(throws: DecodingError.self) {
             try JSONDecoder().decode(
                 Canonicalized<Fraction<Int>>.self,
@@ -87,7 +84,6 @@ extension CanonicalizedFractionDecodableTests {
             Canonicalized<Fraction<Int>>.self,
             from: data
         )
-
         #expect(result.wrappedValue.isNaN == true)
     }
 }
@@ -103,7 +99,6 @@ extension CanonicalizedFractionDecodableTests {
             Canonicalized<Fraction<Int>>.self,
             from: data
         )
-
         #expect(result.wrappedValue == .negativeInfinity)
     }
 }
@@ -119,7 +114,6 @@ extension CanonicalizedFractionDecodableTests {
             Canonicalized<Fraction<Int>>.self,
             from: data
         )
-
         #expect(result.wrappedValue == .zero)
     }
 }
@@ -135,7 +129,6 @@ extension CanonicalizedFractionDecodableTests {
             Canonicalized<Fraction<Int>>.self,
             from: data
         )
-
         #expect(result.wrappedValue == .infinity)
     }
 }
@@ -151,7 +144,6 @@ extension CanonicalizedFractionDecodableTests {
             Canonicalized<Fraction<Int>>.self,
             from: data
         )
-
         #expect(result.wrappedValue == .zero)
     }
 }

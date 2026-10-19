@@ -27,7 +27,6 @@ internal struct UInt4ExpressibleByIntegerLiteralTests {
         integer: Int
     ) throws {
         let expected: UInt4 = try #require(UInt4(exactly: integer))
-
         #expect(value == expected)
     }
 }

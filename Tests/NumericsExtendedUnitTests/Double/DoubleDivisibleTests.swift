@@ -452,7 +452,6 @@ extension DoubleDivisibleTests {
     @Test("Reciprocal of negative infinity returns negative zero")
     internal func reciprocalOfNegativeInfinityReturnsNegativeZero() {
         let reciprocal: Double? = Double.negativeInfinity.reciprocal
-
         #expect(reciprocal == Double.zero)
         #expect(reciprocal?.sign == .minus)
     }
@@ -488,7 +487,6 @@ extension DoubleDivisibleTests {
         quotient: Double
     ) {
         let result: Double = dividend / Double.negativeInfinity
-
         #expect(result == quotient)
         #expect(result.sign == quotient.sign)
     }
@@ -504,7 +502,6 @@ extension DoubleDivisibleTests {
     )
     internal func remainderByNegativeInfinityPreservesDividend(dividend: Double) {
         let remainder: Double = dividend % Double.negativeInfinity
-
         #expect(remainder == dividend)
         #expect(remainder.sign == dividend.sign)
     }
@@ -593,7 +590,6 @@ extension DoubleDivisibleTests {
         quotient: Double
     ) {
         let result: Double = Double.negativeZero / divisor
-
         #expect(result == quotient)
         #expect(result.sign == quotient.sign)
     }
@@ -634,7 +630,6 @@ extension DoubleDivisibleTests {
     @Test("Reciprocal of positive infinity returns positive zero")
     internal func reciprocalOfPositiveInfinityReturnsPositiveZero() {
         let reciprocal: Double? = Double.infinity.reciprocal
-
         #expect(reciprocal == Double.zero)
         #expect(reciprocal?.sign == .plus)
     }
@@ -670,7 +665,6 @@ extension DoubleDivisibleTests {
         quotient: Double
     ) {
         let result: Double = dividend / Double.infinity
-
         #expect(result == quotient)
         #expect(result.sign == quotient.sign)
     }
@@ -686,7 +680,6 @@ extension DoubleDivisibleTests {
     )
     internal func remainderByPositiveInfinityPreservesDividend(dividend: Double) {
         let remainder: Double = dividend % Double.infinity
-
         #expect(remainder == dividend)
         #expect(remainder.sign == dividend.sign)
     }
@@ -787,7 +780,6 @@ extension DoubleDivisibleTests {
         quotient: Double
     ) {
         let result: Double = Double.zero / divisor
-
         #expect(result == quotient)
         #expect(result.sign == quotient.sign)
     }

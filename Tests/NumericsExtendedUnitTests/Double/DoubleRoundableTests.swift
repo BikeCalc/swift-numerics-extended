@@ -139,7 +139,6 @@ extension DoubleRoundableTests {
         decimalPlace: Double.DecimalPlace
     ) {
         let roundedValue: Double = value.rounded(to: decimalPlace)
-
         #expect(roundedValue == Double.zero)
         #expect(roundedValue.sign == .minus)
     }
@@ -175,7 +174,6 @@ extension DoubleRoundableTests {
         decimalPlace: Double.DecimalPlace
     ) {
         let roundedValue: Double = value.rounded(to: decimalPlace)
-
         #expect(roundedValue == Double.zero)
         #expect(roundedValue.sign == .plus)
     }

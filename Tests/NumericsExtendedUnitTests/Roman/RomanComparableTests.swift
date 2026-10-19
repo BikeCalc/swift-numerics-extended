@@ -102,7 +102,6 @@ internal struct RomanComparableTests {
         upperBound: Roman
     ) {
         let range: ClosedRange<Roman> = lowerBound ... upperBound
-
         #expect(value.isWithin(range) == range.contains(value))
     }
 
@@ -116,7 +115,6 @@ internal struct RomanComparableTests {
         upperBound: Roman
     ) {
         let valueIsWithinBounds: Bool = value.isWithin(lowerBound, upperBound) == true
-
         #expect(valueIsWithinBounds == (value >= lowerBound && value <= upperBound))
     }
 
@@ -130,7 +128,6 @@ internal struct RomanComparableTests {
         upperBound: Roman
     ) {
         let valueIsBetweenBounds: Bool = value.isBetween(lowerBound, upperBound) == true
-
         #expect(valueIsBetweenBounds == (value > lowerBound && value < upperBound))
     }
 }

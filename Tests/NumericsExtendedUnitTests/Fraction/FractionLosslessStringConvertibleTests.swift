@@ -68,7 +68,6 @@ extension FractionLosslessStringConvertibleTests {
     @Test("Negative NaN string initialization succeeds")
     internal func negativeNanStringInitializationSucceeds() {
         let description: String = "-nan"
-
         #expect(Fraction<Int>(description)?.isNaN == true)
     }
 }

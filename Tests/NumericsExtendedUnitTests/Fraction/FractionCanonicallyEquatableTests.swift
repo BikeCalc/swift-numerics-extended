@@ -38,7 +38,6 @@ extension FractionCanonicallyEquatableTests {
     @Test("Canonical equality handles an Int minimum denominator")
     internal func canonicalEqualityHandlesIntMinimumDenominator() {
         let value: Fraction<Int> = .init(1, Int.min)
-
         #expect(value.isCanonicallyEqual(to: value) == true)
     }
 }

@@ -58,9 +58,7 @@ extension FractionNumericTests {
     internal func intMinimumMagnitudeUsesUnsignedTerm() {
         let value: Fraction<Int> = .init(Int.min, 1)
         let magnitude: Fraction<UInt> = value.magnitude
-
         let expected: Fraction<UInt> = .init(UInt(Int.max) + 1, 1)
-
         #expect(magnitude == expected)
     }
 }

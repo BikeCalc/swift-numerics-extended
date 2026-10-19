@@ -102,7 +102,6 @@ internal struct UInt4ComparableTests {
         upperBound: UInt4
     ) {
         let range: ClosedRange<UInt4> = lowerBound ... upperBound
-
         #expect(value.isWithin(range) == range.contains(value))
     }
 
@@ -116,7 +115,6 @@ internal struct UInt4ComparableTests {
         upperBound: UInt4
     ) {
         let valueIsWithinBounds: Bool = value.isWithin(lowerBound, upperBound) == true
-
         #expect(valueIsWithinBounds == (value >= lowerBound && value <= upperBound))
     }
 
@@ -130,7 +128,6 @@ internal struct UInt4ComparableTests {
         upperBound: UInt4
     ) {
         let valueIsBetweenBounds: Bool = value.isBetween(lowerBound, upperBound) == true
-
         #expect(valueIsBetweenBounds == (value > lowerBound && value < upperBound))
     }
 }

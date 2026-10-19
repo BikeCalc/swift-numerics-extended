@@ -12,5 +12,6 @@ import NumericsExtended
 // Test-only conformance: Apple's existing method satisfies the protocol without a replacement overload.
 extension Float32: ApproximatelyEquatable {
     public typealias AbsoluteTolerance = Self
+
     public typealias RelativeTolerance = Self
 }
