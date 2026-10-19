@@ -20,7 +20,7 @@ internal enum NumericsExtendedBenchmarks {
             } else {
                 throw BenchmarkCommandError.unsupportedPlatform
             }
-        } catch {
+        } catch let error {
             FileHandle.standardError.write(Data("\(error)\n".utf8))
             exit(EXIT_FAILURE)
         }

@@ -158,6 +158,45 @@ internal func foo(bar: Self) -> Self {
 }
 ```
 
+### Explicit Error and Accessor Bindings
+
+Explicitly bind values that Swift otherwise provides through implicit names whenever the body uses them.
+
+Use `catch let error` instead of relying on the implicit `error` in a bare `catch`. When matching a particular error
+type, use `catch let error as SomeError`. A bare `catch` is appropriate when its body does not use the error.
+
+```swift
+do {
+    try self.foo()
+} catch let error {
+    self.foo(error)
+}
+```
+
+For property and subscript setters, write `set(newValue)` when using the assigned value. For property observers, write
+`willSet(newValue)` or `didSet(oldValue)` when using the incoming or previous value. Do not rely on Swift's implicit
+`newValue` or `oldValue` bindings. Omit the parameter when it is unused; getters have no corresponding implicit value.
+
+```swift
+internal var foo: Int {
+    get {
+        return self.bar
+    }
+    set(newValue) {
+        self.bar = newValue
+    }
+}
+
+internal var foo: Int = 0 {
+    willSet(newValue) {
+        self.bar(newValue)
+    }
+    didSet(oldValue) {
+        self.bar(oldValue)
+    }
+}
+```
+
 ### Type Annotations and Initialization
 
 Declare variable and constant types explicitly wherever Swift permits a type annotation.
