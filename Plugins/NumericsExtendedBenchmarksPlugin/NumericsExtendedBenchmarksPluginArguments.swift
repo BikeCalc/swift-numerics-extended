@@ -35,7 +35,8 @@ internal struct NumericsExtendedBenchmarksPluginArguments {
             }
 
             switch arguments[index] {
-            case "--baseline" where baselineWasProvided == false:
+            case "--baseline"
+            where baselineWasProvided == false:
                 baselineRevision = arguments[index + 1]
                 baselineWasProvided = true
             default:

@@ -90,9 +90,11 @@ fileprivate struct Arguments {
             let url: URL = .init(fileURLWithPath: arguments[index + 1])
 
             switch arguments[index] {
-            case "--report" where reportURL == nil:
+            case "--report"
+            where reportURL == nil:
                 reportURL = url
-            case "--sources" where sourcesURL == nil:
+            case "--sources"
+            where sourcesURL == nil:
                 sourcesURL = url
             default:
                 throw CodeCoverageReportError.invalidArguments

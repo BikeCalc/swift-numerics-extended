@@ -114,9 +114,11 @@ fileprivate struct Arguments {
             let url: URL = .init(fileURLWithPath: arguments[index + 1])
 
             switch arguments[index] {
-            case "--baseline" where baselineURL == nil:
+            case "--baseline"
+            where baselineURL == nil:
                 baselineURL = url
-            case "--current" where currentURL == nil:
+            case "--current"
+            where currentURL == nil:
                 currentURL = url
             default:
                 throw BenchmarkReportError.invalidArguments

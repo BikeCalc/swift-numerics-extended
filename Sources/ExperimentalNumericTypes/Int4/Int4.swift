@@ -804,7 +804,8 @@ extension Int4: ReportableAsOverflow {
 
     public func raisedReportingOverflow(to rhs: Self.Exponent) -> Self.OverflowReport {
         switch rhs {
-        case ..<0 where self == 0:
+        case ..<0
+        where self == 0:
             return (
                 partialValue: 0,
                 overflow: true

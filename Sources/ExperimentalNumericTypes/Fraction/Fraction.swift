@@ -235,7 +235,8 @@ extension Fraction: Addable {
         }
 
         switch (lhs.isInfinite, rhs.isInfinite) {
-        case (true, true) where lhs.hasNegativeSign != rhs.hasNegativeSign:
+        case (true, true)
+        where lhs.hasNegativeSign != rhs.hasNegativeSign:
             return .nan
         case (true, _):
             return .infinity(withNegativeSign: lhs.hasNegativeSign)
@@ -1198,7 +1199,8 @@ extension Fraction: Subtractable {
         }
 
         switch (lhs.isInfinite, rhs.isInfinite) {
-        case (true, true) where lhs.hasNegativeSign == rhs.hasNegativeSign:
+        case (true, true)
+        where lhs.hasNegativeSign == rhs.hasNegativeSign:
             return .nan
         case (true, true):
             return .infinity(withNegativeSign: lhs.hasNegativeSign)
