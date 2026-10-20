@@ -11,7 +11,11 @@ import StandardNumericProtocols
 
 // MARK: - Addable
 
-extension Float64: Addable {}
+extension Float64: Addable {
+    public typealias Addend = Self
+
+    public typealias Sum = Self
+}
 
 // MARK: - Decreasable
 
@@ -20,10 +24,18 @@ extension Float64: Decreasable {}
 // MARK: - Divisible
 
 extension Float64: Divisible {
+    public typealias Divisor = Self
+
+    public typealias Quotient = Self
+
+    public typealias RemainderDivisor = Self
+
+    public typealias Remainder = Self
+
     public static func % (
         _ lhs: Self,
-        _ rhs: Self
-    ) -> Self {
+        _ rhs: Self.RemainderDivisor
+    ) -> Self.Remainder {
         return lhs.truncatingRemainder(dividingBy: rhs)
     }
 }
@@ -34,7 +46,11 @@ extension Float64: Increasable {}
 
 // MARK: - Multipliable
 
-extension Float64: Multipliable {}
+extension Float64: Multipliable {
+    public typealias Multiplier = Self
+
+    public typealias Product = Self
+}
 
 // MARK: - Negateable
 
@@ -44,6 +60,8 @@ extension Float64: Negateable {}
 
 extension Float64: Raisable {
     public typealias Exponent = Int
+
+    public typealias Power = Self
 }
 
 // MARK: - RepresentableByInfinity
@@ -66,7 +84,11 @@ extension Float64: Roundable {
 
 // MARK: - Subtractable
 
-extension Float64: Subtractable {}
+extension Float64: Subtractable {
+    public typealias Subtrahend = Self
+
+    public typealias Difference = Self
+}
 
 // MARK: - Truncatable
 

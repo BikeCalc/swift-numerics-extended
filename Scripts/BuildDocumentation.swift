@@ -132,7 +132,6 @@ fileprivate struct DocumentationBuilder {
     private func buildWebsite() throws(DocumentationBuildError) {
         let process: Process = .init()
         process.executableURL = .init(fileURLWithPath: "/usr/bin/env")
-
         // Keep the generated site rooted at .build/github-pages/ for the workflow's Pages artifact upload.
         process.arguments = [
             "swift", "package", "--allow-writing-to-directory", ".build/github-pages", "generate-documentation",

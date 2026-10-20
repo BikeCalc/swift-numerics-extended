@@ -154,10 +154,14 @@ public struct UInt4 {
 // MARK: - Addable
 
 extension UInt4: Addable {
+    public typealias Addend = Self
+
+    public typealias Sum = Self
+
     public static func + (
         _ lhs: Self,
-        _ rhs: Self
-    ) -> Self {
+        _ rhs: Self.Addend
+    ) -> Self.Sum {
         let newValue: Self.Value = lhs.value + rhs.value
         return .init(value: newValue)
     }
@@ -397,6 +401,14 @@ extension UInt4: Decodable {
 // MARK: - Divisible
 
 extension UInt4: Divisible {
+    public typealias Divisor = Self
+
+    public typealias Quotient = Self
+
+    public typealias RemainderDivisor = Self
+
+    public typealias Remainder = Self
+
     /// Returns the quotient of dividing the first specified value by the second.
     ///
     /// For example:
@@ -416,8 +428,8 @@ extension UInt4: Divisible {
     /// - Precondition: `rhs` must not be zero.
     public static func / (
         _ lhs: Self,
-        _ rhs: Self
-    ) -> Self {
+        _ rhs: Self.Divisor
+    ) -> Self.Quotient {
         let newValue: Self.Value = lhs.value / rhs.value
         return .init(value: newValue)
     }
@@ -441,8 +453,8 @@ extension UInt4: Divisible {
     /// - Precondition: `rhs` must not be zero.
     public static func % (
         _ lhs: Self,
-        _ rhs: Self
-    ) -> Self {
+        _ rhs: Self.RemainderDivisor
+    ) -> Self.Remainder {
         let newValue: Self.Value = lhs.value % rhs.value
         return .init(value: newValue)
     }
@@ -625,10 +637,14 @@ extension UInt4: LosslessStringConvertible {
 // MARK: - Multipliable
 
 extension UInt4: Multipliable {
+    public typealias Multiplier = Self
+
+    public typealias Product = Self
+
     public static func * (
         _ lhs: Self,
-        _ rhs: Self
-    ) -> Self {
+        _ rhs: Self.Multiplier
+    ) -> Self.Product {
         let newValue: Self.Value = lhs.value * rhs.value
         return .init(value: newValue)
     }
@@ -659,12 +675,14 @@ extension UInt4: Numeric {
 
 extension UInt4: Raisable {
     public typealias Exponent = Self
+
+    public typealias Power = Self
 }
 
 // MARK: - ReportableAsOverflow
 
 extension UInt4: ReportableAsOverflow {
-    public func addingReportingOverflow(_ rhs: Self) -> Self.OverflowReport {
+    public func addingReportingOverflow(_ rhs: Self.Addend) -> Self.OverflowReport<Self.Sum> {
         let sum: Self.Value = self.value + rhs.value
         let partialValue: Self = .init(truncatingIfNeeded: sum)
 
@@ -681,7 +699,7 @@ extension UInt4: ReportableAsOverflow {
         )
     }
 
-    public func subtractingReportingOverflow(_ rhs: Self) -> Self.OverflowReport {
+    public func subtractingReportingOverflow(_ rhs: Self.Subtrahend) -> Self.OverflowReport<Self.Difference> {
         let difference: Self.Value = self.value &- rhs.value
         let partialValue: Self = .init(truncatingIfNeeded: difference)
 
@@ -698,7 +716,7 @@ extension UInt4: ReportableAsOverflow {
         )
     }
 
-    public func multipliedReportingOverflow(by rhs: Self) -> Self.OverflowReport {
+    public func multipliedReportingOverflow(by rhs: Self.Multiplier) -> Self.OverflowReport<Self.Product> {
         let product: Self.Value = self.value * rhs.value
         let partialValue: Self = .init(truncatingIfNeeded: product)
 
@@ -715,7 +733,7 @@ extension UInt4: ReportableAsOverflow {
         )
     }
 
-    public func dividedReportingOverflow(by rhs: Self) -> Self.OverflowReport {
+    public func dividedReportingOverflow(by rhs: Self.Divisor) -> Self.OverflowReport<Self.Quotient> {
         guard rhs.value != 0 else {
             return (
                 partialValue: self,
@@ -731,7 +749,8 @@ extension UInt4: ReportableAsOverflow {
         )
     }
 
-    public func remainderReportingOverflow(dividingBy rhs: Self) -> Self.OverflowReport {
+    public func remainderReportingOverflow(dividingBy rhs: Self.RemainderDivisor) -> Self.OverflowReport<Self.Remainder>
+    {
         guard rhs.value != 0 else {
             return (
                 partialValue: self,
@@ -747,7 +766,7 @@ extension UInt4: ReportableAsOverflow {
         )
     }
 
-    public func raisedReportingOverflow(to rhs: Self.Exponent) -> Self.OverflowReport {
+    public func raisedReportingOverflow(to rhs: Self.Exponent) -> Self.OverflowReport<Self.Power> {
         switch rhs {
         case 0:
             return (
@@ -764,7 +783,7 @@ extension UInt4: ReportableAsOverflow {
             var exponent: Self.Exponent = 1
 
             while exponent < rhs {
-                let report: Self.OverflowReport = result.multipliedReportingOverflow(by: self)
+                let report: Self.OverflowReport<Self.Product> = result.multipliedReportingOverflow(by: self)
 
                 guard report.overflow == false else {
                     return report
@@ -817,10 +836,14 @@ extension UInt4: Strideable {}
 // MARK: - Subtractable
 
 extension UInt4: Subtractable {
+    public typealias Subtrahend = Self
+
+    public typealias Difference = Self
+
     public static func - (
         _ lhs: Self,
-        _ rhs: Self
-    ) -> Self {
+        _ rhs: Self.Subtrahend
+    ) -> Self.Difference {
         let newValue: Self.Value = lhs.value - rhs.value
         return .init(value: newValue)
     }

@@ -14,7 +14,7 @@ import Testing
 internal struct CanonicalizedFractionSubtractableTests {
     internal init() {}
 
-    private static let subtractionArguments: [(Fraction<Int>, Fraction<Int>, Fraction<Int>)] = [
+    private static let subtractionArguments: [(Fraction<Int>, Fraction<Int>.Subtrahend, Fraction<Int>)] = [
         (Fraction<Int>(2, 3), Fraction<Int>(1, 2), Fraction<Int>(1, 6)),
         (Fraction<Int>(3, 4), Fraction<Int>(1, 2), Fraction<Int>(1, 4)),
         (Fraction<Int>(-2, 3), Fraction<Int>(1, 2), Fraction<Int>(-7, 6)),
@@ -22,12 +22,12 @@ internal struct CanonicalizedFractionSubtractableTests {
     ]
 
     @Test(
-        "Subtraction equal canonicalizes result",
+        "Subtraction succeeds",
         arguments: Self.subtractionArguments
     )
-    internal func subtractionEqualCanonicalizesResult(
+    internal func subtractionSucceeds(
         minuend: Fraction<Int>,
-        subtrahend: Fraction<Int>,
+        subtrahend: Fraction<Int>.Subtrahend,
         difference: Fraction<Int>
     ) {
         @Canonicalized var runningDifference: Fraction<Int> = minuend
@@ -36,16 +36,16 @@ internal struct CanonicalizedFractionSubtractableTests {
     }
 
     @Test(
-        "Subtract canonicalizes result",
+        "Subtract succeeds",
         arguments: Self.subtractionArguments
     )
-    internal func subtractCanonicalizesResult(
+    internal func subtractSucceeds(
         minuend: Fraction<Int>,
-        subtrahend: Fraction<Int>,
+        subtrahend: Fraction<Int>.Subtrahend,
         difference: Fraction<Int>
-    ) {
+    ) throws {
         @Canonicalized var runningDifference: Fraction<Int> = minuend
-        runningDifference.subtract(subtrahend)
+        try runningDifference.subtract(subtrahend)
         #expect(runningDifference == difference)
     }
 }

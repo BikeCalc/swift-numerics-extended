@@ -28,9 +28,9 @@ internal struct IntEquatableTests {
     internal func equalityPredicates(
         lhs: Int,
         rhs: Int
-    ) {
-        #expect(lhs.isEqual(to: rhs) == (lhs == rhs))
-        #expect(lhs.isUnequal(to: rhs) == (lhs != rhs))
+    ) throws {
+        #expect(try lhs.isEqual(to: rhs) == (lhs == rhs))
+        #expect(try lhs.isUnequal(to: rhs) == (lhs != rhs))
     }
 }
 
@@ -49,11 +49,11 @@ extension IntEquatableTests {
         lhs: Int,
         rhs: Int,
         result: Bool
-    ) {
+    ) throws {
         #expect((lhs == rhs) == result)
         #expect((lhs != rhs) == !result)
-        #expect(lhs.isEqual(to: rhs) == result)
-        #expect(lhs.isUnequal(to: rhs) == !result)
+        #expect(try lhs.isEqual(to: rhs) == result)
+        #expect(try lhs.isUnequal(to: rhs) == !result)
     }
 }
 
@@ -72,10 +72,10 @@ extension IntEquatableTests {
         lhs: Int,
         rhs: Int,
         result: Bool
-    ) {
+    ) throws {
         #expect((lhs == rhs) == result)
         #expect((lhs != rhs) == !result)
-        #expect(lhs.isEqual(to: rhs) == result)
-        #expect(lhs.isUnequal(to: rhs) == !result)
+        #expect(try lhs.isEqual(to: rhs) == result)
+        #expect(try lhs.isUnequal(to: rhs) == !result)
     }
 }

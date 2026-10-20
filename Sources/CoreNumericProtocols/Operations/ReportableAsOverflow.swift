@@ -14,7 +14,7 @@ public protocol ReportableAsOverflow: Operatable, Raisable {
     /// - Parameter rhs: The value to add to this instance.
     /// - Returns: A tuple containing the result of the addition along with a boolean value indicating whether overflow
     ///   occurred.
-    func addingReportingOverflow(_ rhs: Self) -> Self.OverflowReport
+    func addingReportingOverflow(_ rhs: Self.Addend) -> Self.OverflowReport<Self.Sum>
 
     /// Returns the difference after subtracting the specified value from this instance, along with a boolean value
     /// indicating whether overflow occurred in the operation.
@@ -22,7 +22,7 @@ public protocol ReportableAsOverflow: Operatable, Raisable {
     /// - Parameter rhs: The value to subtract from this instance.
     /// - Returns: A tuple containing the result of the subtraction along with a boolean value indicating whether
     ///   overflow occurred.
-    func subtractingReportingOverflow(_ rhs: Self) -> Self.OverflowReport
+    func subtractingReportingOverflow(_ rhs: Self.Subtrahend) -> Self.OverflowReport<Self.Difference>
 
     /// Returns the product after multiplying this instance by the specified value, along with a boolean value
     /// indicating whether overflow occurred in the operation.
@@ -30,7 +30,7 @@ public protocol ReportableAsOverflow: Operatable, Raisable {
     /// - Parameter rhs: The value to multiply this instance by.
     /// - Returns: A tuple containing the result of the multiplication along with a boolean value indicating whether
     ///   overflow occurred.
-    func multipliedReportingOverflow(by rhs: Self) -> Self.OverflowReport
+    func multipliedReportingOverflow(by rhs: Self.Multiplier) -> Self.OverflowReport<Self.Product>
 
     /// Returns the quotient after dividing this instance by the specified value, along with a boolean value indicating
     /// whether overflow occurred in the operation.
@@ -38,7 +38,7 @@ public protocol ReportableAsOverflow: Operatable, Raisable {
     /// - Parameter rhs: The value to divide this instance by.
     /// - Returns: A tuple containing the result of the division along with a boolean value indicating whether overflow
     ///   occurred.
-    func dividedReportingOverflow(by rhs: Self) -> Self.OverflowReport
+    func dividedReportingOverflow(by rhs: Self.Divisor) -> Self.OverflowReport<Self.Quotient>
 
     /// Returns the remainder after dividing this instance by the specified value, along with a boolean value indicating
     /// whether overflow occurred in the operation.
@@ -46,7 +46,7 @@ public protocol ReportableAsOverflow: Operatable, Raisable {
     /// - Parameter rhs: The value to divide this instance by.
     /// - Returns: A tuple containing the result of the division along with a boolean value indicating whether overflow
     ///   occurred.
-    func remainderReportingOverflow(dividingBy rhs: Self) -> Self.OverflowReport
+    func remainderReportingOverflow(dividingBy rhs: Self.RemainderDivisor) -> Self.OverflowReport<Self.Remainder>
 
     /// Returns the partial value of raising this instance to the specified exponent, along with a boolean value
     /// indicating whether the operation overflowed or was invalid.
@@ -59,13 +59,16 @@ public protocol ReportableAsOverflow: Operatable, Raisable {
     ///
     /// - Parameter rhs: The exponent.
     /// - Returns: The partial value and a boolean indicating whether the operation overflowed or was invalid.
-    func raisedReportingOverflow(to rhs: Self.Exponent) -> Self.OverflowReport
+    func raisedReportingOverflow(to rhs: Self.Exponent) -> Self.OverflowReport<Self.Power>
 }
 
 extension ReportableAsOverflow {
-    /// The partial value and overflow status produced by an overflow-reporting operation.
-    public typealias OverflowReport = (
-        partialValue: Self,
+    /// The partial result and overflow status produced by an arithmetic operation.
+    ///
+    /// `Value` is the operation's result type, such as an addable type's `Sum` or a divisible type's `Quotient`.
+    /// The meaning of `partialValue` when `overflow` is `true` is defined by the operation that produces the report.
+    public typealias OverflowReport<Value> = (
+        partialValue: Value,
         overflow: Bool
     )
 }

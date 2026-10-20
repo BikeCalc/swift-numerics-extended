@@ -14,7 +14,7 @@ import Testing
 internal struct CanonicalizedFractionMultipliableTests {
     internal init() {}
 
-    private static let multiplicationArguments: [(Fraction<Int>, Fraction<Int>, Fraction<Int>)] = [
+    private static let multiplicationArguments: [(Fraction<Int>, Fraction<Int>.Multiplier, Fraction<Int>)] = [
         (Fraction<Int>(1, 2), Fraction<Int>(1, 2), Fraction<Int>(1, 4)),
         (Fraction<Int>(1, 2), Fraction<Int>(2, 3), Fraction<Int>(1, 3)),
         (Fraction<Int>(-1, 2), Fraction<Int>(1, 2), Fraction<Int>(-1, 4)),
@@ -22,12 +22,12 @@ internal struct CanonicalizedFractionMultipliableTests {
     ]
 
     @Test(
-        "Multiplication equal canonicalizes result",
+        "Multiplication succeeds",
         arguments: Self.multiplicationArguments
     )
-    internal func multiplicationEqualCanonicalizesResult(
+    internal func multiplicationSucceeds(
         multiplicand: Fraction<Int>,
-        multiplier: Fraction<Int>,
+        multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
     ) {
         @Canonicalized var runningProduct: Fraction<Int> = multiplicand
@@ -36,16 +36,16 @@ internal struct CanonicalizedFractionMultipliableTests {
     }
 
     @Test(
-        "Multiply canonicalizes result",
+        "Multiply succeeds",
         arguments: Self.multiplicationArguments
     )
-    internal func multiplyCanonicalizesResult(
+    internal func multiplySucceeds(
         multiplicand: Fraction<Int>,
-        multiplier: Fraction<Int>,
+        multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
-    ) {
+    ) throws {
         @Canonicalized var runningProduct: Fraction<Int> = multiplicand
-        runningProduct.multiply(by: multiplier)
+        try runningProduct.multiply(by: multiplier)
         #expect(runningProduct == product)
     }
 }

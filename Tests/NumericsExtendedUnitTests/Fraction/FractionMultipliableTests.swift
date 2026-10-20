@@ -14,7 +14,7 @@ import Testing
 internal struct FractionMultipliableTests {
     internal init() {}
 
-    private static let multiplicationArguments: [(Fraction<Int>, Fraction<Int>, Fraction<Int>)] = [
+    private static let multiplicationArguments: [(Fraction<Int>, Fraction<Int>.Multiplier, Fraction<Int>)] = [
         (Fraction<Int>(1, 2), Fraction<Int>(1, 2), Fraction<Int>(1, 4)),
         (Fraction<Int>(1, 2), Fraction<Int>(2, 3), Fraction<Int>(2, 6)),
         (Fraction<Int>(-1, 2), Fraction<Int>(1, 2), Fraction<Int>(-1, 4)),
@@ -51,7 +51,7 @@ internal struct FractionMultipliableTests {
     )
     internal func multiplicationSucceeds(
         multiplicand: Fraction<Int>,
-        multiplier: Fraction<Int>,
+        multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
     ) {
         #expect(multiplicand * multiplier == product)
@@ -63,7 +63,7 @@ internal struct FractionMultipliableTests {
     )
     internal func multiplicationEqualSucceeds(
         multiplicand: Fraction<Int>,
-        multiplier: Fraction<Int>,
+        multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
     ) {
         var runningProduct: Fraction<Int> = multiplicand
@@ -77,10 +77,10 @@ internal struct FractionMultipliableTests {
     )
     internal func multiplyingBySucceeds(
         multiplicand: Fraction<Int>,
-        multiplier: Fraction<Int>,
+        multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
-    ) {
-        #expect(multiplicand.multiplying(by: multiplier) == product)
+    ) throws {
+        #expect(try multiplicand.multiplying(by: multiplier) == product)
     }
 
     @Test(
@@ -89,11 +89,11 @@ internal struct FractionMultipliableTests {
     )
     internal func multiplyBySucceeds(
         multiplicand: Fraction<Int>,
-        multiplier: Fraction<Int>,
+        multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
-    ) {
+    ) throws {
         var runningProduct: Fraction<Int> = multiplicand
-        runningProduct.multiply(by: multiplier)
+        try runningProduct.multiply(by: multiplier)
         #expect(runningProduct == product)
     }
 
@@ -129,7 +129,7 @@ extension FractionMultipliableTests {
     )
     internal func multiplicationIsCommutative(
         multiplicand: Fraction<Int>,
-        multiplier: Fraction<Int>,
+        multiplier: Fraction<Int>.Multiplier,
         product _: Fraction<Int>
     ) {
         #expect(multiplicand * multiplier == multiplier * multiplicand)
@@ -165,7 +165,7 @@ extension FractionMultipliableTests {
     )
     internal func multiplyingPositiveZeroByInfinityReturnsNaN(
         multiplicand: Fraction<Int>,
-        multiplier: Fraction<Int>
+        multiplier: Fraction<Int>.Multiplier
     ) {
         #expect((multiplicand * multiplier).isNaN == true)
     }
@@ -181,7 +181,7 @@ extension FractionMultipliableTests {
     )
     internal func multiplyingNegativeZeroByInfinityReturnsNaN(
         multiplicand: Fraction<Int>,
-        multiplier: Fraction<Int>
+        multiplier: Fraction<Int>.Multiplier
     ) {
         #expect((multiplicand * multiplier).isNaN == true)
     }
@@ -197,7 +197,7 @@ extension FractionMultipliableTests {
             Fraction<Int>.negativeInfinity
         ]
     )
-    internal func multiplyingNaNReturnsNaN(multiplier: Fraction<Int>) {
+    internal func multiplyingNaNReturnsNaN(multiplier: Fraction<Int>.Multiplier) {
         #expect((Fraction<Int>.nan * multiplier).isNaN == true)
     }
 
@@ -244,7 +244,7 @@ extension FractionMultipliableTests {
         ]
     )
     internal func multiplyingNegativeInfinityFollowsRationalRules(
-        multiplier: Fraction<Int>,
+        multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
     ) {
         #expect(Fraction<Int>.negativeInfinity * multiplier == product)
@@ -314,7 +314,7 @@ extension FractionMultipliableTests {
         ]
     )
     internal func multiplyingNegativeZeroFollowsStoredRepresentationRules(
-        multiplier: Fraction<Int>,
+        multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
     ) {
         #expect(Fraction<Int>.negativeZero * multiplier == product)
@@ -348,7 +348,7 @@ extension FractionMultipliableTests {
         ]
     )
     internal func multiplyingPositiveInfinityFollowsRationalRules(
-        multiplier: Fraction<Int>,
+        multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
     ) {
         #expect(Fraction<Int>.infinity * multiplier == product)
@@ -428,7 +428,7 @@ extension FractionMultipliableTests {
         ]
     )
     internal func multiplyingPositiveZeroFollowsStoredRepresentationRules(
-        multiplier: Fraction<Int>,
+        multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
     ) {
         #expect(Fraction<Int>.zero * multiplier == product)

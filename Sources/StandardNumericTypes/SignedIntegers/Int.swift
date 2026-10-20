@@ -11,15 +11,31 @@ import StandardNumericProtocols
 
 // MARK: - Addable
 
-extension Int: Addable {}
+extension Int: Addable {
+    public typealias Addend = Self
+
+    public typealias Sum = Self
+}
 
 // MARK: - Divisible
 
-extension Int: Divisible {}
+extension Int: Divisible {
+    public typealias Divisor = Self
+
+    public typealias Quotient = Self
+
+    public typealias RemainderDivisor = Self
+
+    public typealias Remainder = Self
+}
 
 // MARK: - Multipliable
 
-extension Int: Multipliable {}
+extension Int: Multipliable {
+    public typealias Multiplier = Self
+
+    public typealias Product = Self
+}
 
 // MARK: - Negateable
 
@@ -29,6 +45,8 @@ extension Int: Negateable {}
 
 extension Int: Raisable {
     public typealias Exponent = Self
+
+    public typealias Power = Self
 }
 
 // MARK: - ReportableAsOverflow
@@ -41,4 +59,8 @@ extension Int: RepresentableByZero {}
 
 // MARK: - Subtractable
 
-extension Int: Subtractable {}
+extension Int: Subtractable {
+    public typealias Subtrahend = Self
+
+    public typealias Difference = Self
+}

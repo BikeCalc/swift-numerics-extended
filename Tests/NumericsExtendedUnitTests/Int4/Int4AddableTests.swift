@@ -14,7 +14,7 @@ import Testing
 internal struct Int4AddableTests {
     internal init() {}
 
-    private static let additionArguments: [(Int4, Int4, Int4)] = [
+    private static let additionArguments: [(Int4, Int4.Addend, Int4)] = [
         (2, 3, 5),
         (3, 4, 7),
         (-2, 3, 1),
@@ -27,7 +27,7 @@ internal struct Int4AddableTests {
     )
     internal func additionSucceeds(
         augend: Int4,
-        addend: Int4,
+        addend: Int4.Addend,
         sum: Int4
     ) {
         #expect(augend + addend == sum)
@@ -39,7 +39,7 @@ internal struct Int4AddableTests {
     )
     internal func additionEqualSucceeds(
         augend: Int4,
-        addend: Int4,
+        addend: Int4.Addend,
         sum: Int4
     ) {
         var runningSum: Int4 = augend
@@ -53,10 +53,10 @@ internal struct Int4AddableTests {
     )
     internal func addingSucceeds(
         augend: Int4,
-        addend: Int4,
+        addend: Int4.Addend,
         sum: Int4
-    ) {
-        #expect(augend.adding(addend) == sum)
+    ) throws {
+        #expect(try augend.adding(addend) == sum)
     }
 
     @Test(
@@ -65,11 +65,11 @@ internal struct Int4AddableTests {
     )
     internal func addSucceeds(
         augend: Int4,
-        addend: Int4,
+        addend: Int4.Addend,
         sum: Int4
-    ) {
+    ) throws {
         var runningSum: Int4 = augend
-        runningSum.add(addend)
+        try runningSum.add(addend)
         #expect(runningSum == sum)
     }
 }
@@ -81,7 +81,7 @@ extension Int4AddableTests {
     )
     internal func additionIsCommutative(
         augend: Int4,
-        addend: Int4,
+        addend: Int4.Addend,
         sum _: Int4
     ) {
         #expect(augend + addend == addend + augend)
@@ -115,11 +115,11 @@ extension Int4AddableTests {
             (3, -3),
             (-2, 2),
             (-3, 3)
-        ] as Array<(Int4, Int4)>
+        ] as Array<(Int4, Int4.Addend)>
     )
     internal func addingOppositeValuesReturnsPositiveZero(
         augend: Int4,
-        addend: Int4
+        addend: Int4.Addend
     ) {
         #expect(augend + addend == Int4.zero)
     }

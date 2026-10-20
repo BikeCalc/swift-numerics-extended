@@ -14,14 +14,14 @@ import Testing
 internal struct CanonicalizedFractionDivisibleTests {
     internal init() {}
 
-    private static let divisionArguments: [(Fraction<Int>, Fraction<Int>, Fraction<Int>)] = [
+    private static let divisionArguments: [(Fraction<Int>, Fraction<Int>.Divisor, Fraction<Int>)] = [
         (Fraction<Int>(1, 2), Fraction<Int>(1, 2), Fraction<Int>(1, 1)),
         (Fraction<Int>(1, 2), Fraction<Int>(2, 3), Fraction<Int>(3, 4)),
         (Fraction<Int>(-1, 2), Fraction<Int>(1, 2), Fraction<Int>(-1, 1)),
         (Fraction<Int>(-1, 2), Fraction<Int>(-2, 3), Fraction<Int>(3, 4))
     ]
 
-    private static let remainderArguments: [(Fraction<Int>, Fraction<Int>, Fraction<Int>)] = [
+    private static let remainderArguments: [(Fraction<Int>, Fraction<Int>.RemainderDivisor, Fraction<Int>)] = [
         (Fraction<Int>(1, 2), Fraction<Int>(1, 2), Fraction<Int>(0, 1)),
         (Fraction<Int>(2, 3), Fraction<Int>(1, 2), Fraction<Int>(1, 6)),
         (Fraction<Int>(-2, 3), Fraction<Int>(1, 2), Fraction<Int>(-1, 6)),
@@ -36,12 +36,12 @@ internal struct CanonicalizedFractionDivisibleTests {
     ]
 
     @Test(
-        "Division equal canonicalizes result",
+        "Division succeeds",
         arguments: Self.divisionArguments
     )
-    internal func divisionEqualCanonicalizesResult(
+    internal func divisionSucceeds(
         dividend: Fraction<Int>,
-        divisor: Fraction<Int>,
+        divisor: Fraction<Int>.Divisor,
         quotient: Fraction<Int>
     ) {
         @Canonicalized var runningQuotient: Fraction<Int> = dividend
@@ -50,16 +50,16 @@ internal struct CanonicalizedFractionDivisibleTests {
     }
 
     @Test(
-        "Divide canonicalizes result",
+        "Divide succeeds",
         arguments: Self.divisionArguments
     )
-    internal func divideCanonicalizesResult(
+    internal func divideSucceeds(
         dividend: Fraction<Int>,
-        divisor: Fraction<Int>,
+        divisor: Fraction<Int>.Divisor,
         quotient: Fraction<Int>
-    ) {
+    ) throws {
         @Canonicalized var runningQuotient: Fraction<Int> = dividend
-        runningQuotient.divide(by: divisor)
+        try runningQuotient.divide(by: divisor)
         #expect(runningQuotient == quotient)
     }
 
@@ -69,7 +69,7 @@ internal struct CanonicalizedFractionDivisibleTests {
     )
     internal func remainderEqualCanonicalizesResult(
         dividend: Fraction<Int>,
-        divisor: Fraction<Int>,
+        divisor: Fraction<Int>.RemainderDivisor,
         remainder: Fraction<Int>
     ) {
         @Canonicalized var runningRemainder: Fraction<Int> = dividend
