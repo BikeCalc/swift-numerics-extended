@@ -13,6 +13,7 @@ import StandardNumericProtocols
 
 extension Int64: Addable {
     public typealias Addend = Self
+
     public typealias Sum = Self
 }
 
@@ -20,8 +21,11 @@ extension Int64: Addable {
 
 extension Int64: Divisible {
     public typealias Divisor = Self
+
     public typealias Quotient = Self
+
     public typealias RemainderDivisor = Self
+
     public typealias Remainder = Self
 }
 
@@ -29,6 +33,7 @@ extension Int64: Divisible {
 
 extension Int64: Multipliable {
     public typealias Multiplier = Self
+
     public typealias Product = Self
 }
 
@@ -40,6 +45,7 @@ extension Int64: Negateable {}
 
 extension Int64: Raisable {
     public typealias Exponent = Self
+
     public typealias Power = Self
 }
 
@@ -55,5 +61,6 @@ extension Int64: RepresentableByZero {}
 
 extension Int64: Subtractable {
     public typealias Subtrahend = Self
+
     public typealias Difference = Self
 }

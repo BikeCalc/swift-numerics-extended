@@ -13,6 +13,7 @@ import StandardNumericProtocols
 
 extension Float32: Addable {
     public typealias Addend = Self
+
     public typealias Sum = Self
 }
 
@@ -24,8 +25,11 @@ extension Float32: Decreasable {}
 
 extension Float32: Divisible {
     public typealias Divisor = Self
+
     public typealias Quotient = Self
+
     public typealias RemainderDivisor = Self
+
     public typealias Remainder = Self
 
     public static func % (
@@ -44,6 +48,7 @@ extension Float32: Increasable {}
 
 extension Float32: Multipliable {
     public typealias Multiplier = Self
+
     public typealias Product = Self
 }
 
@@ -55,6 +60,7 @@ extension Float32: Negateable {}
 
 extension Float32: Raisable {
     public typealias Exponent = Int
+
     public typealias Power = Self
 }
 
@@ -80,6 +86,7 @@ extension Float32: Roundable {
 
 extension Float32: Subtractable {
     public typealias Subtrahend = Self
+
     public typealias Difference = Self
 }
 

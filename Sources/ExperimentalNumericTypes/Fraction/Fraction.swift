@@ -205,6 +205,7 @@ where Term: BinaryInteger {
 
 extension Fraction: Addable {
     public typealias Addend = Self
+
     public typealias Sum = Self
 
     /// Returns the sum of the specified values.
@@ -457,8 +458,11 @@ where Term: Decodable {
 
 extension Fraction: Divisible {
     public typealias Divisor = Self
+
     public typealias Quotient = Self
+
     public typealias RemainderDivisor = Self
+
     public typealias Remainder = Self
 
     /// The reciprocal of this value, or `nil` when this value is zero or NaN.
@@ -756,6 +760,7 @@ where Term: LosslessStringConvertible {
 
 extension Fraction: Multipliable {
     public typealias Multiplier = Self
+
     public typealias Product = Self
 
     /// Returns a boolean value indicating whether this value is an exact multiple of the specified value.
@@ -931,6 +936,7 @@ extension Fraction: Normalizable {
 
 extension Fraction: Raisable {
     public typealias Exponent = Int
+
     public typealias Power = Self
 
     /// Returns a boolean value indicating whether this value is a power of the specified value.
@@ -1180,6 +1186,7 @@ extension Fraction: Simplifiable {
 
 extension Fraction: Subtractable {
     public typealias Subtrahend = Self
+
     public typealias Difference = Self
 
     /// Returns the difference between the specified values.

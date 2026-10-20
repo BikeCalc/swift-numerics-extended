@@ -25,7 +25,7 @@ Numerics Extended is written in Swift and avoids platform-specific APIs where po
 1. Add Numerics Extended to the dependencies in your `Package.swift` file:
 
     ```swift
-    let package: Package = .init(
+    internal let package: Package = .init(
         ...
         dependencies: [
             .package(
@@ -41,7 +41,7 @@ Numerics Extended is written in Swift and avoids platform-specific APIs where po
    the name of that target:
 
     ```swift
-    let package: Package = .init(
+    internal let package: Package = .init(
         ...
         targets: [
             .target(
@@ -69,7 +69,7 @@ Numerics Extended is written in Swift and avoids platform-specific APIs where po
 - Combine `Addable` and `RepresentableByZero` to total a sequence of values, starting from zero or an initial value:
 
   ```swift
-  func total<Value>(
+  internal func total<Value>(
       _ values: some Sequence<Value>,
       startingAt initialValue: Value = .zero
   ) -> Value
@@ -97,7 +97,7 @@ Numerics Extended is written in Swift and avoids platform-specific APIs where po
 - Keep a `Fraction` in canonical form while doing arithmetic:
 
   ```swift
-  @Canonicalized var value: Fraction<Int> = .init(2, 4)
+  @Canonicalized internal var value: Fraction<Int> = .init(2, 4)
   print(value)
   // Prints "1/2"
 
@@ -116,7 +116,7 @@ Numerics Extended is written in Swift and avoids platform-specific APIs where po
 ## Documentation
 
 You can read more about this package by visiting the
-[documentation](https://bikecalc.github.io/swift-numerics-extended/documentation/numericsextended).
+[Documentation](https://bikecalc.github.io/swift-numerics-extended/documentation/numericsextended).
 
 ## Contributing
 

@@ -12,7 +12,7 @@ your target, and import the module in source files that use the protocols or exp
 Add the package to the dependencies in your `Package.swift` file.
 
 ```swift
-let package: Package = .init(
+internal let package: Package = .init(
     ...
     dependencies: [
         .package(
@@ -30,7 +30,7 @@ Add the `NumericsExtended` product to the dependencies of the target that will i
 name of that target.
 
 ```swift
-let package: Package = .init(
+internal let package: Package = .init(
     ...
     targets: [
         .target(

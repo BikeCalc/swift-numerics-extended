@@ -14,6 +14,7 @@ import StandardNumericProtocols
 @available(iOS 18.0, macCatalyst 18.0, macOS 15.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
 extension Int128: Addable {
     public typealias Addend = Self
+
     public typealias Sum = Self
 }
 
@@ -22,8 +23,11 @@ extension Int128: Addable {
 @available(iOS 18.0, macCatalyst 18.0, macOS 15.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
 extension Int128: Divisible {
     public typealias Divisor = Self
+
     public typealias Quotient = Self
+
     public typealias RemainderDivisor = Self
+
     public typealias Remainder = Self
 }
 
@@ -32,6 +36,7 @@ extension Int128: Divisible {
 @available(iOS 18.0, macCatalyst 18.0, macOS 15.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
 extension Int128: Multipliable {
     public typealias Multiplier = Self
+
     public typealias Product = Self
 }
 
@@ -45,6 +50,7 @@ extension Int128: Negateable {}
 @available(iOS 18.0, macCatalyst 18.0, macOS 15.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
 extension Int128: Raisable {
     public typealias Exponent = Self
+
     public typealias Power = Self
 }
 
@@ -63,5 +69,6 @@ extension Int128: RepresentableByZero {}
 @available(iOS 18.0, macCatalyst 18.0, macOS 15.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
 extension Int128: Subtractable {
     public typealias Subtrahend = Self
+
     public typealias Difference = Self
 }

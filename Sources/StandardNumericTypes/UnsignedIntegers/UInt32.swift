@@ -13,6 +13,7 @@ import StandardNumericProtocols
 
 extension UInt32: Addable {
     public typealias Addend = Self
+
     public typealias Sum = Self
 }
 
@@ -20,8 +21,11 @@ extension UInt32: Addable {
 
 extension UInt32: Divisible {
     public typealias Divisor = Self
+
     public typealias Quotient = Self
+
     public typealias RemainderDivisor = Self
+
     public typealias Remainder = Self
 }
 
@@ -29,6 +33,7 @@ extension UInt32: Divisible {
 
 extension UInt32: Multipliable {
     public typealias Multiplier = Self
+
     public typealias Product = Self
 }
 
@@ -36,6 +41,7 @@ extension UInt32: Multipliable {
 
 extension UInt32: Raisable {
     public typealias Exponent = Self
+
     public typealias Power = Self
 }
 
@@ -51,5 +57,6 @@ extension UInt32: RepresentableByZero {}
 
 extension UInt32: Subtractable {
     public typealias Subtrahend = Self
+
     public typealias Difference = Self
 }

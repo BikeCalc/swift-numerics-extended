@@ -201,6 +201,7 @@ extension Roman {
 
 extension Roman: Addable {
     public typealias Addend = Self
+
     public typealias Sum = Self
 
     public static func + (
@@ -301,8 +302,11 @@ extension Roman: Decodable {
 
 extension Roman: Divisible {
     public typealias Divisor = Self
+
     public typealias Quotient = Self
+
     public typealias RemainderDivisor = Self
+
     public typealias Remainder = Self
 
     public var reciprocal: Self? {
@@ -461,6 +465,7 @@ extension Roman: LosslessStringConvertible {
 
 extension Roman: Multipliable {
     public typealias Multiplier = Self
+
     public typealias Product = Self
 
     public func isMultiple(of other: Roman) -> Bool {
@@ -509,6 +514,7 @@ extension Roman: Numeric {
 
 extension Roman: Raisable {
     public typealias Exponent = Self
+
     public typealias Power = Self
 
     public func isPower(of other: Self) -> Bool {
@@ -735,6 +741,7 @@ extension Roman: Strideable {
 
 extension Roman: Subtractable {
     public typealias Subtrahend = Self
+
     public typealias Difference = Self
 
     public static func - (

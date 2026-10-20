@@ -370,7 +370,6 @@ fileprivate struct CodeCoverageReporter {
 
         let standardizedSourcesURL: URL = sourcesURL.standardizedFileURL
         let sourcePathPrefix: String = standardizedSourcesURL.path + "/"
-
         // LLVM exports coverage for dependencies and generated files alongside package sources. Retain only files
         // located beneath the explicitly selected source directory.
         self.files = report.data

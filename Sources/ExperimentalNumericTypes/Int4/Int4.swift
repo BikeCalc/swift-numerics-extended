@@ -182,6 +182,7 @@ public struct Int4 {
 
 extension Int4: Addable {
     public typealias Addend = Self
+
     public typealias Sum = Self
 
     public static func + (
@@ -428,8 +429,11 @@ extension Int4: Decodable {
 
 extension Int4: Divisible {
     public typealias Divisor = Self
+
     public typealias Quotient = Self
+
     public typealias RemainderDivisor = Self
+
     public typealias Remainder = Self
 
     /// Returns the quotient of dividing the first specified value by the second.
@@ -651,6 +655,7 @@ extension Int4: LosslessStringConvertible {
 
 extension Int4: Multipliable {
     public typealias Multiplier = Self
+
     public typealias Product = Self
 
     public static func * (
@@ -701,6 +706,7 @@ extension Int4: Numeric {
 
 extension Int4: Raisable {
     public typealias Exponent = Self
+
     public typealias Power = Self
 }
 
@@ -905,6 +911,7 @@ extension Int4: Strideable {}
 
 extension Int4: Subtractable {
     public typealias Subtrahend = Self
+
     public typealias Difference = Self
 
     public static func - (
