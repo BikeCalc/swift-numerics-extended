@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Roman Comparable Tests")
 internal struct RomanComparableTests {
+    internal init() {}
+
     private static let comparisonArguments: Array<(Roman, Roman, Bool, Bool, Bool, Bool)> = [
         (1, 1, false, true, false, true),
         (2, 3, true, true, false, false),
@@ -100,7 +102,6 @@ internal struct RomanComparableTests {
         upperBound: Roman
     ) throws {
         let range: ClosedRange<Roman> = lowerBound ... upperBound
-
         #expect(try value.isWithin(range) == range.contains(value))
     }
 
@@ -114,7 +115,6 @@ internal struct RomanComparableTests {
         upperBound: Roman
     ) throws {
         let valueIsWithinBounds: Bool = try value.isWithin(lowerBound, upperBound) == true
-
         #expect(valueIsWithinBounds == (value >= lowerBound && value <= upperBound))
     }
 
@@ -128,7 +128,6 @@ internal struct RomanComparableTests {
         upperBound: Roman
     ) throws {
         let valueIsBetweenBounds: Bool = try value.isBetween(lowerBound, upperBound) == true
-
         #expect(valueIsBetweenBounds == (value > lowerBound && value < upperBound))
     }
 }

@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Unsigned Fraction LosslessStringConvertible Tests")
 internal struct UnsignedFractionLosslessStringConvertibleTests {
+    internal init() {}
+
     @Test(
         "Negative finite string initialization fails",
         arguments: [

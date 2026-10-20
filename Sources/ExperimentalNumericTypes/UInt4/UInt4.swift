@@ -213,7 +213,6 @@ extension UInt4: BinaryInteger {
                 position == self.startIndex,
                 "UInt4 words index must be zero."
             )
-
             return self.value
         }
 
@@ -227,7 +226,6 @@ extension UInt4: BinaryInteger {
                 index == self.startIndex,
                 "UInt4 words index must be the start index."
             )
-
             return index + 1
         }
 
@@ -241,7 +239,6 @@ extension UInt4: BinaryInteger {
                 index == self.endIndex,
                 "UInt4 words index must be the end index."
             )
-
             return index - 1
         }
 
@@ -261,7 +258,6 @@ extension UInt4: BinaryInteger {
                 self.startIndex ... self.endIndex ~= newIndex,
                 "UInt4 words index must be within bounds."
             )
-
             return newIndex
         }
 
@@ -317,7 +313,8 @@ extension UInt4: BinaryInteger {
         _ lhs: inout Self,
         _ rhs: Self
     ) {
-        lhs = .init(value: lhs.value & rhs.value)
+        let newValue: Self.Value = lhs.value & rhs.value
+        lhs = .init(value: newValue)
     }
 
     /// Stores the bitwise OR of the two specified values in the left-hand-side variable.
@@ -329,7 +326,8 @@ extension UInt4: BinaryInteger {
         _ lhs: inout Self,
         _ rhs: Self
     ) {
-        lhs = .init(value: lhs.value | rhs.value)
+        let newValue: Self.Value = lhs.value | rhs.value
+        lhs = .init(value: newValue)
     }
 
     /// Stores the bitwise XOR of the two specified values in the left-hand-side variable.
@@ -341,7 +339,8 @@ extension UInt4: BinaryInteger {
         _ lhs: inout Self,
         _ rhs: Self
     ) {
-        lhs = .init(value: lhs.value ^ rhs.value)
+        let newValue: Self.Value = lhs.value ^ rhs.value
+        lhs = .init(value: newValue)
     }
 }
 
@@ -494,9 +493,7 @@ extension UInt4: ExpressibleByIntegerLiteral {
             0 ... 15 ~= value,
             "UInt4 integer literal must be between \(Self.min) and \(Self.max)."
         )
-
         let newValue: Self.Value = .init(value)
-
         self.init(value: newValue)
     }
 }
@@ -510,7 +507,6 @@ extension UInt4: FixedWidthInteger {
     public init<T>(truncatingIfNeeded source: T)
     where T: BinaryInteger {
         let value: Self.Value = .init(truncatingIfNeeded: source) & 0b1111
-
         self.init(value: value)
     }
 
@@ -582,7 +578,6 @@ extension UInt4: FixedWidthInteger {
         let product: Self.Value = self.value * other.value
         let high: Self = .init(truncatingIfNeeded: product >> Self.bitWidth)
         let low: Self.Magnitude = .init(truncatingIfNeeded: product)
-
         return (
             high: high,
             low: low
@@ -602,12 +597,10 @@ extension UInt4: FixedWidthInteger {
             self != 0,
             "Divisor must not be zero."
         )
-
         let value: Self.Value = (dividend.high.value << Self.bitWidth) | dividend.low.value
         let result: Self.Value.QuotientAndRemainder = value.quotientAndRemainder(dividingBy: self.value)
         let quotient: Self = .init(truncatingIfNeeded: result.quotient)
         let remainder: Self = .init(truncatingIfNeeded: result.remainder)
-
         return (
             quotient: quotient,
             remainder: remainder
@@ -744,7 +737,6 @@ extension UInt4: ReportableAsOverflow {
 
         let quotient: Self.Value = self.value / rhs.value
         let partialValue: Self = .init(value: quotient)
-
         return (
             partialValue: partialValue,
             overflow: false
@@ -762,7 +754,6 @@ extension UInt4: ReportableAsOverflow {
 
         let remainder: Self.Value = self.value % rhs.value
         let partialValue: Self = .init(value: remainder)
-
         return (
             partialValue: partialValue,
             overflow: false

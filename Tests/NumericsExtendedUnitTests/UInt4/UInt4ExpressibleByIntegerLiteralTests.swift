@@ -12,6 +12,8 @@ import Testing
 
 @Suite("UInt4 ExpressibleByIntegerLiteral Tests")
 internal struct UInt4ExpressibleByIntegerLiteralTests {
+    internal init() {}
+
     @Test(
         "Integer literal initialization succeeds",
         arguments: [
@@ -25,7 +27,6 @@ internal struct UInt4ExpressibleByIntegerLiteralTests {
         integer: Int
     ) throws {
         let expected: UInt4 = try #require(UInt4(exactly: integer))
-
         #expect(value == expected)
     }
 }

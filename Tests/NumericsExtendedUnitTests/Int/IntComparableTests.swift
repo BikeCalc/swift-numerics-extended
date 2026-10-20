@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Int Comparable Tests")
 internal struct IntComparableTests {
+    internal init() {}
+
     private static let comparisonArguments: Array<(Int, Int, Bool, Bool, Bool, Bool)> = [
         (1, 1, false, true, false, true),
         (-1, -1, false, true, false, true),
@@ -108,7 +110,6 @@ internal struct IntComparableTests {
         upperBound: Int
     ) throws {
         let range: ClosedRange<Int> = lowerBound ... upperBound
-
         #expect(try value.isWithin(range) == range.contains(value))
     }
 
@@ -122,7 +123,6 @@ internal struct IntComparableTests {
         upperBound: Int
     ) throws {
         let valueIsWithinBounds: Bool = try value.isWithin(lowerBound, upperBound) == true
-
         #expect(valueIsWithinBounds == (value >= lowerBound && value <= upperBound))
     }
 
@@ -136,7 +136,6 @@ internal struct IntComparableTests {
         upperBound: Int
     ) throws {
         let valueIsBetweenBounds: Bool = try value.isBetween(lowerBound, upperBound) == true
-
         #expect(valueIsBetweenBounds == (value > lowerBound && value < upperBound))
     }
 }

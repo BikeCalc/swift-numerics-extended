@@ -14,6 +14,8 @@ import Testing
 
 @Suite("Int4 Decodable Tests")
 internal struct Int4DecodableTests {
+    internal init() {}
+
     @Test(
         "Decode from JSON succeeds",
         arguments: [
@@ -32,7 +34,6 @@ internal struct Int4DecodableTests {
             Int4.self,
             from: data
         )
-
         #expect(result == value)
     }
 
@@ -47,7 +48,6 @@ internal struct Int4DecodableTests {
     )
     internal func decodeFromJSONThrows(json: String) throws {
         let data: Data = try #require(json.data(using: .utf8))
-
         #expect(throws: DecodingError.self) {
             try JSONDecoder().decode(
                 Int4.self,
@@ -67,7 +67,6 @@ extension Int4DecodableTests {
             Int4.self,
             from: data
         )
-
         #expect(result == .negativeZero)
     }
 }
@@ -82,7 +81,6 @@ extension Int4DecodableTests {
             Int4.self,
             from: data
         )
-
         #expect(result == .zero)
     }
 }

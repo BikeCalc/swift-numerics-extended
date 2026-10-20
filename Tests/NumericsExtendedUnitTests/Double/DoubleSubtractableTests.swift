@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Double Subtractable Tests")
 internal struct DoubleSubtractableTests {
+    internal init() {}
+
     private static let subtractionArguments: [(Double, Double.Subtrahend, Double)] = [
         (3.0, 2.0, 1.0),
         (5.0, 3.0, 2.0),
@@ -171,7 +173,6 @@ extension DoubleSubtractableTests {
         difference: Double
     ) {
         let result: Double = Double.negativeZero - subtrahend
-
         #expect(result == difference)
         #expect(result.sign == difference.sign)
     }
@@ -231,7 +232,6 @@ extension DoubleSubtractableTests {
         difference: Double
     ) {
         let result: Double = Double.zero - subtrahend
-
         #expect(result == difference)
         #expect(result.sign == difference.sign)
     }

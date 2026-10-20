@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Fraction Simplifiable Tests")
 internal struct FractionSimplifiableTests {
+    internal init() {}
+
     private static let simplificationArguments: [(Fraction<Int>, Fraction<Int>)] = [
         (Fraction<Int>(2, 4), Fraction<Int>(1, 2)),
         (Fraction<Int>(-2, 4), Fraction<Int>(-1, 2)),
@@ -98,7 +100,6 @@ internal struct FractionSimplifiableTests {
     )
     internal func simplificationIsIdempotent(value: Fraction<Int>) {
         let result: Fraction<Int> = value.simplified().simplified()
-
         #expect(result == value.simplified())
     }
 }
@@ -110,7 +111,6 @@ extension FractionSimplifiableTests {
     internal func intMinimumTermsSimplifyWithoutOverflow() {
         let value: Fraction<Int> = .init(Int.min, Int.min)
         let expected: Fraction<Int> = .init(-1, -1)
-
         #expect(value.simplified() == expected)
     }
 }

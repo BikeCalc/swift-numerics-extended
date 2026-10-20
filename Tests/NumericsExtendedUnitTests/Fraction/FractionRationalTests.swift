@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Fraction Rational Tests")
 internal struct FractionRationalTests {
+    internal init() {}
+
     @Test(
         "Whole initialization uses denominator one",
         arguments: [
@@ -23,7 +25,6 @@ internal struct FractionRationalTests {
     )
     internal func wholeInitializationUsesDenominatorOne(integer: Int) {
         let value: Fraction<Int> = .init(integer)
-
         #expect(value.numerator == integer)
         #expect(value.denominator == 1)
     }
@@ -148,7 +149,6 @@ extension FractionRationalTests {
     @Test("Int minimum over negative one is whole")
     internal func intMinimumOverNegativeOneIsWhole() {
         let value: Fraction<Int> = .init(Int.min, -1)
-
         #expect(value.isWhole == true)
     }
 }
@@ -159,7 +159,6 @@ extension FractionRationalTests {
     @Test("NaN properties follow rational rules")
     internal func nanPropertiesFollowRationalRules() {
         let value: Fraction<Int> = .nan
-
         #expect(value.isOne == false)
         #expect(value.isWhole == false)
         #expect(value.isProper == false)
@@ -175,7 +174,6 @@ extension FractionRationalTests {
     @Test("Negative infinity properties follow rational rules")
     internal func negativeInfinityPropertiesFollowRationalRules() {
         let value: Fraction<Int> = .negativeInfinity
-
         #expect(value.isOne == false)
         #expect(value.isWhole == false)
         #expect(value.isProper == false)
@@ -201,9 +199,7 @@ extension FractionRationalTests {
         #expect(value.isProper == false)
         #expect(value.isImproper == false)
         #expect(value.isUnit == false)
-
         let quotient: Double = value.quotient
-
         #expect(quotient == .zero)
         #expect(quotient.sign == .minus)
     }
@@ -215,7 +211,6 @@ extension FractionRationalTests {
     @Test("Positive infinity properties follow rational rules")
     internal func positiveInfinityPropertiesFollowRationalRules() {
         let value: Fraction<Int> = .infinity
-
         #expect(value.isOne == false)
         #expect(value.isWhole == false)
         #expect(value.isProper == false)
@@ -241,9 +236,7 @@ extension FractionRationalTests {
         #expect(value.isProper == false)
         #expect(value.isImproper == false)
         #expect(value.isUnit == false)
-
         let quotient: Double = value.quotient
-
         #expect(quotient == .zero)
         #expect(quotient.sign == .plus)
     }

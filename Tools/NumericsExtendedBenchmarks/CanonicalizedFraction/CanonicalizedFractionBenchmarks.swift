@@ -16,7 +16,6 @@ internal let canonicalizedFractionBenchmarks: Array<Benchmark> = {
     let comparisonRHS: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
     let base: Canonicalized<Fraction<Int>> = .init(wrappedValue: .init(12, 17))
     let exponent: Int = 5
-
     return [
         .init(name: "CanonicalizedFraction.addition") {
             var result: Canonicalized<Fraction<Int>> = lhs

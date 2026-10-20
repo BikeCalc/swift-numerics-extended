@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Fraction CustomDebugStringConvertible Tests")
 internal struct FractionCustomDebugStringConvertibleTests {
+    internal init() {}
+
     @Test(
         "Debug description succeeds",
         arguments: [

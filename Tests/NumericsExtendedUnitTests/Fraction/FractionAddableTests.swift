@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Fraction Addable Tests")
 internal struct FractionAddableTests {
+    internal init() {}
+
     private static let additionArguments: [(Fraction<Int>, Fraction<Int>.Addend, Fraction<Int>)] = [
         (Fraction<Int>(1, 2), Fraction<Int>(1, 2), Fraction<Int>(2, 2)),
         (Fraction<Int>(1, 2), Fraction<Int>(2, 3), Fraction<Int>(7, 6)),

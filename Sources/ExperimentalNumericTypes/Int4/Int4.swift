@@ -240,7 +240,6 @@ extension Int4: BinaryInteger {
                 position == self.startIndex,
                 "Int4 words index must be zero."
             )
-
             return self.value
         }
 
@@ -254,7 +253,6 @@ extension Int4: BinaryInteger {
                 index == self.startIndex,
                 "Int4 words index must be the start index."
             )
-
             return index + 1
         }
 
@@ -268,7 +266,6 @@ extension Int4: BinaryInteger {
                 index == self.endIndex,
                 "Int4 words index must be the end index."
             )
-
             return index - 1
         }
 
@@ -288,7 +285,6 @@ extension Int4: BinaryInteger {
                 self.startIndex ... self.endIndex ~= newIndex,
                 "Int4 words index must be within bounds."
             )
-
             return newIndex
         }
 
@@ -344,7 +340,8 @@ extension Int4: BinaryInteger {
         _ lhs: inout Self,
         _ rhs: Self
     ) {
-        lhs = .init(bitPattern: lhs.bitPattern & rhs.bitPattern)
+        let bitPattern: UInt8 = lhs.bitPattern & rhs.bitPattern
+        lhs = .init(bitPattern: bitPattern)
     }
 
     /// Stores the bitwise OR of the two specified values in the left-hand-side variable.
@@ -356,7 +353,8 @@ extension Int4: BinaryInteger {
         _ lhs: inout Self,
         _ rhs: Self
     ) {
-        lhs = .init(bitPattern: lhs.bitPattern | rhs.bitPattern)
+        let bitPattern: UInt8 = lhs.bitPattern | rhs.bitPattern
+        lhs = .init(bitPattern: bitPattern)
     }
 
     /// Stores the bitwise XOR of the two specified values in the left-hand-side variable.
@@ -368,7 +366,8 @@ extension Int4: BinaryInteger {
         _ lhs: inout Self,
         _ rhs: Self
     ) {
-        lhs = .init(bitPattern: lhs.bitPattern ^ rhs.bitPattern)
+        let bitPattern: UInt8 = lhs.bitPattern ^ rhs.bitPattern
+        lhs = .init(bitPattern: bitPattern)
     }
 }
 
@@ -521,9 +520,7 @@ extension Int4: ExpressibleByIntegerLiteral {
             -8 ... 7 ~= value,
             "Int4 integer literal must be between \(Self.min) and \(Self.max)."
         )
-
         let newValue: Self.Value = .init(value)
-
         self.init(value: newValue)
     }
 }
@@ -597,7 +594,6 @@ extension Int4: FixedWidthInteger {
         let bits: UInt8 = .init(truncatingIfNeeded: product)
         let high: Self = .init(bitPattern: bits >> Self.bitWidth)
         let low: Self.Magnitude = .init(truncatingIfNeeded: bits)
-
         return (
             high: high,
             low: low
@@ -617,13 +613,11 @@ extension Int4: FixedWidthInteger {
             self != 0,
             "Divisor must not be zero."
         )
-
         let raw: UInt8 = (dividend.high.bitPattern << Self.bitWidth) | dividend.low.value
         let signedDividend: Self.Value = .init(bitPattern: raw)
         let result: Self.Value.QuotientAndRemainder = signedDividend.quotientAndRemainder(dividingBy: self.value)
         let quotient: Self = .init(truncatingIfNeeded: result.quotient)
         let remainder: Self = .init(truncatingIfNeeded: result.remainder)
-
         return (
             quotient: quotient,
             remainder: remainder
@@ -791,7 +785,6 @@ extension Int4: ReportableAsOverflow {
 
         let quotient: Self.Value = self.value / rhs.value
         let partialValue: Self = .init(value: quotient)
-
         return (
             partialValue: partialValue,
             overflow: false
@@ -816,7 +809,6 @@ extension Int4: ReportableAsOverflow {
 
         let remainder: Self.Value = self.value % rhs.value
         let partialValue: Self = .init(value: remainder)
-
         return (
             partialValue: partialValue,
             overflow: false
@@ -825,7 +817,8 @@ extension Int4: ReportableAsOverflow {
 
     public func raisedReportingOverflow(to rhs: Self.Exponent) -> Self.OverflowReport<Self.Power> {
         switch rhs {
-        case ..<0 where self == 0:
+        case ..<0
+        where self == 0:
             return (
                 partialValue: 0,
                 overflow: true

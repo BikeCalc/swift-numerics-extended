@@ -40,7 +40,8 @@ where Self: ReportableAsOverflow {
     public func raisedReportingOverflow(to rhs: Self.Exponent) -> Self.OverflowReport<Self.Power>
     where Self.Exponent: BinaryInteger, Self.Power == Self, Self.Product == Self {
         switch rhs {
-        case ..<0 where self == 0:
+        case ..<0
+        where self == 0:
             return (
                 partialValue: 0,
                 overflow: true

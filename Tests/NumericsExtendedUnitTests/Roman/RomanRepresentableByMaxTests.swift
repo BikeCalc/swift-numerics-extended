@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Roman RepresentableByMax Tests")
 internal struct RomanRepresentableByMaxTests {
+    internal init() {}
+
     @Test(
         "Is max",
         arguments: [

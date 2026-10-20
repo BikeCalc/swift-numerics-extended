@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Canonicalized Fraction Comparable Tests")
 internal struct CanonicalizedFractionComparableTests {
+    internal init() {}
+
     private static let comparisonArguments: [(Fraction<Int>, Fraction<Int>, Bool, Bool, Bool, Bool)] = [
         (Fraction<Int>(1, 2), Fraction<Int>(1, 2), false, true, false, true),
         (Fraction<Int>(1, 2), Fraction<Int>(2, 4), false, true, false, true),
@@ -48,7 +50,6 @@ internal struct CanonicalizedFractionComparableTests {
     ) throws {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-
         #expect((lhsWrapper < rhsWrapper) == isLess)
         #expect(try lhsWrapper.isLess(than: rhsWrapper) == isLess)
     }
@@ -67,7 +68,6 @@ internal struct CanonicalizedFractionComparableTests {
     ) throws {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-
         #expect((lhsWrapper <= rhsWrapper) == isLessThanOrEqual)
         #expect(try lhsWrapper.isLessThanOrEqual(to: rhsWrapper) == isLessThanOrEqual)
     }
@@ -86,7 +86,6 @@ internal struct CanonicalizedFractionComparableTests {
     ) throws {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-
         #expect((lhsWrapper > rhsWrapper) == isGreater)
         #expect(try lhsWrapper.isGreater(than: rhsWrapper) == isGreater)
     }
@@ -105,7 +104,6 @@ internal struct CanonicalizedFractionComparableTests {
     ) throws {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-
         #expect((lhsWrapper >= rhsWrapper) == isGreaterThanOrEqual)
         #expect(try lhsWrapper.isGreaterThanOrEqual(to: rhsWrapper) == isGreaterThanOrEqual)
     }
@@ -123,7 +121,6 @@ internal struct CanonicalizedFractionComparableTests {
         let lowerBoundWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lowerBound)
         let upperBoundWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: upperBound)
         let range: ClosedRange<Canonicalized<Fraction<Int>>> = lowerBoundWrapper ... upperBoundWrapper
-
         #expect(try valueWrapper.isWithin(range) == range.contains(valueWrapper))
     }
 
@@ -140,7 +137,6 @@ internal struct CanonicalizedFractionComparableTests {
         let lowerBoundWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lowerBound)
         let upperBoundWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: upperBound)
         let valueIsWithinBounds: Bool = try valueWrapper.isWithin(lowerBoundWrapper, upperBoundWrapper) == true
-
         #expect(valueIsWithinBounds == (valueWrapper >= lowerBoundWrapper && valueWrapper <= upperBoundWrapper))
     }
 
@@ -157,7 +153,6 @@ internal struct CanonicalizedFractionComparableTests {
         let lowerBoundWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lowerBound)
         let upperBoundWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: upperBound)
         let valueIsBetweenBounds: Bool = try valueWrapper.isBetween(lowerBoundWrapper, upperBoundWrapper) == true
-
         #expect(valueIsBetweenBounds == (valueWrapper > lowerBoundWrapper && valueWrapper < upperBoundWrapper))
     }
 }
@@ -179,7 +174,6 @@ extension CanonicalizedFractionComparableTests {
     ) throws {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-
         #expect((lhsWrapper < rhsWrapper) == false)
         #expect((lhsWrapper <= rhsWrapper) == false)
         #expect((lhsWrapper > rhsWrapper) == false)
@@ -212,7 +206,6 @@ extension CanonicalizedFractionComparableTests {
     ) throws {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-
         #expect((lhsWrapper < rhsWrapper) == isLess)
         #expect((lhsWrapper <= rhsWrapper) == isLessThanOrEqual)
         #expect((lhsWrapper > rhsWrapper) == isGreater)
@@ -246,7 +239,6 @@ extension CanonicalizedFractionComparableTests {
     ) throws {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-
         #expect((lhsWrapper < rhsWrapper) == isLess)
         #expect((lhsWrapper <= rhsWrapper) == isLessThanOrEqual)
         #expect((lhsWrapper > rhsWrapper) == isGreater)
@@ -279,7 +271,6 @@ extension CanonicalizedFractionComparableTests {
     ) throws {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-
         #expect((lhsWrapper < rhsWrapper) == isLess)
         #expect((lhsWrapper <= rhsWrapper) == isLessThanOrEqual)
         #expect((lhsWrapper > rhsWrapper) == isGreater)
@@ -313,7 +304,6 @@ extension CanonicalizedFractionComparableTests {
     ) throws {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-
         #expect((lhsWrapper < rhsWrapper) == isLess)
         #expect((lhsWrapper <= rhsWrapper) == isLessThanOrEqual)
         #expect((lhsWrapper > rhsWrapper) == isGreater)

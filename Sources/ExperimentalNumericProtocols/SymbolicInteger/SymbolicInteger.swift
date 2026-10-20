@@ -24,4 +24,5 @@ public protocol SymbolicInteger:
     RepresentableByMax,
     RepresentableByMin,
     RepresentableByZero,
-    Strideable {}
+    Strideable
+{}

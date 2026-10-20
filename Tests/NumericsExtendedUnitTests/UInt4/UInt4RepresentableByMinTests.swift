@@ -12,6 +12,8 @@ import Testing
 
 @Suite("UInt4 RepresentableByMin Tests")
 internal struct UInt4RepresentableByMinTests {
+    internal init() {}
+
     @Test(
         "Is min",
         arguments: [

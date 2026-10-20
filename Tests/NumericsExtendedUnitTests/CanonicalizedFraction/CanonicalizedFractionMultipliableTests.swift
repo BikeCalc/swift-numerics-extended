@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Canonicalized Fraction Multipliable Tests")
 internal struct CanonicalizedFractionMultipliableTests {
+    internal init() {}
+
     private static let multiplicationArguments: [(Fraction<Int>, Fraction<Int>.Multiplier, Fraction<Int>)] = [
         (Fraction<Int>(1, 2), Fraction<Int>(1, 2), Fraction<Int>(1, 4)),
         (Fraction<Int>(1, 2), Fraction<Int>(2, 3), Fraction<Int>(1, 3)),
@@ -28,11 +30,8 @@ internal struct CanonicalizedFractionMultipliableTests {
         multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
     ) {
-        @Canonicalized
-        var runningProduct: Fraction<Int> = multiplicand
-
+        @Canonicalized var runningProduct: Fraction<Int> = multiplicand
         runningProduct *= multiplier
-
         #expect(runningProduct == product)
     }
 
@@ -45,11 +44,8 @@ internal struct CanonicalizedFractionMultipliableTests {
         multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
     ) throws {
-        @Canonicalized
-        var runningProduct: Fraction<Int> = multiplicand
-
+        @Canonicalized var runningProduct: Fraction<Int> = multiplicand
         try runningProduct.multiply(by: multiplier)
-
         #expect(runningProduct == product)
     }
 }

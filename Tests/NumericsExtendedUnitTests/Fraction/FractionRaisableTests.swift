@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Fraction Raisable Tests")
 internal struct FractionRaisableTests {
+    internal init() {}
+
     private static let exponentiationArguments: [(Fraction<Int>, Fraction<Int>.Exponent, Fraction<Int>)] = [
         (Fraction<Int>(2, 3), 2, Fraction<Int>(4, 9)),
         (Fraction<Int>(2, 3), 3, Fraction<Int>(8, 27)),
@@ -240,14 +242,12 @@ extension FractionRaisableTests {
     @Test("NaN raised to positive zero returns one")
     internal func nanRaisedToPositiveZeroReturnsOne() {
         let power: Fraction<Int> = .nan ** .zero
-
         #expect(power == .one)
     }
 
     @Test("NaN raised to negative zero returns one")
     internal func nanRaisedToNegativeZeroReturnsOne() {
         let power: Fraction<Int> = .nan ** Fraction<Int>.Exponent.negativeZero
-
         #expect(power == .one)
     }
 }

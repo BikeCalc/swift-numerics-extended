@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Roman Multipliable Tests")
 internal struct RomanMultipliableTests {
+    internal init() {}
+
     private static let multiplicationArguments: [(Roman, Roman.Multiplier, Roman)] = [
         (2, 3, 6),
         (3, 4, 12)

@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Fraction LosslessStringConvertible Tests")
 internal struct FractionLosslessStringConvertibleTests {
+    internal init() {}
+
     @Test(
         "String initialization succeeds",
         arguments: [
@@ -66,7 +68,6 @@ extension FractionLosslessStringConvertibleTests {
     @Test("Negative NaN string initialization succeeds")
     internal func negativeNanStringInitializationSucceeds() {
         let description: String = "-nan"
-
         #expect(Fraction<Int>(description)?.isNaN == true)
     }
 }

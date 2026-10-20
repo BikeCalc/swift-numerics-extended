@@ -28,7 +28,8 @@ swift Scripts/RunUnitTests.swift
 ```
 
 The runner executes `swift test --enable-code-coverage`, locates the exported coverage JSON, and invokes
-`GenerateCodeCoverageReport.swift`. It saves `code-coverage.json` and `code-coverage.md` in `.build/code-coverage/`.
+`GenerateCodeCoverageReport.swift`. It saves `numerics-extended.json` and `numerics-extended.md`
+in `.build/code-coverage/`, and labels the printed report Numerics Extended.
 Test output goes to standard error; standard output contains only the Markdown coverage report, so it can be redirected
 without including test logs. Test or report-generation failures fail the script.
 

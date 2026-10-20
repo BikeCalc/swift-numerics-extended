@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Int Raisable Tests")
 internal struct IntRaisableTests {
+    internal init() {}
+
     private static let exponentiationArguments: [(Int, Int.Exponent, Int)] = [
         (2, 2, 4),
         (2, 3, 8),

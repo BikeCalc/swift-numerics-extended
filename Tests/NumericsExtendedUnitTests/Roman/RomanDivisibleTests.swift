@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Roman Divisible Tests")
 internal struct RomanDivisibleTests {
+    internal init() {}
+
     private static let divisionArguments: [(Roman, Roman.Divisor, Roman)] = [
         (6, 2, 3),
         (6, 3, 2)

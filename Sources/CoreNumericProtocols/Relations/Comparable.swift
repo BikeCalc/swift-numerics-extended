@@ -49,8 +49,8 @@ extension Comparable {
     /// - Returns: A boolean value.
     /// - Throws: An error if the conforming type cannot perform the comparison.
     public func isWithin(_ closedRange: ClosedRange<Self>) throws -> Bool {
-        return try self.isGreaterThanOrEqual(to: closedRange.lowerBound)
-            && self.isLessThanOrEqual(to: closedRange.upperBound)
+        return try self.isGreaterThanOrEqual(to: closedRange.lowerBound) == true
+            && self.isLessThanOrEqual(to: closedRange.upperBound) == true
     }
 
     /// Returns a boolean value indicating whether this value is within two specified values.
@@ -67,12 +67,11 @@ extension Comparable {
     ) throws -> Bool {
         let boundsAreOrdered: Bool = try lowerBound.isLess(than: upperBound)
         precondition(
-            boundsAreOrdered,
+            boundsAreOrdered == true,
             "Lower bound must be less than upper bound."
         )
-
-        return try self.isGreaterThanOrEqual(to: lowerBound)
-            && self.isLessThanOrEqual(to: upperBound)
+        return try self.isGreaterThanOrEqual(to: lowerBound) == true
+            && self.isLessThanOrEqual(to: upperBound) == true
     }
 
     /// Returns a boolean value indicating whether this value is between two specified values.
@@ -89,11 +88,10 @@ extension Comparable {
     ) throws -> Bool {
         let boundsAreOrdered: Bool = try lowerBound.isLess(than: upperBound)
         precondition(
-            boundsAreOrdered,
+            boundsAreOrdered == true,
             "Lower bound must be less than upper bound."
         )
-
-        return try lowerBound.isLess(than: self)
-            && self.isLess(than: upperBound)
+        return try lowerBound.isLess(than: self) == true
+            && self.isLess(than: upperBound) == true
     }
 }

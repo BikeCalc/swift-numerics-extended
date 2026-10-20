@@ -12,6 +12,8 @@ import Testing
 
 @Suite("UInt4 LosslessStringConvertible Tests")
 internal struct UInt4LosslessStringConvertibleTests {
+    internal init() {}
+
     @Test(
         "String initialization succeeds",
         arguments: [

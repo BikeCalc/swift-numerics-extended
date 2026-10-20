@@ -12,6 +12,8 @@ import Testing
 
 @Suite("UInt4 Strideable Tests")
 internal struct UInt4StrideableTests {
+    internal init() {}
+
     @Test(
         "Advanced by succeeds",
         arguments: [

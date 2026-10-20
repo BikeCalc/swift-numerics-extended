@@ -21,7 +21,8 @@ internal struct BenchmarkArguments {
         switch arguments.count {
         case 0:
             self.outputURL = nil
-        case 2 where arguments[0] == "--output":
+        case 2
+        where arguments[0] == "--output":
             self.outputURL = .init(fileURLWithPath: arguments[1])
         default:
             throw BenchmarkCommandError.invalidArguments

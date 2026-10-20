@@ -14,6 +14,8 @@ import Testing
 
 @Suite("Int4 Encodable Tests")
 internal struct Int4EncodableTests {
+    internal init() {}
+
     @Test(
         "Encode to JSON succeeds",
         arguments: [
@@ -29,7 +31,6 @@ internal struct Int4EncodableTests {
     ) throws {
         let result: Data = try JSONEncoder().encode(value)
         let expected: Data = try #require(json.data(using: .utf8))
-
         #expect(result == expected)
     }
 }
@@ -41,7 +42,6 @@ extension Int4EncodableTests {
     internal func positiveZeroEncodesToJSON() throws {
         let result: Data = try JSONEncoder().encode(Int4.zero)
         let expected: Data = try #require("0".data(using: .utf8))
-
         #expect(result == expected)
     }
 }

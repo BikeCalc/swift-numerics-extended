@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Double Hashable Tests")
 internal struct DoubleHashableTests {
+    internal init() {}
+
     @Test(
         "Equal values produce equal hashes",
         arguments: [
@@ -37,7 +39,6 @@ extension DoubleHashableTests {
     @Test("NaN values remain distinct hash keys")
     internal func nanValuesRemainDistinctHashKeys() {
         let value: Double = .nan
-
         #expect(Set([value, value]).count == 2)
     }
 }

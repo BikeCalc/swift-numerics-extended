@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Roman Subtractable Tests")
 internal struct RomanSubtractableTests {
+    internal init() {}
+
     private static let subtractionArguments: [(Roman, Roman.Subtrahend, Roman)] = [
         (3, 2, 1),
         (5, 3, 2)
@@ -83,7 +85,6 @@ extension RomanSubtractableTests {
         let reversedDifferenceReport: Roman.OverflowReport<Roman.Difference> = subtrahend.subtractingReportingOverflow(
             minuend
         )
-
         #expect(minuend - subtrahend == difference)
         #expect(reversedDifferenceReport.partialValue != difference)
         #expect(reversedDifferenceReport.overflow == true)

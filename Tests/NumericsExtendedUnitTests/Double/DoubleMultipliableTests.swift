@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Double Multipliable Tests")
 internal struct DoubleMultipliableTests {
+    internal init() {}
+
     private static let multiplicationArguments: [(Double, Double.Multiplier, Double)] = [
         (2.0, 3.0, 6.0),
         (3.0, 4.0, 12.0),
@@ -336,7 +338,6 @@ extension DoubleMultipliableTests {
         product: Double
     ) {
         let result: Double = Double.negativeZero * multiplier
-
         #expect(result == product)
         #expect(result.sign == product.sign)
     }
@@ -465,7 +466,6 @@ extension DoubleMultipliableTests {
         product: Double
     ) {
         let result: Double = Double.zero * multiplier
-
         #expect(result == product)
         #expect(result.sign == product.sign)
     }

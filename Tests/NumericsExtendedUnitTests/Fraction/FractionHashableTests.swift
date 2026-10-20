@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Fraction Hashable Tests")
 internal struct FractionHashableTests {
+    internal init() {}
+
     @Test(
         "Equal stored values produce equal hashes",
         arguments: [
@@ -54,7 +56,6 @@ extension FractionHashableTests {
     @Test("NaN values remain distinct hash keys")
     internal func nanValuesRemainDistinctHashKeys() {
         let value: Fraction<Int> = .nan
-
         #expect(Set([value, value]).count == 2)
     }
 }

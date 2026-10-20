@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Double RepresentableByZero Tests")
 internal struct DoubleRepresentableByZeroTests {
+    internal init() {}
+
     @Test(
         "Nonzero values are not zero",
         arguments: [

@@ -11,6 +11,11 @@ internal enum BenchmarkCommandError {
     /// The command-line arguments do not match the supported syntax.
     case invalidArguments
 
+    /// The benchmark report could not be encoded or written.
+    ///
+    /// - Parameter error: The original encoding or file-system failure.
+    case operationFailed(error: any Error)
+
     /// The current platform version does not provide the clock required for measurement.
     case unsupportedPlatform
 }
@@ -22,6 +27,8 @@ extension BenchmarkCommandError: CustomStringConvertible {
         switch self {
         case .invalidArguments:
             return "Usage: NumericsExtendedBenchmarks [--output <path>]"
+        case .operationFailed(let error):
+            return "Could not export benchmark report: \(error)"
         case .unsupportedPlatform:
             return "ContinuousClock is unavailable on this platform version"
         }

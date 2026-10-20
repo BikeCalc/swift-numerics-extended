@@ -11,7 +11,9 @@ import Testing
 @testable import NumericsExtended
 
 @Suite("Fraction RepresentableByNaN Tests")
-internal struct FractionRepresentableByNaNTests {}
+internal struct FractionRepresentableByNaNTests {
+    internal init() {}
+}
 
 // MARK: - NaN
 

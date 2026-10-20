@@ -12,6 +12,8 @@ import Testing
 
 @Suite("UInt4 RepresentableByMax Tests")
 internal struct UInt4RepresentableByMaxTests {
+    internal init() {}
+
     @Test(
         "Is max",
         arguments: [

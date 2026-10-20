@@ -14,6 +14,8 @@ import Testing
 
 @Suite("Roman Encodable Tests")
 internal struct RomanEncodableTests {
+    internal init() {}
+
     @Test(
         "Encode to JSON succeeds",
         arguments: [
@@ -29,7 +31,6 @@ internal struct RomanEncodableTests {
     ) throws {
         let result: Data = try JSONEncoder().encode(value)
         let expected: Data = try #require(json.data(using: .utf8))
-
         #expect(result == expected)
     }
 }
@@ -41,7 +42,6 @@ extension RomanEncodableTests {
     internal func positiveZeroEncodesToJSON() throws {
         let result: Data = try JSONEncoder().encode(Roman.zero)
         let expected: Data = try #require("\"N\"".data(using: .utf8))
-
         #expect(result == expected)
     }
 }

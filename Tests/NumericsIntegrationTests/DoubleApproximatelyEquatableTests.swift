@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Double ApproximatelyEquatable Tests")
 internal struct DoubleApproximatelyEquatableTests {
+    internal init() {}
+
     @Test(
         "Approximate equality follows the specified tolerances",
         arguments: [
@@ -45,7 +47,6 @@ internal struct DoubleApproximatelyEquatableTests {
     @Test("Tolerance accommodates floating-point rounding")
     internal func toleranceAccommodatesRounding() {
         let value: Double = 0.1 + 0.2
-
         #expect(
             value.isApproximatelyEqual(
                 to: 0.3,
@@ -90,7 +91,6 @@ extension DoubleApproximatelyEquatableTests {
     @Test("Greatest finite magnitude comparison handles overflow")
     internal func greatestFiniteMagnitudeComparisonHandlesOverflow() {
         let value: Double = .greatestFiniteMagnitude
-
         #expect(
             value.isApproximatelyEqual(
                 to: -value,
@@ -189,7 +189,6 @@ extension DoubleApproximatelyEquatableTests {
     @Test("Least nonzero magnitude respects the tolerance boundary")
     internal func leastNonzeroMagnitudeRespectsToleranceBoundary() {
         let value: Double = .leastNonzeroMagnitude
-
         #expect(
             value.isApproximatelyEqual(
                 to: 0,

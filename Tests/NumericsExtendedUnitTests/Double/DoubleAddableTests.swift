@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Double Addable Tests")
 internal struct DoubleAddableTests {
+    internal init() {}
+
     private static let additionArguments: Array<(Double, Double.Addend, Double)> = [
         (2.0, 3.0, 5.0),
         (3.0, 4.0, 7.0),
@@ -167,7 +169,6 @@ extension DoubleAddableTests {
         sum: Double
     ) {
         let result: Double = Double.negativeZero + addend
-
         #expect(result == sum)
         #expect(result.sign == sum.sign)
     }
@@ -245,7 +246,6 @@ extension DoubleAddableTests {
         sum: Double
     ) {
         let result: Double = Double.zero + addend
-
         #expect(result == sum)
         #expect(result.sign == sum.sign)
     }

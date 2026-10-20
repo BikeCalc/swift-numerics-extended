@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Roman RepresentableByMin Tests")
 internal struct RomanRepresentableByMinTests {
+    internal init() {}
+
     @Test(
         "Is min",
         arguments: [

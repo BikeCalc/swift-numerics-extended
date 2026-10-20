@@ -27,9 +27,7 @@ extension StringProtocol {
             return false
         }
 
-        return RomanSymbol.allCases.contains(where: { (symbol) in
-            symbol.rawValue == self
-        })
+        return RomanSymbol.allCases.contains(where: { $0.rawValue == self }) == true
     }
 
     /// A boolean value indicating whether this instance is a canonical Roman numeral.

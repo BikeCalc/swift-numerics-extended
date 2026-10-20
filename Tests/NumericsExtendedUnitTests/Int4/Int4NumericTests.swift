@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Int4 Numeric Tests")
 internal struct Int4NumericTests {
+    internal init() {}
+
     @Test(
         "Initialized exactly succeeds",
         arguments: [

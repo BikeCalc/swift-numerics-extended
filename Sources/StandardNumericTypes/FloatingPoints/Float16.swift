@@ -15,6 +15,7 @@ import StandardNumericProtocols
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: Addable {
     public typealias Addend = Self
+
     public typealias Sum = Self
 }
 #endif
@@ -32,8 +33,11 @@ extension Float16: Decreasable {}
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: Divisible {
     public typealias Divisor = Self
+
     public typealias Quotient = Self
+
     public typealias RemainderDivisor = Self
+
     public typealias Remainder = Self
 
     public static func % (
@@ -58,6 +62,7 @@ extension Float16: Increasable {}
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: Multipliable {
     public typealias Multiplier = Self
+
     public typealias Product = Self
 }
 #endif
@@ -75,6 +80,7 @@ extension Float16: Negateable {}
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: Raisable {
     public typealias Exponent = Int
+
     public typealias Power = Self
 }
 #endif
@@ -115,6 +121,7 @@ extension Float16: Roundable {
 @available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
 extension Float16: Subtractable {
     public typealias Subtrahend = Self
+
     public typealias Difference = Self
 }
 #endif

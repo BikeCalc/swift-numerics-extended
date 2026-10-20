@@ -14,6 +14,8 @@ import Testing
 
 @Suite("Fraction Decodable Tests")
 internal struct FractionDecodableTests {
+    internal init() {}
+
     @Test(
         "Decode from JSON succeeds",
         arguments: [
@@ -31,7 +33,6 @@ internal struct FractionDecodableTests {
             Fraction<Int>.self,
             from: data
         )
-
         #expect(result == value)
     }
 
@@ -47,7 +48,6 @@ internal struct FractionDecodableTests {
     )
     internal func decodeFromJSONThrows(json: String) throws {
         let data: Data = try #require(json.data(using: .utf8))
-
         #expect(throws: DecodingError.self) {
             try JSONDecoder().decode(
                 Fraction<Int>.self,
@@ -68,7 +68,6 @@ extension FractionDecodableTests {
             Fraction<Int>.self,
             from: data
         )
-
         #expect(result.isNaN == true)
     }
 }
@@ -84,7 +83,6 @@ extension FractionDecodableTests {
             Fraction<Int>.self,
             from: data
         )
-
         #expect(result == .negativeInfinity)
     }
 }
@@ -100,7 +98,6 @@ extension FractionDecodableTests {
             Fraction<Int>.self,
             from: data
         )
-
         #expect(result == Fraction<Int>(0, -2))
     }
 }
@@ -116,7 +113,6 @@ extension FractionDecodableTests {
             Fraction<Int>.self,
             from: data
         )
-
         #expect(result == .infinity)
     }
 }
@@ -132,7 +128,6 @@ extension FractionDecodableTests {
             Fraction<Int>.self,
             from: data
         )
-
         #expect(result == Fraction<Int>(0, 2))
     }
 }

@@ -63,19 +63,19 @@ internal struct RomanNumeralParser {
             return nil
         }
 
-        guard self.hasValidOrder(symbols) else {
+        guard self.hasValidOrder(symbols) == true else {
             return nil
         }
 
-        guard self.hasValidRecurrences(symbols) else {
+        guard self.hasValidRecurrences(symbols) == true else {
             return nil
         }
 
-        guard self.hasValidSubtractivePrefixes(symbols) else {
+        guard self.hasValidSubtractivePrefixes(symbols) == true else {
             return nil
         }
 
-        guard self.hasValidSubtractiveSuffixes(symbols) else {
+        guard self.hasValidSubtractiveSuffixes(symbols) == true else {
             return nil
         }
 
@@ -111,10 +111,8 @@ internal struct RomanNumeralParser {
 
     /// Returns `true` if symbols appear in nonincreasing value order.
     private func hasValidOrder(_ symbols: Array<RomanSymbol>) -> Bool {
-        for (lhs, rhs) in zip(
-            symbols.dropLast(),
-            symbols.dropFirst()
-        ) where lhs < rhs {
+        for (lhs, rhs) in zip(symbols.dropLast(), symbols.dropFirst())
+        where lhs < rhs {
             return false
         }
 
@@ -125,10 +123,7 @@ internal struct RomanNumeralParser {
     ///
     /// Repeatable symbols may appear up to three times in succession. Nonrepeatable symbols may not be repeated.
     private func hasValidRecurrences(_ symbols: Array<RomanSymbol>) -> Bool {
-        for (lhs, rhs) in zip(
-            symbols.dropLast(),
-            symbols.dropFirst()
-        ) {
+        for (lhs, rhs) in zip(symbols.dropLast(), symbols.dropFirst()) {
             if lhs == rhs, rhs.isRepeatable == false {
                 return false
             }
@@ -138,7 +133,7 @@ internal struct RomanNumeralParser {
             let sequence: ArraySlice<RomanSymbol> = symbols[index - 3 ... index]
             let repeatedSymbol: RomanSymbol = sequence[sequence.startIndex]
 
-            if sequence.dropFirst().allSatisfy({ $0 == repeatedSymbol }) {
+            if sequence.dropFirst().allSatisfy({ $0 == repeatedSymbol }) == true {
                 return false
             }
         }
@@ -150,10 +145,7 @@ internal struct RomanNumeralParser {
     ///
     /// For example, this rejects `IIV`, which would otherwise tokenize as `I` followed by `IV`.
     private func hasValidSubtractivePrefixes(_ symbols: Array<RomanSymbol>) -> Bool {
-        for (lhs, rhs) in zip(
-            symbols.dropLast(),
-            symbols.dropFirst()
-        ) {
+        for (lhs, rhs) in zip(symbols.dropLast(), symbols.dropFirst()) {
             guard let separatedSymbols: Array<RomanSymbol> = try? rhs.separate(),
                 let subtractingSymbol: RomanSymbol = separatedSymbols.first
             else {
@@ -172,10 +164,7 @@ internal struct RomanNumeralParser {
     ///
     /// For example, this rejects `IXI`, which would otherwise tokenize as `IX` followed by `I`.
     private func hasValidSubtractiveSuffixes(_ symbols: Array<RomanSymbol>) -> Bool {
-        for (lhs, rhs) in zip(
-            symbols.dropLast(),
-            symbols.dropFirst()
-        ) {
+        for (lhs, rhs) in zip(symbols.dropLast(), symbols.dropFirst()) {
             guard let separatedSymbols: Array<RomanSymbol> = try? lhs.separate(),
                 let subtractingSymbol: RomanSymbol = separatedSymbols.first
             else {

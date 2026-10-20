@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Roman ExpressibleByIntegerLiteral Tests")
 internal struct RomanExpressibleByIntegerLiteralTests {
+    internal init() {}
+
     @Test(
         "Integer literal initialization succeeds",
         arguments: [
@@ -25,7 +27,6 @@ internal struct RomanExpressibleByIntegerLiteralTests {
         integer: Int
     ) throws {
         let expected: Roman = try #require(Roman(exactly: integer))
-
         #expect(value == expected)
     }
 }

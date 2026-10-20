@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Canonicalized Fraction Hashable Tests")
 internal struct CanonicalizedFractionHashableTests {
+    internal init() {}
+
     @Test(
         "Equivalent representations produce equal hashes",
         arguments: [
@@ -27,7 +29,6 @@ internal struct CanonicalizedFractionHashableTests {
     ) {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-
         #expect(lhsWrapper == rhsWrapper)
         #expect(lhsWrapper.hashValue == rhsWrapper.hashValue)
         #expect(Set([lhsWrapper, rhsWrapper]).count == 1)
@@ -40,7 +41,6 @@ extension CanonicalizedFractionHashableTests {
     @Test("NaN values remain distinct hash keys")
     internal func nanValuesRemainDistinctHashKeys() {
         let value: Canonicalized<Fraction<Int>> = .init(wrappedValue: .nan)
-
         #expect(Set([value, value]).count == 2)
     }
 }
@@ -61,7 +61,6 @@ extension CanonicalizedFractionHashableTests {
     ) {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-
         #expect(lhsWrapper == rhsWrapper)
         #expect(lhsWrapper.hashValue == rhsWrapper.hashValue)
         #expect(Set([lhsWrapper, rhsWrapper]).count == 1)
@@ -85,7 +84,6 @@ extension CanonicalizedFractionHashableTests {
     ) {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-
         #expect(lhsWrapper == rhsWrapper)
         #expect(lhsWrapper.hashValue == rhsWrapper.hashValue)
         #expect(Set([lhsWrapper, rhsWrapper]).count == 1)
@@ -108,7 +106,6 @@ extension CanonicalizedFractionHashableTests {
     ) {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-
         #expect(lhsWrapper == rhsWrapper)
         #expect(lhsWrapper.hashValue == rhsWrapper.hashValue)
         #expect(Set([lhsWrapper, rhsWrapper]).count == 1)
@@ -132,7 +129,6 @@ extension CanonicalizedFractionHashableTests {
     ) {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-
         #expect(lhsWrapper == rhsWrapper)
         #expect(lhsWrapper.hashValue == rhsWrapper.hashValue)
         #expect(Set([lhsWrapper, rhsWrapper]).count == 1)

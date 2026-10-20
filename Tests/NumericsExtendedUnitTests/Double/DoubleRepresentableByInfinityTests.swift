@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Double RepresentableByInfinity Tests")
 internal struct DoubleRepresentableByInfinityTests {
+    internal init() {}
+
     @Test(
         "Finite values are finite",
         arguments: [

@@ -11,7 +11,9 @@ import Testing
 @testable import NumericsExtended
 
 @Suite("Unsigned Fraction RepresentableByZero Tests")
-internal struct UnsignedFractionRepresentableByZeroTests {}
+internal struct UnsignedFractionRepresentableByZeroTests {
+    internal init() {}
+}
 
 // MARK: - Negative Zero
 

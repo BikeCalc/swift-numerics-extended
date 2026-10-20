@@ -107,7 +107,7 @@ fileprivate struct Arguments {
     /// - Parameter arguments: Arguments following the script name.
     /// - Throws: `BenchmarkRunnerError.invalidArguments` if the argument shape is unsupported.
     fileprivate init(_ arguments: Array<String>) throws(BenchmarkRunnerError) {
-        if arguments.isEmpty {
+        if arguments.isEmpty == true {
             self.selection = .automatic
         } else if arguments.count == 2 && arguments[0] == "--baseline" {
             self.selection = .baseline(revision: arguments[1])
@@ -145,6 +145,7 @@ fileprivate struct BenchmarkRunner {
     /// - Throws: `BenchmarkRunnerError` if a command cannot start, a baseline is unavailable, or the plugin fails.
     fileprivate func run() throws(BenchmarkRunnerError) {
         let baselineSHA: String = try self.selectBaseline()
+
         if baselineSHA.isEmpty == false {
             try self.prepareBaseline(baselineSHA)
         }
@@ -165,12 +166,14 @@ fileprivate struct BenchmarkRunner {
         } catch let error {
             throw BenchmarkRunnerError.launchFailed(underlyingError: error)
         }
+
         process.waitUntilExit()
 
         // Preserve the plugin's exit status and treat signal termination as failure.
         guard process.terminationReason == .exit else {
             throw BenchmarkRunnerError.commandInterrupted(signal: process.terminationStatus)
         }
+
         guard process.terminationStatus == EXIT_SUCCESS else {
             throw BenchmarkRunnerError.commandFailed(status: process.terminationStatus)
         }
@@ -191,11 +194,11 @@ fileprivate struct BenchmarkRunner {
                 return baseSHA
             }
 
-            if event == "push" && refName == "main" && beforeSHA.allSatisfy({ return $0 == "0" }) == false {
+            if event == "push" && refName == "main" && beforeSHA.allSatisfy({ $0 == "0" }) == false {
                 return beforeSHA
             }
 
-            if event == "push" && refName.hasPrefix("release/") {
+            if event == "push" && refName.hasPrefix("release/") == true {
                 let output: Pipe = .init()
                 let git: Process = .init()
                 git.executableURL = .init(fileURLWithPath: "/usr/bin/env")
@@ -207,6 +210,7 @@ fileprivate struct BenchmarkRunner {
                 } catch let error {
                     throw BenchmarkRunnerError.launchFailed(underlyingError: error)
                 }
+
                 let data: Data = output.fileHandleForReading.readDataToEndOfFile()
                 git.waitUntilExit()
 
@@ -214,6 +218,7 @@ fileprivate struct BenchmarkRunner {
                     if git.terminationReason != .exit {
                         throw BenchmarkRunnerError.commandInterrupted(signal: git.terminationStatus)
                     }
+
                     throw BenchmarkRunnerError.commandFailed(status: git.terminationStatus)
                 }
 
@@ -251,13 +256,15 @@ fileprivate struct BenchmarkRunner {
             let process: Process = .init()
             process.executableURL = .init(fileURLWithPath: "/usr/bin/env")
             process.arguments = ["git"] + arguments
-            process.standardOutput = quiet ? FileHandle.nullDevice : FileHandle.standardError
-            process.standardError = quiet ? FileHandle.nullDevice : FileHandle.standardError
+            process.standardOutput = quiet == true ? FileHandle.nullDevice : FileHandle.standardError
+            process.standardError = quiet == true ? FileHandle.nullDevice : FileHandle.standardError
+
             do {
                 try process.run()
             } catch let error {
                 throw BenchmarkRunnerError.launchFailed(underlyingError: error)
             }
+
             process.waitUntilExit()
             return process.terminationReason == .exit && process.terminationStatus == EXIT_SUCCESS
         }
@@ -265,17 +272,19 @@ fileprivate struct BenchmarkRunner {
         // Require a commit, not merely an existing Git object. A missing revision is expected here, so suppress Git's
         // initial error while deciding whether recovery is needed.
         let checkArguments: Array<String> = ["rev-parse", "--verify", "--end-of-options", "\(revision)^{commit}"]
-        if try runGit(checkArguments, quiet: true) {
+
+        if try runGit(checkArguments, quiet: true) == true {
             return
         }
 
         FileHandle.standardError.write(Data("Fetching missing benchmark baseline \(revision) from origin.\n".utf8))
+
         // First retrieve the missing revision, then verify that the exact revision passed to the plugin resolves
         // locally.
         // Fetch success alone does not guarantee that the requested revision name is resolvable in this checkout.
         // The guard evaluates these checks in order and skips verification if fetching fails; both must succeed.
-        guard try runGit(["fetch", "--no-tags", "origin", revision]),
-            try runGit(checkArguments, quiet: true)
+        guard try runGit(["fetch", "--no-tags", "origin", revision]) == true,
+            try runGit(checkArguments, quiet: true) == true
         else {
             throw BenchmarkRunnerError.unavailableBaseline(revision: revision)
         }

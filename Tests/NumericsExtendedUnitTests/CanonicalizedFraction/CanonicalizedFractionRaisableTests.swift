@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Canonicalized Fraction Raisable Tests")
 internal struct CanonicalizedFractionRaisableTests {
+    internal init() {}
+
     private static let exponentiationArguments: [(Fraction<Int>, Fraction<Int>.Exponent, Fraction<Int>)] = [
         (Fraction<Int>(2, 3), 2, Fraction<Int>(4, 9)),
         (Fraction<Int>(2, 3), 3, Fraction<Int>(8, 27)),
@@ -50,11 +52,8 @@ internal struct CanonicalizedFractionRaisableTests {
         exponent: Fraction<Int>.Exponent,
         power: Fraction<Int>
     ) {
-        @Canonicalized
-        var runningPower: Fraction<Int> = base
-
+        @Canonicalized var runningPower: Fraction<Int> = base
         runningPower **= exponent
-
         #expect(runningPower == power)
     }
 
@@ -67,11 +66,8 @@ internal struct CanonicalizedFractionRaisableTests {
         exponent: Fraction<Int>.Exponent,
         power: Fraction<Int>
     ) throws {
-        @Canonicalized
-        var runningPower: Fraction<Int> = base
-
+        @Canonicalized var runningPower: Fraction<Int> = base
         try runningPower.raise(to: exponent)
-
         #expect(runningPower == power)
     }
 
@@ -83,11 +79,8 @@ internal struct CanonicalizedFractionRaisableTests {
         base: Fraction<Int>,
         power: Fraction<Int>
     ) {
-        @Canonicalized
-        var value: Fraction<Int> = base
-
+        @Canonicalized var value: Fraction<Int> = base
         value.square()
-
         #expect(value == power)
     }
 
@@ -99,11 +92,8 @@ internal struct CanonicalizedFractionRaisableTests {
         base: Fraction<Int>,
         power: Fraction<Int>
     ) {
-        @Canonicalized
-        var value: Fraction<Int> = base
-
+        @Canonicalized var value: Fraction<Int> = base
         value.cube()
-
         #expect(value == power)
     }
 }

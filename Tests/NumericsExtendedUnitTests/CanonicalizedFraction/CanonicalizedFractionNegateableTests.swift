@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Canonicalized Fraction Negateable Tests")
 internal struct CanonicalizedFractionNegateableTests {
+    internal init() {}
+
     private static let negationArguments: [(Fraction<Int>, Fraction<Int>)] = [
         (Fraction<Int>(1, 2), Fraction<Int>(-1, 2)),
         (Fraction<Int>(-1, 2), Fraction<Int>(1, 2)),
@@ -29,11 +31,8 @@ internal struct CanonicalizedFractionNegateableTests {
         value: Fraction<Int>,
         negation: Fraction<Int>
     ) {
-        @Canonicalized
-        var runningValue: Fraction<Int> = value
-
+        @Canonicalized var runningValue: Fraction<Int> = value
         runningValue.negate()
-
         #expect(runningValue == negation)
         #expect(runningValue.isCanonicalized == true)
     }
@@ -44,11 +43,8 @@ internal struct CanonicalizedFractionNegateableTests {
 extension CanonicalizedFractionNegateableTests {
     @Test("Negating NaN returns NaN")
     internal func negatingNaNReturnsNaN() {
-        @Canonicalized
-        var value: Fraction<Int> = .nan
-
+        @Canonicalized var value: Fraction<Int> = .nan
         value.negate()
-
         #expect(value.isNaN == true)
         #expect(value.isCanonicalized == true)
     }
@@ -59,11 +55,8 @@ extension CanonicalizedFractionNegateableTests {
 extension CanonicalizedFractionNegateableTests {
     @Test("Negating negative infinity follows rational rules")
     internal func negatingNegativeInfinityFollowsRationalRules() {
-        @Canonicalized
-        var value: Fraction<Int> = .negativeInfinity
-
+        @Canonicalized var value: Fraction<Int> = .negativeInfinity
         value.negate()
-
         #expect(value == .infinity)
         #expect(value.isCanonicalized == true)
     }
@@ -80,11 +73,8 @@ extension CanonicalizedFractionNegateableTests {
         ]
     )
     internal func negatingNegativeZeroPreservesCanonicalRepresentation(value: Fraction<Int>) {
-        @Canonicalized
-        var runningValue: Fraction<Int> = value
-
+        @Canonicalized var runningValue: Fraction<Int> = value
         runningValue.negate()
-
         #expect(runningValue == .zero)
         #expect(runningValue.isCanonicalized == true)
     }
@@ -95,11 +85,8 @@ extension CanonicalizedFractionNegateableTests {
 extension CanonicalizedFractionNegateableTests {
     @Test("Negating positive infinity follows rational rules")
     internal func negatingPositiveInfinityFollowsRationalRules() {
-        @Canonicalized
-        var value: Fraction<Int> = .infinity
-
+        @Canonicalized var value: Fraction<Int> = .infinity
         value.negate()
-
         #expect(value == .negativeInfinity)
         #expect(value.isCanonicalized == true)
     }
@@ -116,11 +103,8 @@ extension CanonicalizedFractionNegateableTests {
         ]
     )
     internal func negatingPositiveZeroPreservesCanonicalRepresentation(value: Fraction<Int>) {
-        @Canonicalized
-        var runningValue: Fraction<Int> = value
-
+        @Canonicalized var runningValue: Fraction<Int> = value
         runningValue.negate()
-
         #expect(runningValue == .zero)
         #expect(runningValue.isCanonicalized == true)
     }

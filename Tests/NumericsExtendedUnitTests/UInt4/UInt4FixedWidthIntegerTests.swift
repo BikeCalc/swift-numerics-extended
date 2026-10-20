@@ -12,6 +12,8 @@ import Testing
 
 @Suite("UInt4 FixedWidthInteger Tests")
 internal struct UInt4FixedWidthIntegerTests {
+    internal init() {}
+
     @Test("Has four bits")
     internal func hasFourBits() {
         #expect(UInt4.bitWidth == 4)
@@ -144,7 +146,6 @@ internal struct UInt4FixedWidthIntegerTests {
         low: UInt4
     ) {
         let result: UInt4.FullWidthProduct = lhs.multipliedFullWidth(by: rhs)
-
         #expect(result.high == high)
         #expect(result.low == low)
     }
@@ -167,7 +168,6 @@ internal struct UInt4FixedWidthIntegerTests {
         remainder: UInt4
     ) {
         let result: UInt4.QuotientAndRemainder = divisor.dividingFullWidth((high: high, low: low))
-
         #expect(result.quotient == quotient)
         #expect(result.remainder == remainder)
     }

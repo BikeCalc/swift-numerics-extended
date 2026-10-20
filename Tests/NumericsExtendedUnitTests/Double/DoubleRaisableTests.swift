@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Double Raisable Tests")
 internal struct DoubleRaisableTests {
+    internal init() {}
+
     private static let exponentiationArguments: [(Double, Double.Exponent, Double)] = [
         (2.0, 2, 4.0),
         (2.0, 3, 8.0),
@@ -249,14 +251,12 @@ extension DoubleRaisableTests {
     @Test("NaN raised to positive zero returns one")
     internal func nanRaisedToPositiveZeroReturnsOne() {
         let power: Double = Double.nan ** Double.Exponent.zero
-
         #expect(power == 1.0)
     }
 
     @Test("NaN raised to negative zero returns one")
     internal func nanRaisedToNegativeZeroReturnsOne() {
         let power: Double = Double.nan ** Double.Exponent.negativeZero
-
         #expect(power == 1.0)
     }
 }
@@ -333,7 +333,6 @@ extension DoubleRaisableTests {
         exponent: Double.Exponent
     ) {
         let power: Double = base ** exponent
-
         #expect(power == Double.zero)
         #expect(power.sign == .minus)
     }
@@ -427,7 +426,6 @@ extension DoubleRaisableTests {
         exponent: Double.Exponent
     ) {
         let power: Double = base ** exponent
-
         #expect(power == Double.zero)
         #expect(power.sign == .minus)
     }

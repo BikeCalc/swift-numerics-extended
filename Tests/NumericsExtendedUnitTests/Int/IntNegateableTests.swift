@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Int Negateable Tests")
 internal struct IntNegateableTests {
+    internal init() {}
+
     private static let negationArguments: Array<(Int, Int)> = [
         (1, -1),
         (-1, 1),
@@ -163,7 +165,6 @@ extension IntNegateableTests {
         let methodNegation: Int = Int.negativeZero.negating()
         var mutatingNegation: Int = Int.negativeZero
         mutatingNegation.negate()
-
         #expect(operatorNegation == .negativeZero)
         #expect(methodNegation == .negativeZero)
         #expect(mutatingNegation == .negativeZero)
@@ -199,7 +200,6 @@ extension IntNegateableTests {
         let methodNegation: Int = Int.zero.negating()
         var mutatingNegation: Int = Int.zero
         mutatingNegation.negate()
-
         #expect(operatorNegation == .zero)
         #expect(methodNegation == .zero)
         #expect(mutatingNegation == .zero)

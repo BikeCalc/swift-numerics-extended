@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Int Addable Tests")
 internal struct IntAddableTests {
+    internal init() {}
+
     private static let additionArguments: [(Int, Int.Addend, Int)] = [
         (2, 3, 5),
         (3, 4, 7),

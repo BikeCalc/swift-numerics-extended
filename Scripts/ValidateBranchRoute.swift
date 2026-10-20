@@ -115,8 +115,8 @@ fileprivate struct BranchRouteValidator {
             return
         }
 
-        if self.arguments.base.wholeMatch(of: self.releaseBranch) != nil
-            && self.arguments.head.wholeMatch(of: self.allowedSourceBranch) != nil
+        if self.arguments.base.wholeMatch(of: self.releaseBranch) != nil,
+            self.arguments.head.wholeMatch(of: self.allowedSourceBranch) != nil
         {
             return
         }

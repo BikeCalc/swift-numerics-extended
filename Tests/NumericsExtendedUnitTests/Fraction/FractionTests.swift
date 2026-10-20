@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Fraction Tests")
 internal struct FractionTests {
+    internal init() {}
+
     @Test(
         "Initialization preserves finite terms",
         arguments: [
@@ -26,7 +28,6 @@ internal struct FractionTests {
         denominator: Int
     ) {
         let value: Fraction<Int> = .init(numerator, denominator)
-
         #expect(value.numerator == numerator)
         #expect(value.denominator == denominator)
     }
@@ -45,7 +46,6 @@ internal struct FractionTests {
         denominator: Int
     ) {
         let value: Fraction<Int> = .init(numerator, denominator)
-
         #expect(value.numerator == numerator)
         #expect(value.denominator == denominator)
     }
@@ -57,7 +57,6 @@ extension FractionTests {
     @Test("NaN initialization preserves terms")
     internal func nanInitializationPreservesTerms() {
         let value: Fraction<Int> = .nan
-
         #expect(value.numerator == 0)
         #expect(value.denominator == 0)
     }
@@ -75,7 +74,6 @@ extension FractionTests {
     )
     internal func negativeInfinityInitializationCanonicalizesTerms(numerator: Int) {
         let value: Fraction<Int> = .init(numerator, 0)
-
         #expect(value.numerator == -1)
         #expect(value.denominator == 0)
     }
@@ -93,7 +91,6 @@ extension FractionTests {
     )
     internal func negativeZeroInitializationPreservesTerms(denominator: Int) {
         let value: Fraction<Int> = .init(0, denominator)
-
         #expect(value.numerator == 0)
         #expect(value.denominator == denominator)
     }
@@ -111,7 +108,6 @@ extension FractionTests {
     )
     internal func positiveInfinityInitializationCanonicalizesTerms(numerator: Int) {
         let value: Fraction<Int> = .init(numerator, 0)
-
         #expect(value.numerator == 1)
         #expect(value.denominator == 0)
     }
@@ -129,7 +125,6 @@ extension FractionTests {
     )
     internal func positiveZeroInitializationPreservesTerms(denominator: Int) {
         let value: Fraction<Int> = .init(0, denominator)
-
         #expect(value.numerator == 0)
         #expect(value.denominator == denominator)
     }

@@ -14,6 +14,8 @@ import Testing
 
 @Suite("Canonicalized Fraction Encodable Tests")
 internal struct CanonicalizedFractionEncodableTests {
+    internal init() {}
+
     @Test(
         "Encode to JSON succeeds",
         arguments: [
@@ -26,15 +28,11 @@ internal struct CanonicalizedFractionEncodableTests {
         value: Fraction<Int>,
         json: String
     ) throws {
-        @Canonicalized
-        var canonicalizedValue: Fraction<Int> = value
-
+        @Canonicalized var canonicalizedValue: Fraction<Int> = value
         let encoder: JSONEncoder = .init()
         encoder.outputFormatting = .sortedKeys
-
         let result: Data = try encoder.encode(_canonicalizedValue)
         let expected: Data = try #require(json.data(using: .utf8))
-
         #expect(result == expected)
     }
 }
@@ -44,15 +42,11 @@ internal struct CanonicalizedFractionEncodableTests {
 extension CanonicalizedFractionEncodableTests {
     @Test("NaN encodes to JSON")
     internal func nanEncodesToJSON() throws {
-        @Canonicalized
-        var value: Fraction<Int> = .nan
-
+        @Canonicalized var value: Fraction<Int> = .nan
         let encoder: JSONEncoder = .init()
         encoder.outputFormatting = .sortedKeys
-
         let result: Data = try encoder.encode(_value)
         let expected: Data = try #require(#"{"den":0,"num":0}"#.data(using: .utf8))
-
         #expect(result == expected)
     }
 }
@@ -62,15 +56,11 @@ extension CanonicalizedFractionEncodableTests {
 extension CanonicalizedFractionEncodableTests {
     @Test("Negative infinity encodes to JSON")
     internal func negativeInfinityEncodesToJSON() throws {
-        @Canonicalized
-        var value: Fraction<Int> = .negativeInfinity
-
+        @Canonicalized var value: Fraction<Int> = .negativeInfinity
         let encoder: JSONEncoder = .init()
         encoder.outputFormatting = .sortedKeys
-
         let result: Data = try encoder.encode(_value)
         let expected: Data = try #require(#"{"den":0,"num":-1}"#.data(using: .utf8))
-
         #expect(result == expected)
     }
 }
@@ -80,15 +70,11 @@ extension CanonicalizedFractionEncodableTests {
 extension CanonicalizedFractionEncodableTests {
     @Test("Negative zero encodes to JSON")
     internal func negativeZeroEncodesToJSON() throws {
-        @Canonicalized
-        var value: Fraction<Int> = .init(0, -2)
-
+        @Canonicalized var value: Fraction<Int> = .init(0, -2)
         let encoder: JSONEncoder = .init()
         encoder.outputFormatting = .sortedKeys
-
         let result: Data = try encoder.encode(_value)
         let expected: Data = try #require(#"{"den":1,"num":0}"#.data(using: .utf8))
-
         #expect(result == expected)
     }
 }
@@ -98,15 +84,11 @@ extension CanonicalizedFractionEncodableTests {
 extension CanonicalizedFractionEncodableTests {
     @Test("Positive infinity encodes to JSON")
     internal func positiveInfinityEncodesToJSON() throws {
-        @Canonicalized
-        var value: Fraction<Int> = .infinity
-
+        @Canonicalized var value: Fraction<Int> = .infinity
         let encoder: JSONEncoder = .init()
         encoder.outputFormatting = .sortedKeys
-
         let result: Data = try encoder.encode(_value)
         let expected: Data = try #require(#"{"den":0,"num":1}"#.data(using: .utf8))
-
         #expect(result == expected)
     }
 }
@@ -116,15 +98,11 @@ extension CanonicalizedFractionEncodableTests {
 extension CanonicalizedFractionEncodableTests {
     @Test("Positive zero encodes to JSON")
     internal func positiveZeroEncodesToJSON() throws {
-        @Canonicalized
-        var value: Fraction<Int> = .init(0, 2)
-
+        @Canonicalized var value: Fraction<Int> = .init(0, 2)
         let encoder: JSONEncoder = .init()
         encoder.outputFormatting = .sortedKeys
-
         let result: Data = try encoder.encode(_value)
         let expected: Data = try #require(#"{"den":1,"num":0}"#.data(using: .utf8))
-
         #expect(result == expected)
     }
 }

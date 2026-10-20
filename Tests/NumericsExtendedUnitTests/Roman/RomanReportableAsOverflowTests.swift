@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Roman ReportableAsOverflow Tests")
 internal struct RomanReportableAsOverflowTests {
+    internal init() {}
+
     @Test(
         "Adding reporting overflow",
         arguments: [
@@ -29,7 +31,6 @@ internal struct RomanReportableAsOverflowTests {
         overflow: Bool
     ) {
         let report: Roman.OverflowReport<Roman.Sum> = augend.addingReportingOverflow(addend)
-
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }
@@ -51,7 +52,6 @@ internal struct RomanReportableAsOverflowTests {
         overflow: Bool
     ) {
         let report: Roman.OverflowReport<Roman.Difference> = minuend.subtractingReportingOverflow(subtrahend)
-
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }
@@ -75,7 +75,6 @@ internal struct RomanReportableAsOverflowTests {
         overflow: Bool
     ) {
         let report: Roman.OverflowReport<Roman.Product> = multiplicand.multipliedReportingOverflow(by: multiplier)
-
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }
@@ -99,7 +98,6 @@ internal struct RomanReportableAsOverflowTests {
         overflow: Bool
     ) {
         let report: Roman.OverflowReport<Roman.Quotient> = dividend.dividedReportingOverflow(by: divisor)
-
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }
@@ -123,7 +121,6 @@ internal struct RomanReportableAsOverflowTests {
         overflow: Bool
     ) {
         let report: Roman.OverflowReport<Roman.Remainder> = dividend.remainderReportingOverflow(dividingBy: divisor)
-
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }
@@ -152,7 +149,6 @@ internal struct RomanReportableAsOverflowTests {
         overflow: Bool
     ) {
         let report: Roman.OverflowReport<Roman.Power> = base.raisedReportingOverflow(to: exponent)
-
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }

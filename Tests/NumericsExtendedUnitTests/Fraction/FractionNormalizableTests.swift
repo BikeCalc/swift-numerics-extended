@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Fraction Normalizable Tests")
 internal struct FractionNormalizableTests {
+    internal init() {}
+
     private static let normalizationArguments: [(Fraction<Int>, Fraction<Int>)] = [
         (Fraction<Int>(2, 4), Fraction<Int>(2, 4)),
         (Fraction<Int>(-2, 4), Fraction<Int>(-2, 4)),
@@ -98,7 +100,6 @@ internal struct FractionNormalizableTests {
     )
     internal func normalizationIsIdempotent(value: Fraction<Int>) {
         let result: Fraction<Int> = value.normalized().normalized()
-
         #expect(result == value.normalized())
     }
 }

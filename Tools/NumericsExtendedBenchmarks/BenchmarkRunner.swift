@@ -43,7 +43,6 @@ internal struct BenchmarkRunner {
     /// - Returns: A versioned report containing one result for each benchmark.
     internal func run(_ benchmarks: Array<Benchmark>) -> BenchmarkReport {
         let results: Array<BenchmarkResult> = benchmarks.map(self.run)
-
         return .init(
             formatVersion: 1,
             iterationsPerSample: self.iterationsPerSample,
@@ -65,10 +64,8 @@ internal struct BenchmarkRunner {
             let duration: Duration = self.clock.measure {
                 self.perform(benchmark.operation)
             }
-
             return duration.nanoseconds / Double(self.iterationsPerSample)
         }
-
         return .init(
             name: benchmark.name,
             medianNanosecondsPerOperation: self.median(samples),
@@ -93,7 +90,7 @@ internal struct BenchmarkRunner {
         let sortedValues: Array<Double> = values.sorted()
         let middleIndex: Int = sortedValues.count / 2
 
-        if sortedValues.count.isMultiple(of: 2) {
+        if sortedValues.count.isMultiple(of: 2) == true {
             return (sortedValues[middleIndex - 1] + sortedValues[middleIndex]) / 2
         }
 

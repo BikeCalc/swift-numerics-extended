@@ -29,7 +29,8 @@ public protocol Rational:
     Operatable,
     RepresentableByInfinity,
     RepresentableByNaN,
-    RepresentableByZero {
+    RepresentableByZero
+{
     /// The integer type used for the numerator and denominator.
     ///
     /// A signed term type permits negative rational representations, including negative zero and negative infinity.
@@ -82,19 +83,17 @@ extension Rational {
     /// representation and does not require the value to be simplified. For example, `4/2`, `8/4`, `0/3`, and `-4/-2`
     /// are whole fractions, while `3/2` and `-4/2` are not.
     public var isWhole: Bool {
-        guard self.isFinite else {
+        guard self.isFinite == true else {
             return false
         }
 
         let isNumeratorZero: Bool = self.numerator == 0
         let termsHaveMatchingSigns: Bool = (self.numerator < 0) == (self.denominator < 0)
-        let isNonnegative: Bool = isNumeratorZero || termsHaveMatchingSigns
-
+        let isNonnegative: Bool = isNumeratorZero == true || termsHaveMatchingSigns == true
         let isDenominatorMagnitudeOne: Bool = self.denominator.magnitude == 1
         let isEvenlyDivisible: Bool = self.numerator.magnitude % self.denominator.magnitude == 0
-        let isInteger: Bool = isDenominatorMagnitudeOne || isEvenlyDivisible
-
-        return isNonnegative && isInteger
+        let isInteger: Bool = isDenominatorMagnitudeOne == true || isEvenlyDivisible == true
+        return isNonnegative == true && isInteger == true
     }
 
     /// A boolean value indicating whether this value is a proper fraction.
@@ -113,7 +112,7 @@ extension Rational {
     /// its numerator is greater than or equal to the magnitude of its denominator. For example, `3/2`, `-3/2`, and
     /// `2/2` are improper.
     public var isImproper: Bool {
-        return self.isFinite
+        return self.isFinite == true
             && self.numerator.magnitude >= self.denominator.magnitude
     }
 
@@ -227,7 +226,7 @@ extension Rational {
     /// zero. Canonicalizing this value produces `0/1`. An unsigned term type cannot preserve the sign and therefore
     /// uses the ordinary zero representation.
     public static var negativeZero: Self {
-        guard Self.Term.isSigned else {
+        guard Self.Term.isSigned == true else {
             return .zero
         }
 

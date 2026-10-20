@@ -12,6 +12,8 @@ import Testing
 
 @Suite("Double Increasable Tests")
 internal struct DoubleIncreasableTests {
+    internal init() {}
+
     @Test(
         "Increasing by succeeds",
         arguments: [
@@ -106,7 +108,6 @@ extension DoubleIncreasableTests {
         sign: FloatingPointSign
     ) {
         let increasedValue: Double = Double.negativeZero.increasing(by: percentage)
-
         #expect(increasedValue == Double.zero)
         #expect(increasedValue.sign == sign)
     }
