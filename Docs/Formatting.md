@@ -5,8 +5,8 @@ Apply and validate a consistent coding style.
 ## Overview
 
 The formatting workflow and command plugin check Swift source files using the package's Swift Format configuration.
-Developers can also apply formatting explicitly. See [Coding Style](/Docs/CodingStyle.md) for the configuration, rules,
-project conventions, and formatting exceptions.
+Developers can also apply formatting explicitly. The [Swift Format Configuration](/.swift-format) defines the
+formatter's rules. Follow the conventions in surrounding code for formatting the tool does not enforce.
 
 ## Requirements
 

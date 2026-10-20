@@ -120,14 +120,16 @@ You can read more about this package by visiting the
 
 ## Contributing
 
-Everyone is welcome to contribute to Numerics Extended. See the [Contributing](/CONTRIBUTING.md) guide to get started.
+Everyone is welcome to contribute to Numerics Extended. Please read our
+[Contributing Guide](https://github.com/BikeCalc/.github/blob/main/CONTRIBUTING.md) and
+[Code of Conduct](https://github.com/BikeCalc/.github/blob/main/CODE_OF_CONDUCT.md).
 
-If you find a bug, please create an [issue](https://github.com/bikecalc/swift-numerics-extended/issues). Security
-vulnerabilities should be reported using the [Security Policy](/SECURITY.md).
+If you find a bug, please submit a
+[Bug Report](https://github.com/bikecalc/swift-numerics-extended/issues/new?template=bug-report.yml).
+If you would like to suggest a new capability or improvement, please submit a
+[Feature Request](https://github.com/bikecalc/swift-numerics-extended/issues/new?template=feature-request.yml).
 
-## Code of Conduct
-
-This project follows a [Code of Conduct](/CODE_OF_CONDUCT.md).
+Report security vulnerabilities privately through the repository’s Security tab instead of opening a public issue.
 
 ## License
 
