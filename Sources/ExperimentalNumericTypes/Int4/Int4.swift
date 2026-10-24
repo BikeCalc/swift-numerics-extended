@@ -10,6 +10,7 @@ import CoreNumericOperators
 import CoreNumericProtocols
 import StandardNumericProtocols
 import StandardNumericTypes
+import Synchronization
 
 /// A four-bit signed integer value from `-8` through `7`.
 ///
@@ -198,6 +199,22 @@ extension Int4: Addable {
 
 extension Int4: AdditiveArithmetic {}
 
+// MARK: - AtomicRepresentable
+
+@available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
+extension Int4: AtomicRepresentable {
+    public typealias AtomicRepresentation = Int8.AtomicRepresentation
+
+    public static func encodeAtomicRepresentation(_ value: consuming Self) -> Self.AtomicRepresentation {
+        return Int8.encodeAtomicRepresentation(value.value)
+    }
+
+    public static func decodeAtomicRepresentation(_ representation: consuming Self.AtomicRepresentation) -> Self {
+        let value: Self.Value = Int8.decodeAtomicRepresentation(representation)
+        return .init(value: value)
+    }
+}
+
 // MARK: - BinaryInteger
 
 extension Int4: BinaryInteger {
@@ -371,6 +388,10 @@ extension Int4: BinaryInteger {
         lhs = .init(bitPattern: bitPattern)
     }
 }
+
+// MARK: - BitwiseCopyable
+
+extension Int4: BitwiseCopyable {}
 
 // MARK: - Comparable
 
