@@ -10,6 +10,7 @@ import CoreNumericOperators
 import CoreNumericProtocols
 import StandardNumericProtocols
 import StandardNumericTypes
+import Synchronization
 
 /// A four-bit unsigned integer value from `0` through `15`.
 ///
@@ -170,6 +171,22 @@ extension UInt4: Addable {
 // MARK: - AdditiveArithmetic
 
 extension UInt4: AdditiveArithmetic {}
+
+// MARK: - AtomicRepresentable
+
+@available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
+extension UInt4: AtomicRepresentable {
+    public typealias AtomicRepresentation = UInt8.AtomicRepresentation
+
+    public static func encodeAtomicRepresentation(_ value: consuming Self) -> Self.AtomicRepresentation {
+        return UInt8.encodeAtomicRepresentation(value.value)
+    }
+
+    public static func decodeAtomicRepresentation(_ representation: consuming Self.AtomicRepresentation) -> Self {
+        let value: Self.Value = UInt8.decodeAtomicRepresentation(representation)
+        return .init(value: value)
+    }
+}
 
 // MARK: - BinaryInteger
 
@@ -344,6 +361,10 @@ extension UInt4: BinaryInteger {
         lhs = .init(value: newValue)
     }
 }
+
+// MARK: - BitwiseCopyable
+
+extension UInt4: BitwiseCopyable {}
 
 // MARK: - Comparable
 
