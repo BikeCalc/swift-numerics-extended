@@ -11,6 +11,7 @@ import CoreNumericProtocols
 import ExperimentalNumericProtocols
 import StandardNumericProtocols
 import StandardNumericTypes
+import Synchronization
 
 /// A Roman numeral value from `0` through `3,999`.
 ///
@@ -216,6 +217,26 @@ extension Roman: Addable {
 // MARK: - AdditiveArithmetic
 
 extension Roman: AdditiveArithmetic {}
+
+// MARK: - AtomicRepresentable
+
+@available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
+extension Roman: AtomicRepresentable {
+    public typealias AtomicRepresentation = UInt16.AtomicRepresentation
+
+    public static func encodeAtomicRepresentation(_ value: consuming Self) -> Self.AtomicRepresentation {
+        return UInt16.encodeAtomicRepresentation(value.value)
+    }
+
+    public static func decodeAtomicRepresentation(_ representation: consuming Self.AtomicRepresentation) -> Self {
+        let value: Self.Value = UInt16.decodeAtomicRepresentation(representation)
+        return .init(value: value)
+    }
+}
+
+// MARK: - BitwiseCopyable
+
+extension Roman: BitwiseCopyable {}
 
 // MARK: - Comparable
 
