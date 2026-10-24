@@ -10,33 +10,33 @@ import CoreNumericOperators
 import CoreNumericProtocols
 
 extension Numeric
-where Self: Divisible {
+where Self: Divisible, Self.Divisor: ExpressibleByIntegerLiteral {
     /// Returns this value halved.
     ///
     /// - Returns: The value halved.
-    public func halved() -> Self {
+    public func halved() -> Self.Quotient {
         return self / 2
     }
 
     /// Halves this value.
-    ///
-    public mutating func halve() {
+    public mutating func halve()
+    where Self.Quotient == Self {
         self = self.halved()
     }
 }
 
 extension Numeric
-where Self: Multipliable {
+where Self: Multipliable, Self.Multiplier: ExpressibleByIntegerLiteral {
     /// Returns this value doubled.
     ///
     ///  - Returns: The value doubled.
-    public func doubled() -> Self {
+    public func doubled() -> Self.Product {
         return self * 2
     }
 
     /// Doubles this value.
-    ///
-    public mutating func double() {
+    public mutating func double()
+    where Self.Product == Self {
         self = self.doubled()
     }
 }
@@ -46,30 +46,28 @@ where Self: Raisable {
     /// Returns the result of raising this value to its square.
     ///
     /// - Returns: The square.
-    public func squared() -> Self
+    public func squared() -> Self.Power
     where Self.Exponent: ExpressibleByIntegerLiteral {
         return self ** 2
     }
 
     /// Raises this value to its square.
-    ///
     public mutating func square()
-    where Self.Exponent: ExpressibleByIntegerLiteral {
+    where Self.Exponent: ExpressibleByIntegerLiteral, Self.Power == Self {
         self **= 2
     }
 
     /// Returns the result of raising this value to its cube.
     ///
     /// - Returns: The cube.
-    public func cubed() -> Self
+    public func cubed() -> Self.Power
     where Self.Exponent: ExpressibleByIntegerLiteral {
         return self ** 3
     }
 
     /// Raises this value to its cube.
-    ///
     public mutating func cube()
-    where Self.Exponent: ExpressibleByIntegerLiteral {
+    where Self.Exponent: ExpressibleByIntegerLiteral, Self.Power == Self {
         self **= 3
     }
 }

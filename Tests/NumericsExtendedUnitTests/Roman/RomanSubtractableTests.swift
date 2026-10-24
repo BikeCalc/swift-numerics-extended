@@ -14,7 +14,7 @@ import Testing
 internal struct RomanSubtractableTests {
     internal init() {}
 
-    private static let subtractionArguments: [(Roman, Roman, Roman)] = [
+    private static let subtractionArguments: [(Roman, Roman.Subtrahend, Roman)] = [
         (3, 2, 1),
         (5, 3, 2)
     ]
@@ -25,7 +25,7 @@ internal struct RomanSubtractableTests {
     )
     internal func subtractionSucceeds(
         minuend: Roman,
-        subtrahend: Roman,
+        subtrahend: Roman.Subtrahend,
         difference: Roman
     ) {
         #expect(minuend - subtrahend == difference)
@@ -37,7 +37,7 @@ internal struct RomanSubtractableTests {
     )
     internal func subtractionEqualSucceeds(
         minuend: Roman,
-        subtrahend: Roman,
+        subtrahend: Roman.Subtrahend,
         difference: Roman
     ) {
         var runningDifference: Roman = minuend
@@ -51,10 +51,10 @@ internal struct RomanSubtractableTests {
     )
     internal func subtractingSucceeds(
         minuend: Roman,
-        subtrahend: Roman,
+        subtrahend: Roman.Subtrahend,
         difference: Roman
-    ) {
-        #expect(minuend.subtracting(subtrahend) == difference)
+    ) throws {
+        #expect(try minuend.subtracting(subtrahend) == difference)
     }
 
     @Test(
@@ -63,11 +63,11 @@ internal struct RomanSubtractableTests {
     )
     internal func subtractSucceeds(
         minuend: Roman,
-        subtrahend: Roman,
+        subtrahend: Roman.Subtrahend,
         difference: Roman
-    ) {
+    ) throws {
         var runningDifference: Roman = minuend
-        runningDifference.subtract(subtrahend)
+        try runningDifference.subtract(subtrahend)
         #expect(runningDifference == difference)
     }
 }
@@ -79,10 +79,12 @@ extension RomanSubtractableTests {
     )
     internal func subtractionIsNotCommutative(
         minuend: Roman,
-        subtrahend: Roman,
+        subtrahend: Roman.Subtrahend,
         difference: Roman
     ) {
-        let reversedDifferenceReport: Roman.OverflowReport = subtrahend.subtractingReportingOverflow(minuend)
+        let reversedDifferenceReport: Roman.OverflowReport<Roman.Difference> = subtrahend.subtractingReportingOverflow(
+            minuend
+        )
         #expect(minuend - subtrahend == difference)
         #expect(reversedDifferenceReport.partialValue != difference)
         #expect(reversedDifferenceReport.overflow == true)

@@ -14,7 +14,7 @@ import Testing
 internal struct DoubleMultipliableTests {
     internal init() {}
 
-    private static let multiplicationArguments: [(Double, Double, Double)] = [
+    private static let multiplicationArguments: [(Double, Double.Multiplier, Double)] = [
         (2.0, 3.0, 6.0),
         (3.0, 4.0, 12.0),
         (-2.0, 3.0, -6.0),
@@ -63,7 +63,7 @@ internal struct DoubleMultipliableTests {
     )
     internal func multiplicationSucceeds(
         multiplicand: Double,
-        multiplier: Double,
+        multiplier: Double.Multiplier,
         product: Double
     ) {
         #expect(multiplicand * multiplier == product)
@@ -75,7 +75,7 @@ internal struct DoubleMultipliableTests {
     )
     internal func multiplicationEqualSucceeds(
         multiplicand: Double,
-        multiplier: Double,
+        multiplier: Double.Multiplier,
         product: Double
     ) {
         var runningProduct: Double = multiplicand
@@ -89,10 +89,10 @@ internal struct DoubleMultipliableTests {
     )
     internal func multiplyingBySucceeds(
         multiplicand: Double,
-        multiplier: Double,
+        multiplier: Double.Multiplier,
         product: Double
-    ) {
-        #expect(multiplicand.multiplying(by: multiplier) == product)
+    ) throws {
+        #expect(try multiplicand.multiplying(by: multiplier) == product)
     }
 
     @Test(
@@ -101,11 +101,11 @@ internal struct DoubleMultipliableTests {
     )
     internal func multiplyBySucceeds(
         multiplicand: Double,
-        multiplier: Double,
+        multiplier: Double.Multiplier,
         product: Double
-    ) {
+    ) throws {
         var runningProduct: Double = multiplicand
-        runningProduct.multiply(by: multiplier)
+        try runningProduct.multiply(by: multiplier)
         #expect(runningProduct == product)
     }
 
@@ -141,7 +141,7 @@ extension DoubleMultipliableTests {
     )
     internal func multiplicationIsCommutative(
         multiplicand: Double,
-        multiplier: Double,
+        multiplier: Double.Multiplier,
         product _: Double
     ) {
         #expect(multiplicand * multiplier == multiplier * multiplicand)
@@ -177,7 +177,7 @@ extension DoubleMultipliableTests {
     )
     internal func multiplyingPositiveZeroByInfinityReturnsNaN(
         multiplicand: Double,
-        multiplier: Double
+        multiplier: Double.Multiplier
     ) {
         #expect((multiplicand * multiplier).isNaN == true)
     }
@@ -193,7 +193,7 @@ extension DoubleMultipliableTests {
     )
     internal func multiplyingNegativeZeroByInfinityReturnsNaN(
         multiplicand: Double,
-        multiplier: Double
+        multiplier: Double.Multiplier
     ) {
         #expect((multiplicand * multiplier).isNaN == true)
     }
@@ -209,7 +209,7 @@ extension DoubleMultipliableTests {
             Double.negativeInfinity
         ]
     )
-    internal func multiplyingNaNReturnsNaN(multiplier: Double) {
+    internal func multiplyingNaNReturnsNaN(multiplier: Double.Multiplier) {
         #expect((Double.nan * multiplier).isNaN == true)
     }
 
@@ -256,7 +256,7 @@ extension DoubleMultipliableTests {
         ]
     )
     internal func multiplyingNegativeInfinityFollowsFloatingPointRules(
-        multiplier: Double,
+        multiplier: Double.Multiplier,
         product: Double
     ) {
         #expect(Double.negativeInfinity * multiplier == product)
@@ -334,7 +334,7 @@ extension DoubleMultipliableTests {
         ]
     )
     internal func multiplyingNegativeZeroFollowsFloatingPointRules(
-        multiplier: Double,
+        multiplier: Double.Multiplier,
         product: Double
     ) {
         let result: Double = Double.negativeZero * multiplier
@@ -370,7 +370,7 @@ extension DoubleMultipliableTests {
         ]
     )
     internal func multiplyingPositiveInfinityFollowsFloatingPointRules(
-        multiplier: Double,
+        multiplier: Double.Multiplier,
         product: Double
     ) {
         #expect(Double.infinity * multiplier == product)
@@ -462,7 +462,7 @@ extension DoubleMultipliableTests {
         ]
     )
     internal func multiplyingPositiveZeroFollowsFloatingPointRules(
-        multiplier: Double,
+        multiplier: Double.Multiplier,
         product: Double
     ) {
         let result: Double = Double.zero * multiplier

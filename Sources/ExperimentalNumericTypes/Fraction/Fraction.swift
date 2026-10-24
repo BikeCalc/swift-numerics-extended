@@ -204,6 +204,10 @@ where Term: BinaryInteger {
 // MARK: - Addable
 
 extension Fraction: Addable {
+    public typealias Addend = Self
+
+    public typealias Sum = Self
+
     /// Returns the sum of the specified values.
     ///
     /// Fractions with the same stored denominator retain that denominator. Other finite fractions use
@@ -228,8 +232,8 @@ extension Fraction: Addable {
     /// - Returns: The sum, or NaN when the operation is indeterminate.
     public static func + (
         _ lhs: Self,
-        _ rhs: Self
-    ) -> Self {
+        _ rhs: Self.Addend
+    ) -> Self.Sum {
         guard lhs.isNaN == false && rhs.isNaN == false else {
             return .nan
         }
@@ -265,6 +269,11 @@ extension Fraction: Addable {
 
 extension Fraction: AdditiveArithmetic {}
 
+// MARK: - BitwiseCopyable
+
+extension Fraction: BitwiseCopyable
+where Term: BitwiseCopyable {}
+
 // MARK: - Canonicalizable
 
 extension Fraction: Canonicalizable {
@@ -291,6 +300,7 @@ extension Fraction: Canonicalizable {
     /// Canonicalization first removes common factors and then moves any negative sign to the numerator. Simplifying
     /// first can make normalization representable for values whose original terms cannot both be negated.
     ///
+    /// - Returns: The simplified and normalized representation of this value.
     /// - Precondition: `isCanonicalizable` is `true`.
     public func canonicalized() -> Self {
         let simplified: Self = self.simplified()
@@ -452,6 +462,14 @@ where Term: Decodable {
 // MARK: - Divisible
 
 extension Fraction: Divisible {
+    public typealias Divisor = Self
+
+    public typealias Quotient = Self
+
+    public typealias RemainderDivisor = Self
+
+    public typealias Remainder = Self
+
     /// The reciprocal of this value, or `nil` when this value is zero or NaN.
     ///
     /// A finite reciprocal exchanges the stored numerator and denominator. The reciprocal of positive or negative
@@ -516,8 +534,8 @@ extension Fraction: Divisible {
     ///            infinity.
     public static func / (
         _ lhs: Self,
-        _ rhs: Self
-    ) -> Self {
+        _ rhs: Self.Divisor
+    ) -> Self.Quotient {
         guard lhs.isNaN == false && rhs.isNaN == false else {
             return .nan
         }
@@ -559,8 +577,8 @@ extension Fraction: Divisible {
     /// - Returns: The remainder, or NaN when the dividend is infinite, the divisor is zero, or either operand is NaN.
     public static func % (
         _ lhs: Self,
-        _ rhs: Self
-    ) -> Self {
+        _ rhs: Self.RemainderDivisor
+    ) -> Self.Remainder {
         guard lhs.isNaN == false,
             rhs.isNaN == false,
             lhs.isInfinite == false,
@@ -746,6 +764,10 @@ where Term: LosslessStringConvertible {
 // MARK: - Multipliable
 
 extension Fraction: Multipliable {
+    public typealias Multiplier = Self
+
+    public typealias Product = Self
+
     /// Returns a boolean value indicating whether this value is an exact multiple of the specified value.
     ///
     /// Zero is considered a multiple of zero. Otherwise, both values must be finite, the specified value must be
@@ -792,8 +814,8 @@ extension Fraction: Multipliable {
     /// - Returns: The product, or NaN when the operation is indeterminate.
     public static func * (
         _ lhs: Self,
-        _ rhs: Self
-    ) -> Self {
+        _ rhs: Self.Multiplier
+    ) -> Self.Product {
         guard lhs.isNaN == false && rhs.isNaN == false else {
             return .nan
         }
@@ -918,8 +940,9 @@ extension Fraction: Normalizable {
 // MARK: - Raisable
 
 extension Fraction: Raisable {
-    /// The integer type used to represent an exponent.
     public typealias Exponent = Int
+
+    public typealias Power = Self
 
     /// Returns a boolean value indicating whether this value is a power of the specified value.
     ///
@@ -1043,7 +1066,7 @@ extension Fraction: Raisable {
     public static func ** (
         _ lhs: Self,
         _ rhs: Self.Exponent
-    ) -> Self {
+    ) -> Self.Power {
         // Zero exponents return one before handling NaN.
         if rhs == 0 {
             return 1
@@ -1135,6 +1158,8 @@ extension Fraction: Simplifiable {
     ///
     /// Simplification divides both terms by their greatest common divisor without changing sign placement. A fraction
     /// that is already simplified is returned unchanged.
+    ///
+    /// - Returns: The fraction with common factors removed, preserving sign placement. Nonfinite values are unchanged.
     package func simplified() -> Self {
         guard self.isNaN == false && self.isInfinite == false else {
             return self
@@ -1165,6 +1190,10 @@ extension Fraction: Simplifiable {
 // MARK: - Subtractable
 
 extension Fraction: Subtractable {
+    public typealias Subtrahend = Self
+
+    public typealias Difference = Self
+
     /// Returns the difference between the specified values.
     ///
     /// Fractions with the same stored denominator retain that denominator. Other finite fractions use
@@ -1192,8 +1221,8 @@ extension Fraction: Subtractable {
     ///            infinity.
     public static func - (
         _ lhs: Self,
-        _ rhs: Self
-    ) -> Self {
+        _ rhs: Self.Subtrahend
+    ) -> Self.Difference {
         guard lhs.isNaN == false && rhs.isNaN == false else {
             return .nan
         }

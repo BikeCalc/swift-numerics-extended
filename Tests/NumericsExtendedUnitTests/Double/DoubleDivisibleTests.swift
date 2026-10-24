@@ -14,7 +14,7 @@ import Testing
 internal struct DoubleDivisibleTests {
     internal init() {}
 
-    private static let divisionArguments: [(Double, Double, Double)] = [
+    private static let divisionArguments: [(Double, Double.Divisor, Double)] = [
         (6.0, 2.0, 3.0),
         (6.0, 3.0, 2.0),
         (-6.0, 2.0, -3.0),
@@ -25,7 +25,7 @@ internal struct DoubleDivisibleTests {
         (-3.75, -1.5, 2.5)
     ]
 
-    private static let remainderArguments: [(Double, Double, Double)] = [
+    private static let remainderArguments: [(Double, Double.RemainderDivisor, Double)] = [
         (4.0, 2.0, 0.0),
         (5.0, 2.0, 1.0),
         (5.0, -2.0, 1.0),
@@ -133,7 +133,7 @@ internal struct DoubleDivisibleTests {
     )
     internal func divisionSucceeds(
         dividend: Double,
-        divisor: Double,
+        divisor: Double.Divisor,
         quotient: Double
     ) {
         #expect(dividend / divisor == quotient)
@@ -145,7 +145,7 @@ internal struct DoubleDivisibleTests {
     )
     internal func divisionEqualSucceeds(
         dividend: Double,
-        divisor: Double,
+        divisor: Double.Divisor,
         quotient: Double
     ) {
         var runningQuotient: Double = dividend
@@ -159,7 +159,7 @@ internal struct DoubleDivisibleTests {
     )
     internal func remainderSucceeds(
         dividend: Double,
-        divisor: Double,
+        divisor: Double.RemainderDivisor,
         remainder: Double
     ) {
         #expect(dividend % divisor == remainder)
@@ -171,7 +171,7 @@ internal struct DoubleDivisibleTests {
     )
     internal func remainderEqualSucceeds(
         dividend: Double,
-        divisor: Double,
+        divisor: Double.RemainderDivisor,
         remainder: Double
     ) {
         var runningRemainder: Double = dividend
@@ -185,10 +185,10 @@ internal struct DoubleDivisibleTests {
     )
     internal func dividingBySucceeds(
         dividend: Double,
-        divisor: Double,
+        divisor: Double.Divisor,
         quotient: Double
-    ) {
-        #expect(dividend.dividing(by: divisor) == quotient)
+    ) throws {
+        #expect(try dividend.dividing(by: divisor) == quotient)
     }
 
     @Test(
@@ -197,11 +197,11 @@ internal struct DoubleDivisibleTests {
     )
     internal func divideBySucceeds(
         dividend: Double,
-        divisor: Double,
+        divisor: Double.Divisor,
         quotient: Double
-    ) {
+    ) throws {
         var runningQuotient: Double = dividend
-        runningQuotient.divide(by: divisor)
+        try runningQuotient.divide(by: divisor)
         #expect(runningQuotient == quotient)
     }
 
@@ -237,7 +237,7 @@ extension DoubleDivisibleTests {
     )
     internal func divisionIsNotCommutative(
         dividend: Double,
-        divisor: Double,
+        divisor: Double.Divisor,
         quotient _: Double
     ) {
         #expect(dividend / divisor != divisor / dividend)
@@ -279,7 +279,7 @@ extension DoubleDivisibleTests {
             Double.negativeZero
         ]
     )
-    internal func dividingPositiveZeroByPositiveOrNegativeZeroReturnsNaN(divisor: Double) {
+    internal func dividingPositiveZeroByPositiveOrNegativeZeroReturnsNaN(divisor: Double.Divisor) {
         #expect((Double.zero / divisor).isNaN == true)
     }
 
@@ -290,7 +290,7 @@ extension DoubleDivisibleTests {
             Double.negativeZero
         ]
     )
-    internal func dividingNegativeZeroByPositiveOrNegativeZeroReturnsNaN(divisor: Double) {
+    internal func dividingNegativeZeroByPositiveOrNegativeZeroReturnsNaN(divisor: Double.Divisor) {
         #expect((Double.negativeZero / divisor).isNaN == true)
     }
 
@@ -301,7 +301,7 @@ extension DoubleDivisibleTests {
             Double.negativeInfinity
         ]
     )
-    internal func dividingPositiveInfinityByInfinityReturnsNaN(divisor: Double) {
+    internal func dividingPositiveInfinityByInfinityReturnsNaN(divisor: Double.Divisor) {
         #expect((Double.infinity / divisor).isNaN == true)
     }
 
@@ -312,7 +312,7 @@ extension DoubleDivisibleTests {
             Double.negativeInfinity
         ]
     )
-    internal func dividingNegativeInfinityByInfinityReturnsNaN(divisor: Double) {
+    internal func dividingNegativeInfinityByInfinityReturnsNaN(divisor: Double.Divisor) {
         #expect((Double.negativeInfinity / divisor).isNaN == true)
     }
 
@@ -328,7 +328,7 @@ extension DoubleDivisibleTests {
             Double.negativeInfinity
         ]
     )
-    internal func dividingNaNReturnsNaN(divisor: Double) {
+    internal func dividingNaNReturnsNaN(divisor: Double.Divisor) {
         #expect((Double.nan / divisor).isNaN == true)
     }
 
@@ -358,7 +358,7 @@ extension DoubleDivisibleTests {
             Double.negativeInfinity
         ]
     )
-    internal func remainderOfPositiveInfinityReturnsNaN(divisor: Double) {
+    internal func remainderOfPositiveInfinityReturnsNaN(divisor: Double.RemainderDivisor) {
         #expect((Double.infinity % divisor).isNaN == true)
     }
 
@@ -373,7 +373,7 @@ extension DoubleDivisibleTests {
             Double.negativeInfinity
         ]
     )
-    internal func remainderOfNegativeInfinityReturnsNaN(divisor: Double) {
+    internal func remainderOfNegativeInfinityReturnsNaN(divisor: Double.RemainderDivisor) {
         #expect((Double.negativeInfinity % divisor).isNaN == true)
     }
 
@@ -411,7 +411,7 @@ extension DoubleDivisibleTests {
             Double.negativeInfinity
         ]
     )
-    internal func remainderOfNaNReturnsNaN(divisor: Double) {
+    internal func remainderOfNaNReturnsNaN(divisor: Double.RemainderDivisor) {
         #expect((Double.nan % divisor).isNaN == true)
     }
 
@@ -469,7 +469,7 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func dividingNegativeInfinityFollowsFloatingPointRules(
-        divisor: Double,
+        divisor: Double.Divisor,
         quotient: Double
     ) {
         #expect(Double.negativeInfinity / divisor == quotient)
@@ -586,7 +586,7 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func dividingNegativeZeroFollowsFloatingPointRules(
-        divisor: Double,
+        divisor: Double.Divisor,
         quotient: Double
     ) {
         let result: Double = Double.negativeZero / divisor
@@ -647,7 +647,7 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func dividingPositiveInfinityFollowsFloatingPointRules(
-        divisor: Double,
+        divisor: Double.Divisor,
         quotient: Double
     ) {
         #expect(Double.infinity / divisor == quotient)
@@ -735,7 +735,7 @@ extension DoubleDivisibleTests {
             -1.5
         ]
     )
-    internal func dividingPositiveZeroByNonzeroValueReturnsPositiveOrNegativeZero(divisor: Double) {
+    internal func dividingPositiveZeroByNonzeroValueReturnsPositiveOrNegativeZero(divisor: Double.Divisor) {
         #expect(Double.zero / divisor == Double.zero)
     }
 
@@ -776,7 +776,7 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func dividingPositiveZeroFollowsFloatingPointRules(
-        divisor: Double,
+        divisor: Double.Divisor,
         quotient: Double
     ) {
         let result: Double = Double.zero / divisor

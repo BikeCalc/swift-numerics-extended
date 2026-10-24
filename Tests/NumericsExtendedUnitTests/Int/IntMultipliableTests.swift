@@ -14,7 +14,7 @@ import Testing
 internal struct IntMultipliableTests {
     internal init() {}
 
-    private static let multiplicationArguments: [(Int, Int, Int)] = [
+    private static let multiplicationArguments: [(Int, Int.Multiplier, Int)] = [
         (2, 3, 6),
         (3, 4, 12),
         (-2, 3, -6),
@@ -51,7 +51,7 @@ internal struct IntMultipliableTests {
     )
     internal func multiplicationSucceeds(
         multiplicand: Int,
-        multiplier: Int,
+        multiplier: Int.Multiplier,
         product: Int
     ) {
         #expect(multiplicand * multiplier == product)
@@ -63,7 +63,7 @@ internal struct IntMultipliableTests {
     )
     internal func multiplicationEqualSucceeds(
         multiplicand: Int,
-        multiplier: Int,
+        multiplier: Int.Multiplier,
         product: Int
     ) {
         var runningProduct: Int = multiplicand
@@ -77,10 +77,10 @@ internal struct IntMultipliableTests {
     )
     internal func multiplyingBySucceeds(
         multiplicand: Int,
-        multiplier: Int,
+        multiplier: Int.Multiplier,
         product: Int
-    ) {
-        #expect(multiplicand.multiplying(by: multiplier) == product)
+    ) throws {
+        #expect(try multiplicand.multiplying(by: multiplier) == product)
     }
 
     @Test(
@@ -89,11 +89,11 @@ internal struct IntMultipliableTests {
     )
     internal func multiplyBySucceeds(
         multiplicand: Int,
-        multiplier: Int,
+        multiplier: Int.Multiplier,
         product: Int
-    ) {
+    ) throws {
         var runningProduct: Int = multiplicand
-        runningProduct.multiply(by: multiplier)
+        try runningProduct.multiply(by: multiplier)
         #expect(runningProduct == product)
     }
 
@@ -129,7 +129,7 @@ extension IntMultipliableTests {
     )
     internal func multiplicationIsCommutative(
         multiplicand: Int,
-        multiplier: Int,
+        multiplier: Int.Multiplier,
         product _: Int
     ) {
         #expect(multiplicand * multiplier == multiplier * multiplicand)

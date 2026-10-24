@@ -14,7 +14,7 @@ import Testing
 internal struct RomanMultipliableTests {
     internal init() {}
 
-    private static let multiplicationArguments: [(Roman, Roman, Roman)] = [
+    private static let multiplicationArguments: [(Roman, Roman.Multiplier, Roman)] = [
         (2, 3, 6),
         (3, 4, 12)
     ]
@@ -45,7 +45,7 @@ internal struct RomanMultipliableTests {
     )
     internal func multiplicationSucceeds(
         multiplicand: Roman,
-        multiplier: Roman,
+        multiplier: Roman.Multiplier,
         product: Roman
     ) {
         #expect(multiplicand * multiplier == product)
@@ -57,7 +57,7 @@ internal struct RomanMultipliableTests {
     )
     internal func multiplicationEqualSucceeds(
         multiplicand: Roman,
-        multiplier: Roman,
+        multiplier: Roman.Multiplier,
         product: Roman
     ) {
         var runningProduct: Roman = multiplicand
@@ -71,10 +71,10 @@ internal struct RomanMultipliableTests {
     )
     internal func multiplyingBySucceeds(
         multiplicand: Roman,
-        multiplier: Roman,
+        multiplier: Roman.Multiplier,
         product: Roman
-    ) {
-        #expect(multiplicand.multiplying(by: multiplier) == product)
+    ) throws {
+        #expect(try multiplicand.multiplying(by: multiplier) == product)
     }
 
     @Test(
@@ -83,11 +83,11 @@ internal struct RomanMultipliableTests {
     )
     internal func multiplyBySucceeds(
         multiplicand: Roman,
-        multiplier: Roman,
+        multiplier: Roman.Multiplier,
         product: Roman
-    ) {
+    ) throws {
         var runningProduct: Roman = multiplicand
-        runningProduct.multiply(by: multiplier)
+        try runningProduct.multiply(by: multiplier)
         #expect(runningProduct == product)
     }
 
@@ -123,7 +123,7 @@ extension RomanMultipliableTests {
     )
     internal func multiplicationIsCommutative(
         multiplicand: Roman,
-        multiplier: Roman,
+        multiplier: Roman.Multiplier,
         product _: Roman
     ) {
         #expect(multiplicand * multiplier == multiplier * multiplicand)

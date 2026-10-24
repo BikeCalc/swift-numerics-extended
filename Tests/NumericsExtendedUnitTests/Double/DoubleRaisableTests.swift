@@ -117,8 +117,8 @@ internal struct DoubleRaisableTests {
         base: Double,
         exponent: Double.Exponent,
         power: Double
-    ) {
-        #expect(base.raising(to: exponent) == power)
+    ) throws {
+        #expect(try base.raising(to: exponent) == power)
     }
 
     @Test(
@@ -129,9 +129,9 @@ internal struct DoubleRaisableTests {
         base: Double,
         exponent: Double.Exponent,
         power: Double
-    ) {
+    ) throws {
         var runningPower: Double = base
-        runningPower.raise(to: exponent)
+        try runningPower.raise(to: exponent)
         #expect(runningPower == power)
     }
 

@@ -14,7 +14,7 @@ import Testing
 internal struct FractionSubtractableTests {
     internal init() {}
 
-    private static let subtractionArguments: [(Fraction<Int>, Fraction<Int>, Fraction<Int>)] = [
+    private static let subtractionArguments: [(Fraction<Int>, Fraction<Int>.Subtrahend, Fraction<Int>)] = [
         (Fraction<Int>(2, 3), Fraction<Int>(1, 2), Fraction<Int>(1, 6)),
         (Fraction<Int>(3, 4), Fraction<Int>(1, 2), Fraction<Int>(2, 8)),
         (Fraction<Int>(-2, 3), Fraction<Int>(1, 2), Fraction<Int>(-7, 6)),
@@ -27,7 +27,7 @@ internal struct FractionSubtractableTests {
     )
     internal func subtractionSucceeds(
         minuend: Fraction<Int>,
-        subtrahend: Fraction<Int>,
+        subtrahend: Fraction<Int>.Subtrahend,
         difference: Fraction<Int>
     ) {
         #expect(minuend - subtrahend == difference)
@@ -39,7 +39,7 @@ internal struct FractionSubtractableTests {
     )
     internal func subtractionEqualSucceeds(
         minuend: Fraction<Int>,
-        subtrahend: Fraction<Int>,
+        subtrahend: Fraction<Int>.Subtrahend,
         difference: Fraction<Int>
     ) {
         var runningDifference: Fraction<Int> = minuend
@@ -53,10 +53,10 @@ internal struct FractionSubtractableTests {
     )
     internal func subtractingSucceeds(
         minuend: Fraction<Int>,
-        subtrahend: Fraction<Int>,
+        subtrahend: Fraction<Int>.Subtrahend,
         difference: Fraction<Int>
-    ) {
-        #expect(minuend.subtracting(subtrahend) == difference)
+    ) throws {
+        #expect(try minuend.subtracting(subtrahend) == difference)
     }
 
     @Test(
@@ -65,11 +65,11 @@ internal struct FractionSubtractableTests {
     )
     internal func subtractSucceeds(
         minuend: Fraction<Int>,
-        subtrahend: Fraction<Int>,
+        subtrahend: Fraction<Int>.Subtrahend,
         difference: Fraction<Int>
-    ) {
+    ) throws {
         var runningDifference: Fraction<Int> = minuend
-        runningDifference.subtract(subtrahend)
+        try runningDifference.subtract(subtrahend)
         #expect(runningDifference == difference)
     }
 }
@@ -81,7 +81,7 @@ extension FractionSubtractableTests {
     )
     internal func subtractionIsNotCommutative(
         minuend: Fraction<Int>,
-        subtrahend: Fraction<Int>,
+        subtrahend: Fraction<Int>.Subtrahend,
         difference _: Fraction<Int>
     ) {
         #expect(minuend - subtrahend != subtrahend - minuend)
@@ -112,7 +112,7 @@ extension FractionSubtractableTests {
             Fraction<Int>.negativeInfinity
         ]
     )
-    internal func subtractingFromNaNReturnsNaN(subtrahend: Fraction<Int>) {
+    internal func subtractingFromNaNReturnsNaN(subtrahend: Fraction<Int>.Subtrahend) {
         #expect((Fraction<Int>.nan - subtrahend).isNaN == true)
     }
 
@@ -145,7 +145,7 @@ extension FractionSubtractableTests {
     )
     internal func subtractingNegativeInfinityFollowsRationalRules(
         minuend: Fraction<Int>,
-        subtrahend: Fraction<Int>,
+        subtrahend: Fraction<Int>.Subtrahend,
         difference: Fraction<Int>
     ) {
         #expect(minuend - subtrahend == difference)
@@ -165,7 +165,7 @@ extension FractionSubtractableTests {
         ]
     )
     internal func subtractingFromNegativeZeroFollowsStoredRepresentationRules(
-        subtrahend: Fraction<Int>,
+        subtrahend: Fraction<Int>.Subtrahend,
         difference: Fraction<Int>
     ) {
         #expect(Fraction<Int>.negativeZero - subtrahend == difference)
@@ -185,7 +185,7 @@ extension FractionSubtractableTests {
     )
     internal func subtractingPositiveInfinityFollowsRationalRules(
         minuend: Fraction<Int>,
-        subtrahend: Fraction<Int>,
+        subtrahend: Fraction<Int>.Subtrahend,
         difference: Fraction<Int>
     ) {
         #expect(minuend - subtrahend == difference)
@@ -218,7 +218,7 @@ extension FractionSubtractableTests {
         ]
     )
     internal func subtractingFromPositiveZeroFollowsStoredRepresentationRules(
-        subtrahend: Fraction<Int>,
+        subtrahend: Fraction<Int>.Subtrahend,
         difference: Fraction<Int>
     ) {
         #expect(Fraction<Int>.zero - subtrahend == difference)

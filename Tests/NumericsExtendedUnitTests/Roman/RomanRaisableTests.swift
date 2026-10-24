@@ -82,8 +82,8 @@ internal struct RomanRaisableTests {
         base: Roman,
         exponent: Roman.Exponent,
         power: Roman
-    ) {
-        #expect(base.raising(to: exponent) == power)
+    ) throws {
+        #expect(try base.raising(to: exponent) == power)
     }
 
     @Test(
@@ -94,9 +94,9 @@ internal struct RomanRaisableTests {
         base: Roman,
         exponent: Roman.Exponent,
         power: Roman
-    ) {
+    ) throws {
         var runningPower: Roman = base
-        runningPower.raise(to: exponent)
+        try runningPower.raise(to: exponent)
         #expect(runningPower == power)
     }
 

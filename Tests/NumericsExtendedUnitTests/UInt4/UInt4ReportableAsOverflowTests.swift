@@ -30,7 +30,7 @@ internal struct UInt4ReportableAsOverflowTests {
         partialValue: UInt4,
         overflow: Bool
     ) {
-        let report: UInt4.OverflowReport = augend.addingReportingOverflow(addend)
+        let report: UInt4.OverflowReport<UInt4.Sum> = augend.addingReportingOverflow(addend)
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }
@@ -51,7 +51,7 @@ internal struct UInt4ReportableAsOverflowTests {
         partialValue: UInt4,
         overflow: Bool
     ) {
-        let report: UInt4.OverflowReport = minuend.subtractingReportingOverflow(subtrahend)
+        let report: UInt4.OverflowReport<UInt4.Difference> = minuend.subtractingReportingOverflow(subtrahend)
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }
@@ -74,7 +74,7 @@ internal struct UInt4ReportableAsOverflowTests {
         partialValue: UInt4,
         overflow: Bool
     ) {
-        let report: UInt4.OverflowReport = multiplicand.multipliedReportingOverflow(by: multiplier)
+        let report: UInt4.OverflowReport<UInt4.Product> = multiplicand.multipliedReportingOverflow(by: multiplier)
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }
@@ -97,7 +97,7 @@ internal struct UInt4ReportableAsOverflowTests {
         partialValue: UInt4,
         overflow: Bool
     ) {
-        let report: UInt4.OverflowReport = dividend.dividedReportingOverflow(by: divisor)
+        let report: UInt4.OverflowReport<UInt4.Quotient> = dividend.dividedReportingOverflow(by: divisor)
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }
@@ -120,7 +120,7 @@ internal struct UInt4ReportableAsOverflowTests {
         partialValue: UInt4,
         overflow: Bool
     ) {
-        let report: UInt4.OverflowReport = dividend.remainderReportingOverflow(dividingBy: divisor)
+        let report: UInt4.OverflowReport<UInt4.Remainder> = dividend.remainderReportingOverflow(dividingBy: divisor)
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }
@@ -148,7 +148,7 @@ internal struct UInt4ReportableAsOverflowTests {
         partialValue: UInt4,
         overflow: Bool
     ) {
-        let report: UInt4.OverflowReport = base.raisedReportingOverflow(to: exponent)
+        let report: UInt4.OverflowReport<UInt4.Power> = base.raisedReportingOverflow(to: exponent)
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }

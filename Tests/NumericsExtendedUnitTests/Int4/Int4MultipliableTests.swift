@@ -14,7 +14,7 @@ import Testing
 internal struct Int4MultipliableTests {
     internal init() {}
 
-    private static let multiplicationArguments: [(Int4, Int4, Int4)] = [
+    private static let multiplicationArguments: [(Int4, Int4.Multiplier, Int4)] = [
         (2, 3, 6),
         (-2, 3, -6)
     ]
@@ -49,7 +49,7 @@ internal struct Int4MultipliableTests {
     )
     internal func multiplicationSucceeds(
         multiplicand: Int4,
-        multiplier: Int4,
+        multiplier: Int4.Multiplier,
         product: Int4
     ) {
         #expect(multiplicand * multiplier == product)
@@ -61,7 +61,7 @@ internal struct Int4MultipliableTests {
     )
     internal func multiplicationEqualSucceeds(
         multiplicand: Int4,
-        multiplier: Int4,
+        multiplier: Int4.Multiplier,
         product: Int4
     ) {
         var runningProduct: Int4 = multiplicand
@@ -75,10 +75,10 @@ internal struct Int4MultipliableTests {
     )
     internal func multiplyingBySucceeds(
         multiplicand: Int4,
-        multiplier: Int4,
+        multiplier: Int4.Multiplier,
         product: Int4
-    ) {
-        #expect(multiplicand.multiplying(by: multiplier) == product)
+    ) throws {
+        #expect(try multiplicand.multiplying(by: multiplier) == product)
     }
 
     @Test(
@@ -87,11 +87,11 @@ internal struct Int4MultipliableTests {
     )
     internal func multiplyBySucceeds(
         multiplicand: Int4,
-        multiplier: Int4,
+        multiplier: Int4.Multiplier,
         product: Int4
-    ) {
+    ) throws {
         var runningProduct: Int4 = multiplicand
-        runningProduct.multiply(by: multiplier)
+        try runningProduct.multiply(by: multiplier)
         #expect(runningProduct == product)
     }
 
@@ -127,7 +127,7 @@ extension Int4MultipliableTests {
     )
     internal func multiplicationIsCommutative(
         multiplicand: Int4,
-        multiplier: Int4,
+        multiplier: Int4.Multiplier,
         product _: Int4
     ) {
         #expect(multiplicand * multiplier == multiplier * multiplicand)

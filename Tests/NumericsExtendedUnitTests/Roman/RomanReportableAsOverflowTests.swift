@@ -30,7 +30,7 @@ internal struct RomanReportableAsOverflowTests {
         partialValue: Roman,
         overflow: Bool
     ) {
-        let report: Roman.OverflowReport = augend.addingReportingOverflow(addend)
+        let report: Roman.OverflowReport<Roman.Sum> = augend.addingReportingOverflow(addend)
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }
@@ -51,7 +51,7 @@ internal struct RomanReportableAsOverflowTests {
         partialValue: Roman,
         overflow: Bool
     ) {
-        let report: Roman.OverflowReport = minuend.subtractingReportingOverflow(subtrahend)
+        let report: Roman.OverflowReport<Roman.Difference> = minuend.subtractingReportingOverflow(subtrahend)
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }
@@ -74,7 +74,7 @@ internal struct RomanReportableAsOverflowTests {
         partialValue: Roman,
         overflow: Bool
     ) {
-        let report: Roman.OverflowReport = multiplicand.multipliedReportingOverflow(by: multiplier)
+        let report: Roman.OverflowReport<Roman.Product> = multiplicand.multipliedReportingOverflow(by: multiplier)
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }
@@ -97,7 +97,7 @@ internal struct RomanReportableAsOverflowTests {
         partialValue: Roman,
         overflow: Bool
     ) {
-        let report: Roman.OverflowReport = dividend.dividedReportingOverflow(by: divisor)
+        let report: Roman.OverflowReport<Roman.Quotient> = dividend.dividedReportingOverflow(by: divisor)
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }
@@ -120,7 +120,7 @@ internal struct RomanReportableAsOverflowTests {
         partialValue: Roman,
         overflow: Bool
     ) {
-        let report: Roman.OverflowReport = dividend.remainderReportingOverflow(dividingBy: divisor)
+        let report: Roman.OverflowReport<Roman.Remainder> = dividend.remainderReportingOverflow(dividingBy: divisor)
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }
@@ -148,7 +148,7 @@ internal struct RomanReportableAsOverflowTests {
         partialValue: Roman,
         overflow: Bool
     ) {
-        let report: Roman.OverflowReport = base.raisedReportingOverflow(to: exponent)
+        let report: Roman.OverflowReport<Roman.Power> = base.raisedReportingOverflow(to: exponent)
         #expect(report.partialValue == partialValue)
         #expect(report.overflow == overflow)
     }

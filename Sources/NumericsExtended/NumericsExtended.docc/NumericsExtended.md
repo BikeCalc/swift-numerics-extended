@@ -35,6 +35,7 @@ releases.
 - ``/CoreNumericProtocols/Divisible``
 - ``/CoreNumericProtocols/Negateable``
 - ``/CoreNumericProtocols/Raisable``
+- ``/CoreNumericProtocols/ReportableAsOverflow``
 
 ### Relations
 
@@ -59,10 +60,6 @@ releases.
 
 - ``/CoreNumericProtocols/Increasable``
 - ``/CoreNumericProtocols/Decreasable``
-
-### Overflow Reporting
-
-- ``/CoreNumericProtocols/ReportableAsOverflow``
 
 ### Experimental Numeric Protocols
 

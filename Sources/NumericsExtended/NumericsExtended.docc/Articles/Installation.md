@@ -12,12 +12,12 @@ your target, and import the module in source files that use the protocols or exp
 Add the package to the dependencies in your `Package.swift` file.
 
 ```swift
-let package: Package = .init(
+internal let package: Package = .init(
     ...
     dependencies: [
         .package(
             url: "https://github.com/bikecalc/swift-numerics-extended.git",
-            from: "2.0.0"
+            from: "3.0.0"
         )
     ],
     ...
@@ -30,7 +30,7 @@ Add the `NumericsExtended` product to the dependencies of the target that will i
 name of that target.
 
 ```swift
-let package: Package = .init(
+internal let package: Package = .init(
     ...
     targets: [
         .target(

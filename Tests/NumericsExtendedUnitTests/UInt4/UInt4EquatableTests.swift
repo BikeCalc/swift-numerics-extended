@@ -51,8 +51,8 @@ internal struct UInt4EquatableTests {
         lhs: UInt4,
         rhs: UInt4,
         result: Bool
-    ) {
-        #expect(lhs.isEqual(to: rhs) == result)
+    ) throws {
+        #expect(try lhs.isEqual(to: rhs) == result)
     }
 
     @Test(
@@ -63,8 +63,8 @@ internal struct UInt4EquatableTests {
         lhs: UInt4,
         rhs: UInt4,
         result: Bool
-    ) {
-        #expect(lhs.isUnequal(to: rhs) == !result)
+    ) throws {
+        #expect(try lhs.isUnequal(to: rhs) == !result)
     }
 }
 
@@ -82,10 +82,10 @@ extension UInt4EquatableTests {
         lhs: UInt4,
         rhs: UInt4,
         result: Bool
-    ) {
+    ) throws {
         #expect((lhs == rhs) == result)
         #expect((lhs != rhs) == !result)
-        #expect(lhs.isEqual(to: rhs) == result)
-        #expect(lhs.isUnequal(to: rhs) == !result)
+        #expect(try lhs.isEqual(to: rhs) == result)
+        #expect(try lhs.isUnequal(to: rhs) == !result)
     }
 }

@@ -14,14 +14,14 @@ import Testing
 internal struct IntDivisibleTests {
     internal init() {}
 
-    private static let divisionArguments: [(Int, Int, Int)] = [
+    private static let divisionArguments: [(Int, Int.Divisor, Int)] = [
         (6, 2, 3),
         (6, 3, 2),
         (-6, 2, -3),
         (-6, -3, 2)
     ]
 
-    private static let remainderArguments: [(Int, Int, Int)] = [
+    private static let remainderArguments: [(Int, Int.RemainderDivisor, Int)] = [
         (4, 2, 0),
         (5, 2, 1),
         (5, -2, 1),
@@ -112,7 +112,7 @@ internal struct IntDivisibleTests {
     )
     internal func divisionSucceeds(
         dividend: Int,
-        divisor: Int,
+        divisor: Int.Divisor,
         quotient: Int
     ) {
         #expect(dividend / divisor == quotient)
@@ -124,7 +124,7 @@ internal struct IntDivisibleTests {
     )
     internal func divisionEqualSucceeds(
         dividend: Int,
-        divisor: Int,
+        divisor: Int.Divisor,
         quotient: Int
     ) {
         var runningQuotient: Int = dividend
@@ -138,7 +138,7 @@ internal struct IntDivisibleTests {
     )
     internal func remainderSucceeds(
         dividend: Int,
-        divisor: Int,
+        divisor: Int.RemainderDivisor,
         remainder: Int
     ) {
         #expect(dividend % divisor == remainder)
@@ -150,7 +150,7 @@ internal struct IntDivisibleTests {
     )
     internal func remainderEqualSucceeds(
         dividend: Int,
-        divisor: Int,
+        divisor: Int.RemainderDivisor,
         remainder: Int
     ) {
         var runningRemainder: Int = dividend
@@ -164,10 +164,10 @@ internal struct IntDivisibleTests {
     )
     internal func dividingBySucceeds(
         dividend: Int,
-        divisor: Int,
+        divisor: Int.Divisor,
         quotient: Int
-    ) {
-        #expect(dividend.dividing(by: divisor) == quotient)
+    ) throws {
+        #expect(try dividend.dividing(by: divisor) == quotient)
     }
 
     @Test(
@@ -176,11 +176,11 @@ internal struct IntDivisibleTests {
     )
     internal func divideBySucceeds(
         dividend: Int,
-        divisor: Int,
+        divisor: Int.Divisor,
         quotient: Int
-    ) {
+    ) throws {
         var runningQuotient: Int = dividend
-        runningQuotient.divide(by: divisor)
+        try runningQuotient.divide(by: divisor)
         #expect(runningQuotient == quotient)
     }
 
@@ -216,7 +216,7 @@ extension IntDivisibleTests {
     )
     internal func divisionIsNotCommutative(
         dividend: Int,
-        divisor: Int,
+        divisor: Int.Divisor,
         quotient _: Int
     ) {
         #expect(dividend / divisor != divisor / dividend)
@@ -251,7 +251,7 @@ extension IntDivisibleTests {
     )
     internal func integerDivisionTruncatesTowardZero(
         dividend: Int,
-        divisor: Int,
+        divisor: Int.Divisor,
         quotient: Int
     ) {
         #expect(dividend / divisor == quotient)
@@ -327,7 +327,7 @@ extension IntDivisibleTests {
             3
         ]
     )
-    internal func dividingNegativeZeroByNonzeroValueReturnsNegativeZero(divisor: Int) {
+    internal func dividingNegativeZeroByNonzeroValueReturnsNegativeZero(divisor: Int.Divisor) {
         #expect(Int.negativeZero / divisor == Int.negativeZero)
     }
 }
@@ -398,7 +398,7 @@ extension IntDivisibleTests {
             3
         ]
     )
-    internal func dividingPositiveZeroByNonzeroValueReturnsPositiveZero(divisor: Int) {
+    internal func dividingPositiveZeroByNonzeroValueReturnsPositiveZero(divisor: Int.Divisor) {
         #expect(Int.zero / divisor == Int.zero)
     }
 

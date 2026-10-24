@@ -14,7 +14,7 @@ import Testing
 internal struct CanonicalizedFractionAddableTests {
     internal init() {}
 
-    private static let additionArguments: [(Fraction<Int>, Fraction<Int>, Fraction<Int>)] = [
+    private static let additionArguments: [(Fraction<Int>, Fraction<Int>.Addend, Fraction<Int>)] = [
         (Fraction<Int>(1, 2), Fraction<Int>(1, 2), Fraction<Int>(1, 1)),
         (Fraction<Int>(1, 2), Fraction<Int>(2, 3), Fraction<Int>(7, 6)),
         (Fraction<Int>(-1, 2), Fraction<Int>(1, 2), Fraction<Int>(0, 1)),
@@ -22,12 +22,12 @@ internal struct CanonicalizedFractionAddableTests {
     ]
 
     @Test(
-        "Addition equal canonicalizes result",
+        "Addition succeeds",
         arguments: Self.additionArguments
     )
-    internal func additionEqualCanonicalizesResult(
+    internal func additionSucceeds(
         augend: Fraction<Int>,
-        addend: Fraction<Int>,
+        addend: Fraction<Int>.Addend,
         sum: Fraction<Int>
     ) {
         @Canonicalized var runningSum: Fraction<Int> = augend
@@ -36,16 +36,16 @@ internal struct CanonicalizedFractionAddableTests {
     }
 
     @Test(
-        "Add canonicalizes result",
+        "Add succeeds",
         arguments: Self.additionArguments
     )
-    internal func addCanonicalizesResult(
+    internal func addSucceeds(
         augend: Fraction<Int>,
-        addend: Fraction<Int>,
+        addend: Fraction<Int>.Addend,
         sum: Fraction<Int>
-    ) {
+    ) throws {
         @Canonicalized var runningSum: Fraction<Int> = augend
-        runningSum.add(addend)
+        try runningSum.add(addend)
         #expect(runningSum == sum)
     }
 }
