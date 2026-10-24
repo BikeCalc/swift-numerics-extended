@@ -269,6 +269,11 @@ extension Fraction: Addable {
 
 extension Fraction: AdditiveArithmetic {}
 
+// MARK: - BitwiseCopyable
+
+extension Fraction: BitwiseCopyable
+where Term: BitwiseCopyable {}
+
 // MARK: - Canonicalizable
 
 extension Fraction: Canonicalizable {
