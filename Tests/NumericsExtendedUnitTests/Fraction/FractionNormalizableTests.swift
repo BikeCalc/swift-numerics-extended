@@ -15,28 +15,28 @@ internal struct FractionNormalizableTests {
     internal init() {}
 
     private static let normalizationArguments: [(Fraction<Int>, Fraction<Int>)] = [
-        (Fraction<Int>(2, 4), Fraction<Int>(2, 4)),
-        (Fraction<Int>(-2, 4), Fraction<Int>(-2, 4)),
-        (Fraction<Int>(2, -4), Fraction<Int>(-2, 4)),
-        (Fraction<Int>(-2, -4), Fraction<Int>(2, 4)),
-        (Fraction<Int>(1, 2), Fraction<Int>(1, 2)),
-        (Fraction<Int>(-1, 2), Fraction<Int>(-1, 2)),
-        (Fraction<Int>(1, -2), Fraction<Int>(-1, 2)),
-        (Fraction<Int>(-1, -2), Fraction<Int>(1, 2))
+        (.init(2, 4), .init(2, 4)),
+        (.init(-2, 4), .init(-2, 4)),
+        (.init(2, -4), .init(-2, 4)),
+        (.init(-2, -4), .init(2, 4)),
+        (.init(1, 2), .init(1, 2)),
+        (.init(-1, 2), .init(-1, 2)),
+        (.init(1, -2), .init(-1, 2)),
+        (.init(-1, -2), .init(1, 2))
     ]
 
     @Test(
         "Is normalizable",
         arguments: [
-            (Fraction<Int>(2, 4), true),
-            (Fraction<Int>(-2, 4), true),
-            (Fraction<Int>(2, -4), true),
-            (Fraction<Int>(-2, -4), true),
-            (Fraction<Int>(1, 2), true),
-            (Fraction<Int>(-1, 2), true),
-            (Fraction<Int>(1, -2), true),
-            (Fraction<Int>(-1, -2), true)
-        ]
+            (.init(2, 4), true),
+            (.init(-2, 4), true),
+            (.init(2, -4), true),
+            (.init(-2, -4), true),
+            (.init(1, 2), true),
+            (.init(-1, 2), true),
+            (.init(1, -2), true),
+            (.init(-1, -2), true)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func isNormalizable(
         value: Fraction<Int>,
@@ -48,15 +48,15 @@ internal struct FractionNormalizableTests {
     @Test(
         "Is normalized",
         arguments: [
-            (Fraction<Int>(2, 4), true),
-            (Fraction<Int>(-2, 4), true),
-            (Fraction<Int>(2, -4), false),
-            (Fraction<Int>(-2, -4), false),
-            (Fraction<Int>(1, 2), true),
-            (Fraction<Int>(-1, 2), true),
-            (Fraction<Int>(1, -2), false),
-            (Fraction<Int>(-1, -2), false)
-        ]
+            (.init(2, 4), true),
+            (.init(-2, 4), true),
+            (.init(2, -4), false),
+            (.init(-2, -4), false),
+            (.init(1, 2), true),
+            (.init(-1, 2), true),
+            (.init(1, -2), false),
+            (.init(-1, -2), false)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func isNormalized(
         value: Fraction<Int>,
@@ -93,11 +93,11 @@ internal struct FractionNormalizableTests {
     @Test(
         "Normalization is idempotent",
         arguments: [
-            Fraction<Int>(1, 2),
-            Fraction<Int>(2, 4),
-            Fraction<Int>(1, -2),
-            Fraction<Int>(2, -4)
-        ]
+            .init(1, 2),
+            .init(2, 4),
+            .init(1, -2),
+            .init(2, -4)
+        ] as Array<Fraction<Int>>
     )
     internal func normalizationIsIdempotent(value: Fraction<Int>) {
         let result: Fraction<Int> = value.normalized().normalized()
@@ -111,11 +111,11 @@ extension FractionNormalizableTests {
     @Test(
         "Int minimum terms determine normalizability",
         arguments: [
-            (Fraction<Int>(Int.min, 2), true),
-            (Fraction<Int>(Int.min, -2), false),
-            (Fraction<Int>(1, Int.min), false),
-            (Fraction<Int>(2, Int.min), false)
-        ]
+            (.init(Int.min, 2), true),
+            (.init(Int.min, -2), false),
+            (.init(1, Int.min), false),
+            (.init(2, Int.min), false)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func intMinimumTermsDetermineNormalizability(
         value: Fraction<Int>,
@@ -155,9 +155,9 @@ extension FractionNormalizableTests {
     @Test(
         "Negative zero normalization follows rational rules",
         arguments: [
-            (Fraction<Int>.negativeZero, Fraction<Int>.zero),
-            (Fraction<Int>(0, -2), Fraction<Int>(0, 2))
-        ]
+            (.negativeZero, .zero),
+            (.init(0, -2), .init(0, 2))
+        ] as Array<(Fraction<Int>, Fraction<Int>)>
     )
     internal func negativeZeroNormalizationFollowsRationalRules(
         value: Fraction<Int>,
@@ -188,9 +188,9 @@ extension FractionNormalizableTests {
     @Test(
         "Positive zero normalization follows rational rules",
         arguments: [
-            Fraction<Int>.zero,
-            Fraction<Int>(0, 2)
-        ]
+            .zero,
+            .init(0, 2)
+        ] as Array<Fraction<Int>>
     )
     internal func positiveZeroNormalizationFollowsRationalRules(value: Fraction<Int>) {
         #expect(value.isNormalizable == true)

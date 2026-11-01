@@ -17,11 +17,11 @@ internal struct FractionCustomDebugStringConvertibleTests {
     @Test(
         "Debug description succeeds",
         arguments: [
-            (Fraction<Int>(-01, 1), "Fraction<Int>(-1, 1)"),
-            (Fraction<Int>(-1, 1), "Fraction<Int>(-1, 1)"),
-            (Fraction<Int>(01, 1), "Fraction<Int>(1, 1)"),
-            (Fraction<Int>(1, 1), "Fraction<Int>(1, 1)")
-        ]
+            (.init(-01, 1), "Fraction<Int>(-1, 1)"),
+            (.init(-1, 1), "Fraction<Int>(-1, 1)"),
+            (.init(01, 1), "Fraction<Int>(1, 1)"),
+            (.init(1, 1), "Fraction<Int>(1, 1)")
+        ] as Array<(Fraction<Int>, String)>
     )
     internal func debugDescriptionSucceeds(
         value: Fraction<Int>,
@@ -55,9 +55,9 @@ extension FractionCustomDebugStringConvertibleTests {
     @Test(
         "Negative zero debug description",
         arguments: [
-            (Fraction<Int>.negativeZero, "Fraction<Int>(0, -1)"),
-            (Fraction<Int>(0, -2), "Fraction<Int>(0, -2)")
-        ]
+            (.negativeZero, "Fraction<Int>(0, -1)"),
+            (.init(0, -2), "Fraction<Int>(0, -2)")
+        ] as Array<(Fraction<Int>, String)>
     )
     internal func negativeZeroDebugDescription(
         value: Fraction<Int>,
@@ -82,9 +82,9 @@ extension FractionCustomDebugStringConvertibleTests {
     @Test(
         "Positive zero debug description",
         arguments: [
-            (Fraction<Int>.zero, "Fraction<Int>(0, 1)"),
-            (Fraction<Int>(0, 2), "Fraction<Int>(0, 2)")
-        ]
+            (.zero, "Fraction<Int>(0, 1)"),
+            (.init(0, 2), "Fraction<Int>(0, 2)")
+        ] as Array<(Fraction<Int>, String)>
     )
     internal func positiveZeroDebugDescription(
         value: Fraction<Int>,

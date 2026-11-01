@@ -20,8 +20,8 @@ internal struct UInt4NumericTests {
             (0, 0),
             (2, 2),
             (3, 3),
-            (0, UInt4.min),
-            (15, UInt4.max)
+            (0, .min),
+            (15, .max)
         ] as Array<(Int, UInt4)>
     )
     internal func initializedExactlySucceeds(
@@ -36,7 +36,7 @@ internal struct UInt4NumericTests {
         arguments: [
             -1,
             16
-        ]
+        ] as Array<Int>
     )
     internal func initializedExactlyFails(source: Int) {
         #expect(UInt4(exactly: source) == nil)
@@ -48,8 +48,8 @@ internal struct UInt4NumericTests {
             (0, 0),
             (2, 2),
             (3, 3),
-            (UInt4.min, UInt4.min),
-            (UInt4.max, UInt4.max)
+            (.min, UInt4.min),
+            (.max, UInt4.max)
         ] as Array<(UInt4, UInt4.Magnitude)>
     )
     internal func magnitudeSucceeds(

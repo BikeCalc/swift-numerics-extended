@@ -21,7 +21,7 @@ internal struct FractionTests {
             (-1, 2),
             (-1, -2),
             (1, -2)
-        ]
+        ] as Array<(Int, Int)>
     )
     internal func initializationPreservesFiniteTerms(
         numerator: Int,
@@ -39,7 +39,7 @@ internal struct FractionTests {
             (-2, 4),
             (-2, -4),
             (2, -4)
-        ]
+        ] as Array<(Int, Int)>
     )
     internal func initializationPreservesUnsimplifiedTerms(
         numerator: Int,
@@ -69,8 +69,8 @@ extension FractionTests {
         "Negative infinity initialization canonicalizes terms",
         arguments: [
             -2,
-            Int.min
-        ]
+            .min
+        ] as Array<Int>
     )
     internal func negativeInfinityInitializationCanonicalizesTerms(numerator: Int) {
         let value: Fraction<Int> = .init(numerator, 0)
@@ -87,7 +87,7 @@ extension FractionTests {
         arguments: [
             -1,
             -2
-        ]
+        ] as Array<Int>
     )
     internal func negativeZeroInitializationPreservesTerms(denominator: Int) {
         let value: Fraction<Int> = .init(0, denominator)
@@ -103,8 +103,8 @@ extension FractionTests {
         "Positive infinity initialization canonicalizes terms",
         arguments: [
             2,
-            Int.max
-        ]
+            .max
+        ] as Array<Int>
     )
     internal func positiveInfinityInitializationCanonicalizesTerms(numerator: Int) {
         let value: Fraction<Int> = .init(numerator, 0)
@@ -121,7 +121,7 @@ extension FractionTests {
         arguments: [
             1,
             2
-        ]
+        ] as Array<Int>
     )
     internal func positiveZeroInitializationPreservesTerms(denominator: Int) {
         let value: Fraction<Int> = .init(0, denominator)

@@ -21,10 +21,10 @@ extension UnsignedFractionSubtractableTests {
     @Test(
         "Subtracting positive infinity returns NaN when negative infinity is unrepresentable",
         arguments: [
-            Fraction<UInt>.zero,
-            Fraction<UInt>(1, 2),
-            Fraction<UInt>(2, 1)
-        ]
+            .zero,
+            .init(1, 2),
+            .init(2, 1)
+        ] as Array<Fraction<UInt>>
     )
     internal func subtractingPositiveInfinityReturnsNan(minuend: Fraction<UInt>) {
         let result: Fraction<UInt> = minuend - .infinity

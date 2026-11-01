@@ -15,14 +15,14 @@ internal struct CanonicalizedFractionTests {
     internal init() {}
 
     private static let canonicalizationArguments: [(Fraction<Int>, Fraction<Int>)] = [
-        (Fraction<Int>(2, 4), Fraction<Int>(1, 2)),
-        (Fraction<Int>(-2, 4), Fraction<Int>(-1, 2)),
-        (Fraction<Int>(2, -4), Fraction<Int>(-1, 2)),
-        (Fraction<Int>(-2, -4), Fraction<Int>(1, 2)),
-        (Fraction<Int>(1, 2), Fraction<Int>(1, 2)),
-        (Fraction<Int>(-1, 2), Fraction<Int>(-1, 2)),
-        (Fraction<Int>(1, -2), Fraction<Int>(-1, 2)),
-        (Fraction<Int>(-1, -2), Fraction<Int>(1, 2))
+        (.init(2, 4), .init(1, 2)),
+        (.init(-2, 4), .init(-1, 2)),
+        (.init(2, -4), .init(-1, 2)),
+        (.init(-2, -4), .init(1, 2)),
+        (.init(1, 2), .init(1, 2)),
+        (.init(-1, 2), .init(-1, 2)),
+        (.init(1, -2), .init(-1, 2)),
+        (.init(-1, -2), .init(1, 2))
     ]
 
     @Test(
@@ -77,9 +77,9 @@ extension CanonicalizedFractionTests {
     @Test(
         "Negative zero canonicalization follows rational rules",
         arguments: [
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(0, -2)
-        ]
+            .negativeZero,
+            .init(0, -2)
+        ] as Array<Fraction<Int>>
     )
     internal func negativeZeroCanonicalizationFollowsRationalRules(value: Fraction<Int>) {
         @Canonicalized var initializedValue: Fraction<Int> = value
@@ -106,9 +106,9 @@ extension CanonicalizedFractionTests {
     @Test(
         "Positive zero canonicalization follows rational rules",
         arguments: [
-            Fraction<Int>.zero,
-            Fraction<Int>(0, 2)
-        ]
+            .zero,
+            .init(0, 2)
+        ] as Array<Fraction<Int>>
     )
     internal func positiveZeroCanonicalizationFollowsRationalRules(value: Fraction<Int>) {
         @Canonicalized var initializedValue: Fraction<Int> = value

@@ -101,7 +101,7 @@ extension IntAddableTests {
             3,
             -2,
             -3
-        ]
+        ] as Array<Int>
     )
     internal func addingNegativeZeroPreservesAugend(augend: Int) {
         let result: Int = augend + Int.negativeZero
@@ -119,7 +119,7 @@ extension IntAddableTests {
             (3, -3),
             (-2, 2),
             (-3, 3)
-        ]
+        ] as Array<(Int, Int.Addend)>
     )
     internal func addingOppositeValuesReturnsPositiveZero(
         augend: Int,
@@ -136,7 +136,7 @@ extension IntAddableTests {
             3,
             -2,
             -3
-        ]
+        ] as Array<Int>
     )
     internal func addingPositiveZeroPreservesAugend(augend: Int) {
         let result: Int = augend + Int.zero

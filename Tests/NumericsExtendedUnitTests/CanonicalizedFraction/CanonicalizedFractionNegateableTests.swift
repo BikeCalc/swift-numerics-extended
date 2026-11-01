@@ -15,12 +15,12 @@ internal struct CanonicalizedFractionNegateableTests {
     internal init() {}
 
     private static let negationArguments: [(Fraction<Int>, Fraction<Int>)] = [
-        (Fraction<Int>(1, 2), Fraction<Int>(-1, 2)),
-        (Fraction<Int>(-1, 2), Fraction<Int>(1, 2)),
-        (Fraction<Int>(2, 4), Fraction<Int>(-1, 2)),
-        (Fraction<Int>(-2, 4), Fraction<Int>(1, 2)),
-        (Fraction<Int>(2, -4), Fraction<Int>(1, 2)),
-        (Fraction<Int>(-2, -4), Fraction<Int>(-1, 2))
+        (.init(1, 2), .init(-1, 2)),
+        (.init(-1, 2), .init(1, 2)),
+        (.init(2, 4), .init(-1, 2)),
+        (.init(-2, 4), .init(1, 2)),
+        (.init(2, -4), .init(1, 2)),
+        (.init(-2, -4), .init(-1, 2))
     ]
 
     @Test(
@@ -68,9 +68,9 @@ extension CanonicalizedFractionNegateableTests {
     @Test(
         "Negating negative zero preserves canonical representation",
         arguments: [
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(0, -2)
-        ]
+            .negativeZero,
+            .init(0, -2)
+        ] as Array<Fraction<Int>>
     )
     internal func negatingNegativeZeroPreservesCanonicalRepresentation(value: Fraction<Int>) {
         @Canonicalized var result: Fraction<Int> = value
@@ -98,9 +98,9 @@ extension CanonicalizedFractionNegateableTests {
     @Test(
         "Negating positive zero preserves canonical representation",
         arguments: [
-            Fraction<Int>.zero,
-            Fraction<Int>(0, 2)
-        ]
+            .zero,
+            .init(0, 2)
+        ] as Array<Fraction<Int>>
     )
     internal func negatingPositiveZeroPreservesCanonicalRepresentation(value: Fraction<Int>) {
         @Canonicalized var result: Fraction<Int> = value

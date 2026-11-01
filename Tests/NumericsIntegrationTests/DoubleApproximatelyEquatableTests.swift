@@ -26,7 +26,7 @@ internal struct DoubleApproximatelyEquatableTests {
             (100.0, 102.0, 0.0, 0.01, false),
             (0.0, 0.125, 0.25, 0.01, true),
             (0.0, 0.125, 0.0, 0.01, false)
-        ]
+        ] as Array<(Double, Double, Double, Double, Bool)>
     )
     internal func approximateEqualityFollowsSpecifiedTolerances(
         lhs: Double,
@@ -112,10 +112,10 @@ extension DoubleApproximatelyEquatableTests {
     @Test(
         "NaN approximate equality follows floating-point rules",
         arguments: [
-            (Double.nan, Double.nan, false),
-            (Double.nan, 1.0, false),
-            (1.0, Double.nan, false)
-        ]
+            (.nan, .nan, false),
+            (.nan, 1.0, false),
+            (1.0, .nan, false)
+        ] as Array<(Double, Double, Bool)>
     )
     internal func nanApproximateEqualityFollowsFloatingPointRules(
         lhs: Double,
@@ -138,9 +138,9 @@ extension DoubleApproximatelyEquatableTests {
     @Test(
         "Negative Infinity approximate equality follows floating-point rules",
         arguments: [
-            (Double.negativeInfinity, Double.negativeInfinity, true),
-            (Double.negativeInfinity, Double.infinity, false)
-        ]
+            (.negativeInfinity, .negativeInfinity, true),
+            (.negativeInfinity, .infinity, false)
+        ] as Array<(Double, Double, Bool)>
     )
     internal func negativeInfinityApproximateEqualityFollowsFloatingPointRules(
         lhs: Double,
@@ -163,10 +163,10 @@ extension DoubleApproximatelyEquatableTests {
     @Test(
         "Negative Zero approximate equality follows floating-point rules",
         arguments: [
-            (Double.negativeZero, Double.negativeZero, true),
-            (Double.negativeZero, Double.zero, true),
-            (Double.negativeZero, -1.0, false)
-        ]
+            (.negativeZero, .negativeZero, true),
+            (.negativeZero, .zero, true),
+            (.negativeZero, -1.0, false)
+        ] as Array<(Double, Double, Bool)>
     )
     internal func negativeZeroApproximateEqualityFollowsFloatingPointRules(
         lhs: Double,
@@ -210,9 +210,9 @@ extension DoubleApproximatelyEquatableTests {
     @Test(
         "Positive Infinity approximate equality follows floating-point rules",
         arguments: [
-            (Double.infinity, Double.infinity, true),
-            (Double.infinity, Double.negativeInfinity, false)
-        ]
+            (.infinity, .infinity, true),
+            (.infinity, .negativeInfinity, false)
+        ] as Array<(Double, Double, Bool)>
     )
     internal func positiveInfinityApproximateEqualityFollowsFloatingPointRules(
         lhs: Double,
@@ -235,10 +235,10 @@ extension DoubleApproximatelyEquatableTests {
     @Test(
         "Positive Zero approximate equality follows floating-point rules",
         arguments: [
-            (Double.zero, Double.zero, true),
-            (Double.zero, Double.negativeZero, true),
-            (Double.zero, 1.0, false)
-        ]
+            (.zero, .zero, true),
+            (.zero, .negativeZero, true),
+            (.zero, 1.0, false)
+        ] as Array<(Double, Double, Bool)>
     )
     internal func positiveZeroApproximateEqualityFollowsFloatingPointRules(
         lhs: Double,

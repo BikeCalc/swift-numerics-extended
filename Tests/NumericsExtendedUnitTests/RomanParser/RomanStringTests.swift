@@ -37,7 +37,7 @@ internal struct RomanStringTests {
             ("MMM", false),
             ("A", false),
             ("z", false)
-        ]
+        ] as Array<(String, Bool)>
     )
     internal func isRomanSymbol(
         string: String,
@@ -110,7 +110,7 @@ internal struct RomanStringTests {
             (" IV", false),
             ("ABC", false),
             ("iv", false)
-        ]
+        ] as Array<(String, Bool)>
     )
     internal func isRomanNumeral(
         string: String,

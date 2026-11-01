@@ -17,11 +17,11 @@ internal struct FractionNumericTests {
     @Test(
         "Initialized exactly succeeds",
         arguments: [
-            (0, Fraction<Int>(0, 1)),
-            (2, Fraction<Int>(2, 1)),
-            (3, Fraction<Int>(3, 1)),
-            (-2, Fraction<Int>(-2, 1)),
-            (-3, Fraction<Int>(-3, 1))
+            (0, .init(0, 1)),
+            (2, .init(2, 1)),
+            (3, .init(3, 1)),
+            (-2, .init(-2, 1)),
+            (-3, .init(-3, 1))
         ] as Array<(Int, Fraction<Int>)>
     )
     internal func initializedExactlySucceeds(
@@ -34,13 +34,13 @@ internal struct FractionNumericTests {
     @Test(
         "Magnitude succeeds",
         arguments: [
-            (Fraction<Int>(0, 1), Fraction<Int>.Magnitude(0, 1)),
-            (Fraction<Int>(2, 1), Fraction<Int>.Magnitude(2, 1)),
-            (Fraction<Int>(3, 1), Fraction<Int>.Magnitude(3, 1)),
-            (Fraction<Int>(-2, 1), Fraction<Int>.Magnitude(2, 1)),
-            (Fraction<Int>(-3, 1), Fraction<Int>.Magnitude(3, 1)),
-            (Fraction<Int>(1, -2), Fraction<Int>.Magnitude(1, 2)),
-            (Fraction<Int>(-1, -2), Fraction<Int>.Magnitude(1, 2))
+            (.init(0, 1), .init(0, 1)),
+            (.init(2, 1), .init(2, 1)),
+            (.init(3, 1), .init(3, 1)),
+            (.init(-2, 1), .init(2, 1)),
+            (.init(-3, 1), .init(3, 1)),
+            (.init(1, -2), .init(1, 2)),
+            (.init(-1, -2), .init(1, 2))
         ] as Array<(Fraction<Int>, Fraction<Int>.Magnitude)>
     )
     internal func magnitudeSucceeds(

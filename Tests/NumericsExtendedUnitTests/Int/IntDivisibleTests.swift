@@ -46,7 +46,7 @@ internal struct IntDivisibleTests {
             (-1, false),
             (-2, true),
             (-3, false)
-        ]
+        ] as Array<(Int, Bool)>
     )
     internal func parityPredicates(
         value: Int,
@@ -63,7 +63,7 @@ internal struct IntDivisibleTests {
             (-1, -1),
             (2, nil),
             (-2, nil)
-        ]
+        ] as Array<(Int, Int?)>
     )
     internal func reciprocal(
         dividend: Int,
@@ -79,7 +79,7 @@ internal struct IntDivisibleTests {
             (7, 3, false),
             (-6, 3, true),
             (-7, 3, false)
-        ]
+        ] as Array<(Int, Int, Bool)>
     )
     internal func isDivisibleBy(
         dividend: Int,
@@ -97,7 +97,7 @@ internal struct IntDivisibleTests {
             (3, 7, false),
             (3, -6, true),
             (3, -7, false)
-        ]
+        ] as Array<(Int, Int, Bool)>
     )
     internal func isFactorOf(
         factor: Int,
@@ -238,7 +238,7 @@ extension IntDivisibleTests {
             (-3, -1),
             (5, 2),
             (-5, -2)
-        ]
+        ] as Array<(Int, Int)>
     )
     internal func halvingOddValuesTruncatesTowardZero(
         dividend: Int,
@@ -255,7 +255,7 @@ extension IntDivisibleTests {
             (-7, 3, -2),
             (7, -3, -2),
             (-7, -3, 2)
-        ]
+        ] as Array<(Int, Int.Divisor, Int)>
     )
     internal func integerDivisionTruncatesTowardZero(
         dividend: Int,
@@ -277,7 +277,7 @@ extension IntDivisibleTests {
             (4, -4),
             (-6, 6),
             (-4, 4)
-        ]
+        ] as Array<(Int, Int)>
     )
     internal func dividingByNegativeOneReturnsOppositeValue(
         dividend: Int,
@@ -292,7 +292,7 @@ extension IntDivisibleTests {
         arguments: [
             (-1, true),
             (-2, false)
-        ]
+        ] as Array<(Int, Bool)>
     )
     internal func negativeOneInvertibilityFollowsIntegerRules(
         dividend: Int,
@@ -308,7 +308,7 @@ extension IntDivisibleTests {
             4,
             -6,
             -4
-        ]
+        ] as Array<Int>
     )
     internal func remainderByNegativeOneReturnsPositiveZero(dividend: Int) {
         let result: Int = dividend % -1
@@ -324,7 +324,7 @@ extension IntDivisibleTests {
         arguments: [
             0,
             -0
-        ]
+        ] as Array<Int>
     )
     internal func negativeZeroIsNotInvertible(dividend: Int) {
         #expect(dividend.isInvertible == false)
@@ -336,7 +336,7 @@ extension IntDivisibleTests {
             2,
             -3,
             3
-        ]
+        ] as Array<Int.Divisor>
     )
     internal func dividingNegativeZeroByNonzeroValueReturnsNegativeZero(divisor: Int.Divisor) {
         let result: Int = Int.negativeZero / divisor
@@ -354,7 +354,7 @@ extension IntDivisibleTests {
             4,
             -6,
             -4
-        ]
+        ] as Array<Int>
     )
     internal func dividingByPositiveOnePreservesDividend(dividend: Int) {
         let result: Int = dividend / 1
@@ -366,7 +366,7 @@ extension IntDivisibleTests {
         arguments: [
             (1, true),
             (2, false)
-        ]
+        ] as Array<(Int, Bool)>
     )
     internal func positiveOneInvertibilityFollowsIntegerRules(
         dividend: Int,
@@ -382,7 +382,7 @@ extension IntDivisibleTests {
             4,
             -6,
             -4
-        ]
+        ] as Array<Int>
     )
     internal func remainderByPositiveOneReturnsPositiveZero(dividend: Int) {
         let result: Int = dividend % 1
@@ -398,7 +398,7 @@ extension IntDivisibleTests {
         arguments: [
             0,
             -0
-        ]
+        ] as Array<Int>
     )
     internal func positiveZeroIsNotInvertible(dividend: Int) {
         #expect(dividend.isInvertible == false)
@@ -410,7 +410,7 @@ extension IntDivisibleTests {
             2,
             -3,
             3
-        ]
+        ] as Array<Int.Divisor>
     )
     internal func dividingPositiveZeroByNonzeroValueReturnsPositiveZero(divisor: Int.Divisor) {
         let result: Int = Int.zero / divisor
@@ -424,7 +424,7 @@ extension IntDivisibleTests {
             4,
             -6,
             -4
-        ]
+        ] as Array<Int>
     )
     internal func remainderBySelfReturnsPositiveZero(value: Int) {
         let result: Int = value % value

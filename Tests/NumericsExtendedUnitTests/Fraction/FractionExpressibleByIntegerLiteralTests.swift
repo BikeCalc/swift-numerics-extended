@@ -20,7 +20,7 @@ internal struct FractionExpressibleByIntegerLiteralTests {
             (-1, -1),
             (0, 0),
             (1, 1)
-        ] as [(Fraction<Int>, Int)]
+        ] as Array<(Fraction<Int>, Int)>
     )
     internal func integerLiteralInitializationSucceeds(
         value: Fraction<Int>,

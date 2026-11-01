@@ -27,7 +27,7 @@ internal struct UInt4FixedWidthIntegerTests {
     @Test(
         "Nonzero bit count succeeds",
         arguments: [
-            (UInt4.min, 0),
+            (.min, 0),
             (1, 1),
             (2, 1),
             (3, 2),
@@ -42,7 +42,7 @@ internal struct UInt4FixedWidthIntegerTests {
             (12, 2),
             (13, 3),
             (14, 3),
-            (UInt4.max, 4)
+            (.max, 4)
         ] as Array<(UInt4, Int)>
     )
     internal func nonzeroBitCountSucceeds(
@@ -55,7 +55,7 @@ internal struct UInt4FixedWidthIntegerTests {
     @Test(
         "Leading zero bit count succeeds",
         arguments: [
-            (UInt4.min, 4),
+            (.min, 4),
             (0b0001, 3),
             (0b0010, 2),
             (0b0011, 2),
@@ -70,7 +70,7 @@ internal struct UInt4FixedWidthIntegerTests {
             (0b1100, 0),
             (0b1101, 0),
             (0b1110, 0),
-            (UInt4.max, 0)
+            (.max, 0)
         ] as Array<(UInt4, Int)>
     )
     internal func leadingZeroBitCountSucceeds(
@@ -83,9 +83,9 @@ internal struct UInt4FixedWidthIntegerTests {
     @Test(
         "Byte swapped succeeds",
         arguments: [
-            UInt4.min,
+            .min,
             8,
-            UInt4.max
+            .max
         ] as Array<UInt4>
     )
     internal func byteSwappedSucceeds(value: UInt4) {
@@ -96,12 +96,12 @@ internal struct UInt4FixedWidthIntegerTests {
         "Initialized truncating if needed succeeds",
         arguments: [
             (-2, 14),
-            (-1, UInt4.max),
-            (0, UInt4.min),
+            (-1, .max),
+            (0, .min),
             (1, 1),
             (14, 14),
-            (15, UInt4.max),
-            (16, UInt4.min),
+            (15, .max),
+            (16, .min),
             (17, 1)
         ] as Array<(Int, UInt4)>
     )
@@ -115,12 +115,12 @@ internal struct UInt4FixedWidthIntegerTests {
     @Test(
         "Initialized clamping succeeds",
         arguments: [
-            (-1, UInt4.min),
-            (0, UInt4.min),
+            (-1, .min),
+            (0, .min),
             (1, 1),
             (14, 14),
-            (15, UInt4.max),
-            (16, UInt4.max)
+            (15, .max),
+            (16, .max)
         ] as Array<(Int, UInt4)>
     )
     internal func initializedClampingSucceeds(

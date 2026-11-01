@@ -15,28 +15,28 @@ internal struct FractionSimplifiableTests {
     internal init() {}
 
     private static let simplificationArguments: [(Fraction<Int>, Fraction<Int>)] = [
-        (Fraction<Int>(2, 4), Fraction<Int>(1, 2)),
-        (Fraction<Int>(-2, 4), Fraction<Int>(-1, 2)),
-        (Fraction<Int>(2, -4), Fraction<Int>(1, -2)),
-        (Fraction<Int>(-2, -4), Fraction<Int>(-1, -2)),
-        (Fraction<Int>(1, 2), Fraction<Int>(1, 2)),
-        (Fraction<Int>(-1, 2), Fraction<Int>(-1, 2)),
-        (Fraction<Int>(1, -2), Fraction<Int>(1, -2)),
-        (Fraction<Int>(-1, -2), Fraction<Int>(-1, -2))
+        (.init(2, 4), .init(1, 2)),
+        (.init(-2, 4), .init(-1, 2)),
+        (.init(2, -4), .init(1, -2)),
+        (.init(-2, -4), .init(-1, -2)),
+        (.init(1, 2), .init(1, 2)),
+        (.init(-1, 2), .init(-1, 2)),
+        (.init(1, -2), .init(1, -2)),
+        (.init(-1, -2), .init(-1, -2))
     ]
 
     @Test(
         "Is simplifiable",
         arguments: [
-            (Fraction<Int>(2, 4), true),
-            (Fraction<Int>(-2, 4), true),
-            (Fraction<Int>(2, -4), true),
-            (Fraction<Int>(-2, -4), true),
-            (Fraction<Int>(1, 2), true),
-            (Fraction<Int>(-1, 2), true),
-            (Fraction<Int>(1, -2), true),
-            (Fraction<Int>(-1, -2), true)
-        ]
+            (.init(2, 4), true),
+            (.init(-2, 4), true),
+            (.init(2, -4), true),
+            (.init(-2, -4), true),
+            (.init(1, 2), true),
+            (.init(-1, 2), true),
+            (.init(1, -2), true),
+            (.init(-1, -2), true)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func isSimplifiable(
         value: Fraction<Int>,
@@ -48,15 +48,15 @@ internal struct FractionSimplifiableTests {
     @Test(
         "Is simplified",
         arguments: [
-            (Fraction<Int>(2, 4), false),
-            (Fraction<Int>(-2, 4), false),
-            (Fraction<Int>(2, -4), false),
-            (Fraction<Int>(-2, -4), false),
-            (Fraction<Int>(1, 2), true),
-            (Fraction<Int>(-1, 2), true),
-            (Fraction<Int>(1, -2), true),
-            (Fraction<Int>(-1, -2), true)
-        ]
+            (.init(2, 4), false),
+            (.init(-2, 4), false),
+            (.init(2, -4), false),
+            (.init(-2, -4), false),
+            (.init(1, 2), true),
+            (.init(-1, 2), true),
+            (.init(1, -2), true),
+            (.init(-1, -2), true)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func isSimplified(
         value: Fraction<Int>,
@@ -93,11 +93,11 @@ internal struct FractionSimplifiableTests {
     @Test(
         "Simplification is idempotent",
         arguments: [
-            Fraction<Int>(1, 2),
-            Fraction<Int>(2, 4),
-            Fraction<Int>(1, -2),
-            Fraction<Int>(2, -4)
-        ]
+            .init(1, 2),
+            .init(2, 4),
+            .init(1, -2),
+            .init(2, -4)
+        ] as Array<Fraction<Int>>
     )
     internal func simplificationIsIdempotent(value: Fraction<Int>) {
         let result: Fraction<Int> = value.simplified().simplified()
@@ -147,9 +147,9 @@ extension FractionSimplifiableTests {
     @Test(
         "Negative zero simplification follows rational rules",
         arguments: [
-            (Fraction<Int>.negativeZero, true),
-            (Fraction<Int>(0, -2), false)
-        ]
+            (.negativeZero, true),
+            (.init(0, -2), false)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func negativeZeroSimplificationFollowsRationalRules(
         value: Fraction<Int>,
@@ -180,9 +180,9 @@ extension FractionSimplifiableTests {
     @Test(
         "Positive zero simplification follows rational rules",
         arguments: [
-            (Fraction<Int>.zero, true),
-            (Fraction<Int>(0, 2), false)
-        ]
+            (.zero, true),
+            (.init(0, 2), false)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func positiveZeroSimplificationFollowsRationalRules(
         value: Fraction<Int>,

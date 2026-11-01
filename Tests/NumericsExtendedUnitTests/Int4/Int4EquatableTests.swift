@@ -80,10 +80,10 @@ extension Int4EquatableTests {
     @Test(
         "Negative zero equality follows integer rules",
         arguments: [
-            (Int4.negativeZero, Int4.negativeZero, true),
-            (Int4.negativeZero, Int4.zero, true),
-            (Int4.negativeZero, 1, false)
-        ]
+            (.negativeZero, .negativeZero, true),
+            (.negativeZero, .zero, true),
+            (.negativeZero, 1, false)
+        ] as Array<(Int4, Int4, Bool)>
     )
     internal func negativeZeroEqualityFollowsIntegerRules(
         lhs: Int4,
@@ -107,10 +107,10 @@ extension Int4EquatableTests {
     @Test(
         "Positive zero equality follows integer rules",
         arguments: [
-            (Int4.zero, Int4.zero, true),
-            (Int4.zero, Int4.negativeZero, true),
-            (Int4.zero, 1, false)
-        ]
+            (.zero, .zero, true),
+            (.zero, .negativeZero, true),
+            (.zero, 1, false)
+        ] as Array<(Int4, Int4, Bool)>
     )
     internal func positiveZeroEqualityFollowsIntegerRules(
         lhs: Int4,

@@ -46,10 +46,10 @@ extension DoubleEquatableTests {
     @Test(
         "NaN equality follows floating-point rules",
         arguments: [
-            (Double.nan, Double.nan),
-            (Double.nan, 1.0),
-            (1.0, Double.nan)
-        ]
+            (.nan, .nan),
+            (.nan, 1.0),
+            (1.0, .nan)
+        ] as Array<(Double, Double)>
     )
     internal func nanEqualityFollowsFloatingPointRules(
         lhs: Double,
@@ -72,9 +72,9 @@ extension DoubleEquatableTests {
     @Test(
         "Negative infinity equality follows floating-point rules",
         arguments: [
-            (Double.negativeInfinity, Double.negativeInfinity, true),
-            (Double.negativeInfinity, Double.infinity, false)
-        ]
+            (.negativeInfinity, .negativeInfinity, true),
+            (.negativeInfinity, .infinity, false)
+        ] as Array<(Double, Double, Bool)>
     )
     internal func negativeInfinityEqualityFollowsFloatingPointRules(
         lhs: Double,
@@ -98,10 +98,10 @@ extension DoubleEquatableTests {
     @Test(
         "Negative zero equality follows floating-point rules",
         arguments: [
-            (Double.negativeZero, Double.negativeZero, true),
-            (Double.negativeZero, Double.zero, true),
-            (Double.negativeZero, -1.0, false)
-        ]
+            (.negativeZero, .negativeZero, true),
+            (.negativeZero, .zero, true),
+            (.negativeZero, -1.0, false)
+        ] as Array<(Double, Double, Bool)>
     )
     internal func negativeZeroEqualityFollowsFloatingPointRules(
         lhs: Double,
@@ -125,9 +125,9 @@ extension DoubleEquatableTests {
     @Test(
         "Positive infinity equality follows floating-point rules",
         arguments: [
-            (Double.infinity, Double.infinity, true),
-            (Double.infinity, Double.negativeInfinity, false)
-        ]
+            (.infinity, .infinity, true),
+            (.infinity, .negativeInfinity, false)
+        ] as Array<(Double, Double, Bool)>
     )
     internal func positiveInfinityEqualityFollowsFloatingPointRules(
         lhs: Double,
@@ -151,10 +151,10 @@ extension DoubleEquatableTests {
     @Test(
         "Positive zero equality follows floating-point rules",
         arguments: [
-            (Double.zero, Double.zero, true),
-            (Double.zero, Double.negativeZero, true),
-            (Double.zero, 1.0, false)
-        ]
+            (.zero, .zero, true),
+            (.zero, .negativeZero, true),
+            (.zero, 1.0, false)
+        ] as Array<(Double, Double, Bool)>
     )
     internal func positiveZeroEqualityFollowsFloatingPointRules(
         lhs: Double,

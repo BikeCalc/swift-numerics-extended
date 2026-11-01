@@ -20,7 +20,7 @@ internal struct RomanExpressibleByIntegerLiteralTests {
             (0, 0),
             (1, 1),
             (3_999, 3_999)
-        ] as [(Roman, Int)]
+        ] as Array<(Roman, Int)>
     )
     internal func integerLiteralInitializationSucceeds(
         value: Roman,

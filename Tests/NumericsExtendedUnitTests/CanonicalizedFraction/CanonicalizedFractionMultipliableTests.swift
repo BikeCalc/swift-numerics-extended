@@ -15,10 +15,10 @@ internal struct CanonicalizedFractionMultipliableTests {
     internal init() {}
 
     private static let multiplicationArguments: [(Fraction<Int>, Fraction<Int>.Multiplier, Fraction<Int>)] = [
-        (Fraction<Int>(1, 2), Fraction<Int>(1, 2), Fraction<Int>(1, 4)),
-        (Fraction<Int>(1, 2), Fraction<Int>(2, 3), Fraction<Int>(1, 3)),
-        (Fraction<Int>(-1, 2), Fraction<Int>(1, 2), Fraction<Int>(-1, 4)),
-        (Fraction<Int>(-1, 2), Fraction<Int>(-2, 3), Fraction<Int>(1, 3))
+        (.init(1, 2), .init(1, 2), .init(1, 4)),
+        (.init(1, 2), .init(2, 3), .init(1, 3)),
+        (.init(-1, 2), .init(1, 2), .init(-1, 4)),
+        (.init(-1, 2), .init(-2, 3), .init(1, 3))
     ]
 
     @Test(

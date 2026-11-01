@@ -25,7 +25,7 @@ internal struct DoubleIncreasableTests {
             (1.5, 3.0, 1.545),
             (-0.5, 2.0, -0.51),
             (-1.5, 3.0, -1.545)
-        ]
+        ] as Array<(Double, Double, Double)>
     )
     internal func increasingBySucceeds(
         value: Double,
@@ -43,7 +43,7 @@ extension DoubleIncreasableTests {
         arguments: [
             (10.0, -2.0, 9.8),
             (20.0, -3.0, 19.4)
-        ]
+        ] as Array<(Double, Double, Double)>
     )
     internal func increasingPositiveValueByNegativePercentageDecreasesValue(
         value: Double,
@@ -60,7 +60,7 @@ extension DoubleIncreasableTests {
         arguments: [
             (-10.0, -2.0, -9.8),
             (-20.0, -3.0, -19.4)
-        ]
+        ] as Array<(Double, Double, Double)>
     )
     internal func increasingNegativeValueByNegativePercentageIncreasesValue(
         value: Double,
@@ -87,7 +87,7 @@ extension DoubleIncreasableTests {
             1.5,
             -0.5,
             -1.5
-        ]
+        ] as Array<Double>
     )
     internal func increasingByNegativeZeroPreservesValue(value: Double) {
         let result: Double = value.increasing(by: Double.negativeZero)
@@ -97,11 +97,11 @@ extension DoubleIncreasableTests {
     @Test(
         "Increasing negative zero follows floating-point rules",
         arguments: [
-            (2.0, FloatingPointSign.minus),
-            (3.0, FloatingPointSign.minus),
-            (-2.0, FloatingPointSign.plus),
-            (-3.0, FloatingPointSign.plus)
-        ]
+            (2.0, .minus),
+            (3.0, .minus),
+            (-2.0, .plus),
+            (-3.0, .plus)
+        ] as Array<(Double, FloatingPointSign)>
     )
     internal func increasingNegativeZeroFollowsFloatingPointRules(
         percentage: Double,
@@ -127,7 +127,7 @@ extension DoubleIncreasableTests {
             1.5,
             -0.5,
             -1.5
-        ]
+        ] as Array<Double>
     )
     internal func increasingByPositiveZeroPreservesValue(value: Double) {
         let result: Double = value.increasing(by: Double.zero)
@@ -141,7 +141,7 @@ extension DoubleIncreasableTests {
             3.0,
             -2.0,
             -3.0
-        ]
+        ] as Array<Double>
     )
     internal func increasingPositiveZeroReturnsPositiveZero(percentage: Double) {
         let result: Double = Double.zero.increasing(by: percentage)

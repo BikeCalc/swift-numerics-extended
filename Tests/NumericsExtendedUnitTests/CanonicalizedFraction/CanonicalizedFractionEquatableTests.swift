@@ -15,12 +15,12 @@ internal struct CanonicalizedFractionEquatableTests {
     internal init() {}
 
     private static let equalityArguments: [(Fraction<Int>, Fraction<Int>, Bool)] = [
-        (Fraction<Int>(1, 2), Fraction<Int>(1, 2), true),
-        (Fraction<Int>(1, 2), Fraction<Int>(2, 3), false),
-        (Fraction<Int>(1, 2), Fraction<Int>(2, 4), true),
-        (Fraction<Int>(-1, 2), Fraction<Int>(-1, 2), true),
-        (Fraction<Int>(-1, 2), Fraction<Int>(-2, 3), false),
-        (Fraction<Int>(-1, 2), Fraction<Int>(1, -2), true)
+        (.init(1, 2), .init(1, 2), true),
+        (.init(1, 2), .init(2, 3), false),
+        (.init(1, 2), .init(2, 4), true),
+        (.init(-1, 2), .init(-1, 2), true),
+        (.init(-1, 2), .init(-2, 3), false),
+        (.init(-1, 2), .init(1, -2), true)
     ]
 
     @Test(
@@ -90,10 +90,10 @@ extension CanonicalizedFractionEquatableTests {
     @Test(
         "NaN equality follows rational rules",
         arguments: [
-            (Fraction<Int>.nan, Fraction<Int>.nan, false),
-            (Fraction<Int>.nan, Fraction<Int>(1, 1), false),
-            (Fraction<Int>(1, 1), Fraction<Int>.nan, false)
-        ]
+            (.nan, .nan, false),
+            (.nan, .init(1, 1), false),
+            (.init(1, 1), .nan, false)
+        ] as Array<(Fraction<Int>, Fraction<Int>, Bool)>
     )
     internal func nanEqualityFollowsRationalRules(
         lhs: Fraction<Int>,
@@ -119,9 +119,9 @@ extension CanonicalizedFractionEquatableTests {
     @Test(
         "Negative infinity equality follows rational rules",
         arguments: [
-            (Fraction<Int>.negativeInfinity, Fraction<Int>.negativeInfinity, true),
-            (Fraction<Int>.negativeInfinity, Fraction<Int>.infinity, false)
-        ]
+            (.negativeInfinity, .negativeInfinity, true),
+            (.negativeInfinity, .infinity, false)
+        ] as Array<(Fraction<Int>, Fraction<Int>, Bool)>
     )
     internal func negativeInfinityEqualityFollowsRationalRules(
         lhs: Fraction<Int>,
@@ -147,11 +147,11 @@ extension CanonicalizedFractionEquatableTests {
     @Test(
         "Negative zero equality follows rational rules",
         arguments: [
-            (Fraction<Int>.negativeZero, Fraction<Int>.negativeZero, true),
-            (Fraction<Int>.negativeZero, Fraction<Int>.zero, true),
-            (Fraction<Int>.negativeZero, Fraction<Int>(0, -2), true),
-            (Fraction<Int>.negativeZero, Fraction<Int>(-1, 1), false)
-        ]
+            (.negativeZero, .negativeZero, true),
+            (.negativeZero, .zero, true),
+            (.negativeZero, .init(0, -2), true),
+            (.negativeZero, .init(-1, 1), false)
+        ] as Array<(Fraction<Int>, Fraction<Int>, Bool)>
     )
     internal func negativeZeroEqualityFollowsRationalRules(
         lhs: Fraction<Int>,
@@ -177,9 +177,9 @@ extension CanonicalizedFractionEquatableTests {
     @Test(
         "Positive infinity equality follows rational rules",
         arguments: [
-            (Fraction<Int>.infinity, Fraction<Int>.infinity, true),
-            (Fraction<Int>.infinity, Fraction<Int>.negativeInfinity, false)
-        ]
+            (.infinity, .infinity, true),
+            (.infinity, .negativeInfinity, false)
+        ] as Array<(Fraction<Int>, Fraction<Int>, Bool)>
     )
     internal func positiveInfinityEqualityFollowsRationalRules(
         lhs: Fraction<Int>,
@@ -205,11 +205,11 @@ extension CanonicalizedFractionEquatableTests {
     @Test(
         "Positive zero equality follows rational rules",
         arguments: [
-            (Fraction<Int>.zero, Fraction<Int>.zero, true),
-            (Fraction<Int>.zero, Fraction<Int>.negativeZero, true),
-            (Fraction<Int>.zero, Fraction<Int>(0, 2), true),
-            (Fraction<Int>.zero, Fraction<Int>(1, 1), false)
-        ]
+            (.zero, .zero, true),
+            (.zero, .negativeZero, true),
+            (.zero, .init(0, 2), true),
+            (.zero, .init(1, 1), false)
+        ] as Array<(Fraction<Int>, Fraction<Int>, Bool)>
     )
     internal func positiveZeroEqualityFollowsRationalRules(
         lhs: Fraction<Int>,

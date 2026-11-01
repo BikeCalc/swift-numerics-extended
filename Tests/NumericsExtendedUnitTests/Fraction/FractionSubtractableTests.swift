@@ -15,10 +15,10 @@ internal struct FractionSubtractableTests {
     internal init() {}
 
     private static let subtractionArguments: [(Fraction<Int>, Fraction<Int>.Subtrahend, Fraction<Int>)] = [
-        (Fraction<Int>(2, 3), Fraction<Int>(1, 2), Fraction<Int>(1, 6)),
-        (Fraction<Int>(3, 4), Fraction<Int>(1, 2), Fraction<Int>(2, 8)),
-        (Fraction<Int>(-2, 3), Fraction<Int>(1, 2), Fraction<Int>(-7, 6)),
-        (Fraction<Int>(-3, 4), Fraction<Int>(-1, 2), Fraction<Int>(-2, 8))
+        (.init(2, 3), .init(1, 2), .init(1, 6)),
+        (.init(3, 4), .init(1, 2), .init(2, 8)),
+        (.init(-2, 3), .init(1, 2), .init(-7, 6)),
+        (.init(-3, 4), .init(-1, 2), .init(-2, 8))
     ]
 
     @Test(
@@ -109,13 +109,13 @@ extension FractionSubtractableTests {
     @Test(
         "Subtracting from NaN returns NaN",
         arguments: [
-            Fraction<Int>.nan,
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(1, 1),
-            Fraction<Int>.infinity,
-            Fraction<Int>.negativeInfinity
-        ]
+            .nan,
+            .zero,
+            .negativeZero,
+            .init(1, 1),
+            .infinity,
+            .negativeInfinity
+        ] as Array<Fraction<Int>.Subtrahend>
     )
     internal func subtractingFromNaNReturnsNaN(subtrahend: Fraction<Int>.Subtrahend) {
         let result: Fraction<Int> = Fraction<Int>.nan - subtrahend
@@ -125,13 +125,13 @@ extension FractionSubtractableTests {
     @Test(
         "Subtracting NaN returns NaN",
         arguments: [
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(1, 1),
-            Fraction<Int>(-1, 1),
-            Fraction<Int>.infinity,
-            Fraction<Int>.negativeInfinity
-        ]
+            .zero,
+            .negativeZero,
+            .init(1, 1),
+            .init(-1, 1),
+            .infinity,
+            .negativeInfinity
+        ] as Array<Fraction<Int>>
     )
     internal func subtractingNaNReturnsNaN(minuend: Fraction<Int>) {
         let result: Fraction<Int> = minuend - Fraction<Int>.nan
@@ -145,10 +145,10 @@ extension FractionSubtractableTests {
     @Test(
         "Subtracting negative infinity follows rational rules",
         arguments: [
-            (Fraction<Int>.negativeInfinity, Fraction<Int>.infinity, Fraction<Int>.negativeInfinity),
-            (Fraction<Int>.negativeInfinity, Fraction<Int>(1, 1), Fraction<Int>.negativeInfinity),
-            (Fraction<Int>(1, 1), Fraction<Int>.negativeInfinity, Fraction<Int>.infinity)
-        ]
+            (.negativeInfinity, .infinity, .negativeInfinity),
+            (.negativeInfinity, .init(1, 1), .negativeInfinity),
+            (.init(1, 1), .negativeInfinity, .infinity)
+        ] as Array<(Fraction<Int>, Fraction<Int>.Subtrahend, Fraction<Int>)>
     )
     internal func subtractingNegativeInfinityFollowsRationalRules(
         minuend: Fraction<Int>,
@@ -166,11 +166,11 @@ extension FractionSubtractableTests {
     @Test(
         "Subtracting from negative zero follows stored representation rules",
         arguments: [
-            (Fraction<Int>.zero, Fraction<Int>.negativeZero),
-            (Fraction<Int>.negativeZero, Fraction<Int>.negativeZero),
-            (Fraction<Int>(1, 1), Fraction<Int>(1, -1)),
-            (Fraction<Int>(-1, 1), Fraction<Int>(-1, -1))
-        ]
+            (.zero, .negativeZero),
+            (.negativeZero, .negativeZero),
+            (.init(1, 1), .init(1, -1)),
+            (.init(-1, 1), .init(-1, -1))
+        ] as Array<(Fraction<Int>.Subtrahend, Fraction<Int>)>
     )
     internal func subtractingFromNegativeZeroFollowsStoredRepresentationRules(
         subtrahend: Fraction<Int>.Subtrahend,
@@ -187,10 +187,10 @@ extension FractionSubtractableTests {
     @Test(
         "Subtracting positive infinity follows rational rules",
         arguments: [
-            (Fraction<Int>.infinity, Fraction<Int>.negativeInfinity, Fraction<Int>.infinity),
-            (Fraction<Int>.infinity, Fraction<Int>(1, 1), Fraction<Int>.infinity),
-            (Fraction<Int>(1, 1), Fraction<Int>.infinity, Fraction<Int>.negativeInfinity)
-        ]
+            (.infinity, .negativeInfinity, .infinity),
+            (.infinity, .init(1, 1), .infinity),
+            (.init(1, 1), .infinity, .negativeInfinity)
+        ] as Array<(Fraction<Int>, Fraction<Int>.Subtrahend, Fraction<Int>)>
     )
     internal func subtractingPositiveInfinityFollowsRationalRules(
         minuend: Fraction<Int>,
@@ -208,11 +208,11 @@ extension FractionSubtractableTests {
     @Test(
         "Subtracting positive zero preserves minuend",
         arguments: [
-            Fraction<Int>(2, 3),
-            Fraction<Int>(3, 4),
-            Fraction<Int>(-2, 3),
-            Fraction<Int>(-3, 4)
-        ]
+            .init(2, 3),
+            .init(3, 4),
+            .init(-2, 3),
+            .init(-3, 4)
+        ] as Array<Fraction<Int>>
     )
     internal func subtractingPositiveZeroPreservesMinuend(minuend: Fraction<Int>) {
         let result: Fraction<Int> = minuend - .zero
@@ -222,11 +222,11 @@ extension FractionSubtractableTests {
     @Test(
         "Subtracting from positive zero follows stored representation rules",
         arguments: [
-            (Fraction<Int>.zero, Fraction<Int>.zero),
-            (Fraction<Int>.negativeZero, Fraction<Int>.negativeZero),
-            (Fraction<Int>(1, 1), Fraction<Int>(-1, 1)),
-            (Fraction<Int>(-1, 1), Fraction<Int>(1, 1))
-        ]
+            (.zero, .zero),
+            (.negativeZero, .negativeZero),
+            (.init(1, 1), .init(-1, 1)),
+            (.init(-1, 1), .init(1, 1))
+        ] as Array<(Fraction<Int>.Subtrahend, Fraction<Int>)>
     )
     internal func subtractingFromPositiveZeroFollowsStoredRepresentationRules(
         subtrahend: Fraction<Int>.Subtrahend,
@@ -239,11 +239,11 @@ extension FractionSubtractableTests {
     @Test(
         "Subtracting self returns positive zero",
         arguments: [
-            Fraction<Int>(2, 3),
-            Fraction<Int>(3, 4),
-            Fraction<Int>(-2, 3),
-            Fraction<Int>(-3, 4)
-        ]
+            .init(2, 3),
+            .init(3, 4),
+            .init(-2, 3),
+            .init(-3, 4)
+        ] as Array<Fraction<Int>>
     )
     internal func subtractingSelfReturnsPositiveZero(value: Fraction<Int>) {
         let result: Fraction<Int> = value - value

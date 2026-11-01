@@ -86,7 +86,7 @@ internal struct DoubleNegateableTests {
             (-0.5, true),
             (1.5, false),
             (-1.5, true)
-        ]
+        ] as Array<(Double, Bool)>
     )
     internal func isNegative(
         value: Double,
@@ -106,7 +106,7 @@ internal struct DoubleNegateableTests {
             (-0.5, false),
             (1.5, true),
             (-1.5, false)
-        ]
+        ] as Array<(Double, Bool)>
     )
     internal func isPositive(
         value: Double,
@@ -126,7 +126,7 @@ internal struct DoubleNegateableTests {
             (-0.5, true),
             (1.5, true),
             (-1.5, true)
-        ]
+        ] as Array<(Double, Bool)>
     )
     internal func isSigned(
         value: Double,
@@ -146,7 +146,7 @@ internal struct DoubleNegateableTests {
             (-0.5, -0.5, false),
             (-0.5, 0.5, true),
             (0.5, -0.5, true)
-        ]
+        ] as Array<(Double, Double, Bool)>
     )
     internal func isOpposite(
         value: Double,
@@ -182,12 +182,12 @@ extension DoubleNegateableTests {
     @Test(
         "NaN opposite follows floating-point rules",
         arguments: [
-            Double.zero,
-            Double.negativeZero,
+            .zero,
+            .negativeZero,
             1.0,
-            Double.infinity,
-            Double.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Double>
     )
     internal func nanOppositeFollowsFloatingPointRules(other: Double) {
         let firstResult: Bool = Double.nan.isOpposite(of: other)
@@ -221,9 +221,9 @@ extension DoubleNegateableTests {
     @Test(
         "Negative infinity opposite follows floating-point rules",
         arguments: [
-            (Double.negativeInfinity, false),
-            (Double.infinity, true)
-        ]
+            (.negativeInfinity, false),
+            (.infinity, true)
+        ] as Array<(Double, Bool)>
     )
     internal func negativeInfinityOppositeFollowsFloatingPointRules(
         other: Double,
@@ -258,9 +258,9 @@ extension DoubleNegateableTests {
     @Test(
         "Negative zero opposite follows floating-point rules",
         arguments: [
-            (Double.zero, true),
-            (Double.negativeZero, true)
-        ]
+            (.zero, true),
+            (.negativeZero, true)
+        ] as Array<(Double, Bool)>
     )
     internal func negativeZeroOppositeFollowsFloatingPointRules(
         other: Double,
@@ -298,9 +298,9 @@ extension DoubleNegateableTests {
     @Test(
         "Positive infinity opposite follows floating-point rules",
         arguments: [
-            (Double.infinity, false),
-            (Double.negativeInfinity, true)
-        ]
+            (.infinity, false),
+            (.negativeInfinity, true)
+        ] as Array<(Double, Bool)>
     )
     internal func positiveInfinityOppositeFollowsFloatingPointRules(
         other: Double,
@@ -345,9 +345,9 @@ extension DoubleNegateableTests {
     @Test(
         "Positive zero opposite follows floating-point rules",
         arguments: [
-            (Double.zero, true),
-            (Double.negativeZero, true)
-        ]
+            (.zero, true),
+            (.negativeZero, true)
+        ] as Array<(Double, Bool)>
     )
     internal func positiveZeroOppositeFollowsFloatingPointRules(
         other: Double,

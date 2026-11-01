@@ -21,7 +21,7 @@ internal struct DoubleHashableTests {
             (-1.0, -1.0),
             (0.5, 0.5),
             (-0.5, -0.5)
-        ]
+        ] as Array<(Double, Double)>
     )
     internal func equalValuesProduceEqualHashes(
         lhs: Double,
@@ -59,9 +59,9 @@ extension DoubleHashableTests {
     @Test(
         "Negative zero hashing follows floating-point rules",
         arguments: [
-            (Double.negativeZero, Double.negativeZero),
-            (Double.negativeZero, Double.zero)
-        ]
+            (.negativeZero, .negativeZero),
+            (.negativeZero, .zero)
+        ] as Array<(Double, Double)>
     )
     internal func negativeZeroHashingFollowsFloatingPointRules(
         lhs: Double,
@@ -89,9 +89,9 @@ extension DoubleHashableTests {
     @Test(
         "Positive zero hashing follows floating-point rules",
         arguments: [
-            (Double.zero, Double.zero),
-            (Double.zero, Double.negativeZero)
-        ]
+            (.zero, .zero),
+            (.zero, .negativeZero)
+        ] as Array<(Double, Double)>
     )
     internal func positiveZeroHashingFollowsFloatingPointRules(
         lhs: Double,

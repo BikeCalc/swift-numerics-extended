@@ -15,18 +15,18 @@ internal struct DoubleTruncatableTests {
     internal init() {}
 
     private static let truncationArguments: Array<(Double, Double.DecimalPlace, Double)> = [
-        (1.2345, Double.DecimalPlace(0), 1.0),
-        (-1.2345, Double.DecimalPlace(0), -1.0),
-        (1.2345, Double.DecimalPlace(1), 1.2),
-        (-1.2345, Double.DecimalPlace(1), -1.2),
-        (1.2345, Double.DecimalPlace(2), 1.23),
-        (-1.2345, Double.DecimalPlace(2), -1.23),
-        (1.2399, Double.DecimalPlace(2), 1.23),
-        (-1.2399, Double.DecimalPlace(2), -1.23),
-        (0.555, Double.DecimalPlace(2), 0.55),
-        (-0.555, Double.DecimalPlace(2), -0.55),
-        (12.999, Double.DecimalPlace(2), 12.99),
-        (-12.999, Double.DecimalPlace(2), -12.99)
+        (1.2345, .init(0), 1.0),
+        (-1.2345, .init(0), -1.0),
+        (1.2345, .init(1), 1.2),
+        (-1.2345, .init(1), -1.2),
+        (1.2345, .init(2), 1.23),
+        (-1.2345, .init(2), -1.23),
+        (1.2399, .init(2), 1.23),
+        (-1.2399, .init(2), -1.23),
+        (0.555, .init(2), 0.55),
+        (-0.555, .init(2), -0.55),
+        (12.999, .init(2), 12.99),
+        (-12.999, .init(2), -12.99)
     ]
 
     @Test(
@@ -61,11 +61,11 @@ extension DoubleTruncatableTests {
     @Test(
         "Truncating follows toward-zero rule",
         arguments: [
-            (1.9, Double.DecimalPlace(0), 1.0),
-            (-1.9, Double.DecimalPlace(0), -1.0),
-            (1.29, Double.DecimalPlace(1), 1.2),
-            (-1.29, Double.DecimalPlace(1), -1.2)
-        ]
+            (1.9, .init(0), 1.0),
+            (-1.9, .init(0), -1.0),
+            (1.29, .init(1), 1.2),
+            (-1.29, .init(1), -1.2)
+        ] as Array<(Double, Double.DecimalPlace, Double)>
     )
     internal func truncatingFollowsTowardZeroRule(
         value: Double,
@@ -79,11 +79,11 @@ extension DoubleTruncatableTests {
     @Test(
         "Truncating whole value preserves value",
         arguments: [
-            (1.0, Double.DecimalPlace(0)),
-            (-1.0, Double.DecimalPlace(0)),
-            (1.0, Double.DecimalPlace(2)),
-            (-1.0, Double.DecimalPlace(2))
-        ]
+            (1.0, .init(0)),
+            (-1.0, .init(0)),
+            (1.0, .init(2)),
+            (-1.0, .init(2))
+        ] as Array<(Double, Double.DecimalPlace)>
     )
     internal func truncatingWholeValuePreservesValue(
         value: Double,
@@ -100,9 +100,9 @@ extension DoubleTruncatableTests {
     @Test(
         "Truncating NaN returns NaN",
         arguments: [
-            (Double.nan, Double.DecimalPlace(0)),
-            (Double.nan, Double.DecimalPlace(2))
-        ]
+            (.nan, .init(0)),
+            (.nan, .init(2))
+        ] as Array<(Double, Double.DecimalPlace)>
     )
     internal func truncatingNaNReturnsNaN(
         value: Double,
@@ -119,9 +119,9 @@ extension DoubleTruncatableTests {
     @Test(
         "Truncating negative infinity follows floating-point rules",
         arguments: [
-            Double.DecimalPlace(0),
-            Double.DecimalPlace(2)
-        ]
+            .init(0),
+            .init(2)
+        ] as Array<Double.DecimalPlace>
     )
     internal func truncatingNegativeInfinityFollowsFloatingPointRules(decimalPlace: Double.DecimalPlace) {
         let result: Double = Double.negativeInfinity.truncated(to: decimalPlace)
@@ -135,9 +135,9 @@ extension DoubleTruncatableTests {
     @Test(
         "Truncating negative zero preserves its sign",
         arguments: [
-            (-0.0, Double.DecimalPlace(0)),
-            (-0.0, Double.DecimalPlace(2))
-        ]
+            (-0.0, .init(0)),
+            (-0.0, .init(2))
+        ] as Array<(Double, Double.DecimalPlace)>
     )
     internal func truncatingNegativeZeroPreservesItsSign(
         value: Double,
@@ -155,9 +155,9 @@ extension DoubleTruncatableTests {
     @Test(
         "Truncating positive infinity follows floating-point rules",
         arguments: [
-            Double.DecimalPlace(0),
-            Double.DecimalPlace(2)
-        ]
+            .init(0),
+            .init(2)
+        ] as Array<Double.DecimalPlace>
     )
     internal func truncatingPositiveInfinityFollowsFloatingPointRules(decimalPlace: Double.DecimalPlace) {
         let result: Double = Double.infinity.truncated(to: decimalPlace)
@@ -171,9 +171,9 @@ extension DoubleTruncatableTests {
     @Test(
         "Truncating positive zero preserves its sign",
         arguments: [
-            (0.0, Double.DecimalPlace(0)),
-            (0.0, Double.DecimalPlace(2))
-        ]
+            (0.0, .init(0)),
+            (0.0, .init(2))
+        ] as Array<(Double, Double.DecimalPlace)>
     )
     internal func truncatingPositiveZeroPreservesItsSign(
         value: Double,

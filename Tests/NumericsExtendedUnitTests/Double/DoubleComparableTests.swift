@@ -179,10 +179,10 @@ extension DoubleComparableTests {
     @Test(
         "NaN comparison follows floating-point rules",
         arguments: [
-            (Double.nan, 1.0),
-            (1.0, Double.nan),
-            (Double.nan, Double.nan)
-        ]
+            (.nan, 1.0),
+            (1.0, .nan),
+            (.nan, .nan)
+        ] as Array<(Double, Double)>
     )
     internal func nanComparisonFollowsFloatingPointRules(
         lhs: Double,
@@ -213,10 +213,10 @@ extension DoubleComparableTests {
     @Test(
         "Negative infinity comparison follows floating-point rules",
         arguments: [
-            (Double.negativeInfinity, Double.negativeInfinity, false, true, false, true),
-            (Double.negativeInfinity, -1.0, true, true, false, false),
-            (Double.negativeInfinity, Double.infinity, true, true, false, false)
-        ]
+            (.negativeInfinity, .negativeInfinity, false, true, false, true),
+            (.negativeInfinity, -1.0, true, true, false, false),
+            (.negativeInfinity, .infinity, true, true, false, false)
+        ] as Array<(Double, Double, Bool, Bool, Bool, Bool)>
     )
     internal func negativeInfinityComparisonFollowsFloatingPointRules(
         lhs: Double,
@@ -251,10 +251,10 @@ extension DoubleComparableTests {
     @Test(
         "Negative zero comparison follows floating-point rules",
         arguments: [
-            (Double.negativeZero, Double.negativeZero, false, true, false, true),
-            (Double.negativeZero, Double.zero, false, true, false, true),
-            (Double.negativeZero, -1.0, false, false, true, true)
-        ]
+            (.negativeZero, .negativeZero, false, true, false, true),
+            (.negativeZero, .zero, false, true, false, true),
+            (.negativeZero, -1.0, false, false, true, true)
+        ] as Array<(Double, Double, Bool, Bool, Bool, Bool)>
     )
     internal func negativeZeroComparisonFollowsFloatingPointRules(
         lhs: Double,
@@ -289,10 +289,10 @@ extension DoubleComparableTests {
     @Test(
         "Positive infinity comparison follows floating-point rules",
         arguments: [
-            (Double.infinity, Double.infinity, false, true, false, true),
-            (Double.infinity, 1.0, false, false, true, true),
-            (Double.infinity, Double.negativeInfinity, false, false, true, true)
-        ]
+            (.infinity, .infinity, false, true, false, true),
+            (.infinity, 1.0, false, false, true, true),
+            (.infinity, .negativeInfinity, false, false, true, true)
+        ] as Array<(Double, Double, Bool, Bool, Bool, Bool)>
     )
     internal func positiveInfinityComparisonFollowsFloatingPointRules(
         lhs: Double,
@@ -327,10 +327,10 @@ extension DoubleComparableTests {
     @Test(
         "Positive zero comparison follows floating-point rules",
         arguments: [
-            (Double.zero, Double.zero, false, true, false, true),
-            (Double.zero, Double.negativeZero, false, true, false, true),
-            (Double.zero, 1.0, true, true, false, false)
-        ]
+            (.zero, .zero, false, true, false, true),
+            (.zero, .negativeZero, false, true, false, true),
+            (.zero, 1.0, true, true, false, false)
+        ] as Array<(Double, Double, Bool, Bool, Bool, Bool)>
     )
     internal func positiveZeroComparisonFollowsFloatingPointRules(
         lhs: Double,

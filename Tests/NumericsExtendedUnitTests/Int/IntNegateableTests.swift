@@ -73,7 +73,7 @@ internal struct IntNegateableTests {
             (-1, true),
             (5, false),
             (-5, true)
-        ]
+        ] as Array<(Int, Bool)>
     )
     internal func isNegative(
         value: Int,
@@ -89,7 +89,7 @@ internal struct IntNegateableTests {
             (-1, false),
             (5, true),
             (-5, false)
-        ]
+        ] as Array<(Int, Bool)>
     )
     internal func isPositive(
         value: Int,
@@ -105,7 +105,7 @@ internal struct IntNegateableTests {
             (-1, true),
             (5, true),
             (-5, true)
-        ]
+        ] as Array<(Int, Bool)>
     )
     internal func isSigned(
         value: Int,
@@ -125,7 +125,7 @@ internal struct IntNegateableTests {
             (-5, -5, false),
             (-5, 5, true),
             (5, -5, true)
-        ]
+        ] as Array<(Int, Int, Bool)>
     )
     internal func isOpposite(
         value: Int,

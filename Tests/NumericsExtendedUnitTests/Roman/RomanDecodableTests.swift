@@ -70,7 +70,7 @@ internal struct RomanDecodableTests {
             "-1",
             "4000",
             "true"
-        ]
+        ] as Array<String>
     )
     internal func decodeFromJSONThrows(json: String) throws {
         let data: Data = try #require(json.data(using: .utf8))

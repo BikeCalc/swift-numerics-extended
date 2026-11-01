@@ -82,7 +82,7 @@ internal struct RomanLosslessStringConvertibleTests {
             "MCMC",
             "ABC",
             "iv"
-        ]
+        ] as Array<String>
     )
     internal func stringInitializationFails(description: String) {
         #expect(Roman(description) == nil)
@@ -97,7 +97,7 @@ extension RomanLosslessStringConvertibleTests {
         arguments: [
             "0",
             "00"
-        ]
+        ] as Array<String>
     )
     internal func positiveZeroDecimalStringInitializationSucceeds(description: String) {
         #expect(Roman(description) == .zero)

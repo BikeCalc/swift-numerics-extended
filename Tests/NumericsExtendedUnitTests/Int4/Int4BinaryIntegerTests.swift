@@ -19,8 +19,8 @@ internal struct Int4BinaryIntegerTests {
         arguments: [
             (0, 0),
             (7, 7),
-            (-8, UInt(bitPattern: -8)),
-            (-1, UInt(bitPattern: -1))
+            (-8, .init(bitPattern: -8)),
+            (-1, .init(bitPattern: -1))
         ] as Array<(Int4, UInt)>
     )
     internal func wordsSucceeds(

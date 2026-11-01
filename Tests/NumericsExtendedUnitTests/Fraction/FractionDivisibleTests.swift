@@ -15,35 +15,35 @@ internal struct FractionDivisibleTests {
     internal init() {}
 
     private static let divisionArguments: [(Fraction<Int>, Fraction<Int>.Divisor, Fraction<Int>)] = [
-        (Fraction<Int>(1, 2), Fraction<Int>(1, 2), Fraction<Int>(2, 2)),
-        (Fraction<Int>(1, 2), Fraction<Int>(2, 3), Fraction<Int>(3, 4)),
-        (Fraction<Int>(-1, 2), Fraction<Int>(1, 2), Fraction<Int>(-2, 2)),
-        (Fraction<Int>(-1, 2), Fraction<Int>(-2, 3), Fraction<Int>(-3, -4))
+        (.init(1, 2), .init(1, 2), .init(2, 2)),
+        (.init(1, 2), .init(2, 3), .init(3, 4)),
+        (.init(-1, 2), .init(1, 2), .init(-2, 2)),
+        (.init(-1, 2), .init(-2, 3), .init(-3, -4))
     ]
 
     private static let remainderArguments: [(Fraction<Int>, Fraction<Int>.RemainderDivisor, Fraction<Int>)] = [
-        (Fraction<Int>(1, 2), Fraction<Int>(1, 2), Fraction<Int>(0, 2)),
-        (Fraction<Int>(2, 3), Fraction<Int>(1, 2), Fraction<Int>(1, 6)),
-        (Fraction<Int>(2, 3), Fraction<Int>(-1, 2), Fraction<Int>(1, 6)),
-        (Fraction<Int>(-2, 3), Fraction<Int>(1, 2), Fraction<Int>(-1, 6)),
-        (Fraction<Int>(-2, 3), Fraction<Int>(-1, 2), Fraction<Int>(-1, 6))
+        (.init(1, 2), .init(1, 2), .init(0, 2)),
+        (.init(2, 3), .init(1, 2), .init(1, 6)),
+        (.init(2, 3), .init(-1, 2), .init(1, 6)),
+        (.init(-2, 3), .init(1, 2), .init(-1, 6)),
+        (.init(-2, 3), .init(-1, 2), .init(-1, 6))
     ]
 
     private static let halvingArguments: [(Fraction<Int>, Fraction<Int>)] = [
-        (Fraction<Int>(1, 2), Fraction<Int>(1, 4)),
-        (Fraction<Int>(2, 3), Fraction<Int>(2, 6)),
-        (Fraction<Int>(-1, 2), Fraction<Int>(-1, 4)),
-        (Fraction<Int>(-2, 3), Fraction<Int>(-2, 6))
+        (.init(1, 2), .init(1, 4)),
+        (.init(2, 3), .init(2, 6)),
+        (.init(-1, 2), .init(-1, 4)),
+        (.init(-2, 3), .init(-2, 6))
     ]
 
     @Test(
         "Reciprocal",
         arguments: [
-            (Fraction<Int>(1, 1), Fraction<Int>(1, 1) as Fraction<Int>?),
-            (Fraction<Int>(-1, 1), Fraction<Int>(1, -1)),
-            (Fraction<Int>(2, 1), Fraction<Int>(1, 2)),
-            (Fraction<Int>(-2, 1), Fraction<Int>(1, -2))
-        ]
+            (.init(1, 1), Fraction<Int>(1, 1) as Fraction<Int>?),
+            (.init(-1, 1), Fraction<Int>(1, -1)),
+            (.init(2, 1), Fraction<Int>(1, 2)),
+            (.init(-2, 1), Fraction<Int>(1, -2))
+        ] as Array<(Fraction<Int>, Fraction<Int>?)>
     )
     internal func reciprocal(
         dividend: Fraction<Int>,
@@ -55,11 +55,11 @@ internal struct FractionDivisibleTests {
     @Test(
         "Is divisible by",
         arguments: [
-            (Fraction<Int>(6, 1), Fraction<Int>(3, 1), true),
-            (Fraction<Int>(7, 1), Fraction<Int>(3, 1), false),
-            (Fraction<Int>(-6, 1), Fraction<Int>(3, 1), true),
-            (Fraction<Int>(-7, 1), Fraction<Int>(3, 1), false)
-        ]
+            (.init(6, 1), .init(3, 1), true),
+            (.init(7, 1), .init(3, 1), false),
+            (.init(-6, 1), .init(3, 1), true),
+            (.init(-7, 1), .init(3, 1), false)
+        ] as Array<(Fraction<Int>, Fraction<Int>, Bool)>
     )
     internal func isDivisibleBy(
         dividend: Fraction<Int>,
@@ -73,11 +73,11 @@ internal struct FractionDivisibleTests {
     @Test(
         "Is factor of",
         arguments: [
-            (Fraction<Int>(3, 1), Fraction<Int>(6, 1), true),
-            (Fraction<Int>(3, 1), Fraction<Int>(7, 1), false),
-            (Fraction<Int>(3, 1), Fraction<Int>(-6, 1), true),
-            (Fraction<Int>(3, 1), Fraction<Int>(-7, 1), false)
-        ]
+            (.init(3, 1), .init(6, 1), true),
+            (.init(3, 1), .init(7, 1), false),
+            (.init(3, 1), .init(-6, 1), true),
+            (.init(3, 1), .init(-7, 1), false)
+        ] as Array<(Fraction<Int>, Fraction<Int>, Bool)>
     )
     internal func isFactorOf(
         factor: Fraction<Int>,
@@ -199,10 +199,10 @@ extension FractionDivisibleTests {
     @Test(
         "Division is not commutative",
         arguments: [
-            (Fraction<Int>(1, 2), Fraction<Int>(2, 3)),
-            (Fraction<Int>(-1, 2), Fraction<Int>(1, 2)),
-            (Fraction<Int>(-1, 2), Fraction<Int>(-2, 3))
-        ]
+            (.init(1, 2), .init(2, 3)),
+            (.init(-1, 2), .init(1, 2)),
+            (.init(-1, 2), .init(-2, 3))
+        ] as Array<(Fraction<Int>, Fraction<Int>.Divisor)>
     )
     internal func divisionIsNotCommutative(
         dividend: Fraction<Int>,
@@ -219,12 +219,12 @@ extension FractionDivisibleTests {
     @Test(
         "NaN divisibility follows rational rules",
         arguments: [
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(2, 1),
-            Fraction<Int>.infinity,
-            Fraction<Int>.negativeInfinity
-        ]
+            .zero,
+            .negativeZero,
+            .init(2, 1),
+            .infinity,
+            .negativeInfinity
+        ] as Array<Fraction<Int>>
     )
     internal func nanDivisibilityFollowsRationalRules(other: Fraction<Int>) {
         let isDivisibleResult: Bool = Fraction<Int>.nan.isDivisible(by: other)
@@ -246,9 +246,9 @@ extension FractionDivisibleTests {
     @Test(
         "Dividing positive zero by positive or negative zero returns NaN",
         arguments: [
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero
-        ]
+            .zero,
+            .negativeZero
+        ] as Array<Fraction<Int>.Divisor>
     )
     internal func dividingPositiveZeroByPositiveOrNegativeZeroReturnsNaN(divisor: Fraction<Int>.Divisor) {
         let result: Fraction<Int> = Fraction<Int>.zero / divisor
@@ -258,9 +258,9 @@ extension FractionDivisibleTests {
     @Test(
         "Dividing negative zero by positive or negative zero returns NaN",
         arguments: [
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero
-        ]
+            .zero,
+            .negativeZero
+        ] as Array<Fraction<Int>.Divisor>
     )
     internal func dividingNegativeZeroByPositiveOrNegativeZeroReturnsNaN(divisor: Fraction<Int>.Divisor) {
         let result: Fraction<Int> = Fraction<Int>.negativeZero / divisor
@@ -270,9 +270,9 @@ extension FractionDivisibleTests {
     @Test(
         "Dividing positive infinity by infinity returns NaN",
         arguments: [
-            Fraction<Int>.infinity,
-            Fraction<Int>.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Fraction<Int>.Divisor>
     )
     internal func dividingPositiveInfinityByInfinityReturnsNaN(divisor: Fraction<Int>.Divisor) {
         let result: Fraction<Int> = Fraction<Int>.infinity / divisor
@@ -282,9 +282,9 @@ extension FractionDivisibleTests {
     @Test(
         "Dividing negative infinity by infinity returns NaN",
         arguments: [
-            Fraction<Int>.infinity,
-            Fraction<Int>.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Fraction<Int>.Divisor>
     )
     internal func dividingNegativeInfinityByInfinityReturnsNaN(divisor: Fraction<Int>.Divisor) {
         let result: Fraction<Int> = Fraction<Int>.negativeInfinity / divisor
@@ -294,14 +294,14 @@ extension FractionDivisibleTests {
     @Test(
         "Dividing NaN returns NaN",
         arguments: [
-            Fraction<Int>.nan,
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(1, 1),
-            Fraction<Int>(-1, 1),
-            Fraction<Int>.infinity,
-            Fraction<Int>.negativeInfinity
-        ]
+            .nan,
+            .zero,
+            .negativeZero,
+            .init(1, 1),
+            .init(-1, 1),
+            .infinity,
+            .negativeInfinity
+        ] as Array<Fraction<Int>.Divisor>
     )
     internal func dividingNaNReturnsNaN(divisor: Fraction<Int>.Divisor) {
         let result: Fraction<Int> = Fraction<Int>.nan / divisor
@@ -311,13 +311,13 @@ extension FractionDivisibleTests {
     @Test(
         "Dividing by NaN returns NaN",
         arguments: [
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(1, 1),
-            Fraction<Int>(-1, 1),
-            Fraction<Int>.infinity,
-            Fraction<Int>.negativeInfinity
-        ]
+            .zero,
+            .negativeZero,
+            .init(1, 1),
+            .init(-1, 1),
+            .infinity,
+            .negativeInfinity
+        ] as Array<Fraction<Int>>
     )
     internal func dividingByNaNReturnsNaN(dividend: Fraction<Int>) {
         let result: Fraction<Int> = dividend / Fraction<Int>.nan
@@ -327,13 +327,13 @@ extension FractionDivisibleTests {
     @Test(
         "Remainder of positive infinity returns NaN",
         arguments: [
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(1, 1),
-            Fraction<Int>(-1, 1),
-            Fraction<Int>.infinity,
-            Fraction<Int>.negativeInfinity
-        ]
+            .zero,
+            .negativeZero,
+            .init(1, 1),
+            .init(-1, 1),
+            .infinity,
+            .negativeInfinity
+        ] as Array<Fraction<Int>.RemainderDivisor>
     )
     internal func remainderOfPositiveInfinityReturnsNaN(divisor: Fraction<Int>.RemainderDivisor) {
         let result: Fraction<Int> = Fraction<Int>.infinity % divisor
@@ -343,13 +343,13 @@ extension FractionDivisibleTests {
     @Test(
         "Remainder of negative infinity returns NaN",
         arguments: [
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(1, 1),
-            Fraction<Int>(-1, 1),
-            Fraction<Int>.infinity,
-            Fraction<Int>.negativeInfinity
-        ]
+            .zero,
+            .negativeZero,
+            .init(1, 1),
+            .init(-1, 1),
+            .infinity,
+            .negativeInfinity
+        ] as Array<Fraction<Int>.RemainderDivisor>
     )
     internal func remainderOfNegativeInfinityReturnsNaN(divisor: Fraction<Int>.RemainderDivisor) {
         let result: Fraction<Int> = Fraction<Int>.negativeInfinity % divisor
@@ -359,9 +359,9 @@ extension FractionDivisibleTests {
     @Test(
         "Remainder by positive zero returns NaN",
         arguments: [
-            Fraction<Int>(1, 1),
-            Fraction<Int>(-1, 1)
-        ]
+            .init(1, 1),
+            .init(-1, 1)
+        ] as Array<Fraction<Int>>
     )
     internal func remainderByPositiveZeroReturnsNaN(dividend: Fraction<Int>) {
         let result: Fraction<Int> = dividend % Fraction<Int>.zero
@@ -371,9 +371,9 @@ extension FractionDivisibleTests {
     @Test(
         "Remainder by negative zero returns NaN",
         arguments: [
-            Fraction<Int>(1, 1),
-            Fraction<Int>(-1, 1)
-        ]
+            .init(1, 1),
+            .init(-1, 1)
+        ] as Array<Fraction<Int>>
     )
     internal func remainderByNegativeZeroReturnsNaN(dividend: Fraction<Int>) {
         let result: Fraction<Int> = dividend % Fraction<Int>.negativeZero
@@ -383,14 +383,14 @@ extension FractionDivisibleTests {
     @Test(
         "Remainder of NaN returns NaN",
         arguments: [
-            Fraction<Int>.nan,
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(1, 1),
-            Fraction<Int>(-1, 1),
-            Fraction<Int>.infinity,
-            Fraction<Int>.negativeInfinity
-        ]
+            .nan,
+            .zero,
+            .negativeZero,
+            .init(1, 1),
+            .init(-1, 1),
+            .infinity,
+            .negativeInfinity
+        ] as Array<Fraction<Int>.RemainderDivisor>
     )
     internal func remainderOfNaNReturnsNaN(divisor: Fraction<Int>.RemainderDivisor) {
         let result: Fraction<Int> = Fraction<Int>.nan % divisor
@@ -400,13 +400,13 @@ extension FractionDivisibleTests {
     @Test(
         "Remainder by NaN returns NaN",
         arguments: [
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(1, 1),
-            Fraction<Int>(-1, 1),
-            Fraction<Int>.infinity,
-            Fraction<Int>.negativeInfinity
-        ]
+            .zero,
+            .negativeZero,
+            .init(1, 1),
+            .init(-1, 1),
+            .infinity,
+            .negativeInfinity
+        ] as Array<Fraction<Int>>
     )
     internal func remainderByNaNReturnsNaN(dividend: Fraction<Int>) {
         let result: Fraction<Int> = dividend % Fraction<Int>.nan
@@ -420,12 +420,12 @@ extension FractionDivisibleTests {
     @Test(
         "Negative infinity divisibility follows rational rules",
         arguments: [
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(2, 1),
-            Fraction<Int>.infinity,
-            Fraction<Int>.negativeInfinity
-        ]
+            .zero,
+            .negativeZero,
+            .init(2, 1),
+            .infinity,
+            .negativeInfinity
+        ] as Array<Fraction<Int>>
     )
     internal func negativeInfinityDivisibilityFollowsRationalRules(other: Fraction<Int>) {
         let isDivisibleResult: Bool = Fraction<Int>.negativeInfinity.isDivisible(by: other)
@@ -447,9 +447,9 @@ extension FractionDivisibleTests {
     @Test(
         "Dividing negative infinity follows rational rules",
         arguments: [
-            (Fraction<Int>(1, 1), Fraction<Int>.negativeInfinity),
-            (Fraction<Int>(-1, 1), Fraction<Int>.infinity)
-        ]
+            (.init(1, 1), .negativeInfinity),
+            (.init(-1, 1), .infinity)
+        ] as Array<(Fraction<Int>.Divisor, Fraction<Int>)>
     )
     internal func dividingNegativeInfinityFollowsRationalRules(
         divisor: Fraction<Int>.Divisor,
@@ -462,9 +462,9 @@ extension FractionDivisibleTests {
     @Test(
         "Dividing by negative infinity follows rational rules",
         arguments: [
-            (Fraction<Int>(1, 1), Fraction<Int>.negativeZero),
-            (Fraction<Int>(-1, 1), Fraction<Int>.zero)
-        ]
+            (.init(1, 1), .negativeZero),
+            (.init(-1, 1), .zero)
+        ] as Array<(Fraction<Int>, Fraction<Int>)>
     )
     internal func dividingByNegativeInfinityFollowsRationalRules(
         dividend: Fraction<Int>,
@@ -477,11 +477,11 @@ extension FractionDivisibleTests {
     @Test(
         "Remainder by negative infinity preserves dividend",
         arguments: [
-            Fraction<Int>(1, 2),
-            Fraction<Int>(-1, 2),
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero
-        ]
+            .init(1, 2),
+            .init(-1, 2),
+            .zero,
+            .negativeZero
+        ] as Array<Fraction<Int>>
     )
     internal func remainderByNegativeInfinityPreservesDividend(dividend: Fraction<Int>) {
         let result: Fraction<Int> = dividend % Fraction<Int>.negativeInfinity
@@ -495,11 +495,11 @@ extension FractionDivisibleTests {
     @Test(
         "Dividing by negative one preserves raw quotient terms",
         arguments: [
-            (Fraction<Int>(6, 1), Fraction<Int>(6, -1)),
-            (Fraction<Int>(4, 1), Fraction<Int>(4, -1)),
-            (Fraction<Int>(-6, 1), Fraction<Int>(-6, -1)),
-            (Fraction<Int>(-4, 1), Fraction<Int>(-4, -1))
-        ]
+            (.init(6, 1), .init(6, -1)),
+            (.init(4, 1), .init(4, -1)),
+            (.init(-6, 1), .init(-6, -1)),
+            (.init(-4, 1), .init(-4, -1))
+        ] as Array<(Fraction<Int>, Fraction<Int>)>
     )
     internal func dividingByNegativeOnePreservesRawQuotientTerms(
         dividend: Fraction<Int>,
@@ -518,12 +518,12 @@ extension FractionDivisibleTests {
     @Test(
         "Negative zero divisibility follows rational rules",
         arguments: [
-            (Fraction<Int>.zero, false, false),
-            (Fraction<Int>.negativeZero, false, false),
-            (Fraction<Int>(2, 1), true, false),
-            (Fraction<Int>.infinity, false, false),
-            (Fraction<Int>.negativeInfinity, false, false)
-        ]
+            (.zero, false, false),
+            (.negativeZero, false, false),
+            (.init(2, 1), true, false),
+            (.infinity, false, false),
+            (.negativeInfinity, false, false)
+        ] as Array<(Fraction<Int>, Bool, Bool)>
     )
     internal func negativeZeroDivisibilityFollowsRationalRules(
         other: Fraction<Int>,
@@ -549,9 +549,9 @@ extension FractionDivisibleTests {
     @Test(
         "Dividing negative zero follows rational rules",
         arguments: [
-            (Fraction<Int>(1, 1), Fraction<Int>.negativeZero),
-            (Fraction<Int>(-1, 1), Fraction<Int>.zero)
-        ]
+            (.init(1, 1), .negativeZero),
+            (.init(-1, 1), .zero)
+        ] as Array<(Fraction<Int>.Divisor, Fraction<Int>)>
     )
     internal func dividingNegativeZeroFollowsRationalRules(
         divisor: Fraction<Int>.Divisor,
@@ -564,9 +564,9 @@ extension FractionDivisibleTests {
     @Test(
         "Dividing by negative zero follows rational rules",
         arguments: [
-            (Fraction<Int>(1, 1), Fraction<Int>.negativeInfinity),
-            (Fraction<Int>(-1, 1), Fraction<Int>.infinity)
-        ]
+            (.init(1, 1), .negativeInfinity),
+            (.init(-1, 1), .infinity)
+        ] as Array<(Fraction<Int>, Fraction<Int>)>
     )
     internal func dividingByNegativeZeroFollowsRationalRules(
         dividend: Fraction<Int>,
@@ -583,12 +583,12 @@ extension FractionDivisibleTests {
     @Test(
         "Positive infinity divisibility follows rational rules",
         arguments: [
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(2, 1),
-            Fraction<Int>.infinity,
-            Fraction<Int>.negativeInfinity
-        ]
+            .zero,
+            .negativeZero,
+            .init(2, 1),
+            .infinity,
+            .negativeInfinity
+        ] as Array<Fraction<Int>>
     )
     internal func positiveInfinityDivisibilityFollowsRationalRules(other: Fraction<Int>) {
         let isDivisibleResult: Bool = Fraction<Int>.infinity.isDivisible(by: other)
@@ -610,9 +610,9 @@ extension FractionDivisibleTests {
     @Test(
         "Dividing positive infinity follows rational rules",
         arguments: [
-            (Fraction<Int>(1, 1), Fraction<Int>.infinity),
-            (Fraction<Int>(-1, 1), Fraction<Int>.negativeInfinity)
-        ]
+            (.init(1, 1), .infinity),
+            (.init(-1, 1), .negativeInfinity)
+        ] as Array<(Fraction<Int>.Divisor, Fraction<Int>)>
     )
     internal func dividingPositiveInfinityFollowsRationalRules(
         divisor: Fraction<Int>.Divisor,
@@ -625,9 +625,9 @@ extension FractionDivisibleTests {
     @Test(
         "Dividing by positive infinity follows rational rules",
         arguments: [
-            (Fraction<Int>(1, 1), Fraction<Int>.zero),
-            (Fraction<Int>(-1, 1), Fraction<Int>.negativeZero)
-        ]
+            (.init(1, 1), .zero),
+            (.init(-1, 1), .negativeZero)
+        ] as Array<(Fraction<Int>, Fraction<Int>)>
     )
     internal func dividingByPositiveInfinityFollowsRationalRules(
         dividend: Fraction<Int>,
@@ -640,11 +640,11 @@ extension FractionDivisibleTests {
     @Test(
         "Remainder by positive infinity preserves dividend",
         arguments: [
-            Fraction<Int>(1, 2),
-            Fraction<Int>(-1, 2),
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero
-        ]
+            .init(1, 2),
+            .init(-1, 2),
+            .zero,
+            .negativeZero
+        ] as Array<Fraction<Int>>
     )
     internal func remainderByPositiveInfinityPreservesDividend(dividend: Fraction<Int>) {
         let result: Fraction<Int> = dividend % Fraction<Int>.infinity
@@ -658,11 +658,11 @@ extension FractionDivisibleTests {
     @Test(
         "Dividing by positive one preserves dividend",
         arguments: [
-            Fraction<Int>(6, 1),
-            Fraction<Int>(4, 1),
-            Fraction<Int>(-6, 1),
-            Fraction<Int>(-4, 1)
-        ]
+            .init(6, 1),
+            .init(4, 1),
+            .init(-6, 1),
+            .init(-4, 1)
+        ] as Array<Fraction<Int>>
     )
     internal func dividingByPositiveOnePreservesDividend(dividend: Fraction<Int>) {
         let result: Fraction<Int> = dividend / 1
@@ -676,10 +676,10 @@ extension FractionDivisibleTests {
     @Test(
         "Dividing positive zero by nonzero value returns positive or negative zero",
         arguments: [
-            Fraction<Int>(2, 1),
-            Fraction<Int>(-3, 1),
-            Fraction<Int>(3, 1)
-        ]
+            .init(2, 1),
+            .init(-3, 1),
+            .init(3, 1)
+        ] as Array<Fraction<Int>.Divisor>
     )
     internal func dividingPositiveZeroByNonzeroValueReturnsPositiveOrNegativeZero(divisor: Fraction<Int>.Divisor) {
         let result: Fraction<Int> = Fraction<Int>.zero / divisor
@@ -689,12 +689,12 @@ extension FractionDivisibleTests {
     @Test(
         "Positive zero divisibility follows rational rules",
         arguments: [
-            (Fraction<Int>.zero, false, false),
-            (Fraction<Int>.negativeZero, false, false),
-            (Fraction<Int>(2, 1), true, false),
-            (Fraction<Int>.infinity, false, false),
-            (Fraction<Int>.negativeInfinity, false, false)
-        ]
+            (.zero, false, false),
+            (.negativeZero, false, false),
+            (.init(2, 1), true, false),
+            (.infinity, false, false),
+            (.negativeInfinity, false, false)
+        ] as Array<(Fraction<Int>, Bool, Bool)>
     )
     internal func positiveZeroDivisibilityFollowsRationalRules(
         other: Fraction<Int>,
@@ -720,9 +720,9 @@ extension FractionDivisibleTests {
     @Test(
         "Dividing positive zero follows rational rules",
         arguments: [
-            (Fraction<Int>(1, 1), Fraction<Int>.zero),
-            (Fraction<Int>(-1, 1), Fraction<Int>.negativeZero)
-        ]
+            (.init(1, 1), .zero),
+            (.init(-1, 1), .negativeZero)
+        ] as Array<(Fraction<Int>.Divisor, Fraction<Int>)>
     )
     internal func dividingPositiveZeroFollowsRationalRules(
         divisor: Fraction<Int>.Divisor,
@@ -735,9 +735,9 @@ extension FractionDivisibleTests {
     @Test(
         "Dividing by positive zero follows rational rules",
         arguments: [
-            (Fraction<Int>(1, 1), Fraction<Int>.infinity),
-            (Fraction<Int>(-1, 1), Fraction<Int>.negativeInfinity)
-        ]
+            (.init(1, 1), .infinity),
+            (.init(-1, 1), .negativeInfinity)
+        ] as Array<(Fraction<Int>, Fraction<Int>)>
     )
     internal func dividingByPositiveZeroFollowsRationalRules(
         dividend: Fraction<Int>,
@@ -750,11 +750,11 @@ extension FractionDivisibleTests {
     @Test(
         "Remainder by self returns positive zero",
         arguments: [
-            Fraction<Int>(6, 1),
-            Fraction<Int>(4, 1),
-            Fraction<Int>(-6, 1),
-            Fraction<Int>(-4, 1)
-        ]
+            .init(6, 1),
+            .init(4, 1),
+            .init(-6, 1),
+            .init(-4, 1)
+        ] as Array<Fraction<Int>>
     )
     internal func remainderBySelfReturnsPositiveZero(dividend: Fraction<Int>) {
         let result: Fraction<Int> = dividend % dividend

@@ -17,11 +17,11 @@ internal struct CanonicalizedFractionHashableTests {
     @Test(
         "Equivalent representations produce equal hashes",
         arguments: [
-            (Fraction<Int>(1, 2), Fraction<Int>(2, 4)),
-            (Fraction<Int>(-1, 2), Fraction<Int>(1, -2)),
-            (Fraction<Int>(-1, 2), Fraction<Int>(-2, 4)),
-            (Fraction<Int>(1, 2), Fraction<Int>(-1, -2))
-        ]
+            (.init(1, 2), .init(2, 4)),
+            (.init(-1, 2), .init(1, -2)),
+            (.init(-1, 2), .init(-2, 4)),
+            (.init(1, 2), .init(-1, -2))
+        ] as Array<(Fraction<Int>, Fraction<Int>)>
     )
     internal func equivalentRepresentationsProduceEqualHashes(
         lhs: Fraction<Int>,
@@ -51,9 +51,9 @@ extension CanonicalizedFractionHashableTests {
     @Test(
         "Negative infinity hashing follows rational rules",
         arguments: [
-            (Fraction<Int>.negativeInfinity, Fraction<Int>.negativeInfinity),
-            (Fraction<Int>.negativeInfinity, Fraction<Int>(-2, 0))
-        ]
+            (.negativeInfinity, .negativeInfinity),
+            (.negativeInfinity, .init(-2, 0))
+        ] as Array<(Fraction<Int>, Fraction<Int>)>
     )
     internal func negativeInfinityHashingFollowsRationalRules(
         lhs: Fraction<Int>,
@@ -73,10 +73,10 @@ extension CanonicalizedFractionHashableTests {
     @Test(
         "Negative zero hashing follows rational rules",
         arguments: [
-            (Fraction<Int>.negativeZero, Fraction<Int>.negativeZero),
-            (Fraction<Int>.negativeZero, Fraction<Int>(0, -2)),
-            (Fraction<Int>.negativeZero, Fraction<Int>.zero)
-        ]
+            (.negativeZero, .negativeZero),
+            (.negativeZero, .init(0, -2)),
+            (.negativeZero, .zero)
+        ] as Array<(Fraction<Int>, Fraction<Int>)>
     )
     internal func negativeZeroHashingFollowsRationalRules(
         lhs: Fraction<Int>,
@@ -96,9 +96,9 @@ extension CanonicalizedFractionHashableTests {
     @Test(
         "Positive infinity hashing follows rational rules",
         arguments: [
-            (Fraction<Int>.infinity, Fraction<Int>.infinity),
-            (Fraction<Int>.infinity, Fraction<Int>(2, 0))
-        ]
+            (.infinity, .infinity),
+            (.infinity, .init(2, 0))
+        ] as Array<(Fraction<Int>, Fraction<Int>)>
     )
     internal func positiveInfinityHashingFollowsRationalRules(
         lhs: Fraction<Int>,
@@ -118,10 +118,10 @@ extension CanonicalizedFractionHashableTests {
     @Test(
         "Positive zero hashing follows rational rules",
         arguments: [
-            (Fraction<Int>.zero, Fraction<Int>.zero),
-            (Fraction<Int>.zero, Fraction<Int>(0, 2)),
-            (Fraction<Int>.zero, Fraction<Int>.negativeZero)
-        ]
+            (.zero, .zero),
+            (.zero, .init(0, 2)),
+            (.zero, .negativeZero)
+        ] as Array<(Fraction<Int>, Fraction<Int>)>
     )
     internal func positiveZeroHashingFollowsRationalRules(
         lhs: Fraction<Int>,

@@ -59,7 +59,7 @@ internal struct DoubleDivisibleTests {
             (0.25, 4.0),
             (-0.5, -2.0),
             (-0.25, -4.0)
-        ]
+        ] as Array<(Double, Double?)>
     )
     internal func reciprocal(
         dividend: Double,
@@ -79,7 +79,7 @@ internal struct DoubleDivisibleTests {
             1.5,
             -0.5,
             -1.5
-        ]
+        ] as Array<Double>
     )
     internal func isInvertible(dividend: Double) {
         #expect(dividend.isInvertible == true)
@@ -96,7 +96,7 @@ internal struct DoubleDivisibleTests {
             (1.5, 2.5, false),
             (-1.5, 0.5, true),
             (-1.5, 2.5, false)
-        ]
+        ] as Array<(Double, Double, Bool)>
     )
     internal func isDivisibleBy(
         dividend: Double,
@@ -118,7 +118,7 @@ internal struct DoubleDivisibleTests {
             (2.5, 1.5, false),
             (0.5, -1.5, true),
             (2.5, -1.5, false)
-        ]
+        ] as Array<(Double, Double, Bool)>
     )
     internal func isFactorOf(
         factor: Double,
@@ -257,12 +257,12 @@ extension DoubleDivisibleTests {
     @Test(
         "NaN divisibility follows floating-point rules",
         arguments: [
-            Double.zero,
-            Double.negativeZero,
+            .zero,
+            .negativeZero,
             2.0,
-            Double.infinity,
-            Double.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Double>
     )
     internal func nanDivisibilityFollowsFloatingPointRules(other: Double) {
         let isDivisibleResult: Bool = Double.nan.isDivisible(by: other)
@@ -284,9 +284,9 @@ extension DoubleDivisibleTests {
     @Test(
         "Dividing positive zero by positive or negative zero returns NaN",
         arguments: [
-            Double.zero,
-            Double.negativeZero
-        ]
+            .zero,
+            .negativeZero
+        ] as Array<Double.Divisor>
     )
     internal func dividingPositiveZeroByPositiveOrNegativeZeroReturnsNaN(divisor: Double.Divisor) {
         let result: Double = Double.zero / divisor
@@ -296,9 +296,9 @@ extension DoubleDivisibleTests {
     @Test(
         "Dividing negative zero by positive or negative zero returns NaN",
         arguments: [
-            Double.zero,
-            Double.negativeZero
-        ]
+            .zero,
+            .negativeZero
+        ] as Array<Double.Divisor>
     )
     internal func dividingNegativeZeroByPositiveOrNegativeZeroReturnsNaN(divisor: Double.Divisor) {
         let result: Double = Double.negativeZero / divisor
@@ -308,9 +308,9 @@ extension DoubleDivisibleTests {
     @Test(
         "Dividing positive infinity by infinity returns NaN",
         arguments: [
-            Double.infinity,
-            Double.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Double.Divisor>
     )
     internal func dividingPositiveInfinityByInfinityReturnsNaN(divisor: Double.Divisor) {
         let result: Double = Double.infinity / divisor
@@ -320,9 +320,9 @@ extension DoubleDivisibleTests {
     @Test(
         "Dividing negative infinity by infinity returns NaN",
         arguments: [
-            Double.infinity,
-            Double.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Double.Divisor>
     )
     internal func dividingNegativeInfinityByInfinityReturnsNaN(divisor: Double.Divisor) {
         let result: Double = Double.negativeInfinity / divisor
@@ -332,14 +332,14 @@ extension DoubleDivisibleTests {
     @Test(
         "Dividing NaN returns NaN",
         arguments: [
-            Double.nan,
-            Double.zero,
-            Double.negativeZero,
+            .nan,
+            .zero,
+            .negativeZero,
             1.0,
             -1.0,
-            Double.infinity,
-            Double.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Double.Divisor>
     )
     internal func dividingNaNReturnsNaN(divisor: Double.Divisor) {
         let result: Double = Double.nan / divisor
@@ -349,13 +349,13 @@ extension DoubleDivisibleTests {
     @Test(
         "Dividing by NaN returns NaN",
         arguments: [
-            Double.zero,
-            Double.negativeZero,
+            .zero,
+            .negativeZero,
             1.0,
             -1.0,
-            Double.infinity,
-            Double.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Double>
     )
     internal func dividingByNaNReturnsNaN(dividend: Double) {
         let result: Double = dividend / Double.nan
@@ -365,13 +365,13 @@ extension DoubleDivisibleTests {
     @Test(
         "Remainder of positive infinity returns NaN",
         arguments: [
-            Double.zero,
-            Double.negativeZero,
+            .zero,
+            .negativeZero,
             1.0,
             -1.0,
-            Double.infinity,
-            Double.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Double.RemainderDivisor>
     )
     internal func remainderOfPositiveInfinityReturnsNaN(divisor: Double.RemainderDivisor) {
         let result: Double = Double.infinity % divisor
@@ -381,13 +381,13 @@ extension DoubleDivisibleTests {
     @Test(
         "Remainder of negative infinity returns NaN",
         arguments: [
-            Double.zero,
-            Double.negativeZero,
+            .zero,
+            .negativeZero,
             1.0,
             -1.0,
-            Double.infinity,
-            Double.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Double.RemainderDivisor>
     )
     internal func remainderOfNegativeInfinityReturnsNaN(divisor: Double.RemainderDivisor) {
         let result: Double = Double.negativeInfinity % divisor
@@ -399,7 +399,7 @@ extension DoubleDivisibleTests {
         arguments: [
             1.0,
             -1.0
-        ]
+        ] as Array<Double>
     )
     internal func remainderByPositiveZeroReturnsNaN(dividend: Double) {
         let result: Double = dividend % Double.zero
@@ -411,7 +411,7 @@ extension DoubleDivisibleTests {
         arguments: [
             1.0,
             -1.0
-        ]
+        ] as Array<Double>
     )
     internal func remainderByNegativeZeroReturnsNaN(dividend: Double) {
         let result: Double = dividend % Double.negativeZero
@@ -421,14 +421,14 @@ extension DoubleDivisibleTests {
     @Test(
         "Remainder of NaN returns NaN",
         arguments: [
-            Double.nan,
-            Double.zero,
-            Double.negativeZero,
+            .nan,
+            .zero,
+            .negativeZero,
             1.0,
             -1.0,
-            Double.infinity,
-            Double.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Double.RemainderDivisor>
     )
     internal func remainderOfNaNReturnsNaN(divisor: Double.RemainderDivisor) {
         let result: Double = Double.nan % divisor
@@ -438,13 +438,13 @@ extension DoubleDivisibleTests {
     @Test(
         "Remainder by NaN returns NaN",
         arguments: [
-            Double.zero,
-            Double.negativeZero,
+            .zero,
+            .negativeZero,
             1.0,
             -1.0,
-            Double.infinity,
-            Double.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Double>
     )
     internal func remainderByNaNReturnsNaN(dividend: Double) {
         let result: Double = dividend % Double.nan
@@ -458,12 +458,12 @@ extension DoubleDivisibleTests {
     @Test(
         "Negative infinity divisibility follows floating-point rules",
         arguments: [
-            Double.zero,
-            Double.negativeZero,
+            .zero,
+            .negativeZero,
             2.0,
-            Double.infinity,
-            Double.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Double>
     )
     internal func negativeInfinityDivisibilityFollowsFloatingPointRules(other: Double) {
         let isDivisibleResult: Bool = Double.negativeInfinity.isDivisible(by: other)
@@ -487,9 +487,9 @@ extension DoubleDivisibleTests {
     @Test(
         "Dividing negative infinity follows floating-point rules",
         arguments: [
-            (1.0, Double.negativeInfinity),
-            (-1.0, Double.infinity)
-        ]
+            (1.0, .negativeInfinity),
+            (-1.0, .infinity)
+        ] as Array<(Double.Divisor, Double)>
     )
     internal func dividingNegativeInfinityFollowsFloatingPointRules(
         divisor: Double.Divisor,
@@ -502,9 +502,9 @@ extension DoubleDivisibleTests {
     @Test(
         "Dividing by negative infinity follows floating-point rules",
         arguments: [
-            (1.0, Double.negativeZero),
-            (-1.0, Double.zero)
-        ]
+            (1.0, .negativeZero),
+            (-1.0, .zero)
+        ] as Array<(Double, Double)>
     )
     internal func dividingByNegativeInfinityFollowsFloatingPointRules(
         dividend: Double,
@@ -520,9 +520,9 @@ extension DoubleDivisibleTests {
         arguments: [
             0.5,
             -0.5,
-            Double.zero,
-            Double.negativeZero
-        ]
+            .zero,
+            .negativeZero
+        ] as Array<Double>
     )
     internal func remainderByNegativeInfinityPreservesDividend(dividend: Double) {
         let result: Double = dividend % Double.negativeInfinity
@@ -545,7 +545,7 @@ extension DoubleDivisibleTests {
             (3.75, -3.75),
             (-1.5, 1.5),
             (-3.75, 3.75)
-        ]
+        ] as Array<(Double, Double)>
     )
     internal func dividingByNegativeOneReturnsOppositeValue(
         dividend: Double,
@@ -566,7 +566,7 @@ extension DoubleDivisibleTests {
             -4.0,
             -1.5,
             -3.75
-        ]
+        ] as Array<Double>
     )
     internal func remainderBySelfReturnsNegativeZero(value: Double) {
         let result: Double = value % value
@@ -577,12 +577,12 @@ extension DoubleDivisibleTests {
     @Test(
         "Negative zero divisibility follows floating-point rules",
         arguments: [
-            (Double.zero, false, false),
-            (Double.negativeZero, false, false),
+            (.zero, false, false),
+            (.negativeZero, false, false),
             (2.0, true, false),
-            (Double.infinity, false, false),
-            (Double.negativeInfinity, false, false)
-        ]
+            (.infinity, false, false),
+            (.negativeInfinity, false, false)
+        ] as Array<(Double, Bool, Bool)>
     )
     internal func negativeZeroDivisibilityFollowsFloatingPointRules(
         other: Double,
@@ -608,9 +608,9 @@ extension DoubleDivisibleTests {
     @Test(
         "Dividing negative zero follows floating-point rules",
         arguments: [
-            (1.0, Double.negativeZero),
-            (-1.0, Double.zero)
-        ]
+            (1.0, .negativeZero),
+            (-1.0, .zero)
+        ] as Array<(Double.Divisor, Double)>
     )
     internal func dividingNegativeZeroFollowsFloatingPointRules(
         divisor: Double.Divisor,
@@ -624,9 +624,9 @@ extension DoubleDivisibleTests {
     @Test(
         "Dividing by negative zero follows floating-point rules",
         arguments: [
-            (1.0, Double.negativeInfinity),
-            (-1.0, Double.infinity)
-        ]
+            (1.0, .negativeInfinity),
+            (-1.0, .infinity)
+        ] as Array<(Double, Double)>
     )
     internal func dividingByNegativeZeroFollowsFloatingPointRules(
         dividend: Double,
@@ -643,12 +643,12 @@ extension DoubleDivisibleTests {
     @Test(
         "Positive infinity divisibility follows floating-point rules",
         arguments: [
-            Double.zero,
-            Double.negativeZero,
+            .zero,
+            .negativeZero,
             2.0,
-            Double.infinity,
-            Double.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Double>
     )
     internal func positiveInfinityDivisibilityFollowsFloatingPointRules(other: Double) {
         let isDivisibleResult: Bool = Double.infinity.isDivisible(by: other)
@@ -672,9 +672,9 @@ extension DoubleDivisibleTests {
     @Test(
         "Dividing positive infinity follows floating-point rules",
         arguments: [
-            (1.0, Double.infinity),
-            (-1.0, Double.negativeInfinity)
-        ]
+            (1.0, .infinity),
+            (-1.0, .negativeInfinity)
+        ] as Array<(Double.Divisor, Double)>
     )
     internal func dividingPositiveInfinityFollowsFloatingPointRules(
         divisor: Double.Divisor,
@@ -687,9 +687,9 @@ extension DoubleDivisibleTests {
     @Test(
         "Dividing by positive infinity follows floating-point rules",
         arguments: [
-            (1.0, Double.zero),
-            (-1.0, Double.negativeZero)
-        ]
+            (1.0, .zero),
+            (-1.0, .negativeZero)
+        ] as Array<(Double, Double)>
     )
     internal func dividingByPositiveInfinityFollowsFloatingPointRules(
         dividend: Double,
@@ -705,9 +705,9 @@ extension DoubleDivisibleTests {
         arguments: [
             0.5,
             -0.5,
-            Double.zero,
-            Double.negativeZero
-        ]
+            .zero,
+            .negativeZero
+        ] as Array<Double>
     )
     internal func remainderByPositiveInfinityPreservesDividend(dividend: Double) {
         let result: Double = dividend % Double.infinity
@@ -730,7 +730,7 @@ extension DoubleDivisibleTests {
             3.75,
             -1.5,
             -3.75
-        ]
+        ] as Array<Double>
     )
     internal func dividingByPositiveOnePreservesDividend(dividend: Double) {
         let result: Double = dividend / 1.0
@@ -748,7 +748,7 @@ extension DoubleDivisibleTests {
             4.0,
             1.5,
             3.75
-        ]
+        ] as Array<Double>
     )
     internal func remainderBySelfReturnsPositiveZero(value: Double) {
         let result: Double = value % value
@@ -765,7 +765,7 @@ extension DoubleDivisibleTests {
             0.5,
             1.5,
             -1.5
-        ]
+        ] as Array<Double.Divisor>
     )
     internal func dividingPositiveZeroByNonzeroValueReturnsPositiveOrNegativeZero(divisor: Double.Divisor) {
         let result: Double = Double.zero / divisor
@@ -775,12 +775,12 @@ extension DoubleDivisibleTests {
     @Test(
         "Positive zero divisibility follows floating-point rules",
         arguments: [
-            (Double.zero, false, false),
-            (Double.negativeZero, false, false),
+            (.zero, false, false),
+            (.negativeZero, false, false),
             (2.0, true, false),
-            (Double.infinity, false, false),
-            (Double.negativeInfinity, false, false)
-        ]
+            (.infinity, false, false),
+            (.negativeInfinity, false, false)
+        ] as Array<(Double, Bool, Bool)>
     )
     internal func positiveZeroDivisibilityFollowsFloatingPointRules(
         other: Double,
@@ -806,9 +806,9 @@ extension DoubleDivisibleTests {
     @Test(
         "Dividing positive zero follows floating-point rules",
         arguments: [
-            (1.0, Double.zero),
-            (-1.0, Double.negativeZero)
-        ]
+            (1.0, .zero),
+            (-1.0, .negativeZero)
+        ] as Array<(Double.Divisor, Double)>
     )
     internal func dividingPositiveZeroFollowsFloatingPointRules(
         divisor: Double.Divisor,
@@ -822,9 +822,9 @@ extension DoubleDivisibleTests {
     @Test(
         "Dividing by positive zero follows floating-point rules",
         arguments: [
-            (1.0, Double.infinity),
-            (-1.0, Double.negativeInfinity)
-        ]
+            (1.0, .infinity),
+            (-1.0, .negativeInfinity)
+        ] as Array<(Double, Double)>
     )
     internal func dividingByPositiveZeroFollowsFloatingPointRules(
         dividend: Double,

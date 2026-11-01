@@ -15,25 +15,25 @@ internal struct CanonicalizedFractionComparableTests {
     internal init() {}
 
     private static let comparisonArguments: [(Fraction<Int>, Fraction<Int>, Bool, Bool, Bool, Bool)] = [
-        (Fraction<Int>(1, 2), Fraction<Int>(1, 2), false, true, false, true),
-        (Fraction<Int>(1, 2), Fraction<Int>(2, 4), false, true, false, true),
-        (Fraction<Int>(2, 2), Fraction<Int>(3, 2), true, true, false, false),
-        (Fraction<Int>(3, 2), Fraction<Int>(2, 2), false, false, true, true),
-        (Fraction<Int>(-2, 2), Fraction<Int>(3, 2), true, true, false, false),
-        (Fraction<Int>(-3, 2), Fraction<Int>(-2, 2), true, true, false, false)
+        (.init(1, 2), .init(1, 2), false, true, false, true),
+        (.init(1, 2), .init(2, 4), false, true, false, true),
+        (.init(2, 2), .init(3, 2), true, true, false, false),
+        (.init(3, 2), .init(2, 2), false, false, true, true),
+        (.init(-2, 2), .init(3, 2), true, true, false, false),
+        (.init(-3, 2), .init(-2, 2), true, true, false, false)
     ]
 
     private static let rangeArguments: [(Fraction<Int>, Fraction<Int>, Fraction<Int>)] = [
-        (Fraction<Int>(1, 2), Fraction<Int>(2, 2), Fraction<Int>(4, 2)),
-        (Fraction<Int>(2, 2), Fraction<Int>(2, 2), Fraction<Int>(4, 2)),
-        (Fraction<Int>(3, 2), Fraction<Int>(2, 2), Fraction<Int>(4, 2)),
-        (Fraction<Int>(4, 2), Fraction<Int>(2, 2), Fraction<Int>(4, 2)),
-        (Fraction<Int>(5, 2), Fraction<Int>(2, 2), Fraction<Int>(4, 2)),
-        (Fraction<Int>(-5, 2), Fraction<Int>(-4, 2), Fraction<Int>(-2, 2)),
-        (Fraction<Int>(-4, 2), Fraction<Int>(-4, 2), Fraction<Int>(-2, 2)),
-        (Fraction<Int>(-3, 2), Fraction<Int>(-4, 2), Fraction<Int>(-2, 2)),
-        (Fraction<Int>(-2, 2), Fraction<Int>(-4, 2), Fraction<Int>(-2, 2)),
-        (Fraction<Int>(-1, 2), Fraction<Int>(-4, 2), Fraction<Int>(-2, 2))
+        (.init(1, 2), .init(2, 2), .init(4, 2)),
+        (.init(2, 2), .init(2, 2), .init(4, 2)),
+        (.init(3, 2), .init(2, 2), .init(4, 2)),
+        (.init(4, 2), .init(2, 2), .init(4, 2)),
+        (.init(5, 2), .init(2, 2), .init(4, 2)),
+        (.init(-5, 2), .init(-4, 2), .init(-2, 2)),
+        (.init(-4, 2), .init(-4, 2), .init(-2, 2)),
+        (.init(-3, 2), .init(-4, 2), .init(-2, 2)),
+        (.init(-2, 2), .init(-4, 2), .init(-2, 2)),
+        (.init(-1, 2), .init(-4, 2), .init(-2, 2))
     ]
 
     @Test(
@@ -172,10 +172,10 @@ extension CanonicalizedFractionComparableTests {
     @Test(
         "NaN comparison follows rational rules",
         arguments: [
-            (Fraction<Int>.nan, Fraction<Int>(1, 1)),
-            (Fraction<Int>(1, 1), Fraction<Int>.nan),
-            (Fraction<Int>.nan, Fraction<Int>.nan)
-        ]
+            (.nan, .init(1, 1)),
+            (.init(1, 1), .nan),
+            (.nan, .nan)
+        ] as Array<(Fraction<Int>, Fraction<Int>)>
     )
     internal func nanComparisonFollowsRationalRules(
         lhs: Fraction<Int>,
@@ -208,10 +208,10 @@ extension CanonicalizedFractionComparableTests {
     @Test(
         "Negative infinity comparison follows rational rules",
         arguments: [
-            (Fraction<Int>.negativeInfinity, Fraction<Int>.negativeInfinity, false, true, false, true),
-            (Fraction<Int>.negativeInfinity, Fraction<Int>(-1, 1), true, true, false, false),
-            (Fraction<Int>.negativeInfinity, Fraction<Int>.infinity, true, true, false, false)
-        ]
+            (.negativeInfinity, .negativeInfinity, false, true, false, true),
+            (.negativeInfinity, .init(-1, 1), true, true, false, false),
+            (.negativeInfinity, .infinity, true, true, false, false)
+        ] as Array<(Fraction<Int>, Fraction<Int>, Bool, Bool, Bool, Bool)>
     )
     internal func negativeInfinityComparisonFollowsRationalRules(
         lhs: Fraction<Int>,
@@ -248,11 +248,11 @@ extension CanonicalizedFractionComparableTests {
     @Test(
         "Negative zero comparison follows rational rules",
         arguments: [
-            (Fraction<Int>.negativeZero, Fraction<Int>.negativeZero, false, true, false, true),
-            (Fraction<Int>.negativeZero, Fraction<Int>.zero, false, true, false, true),
-            (Fraction<Int>.negativeZero, Fraction<Int>(1, 1), true, true, false, false),
-            (Fraction<Int>.negativeZero, Fraction<Int>(-1, 1), false, false, true, true)
-        ]
+            (.negativeZero, .negativeZero, false, true, false, true),
+            (.negativeZero, .zero, false, true, false, true),
+            (.negativeZero, .init(1, 1), true, true, false, false),
+            (.negativeZero, .init(-1, 1), false, false, true, true)
+        ] as Array<(Fraction<Int>, Fraction<Int>, Bool, Bool, Bool, Bool)>
     )
     internal func negativeZeroComparisonFollowsRationalRules(
         lhs: Fraction<Int>,
@@ -289,10 +289,10 @@ extension CanonicalizedFractionComparableTests {
     @Test(
         "Positive infinity comparison follows rational rules",
         arguments: [
-            (Fraction<Int>.infinity, Fraction<Int>.infinity, false, true, false, true),
-            (Fraction<Int>.infinity, Fraction<Int>(1, 1), false, false, true, true),
-            (Fraction<Int>.infinity, Fraction<Int>.negativeInfinity, false, false, true, true)
-        ]
+            (.infinity, .infinity, false, true, false, true),
+            (.infinity, .init(1, 1), false, false, true, true),
+            (.infinity, .negativeInfinity, false, false, true, true)
+        ] as Array<(Fraction<Int>, Fraction<Int>, Bool, Bool, Bool, Bool)>
     )
     internal func positiveInfinityComparisonFollowsRationalRules(
         lhs: Fraction<Int>,
@@ -329,11 +329,11 @@ extension CanonicalizedFractionComparableTests {
     @Test(
         "Positive zero comparison follows rational rules",
         arguments: [
-            (Fraction<Int>.zero, Fraction<Int>.zero, false, true, false, true),
-            (Fraction<Int>.zero, Fraction<Int>.negativeZero, false, true, false, true),
-            (Fraction<Int>.zero, Fraction<Int>(1, 1), true, true, false, false),
-            (Fraction<Int>.zero, Fraction<Int>(-1, 1), false, false, true, true)
-        ]
+            (.zero, .zero, false, true, false, true),
+            (.zero, .negativeZero, false, true, false, true),
+            (.zero, .init(1, 1), true, true, false, false),
+            (.zero, .init(-1, 1), false, false, true, true)
+        ] as Array<(Fraction<Int>, Fraction<Int>, Bool, Bool, Bool, Bool)>
     )
     internal func positiveZeroComparisonFollowsRationalRules(
         lhs: Fraction<Int>,

@@ -17,11 +17,11 @@ internal struct FractionLosslessStringConvertibleTests {
     @Test(
         "String initialization succeeds",
         arguments: [
-            ("2", Fraction<Int>(2, 1)),
-            ("1/2", Fraction<Int>(1, 2)),
-            ("2/4", Fraction<Int>(2, 4)),
-            ("2/-4", Fraction<Int>(2, -4))
-        ]
+            ("2", .init(2, 1)),
+            ("1/2", .init(1, 2)),
+            ("2/4", .init(2, 4)),
+            ("2/-4", .init(2, -4))
+        ] as Array<(String, Fraction<Int>)>
     )
     internal func stringInitializationSucceeds(
         description: String,
@@ -41,7 +41,7 @@ internal struct FractionLosslessStringConvertibleTests {
             "1/2/3",
             "abc",
             "1.5"
-        ]
+        ] as Array<String>
     )
     internal func stringInitializationFails(description: String) {
         let result: Fraction<Int>? = Fraction<Int>(description)
@@ -57,7 +57,7 @@ extension FractionLosslessStringConvertibleTests {
         arguments: [
             "-inf",
             "-infinity"
-        ]
+        ] as Array<String>
     )
     internal func negativeInfinityStringInitializationSucceeds(description: String) {
         let result: Fraction<Int>? = Fraction<Int>(description)
@@ -82,10 +82,10 @@ extension FractionLosslessStringConvertibleTests {
     @Test(
         "Negative zero string initialization succeeds",
         arguments: [
-            ("-0", Fraction<Int>(0, -1)),
-            ("0/-1", Fraction<Int>(0, -1)),
-            ("0/-2", Fraction<Int>(0, -2))
-        ]
+            ("-0", .init(0, -1)),
+            ("0/-1", .init(0, -1)),
+            ("0/-2", .init(0, -2))
+        ] as Array<(String, Fraction<Int>)>
     )
     internal func negativeZeroStringInitializationSucceeds(
         description: String,
@@ -106,7 +106,7 @@ extension FractionLosslessStringConvertibleTests {
             "+inf",
             "infinity",
             "+infinity"
-        ]
+        ] as Array<String>
     )
     internal func positiveInfinityStringInitializationSucceeds(description: String) {
         let result: Fraction<Int>? = Fraction<Int>(description)
@@ -122,7 +122,7 @@ extension FractionLosslessStringConvertibleTests {
         arguments: [
             "nan",
             "+nan"
-        ]
+        ] as Array<String>
     )
     internal func positiveNanStringInitializationSucceeds(description: String) {
         let result: Fraction<Int>? = Fraction<Int>(description)
@@ -136,10 +136,10 @@ extension FractionLosslessStringConvertibleTests {
     @Test(
         "Positive zero string initialization succeeds",
         arguments: [
-            ("0", Fraction<Int>(0, 1)),
-            ("0/1", Fraction<Int>(0, 1)),
-            ("0/2", Fraction<Int>(0, 2))
-        ]
+            ("0", .init(0, 1)),
+            ("0/1", .init(0, 1)),
+            ("0/2", .init(0, 2))
+        ] as Array<(String, Fraction<Int>)>
     )
     internal func positiveZeroStringInitializationSucceeds(
         description: String,

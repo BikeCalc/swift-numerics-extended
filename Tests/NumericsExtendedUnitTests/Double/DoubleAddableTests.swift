@@ -113,13 +113,13 @@ extension DoubleAddableTests {
     @Test(
         "Adding to NaN returns NaN",
         arguments: [
-            Double.nan,
-            Double.zero,
-            Double.negativeZero,
+            .nan,
+            .zero,
+            .negativeZero,
             1.0,
-            Double.infinity,
-            Double.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Double.Addend>
     )
     internal func addingToNaNReturnsNaN(addend: Double.Addend) {
         let result: Double = Double.nan + addend
@@ -129,13 +129,13 @@ extension DoubleAddableTests {
     @Test(
         "Adding NaN returns NaN",
         arguments: [
-            Double.zero,
-            Double.negativeZero,
+            .zero,
+            .negativeZero,
             1.0,
             -1.0,
-            Double.infinity,
-            Double.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Double>
     )
     internal func addingNaNReturnsNaN(augend: Double) {
         let result: Double = augend + Double.nan
@@ -149,10 +149,10 @@ extension DoubleAddableTests {
     @Test(
         "Adding to negative infinity follows floating-point rules",
         arguments: [
-            Double.negativeInfinity,
+            .negativeInfinity,
             1.0,
             -1.0
-        ]
+        ] as Array<Double.Addend>
     )
     internal func addingToNegativeInfinityFollowsFloatingPointRules(addend: Double.Addend) {
         let result: Double = Double.negativeInfinity + addend
@@ -166,11 +166,11 @@ extension DoubleAddableTests {
     @Test(
         "Adding to negative zero follows floating-point rules",
         arguments: [
-            (Double.zero, Double.zero),
-            (Double.negativeZero, Double.negativeZero),
+            (.zero, .zero),
+            (.negativeZero, .negativeZero),
             (1.0, 1.0),
             (-1.0, -1.0)
-        ]
+        ] as Array<(Double.Addend, Double)>
     )
     internal func addingToNegativeZeroFollowsFloatingPointRules(
         addend: Double.Addend,
@@ -188,10 +188,10 @@ extension DoubleAddableTests {
     @Test(
         "Adding to positive infinity follows floating-point rules",
         arguments: [
-            Double.infinity,
+            .infinity,
             1.0,
             -1.0
-        ]
+        ] as Array<Double.Addend>
     )
     internal func addingToPositiveInfinityFollowsFloatingPointRules(addend: Double.Addend) {
         let result: Double = Double.infinity + addend
@@ -213,7 +213,7 @@ extension DoubleAddableTests {
             (1.5, -1.5),
             (-0.5, 0.5),
             (-1.5, 1.5)
-        ]
+        ] as Array<(Double, Double.Addend)>
     )
     internal func addingOppositeValuesReturnsPositiveZero(
         augend: Double,
@@ -235,7 +235,7 @@ extension DoubleAddableTests {
             1.5,
             -0.5,
             -1.5
-        ]
+        ] as Array<Double>
     )
     internal func addingPositiveZeroPreservesAugend(augend: Double) {
         let result: Double = augend + Double.zero
@@ -245,11 +245,11 @@ extension DoubleAddableTests {
     @Test(
         "Adding to positive zero follows floating-point rules",
         arguments: [
-            (Double.zero, Double.zero),
-            (Double.negativeZero, Double.zero),
+            (.zero, .zero),
+            (.negativeZero, .zero),
             (1.0, 1.0),
             (-1.0, -1.0)
-        ]
+        ] as Array<(Double.Addend, Double)>
     )
     internal func addingToPositiveZeroFollowsFloatingPointRules(
         addend: Double.Addend,

@@ -47,7 +47,7 @@ internal struct DoubleMultipliableTests {
             (1.5, 2.5, false),
             (-1.5, 0.5, true),
             (-1.5, 2.5, false)
-        ]
+        ] as Array<(Double, Double, Bool)>
     )
     internal func isMultipleOf(
         multiplicand: Double,
@@ -159,12 +159,12 @@ extension DoubleMultipliableTests {
     @Test(
         "NaN multiple predicate follows floating-point rules",
         arguments: [
-            Double.zero,
-            Double.negativeZero,
+            .zero,
+            .negativeZero,
             2.0,
-            Double.infinity,
-            Double.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Double>
     )
     internal func nanMultiplePredicateFollowsFloatingPointRules(other: Double) {
         let firstResult: Bool = Double.nan.isMultiple(of: other)
@@ -176,11 +176,11 @@ extension DoubleMultipliableTests {
     @Test(
         "Multiplying positive zero by infinity returns NaN",
         arguments: [
-            (Double.zero, Double.infinity),
-            (Double.zero, Double.negativeInfinity),
-            (Double.infinity, Double.zero),
-            (Double.negativeInfinity, Double.zero)
-        ]
+            (.zero, .infinity),
+            (.zero, .negativeInfinity),
+            (.infinity, .zero),
+            (.negativeInfinity, .zero)
+        ] as Array<(Double, Double.Multiplier)>
     )
     internal func multiplyingPositiveZeroByInfinityReturnsNaN(
         multiplicand: Double,
@@ -193,11 +193,11 @@ extension DoubleMultipliableTests {
     @Test(
         "Multiplying negative zero by infinity returns NaN",
         arguments: [
-            (Double.negativeZero, Double.infinity),
-            (Double.negativeZero, Double.negativeInfinity),
-            (Double.infinity, Double.negativeZero),
-            (Double.negativeInfinity, Double.negativeZero)
-        ]
+            (.negativeZero, .infinity),
+            (.negativeZero, .negativeInfinity),
+            (.infinity, .negativeZero),
+            (.negativeInfinity, .negativeZero)
+        ] as Array<(Double, Double.Multiplier)>
     )
     internal func multiplyingNegativeZeroByInfinityReturnsNaN(
         multiplicand: Double,
@@ -210,13 +210,13 @@ extension DoubleMultipliableTests {
     @Test(
         "Multiplying NaN returns NaN",
         arguments: [
-            Double.nan,
-            Double.zero,
-            Double.negativeZero,
+            .nan,
+            .zero,
+            .negativeZero,
             1.0,
-            Double.infinity,
-            Double.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Double.Multiplier>
     )
     internal func multiplyingNaNReturnsNaN(multiplier: Double.Multiplier) {
         let result: Double = Double.nan * multiplier
@@ -226,13 +226,13 @@ extension DoubleMultipliableTests {
     @Test(
         "Multiplying by NaN returns NaN",
         arguments: [
-            Double.zero,
-            Double.negativeZero,
+            .zero,
+            .negativeZero,
             1.0,
             -1.0,
-            Double.infinity,
-            Double.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Double>
     )
     internal func multiplyingByNaNReturnsNaN(multiplicand: Double) {
         let result: Double = multiplicand * Double.nan
@@ -246,12 +246,12 @@ extension DoubleMultipliableTests {
     @Test(
         "Negative infinity multiple predicate follows floating-point rules",
         arguments: [
-            Double.zero,
-            Double.negativeZero,
+            .zero,
+            .negativeZero,
             2.0,
-            Double.infinity,
-            Double.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Double>
     )
     internal func negativeInfinityMultiplePredicateFollowsFloatingPointRules(other: Double) {
         let result: Bool = Double.negativeInfinity.isMultiple(of: other)
@@ -261,11 +261,11 @@ extension DoubleMultipliableTests {
     @Test(
         "Multiplying negative infinity follows floating-point rules",
         arguments: [
-            (Double.infinity, Double.negativeInfinity),
-            (Double.negativeInfinity, Double.infinity),
-            (1.0, Double.negativeInfinity),
-            (-1.0, Double.infinity)
-        ]
+            (.infinity, .negativeInfinity),
+            (.negativeInfinity, .infinity),
+            (1.0, .negativeInfinity),
+            (-1.0, .infinity)
+        ] as Array<(Double.Multiplier, Double)>
     )
     internal func multiplyingNegativeInfinityFollowsFloatingPointRules(
         multiplier: Double.Multiplier,
@@ -290,7 +290,7 @@ extension DoubleMultipliableTests {
             (1.5, -1.5),
             (-0.5, 0.5),
             (-1.5, 1.5)
-        ]
+        ] as Array<(Double, Double)>
     )
     internal func multiplyingByNegativeOneReturnsOppositeValue(
         multiplicand: Double,
@@ -315,7 +315,7 @@ extension DoubleMultipliableTests {
             1.5,
             -0.5,
             -1.5
-        ]
+        ] as Array<Double>
     )
     internal func isMultipleOfNegativeZeroReturnsFalse(multiplicand: Double) {
         let result: Bool = multiplicand.isMultiple(of: Double.negativeZero)
@@ -325,12 +325,12 @@ extension DoubleMultipliableTests {
     @Test(
         "Negative zero multiple predicate follows floating-point rules",
         arguments: [
-            (Double.zero, true),
-            (Double.negativeZero, true),
+            (.zero, true),
+            (.negativeZero, true),
             (2.0, true),
-            (Double.infinity, true),
-            (Double.negativeInfinity, true)
-        ]
+            (.infinity, true),
+            (.negativeInfinity, true)
+        ] as Array<(Double, Bool)>
     )
     internal func negativeZeroMultiplePredicateFollowsFloatingPointRules(
         other: Double,
@@ -343,11 +343,11 @@ extension DoubleMultipliableTests {
     @Test(
         "Multiplying negative zero follows floating-point rules",
         arguments: [
-            (Double.zero, Double.negativeZero),
-            (Double.negativeZero, Double.zero),
-            (1.0, Double.negativeZero),
-            (-1.0, Double.zero)
-        ]
+            (.zero, .negativeZero),
+            (.negativeZero, .zero),
+            (1.0, .negativeZero),
+            (-1.0, .zero)
+        ] as Array<(Double.Multiplier, Double)>
     )
     internal func multiplyingNegativeZeroFollowsFloatingPointRules(
         multiplier: Double.Multiplier,
@@ -365,12 +365,12 @@ extension DoubleMultipliableTests {
     @Test(
         "Positive infinity multiple predicate follows floating-point rules",
         arguments: [
-            Double.zero,
-            Double.negativeZero,
+            .zero,
+            .negativeZero,
             2.0,
-            Double.infinity,
-            Double.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Double>
     )
     internal func positiveInfinityMultiplePredicateFollowsFloatingPointRules(other: Double) {
         let result: Bool = Double.infinity.isMultiple(of: other)
@@ -380,11 +380,11 @@ extension DoubleMultipliableTests {
     @Test(
         "Multiplying positive infinity follows floating-point rules",
         arguments: [
-            (Double.infinity, Double.infinity),
-            (Double.negativeInfinity, Double.negativeInfinity),
-            (1.0, Double.infinity),
-            (-1.0, Double.negativeInfinity)
-        ]
+            (.infinity, .infinity),
+            (.negativeInfinity, .negativeInfinity),
+            (1.0, .infinity),
+            (-1.0, .negativeInfinity)
+        ] as Array<(Double.Multiplier, Double)>
     )
     internal func multiplyingPositiveInfinityFollowsFloatingPointRules(
         multiplier: Double.Multiplier,
@@ -409,7 +409,7 @@ extension DoubleMultipliableTests {
             1.5,
             -0.5,
             -1.5
-        ]
+        ] as Array<Double>
     )
     internal func multiplyingByPositiveOnePreservesMultiplicand(multiplicand: Double) {
         let result: Double = multiplicand * 1.0
@@ -431,7 +431,7 @@ extension DoubleMultipliableTests {
             1.5,
             -0.5,
             -1.5
-        ]
+        ] as Array<Double>
     )
     internal func isMultipleOfPositiveZeroReturnsFalse(multiplicand: Double) {
         let result: Bool = multiplicand.isMultiple(of: Double.zero)
@@ -449,7 +449,7 @@ extension DoubleMultipliableTests {
             1.5,
             -0.5,
             -1.5
-        ]
+        ] as Array<Double>
     )
     internal func multiplyingByPositiveZeroReturnsPositiveOrNegativeZero(multiplicand: Double) {
         let result: Double = multiplicand * Double.zero
@@ -459,12 +459,12 @@ extension DoubleMultipliableTests {
     @Test(
         "Positive zero multiple predicate follows floating-point rules",
         arguments: [
-            (Double.zero, true),
-            (Double.negativeZero, true),
+            (.zero, true),
+            (.negativeZero, true),
             (2.0, true),
-            (Double.infinity, true),
-            (Double.negativeInfinity, true)
-        ]
+            (.infinity, true),
+            (.negativeInfinity, true)
+        ] as Array<(Double, Bool)>
     )
     internal func positiveZeroMultiplePredicateFollowsFloatingPointRules(
         other: Double,
@@ -477,11 +477,11 @@ extension DoubleMultipliableTests {
     @Test(
         "Multiplying positive zero follows floating-point rules",
         arguments: [
-            (Double.zero, Double.zero),
-            (Double.negativeZero, Double.negativeZero),
-            (1.0, Double.zero),
-            (-1.0, Double.negativeZero)
-        ]
+            (.zero, .zero),
+            (.negativeZero, .negativeZero),
+            (1.0, .zero),
+            (-1.0, .negativeZero)
+        ] as Array<(Double.Multiplier, Double)>
     )
     internal func multiplyingPositiveZeroFollowsFloatingPointRules(
         multiplier: Double.Multiplier,

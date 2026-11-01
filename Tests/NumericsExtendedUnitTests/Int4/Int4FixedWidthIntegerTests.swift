@@ -27,7 +27,7 @@ internal struct Int4FixedWidthIntegerTests {
     @Test(
         "Nonzero bit count succeeds",
         arguments: [
-            (Int4.min, 1),
+            (.min, 1),
             (-7, 2),
             (-6, 2),
             (-5, 3),
@@ -42,7 +42,7 @@ internal struct Int4FixedWidthIntegerTests {
             (4, 1),
             (5, 2),
             (6, 2),
-            (Int4.max, 3)
+            (.max, 3)
         ] as Array<(Int4, Int)>
     )
     internal func nonzeroBitCountSucceeds(
@@ -55,7 +55,7 @@ internal struct Int4FixedWidthIntegerTests {
     @Test(
         "Leading zero bit count succeeds",
         arguments: [
-            (Int4.min, 0),
+            (.min, 0),
             (-7, 0),
             (-6, 0),
             (-5, 0),
@@ -70,7 +70,7 @@ internal struct Int4FixedWidthIntegerTests {
             (4, 1),
             (5, 1),
             (6, 1),
-            (Int4.max, 1)
+            (.max, 1)
         ] as Array<(Int4, Int)>
     )
     internal func leadingZeroBitCountSucceeds(
@@ -83,9 +83,9 @@ internal struct Int4FixedWidthIntegerTests {
     @Test(
         "Byte swapped succeeds",
         arguments: [
-            Int4.min,
+            .min,
             0,
-            Int4.max
+            .max
         ] as Array<Int4>
     )
     internal func byteSwappedSucceeds(value: Int4) {
@@ -96,12 +96,12 @@ internal struct Int4FixedWidthIntegerTests {
         "Initialized truncating if needed succeeds",
         arguments: [
             (-10, 6),
-            (-9, Int4.max),
-            (-8, Int4.min),
+            (-9, .max),
+            (-8, .min),
             (-7, -7),
             (6, 6),
-            (7, Int4.max),
-            (8, Int4.min),
+            (7, .max),
+            (8, .min),
             (9, -7)
         ] as Array<(Int, Int4)>
     )
@@ -115,12 +115,12 @@ internal struct Int4FixedWidthIntegerTests {
     @Test(
         "Initialized clamping succeeds",
         arguments: [
-            (-9, Int4.min),
-            (-8, Int4.min),
+            (-9, .min),
+            (-8, .min),
             (-7, -7),
             (6, 6),
-            (7, Int4.max),
-            (8, Int4.max)
+            (7, .max),
+            (8, .max)
         ] as Array<(Int, Int4)>
     )
     internal func initializedClampingSucceeds(

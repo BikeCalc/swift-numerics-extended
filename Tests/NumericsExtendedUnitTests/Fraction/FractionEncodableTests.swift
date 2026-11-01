@@ -19,10 +19,10 @@ internal struct FractionEncodableTests {
     @Test(
         "Encode to JSON succeeds",
         arguments: [
-            (Fraction<Int>(1, 2), #"{"den":2,"num":1}"#),
-            (Fraction<Int>(2, 4), #"{"den":4,"num":2}"#),
-            (Fraction<Int>(2, -4), #"{"den":-4,"num":2}"#)
-        ]
+            (.init(1, 2), #"{"den":2,"num":1}"#),
+            (.init(2, 4), #"{"den":4,"num":2}"#),
+            (.init(2, -4), #"{"den":-4,"num":2}"#)
+        ] as Array<(Fraction<Int>, String)>
     )
     internal func encodeToJSONSucceeds(
         value: Fraction<Int>,

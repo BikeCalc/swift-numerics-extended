@@ -22,7 +22,7 @@ internal struct Int4ExpressibleByIntegerLiteralTests {
             (0, 0),
             (1, 1),
             (7, 7)
-        ] as [(Int4, Int)]
+        ] as Array<(Int4, Int)>
     )
     internal func integerLiteralInitializationSucceeds(
         value: Int4,

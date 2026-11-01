@@ -21,7 +21,7 @@ internal struct DoubleRepresentableByZeroTests {
             -1.0,
             0.5,
             -0.5
-        ]
+        ] as Array<Double>
     )
     internal func nonzeroValuesAreNotZero(value: Double) {
         #expect(value.isZero == false)

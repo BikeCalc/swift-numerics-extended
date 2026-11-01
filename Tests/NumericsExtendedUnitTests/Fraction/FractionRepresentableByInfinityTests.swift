@@ -17,11 +17,11 @@ internal struct FractionRepresentableByInfinityTests {
     @Test(
         "Finite values are finite",
         arguments: [
-            Fraction<Int>(1, 2),
-            Fraction<Int>(-1, 2),
-            Fraction<Int>(-1, -2),
-            Fraction<Int>(1, -2)
-        ]
+            .init(1, 2),
+            .init(-1, 2),
+            .init(-1, -2),
+            .init(1, -2)
+        ] as Array<Fraction<Int>>
     )
     internal func finiteValuesAreFinite(value: Fraction<Int>) {
         #expect(value.isFinite == true)

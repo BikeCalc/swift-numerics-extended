@@ -73,7 +73,7 @@ internal struct DoubleRaisableTests {
             (4.0, 0.5, true),
             (-0.125, -2.0, true),
             (0.2, 2.0, false)
-        ]
+        ] as Array<(Double, Double, Bool)>
     )
     internal func isPowerOf(
         value: Double,
@@ -198,7 +198,7 @@ extension DoubleRaisableTests {
             (-2.0, 3),
             (0.5, 2),
             (2.0, -2)
-        ]
+        ] as Array<(Double, Double.Exponent)>
     )
     internal func exponentiationIsNotCommutative(
         base: Double,
@@ -222,7 +222,7 @@ extension DoubleRaisableTests {
             (-2.0, -0.5),
             (0.5, 2.0),
             (-0.5, -2.0)
-        ]
+        ] as Array<(Double, Double)>
     )
     internal func raisingToNegativeOneReturnsReciprocal(
         base: Double,
@@ -245,10 +245,10 @@ extension DoubleRaisableTests {
     @Test(
         "NaN raised to nonzero exponent returns NaN",
         arguments: [
-            (Double.nan, 1),
-            (Double.nan, 2),
-            (Double.nan, -1)
-        ]
+            (.nan, 1),
+            (.nan, 2),
+            (.nan, -1)
+        ] as Array<(Double, Double.Exponent)>
     )
     internal func nanRaisedToNonzeroExponentReturnsNaN(
         base: Double,
@@ -289,7 +289,7 @@ extension DoubleRaisableTests {
             1.5,
             -0.5,
             -1.5
-        ]
+        ] as Array<Double>
     )
     internal func raisingToNegativeZeroReturnsOne(base: Double) {
         let result: Double = base ** Double.Exponent.negativeZero
@@ -303,9 +303,9 @@ extension DoubleRaisableTests {
             (-0.0, true),
             (1.0, true),
             (2.0, false),
-            (Double.infinity, true),
-            (Double.negativeInfinity, true)
-        ]
+            (.infinity, true),
+            (.negativeInfinity, true)
+        ] as Array<(Double, Bool)>
     )
     internal func negativeInfinityBasePowerPredicateFollowsFloatingPointRules(
         value: Double,
@@ -318,12 +318,12 @@ extension DoubleRaisableTests {
     @Test(
         "Negative infinity exponentiation follows parity rule",
         arguments: [
-            (Double.negativeInfinity, 0, 1.0),
-            (Double.negativeInfinity, 1, Double.negativeInfinity),
-            (Double.negativeInfinity, 2, Double.infinity),
-            (Double.negativeInfinity, -1, -0.0),
-            (Double.negativeInfinity, -2, 0.0)
-        ]
+            (.negativeInfinity, 0, 1.0),
+            (.negativeInfinity, 1, .negativeInfinity),
+            (.negativeInfinity, 2, .infinity),
+            (.negativeInfinity, -1, -0.0),
+            (.negativeInfinity, -2, 0.0)
+        ] as Array<(Double, Double.Exponent, Double)>
     )
     internal func negativeInfinityExponentiationFollowsParityRule(
         base: Double,
@@ -337,9 +337,9 @@ extension DoubleRaisableTests {
     @Test(
         "Negative infinity exponentiation preserves negative zero sign",
         arguments: [
-            (Double.negativeInfinity, -1),
-            (Double.negativeInfinity, -3)
-        ]
+            (.negativeInfinity, -1),
+            (.negativeInfinity, -3)
+        ] as Array<(Double, Double.Exponent)>
     )
     internal func negativeInfinityExponentiationPreservesNegativeZeroSign(
         base: Double,
@@ -363,7 +363,7 @@ extension DoubleRaisableTests {
             (3, -1.0),
             (-2, 1.0),
             (-3, -1.0)
-        ]
+        ] as Array<(Double.Exponent, Double)>
     )
     internal func negativeOneBaseExponentiationFollowsParityRule(
         exponent: Double.Exponent,
@@ -379,7 +379,7 @@ extension DoubleRaisableTests {
             (1.0, true),
             (-1.0, true),
             (2.0, false)
-        ]
+        ] as Array<(Double, Bool)>
     )
     internal func negativeOneBasePowerPredicateFollowsSignedRules(
         value: Double,
@@ -400,9 +400,9 @@ extension DoubleRaisableTests {
             (-0.0, true),
             (1.0, true),
             (2.0, false),
-            (Double.infinity, true),
-            (Double.negativeInfinity, true)
-        ]
+            (.infinity, true),
+            (.negativeInfinity, true)
+        ] as Array<(Double, Bool)>
     )
     internal func negativeZeroBasePowerPredicateFollowsFloatingPointRules(
         value: Double,
@@ -419,8 +419,8 @@ extension DoubleRaisableTests {
             (-0.0, 1, -0.0),
             (-0.0, 2, 0.0),
             (-0.0, -1, -Double.infinity),
-            (-0.0, -2, Double.infinity)
-        ]
+            (-0.0, -2, .infinity)
+        ] as Array<(Double, Double.Exponent, Double)>
     )
     internal func negativeZeroBaseExponentiationFollowsParityRule(
         base: Double,
@@ -436,7 +436,7 @@ extension DoubleRaisableTests {
         arguments: [
             (-0.0, 1),
             (-0.0, 3)
-        ]
+        ] as Array<(Double, Double.Exponent)>
     )
     internal func negativeZeroBaseExponentiationPreservesNegativeZeroSign(
         base: Double,
@@ -458,9 +458,9 @@ extension DoubleRaisableTests {
             (-0.0, true),
             (1.0, true),
             (2.0, false),
-            (Double.infinity, true),
-            (Double.negativeInfinity, false)
-        ]
+            (.infinity, true),
+            (.negativeInfinity, false)
+        ] as Array<(Double, Bool)>
     )
     internal func positiveInfinityBasePowerPredicateFollowsFloatingPointRules(
         value: Double,
@@ -473,10 +473,10 @@ extension DoubleRaisableTests {
     @Test(
         "Positive infinity exponentiation follows reciprocal rules",
         arguments: [
-            (Double.infinity, 0, 1.0),
-            (Double.infinity, 1, Double.infinity),
-            (Double.infinity, -1, 0.0)
-        ]
+            (.infinity, 0, 1.0),
+            (.infinity, 1, .infinity),
+            (.infinity, -1, 0.0)
+        ] as Array<(Double, Double.Exponent, Double)>
     )
     internal func positiveInfinityExponentiationFollowsReciprocalRules(
         base: Double,
@@ -506,7 +506,7 @@ extension DoubleRaisableTests {
             1.5,
             -0.5,
             -1.5
-        ]
+        ] as Array<Double>
     )
     internal func raisingToPositiveOnePreservesBase(base: Double) {
         let result: Double = base ** 1
@@ -522,7 +522,7 @@ extension DoubleRaisableTests {
             3,
             -2,
             -3
-        ]
+        ] as Array<Double.Exponent>
     )
     internal func positiveOneBaseExponentiationReturnsPositiveOne(exponent: Double.Exponent) {
         let result: Double = 1.0 ** exponent
@@ -534,7 +534,7 @@ extension DoubleRaisableTests {
         arguments: [
             (1.0, true),
             (2.0, false)
-        ]
+        ] as Array<(Double, Bool)>
     )
     internal func positiveOneBasePowerPredicateFollowsIdentityRule(
         value: Double,
@@ -563,7 +563,7 @@ extension DoubleRaisableTests {
             1.5,
             -0.5,
             -1.5
-        ]
+        ] as Array<Double>
     )
     internal func raisingToPositiveZeroReturnsOne(base: Double) {
         let result: Double = base ** Double.Exponent.zero
@@ -577,9 +577,9 @@ extension DoubleRaisableTests {
             (-0.0, true),
             (1.0, true),
             (2.0, false),
-            (Double.infinity, true),
-            (Double.negativeInfinity, false)
-        ]
+            (.infinity, true),
+            (.negativeInfinity, false)
+        ] as Array<(Double, Bool)>
     )
     internal func positiveZeroBasePowerPredicateFollowsFloatingPointRules(
         value: Double,
@@ -595,8 +595,8 @@ extension DoubleRaisableTests {
             (0.0, 0, 1.0),
             (0.0, 1, 0.0),
             (0.0, 2, 0.0),
-            (0.0, -1, Double.infinity)
-        ]
+            (0.0, -1, .infinity)
+        ] as Array<(Double, Double.Exponent, Double)>
     )
     internal func positiveZeroBaseExponentiationFollowsFloatingPointRules(
         base: Double,

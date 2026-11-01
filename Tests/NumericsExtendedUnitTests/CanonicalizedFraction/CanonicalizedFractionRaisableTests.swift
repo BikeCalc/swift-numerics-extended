@@ -15,32 +15,32 @@ internal struct CanonicalizedFractionRaisableTests {
     internal init() {}
 
     private static let exponentiationArguments: [(Fraction<Int>, Fraction<Int>.Exponent, Fraction<Int>)] = [
-        (Fraction<Int>(2, 3), 2, Fraction<Int>(4, 9)),
-        (Fraction<Int>(2, 3), 3, Fraction<Int>(8, 27)),
-        (Fraction<Int>(2, 3), -2, Fraction<Int>(9, 4)),
-        (Fraction<Int>(2, 3), -3, Fraction<Int>(27, 8)),
-        (Fraction<Int>(-2, 3), 2, Fraction<Int>(4, 9)),
-        (Fraction<Int>(-2, 3), 3, Fraction<Int>(-8, 27)),
-        (Fraction<Int>(-2, 3), -2, Fraction<Int>(9, 4)),
-        (Fraction<Int>(-2, 3), -3, Fraction<Int>(-27, 8)),
-        (Fraction<Int>(1, 1), -2, Fraction<Int>(1, 1)),
-        (Fraction<Int>(1, 1), -3, Fraction<Int>(1, 1)),
-        (Fraction<Int>(-1, 1), -2, Fraction<Int>(1, 1)),
-        (Fraction<Int>(-1, 1), -3, Fraction<Int>(-1, 1))
+        (.init(2, 3), 2, .init(4, 9)),
+        (.init(2, 3), 3, .init(8, 27)),
+        (.init(2, 3), -2, .init(9, 4)),
+        (.init(2, 3), -3, .init(27, 8)),
+        (.init(-2, 3), 2, .init(4, 9)),
+        (.init(-2, 3), 3, .init(-8, 27)),
+        (.init(-2, 3), -2, .init(9, 4)),
+        (.init(-2, 3), -3, .init(-27, 8)),
+        (.init(1, 1), -2, .init(1, 1)),
+        (.init(1, 1), -3, .init(1, 1)),
+        (.init(-1, 1), -2, .init(1, 1)),
+        (.init(-1, 1), -3, .init(-1, 1))
     ]
 
     private static let squaringArguments: [(Fraction<Int>, Fraction<Int>)] = [
-        (Fraction<Int>(2, 3), Fraction<Int>(4, 9)),
-        (Fraction<Int>(3, 4), Fraction<Int>(9, 16)),
-        (Fraction<Int>(-2, 3), Fraction<Int>(4, 9)),
-        (Fraction<Int>(-3, 4), Fraction<Int>(9, 16))
+        (.init(2, 3), .init(4, 9)),
+        (.init(3, 4), .init(9, 16)),
+        (.init(-2, 3), .init(4, 9)),
+        (.init(-3, 4), .init(9, 16))
     ]
 
     private static let cubingArguments: [(Fraction<Int>, Fraction<Int>)] = [
-        (Fraction<Int>(2, 3), Fraction<Int>(8, 27)),
-        (Fraction<Int>(3, 4), Fraction<Int>(27, 64)),
-        (Fraction<Int>(-2, 3), Fraction<Int>(-8, 27)),
-        (Fraction<Int>(-3, 4), Fraction<Int>(-27, 64))
+        (.init(2, 3), .init(8, 27)),
+        (.init(3, 4), .init(27, 64)),
+        (.init(-2, 3), .init(-8, 27)),
+        (.init(-3, 4), .init(-27, 64))
     ]
 
     @Test(

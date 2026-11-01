@@ -21,7 +21,7 @@ internal struct FractionRationalTests {
             -1,
             1,
             2
-        ]
+        ] as Array<Int>
     )
     internal func wholeInitializationUsesDenominatorOne(integer: Int) {
         let value: Fraction<Int> = .init(integer)
@@ -32,11 +32,11 @@ internal struct FractionRationalTests {
     @Test(
         "Is one",
         arguments: [
-            (Fraction<Int>(1, 1), true),
-            (Fraction<Int>(3, 3), true),
-            (Fraction<Int>(-3, -3), true),
-            (Fraction<Int>(-1, 1), false)
-        ]
+            (.init(1, 1), true),
+            (.init(3, 3), true),
+            (.init(-3, -3), true),
+            (.init(-1, 1), false)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func isOne(
         value: Fraction<Int>,
@@ -48,11 +48,11 @@ internal struct FractionRationalTests {
     @Test(
         "Is whole",
         arguments: [
-            (Fraction<Int>(4, 2), true),
-            (Fraction<Int>(-4, -2), true),
-            (Fraction<Int>(3, 2), false),
-            (Fraction<Int>(-4, 2), false)
-        ]
+            (.init(4, 2), true),
+            (.init(-4, -2), true),
+            (.init(3, 2), false),
+            (.init(-4, 2), false)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func isWhole(
         value: Fraction<Int>,
@@ -64,11 +64,11 @@ internal struct FractionRationalTests {
     @Test(
         "Is proper",
         arguments: [
-            (Fraction<Int>(1, 2), true),
-            (Fraction<Int>(-1, 2), true),
-            (Fraction<Int>(2, 2), false),
-            (Fraction<Int>(-2, 2), false)
-        ]
+            (.init(1, 2), true),
+            (.init(-1, 2), true),
+            (.init(2, 2), false),
+            (.init(-2, 2), false)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func isProper(
         value: Fraction<Int>,
@@ -80,11 +80,11 @@ internal struct FractionRationalTests {
     @Test(
         "Is improper",
         arguments: [
-            (Fraction<Int>(3, 2), true),
-            (Fraction<Int>(-3, 2), true),
-            (Fraction<Int>(2, 2), true),
-            (Fraction<Int>(1, 2), false)
-        ]
+            (.init(3, 2), true),
+            (.init(-3, 2), true),
+            (.init(2, 2), true),
+            (.init(1, 2), false)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func isImproper(
         value: Fraction<Int>,
@@ -96,11 +96,11 @@ internal struct FractionRationalTests {
     @Test(
         "Is unit",
         arguments: [
-            (Fraction<Int>(1, 2), true),
-            (Fraction<Int>(-1, -2), false),
-            (Fraction<Int>(1, -2), false),
-            (Fraction<Int>(2, 4), false)
-        ]
+            (.init(1, 2), true),
+            (.init(-1, -2), false),
+            (.init(1, -2), false),
+            (.init(2, 4), false)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func isUnit(
         value: Fraction<Int>,
@@ -112,11 +112,11 @@ internal struct FractionRationalTests {
     @Test(
         "Quotient",
         arguments: [
-            (Fraction<Int>(1, 2), 0.5),
-            (Fraction<Int>(-1, 2), -0.5),
-            (Fraction<Int>(4, 2), 2.0),
-            (Fraction<Int>(-4, 2), -2.0)
-        ]
+            (.init(1, 2), 0.5),
+            (.init(-1, 2), -0.5),
+            (.init(4, 2), 2.0),
+            (.init(-4, 2), -2.0)
+        ] as Array<(Fraction<Int>, Double)>
     )
     internal func quotient(
         value: Fraction<Int>,
@@ -128,11 +128,11 @@ internal struct FractionRationalTests {
     @Test(
         "Is like",
         arguments: [
-            (Fraction<Int>(1, 4), Fraction<Int>(3, 4), true),
-            (Fraction<Int>(1, 2), Fraction<Int>(2, 4), false),
-            (Fraction<Int>(1, -4), Fraction<Int>(3, -4), true),
-            (Fraction<Int>(1, -2), Fraction<Int>(2, -4), false)
-        ]
+            (.init(1, 4), .init(3, 4), true),
+            (.init(1, 2), .init(2, 4), false),
+            (.init(1, -4), .init(3, -4), true),
+            (.init(1, -2), .init(2, -4), false)
+        ] as Array<(Fraction<Int>, Fraction<Int>, Bool)>
     )
     internal func isLike(
         lhs: Fraction<Int>,
@@ -190,9 +190,9 @@ extension FractionRationalTests {
     @Test(
         "Negative zero properties follow rational rules",
         arguments: [
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(0, -2)
-        ]
+            .negativeZero,
+            .init(0, -2)
+        ] as Array<Fraction<Int>>
     )
     internal func negativeZeroPropertiesFollowRationalRules(value: Fraction<Int>) {
         #expect(value.isOne == false)
@@ -227,9 +227,9 @@ extension FractionRationalTests {
     @Test(
         "Positive zero properties follow rational rules",
         arguments: [
-            Fraction<Int>.zero,
-            Fraction<Int>(0, 2)
-        ]
+            .zero,
+            .init(0, 2)
+        ] as Array<Fraction<Int>>
     )
     internal func positiveZeroPropertiesFollowRationalRules(value: Fraction<Int>) {
         #expect(value.isOne == false)

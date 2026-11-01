@@ -44,7 +44,7 @@ internal struct Int4DecodableTests {
             "8",
             "\"1\"",
             "true"
-        ]
+        ] as Array<String>
     )
     internal func decodeFromJSONThrows(json: String) throws {
         let data: Data = try #require(json.data(using: .utf8))

@@ -26,9 +26,9 @@ internal struct Int4RaisableTests {
         (1, -3, 1),
         (-1, -2, 1),
         (-1, -3, -1),
-        (0, Int4.max, 0),
-        (1, Int4.max, 1),
-        (-1, Int4.max, -1)
+        (0, .max, 0),
+        (1, .max, 1),
+        (-1, .max, -1)
     ]
 
     private static let squaringArguments: [(Int4, Int4)] = [
@@ -314,9 +314,9 @@ extension Int4RaisableTests {
     @Test(
         "Negative zero base exponentiation follows integer rules",
         arguments: [
-            (Int4.negativeZero, Int4.Exponent.zero, Int4.one),
-            (Int4.negativeZero, 1, Int4.negativeZero),
-            (Int4.negativeZero, 2, Int4.zero)
+            (.negativeZero, .zero, .one),
+            (.negativeZero, 1, .negativeZero),
+            (.negativeZero, 2, .zero)
         ] as Array<(Int4, Int4.Exponent, Int4)>
     )
     internal func negativeZeroBaseExponentiationFollowsIntegerRules(
@@ -423,9 +423,9 @@ extension Int4RaisableTests {
     @Test(
         "Positive zero base exponentiation follows integer rules",
         arguments: [
-            (Int4.zero, Int4.Exponent.zero, Int4.one),
-            (Int4.zero, 1, Int4.zero),
-            (Int4.zero, 2, Int4.zero)
+            (.zero, .zero, .one),
+            (.zero, 1, .zero),
+            (.zero, 2, .zero)
         ] as Array<(Int4, Int4.Exponent, Int4)>
     )
     internal func positiveZeroBaseExponentiationFollowsIntegerRules(

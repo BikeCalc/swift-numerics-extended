@@ -101,7 +101,7 @@ extension IntSubtractableTests {
             5,
             -3,
             -5
-        ]
+        ] as Array<Int>
     )
     internal func subtractingNegativeZeroPreservesMinuend(minuend: Int) {
         let result: Int = minuend - Int.negativeZero
@@ -119,7 +119,7 @@ extension IntSubtractableTests {
             5,
             -3,
             -5
-        ]
+        ] as Array<Int>
     )
     internal func subtractingPositiveZeroPreservesMinuend(minuend: Int) {
         let result: Int = minuend - Int.zero
@@ -133,7 +133,7 @@ extension IntSubtractableTests {
             5,
             -3,
             -5
-        ]
+        ] as Array<Int>
     )
     internal func subtractingSelfReturnsPositiveZero(value: Int) {
         let result: Int = value - value

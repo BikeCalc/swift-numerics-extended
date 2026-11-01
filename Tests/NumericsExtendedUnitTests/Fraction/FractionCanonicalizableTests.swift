@@ -15,28 +15,28 @@ internal struct FractionCanonicalizableTests {
     internal init() {}
 
     private static let canonicalizationArguments: [(Fraction<Int>, Fraction<Int>)] = [
-        (Fraction<Int>(2, 4), Fraction<Int>(1, 2)),
-        (Fraction<Int>(-2, 4), Fraction<Int>(-1, 2)),
-        (Fraction<Int>(2, -4), Fraction<Int>(-1, 2)),
-        (Fraction<Int>(-2, -4), Fraction<Int>(1, 2)),
-        (Fraction<Int>(1, 2), Fraction<Int>(1, 2)),
-        (Fraction<Int>(-1, 2), Fraction<Int>(-1, 2)),
-        (Fraction<Int>(1, -2), Fraction<Int>(-1, 2)),
-        (Fraction<Int>(-1, -2), Fraction<Int>(1, 2))
+        (.init(2, 4), .init(1, 2)),
+        (.init(-2, 4), .init(-1, 2)),
+        (.init(2, -4), .init(-1, 2)),
+        (.init(-2, -4), .init(1, 2)),
+        (.init(1, 2), .init(1, 2)),
+        (.init(-1, 2), .init(-1, 2)),
+        (.init(1, -2), .init(-1, 2)),
+        (.init(-1, -2), .init(1, 2))
     ]
 
     @Test(
         "Is canonicalizable",
         arguments: [
-            (Fraction<Int>(2, 4), true),
-            (Fraction<Int>(-2, 4), true),
-            (Fraction<Int>(2, -4), true),
-            (Fraction<Int>(-2, -4), true),
-            (Fraction<Int>(1, 2), true),
-            (Fraction<Int>(-1, 2), true),
-            (Fraction<Int>(1, -2), true),
-            (Fraction<Int>(-1, -2), true)
-        ]
+            (.init(2, 4), true),
+            (.init(-2, 4), true),
+            (.init(2, -4), true),
+            (.init(-2, -4), true),
+            (.init(1, 2), true),
+            (.init(-1, 2), true),
+            (.init(1, -2), true),
+            (.init(-1, -2), true)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func isCanonicalizable(
         value: Fraction<Int>,
@@ -48,15 +48,15 @@ internal struct FractionCanonicalizableTests {
     @Test(
         "Is canonicalized",
         arguments: [
-            (Fraction<Int>(2, 4), false),
-            (Fraction<Int>(-2, 4), false),
-            (Fraction<Int>(2, -4), false),
-            (Fraction<Int>(-2, -4), false),
-            (Fraction<Int>(1, 2), true),
-            (Fraction<Int>(-1, 2), true),
-            (Fraction<Int>(1, -2), false),
-            (Fraction<Int>(-1, -2), false)
-        ]
+            (.init(2, 4), false),
+            (.init(-2, 4), false),
+            (.init(2, -4), false),
+            (.init(-2, -4), false),
+            (.init(1, 2), true),
+            (.init(-1, 2), true),
+            (.init(1, -2), false),
+            (.init(-1, -2), false)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func isCanonicalized(
         value: Fraction<Int>,
@@ -93,11 +93,11 @@ internal struct FractionCanonicalizableTests {
     @Test(
         "Canonicalization is idempotent",
         arguments: [
-            Fraction<Int>(1, 2),
-            Fraction<Int>(2, 4),
-            Fraction<Int>(1, -2),
-            Fraction<Int>(2, -4)
-        ]
+            .init(1, 2),
+            .init(2, 4),
+            .init(1, -2),
+            .init(2, -4)
+        ] as Array<Fraction<Int>>
     )
     internal func canonicalizationIsIdempotent(value: Fraction<Int>) {
         let result: Fraction<Int> = value.canonicalized().canonicalized()
@@ -155,9 +155,9 @@ extension FractionCanonicalizableTests {
     @Test(
         "Negative zero canonicalization follows rational rules",
         arguments: [
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(0, -2)
-        ]
+            .negativeZero,
+            .init(0, -2)
+        ] as Array<Fraction<Int>>
     )
     internal func negativeZeroCanonicalizationFollowsRationalRules(value: Fraction<Int>) {
         #expect(value.isCanonicalizable == true)
@@ -185,9 +185,9 @@ extension FractionCanonicalizableTests {
     @Test(
         "Positive zero canonicalization follows rational rules",
         arguments: [
-            (Fraction<Int>.zero, true),
-            (Fraction<Int>(0, 2), false)
-        ]
+            (.zero, true),
+            (.init(0, 2), false)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func positiveZeroCanonicalizationFollowsRationalRules(
         value: Fraction<Int>,

@@ -15,49 +15,49 @@ internal struct FractionRaisableTests {
     internal init() {}
 
     private static let exponentiationArguments: [(Fraction<Int>, Fraction<Int>.Exponent, Fraction<Int>)] = [
-        (Fraction<Int>(2, 3), 2, Fraction<Int>(4, 9)),
-        (Fraction<Int>(2, 3), 3, Fraction<Int>(8, 27)),
-        (Fraction<Int>(2, 3), -2, Fraction<Int>(9, 4)),
-        (Fraction<Int>(2, 3), -3, Fraction<Int>(27, 8)),
-        (Fraction<Int>(-2, 3), 2, Fraction<Int>(4, 9)),
-        (Fraction<Int>(-2, 3), 3, Fraction<Int>(-8, 27)),
-        (Fraction<Int>(-2, 3), -2, Fraction<Int>(9, 4)),
-        (Fraction<Int>(-2, 3), -3, Fraction<Int>(27, -8)),
-        (Fraction<Int>(1, 1), -2, Fraction<Int>(1, 1)),
-        (Fraction<Int>(1, 1), -3, Fraction<Int>(1, 1)),
-        (Fraction<Int>(-1, 1), -2, Fraction<Int>(1, 1)),
-        (Fraction<Int>(-1, 1), -3, Fraction<Int>(1, -1))
+        (.init(2, 3), 2, .init(4, 9)),
+        (.init(2, 3), 3, .init(8, 27)),
+        (.init(2, 3), -2, .init(9, 4)),
+        (.init(2, 3), -3, .init(27, 8)),
+        (.init(-2, 3), 2, .init(4, 9)),
+        (.init(-2, 3), 3, .init(-8, 27)),
+        (.init(-2, 3), -2, .init(9, 4)),
+        (.init(-2, 3), -3, .init(27, -8)),
+        (.init(1, 1), -2, .init(1, 1)),
+        (.init(1, 1), -3, .init(1, 1)),
+        (.init(-1, 1), -2, .init(1, 1)),
+        (.init(-1, 1), -3, .init(1, -1))
     ]
 
     private static let squaringArguments: [(Fraction<Int>, Fraction<Int>)] = [
-        (Fraction<Int>(2, 3), Fraction<Int>(4, 9)),
-        (Fraction<Int>(3, 4), Fraction<Int>(9, 16)),
-        (Fraction<Int>(-2, 3), Fraction<Int>(4, 9)),
-        (Fraction<Int>(-3, 4), Fraction<Int>(9, 16))
+        (.init(2, 3), .init(4, 9)),
+        (.init(3, 4), .init(9, 16)),
+        (.init(-2, 3), .init(4, 9)),
+        (.init(-3, 4), .init(9, 16))
     ]
 
     private static let cubingArguments: [(Fraction<Int>, Fraction<Int>)] = [
-        (Fraction<Int>(2, 3), Fraction<Int>(8, 27)),
-        (Fraction<Int>(3, 4), Fraction<Int>(27, 64)),
-        (Fraction<Int>(-2, 3), Fraction<Int>(-8, 27)),
-        (Fraction<Int>(-3, 4), Fraction<Int>(-27, 64))
+        (.init(2, 3), .init(8, 27)),
+        (.init(3, 4), .init(27, 64)),
+        (.init(-2, 3), .init(-8, 27)),
+        (.init(-3, 4), .init(-27, 64))
     ]
 
     @Test(
         "Is power of",
         arguments: [
-            (Fraction<Int>(4, 1), Fraction<Int>(2, 1), true),
-            (Fraction<Int>(6, 1), Fraction<Int>(2, 1), false),
-            (Fraction<Int>(8, 1), Fraction<Int>(2, 1), true),
-            (Fraction<Int>(9, 1), Fraction<Int>(2, 1), false),
-            (Fraction<Int>(4, 1), Fraction<Int>(-2, 1), true),
-            (Fraction<Int>(-8, 1), Fraction<Int>(-2, 1), true),
-            (Fraction<Int>(6, 1), Fraction<Int>(-2, 1), false),
-            (Fraction<Int>(1, 4), Fraction<Int>(2, 1), true),
-            (Fraction<Int>(4, 1), Fraction<Int>(1, 2), true),
-            (Fraction<Int>(-1, 8), Fraction<Int>(-2, 1), true),
-            (Fraction<Int>(1, 8), Fraction<Int>(-2, 1), false)
-        ]
+            (.init(4, 1), .init(2, 1), true),
+            (.init(6, 1), .init(2, 1), false),
+            (.init(8, 1), .init(2, 1), true),
+            (.init(9, 1), .init(2, 1), false),
+            (.init(4, 1), .init(-2, 1), true),
+            (.init(-8, 1), .init(-2, 1), true),
+            (.init(6, 1), .init(-2, 1), false),
+            (.init(1, 4), .init(2, 1), true),
+            (.init(4, 1), .init(1, 2), true),
+            (.init(-1, 8), .init(-2, 1), true),
+            (.init(1, 8), .init(-2, 1), false)
+        ] as Array<(Fraction<Int>, Fraction<Int>, Bool)>
     )
     internal func isPowerOf(
         value: Fraction<Int>,
@@ -177,11 +177,11 @@ extension FractionRaisableTests {
     @Test(
         "Exponentiation is not commutative",
         arguments: [
-            (Fraction<Int>(2, 1), 3),
-            (Fraction<Int>(3, 1), 2),
-            (Fraction<Int>(-2, 1), 3),
-            (Fraction<Int>(2, 1), -2)
-        ]
+            (.init(2, 1), 3),
+            (.init(3, 1), 2),
+            (.init(-2, 1), 3),
+            (.init(2, 1), -2)
+        ] as Array<(Fraction<Int>, Fraction<Int>.Exponent)>
     )
     internal func exponentiationIsNotCommutative(
         base: Fraction<Int>,
@@ -199,11 +199,11 @@ extension FractionRaisableTests {
     @Test(
         "Raising to negative one returns reciprocal",
         arguments: [
-            (Fraction<Int>(1, 1), Fraction<Int>(1, 1)),
-            (Fraction<Int>(-1, 1), Fraction<Int>(1, -1)),
-            (Fraction<Int>(2, 3), Fraction<Int>(3, 2)),
-            (Fraction<Int>(-2, 3), Fraction<Int>(3, -2))
-        ]
+            (.init(1, 1), .init(1, 1)),
+            (.init(-1, 1), .init(1, -1)),
+            (.init(2, 3), .init(3, 2)),
+            (.init(-2, 3), .init(3, -2))
+        ] as Array<(Fraction<Int>, Fraction<Int>)>
     )
     internal func raisingToNegativeOneReturnsReciprocal(
         base: Fraction<Int>,
@@ -238,10 +238,10 @@ extension FractionRaisableTests {
     @Test(
         "NaN raised to nonzero exponent returns NaN",
         arguments: [
-            (Fraction<Int>.nan, 1),
-            (Fraction<Int>.nan, 2),
-            (Fraction<Int>.nan, -1)
-        ]
+            (.nan, 1),
+            (.nan, 2),
+            (.nan, -1)
+        ] as Array<(Fraction<Int>, Fraction<Int>.Exponent)>
     )
     internal func nanRaisedToNonzeroExponentReturnsNaN(
         base: Fraction<Int>,
@@ -270,15 +270,15 @@ extension FractionRaisableTests {
     @Test(
         "Raising to negative zero returns one",
         arguments: [
-            Fraction<Int>(0, 1),
-            Fraction<Int>(0, -2),
-            Fraction<Int>(1, 1),
-            Fraction<Int>(-1, 1),
-            Fraction<Int>(2, 1),
-            Fraction<Int>(3, 1),
-            Fraction<Int>(-2, 1),
-            Fraction<Int>(-3, 1)
-        ]
+            .init(0, 1),
+            .init(0, -2),
+            .init(1, 1),
+            .init(-1, 1),
+            .init(2, 1),
+            .init(3, 1),
+            .init(-2, 1),
+            .init(-3, 1)
+        ] as Array<Fraction<Int>>
     )
     internal func raisingToNegativeZeroReturnsOne(base: Fraction<Int>) {
         let result: Fraction<Int> = base ** Fraction<Int>.Exponent.negativeZero
@@ -288,13 +288,13 @@ extension FractionRaisableTests {
     @Test(
         "Negative infinity base power predicate follows rational rules",
         arguments: [
-            (Fraction<Int>(0, 1), true),
-            (Fraction<Int>(0, -1), true),
-            (Fraction<Int>(1, 1), true),
-            (Fraction<Int>(2, 1), false),
-            (Fraction<Int>.infinity, true),
-            (Fraction<Int>.negativeInfinity, true)
-        ]
+            (.init(0, 1), true),
+            (.init(0, -1), true),
+            (.init(1, 1), true),
+            (.init(2, 1), false),
+            (.infinity, true),
+            (.negativeInfinity, true)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func negativeInfinityBasePowerPredicateFollowsRationalRules(
         value: Fraction<Int>,
@@ -307,12 +307,12 @@ extension FractionRaisableTests {
     @Test(
         "Negative infinity exponentiation follows parity rule",
         arguments: [
-            (Fraction<Int>.negativeInfinity, 0, Fraction<Int>(1, 1)),
-            (Fraction<Int>.negativeInfinity, 1, Fraction<Int>.negativeInfinity),
-            (Fraction<Int>.negativeInfinity, 2, Fraction<Int>.infinity),
-            (Fraction<Int>.negativeInfinity, -1, Fraction<Int>(0, -1)),
-            (Fraction<Int>.negativeInfinity, -2, Fraction<Int>(0, 1))
-        ]
+            (.negativeInfinity, 0, .init(1, 1)),
+            (.negativeInfinity, 1, .negativeInfinity),
+            (.negativeInfinity, 2, .infinity),
+            (.negativeInfinity, -1, .init(0, -1)),
+            (.negativeInfinity, -2, .init(0, 1))
+        ] as Array<(Fraction<Int>, Fraction<Int>.Exponent, Fraction<Int>)>
     )
     internal func negativeInfinityExponentiationFollowsParityRule(
         base: Fraction<Int>,
@@ -330,13 +330,13 @@ extension FractionRaisableTests {
     @Test(
         "Negative one base exponentiation follows parity rule",
         arguments: [
-            (0, Fraction<Int>(1, 1)),
-            (1, Fraction<Int>(-1, 1)),
-            (2, Fraction<Int>(1, 1)),
-            (3, Fraction<Int>(-1, 1)),
-            (-2, Fraction<Int>(1, 1)),
-            (-3, Fraction<Int>(1, -1))
-        ]
+            (0, .init(1, 1)),
+            (1, .init(-1, 1)),
+            (2, .init(1, 1)),
+            (3, .init(-1, 1)),
+            (-2, .init(1, 1)),
+            (-3, .init(1, -1))
+        ] as Array<(Fraction<Int>.Exponent, Fraction<Int>)>
     )
     internal func negativeOneBaseExponentiationFollowsParityRule(
         exponent: Fraction<Int>.Exponent,
@@ -349,10 +349,10 @@ extension FractionRaisableTests {
     @Test(
         "Negative one base power predicate follows signed rules",
         arguments: [
-            (Fraction<Int>(1, 1), true),
-            (Fraction<Int>(-1, 1), true),
-            (Fraction<Int>(2, 1), false)
-        ]
+            (.init(1, 1), true),
+            (.init(-1, 1), true),
+            (.init(2, 1), false)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func negativeOneBasePowerPredicateFollowsSignedRules(
         value: Fraction<Int>,
@@ -369,13 +369,13 @@ extension FractionRaisableTests {
     @Test(
         "Negative zero base power predicate follows rational rules",
         arguments: [
-            (Fraction<Int>(0, 1), true),
-            (Fraction<Int>(0, -1), true),
-            (Fraction<Int>(1, 1), true),
-            (Fraction<Int>(2, 1), false),
-            (Fraction<Int>.infinity, true),
-            (Fraction<Int>.negativeInfinity, true)
-        ]
+            (.init(0, 1), true),
+            (.init(0, -1), true),
+            (.init(1, 1), true),
+            (.init(2, 1), false),
+            (.infinity, true),
+            (.negativeInfinity, true)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func negativeZeroBasePowerPredicateFollowsRationalRules(
         value: Fraction<Int>,
@@ -388,12 +388,12 @@ extension FractionRaisableTests {
     @Test(
         "Negative zero base exponentiation follows parity rule",
         arguments: [
-            (Fraction<Int>(0, -1), 0, Fraction<Int>(1, 1)),
-            (Fraction<Int>(0, -1), 1, Fraction<Int>(0, -1)),
-            (Fraction<Int>(0, -1), 2, Fraction<Int>(0, 1)),
-            (Fraction<Int>(0, -1), -1, Fraction<Int>.negativeInfinity),
-            (Fraction<Int>(0, -1), -2, Fraction<Int>.infinity)
-        ]
+            (.init(0, -1), 0, .init(1, 1)),
+            (.init(0, -1), 1, .init(0, -1)),
+            (.init(0, -1), 2, .init(0, 1)),
+            (.init(0, -1), -1, .negativeInfinity),
+            (.init(0, -1), -2, .infinity)
+        ] as Array<(Fraction<Int>, Fraction<Int>.Exponent, Fraction<Int>)>
     )
     internal func negativeZeroBaseExponentiationFollowsParityRule(
         base: Fraction<Int>,
@@ -411,13 +411,13 @@ extension FractionRaisableTests {
     @Test(
         "Positive infinity base power predicate follows rational rules",
         arguments: [
-            (Fraction<Int>(0, 1), true),
-            (Fraction<Int>(0, -1), true),
-            (Fraction<Int>(1, 1), true),
-            (Fraction<Int>(2, 1), false),
-            (Fraction<Int>.infinity, true),
-            (Fraction<Int>.negativeInfinity, false)
-        ]
+            (.init(0, 1), true),
+            (.init(0, -1), true),
+            (.init(1, 1), true),
+            (.init(2, 1), false),
+            (.infinity, true),
+            (.negativeInfinity, false)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func positiveInfinityBasePowerPredicateFollowsRationalRules(
         value: Fraction<Int>,
@@ -430,10 +430,10 @@ extension FractionRaisableTests {
     @Test(
         "Positive infinity exponentiation follows reciprocal rules",
         arguments: [
-            (Fraction<Int>.infinity, 0, Fraction<Int>(1, 1)),
-            (Fraction<Int>.infinity, 1, Fraction<Int>.infinity),
-            (Fraction<Int>.infinity, -1, Fraction<Int>(0, 1))
-        ]
+            (.infinity, 0, .init(1, 1)),
+            (.infinity, 1, .infinity),
+            (.infinity, -1, .init(0, 1))
+        ] as Array<(Fraction<Int>, Fraction<Int>.Exponent, Fraction<Int>)>
     )
     internal func positiveInfinityExponentiationFollowsReciprocalRules(
         base: Fraction<Int>,
@@ -451,15 +451,15 @@ extension FractionRaisableTests {
     @Test(
         "Raising to positive one preserves base",
         arguments: [
-            Fraction<Int>(0, 1),
-            Fraction<Int>(0, -2),
-            Fraction<Int>(1, 1),
-            Fraction<Int>(-1, 1),
-            Fraction<Int>(2, 1),
-            Fraction<Int>(3, 1),
-            Fraction<Int>(-2, 1),
-            Fraction<Int>(-3, 1)
-        ]
+            .init(0, 1),
+            .init(0, -2),
+            .init(1, 1),
+            .init(-1, 1),
+            .init(2, 1),
+            .init(3, 1),
+            .init(-2, 1),
+            .init(-3, 1)
+        ] as Array<Fraction<Int>>
     )
     internal func raisingToPositiveOnePreservesBase(base: Fraction<Int>) {
         let result: Fraction<Int> = base ** 1
@@ -475,7 +475,7 @@ extension FractionRaisableTests {
             3,
             -2,
             -3
-        ]
+        ] as Array<Fraction<Int>.Exponent>
     )
     internal func positiveOneBaseExponentiationReturnsPositiveOne(exponent: Fraction<Int>.Exponent) {
         let result: Fraction<Int> = Fraction<Int>(1, 1) ** exponent
@@ -485,9 +485,9 @@ extension FractionRaisableTests {
     @Test(
         "Positive one base power predicate follows identity rule",
         arguments: [
-            (Fraction<Int>(1, 1), true),
-            (Fraction<Int>(2, 1), false)
-        ]
+            (.init(1, 1), true),
+            (.init(2, 1), false)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func positiveOneBasePowerPredicateFollowsIdentityRule(
         value: Fraction<Int>,
@@ -504,15 +504,15 @@ extension FractionRaisableTests {
     @Test(
         "Raising to positive zero returns one",
         arguments: [
-            Fraction<Int>(0, 1),
-            Fraction<Int>(0, -2),
-            Fraction<Int>(1, 1),
-            Fraction<Int>(-1, 1),
-            Fraction<Int>(2, 1),
-            Fraction<Int>(3, 1),
-            Fraction<Int>(-2, 1),
-            Fraction<Int>(-3, 1)
-        ]
+            .init(0, 1),
+            .init(0, -2),
+            .init(1, 1),
+            .init(-1, 1),
+            .init(2, 1),
+            .init(3, 1),
+            .init(-2, 1),
+            .init(-3, 1)
+        ] as Array<Fraction<Int>>
     )
     internal func raisingToPositiveZeroReturnsOne(base: Fraction<Int>) {
         let result: Fraction<Int> = base ** .zero
@@ -522,13 +522,13 @@ extension FractionRaisableTests {
     @Test(
         "Positive zero base power predicate follows rational rules",
         arguments: [
-            (Fraction<Int>(0, 1), true),
-            (Fraction<Int>(0, -1), true),
-            (Fraction<Int>(1, 1), true),
-            (Fraction<Int>(2, 1), false),
-            (Fraction<Int>.infinity, true),
-            (Fraction<Int>.negativeInfinity, false)
-        ]
+            (.init(0, 1), true),
+            (.init(0, -1), true),
+            (.init(1, 1), true),
+            (.init(2, 1), false),
+            (.infinity, true),
+            (.negativeInfinity, false)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func positiveZeroBasePowerPredicateFollowsRationalRules(
         value: Fraction<Int>,
@@ -541,11 +541,11 @@ extension FractionRaisableTests {
     @Test(
         "Positive zero base exponentiation follows rational rules",
         arguments: [
-            (Fraction<Int>(0, 1), 0, Fraction<Int>(1, 1)),
-            (Fraction<Int>(0, 1), 1, Fraction<Int>(0, 1)),
-            (Fraction<Int>(0, 1), 2, Fraction<Int>(0, 1)),
-            (Fraction<Int>(0, 1), -1, Fraction<Int>.infinity)
-        ]
+            (.init(0, 1), 0, .init(1, 1)),
+            (.init(0, 1), 1, .init(0, 1)),
+            (.init(0, 1), 2, .init(0, 1)),
+            (.init(0, 1), -1, .infinity)
+        ] as Array<(Fraction<Int>, Fraction<Int>.Exponent, Fraction<Int>)>
     )
     internal func positiveZeroBaseExponentiationFollowsRationalRules(
         base: Fraction<Int>,

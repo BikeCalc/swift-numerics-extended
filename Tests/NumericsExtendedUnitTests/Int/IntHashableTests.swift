@@ -21,7 +21,7 @@ internal struct IntHashableTests {
             (-1, -1),
             (2, 2),
             (-2, -2)
-        ]
+        ] as Array<(Int, Int)>
     )
     internal func equalValuesProduceEqualHashes(
         lhs: Int,

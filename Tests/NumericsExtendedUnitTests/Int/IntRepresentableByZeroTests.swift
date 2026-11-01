@@ -19,7 +19,7 @@ internal struct IntRepresentableByZeroTests {
         arguments: [
             1,
             -1
-        ]
+        ] as Array<Int>
     )
     internal func nonzeroValuesAreNotZero(value: Int) {
         #expect(value.isZero == false)

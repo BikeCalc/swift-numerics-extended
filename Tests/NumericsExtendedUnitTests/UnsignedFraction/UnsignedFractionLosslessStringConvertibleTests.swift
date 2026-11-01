@@ -20,7 +20,7 @@ internal struct UnsignedFractionLosslessStringConvertibleTests {
             "-1",
             "-1/2",
             "1/-2"
-        ]
+        ] as Array<String>
     )
     internal func negativeFiniteStringInitializationFails(description: String) {
         let result: Fraction<UInt>? = Fraction<UInt>(description)
@@ -36,7 +36,7 @@ extension UnsignedFractionLosslessStringConvertibleTests {
         arguments: [
             "-inf",
             "-infinity"
-        ]
+        ] as Array<String>
     )
     internal func negativeInfinityStringInitializationFails(description: String) {
         let result: Fraction<UInt>? = Fraction<UInt>(description)
@@ -61,7 +61,7 @@ extension UnsignedFractionLosslessStringConvertibleTests {
         arguments: [
             "-0",
             "0/-1"
-        ]
+        ] as Array<String>
     )
     internal func negativeZeroStringInitializationFails(description: String) {
         let result: Fraction<UInt>? = Fraction<UInt>(description)

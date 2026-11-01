@@ -36,7 +36,7 @@ internal struct UInt4LosslessStringConvertibleTests {
             "16",
             "abc",
             "1.0"
-        ]
+        ] as Array<String>
     )
     internal func stringInitializationFails(description: String) {
         #expect(UInt4(description) == nil)

@@ -19,10 +19,10 @@ internal struct CanonicalizedFractionDecodableTests {
     @Test(
         "Decode from JSON succeeds",
         arguments: [
-            (#"{"num":1,"den":2}"#, Fraction<Int>(1, 2)),
-            (#"{"num":2,"den":4}"#, Fraction<Int>(1, 2)),
-            (#"{"num":2,"den":-4}"#, Fraction<Int>(-1, 2))
-        ]
+            (#"{"num":1,"den":2}"#, .init(1, 2)),
+            (#"{"num":2,"den":4}"#, .init(1, 2)),
+            (#"{"num":2,"den":-4}"#, .init(-1, 2))
+        ] as Array<(String, Fraction<Int>)>
     )
     internal func decodeFromJSONSucceeds(
         json: String,
@@ -44,7 +44,7 @@ internal struct CanonicalizedFractionDecodableTests {
             #"{"num":"1","den":2}"#,
             #"[1,2]"#,
             #"true"#
-        ]
+        ] as Array<String>
     )
     internal func decodeFromJSONThrows(json: String) throws {
         let data: Data = try #require(json.data(using: .utf8))

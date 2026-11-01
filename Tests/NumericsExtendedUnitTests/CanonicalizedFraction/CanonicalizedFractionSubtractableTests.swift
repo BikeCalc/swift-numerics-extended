@@ -15,10 +15,10 @@ internal struct CanonicalizedFractionSubtractableTests {
     internal init() {}
 
     private static let subtractionArguments: [(Fraction<Int>, Fraction<Int>.Subtrahend, Fraction<Int>)] = [
-        (Fraction<Int>(2, 3), Fraction<Int>(1, 2), Fraction<Int>(1, 6)),
-        (Fraction<Int>(3, 4), Fraction<Int>(1, 2), Fraction<Int>(1, 4)),
-        (Fraction<Int>(-2, 3), Fraction<Int>(1, 2), Fraction<Int>(-7, 6)),
-        (Fraction<Int>(-3, 4), Fraction<Int>(-1, 2), Fraction<Int>(-1, 4))
+        (.init(2, 3), .init(1, 2), .init(1, 6)),
+        (.init(3, 4), .init(1, 2), .init(1, 4)),
+        (.init(-2, 3), .init(1, 2), .init(-7, 6)),
+        (.init(-3, 4), .init(-1, 2), .init(-1, 4))
     ]
 
     @Test(

@@ -15,19 +15,19 @@ internal struct FractionNegateableTests {
     internal init() {}
 
     private static let negationArguments: [(Fraction<Int>, Fraction<Int>)] = [
-        (Fraction<Int>(1, 2), Fraction<Int>(-1, 2)),
-        (Fraction<Int>(-1, 2), Fraction<Int>(1, 2)),
-        (Fraction<Int>(5, 2), Fraction<Int>(-5, 2)),
-        (Fraction<Int>(-5, 2), Fraction<Int>(5, 2))
+        (.init(1, 2), .init(-1, 2)),
+        (.init(-1, 2), .init(1, 2)),
+        (.init(5, 2), .init(-5, 2)),
+        (.init(-5, 2), .init(5, 2))
     ]
 
     private static let additiveInverseArguments: [Fraction<Int>] = [
-        Fraction<Int>(0, 1),
-        Fraction<Int>(0, -2),
-        Fraction<Int>(1, 2),
-        Fraction<Int>(-1, 2),
-        Fraction<Int>(5, 2),
-        Fraction<Int>(-5, 2)
+        .init(0, 1),
+        .init(0, -2),
+        .init(1, 2),
+        .init(-1, 2),
+        .init(5, 2),
+        .init(-5, 2)
     ]
 
     @Test(
@@ -70,11 +70,11 @@ internal struct FractionNegateableTests {
     @Test(
         "Is negative",
         arguments: [
-            (Fraction<Int>(1, 2), false),
-            (Fraction<Int>(-1, 2), true),
-            (Fraction<Int>(5, 2), false),
-            (Fraction<Int>(-5, 2), true)
-        ]
+            (.init(1, 2), false),
+            (.init(-1, 2), true),
+            (.init(5, 2), false),
+            (.init(-5, 2), true)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func isNegative(
         value: Fraction<Int>,
@@ -86,11 +86,11 @@ internal struct FractionNegateableTests {
     @Test(
         "Is positive",
         arguments: [
-            (Fraction<Int>(1, 2), true),
-            (Fraction<Int>(-1, 2), false),
-            (Fraction<Int>(5, 2), true),
-            (Fraction<Int>(-5, 2), false)
-        ]
+            (.init(1, 2), true),
+            (.init(-1, 2), false),
+            (.init(5, 2), true),
+            (.init(-5, 2), false)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func isPositive(
         value: Fraction<Int>,
@@ -102,11 +102,11 @@ internal struct FractionNegateableTests {
     @Test(
         "Is signed",
         arguments: [
-            (Fraction<Int>(1, 2), true),
-            (Fraction<Int>(-1, 2), true),
-            (Fraction<Int>(5, 2), true),
-            (Fraction<Int>(-5, 2), true)
-        ]
+            (.init(1, 2), true),
+            (.init(-1, 2), true),
+            (.init(5, 2), true),
+            (.init(-5, 2), true)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func isSigned(
         value: Fraction<Int>,
@@ -118,15 +118,15 @@ internal struct FractionNegateableTests {
     @Test(
         "Is opposite",
         arguments: [
-            (Fraction<Int>(1, 2), Fraction<Int>(1, 2), false),
-            (Fraction<Int>(-1, 2), Fraction<Int>(-1, 2), false),
-            (Fraction<Int>(-1, 2), Fraction<Int>(1, 2), true),
-            (Fraction<Int>(1, 2), Fraction<Int>(-1, 2), true),
-            (Fraction<Int>(5, 2), Fraction<Int>(5, 2), false),
-            (Fraction<Int>(-5, 2), Fraction<Int>(-5, 2), false),
-            (Fraction<Int>(-5, 2), Fraction<Int>(5, 2), true),
-            (Fraction<Int>(5, 2), Fraction<Int>(-5, 2), true)
-        ]
+            (.init(1, 2), .init(1, 2), false),
+            (.init(-1, 2), .init(-1, 2), false),
+            (.init(-1, 2), .init(1, 2), true),
+            (.init(1, 2), .init(-1, 2), true),
+            (.init(5, 2), .init(5, 2), false),
+            (.init(-5, 2), .init(-5, 2), false),
+            (.init(-5, 2), .init(5, 2), true),
+            (.init(5, 2), .init(-5, 2), true)
+        ] as Array<(Fraction<Int>, Fraction<Int>, Bool)>
     )
     internal func isOpposite(
         value: Fraction<Int>,
@@ -173,12 +173,12 @@ extension FractionNegateableTests {
     @Test(
         "NaN opposite follows rational rules",
         arguments: [
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(1, 1),
-            Fraction<Int>.infinity,
-            Fraction<Int>.negativeInfinity
-        ]
+            .zero,
+            .negativeZero,
+            .init(1, 1),
+            .infinity,
+            .negativeInfinity
+        ] as Array<Fraction<Int>>
     )
     internal func nanOppositeFollowsRationalRules(other: Fraction<Int>) {
         let firstResult: Bool = Fraction<Int>.nan.isOpposite(of: other)
@@ -212,9 +212,9 @@ extension FractionNegateableTests {
     @Test(
         "Negative infinity opposite follows rational rules",
         arguments: [
-            (Fraction<Int>.negativeInfinity, false),
-            (Fraction<Int>.infinity, true)
-        ]
+            (.negativeInfinity, false),
+            (.infinity, true)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func negativeInfinityOppositeFollowsRationalRules(
         other: Fraction<Int>,
@@ -257,9 +257,9 @@ extension FractionNegateableTests {
     @Test(
         "Negative zero opposite follows stored representation rules",
         arguments: [
-            (Fraction<Int>.negativeZero, true),
-            (Fraction<Int>.zero, false)
-        ]
+            (.negativeZero, true),
+            (.zero, false)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func negativeZeroOppositeFollowsStoredRepresentationRules(
         other: Fraction<Int>,
@@ -272,9 +272,9 @@ extension FractionNegateableTests {
     @Test(
         "Negating negative zero preserves stored representation",
         arguments: [
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(0, -2)
-        ]
+            .negativeZero,
+            .init(0, -2)
+        ] as Array<Fraction<Int>>
     )
     internal func negatingNegativeZeroPreservesStoredRepresentation(value: Fraction<Int>) {
         let operatorResult: Fraction<Int> = -value
@@ -300,9 +300,9 @@ extension FractionNegateableTests {
     @Test(
         "Positive infinity opposite follows rational rules",
         arguments: [
-            (Fraction<Int>.infinity, false),
-            (Fraction<Int>.negativeInfinity, true)
-        ]
+            (.infinity, false),
+            (.negativeInfinity, true)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func positiveInfinityOppositeFollowsRationalRules(
         other: Fraction<Int>,
@@ -330,12 +330,12 @@ extension FractionNegateableTests {
     @Test(
         "Adding value and its negation returns positive zero",
         arguments: [
-            Fraction<Int>.zero,
-            Fraction<Int>(1, 2),
-            Fraction<Int>(-1, 2),
-            Fraction<Int>(5, 2),
-            Fraction<Int>(-5, 2)
-        ]
+            .zero,
+            .init(1, 2),
+            .init(-1, 2),
+            .init(5, 2),
+            .init(-5, 2)
+        ] as Array<Fraction<Int>>
     )
     internal func addingValueAndItsNegationReturnsPositiveZero(value: Fraction<Int>) {
         let result: Fraction<Int> = value + value.negating()
@@ -353,9 +353,9 @@ extension FractionNegateableTests {
     @Test(
         "Positive zero opposite follows stored representation rules",
         arguments: [
-            (Fraction<Int>.zero, true),
-            (Fraction<Int>.negativeZero, false)
-        ]
+            (.zero, true),
+            (.negativeZero, false)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func positiveZeroOppositeFollowsStoredRepresentationRules(
         other: Fraction<Int>,
@@ -368,9 +368,9 @@ extension FractionNegateableTests {
     @Test(
         "Negating positive zero preserves stored representation",
         arguments: [
-            Fraction<Int>.zero,
-            Fraction<Int>(0, 2)
-        ]
+            .zero,
+            .init(0, 2)
+        ] as Array<Fraction<Int>>
     )
     internal func negatingPositiveZeroPreservesStoredRepresentation(value: Fraction<Int>) {
         let operatorResult: Fraction<Int> = -value

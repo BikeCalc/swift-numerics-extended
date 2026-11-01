@@ -20,8 +20,8 @@ internal struct RomanNumericTests {
             (0, 0),
             (2, 2),
             (3, 3),
-            (0, Roman.min),
-            (3_999, Roman.max)
+            (0, .min),
+            (3_999, .max)
         ] as Array<(Int, Roman)>
     )
     internal func initializedExactlySucceeds(
@@ -36,7 +36,7 @@ internal struct RomanNumericTests {
         arguments: [
             -1,
             4_000
-        ]
+        ] as Array<Int>
     )
     internal func initializedExactlyFails(source: Int) {
         #expect(Roman(exactly: source) == nil)
@@ -48,8 +48,8 @@ internal struct RomanNumericTests {
             (0, 0),
             (2, 2),
             (3, 3),
-            (Roman.min, Roman.min),
-            (Roman.max, Roman.max)
+            (.min, Roman.min),
+            (.max, Roman.max)
         ] as Array<(Roman, Roman.Magnitude)>
     )
     internal func magnitudeSucceeds(

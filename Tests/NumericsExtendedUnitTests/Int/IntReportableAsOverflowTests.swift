@@ -21,12 +21,12 @@ internal struct IntReportableAsOverflowTests {
             (3, 4, 7, false),
             (-2, 3, 1, false),
             (-3, -4, -7, false),
-            (Int.max - 1, 1, Int.max, false),
-            (Int.max, 1, Int.min, true),
-            (Int.max, 2, Int.min + 1, true),
-            (Int.min, -1, Int.max, true),
-            (Int.min, -2, Int.max - 1, true)
-        ]
+            (Int.max - 1, 1, .max, false),
+            (.max, 1, .min, true),
+            (.max, 2, Int.min + 1, true),
+            (.min, -1, .max, true),
+            (.min, -2, Int.max - 1, true)
+        ] as Array<(Int, Int, Int, Bool)>
     )
     internal func addingReportingOverflow(
         augend: Int,
@@ -46,12 +46,12 @@ internal struct IntReportableAsOverflowTests {
             (5, 3, 2, false),
             (-3, 2, -5, false),
             (-5, -3, -2, false),
-            (Int.min + 1, 1, Int.min, false),
-            (Int.min, 1, Int.max, true),
-            (Int.min, 2, Int.max - 1, true),
-            (Int.max, -1, Int.min, true),
-            (Int.max, -2, Int.min + 1, true)
-        ]
+            (Int.min + 1, 1, .min, false),
+            (.min, 1, .max, true),
+            (.min, 2, Int.max - 1, true),
+            (.max, -1, .min, true),
+            (.max, -2, Int.min + 1, true)
+        ] as Array<(Int, Int, Int, Bool)>
     )
     internal func subtractingReportingOverflow(
         minuend: Int,
@@ -71,12 +71,12 @@ internal struct IntReportableAsOverflowTests {
             (3, 4, 12, false),
             (-2, 3, -6, false),
             (-3, -4, 12, false),
-            (Int.max, 1, Int.max, false),
-            (Int.min, 1, Int.min, false),
-            (Int.max, 2, -2, true),
-            (Int.min, 2, 0, true),
-            (Int.min, -1, Int.min, true)
-        ]
+            (.max, 1, .max, false),
+            (.min, 1, .min, false),
+            (.max, 2, -2, true),
+            (.min, 2, 0, true),
+            (.min, -1, .min, true)
+        ] as Array<(Int, Int, Int, Bool)>
     )
     internal func multipliedReportingOverflow(
         multiplicand: Int,
@@ -97,11 +97,11 @@ internal struct IntReportableAsOverflowTests {
             (-6, 2, -3, false),
             (-6, -3, 2, false),
             (0, 1, 0, false),
-            (Int.max, 1, Int.max, false),
-            (Int.min, 1, Int.min, false),
-            (Int.max, 0, Int.max, true),
-            (Int.min, -1, Int.min, true)
-        ]
+            (.max, 1, .max, false),
+            (.min, 1, .min, false),
+            (.max, 0, .max, true),
+            (.min, -1, .min, true)
+        ] as Array<(Int, Int, Int, Bool)>
     )
     internal func dividedReportingOverflow(
         dividend: Int,
@@ -122,11 +122,11 @@ internal struct IntReportableAsOverflowTests {
             (-6, 2, 0, false),
             (-7, 2, -1, false),
             (0, 1, 0, false),
-            (Int.max, 1, 0, false),
-            (Int.min, 1, 0, false),
-            (Int.max, 0, Int.max, true),
-            (Int.min, -1, 0, true)
-        ]
+            (.max, 1, 0, false),
+            (.min, 1, 0, false),
+            (.max, 0, .max, true),
+            (.min, -1, 0, true)
+        ] as Array<(Int, Int, Int, Bool)>
     )
     internal func remainderReportingOverflow(
         dividend: Int,
@@ -161,12 +161,12 @@ internal struct IntReportableAsOverflowTests {
             (0, -3, 0, true),
             (1, 0, 1, false),
             (1, 1, 1, false),
-            (Int.max, 1, Int.max, false),
-            (Int.max, 2, 1, true),
-            (Int.max, 3, 1, true),
-            (Int.min, 1, Int.min, false),
-            (Int.min, 2, 0, true)
-        ]
+            (.max, 1, .max, false),
+            (.max, 2, 1, true),
+            (.max, 3, 1, true),
+            (.min, 1, .min, false),
+            (.min, 2, 0, true)
+        ] as Array<(Int, Int.Exponent, Int, Bool)>
     )
     internal func raisedReportingOverflow(
         base: Int,

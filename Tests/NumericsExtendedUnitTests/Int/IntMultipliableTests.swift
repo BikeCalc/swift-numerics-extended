@@ -35,7 +35,7 @@ internal struct IntMultipliableTests {
             (7, 3, false),
             (-6, 3, true),
             (-7, 3, false)
-        ]
+        ] as Array<(Int, Int, Bool)>
     )
     internal func isMultipleOf(
         multiplicand: Int,
@@ -151,7 +151,7 @@ extension IntMultipliableTests {
             (3, -3),
             (-2, 2),
             (-3, 3)
-        ]
+        ] as Array<(Int, Int)>
     )
     internal func multiplyingByNegativeOneReturnsOppositeValue(
         multiplicand: Int,
@@ -168,7 +168,7 @@ extension IntMultipliableTests {
             3,
             -2,
             -3
-        ]
+        ] as Array<Int>
     )
     internal func isMultipleOfNegativeOneReturnsTrue(multiplicand: Int) {
         let result: Bool = multiplicand.isMultiple(of: -1)
@@ -192,7 +192,7 @@ extension IntMultipliableTests {
             3,
             -2,
             -3
-        ]
+        ] as Array<Int>
     )
     internal func isMultipleOfNegativeZeroReturnsFalse(multiplicand: Int) {
         let result: Bool = multiplicand.isMultiple(of: Int.negativeZero)
@@ -206,7 +206,7 @@ extension IntMultipliableTests {
             3,
             -2,
             -3
-        ]
+        ] as Array<Int>
     )
     internal func multiplyingByNegativeZeroReturnsNegativeZero(multiplicand: Int) {
         let result: Int = multiplicand * Int.negativeZero
@@ -224,7 +224,7 @@ extension IntMultipliableTests {
             3,
             -2,
             -3
-        ]
+        ] as Array<Int>
     )
     internal func multiplyingByPositiveOnePreservesMultiplicand(multiplicand: Int) {
         let result: Int = multiplicand * 1
@@ -238,7 +238,7 @@ extension IntMultipliableTests {
             3,
             -2,
             -3
-        ]
+        ] as Array<Int>
     )
     internal func isMultipleOfPositiveOneReturnsTrue(multiplicand: Int) {
         let result: Bool = multiplicand.isMultiple(of: 1)
@@ -262,7 +262,7 @@ extension IntMultipliableTests {
             3,
             -2,
             -3
-        ]
+        ] as Array<Int>
     )
     internal func isMultipleOfPositiveZeroReturnsFalse(multiplicand: Int) {
         let result: Bool = multiplicand.isMultiple(of: Int.zero)
@@ -276,7 +276,7 @@ extension IntMultipliableTests {
             3,
             -2,
             -3
-        ]
+        ] as Array<Int>
     )
     internal func multiplyingByPositiveZeroReturnsPositiveZero(multiplicand: Int) {
         let result: Int = multiplicand * Int.zero

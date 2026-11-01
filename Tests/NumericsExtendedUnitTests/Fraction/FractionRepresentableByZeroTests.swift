@@ -17,9 +17,9 @@ internal struct FractionRepresentableByZeroTests {
     @Test(
         "Nonzero values are not zero",
         arguments: [
-            Fraction<Int>(1, 1),
-            Fraction<Int>(-1, 1)
-        ]
+            .init(1, 1),
+            .init(-1, 1)
+        ] as Array<Fraction<Int>>
     )
     internal func nonzeroValuesAreNotZero(value: Fraction<Int>) {
         #expect(value.isZero == false)

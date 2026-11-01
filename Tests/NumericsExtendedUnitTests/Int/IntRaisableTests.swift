@@ -53,7 +53,7 @@ internal struct IntRaisableTests {
             (4, -2, true),
             (-8, -2, true),
             (6, -2, false)
-        ]
+        ] as Array<(Int, Int, Bool)>
     )
     internal func isPowerOf(
         value: Int,
@@ -177,7 +177,7 @@ extension IntRaisableTests {
             (3, 2),
             (-2, 3),
             (2, -2)
-        ]
+        ] as Array<(Int, Int.Exponent)>
     )
     internal func exponentiationIsNotCommutative(
         base: Int,
@@ -194,7 +194,7 @@ extension IntRaisableTests {
             (2, -1, 0),
             (2, -2, 0),
             (2, -3, 0)
-        ]
+        ] as Array<(Int, Int.Exponent, Int)>
     )
     internal func negativeExponentReturnsPositiveZero(
         base: Int,
@@ -211,7 +211,7 @@ extension IntRaisableTests {
             (-2, -1, 0),
             (-2, -2, 0),
             (-2, -3, 0)
-        ]
+        ] as Array<(Int, Int.Exponent, Int)>
     )
     internal func negativeBaseWithNegativeExponentReturnsPositiveZero(
         base: Int,
@@ -233,7 +233,7 @@ extension IntRaisableTests {
             (-1, -1),
             (2, 0),
             (-2, 0)
-        ]
+        ] as Array<(Int, Int)>
     )
     internal func raisingToNegativeOneFollowsIntegerRules(
         base: Int,
@@ -252,7 +252,7 @@ extension IntRaisableTests {
             (3, -1),
             (-2, 1),
             (-3, -1)
-        ]
+        ] as Array<(Int.Exponent, Int)>
     )
     internal func negativeOneBaseExponentiationFollowsParityRule(
         exponent: Int.Exponent,
@@ -268,7 +268,7 @@ extension IntRaisableTests {
             (1, true),
             (-1, true),
             (2, false)
-        ]
+        ] as Array<(Int, Bool)>
     )
     internal func negativeOneBasePowerPredicateFollowsSignedRules(
         value: Int,
@@ -293,7 +293,7 @@ extension IntRaisableTests {
             3,
             -2,
             -3
-        ]
+        ] as Array<Int>
     )
     internal func raisingToNegativeZeroReturnsOne(base: Int) {
         let result: Int = base ** Int.Exponent.negativeZero
@@ -307,7 +307,7 @@ extension IntRaisableTests {
             (-0, true),
             (1, true),
             (2, false)
-        ]
+        ] as Array<(Int, Bool)>
     )
     internal func negativeZeroBasePowerPredicateFollowsIntegerRules(
         value: Int,
@@ -320,10 +320,10 @@ extension IntRaisableTests {
     @Test(
         "Negative zero base exponentiation follows integer rules",
         arguments: [
-            (Int.negativeZero, Int.Exponent.zero, Int.one),
-            (Int.negativeZero, 1, Int.negativeZero),
-            (Int.negativeZero, 2, Int.zero)
-        ]
+            (.negativeZero, .zero, .one),
+            (.negativeZero, 1, .negativeZero),
+            (.negativeZero, 2, .zero)
+        ] as Array<(Int, Int.Exponent, Int)>
     )
     internal func negativeZeroBaseExponentiationFollowsIntegerRules(
         base: Int,
@@ -349,7 +349,7 @@ extension IntRaisableTests {
             3,
             -2,
             -3
-        ]
+        ] as Array<Int>
     )
     internal func raisingToPositiveOnePreservesBase(base: Int) {
         let result: Int = base ** 1
@@ -365,7 +365,7 @@ extension IntRaisableTests {
             3,
             -2,
             -3
-        ]
+        ] as Array<Int.Exponent>
     )
     internal func positiveOneBaseExponentiationReturnsPositiveOne(exponent: Int.Exponent) {
         let result: Int = 1 ** exponent
@@ -377,7 +377,7 @@ extension IntRaisableTests {
         arguments: [
             (1, true),
             (2, false)
-        ]
+        ] as Array<(Int, Bool)>
     )
     internal func positiveOneBasePowerPredicateFollowsIdentityRule(
         value: Int,
@@ -402,7 +402,7 @@ extension IntRaisableTests {
             3,
             -2,
             -3
-        ]
+        ] as Array<Int>
     )
     internal func raisingToPositiveZeroReturnsOne(base: Int) {
         let result: Int = base ** Int.Exponent.zero
@@ -416,7 +416,7 @@ extension IntRaisableTests {
             (-0, true),
             (1, true),
             (2, false)
-        ]
+        ] as Array<(Int, Bool)>
     )
     internal func positiveZeroBasePowerPredicateFollowsIntegerRules(
         value: Int,
@@ -429,10 +429,10 @@ extension IntRaisableTests {
     @Test(
         "Positive zero base exponentiation follows integer rules",
         arguments: [
-            (Int.zero, Int.Exponent.zero, Int.one),
-            (Int.zero, 1, Int.zero),
-            (Int.zero, 2, Int.zero)
-        ]
+            (.zero, .zero, .one),
+            (.zero, 1, .zero),
+            (.zero, 2, .zero)
+        ] as Array<(Int, Int.Exponent, Int)>
     )
     internal func positiveZeroBaseExponentiationFollowsIntegerRules(
         base: Int,

@@ -15,18 +15,18 @@ internal struct DoubleRoundableTests {
     internal init() {}
 
     private static let roundingArguments: Array<(Double, Double.DecimalPlace, Double)> = [
-        (1.2345, Double.DecimalPlace(0), 1.0),
-        (-1.2345, Double.DecimalPlace(0), -1.0),
-        (1.2345, Double.DecimalPlace(1), 1.2),
-        (-1.2345, Double.DecimalPlace(1), -1.2),
-        (1.2345, Double.DecimalPlace(2), 1.23),
-        (-1.2345, Double.DecimalPlace(2), -1.23),
-        (1.2355, Double.DecimalPlace(2), 1.24),
-        (-1.2355, Double.DecimalPlace(2), -1.24),
-        (0.555, Double.DecimalPlace(2), 0.56),
-        (-0.555, Double.DecimalPlace(2), -0.56),
-        (12.999, Double.DecimalPlace(2), 13.0),
-        (-12.999, Double.DecimalPlace(2), -13.0)
+        (1.2345, .init(0), 1.0),
+        (-1.2345, .init(0), -1.0),
+        (1.2345, .init(1), 1.2),
+        (-1.2345, .init(1), -1.2),
+        (1.2345, .init(2), 1.23),
+        (-1.2345, .init(2), -1.23),
+        (1.2355, .init(2), 1.24),
+        (-1.2355, .init(2), -1.24),
+        (0.555, .init(2), 0.56),
+        (-0.555, .init(2), -0.56),
+        (12.999, .init(2), 13.0),
+        (-12.999, .init(2), -13.0)
     ]
 
     @Test(
@@ -61,11 +61,11 @@ extension DoubleRoundableTests {
     @Test(
         "Rounding midpoint follows away-from-zero rule",
         arguments: [
-            (1.5, Double.DecimalPlace(0), 2.0),
-            (-1.5, Double.DecimalPlace(0), -2.0),
-            (1.25, Double.DecimalPlace(1), 1.3),
-            (-1.25, Double.DecimalPlace(1), -1.3)
-        ]
+            (1.5, .init(0), 2.0),
+            (-1.5, .init(0), -2.0),
+            (1.25, .init(1), 1.3),
+            (-1.25, .init(1), -1.3)
+        ] as Array<(Double, Double.DecimalPlace, Double)>
     )
     internal func roundingMidpointFollowsAwayFromZeroRule(
         value: Double,
@@ -79,11 +79,11 @@ extension DoubleRoundableTests {
     @Test(
         "Rounding whole value preserves value",
         arguments: [
-            (1.0, Double.DecimalPlace(0)),
-            (-1.0, Double.DecimalPlace(0)),
-            (1.0, Double.DecimalPlace(2)),
-            (-1.0, Double.DecimalPlace(2))
-        ]
+            (1.0, .init(0)),
+            (-1.0, .init(0)),
+            (1.0, .init(2)),
+            (-1.0, .init(2))
+        ] as Array<(Double, Double.DecimalPlace)>
     )
     internal func roundingWholeValuePreservesValue(
         value: Double,
@@ -100,9 +100,9 @@ extension DoubleRoundableTests {
     @Test(
         "Rounding NaN returns NaN",
         arguments: [
-            (Double.nan, Double.DecimalPlace(0)),
-            (Double.nan, Double.DecimalPlace(2))
-        ]
+            (.nan, .init(0)),
+            (.nan, .init(2))
+        ] as Array<(Double, Double.DecimalPlace)>
     )
     internal func roundingNaNReturnsNaN(
         value: Double,
@@ -119,9 +119,9 @@ extension DoubleRoundableTests {
     @Test(
         "Rounding negative infinity follows floating-point rules",
         arguments: [
-            Double.DecimalPlace(0),
-            Double.DecimalPlace(2)
-        ]
+            .init(0),
+            .init(2)
+        ] as Array<Double.DecimalPlace>
     )
     internal func roundingNegativeInfinityFollowsFloatingPointRules(decimalPlace: Double.DecimalPlace) {
         let result: Double = Double.negativeInfinity.rounded(to: decimalPlace)
@@ -135,9 +135,9 @@ extension DoubleRoundableTests {
     @Test(
         "Rounding negative zero preserves its sign",
         arguments: [
-            (-0.0, Double.DecimalPlace(0)),
-            (-0.0, Double.DecimalPlace(2))
-        ]
+            (-0.0, .init(0)),
+            (-0.0, .init(2))
+        ] as Array<(Double, Double.DecimalPlace)>
     )
     internal func roundingNegativeZeroPreservesItsSign(
         value: Double,
@@ -155,9 +155,9 @@ extension DoubleRoundableTests {
     @Test(
         "Rounding positive infinity follows floating-point rules",
         arguments: [
-            Double.DecimalPlace(0),
-            Double.DecimalPlace(2)
-        ]
+            .init(0),
+            .init(2)
+        ] as Array<Double.DecimalPlace>
     )
     internal func roundingPositiveInfinityFollowsFloatingPointRules(decimalPlace: Double.DecimalPlace) {
         let result: Double = Double.infinity.rounded(to: decimalPlace)
@@ -171,9 +171,9 @@ extension DoubleRoundableTests {
     @Test(
         "Rounding positive zero preserves its sign",
         arguments: [
-            (0.0, Double.DecimalPlace(0)),
-            (0.0, Double.DecimalPlace(2))
-        ]
+            (0.0, .init(0)),
+            (0.0, .init(2))
+        ] as Array<(Double, Double.DecimalPlace)>
     )
     internal func roundingPositiveZeroPreservesItsSign(
         value: Double,

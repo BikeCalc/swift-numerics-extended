@@ -15,27 +15,27 @@ internal struct FractionMultipliableTests {
     internal init() {}
 
     private static let multiplicationArguments: [(Fraction<Int>, Fraction<Int>.Multiplier, Fraction<Int>)] = [
-        (Fraction<Int>(1, 2), Fraction<Int>(1, 2), Fraction<Int>(1, 4)),
-        (Fraction<Int>(1, 2), Fraction<Int>(2, 3), Fraction<Int>(2, 6)),
-        (Fraction<Int>(-1, 2), Fraction<Int>(1, 2), Fraction<Int>(-1, 4)),
-        (Fraction<Int>(-1, 2), Fraction<Int>(-2, 3), Fraction<Int>(2, 6))
+        (.init(1, 2), .init(1, 2), .init(1, 4)),
+        (.init(1, 2), .init(2, 3), .init(2, 6)),
+        (.init(-1, 2), .init(1, 2), .init(-1, 4)),
+        (.init(-1, 2), .init(-2, 3), .init(2, 6))
     ]
 
     private static let doublingArguments: [(Fraction<Int>, Fraction<Int>)] = [
-        (Fraction<Int>(1, 2), Fraction<Int>(2, 2)),
-        (Fraction<Int>(-1, 2), Fraction<Int>(-2, 2)),
-        (Fraction<Int>(-1, -2), Fraction<Int>(-2, -2)),
-        (Fraction<Int>(1, -2), Fraction<Int>(2, -2))
+        (.init(1, 2), .init(2, 2)),
+        (.init(-1, 2), .init(-2, 2)),
+        (.init(-1, -2), .init(-2, -2)),
+        (.init(1, -2), .init(2, -2))
     ]
 
     @Test(
         "Is multiple of",
         arguments: [
-            (Fraction<Int>(1, 4), Fraction<Int>(1, 4), true),
-            (Fraction<Int>(2, 6), Fraction<Int>(1, 4), false),
-            (Fraction<Int>(-1, 4), Fraction<Int>(1, 4), true),
-            (Fraction<Int>(-2, 6), Fraction<Int>(1, 4), false)
-        ]
+            (.init(1, 4), .init(1, 4), true),
+            (.init(2, 6), .init(1, 4), false),
+            (.init(-1, 4), .init(1, 4), true),
+            (.init(-2, 6), .init(1, 4), false)
+        ] as Array<(Fraction<Int>, Fraction<Int>, Bool)>
     )
     internal func isMultipleOf(
         value: Fraction<Int>,
@@ -147,12 +147,12 @@ extension FractionMultipliableTests {
     @Test(
         "NaN multiple predicate follows rational rules",
         arguments: [
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(2, 1),
-            Fraction<Int>.infinity,
-            Fraction<Int>.negativeInfinity
-        ]
+            .zero,
+            .negativeZero,
+            .init(2, 1),
+            .infinity,
+            .negativeInfinity
+        ] as Array<Fraction<Int>>
     )
     internal func nanMultiplePredicateFollowsRationalRules(other: Fraction<Int>) {
         let firstResult: Bool = Fraction<Int>.nan.isMultiple(of: other)
@@ -164,11 +164,11 @@ extension FractionMultipliableTests {
     @Test(
         "Multiplying positive zero by infinity returns NaN",
         arguments: [
-            (Fraction<Int>.zero, Fraction<Int>.infinity),
-            (Fraction<Int>.zero, Fraction<Int>.negativeInfinity),
-            (Fraction<Int>.infinity, Fraction<Int>.zero),
-            (Fraction<Int>.negativeInfinity, Fraction<Int>.zero)
-        ]
+            (.zero, .infinity),
+            (.zero, .negativeInfinity),
+            (.infinity, .zero),
+            (.negativeInfinity, .zero)
+        ] as Array<(Fraction<Int>, Fraction<Int>.Multiplier)>
     )
     internal func multiplyingPositiveZeroByInfinityReturnsNaN(
         multiplicand: Fraction<Int>,
@@ -181,11 +181,11 @@ extension FractionMultipliableTests {
     @Test(
         "Multiplying negative zero by infinity returns NaN",
         arguments: [
-            (Fraction<Int>.negativeZero, Fraction<Int>.infinity),
-            (Fraction<Int>.negativeZero, Fraction<Int>.negativeInfinity),
-            (Fraction<Int>.infinity, Fraction<Int>.negativeZero),
-            (Fraction<Int>.negativeInfinity, Fraction<Int>.negativeZero)
-        ]
+            (.negativeZero, .infinity),
+            (.negativeZero, .negativeInfinity),
+            (.infinity, .negativeZero),
+            (.negativeInfinity, .negativeZero)
+        ] as Array<(Fraction<Int>, Fraction<Int>.Multiplier)>
     )
     internal func multiplyingNegativeZeroByInfinityReturnsNaN(
         multiplicand: Fraction<Int>,
@@ -198,13 +198,13 @@ extension FractionMultipliableTests {
     @Test(
         "Multiplying NaN returns NaN",
         arguments: [
-            Fraction<Int>.nan,
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(1, 1),
-            Fraction<Int>.infinity,
-            Fraction<Int>.negativeInfinity
-        ]
+            .nan,
+            .zero,
+            .negativeZero,
+            .init(1, 1),
+            .infinity,
+            .negativeInfinity
+        ] as Array<Fraction<Int>.Multiplier>
     )
     internal func multiplyingNaNReturnsNaN(multiplier: Fraction<Int>.Multiplier) {
         let result: Fraction<Int> = Fraction<Int>.nan * multiplier
@@ -214,13 +214,13 @@ extension FractionMultipliableTests {
     @Test(
         "Multiplying by NaN returns NaN",
         arguments: [
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(1, 1),
-            Fraction<Int>(-1, 1),
-            Fraction<Int>.infinity,
-            Fraction<Int>.negativeInfinity
-        ]
+            .zero,
+            .negativeZero,
+            .init(1, 1),
+            .init(-1, 1),
+            .infinity,
+            .negativeInfinity
+        ] as Array<Fraction<Int>>
     )
     internal func multiplyingByNaNReturnsNaN(multiplicand: Fraction<Int>) {
         let result: Fraction<Int> = multiplicand * Fraction<Int>.nan
@@ -234,12 +234,12 @@ extension FractionMultipliableTests {
     @Test(
         "Negative infinity multiple predicate follows rational rules",
         arguments: [
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(2, 1),
-            Fraction<Int>.infinity,
-            Fraction<Int>.negativeInfinity
-        ]
+            .zero,
+            .negativeZero,
+            .init(2, 1),
+            .infinity,
+            .negativeInfinity
+        ] as Array<Fraction<Int>>
     )
     internal func negativeInfinityMultiplePredicateFollowsRationalRules(other: Fraction<Int>) {
         let result: Bool = Fraction<Int>.negativeInfinity.isMultiple(of: other)
@@ -249,11 +249,11 @@ extension FractionMultipliableTests {
     @Test(
         "Multiplying negative infinity follows rational rules",
         arguments: [
-            (Fraction<Int>.infinity, Fraction<Int>.negativeInfinity),
-            (Fraction<Int>.negativeInfinity, Fraction<Int>.infinity),
-            (Fraction<Int>(1, 1), Fraction<Int>.negativeInfinity),
-            (Fraction<Int>(-1, 1), Fraction<Int>.infinity)
-        ]
+            (.infinity, .negativeInfinity),
+            (.negativeInfinity, .infinity),
+            (.init(1, 1), .negativeInfinity),
+            (.init(-1, 1), .infinity)
+        ] as Array<(Fraction<Int>.Multiplier, Fraction<Int>)>
     )
     internal func multiplyingNegativeInfinityFollowsRationalRules(
         multiplier: Fraction<Int>.Multiplier,
@@ -270,11 +270,11 @@ extension FractionMultipliableTests {
     @Test(
         "Multiplying by negative one returns opposite value",
         arguments: [
-            (Fraction<Int>(1, 2), Fraction<Int>(-1, 2)),
-            (Fraction<Int>(2, 3), Fraction<Int>(-2, 3)),
-            (Fraction<Int>(-1, 2), Fraction<Int>(1, 2)),
-            (Fraction<Int>(-2, 3), Fraction<Int>(2, 3))
-        ]
+            (.init(1, 2), .init(-1, 2)),
+            (.init(2, 3), .init(-2, 3)),
+            (.init(-1, 2), .init(1, 2)),
+            (.init(-2, 3), .init(2, 3))
+        ] as Array<(Fraction<Int>, Fraction<Int>)>
     )
     internal func multiplyingByNegativeOneReturnsOppositeValue(
         multiplicand: Fraction<Int>,
@@ -291,11 +291,11 @@ extension FractionMultipliableTests {
     @Test(
         "Is multiple of negative zero returns false",
         arguments: [
-            Fraction<Int>(1, 2),
-            Fraction<Int>(2, 3),
-            Fraction<Int>(-1, 2),
-            Fraction<Int>(-2, 3)
-        ]
+            .init(1, 2),
+            .init(2, 3),
+            .init(-1, 2),
+            .init(-2, 3)
+        ] as Array<Fraction<Int>>
     )
     internal func isMultipleOfNegativeZeroReturnsFalse(multiplicand: Fraction<Int>) {
         let result: Bool = multiplicand.isMultiple(of: .negativeZero)
@@ -305,12 +305,12 @@ extension FractionMultipliableTests {
     @Test(
         "Negative zero multiple predicate follows rational rules",
         arguments: [
-            (Fraction<Int>.zero, true),
-            (Fraction<Int>.negativeZero, true),
-            (Fraction<Int>(2, 1), true),
-            (Fraction<Int>.infinity, false),
-            (Fraction<Int>.negativeInfinity, false)
-        ]
+            (.zero, true),
+            (.negativeZero, true),
+            (.init(2, 1), true),
+            (.infinity, false),
+            (.negativeInfinity, false)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func negativeZeroMultiplePredicateFollowsRationalRules(
         other: Fraction<Int>,
@@ -323,11 +323,11 @@ extension FractionMultipliableTests {
     @Test(
         "Multiplying negative zero follows stored representation rules",
         arguments: [
-            (Fraction<Int>.zero, Fraction<Int>.negativeZero),
-            (Fraction<Int>.negativeZero, Fraction<Int>.zero),
-            (Fraction<Int>(1, 1), Fraction<Int>.negativeZero),
-            (Fraction<Int>(-1, 1), Fraction<Int>.negativeZero)
-        ]
+            (.zero, .negativeZero),
+            (.negativeZero, .zero),
+            (.init(1, 1), .negativeZero),
+            (.init(-1, 1), .negativeZero)
+        ] as Array<(Fraction<Int>.Multiplier, Fraction<Int>)>
     )
     internal func multiplyingNegativeZeroFollowsStoredRepresentationRules(
         multiplier: Fraction<Int>.Multiplier,
@@ -344,12 +344,12 @@ extension FractionMultipliableTests {
     @Test(
         "Positive infinity multiple predicate follows rational rules",
         arguments: [
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(2, 1),
-            Fraction<Int>.infinity,
-            Fraction<Int>.negativeInfinity
-        ]
+            .zero,
+            .negativeZero,
+            .init(2, 1),
+            .infinity,
+            .negativeInfinity
+        ] as Array<Fraction<Int>>
     )
     internal func positiveInfinityMultiplePredicateFollowsRationalRules(other: Fraction<Int>) {
         let result: Bool = Fraction<Int>.infinity.isMultiple(of: other)
@@ -359,11 +359,11 @@ extension FractionMultipliableTests {
     @Test(
         "Multiplying positive infinity follows rational rules",
         arguments: [
-            (Fraction<Int>.infinity, Fraction<Int>.infinity),
-            (Fraction<Int>.negativeInfinity, Fraction<Int>.negativeInfinity),
-            (Fraction<Int>(1, 1), Fraction<Int>.infinity),
-            (Fraction<Int>(-1, 1), Fraction<Int>.negativeInfinity)
-        ]
+            (.infinity, .infinity),
+            (.negativeInfinity, .negativeInfinity),
+            (.init(1, 1), .infinity),
+            (.init(-1, 1), .negativeInfinity)
+        ] as Array<(Fraction<Int>.Multiplier, Fraction<Int>)>
     )
     internal func multiplyingPositiveInfinityFollowsRationalRules(
         multiplier: Fraction<Int>.Multiplier,
@@ -380,11 +380,11 @@ extension FractionMultipliableTests {
     @Test(
         "Multiplying by positive one preserves multiplicand",
         arguments: [
-            Fraction<Int>(1, 2),
-            Fraction<Int>(2, 3),
-            Fraction<Int>(-1, 2),
-            Fraction<Int>(-2, 3)
-        ]
+            .init(1, 2),
+            .init(2, 3),
+            .init(-1, 2),
+            .init(-2, 3)
+        ] as Array<Fraction<Int>>
     )
     internal func multiplyingByPositiveOnePreservesMultiplicand(multiplicand: Fraction<Int>) {
         let result: Fraction<Int> = multiplicand * 1
@@ -398,11 +398,11 @@ extension FractionMultipliableTests {
     @Test(
         "Is multiple of positive zero returns false",
         arguments: [
-            Fraction<Int>(1, 2),
-            Fraction<Int>(2, 3),
-            Fraction<Int>(-1, 2),
-            Fraction<Int>(-2, 3)
-        ]
+            .init(1, 2),
+            .init(2, 3),
+            .init(-1, 2),
+            .init(-2, 3)
+        ] as Array<Fraction<Int>>
     )
     internal func isMultipleOfPositiveZeroReturnsFalse(multiplicand: Fraction<Int>) {
         let result: Bool = multiplicand.isMultiple(of: .zero)
@@ -412,11 +412,11 @@ extension FractionMultipliableTests {
     @Test(
         "Multiplying by positive zero returns positive or negative zero",
         arguments: [
-            Fraction<Int>(1, 2),
-            Fraction<Int>(2, 3),
-            Fraction<Int>(-1, 2),
-            Fraction<Int>(-2, 3)
-        ]
+            .init(1, 2),
+            .init(2, 3),
+            .init(-1, 2),
+            .init(-2, 3)
+        ] as Array<Fraction<Int>>
     )
     internal func multiplyingByPositiveZeroReturnsPositiveOrNegativeZero(multiplicand: Fraction<Int>) {
         let result: Fraction<Int> = multiplicand * .zero
@@ -426,12 +426,12 @@ extension FractionMultipliableTests {
     @Test(
         "Positive zero multiple predicate follows rational rules",
         arguments: [
-            (Fraction<Int>.zero, true),
-            (Fraction<Int>.negativeZero, true),
-            (Fraction<Int>(2, 1), true),
-            (Fraction<Int>.infinity, false),
-            (Fraction<Int>.negativeInfinity, false)
-        ]
+            (.zero, true),
+            (.negativeZero, true),
+            (.init(2, 1), true),
+            (.infinity, false),
+            (.negativeInfinity, false)
+        ] as Array<(Fraction<Int>, Bool)>
     )
     internal func positiveZeroMultiplePredicateFollowsRationalRules(
         other: Fraction<Int>,
@@ -444,11 +444,11 @@ extension FractionMultipliableTests {
     @Test(
         "Multiplying positive zero follows stored representation rules",
         arguments: [
-            (Fraction<Int>.zero, Fraction<Int>.zero),
-            (Fraction<Int>.negativeZero, Fraction<Int>.negativeZero),
-            (Fraction<Int>(1, 1), Fraction<Int>.zero),
-            (Fraction<Int>(-1, 1), Fraction<Int>.zero)
-        ]
+            (.zero, .zero),
+            (.negativeZero, .negativeZero),
+            (.init(1, 1), .zero),
+            (.init(-1, 1), .zero)
+        ] as Array<(Fraction<Int>.Multiplier, Fraction<Int>)>
     )
     internal func multiplyingPositiveZeroFollowsStoredRepresentationRules(
         multiplier: Fraction<Int>.Multiplier,

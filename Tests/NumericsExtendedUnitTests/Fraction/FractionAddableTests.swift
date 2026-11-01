@@ -15,10 +15,10 @@ internal struct FractionAddableTests {
     internal init() {}
 
     private static let additionArguments: [(Fraction<Int>, Fraction<Int>.Addend, Fraction<Int>)] = [
-        (Fraction<Int>(1, 2), Fraction<Int>(1, 2), Fraction<Int>(2, 2)),
-        (Fraction<Int>(1, 2), Fraction<Int>(2, 3), Fraction<Int>(7, 6)),
-        (Fraction<Int>(-1, 2), Fraction<Int>(1, 2), Fraction<Int>(0, 2)),
-        (Fraction<Int>(-1, 2), Fraction<Int>(-2, 3), Fraction<Int>(-7, 6))
+        (.init(1, 2), .init(1, 2), .init(2, 2)),
+        (.init(1, 2), .init(2, 3), .init(7, 6)),
+        (.init(-1, 2), .init(1, 2), .init(0, 2)),
+        (.init(-1, 2), .init(-2, 3), .init(-7, 6))
     ]
 
     @Test(
@@ -109,13 +109,13 @@ extension FractionAddableTests {
     @Test(
         "Adding to NaN returns NaN",
         arguments: [
-            Fraction<Int>.nan,
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(1, 1),
-            Fraction<Int>.infinity,
-            Fraction<Int>.negativeInfinity
-        ]
+            .nan,
+            .zero,
+            .negativeZero,
+            .init(1, 1),
+            .infinity,
+            .negativeInfinity
+        ] as Array<Fraction<Int>.Addend>
     )
     internal func addingToNaNReturnsNaN(addend: Fraction<Int>.Addend) {
         let result: Fraction<Int> = Fraction<Int>.nan + addend
@@ -125,13 +125,13 @@ extension FractionAddableTests {
     @Test(
         "Adding NaN returns NaN",
         arguments: [
-            Fraction<Int>.zero,
-            Fraction<Int>.negativeZero,
-            Fraction<Int>(1, 1),
-            Fraction<Int>(-1, 1),
-            Fraction<Int>.infinity,
-            Fraction<Int>.negativeInfinity
-        ]
+            .zero,
+            .negativeZero,
+            .init(1, 1),
+            .init(-1, 1),
+            .infinity,
+            .negativeInfinity
+        ] as Array<Fraction<Int>>
     )
     internal func addingNaNReturnsNaN(augend: Fraction<Int>) {
         let result: Fraction<Int> = augend + Fraction<Int>.nan
@@ -145,10 +145,10 @@ extension FractionAddableTests {
     @Test(
         "Adding to negative infinity follows rational rules",
         arguments: [
-            Fraction<Int>.negativeInfinity,
-            Fraction<Int>(1, 1),
-            Fraction<Int>(-1, 1)
-        ]
+            .negativeInfinity,
+            .init(1, 1),
+            .init(-1, 1)
+        ] as Array<Fraction<Int>.Addend>
     )
     internal func addingToNegativeInfinityFollowsRationalRules(addend: Fraction<Int>.Addend) {
         let result: Fraction<Int> = Fraction<Int>.negativeInfinity + addend
@@ -162,11 +162,11 @@ extension FractionAddableTests {
     @Test(
         "Adding to negative zero follows stored representation rules",
         arguments: [
-            (Fraction<Int>.zero, Fraction<Int>.negativeZero),
-            (Fraction<Int>.negativeZero, Fraction<Int>.negativeZero),
-            (Fraction<Int>(1, 1), Fraction<Int>(-1, -1)),
-            (Fraction<Int>(-1, 1), Fraction<Int>(1, -1))
-        ]
+            (.zero, .negativeZero),
+            (.negativeZero, .negativeZero),
+            (.init(1, 1), .init(-1, -1)),
+            (.init(-1, 1), .init(1, -1))
+        ] as Array<(Fraction<Int>.Addend, Fraction<Int>)>
     )
     internal func addingToNegativeZeroFollowsStoredRepresentationRules(
         addend: Fraction<Int>.Addend,
@@ -183,10 +183,10 @@ extension FractionAddableTests {
     @Test(
         "Adding to positive infinity follows rational rules",
         arguments: [
-            Fraction<Int>.infinity,
-            Fraction<Int>(1, 1),
-            Fraction<Int>(-1, 1)
-        ]
+            .infinity,
+            .init(1, 1),
+            .init(-1, 1)
+        ] as Array<Fraction<Int>.Addend>
     )
     internal func addingToPositiveInfinityFollowsRationalRules(addend: Fraction<Int>.Addend) {
         let result: Fraction<Int> = Fraction<Int>.infinity + addend
@@ -200,11 +200,11 @@ extension FractionAddableTests {
     @Test(
         "Adding opposite values returns positive zero",
         arguments: [
-            (Fraction<Int>(1, 2), Fraction<Int>(-1, 2)),
-            (Fraction<Int>(2, 3), Fraction<Int>(-2, 3)),
-            (Fraction<Int>(-1, 2), Fraction<Int>(1, 2)),
-            (Fraction<Int>(-2, 3), Fraction<Int>(2, 3))
-        ]
+            (.init(1, 2), .init(-1, 2)),
+            (.init(2, 3), .init(-2, 3)),
+            (.init(-1, 2), .init(1, 2)),
+            (.init(-2, 3), .init(2, 3))
+        ] as Array<(Fraction<Int>, Fraction<Int>.Addend)>
     )
     internal func addingOppositeValuesReturnsPositiveZero(
         augend: Fraction<Int>,
@@ -218,11 +218,11 @@ extension FractionAddableTests {
     @Test(
         "Adding positive zero preserves augend",
         arguments: [
-            Fraction<Int>(1, 2),
-            Fraction<Int>(2, 3),
-            Fraction<Int>(-1, 2),
-            Fraction<Int>(-2, 3)
-        ]
+            .init(1, 2),
+            .init(2, 3),
+            .init(-1, 2),
+            .init(-2, 3)
+        ] as Array<Fraction<Int>>
     )
     internal func addingPositiveZeroPreservesAugend(augend: Fraction<Int>) {
         let result: Fraction<Int> = augend + .zero
@@ -232,11 +232,11 @@ extension FractionAddableTests {
     @Test(
         "Adding to positive zero follows stored representation rules",
         arguments: [
-            (Fraction<Int>.zero, Fraction<Int>.zero),
-            (Fraction<Int>.negativeZero, Fraction<Int>.negativeZero),
-            (Fraction<Int>(1, 1), Fraction<Int>(1, 1)),
-            (Fraction<Int>(-1, 1), Fraction<Int>(-1, 1))
-        ]
+            (.zero, .zero),
+            (.negativeZero, .negativeZero),
+            (.init(1, 1), .init(1, 1)),
+            (.init(-1, 1), .init(-1, 1))
+        ] as Array<(Fraction<Int>.Addend, Fraction<Int>)>
     )
     internal func addingToPositiveZeroFollowsStoredRepresentationRules(
         addend: Fraction<Int>.Addend,

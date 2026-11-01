@@ -15,24 +15,24 @@ internal struct CanonicalizedFractionDivisibleTests {
     internal init() {}
 
     private static let divisionArguments: [(Fraction<Int>, Fraction<Int>.Divisor, Fraction<Int>)] = [
-        (Fraction<Int>(1, 2), Fraction<Int>(1, 2), Fraction<Int>(1, 1)),
-        (Fraction<Int>(1, 2), Fraction<Int>(2, 3), Fraction<Int>(3, 4)),
-        (Fraction<Int>(-1, 2), Fraction<Int>(1, 2), Fraction<Int>(-1, 1)),
-        (Fraction<Int>(-1, 2), Fraction<Int>(-2, 3), Fraction<Int>(3, 4))
+        (.init(1, 2), .init(1, 2), .init(1, 1)),
+        (.init(1, 2), .init(2, 3), .init(3, 4)),
+        (.init(-1, 2), .init(1, 2), .init(-1, 1)),
+        (.init(-1, 2), .init(-2, 3), .init(3, 4))
     ]
 
     private static let remainderArguments: [(Fraction<Int>, Fraction<Int>.RemainderDivisor, Fraction<Int>)] = [
-        (Fraction<Int>(1, 2), Fraction<Int>(1, 2), Fraction<Int>(0, 1)),
-        (Fraction<Int>(2, 3), Fraction<Int>(1, 2), Fraction<Int>(1, 6)),
-        (Fraction<Int>(-2, 3), Fraction<Int>(1, 2), Fraction<Int>(-1, 6)),
-        (Fraction<Int>(-2, 3), Fraction<Int>(-1, 2), Fraction<Int>(-1, 6))
+        (.init(1, 2), .init(1, 2), .init(0, 1)),
+        (.init(2, 3), .init(1, 2), .init(1, 6)),
+        (.init(-2, 3), .init(1, 2), .init(-1, 6)),
+        (.init(-2, 3), .init(-1, 2), .init(-1, 6))
     ]
 
     private static let halvingArguments: [(Fraction<Int>, Fraction<Int>)] = [
-        (Fraction<Int>(1, 2), Fraction<Int>(1, 4)),
-        (Fraction<Int>(2, 3), Fraction<Int>(1, 3)),
-        (Fraction<Int>(-1, 2), Fraction<Int>(-1, 4)),
-        (Fraction<Int>(-2, 3), Fraction<Int>(-1, 3))
+        (.init(1, 2), .init(1, 4)),
+        (.init(2, 3), .init(1, 3)),
+        (.init(-1, 2), .init(-1, 4)),
+        (.init(-2, 3), .init(-1, 3))
     ]
 
     @Test(

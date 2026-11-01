@@ -113,13 +113,13 @@ extension DoubleSubtractableTests {
     @Test(
         "Subtracting from NaN returns NaN",
         arguments: [
-            Double.nan,
-            Double.zero,
-            Double.negativeZero,
+            .nan,
+            .zero,
+            .negativeZero,
             1.0,
-            Double.infinity,
-            Double.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Double.Subtrahend>
     )
     internal func subtractingFromNaNReturnsNaN(subtrahend: Double.Subtrahend) {
         let result: Double = Double.nan - subtrahend
@@ -129,13 +129,13 @@ extension DoubleSubtractableTests {
     @Test(
         "Subtracting NaN returns NaN",
         arguments: [
-            Double.zero,
-            Double.negativeZero,
+            .zero,
+            .negativeZero,
             1.0,
             -1.0,
-            Double.infinity,
-            Double.negativeInfinity
-        ]
+            .infinity,
+            .negativeInfinity
+        ] as Array<Double>
     )
     internal func subtractingNaNReturnsNaN(minuend: Double) {
         let result: Double = minuend - Double.nan
@@ -149,10 +149,10 @@ extension DoubleSubtractableTests {
     @Test(
         "Subtracting negative infinity follows floating-point rules",
         arguments: [
-            (Double.negativeInfinity, Double.infinity, Double.negativeInfinity),
-            (Double.negativeInfinity, 1.0, Double.negativeInfinity),
-            (1.0, Double.negativeInfinity, Double.infinity)
-        ]
+            (.negativeInfinity, .infinity, .negativeInfinity),
+            (.negativeInfinity, 1.0, .negativeInfinity),
+            (1.0, .negativeInfinity, .infinity)
+        ] as Array<(Double, Double.Subtrahend, Double)>
     )
     internal func subtractingNegativeInfinityFollowsFloatingPointRules(
         minuend: Double,
@@ -170,11 +170,11 @@ extension DoubleSubtractableTests {
     @Test(
         "Subtracting from negative zero follows floating-point rules",
         arguments: [
-            (Double.zero, Double.negativeZero),
-            (Double.negativeZero, Double.zero),
+            (.zero, .negativeZero),
+            (.negativeZero, .zero),
             (1.0, -1.0),
             (-1.0, 1.0)
-        ]
+        ] as Array<(Double.Subtrahend, Double)>
     )
     internal func subtractingFromNegativeZeroFollowsFloatingPointRules(
         subtrahend: Double.Subtrahend,
@@ -192,10 +192,10 @@ extension DoubleSubtractableTests {
     @Test(
         "Subtracting positive infinity follows floating-point rules",
         arguments: [
-            (Double.infinity, Double.negativeInfinity, Double.infinity),
-            (Double.infinity, 1.0, Double.infinity),
-            (1.0, Double.infinity, Double.negativeInfinity)
-        ]
+            (.infinity, .negativeInfinity, .infinity),
+            (.infinity, 1.0, .infinity),
+            (1.0, .infinity, .negativeInfinity)
+        ] as Array<(Double, Double.Subtrahend, Double)>
     )
     internal func subtractingPositiveInfinityFollowsFloatingPointRules(
         minuend: Double,
@@ -221,7 +221,7 @@ extension DoubleSubtractableTests {
             3.5,
             -1.5,
             -3.5
-        ]
+        ] as Array<Double>
     )
     internal func subtractingPositiveZeroPreservesMinuend(minuend: Double) {
         let result: Double = minuend - Double.zero
@@ -231,11 +231,11 @@ extension DoubleSubtractableTests {
     @Test(
         "Subtracting from positive zero follows floating-point rules",
         arguments: [
-            (Double.zero, Double.zero),
-            (Double.negativeZero, Double.zero),
+            (.zero, .zero),
+            (.negativeZero, .zero),
             (1.0, -1.0),
             (-1.0, 1.0)
-        ]
+        ] as Array<(Double.Subtrahend, Double)>
     )
     internal func subtractingFromPositiveZeroFollowsFloatingPointRules(
         subtrahend: Double.Subtrahend,
@@ -257,7 +257,7 @@ extension DoubleSubtractableTests {
             3.5,
             -1.5,
             -3.5
-        ]
+        ] as Array<Double>
     )
     internal func subtractingSelfReturnsPositiveZero(value: Double) {
         let result: Double = value - value

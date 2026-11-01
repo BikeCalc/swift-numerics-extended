@@ -19,9 +19,9 @@ internal struct UInt4ReportableAsOverflowTests {
         arguments: [
             (2, 3, 5, false),
             (3, 4, 7, false),
-            (UInt4.max - 1, 1, UInt4.max, false),
-            (UInt4.max, 1, UInt4.min, true),
-            (UInt4.max, 2, UInt4.min + 1, true)
+            (UInt4.max - 1, 1, .max, false),
+            (.max, 1, .min, true),
+            (.max, 2, UInt4.min + 1, true)
         ] as Array<(UInt4, UInt4, UInt4, Bool)>
     )
     internal func addingReportingOverflow(
@@ -40,9 +40,9 @@ internal struct UInt4ReportableAsOverflowTests {
         arguments: [
             (3, 2, 1, false),
             (5, 3, 2, false),
-            (UInt4.min + 1, 1, UInt4.min, false),
-            (UInt4.min, 1, UInt4.max, true),
-            (UInt4.min, 2, UInt4.max - 1, true)
+            (UInt4.min + 1, 1, .min, false),
+            (.min, 1, .max, true),
+            (.min, 2, UInt4.max - 1, true)
         ] as Array<(UInt4, UInt4, UInt4, Bool)>
     )
     internal func subtractingReportingOverflow(
@@ -61,11 +61,11 @@ internal struct UInt4ReportableAsOverflowTests {
         arguments: [
             (2, 3, 6, false),
             (3, 4, 12, false),
-            (UInt4.max, 1, UInt4.max, false),
-            (UInt4.max, 2, UInt4.max - 1, true),
+            (.max, 1, .max, false),
+            (.max, 2, UInt4.max - 1, true),
             (8, 2, 0, true),
             (4, 4, 0, true),
-            (UInt4.max, UInt4.max, 1, true)
+            (.max, .max, 1, true)
         ] as Array<(UInt4, UInt4, UInt4, Bool)>
     )
     internal func multipliedReportingOverflow(
@@ -86,9 +86,9 @@ internal struct UInt4ReportableAsOverflowTests {
             (6, 3, 2, false),
             (7, 2, 3, false),
             (0, 1, 0, false),
-            (UInt4.max, 1, UInt4.max, false),
-            (UInt4.min, 1, UInt4.min, false),
-            (UInt4.max, 0, UInt4.max, true)
+            (.max, 1, .max, false),
+            (.min, 1, .min, false),
+            (.max, 0, .max, true)
         ] as Array<(UInt4, UInt4, UInt4, Bool)>
     )
     internal func dividedReportingOverflow(
@@ -108,10 +108,10 @@ internal struct UInt4ReportableAsOverflowTests {
             (6, 2, 0, false),
             (7, 2, 1, false),
             (0, 1, 0, false),
-            (UInt4.max, 1, UInt4.min, false),
-            (UInt4.min, 1, UInt4.min, false),
-            (UInt4.max, UInt4.max, UInt4.min, false),
-            (UInt4.max, 0, UInt4.max, true)
+            (.max, 1, .min, false),
+            (.min, 1, .min, false),
+            (.max, .max, .min, false),
+            (.max, 0, .max, true)
         ] as Array<(UInt4, UInt4, UInt4, Bool)>
     )
     internal func remainderReportingOverflow(
@@ -134,12 +134,12 @@ internal struct UInt4ReportableAsOverflowTests {
             (0, 1, 0, false),
             (1, 0, 1, false),
             (1, 1, 1, false),
-            (UInt4.max, 1, UInt4.max, false),
-            (UInt4.max, 2, 1, true),
-            (UInt4.max, 3, 1, true),
+            (.max, 1, .max, false),
+            (.max, 2, 1, true),
+            (.max, 3, 1, true),
             (4, 2, 0, true),
-            (0, UInt4.max, 0, false),
-            (1, UInt4.max, 1, false)
+            (0, .max, 0, false),
+            (1, .max, 1, false)
         ] as Array<(UInt4, UInt4.Exponent, UInt4, Bool)>
     )
     internal func raisedReportingOverflow(

@@ -19,9 +19,9 @@ internal struct RomanReportableAsOverflowTests {
         arguments: [
             (2, 3, 5, false),
             (3, 4, 7, false),
-            (Roman.max - 1, 1, Roman.max, false),
-            (Roman.max, 1, Roman.min, true),
-            (Roman.max, 2, Roman.min + 1, true)
+            (Roman.max - 1, 1, .max, false),
+            (.max, 1, .min, true),
+            (.max, 2, Roman.min + 1, true)
         ] as Array<(Roman, Roman, Roman, Bool)>
     )
     internal func addingReportingOverflow(
@@ -40,9 +40,9 @@ internal struct RomanReportableAsOverflowTests {
         arguments: [
             (3, 2, 1, false),
             (5, 3, 2, false),
-            (Roman.min + 1, 1, Roman.min, false),
-            (Roman.min, 1, Roman.max, true),
-            (Roman.min, 2, Roman.max - 1, true)
+            (Roman.min + 1, 1, .min, false),
+            (.min, 1, .max, true),
+            (.min, 2, Roman.max - 1, true)
         ] as Array<(Roman, Roman, Roman, Bool)>
     )
     internal func subtractingReportingOverflow(
@@ -61,11 +61,11 @@ internal struct RomanReportableAsOverflowTests {
         arguments: [
             (2, 3, 6, false),
             (3, 4, 12, false),
-            (Roman.max, 1, Roman.max, false),
-            (Roman.max, 2, Roman.max - 1, true),
+            (.max, 1, .max, false),
+            (.max, 2, Roman.max - 1, true),
             (2_000, 2, 0, true),
             (1_000, 4, 0, true),
-            (Roman.max, Roman.max, 1, true)
+            (.max, .max, 1, true)
         ] as Array<(Roman, Roman, Roman, Bool)>
     )
     internal func multipliedReportingOverflow(
@@ -86,9 +86,9 @@ internal struct RomanReportableAsOverflowTests {
             (6, 3, 2, false),
             (7, 2, 3, false),
             (0, 1, 0, false),
-            (Roman.max, 1, Roman.max, false),
-            (Roman.min, 1, Roman.min, false),
-            (Roman.max, 0, Roman.max, true)
+            (.max, 1, .max, false),
+            (.min, 1, .min, false),
+            (.max, 0, .max, true)
         ] as Array<(Roman, Roman, Roman, Bool)>
     )
     internal func dividedReportingOverflow(
@@ -108,10 +108,10 @@ internal struct RomanReportableAsOverflowTests {
             (6, 2, 0, false),
             (7, 2, 1, false),
             (0, 1, 0, false),
-            (Roman.max, 1, Roman.min, false),
-            (Roman.min, 1, Roman.min, false),
-            (Roman.max, Roman.max, Roman.min, false),
-            (Roman.max, 0, Roman.max, true)
+            (.max, 1, .min, false),
+            (.min, 1, .min, false),
+            (.max, .max, .min, false),
+            (.max, 0, .max, true)
         ] as Array<(Roman, Roman, Roman, Bool)>
     )
     internal func remainderReportingOverflow(
@@ -134,12 +134,12 @@ internal struct RomanReportableAsOverflowTests {
             (0, 1, 0, false),
             (1, 0, 1, false),
             (1, 1, 1, false),
-            (Roman.max, 1, Roman.max, false),
-            (Roman.max, 2, 1, true),
-            (Roman.max, 3, 1, true),
+            (.max, 1, .max, false),
+            (.max, 2, 1, true),
+            (.max, 3, 1, true),
             (16, 3, 96, true),
-            (0, Roman.max, 0, false),
-            (1, Roman.max, 1, false)
+            (0, .max, 0, false),
+            (1, .max, 1, false)
         ] as Array<(Roman, Roman.Exponent, Roman, Bool)>
     )
     internal func raisedReportingOverflow(

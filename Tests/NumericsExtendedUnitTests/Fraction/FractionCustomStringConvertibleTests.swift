@@ -17,11 +17,11 @@ internal struct FractionCustomStringConvertibleTests {
     @Test(
         "Description succeeds",
         arguments: [
-            (Fraction<Int>(-01, 1), "-1/1"),
-            (Fraction<Int>(-1, 1), "-1/1"),
-            (Fraction<Int>(01, 1), "1/1"),
-            (Fraction<Int>(1, 1), "1/1")
-        ]
+            (.init(-01, 1), "-1/1"),
+            (.init(-1, 1), "-1/1"),
+            (.init(01, 1), "1/1"),
+            (.init(1, 1), "1/1")
+        ] as Array<(Fraction<Int>, String)>
     )
     internal func descriptionSucceeds(
         value: Fraction<Int>,
@@ -55,9 +55,9 @@ extension FractionCustomStringConvertibleTests {
     @Test(
         "Negative zero description",
         arguments: [
-            (Fraction<Int>.negativeZero, "0/-1"),
-            (Fraction<Int>(0, -2), "0/-2")
-        ]
+            (.negativeZero, "0/-1"),
+            (.init(0, -2), "0/-2")
+        ] as Array<(Fraction<Int>, String)>
     )
     internal func negativeZeroDescription(
         value: Fraction<Int>,
@@ -82,9 +82,9 @@ extension FractionCustomStringConvertibleTests {
     @Test(
         "Positive zero description",
         arguments: [
-            (Fraction<Int>.zero, "0/1"),
-            (Fraction<Int>(0, 2), "0/2")
-        ]
+            (.zero, "0/1"),
+            (.init(0, 2), "0/2")
+        ] as Array<(Fraction<Int>, String)>
     )
     internal func positiveZeroDescription(
         value: Fraction<Int>,
