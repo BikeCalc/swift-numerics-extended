@@ -256,28 +256,6 @@ extension DoubleRaisableTests {
 
 extension DoubleRaisableTests {
     @Test(
-        "Raising to negative zero returns one",
-        arguments: [
-            0.0,
-            -0.0,
-            1.0,
-            -1.0,
-            2.0,
-            3.0,
-            -2.0,
-            -3.0,
-            0.5,
-            1.5,
-            -0.5,
-            -1.5
-        ] as Array<Double>
-    )
-    internal func raisingToNegativeZeroReturnsOne(base: Double) {
-        let result: Double = base ** Double.Exponent.negativeZero
-        #expect(result == 1.0)
-    }
-
-    @Test(
         "Negative infinity base power predicate follows floating-point rules",
         arguments: [
             (0.0, true),
@@ -393,6 +371,28 @@ extension DoubleRaisableTests {
 // MARK: - Negative Zero
 
 extension DoubleRaisableTests {
+    @Test(
+        "Raising to negative zero returns one",
+        arguments: [
+            0.0,
+            -0.0,
+            1.0,
+            -1.0,
+            2.0,
+            3.0,
+            -2.0,
+            -3.0,
+            0.5,
+            1.5,
+            -0.5,
+            -1.5
+        ] as Array<Double>
+    )
+    internal func raisingToNegativeZeroReturnsOne(base: Double) {
+        let result: Double = base ** Double.Exponent.negativeZero
+        #expect(result == 1.0)
+    }
+
     @Test(
         "Negative zero base power predicate follows floating-point rules",
         arguments: [

@@ -251,24 +251,6 @@ extension FractionRaisableTests {
 
 extension FractionRaisableTests {
     @Test(
-        "Raising to negative zero returns one",
-        arguments: [
-            .init(0, 1),
-            .init(0, -2),
-            .init(1, 1),
-            .init(-1, 1),
-            .init(2, 1),
-            .init(3, 1),
-            .init(-2, 1),
-            .init(-3, 1)
-        ] as Array<Fraction<Int>>
-    )
-    internal func raisingToNegativeZeroReturnsOne(base: Fraction<Int>) {
-        let result: Fraction<Int> = base ** Fraction<Int>.Exponent.negativeZero
-        #expect(result == 1)
-    }
-
-    @Test(
         "Negative infinity base power predicate follows rational rules",
         arguments: [
             (.init(0, 1), true),
@@ -366,6 +348,24 @@ extension FractionRaisableTests {
 // MARK: - Negative Zero
 
 extension FractionRaisableTests {
+    @Test(
+        "Raising to negative zero returns one",
+        arguments: [
+            .init(0, 1),
+            .init(0, -2),
+            .init(1, 1),
+            .init(-1, 1),
+            .init(2, 1),
+            .init(3, 1),
+            .init(-2, 1),
+            .init(-3, 1)
+        ] as Array<Fraction<Int>>
+    )
+    internal func raisingToNegativeZeroReturnsOne(base: Fraction<Int>) {
+        let result: Fraction<Int> = base ** Fraction<Int>.Exponent.negativeZero
+        #expect(result == 1)
+    }
+
     @Test(
         "Negative zero base power predicate follows rational rules",
         arguments: [
