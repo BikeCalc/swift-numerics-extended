@@ -23,9 +23,9 @@ internal struct RomanRepresentableByMaxTests {
     )
     internal func isMax(
         value: Roman,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isMax == result)
+        #expect(value.isMax == expected)
     }
 
     @Test("Max returns max")

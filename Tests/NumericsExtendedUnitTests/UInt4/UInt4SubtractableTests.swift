@@ -28,7 +28,8 @@ internal struct UInt4SubtractableTests {
         subtrahend: UInt4.Subtrahend,
         difference: UInt4
     ) {
-        #expect(minuend - subtrahend == difference)
+        let result: UInt4 = minuend - subtrahend
+        #expect(result == difference)
     }
 
     @Test(
@@ -54,7 +55,8 @@ internal struct UInt4SubtractableTests {
         subtrahend: UInt4.Subtrahend,
         difference: UInt4
     ) throws {
-        #expect(try minuend.subtracting(subtrahend) == difference)
+        let result: UInt4 = try minuend.subtracting(subtrahend)
+        #expect(result == difference)
     }
 
     @Test(
@@ -85,7 +87,8 @@ extension UInt4SubtractableTests {
         let reversedDifferenceReport: UInt4.OverflowReport<UInt4.Difference> = subtrahend.subtractingReportingOverflow(
             minuend
         )
-        #expect(minuend - subtrahend == difference)
+        let result: UInt4 = minuend - subtrahend
+        #expect(result == difference)
         #expect(reversedDifferenceReport.partialValue != difference)
         #expect(reversedDifferenceReport.overflow == true)
     }
@@ -102,7 +105,8 @@ extension UInt4SubtractableTests {
         ] as Array<UInt4>
     )
     internal func subtractingPositiveZeroPreservesMinuend(minuend: UInt4) {
-        #expect(minuend - UInt4.zero == minuend)
+        let result: UInt4 = minuend - UInt4.zero
+        #expect(result == minuend)
     }
 
     @Test(
@@ -113,6 +117,7 @@ extension UInt4SubtractableTests {
         ] as Array<UInt4>
     )
     internal func subtractingSelfReturnsPositiveZero(value: UInt4) {
-        #expect(value - value == UInt4.zero)
+        let result: UInt4 = value - value
+        #expect(result == UInt4.zero)
     }
 }

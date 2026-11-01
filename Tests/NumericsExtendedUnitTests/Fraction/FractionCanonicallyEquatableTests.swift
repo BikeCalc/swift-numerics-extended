@@ -26,9 +26,10 @@ internal struct FractionCanonicallyEquatableTests {
     internal func canonicalEquality(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(lhs.isCanonicallyEqual(to: rhs) == result)
+        let result: Bool = lhs.isCanonicallyEqual(to: rhs)
+        #expect(result == expected)
     }
 }
 
@@ -38,7 +39,8 @@ extension FractionCanonicallyEquatableTests {
     @Test("Canonical equality handles an Int minimum denominator")
     internal func canonicalEqualityHandlesIntMinimumDenominator() {
         let value: Fraction<Int> = .init(1, Int.min)
-        #expect(value.isCanonicallyEqual(to: value) == true)
+        let result: Bool = value.isCanonicallyEqual(to: value)
+        #expect(result == true)
     }
 }
 
@@ -56,9 +58,10 @@ extension FractionCanonicallyEquatableTests {
     internal func nanCanonicalEqualityFollowsRationalRules(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(lhs.isCanonicallyEqual(to: rhs) == result)
+        let result: Bool = lhs.isCanonicallyEqual(to: rhs)
+        #expect(result == expected)
     }
 }
 
@@ -75,9 +78,10 @@ extension FractionCanonicallyEquatableTests {
     internal func negativeInfinityCanonicalEqualityFollowsRationalRules(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(lhs.isCanonicallyEqual(to: rhs) == result)
+        let result: Bool = lhs.isCanonicallyEqual(to: rhs)
+        #expect(result == expected)
     }
 }
 
@@ -96,9 +100,10 @@ extension FractionCanonicallyEquatableTests {
     internal func negativeZeroCanonicalEqualityFollowsRationalRules(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(lhs.isCanonicallyEqual(to: rhs) == result)
+        let result: Bool = lhs.isCanonicallyEqual(to: rhs)
+        #expect(result == expected)
     }
 }
 
@@ -115,9 +120,10 @@ extension FractionCanonicallyEquatableTests {
     internal func positiveInfinityCanonicalEqualityFollowsRationalRules(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(lhs.isCanonicallyEqual(to: rhs) == result)
+        let result: Bool = lhs.isCanonicallyEqual(to: rhs)
+        #expect(result == expected)
     }
 }
 
@@ -136,8 +142,9 @@ extension FractionCanonicallyEquatableTests {
     internal func positiveZeroCanonicalEqualityFollowsRationalRules(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(lhs.isCanonicallyEqual(to: rhs) == result)
+        let result: Bool = lhs.isCanonicallyEqual(to: rhs)
+        #expect(result == expected)
     }
 }

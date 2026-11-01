@@ -43,9 +43,10 @@ internal struct RomanRaisableTests {
     internal func isPowerOf(
         value: Roman,
         other: Roman,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: other) == result)
+        let result: Bool = value.isPower(of: other)
+        #expect(result == expected)
     }
 
     @Test(
@@ -57,7 +58,8 @@ internal struct RomanRaisableTests {
         exponent: Roman.Exponent,
         power: Roman
     ) {
-        #expect(base ** exponent == power)
+        let result: Roman = base ** exponent
+        #expect(result == power)
     }
 
     @Test(
@@ -83,7 +85,8 @@ internal struct RomanRaisableTests {
         exponent: Roman.Exponent,
         power: Roman
     ) throws {
-        #expect(try base.raising(to: exponent) == power)
+        let result: Roman = try base.raising(to: exponent)
+        #expect(result == power)
     }
 
     @Test(
@@ -108,7 +111,8 @@ internal struct RomanRaisableTests {
         base: Roman,
         power: Roman
     ) {
-        #expect(base.squared() == power)
+        let result: Roman = base.squared()
+        #expect(result == power)
     }
 
     @Test(
@@ -132,7 +136,8 @@ internal struct RomanRaisableTests {
         base: Roman,
         power: Roman
     ) {
-        #expect(base.cubed() == power)
+        let result: Roman = base.cubed()
+        #expect(result == power)
     }
 
     @Test(
@@ -180,7 +185,8 @@ extension RomanRaisableTests {
         ] as Array<Roman>
     )
     internal func raisingToPositiveOnePreservesBase(base: Roman) {
-        #expect(base ** 1 == base)
+        let result: Roman = base ** 1
+        #expect(result == base)
     }
 
     @Test(
@@ -193,7 +199,8 @@ extension RomanRaisableTests {
         ] as Array<Roman.Exponent>
     )
     internal func positiveOneBaseExponentiationReturnsPositiveOne(exponent: Roman.Exponent) {
-        #expect(Roman(1) ** exponent == 1)
+        let result: Roman = Roman(1) ** exponent
+        #expect(result == 1)
     }
 
     @Test(
@@ -205,9 +212,10 @@ extension RomanRaisableTests {
     )
     internal func positiveOneBasePowerPredicateFollowsIdentityRule(
         value: Roman,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: 1) == result)
+        let result: Bool = value.isPower(of: 1)
+        #expect(result == expected)
     }
 }
 
@@ -224,7 +232,8 @@ extension RomanRaisableTests {
         ] as Array<Roman>
     )
     internal func raisingToPositiveZeroReturnsOne(base: Roman) {
-        #expect(base ** Roman.Exponent.zero == 1)
+        let result: Roman = base ** Roman.Exponent.zero
+        #expect(result == 1)
     }
 
     @Test(
@@ -237,9 +246,10 @@ extension RomanRaisableTests {
     )
     internal func positiveZeroBasePowerPredicateFollowsIntegerRules(
         value: Roman,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: Roman.zero) == result)
+        let result: Bool = value.isPower(of: Roman.zero)
+        #expect(result == expected)
     }
 
     @Test(
@@ -255,6 +265,7 @@ extension RomanRaisableTests {
         exponent: Roman.Exponent,
         power: Roman
     ) {
-        #expect(base ** exponent == power)
+        let result: Roman = base ** exponent
+        #expect(result == power)
     }
 }

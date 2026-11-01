@@ -42,9 +42,10 @@ internal struct UInt4RaisableTests {
     internal func isPowerOf(
         value: UInt4,
         other: UInt4,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: other) == result)
+        let result: Bool = value.isPower(of: other)
+        #expect(result == expected)
     }
 
     @Test(
@@ -56,7 +57,8 @@ internal struct UInt4RaisableTests {
         exponent: UInt4.Exponent,
         power: UInt4
     ) {
-        #expect(base ** exponent == power)
+        let result: UInt4 = base ** exponent
+        #expect(result == power)
     }
 
     @Test(
@@ -82,7 +84,8 @@ internal struct UInt4RaisableTests {
         exponent: UInt4.Exponent,
         power: UInt4
     ) throws {
-        #expect(try base.raising(to: exponent) == power)
+        let result: UInt4 = try base.raising(to: exponent)
+        #expect(result == power)
     }
 
     @Test(
@@ -107,7 +110,8 @@ internal struct UInt4RaisableTests {
         base: UInt4,
         power: UInt4
     ) {
-        #expect(base.squared() == power)
+        let result: UInt4 = base.squared()
+        #expect(result == power)
     }
 
     @Test(
@@ -131,7 +135,8 @@ internal struct UInt4RaisableTests {
         base: UInt4,
         power: UInt4
     ) {
-        #expect(base.cubed() == power)
+        let result: UInt4 = base.cubed()
+        #expect(result == power)
     }
 
     @Test(
@@ -179,7 +184,8 @@ extension UInt4RaisableTests {
         ] as Array<UInt4>
     )
     internal func raisingToPositiveOnePreservesBase(base: UInt4) {
-        #expect(base ** 1 == base)
+        let result: UInt4 = base ** 1
+        #expect(result == base)
     }
 
     @Test(
@@ -192,7 +198,8 @@ extension UInt4RaisableTests {
         ] as Array<UInt4.Exponent>
     )
     internal func positiveOneBaseExponentiationReturnsPositiveOne(exponent: UInt4.Exponent) {
-        #expect(UInt4(1) ** exponent == 1)
+        let result: UInt4 = UInt4(1) ** exponent
+        #expect(result == 1)
     }
 
     @Test(
@@ -204,9 +211,10 @@ extension UInt4RaisableTests {
     )
     internal func positiveOneBasePowerPredicateFollowsIdentityRule(
         value: UInt4,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: 1) == result)
+        let result: Bool = value.isPower(of: 1)
+        #expect(result == expected)
     }
 }
 
@@ -223,7 +231,8 @@ extension UInt4RaisableTests {
         ] as Array<UInt4>
     )
     internal func raisingToPositiveZeroReturnsOne(base: UInt4) {
-        #expect(base ** UInt4.Exponent.zero == 1)
+        let result: UInt4 = base ** UInt4.Exponent.zero
+        #expect(result == 1)
     }
 
     @Test(
@@ -236,9 +245,10 @@ extension UInt4RaisableTests {
     )
     internal func positiveZeroBasePowerPredicateFollowsUnsignedIntegerRules(
         value: UInt4,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: UInt4.zero) == result)
+        let result: Bool = value.isPower(of: UInt4.zero)
+        #expect(result == expected)
     }
 
     @Test(
@@ -254,6 +264,7 @@ extension UInt4RaisableTests {
         exponent: UInt4.Exponent,
         power: UInt4
     ) {
-        #expect(base ** exponent == power)
+        let result: UInt4 = base ** exponent
+        #expect(result == power)
     }
 }

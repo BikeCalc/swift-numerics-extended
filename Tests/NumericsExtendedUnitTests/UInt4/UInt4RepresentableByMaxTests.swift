@@ -23,9 +23,9 @@ internal struct UInt4RepresentableByMaxTests {
     )
     internal func isMax(
         value: UInt4,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isMax == result)
+        #expect(value.isMax == expected)
     }
 
     @Test("Max returns max")

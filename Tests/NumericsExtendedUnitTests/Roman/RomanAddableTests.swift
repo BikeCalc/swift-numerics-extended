@@ -28,7 +28,8 @@ internal struct RomanAddableTests {
         addend: Roman.Addend,
         sum: Roman
     ) {
-        #expect(augend + addend == sum)
+        let result: Roman = augend + addend
+        #expect(result == sum)
     }
 
     @Test(
@@ -54,7 +55,8 @@ internal struct RomanAddableTests {
         addend: Roman.Addend,
         sum: Roman
     ) throws {
-        #expect(try augend.adding(addend) == sum)
+        let result: Roman = try augend.adding(addend)
+        #expect(result == sum)
     }
 
     @Test(
@@ -82,7 +84,8 @@ extension RomanAddableTests {
         addend: Roman.Addend,
         sum _: Roman
     ) {
-        #expect(augend + addend == addend + augend)
+        let result: Roman = augend + addend
+        #expect(result == addend + augend)
     }
 }
 
@@ -97,6 +100,7 @@ extension RomanAddableTests {
         ] as Array<Roman>
     )
     internal func addingPositiveZeroPreservesAugend(augend: Roman) {
-        #expect(augend + Roman.zero == augend)
+        let result: Roman = augend + Roman.zero
+        #expect(result == augend)
     }
 }

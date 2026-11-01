@@ -52,9 +52,10 @@ internal struct DoubleMultipliableTests {
     internal func isMultipleOf(
         multiplicand: Double,
         multiplier: Double,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(multiplicand.isMultiple(of: multiplier) == result)
+        let result: Bool = multiplicand.isMultiple(of: multiplier)
+        #expect(result == expected)
     }
 
     @Test(
@@ -66,7 +67,8 @@ internal struct DoubleMultipliableTests {
         multiplier: Double.Multiplier,
         product: Double
     ) {
-        #expect(multiplicand * multiplier == product)
+        let result: Double = multiplicand * multiplier
+        #expect(result == product)
     }
 
     @Test(
@@ -92,7 +94,8 @@ internal struct DoubleMultipliableTests {
         multiplier: Double.Multiplier,
         product: Double
     ) throws {
-        #expect(try multiplicand.multiplying(by: multiplier) == product)
+        let result: Double = try multiplicand.multiplying(by: multiplier)
+        #expect(result == product)
     }
 
     @Test(
@@ -117,7 +120,8 @@ internal struct DoubleMultipliableTests {
         multiplicand: Double,
         product: Double
     ) {
-        #expect(multiplicand.doubled() == product)
+        let result: Double = multiplicand.doubled()
+        #expect(result == product)
     }
 
     @Test(
@@ -144,7 +148,8 @@ extension DoubleMultipliableTests {
         multiplier: Double.Multiplier,
         product _: Double
     ) {
-        #expect(multiplicand * multiplier == multiplier * multiplicand)
+        let result: Double = multiplicand * multiplier
+        #expect(result == multiplier * multiplicand)
     }
 }
 
@@ -162,8 +167,10 @@ extension DoubleMultipliableTests {
         ]
     )
     internal func nanMultiplePredicateFollowsFloatingPointRules(other: Double) {
-        #expect(Double.nan.isMultiple(of: other) == false)
-        #expect(other.isMultiple(of: .nan) == false)
+        let firstResult: Bool = Double.nan.isMultiple(of: other)
+        #expect(firstResult == false)
+        let secondResult: Bool = other.isMultiple(of: .nan)
+        #expect(secondResult == false)
     }
 
     @Test(
@@ -247,7 +254,8 @@ extension DoubleMultipliableTests {
         ]
     )
     internal func negativeInfinityMultiplePredicateFollowsFloatingPointRules(other: Double) {
-        #expect(Double.negativeInfinity.isMultiple(of: other) == false)
+        let result: Bool = Double.negativeInfinity.isMultiple(of: other)
+        #expect(result == false)
     }
 
     @Test(
@@ -263,7 +271,8 @@ extension DoubleMultipliableTests {
         multiplier: Double.Multiplier,
         product: Double
     ) {
-        #expect(Double.negativeInfinity * multiplier == product)
+        let result: Double = Double.negativeInfinity * multiplier
+        #expect(result == product)
     }
 }
 
@@ -287,7 +296,8 @@ extension DoubleMultipliableTests {
         multiplicand: Double,
         product: Double
     ) {
-        #expect(multiplicand * -1.0 == product)
+        let result: Double = multiplicand * -1.0
+        #expect(result == product)
     }
 }
 
@@ -308,7 +318,8 @@ extension DoubleMultipliableTests {
         ]
     )
     internal func isMultipleOfNegativeZeroReturnsFalse(multiplicand: Double) {
-        #expect(multiplicand.isMultiple(of: Double.negativeZero) == false)
+        let result: Bool = multiplicand.isMultiple(of: Double.negativeZero)
+        #expect(result == false)
     }
 
     @Test(
@@ -323,9 +334,10 @@ extension DoubleMultipliableTests {
     )
     internal func negativeZeroMultiplePredicateFollowsFloatingPointRules(
         other: Double,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(Double.negativeZero.isMultiple(of: other) == result)
+        let result: Bool = Double.negativeZero.isMultiple(of: other)
+        #expect(result == expected)
     }
 
     @Test(
@@ -361,7 +373,8 @@ extension DoubleMultipliableTests {
         ]
     )
     internal func positiveInfinityMultiplePredicateFollowsFloatingPointRules(other: Double) {
-        #expect(Double.infinity.isMultiple(of: other) == false)
+        let result: Bool = Double.infinity.isMultiple(of: other)
+        #expect(result == false)
     }
 
     @Test(
@@ -377,7 +390,8 @@ extension DoubleMultipliableTests {
         multiplier: Double.Multiplier,
         product: Double
     ) {
-        #expect(Double.infinity * multiplier == product)
+        let result: Double = Double.infinity * multiplier
+        #expect(result == product)
     }
 }
 
@@ -398,7 +412,8 @@ extension DoubleMultipliableTests {
         ]
     )
     internal func multiplyingByPositiveOnePreservesMultiplicand(multiplicand: Double) {
-        #expect(multiplicand * 1.0 == multiplicand)
+        let result: Double = multiplicand * 1.0
+        #expect(result == multiplicand)
     }
 }
 
@@ -419,7 +434,8 @@ extension DoubleMultipliableTests {
         ]
     )
     internal func isMultipleOfPositiveZeroReturnsFalse(multiplicand: Double) {
-        #expect(multiplicand.isMultiple(of: Double.zero) == false)
+        let result: Bool = multiplicand.isMultiple(of: Double.zero)
+        #expect(result == false)
     }
 
     @Test(
@@ -436,7 +452,8 @@ extension DoubleMultipliableTests {
         ]
     )
     internal func multiplyingByPositiveZeroReturnsPositiveOrNegativeZero(multiplicand: Double) {
-        #expect(multiplicand * Double.zero == Double.zero)
+        let result: Double = multiplicand * Double.zero
+        #expect(result == Double.zero)
     }
 
     @Test(
@@ -451,9 +468,10 @@ extension DoubleMultipliableTests {
     )
     internal func positiveZeroMultiplePredicateFollowsFloatingPointRules(
         other: Double,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(Double.zero.isMultiple(of: other) == result)
+        let result: Bool = Double.zero.isMultiple(of: other)
+        #expect(result == expected)
     }
 
     @Test(

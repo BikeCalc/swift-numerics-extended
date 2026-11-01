@@ -28,7 +28,8 @@ internal struct UInt4AddableTests {
         addend: UInt4.Addend,
         sum: UInt4
     ) {
-        #expect(augend + addend == sum)
+        let result: UInt4 = augend + addend
+        #expect(result == sum)
     }
 
     @Test(
@@ -54,7 +55,8 @@ internal struct UInt4AddableTests {
         addend: UInt4.Addend,
         sum: UInt4
     ) throws {
-        #expect(try augend.adding(addend) == sum)
+        let result: UInt4 = try augend.adding(addend)
+        #expect(result == sum)
     }
 
     @Test(
@@ -82,7 +84,8 @@ extension UInt4AddableTests {
         addend: UInt4.Addend,
         sum _: UInt4
     ) {
-        #expect(augend + addend == addend + augend)
+        let result: UInt4 = augend + addend
+        #expect(result == addend + augend)
     }
 }
 
@@ -97,6 +100,7 @@ extension UInt4AddableTests {
         ] as Array<UInt4>
     )
     internal func addingPositiveZeroPreservesAugend(augend: UInt4) {
-        #expect(augend + UInt4.zero == augend)
+        let result: UInt4 = augend + UInt4.zero
+        #expect(result == augend)
     }
 }

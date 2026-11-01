@@ -63,9 +63,9 @@ internal struct DoubleDivisibleTests {
     )
     internal func reciprocal(
         dividend: Double,
-        result: Double?
+        expected: Double?
     ) {
-        #expect(dividend.reciprocal == result)
+        #expect(dividend.reciprocal == expected)
     }
 
     @Test(
@@ -101,9 +101,10 @@ internal struct DoubleDivisibleTests {
     internal func isDivisibleBy(
         dividend: Double,
         divisor: Double,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(dividend.isDivisible(by: divisor) == result)
+        let result: Bool = dividend.isDivisible(by: divisor)
+        #expect(result == expected)
     }
 
     @Test(
@@ -122,9 +123,10 @@ internal struct DoubleDivisibleTests {
     internal func isFactorOf(
         factor: Double,
         value: Double,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(factor.isFactor(of: value) == result)
+        let result: Bool = factor.isFactor(of: value)
+        #expect(result == expected)
     }
 
     @Test(
@@ -136,7 +138,8 @@ internal struct DoubleDivisibleTests {
         divisor: Double.Divisor,
         quotient: Double
     ) {
-        #expect(dividend / divisor == quotient)
+        let result: Double = dividend / divisor
+        #expect(result == quotient)
     }
 
     @Test(
@@ -162,7 +165,8 @@ internal struct DoubleDivisibleTests {
         divisor: Double.RemainderDivisor,
         remainder: Double
     ) {
-        #expect(dividend % divisor == remainder)
+        let result: Double = dividend % divisor
+        #expect(result == remainder)
     }
 
     @Test(
@@ -188,7 +192,8 @@ internal struct DoubleDivisibleTests {
         divisor: Double.Divisor,
         quotient: Double
     ) throws {
-        #expect(try dividend.dividing(by: divisor) == quotient)
+        let result: Double = try dividend.dividing(by: divisor)
+        #expect(result == quotient)
     }
 
     @Test(
@@ -213,7 +218,8 @@ internal struct DoubleDivisibleTests {
         dividend: Double,
         quotient: Double
     ) {
-        #expect(dividend.halved() == quotient)
+        let result: Double = dividend.halved()
+        #expect(result == quotient)
     }
 
     @Test(
@@ -240,7 +246,8 @@ extension DoubleDivisibleTests {
         divisor: Double.Divisor,
         quotient _: Double
     ) {
-        #expect(dividend / divisor != divisor / dividend)
+        let result: Double = dividend / divisor
+        #expect(result != divisor / dividend)
     }
 }
 
@@ -258,8 +265,10 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func nanDivisibilityFollowsFloatingPointRules(other: Double) {
-        #expect(Double.nan.isDivisible(by: other) == false)
-        #expect(Double.nan.isFactor(of: other) == false)
+        let isDivisibleResult: Bool = Double.nan.isDivisible(by: other)
+        #expect(isDivisibleResult == false)
+        let isFactorResult: Bool = Double.nan.isFactor(of: other)
+        #expect(isFactorResult == false)
     }
 
     @Test("Reciprocal of NaN returns nil")
@@ -457,8 +466,10 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func negativeInfinityDivisibilityFollowsFloatingPointRules(other: Double) {
-        #expect(Double.negativeInfinity.isDivisible(by: other) == false)
-        #expect(Double.negativeInfinity.isFactor(of: other) == false)
+        let isDivisibleResult: Bool = Double.negativeInfinity.isDivisible(by: other)
+        #expect(isDivisibleResult == false)
+        let isFactorResult: Bool = Double.negativeInfinity.isFactor(of: other)
+        #expect(isFactorResult == false)
     }
 
     @Test("Reciprocal of negative infinity returns negative zero")
@@ -484,7 +495,8 @@ extension DoubleDivisibleTests {
         divisor: Double.Divisor,
         quotient: Double
     ) {
-        #expect(Double.negativeInfinity / divisor == quotient)
+        let result: Double = Double.negativeInfinity / divisor
+        #expect(result == quotient)
     }
 
     @Test(
@@ -539,7 +551,8 @@ extension DoubleDivisibleTests {
         dividend: Double,
         quotient: Double
     ) {
-        #expect(dividend / -1.0 == quotient)
+        let result: Double = dividend / -1.0
+        #expect(result == quotient)
     }
 }
 
@@ -576,8 +589,10 @@ extension DoubleDivisibleTests {
         isDivisible: Bool,
         isFactor: Bool
     ) {
-        #expect(Double.negativeZero.isDivisible(by: other) == isDivisible)
-        #expect(Double.negativeZero.isFactor(of: other) == isFactor)
+        let isDivisibleResult: Bool = Double.negativeZero.isDivisible(by: other)
+        #expect(isDivisibleResult == isDivisible)
+        let isFactorResult: Bool = Double.negativeZero.isFactor(of: other)
+        #expect(isFactorResult == isFactor)
     }
 
     @Test("Reciprocal of negative zero returns nil")
@@ -617,7 +632,8 @@ extension DoubleDivisibleTests {
         dividend: Double,
         quotient: Double
     ) {
-        #expect(dividend / Double.negativeZero == quotient)
+        let result: Double = dividend / Double.negativeZero
+        #expect(result == quotient)
     }
 }
 
@@ -635,8 +651,10 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func positiveInfinityDivisibilityFollowsFloatingPointRules(other: Double) {
-        #expect(Double.infinity.isDivisible(by: other) == false)
-        #expect(Double.infinity.isFactor(of: other) == false)
+        let isDivisibleResult: Bool = Double.infinity.isDivisible(by: other)
+        #expect(isDivisibleResult == false)
+        let isFactorResult: Bool = Double.infinity.isFactor(of: other)
+        #expect(isFactorResult == false)
     }
 
     @Test("Reciprocal of positive infinity returns positive zero")
@@ -662,7 +680,8 @@ extension DoubleDivisibleTests {
         divisor: Double.Divisor,
         quotient: Double
     ) {
-        #expect(Double.infinity / divisor == quotient)
+        let result: Double = Double.infinity / divisor
+        #expect(result == quotient)
     }
 
     @Test(
@@ -714,7 +733,8 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func dividingByPositiveOnePreservesDividend(dividend: Double) {
-        #expect(dividend / 1.0 == dividend)
+        let result: Double = dividend / 1.0
+        #expect(result == dividend)
     }
 }
 
@@ -748,7 +768,8 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func dividingPositiveZeroByNonzeroValueReturnsPositiveOrNegativeZero(divisor: Double.Divisor) {
-        #expect(Double.zero / divisor == Double.zero)
+        let result: Double = Double.zero / divisor
+        #expect(result == Double.zero)
     }
 
     @Test(
@@ -766,8 +787,10 @@ extension DoubleDivisibleTests {
         isDivisible: Bool,
         isFactor: Bool
     ) {
-        #expect(Double.zero.isDivisible(by: other) == isDivisible)
-        #expect(Double.zero.isFactor(of: other) == isFactor)
+        let isDivisibleResult: Bool = Double.zero.isDivisible(by: other)
+        #expect(isDivisibleResult == isDivisible)
+        let isFactorResult: Bool = Double.zero.isFactor(of: other)
+        #expect(isFactorResult == isFactor)
     }
 
     @Test("Reciprocal of positive zero returns nil")
@@ -807,6 +830,7 @@ extension DoubleDivisibleTests {
         dividend: Double,
         quotient: Double
     ) {
-        #expect(dividend / Double.zero == quotient)
+        let result: Double = dividend / Double.zero
+        #expect(result == quotient)
     }
 }

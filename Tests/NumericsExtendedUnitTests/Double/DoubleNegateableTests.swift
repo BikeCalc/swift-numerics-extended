@@ -46,7 +46,8 @@ internal struct DoubleNegateableTests {
         value: Double,
         negation: Double
     ) {
-        #expect(-value == negation)
+        let result: Double = -value
+        #expect(result == negation)
     }
 
     @Test(
@@ -57,7 +58,8 @@ internal struct DoubleNegateableTests {
         value: Double,
         negation: Double
     ) {
-        #expect(value.negating() == negation)
+        let result: Double = value.negating()
+        #expect(result == negation)
     }
 
     @Test(
@@ -88,9 +90,9 @@ internal struct DoubleNegateableTests {
     )
     internal func isNegative(
         value: Double,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isNegative == result)
+        #expect(value.isNegative == expected)
     }
 
     @Test(
@@ -108,9 +110,9 @@ internal struct DoubleNegateableTests {
     )
     internal func isPositive(
         value: Double,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPositive == result)
+        #expect(value.isPositive == expected)
     }
 
     @Test(
@@ -128,9 +130,9 @@ internal struct DoubleNegateableTests {
     )
     internal func isSigned(
         value: Double,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isSigned == result)
+        #expect(value.isSigned == expected)
     }
 
     @Test(
@@ -149,9 +151,10 @@ internal struct DoubleNegateableTests {
     internal func isOpposite(
         value: Double,
         other: Double,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isOpposite(of: other) == result)
+        let result: Bool = value.isOpposite(of: other)
+        #expect(result == expected)
     }
 }
 
@@ -161,7 +164,8 @@ extension DoubleNegateableTests {
         arguments: Self.additiveInverseArguments
     )
     internal func negatingTwiceReturnsOriginalValue(value: Double) {
-        #expect(value.negating().negating() == value)
+        let result: Double = value.negating().negating()
+        #expect(result == value)
     }
 }
 
@@ -186,8 +190,10 @@ extension DoubleNegateableTests {
         ]
     )
     internal func nanOppositeFollowsFloatingPointRules(other: Double) {
-        #expect(Double.nan.isOpposite(of: other) == false)
-        #expect(other.isOpposite(of: .nan) == false)
+        let firstResult: Bool = Double.nan.isOpposite(of: other)
+        #expect(firstResult == false)
+        let secondResult: Bool = other.isOpposite(of: .nan)
+        #expect(secondResult == false)
     }
 
     @Test("Negating NaN returns NaN")
@@ -221,9 +227,10 @@ extension DoubleNegateableTests {
     )
     internal func negativeInfinityOppositeFollowsFloatingPointRules(
         other: Double,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(Double.negativeInfinity.isOpposite(of: other) == result)
+        let result: Bool = Double.negativeInfinity.isOpposite(of: other)
+        #expect(result == expected)
     }
 
     @Test("Negating negative infinity follows floating-point rules")
@@ -257,9 +264,10 @@ extension DoubleNegateableTests {
     )
     internal func negativeZeroOppositeFollowsFloatingPointRules(
         other: Double,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(Double.negativeZero.isOpposite(of: other) == result)
+        let result: Bool = Double.negativeZero.isOpposite(of: other)
+        #expect(result == expected)
     }
 
     @Test("Negating negative zero follows floating-point rules")
@@ -296,9 +304,10 @@ extension DoubleNegateableTests {
     )
     internal func positiveInfinityOppositeFollowsFloatingPointRules(
         other: Double,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(Double.infinity.isOpposite(of: other) == result)
+        let result: Bool = Double.infinity.isOpposite(of: other)
+        #expect(result == expected)
     }
 
     @Test("Negating positive infinity follows floating-point rules")
@@ -342,9 +351,10 @@ extension DoubleNegateableTests {
     )
     internal func positiveZeroOppositeFollowsFloatingPointRules(
         other: Double,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(Double.zero.isOpposite(of: other) == result)
+        let result: Bool = Double.zero.isOpposite(of: other)
+        #expect(result == expected)
     }
 
     @Test("Negating positive zero follows floating-point rules")

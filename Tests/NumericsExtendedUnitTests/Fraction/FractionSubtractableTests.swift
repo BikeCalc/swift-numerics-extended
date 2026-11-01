@@ -30,7 +30,8 @@ internal struct FractionSubtractableTests {
         subtrahend: Fraction<Int>.Subtrahend,
         difference: Fraction<Int>
     ) {
-        #expect(minuend - subtrahend == difference)
+        let result: Fraction<Int> = minuend - subtrahend
+        #expect(result == difference)
     }
 
     @Test(
@@ -56,7 +57,8 @@ internal struct FractionSubtractableTests {
         subtrahend: Fraction<Int>.Subtrahend,
         difference: Fraction<Int>
     ) throws {
-        #expect(try minuend.subtracting(subtrahend) == difference)
+        let result: Fraction<Int> = try minuend.subtracting(subtrahend)
+        #expect(result == difference)
     }
 
     @Test(
@@ -84,7 +86,8 @@ extension FractionSubtractableTests {
         subtrahend: Fraction<Int>.Subtrahend,
         difference _: Fraction<Int>
     ) {
-        #expect(minuend - subtrahend != subtrahend - minuend)
+        let result: Fraction<Int> = minuend - subtrahend
+        #expect(result != subtrahend - minuend)
     }
 }
 
@@ -152,7 +155,8 @@ extension FractionSubtractableTests {
         subtrahend: Fraction<Int>.Subtrahend,
         difference: Fraction<Int>
     ) {
-        #expect(minuend - subtrahend == difference)
+        let result: Fraction<Int> = minuend - subtrahend
+        #expect(result == difference)
     }
 }
 
@@ -172,7 +176,8 @@ extension FractionSubtractableTests {
         subtrahend: Fraction<Int>.Subtrahend,
         difference: Fraction<Int>
     ) {
-        #expect(Fraction<Int>.negativeZero - subtrahend == difference)
+        let result: Fraction<Int> = Fraction<Int>.negativeZero - subtrahend
+        #expect(result == difference)
     }
 }
 
@@ -192,7 +197,8 @@ extension FractionSubtractableTests {
         subtrahend: Fraction<Int>.Subtrahend,
         difference: Fraction<Int>
     ) {
-        #expect(minuend - subtrahend == difference)
+        let result: Fraction<Int> = minuend - subtrahend
+        #expect(result == difference)
     }
 }
 
@@ -209,7 +215,8 @@ extension FractionSubtractableTests {
         ]
     )
     internal func subtractingPositiveZeroPreservesMinuend(minuend: Fraction<Int>) {
-        #expect(minuend - .zero == minuend)
+        let result: Fraction<Int> = minuend - .zero
+        #expect(result == minuend)
     }
 
     @Test(
@@ -225,7 +232,8 @@ extension FractionSubtractableTests {
         subtrahend: Fraction<Int>.Subtrahend,
         difference: Fraction<Int>
     ) {
-        #expect(Fraction<Int>.zero - subtrahend == difference)
+        let result: Fraction<Int> = Fraction<Int>.zero - subtrahend
+        #expect(result == difference)
     }
 
     @Test(

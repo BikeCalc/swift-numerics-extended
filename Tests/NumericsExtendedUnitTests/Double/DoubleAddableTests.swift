@@ -34,7 +34,8 @@ internal struct DoubleAddableTests {
         addend: Double.Addend,
         sum: Double
     ) {
-        #expect(augend + addend == sum)
+        let result: Double = augend + addend
+        #expect(result == sum)
     }
 
     @Test(
@@ -60,7 +61,8 @@ internal struct DoubleAddableTests {
         addend: Double.Addend,
         sum: Double
     ) throws {
-        #expect(try augend.adding(addend) == sum)
+        let result: Double = try augend.adding(addend)
+        #expect(result == sum)
     }
 
     @Test(
@@ -88,7 +90,8 @@ extension DoubleAddableTests {
         addend: Double.Addend,
         sum _: Double
     ) {
-        #expect(augend + addend == addend + augend)
+        let result: Double = augend + addend
+        #expect(result == addend + augend)
     }
 }
 
@@ -152,7 +155,8 @@ extension DoubleAddableTests {
         ]
     )
     internal func addingToNegativeInfinityFollowsFloatingPointRules(addend: Double.Addend) {
-        #expect(Double.negativeInfinity + addend == .negativeInfinity)
+        let result: Double = Double.negativeInfinity + addend
+        #expect(result == .negativeInfinity)
     }
 }
 
@@ -190,7 +194,8 @@ extension DoubleAddableTests {
         ]
     )
     internal func addingToPositiveInfinityFollowsFloatingPointRules(addend: Double.Addend) {
-        #expect(Double.infinity + addend == .infinity)
+        let result: Double = Double.infinity + addend
+        #expect(result == .infinity)
     }
 }
 
@@ -233,7 +238,8 @@ extension DoubleAddableTests {
         ]
     )
     internal func addingPositiveZeroPreservesAugend(augend: Double) {
-        #expect(augend + Double.zero == augend)
+        let result: Double = augend + Double.zero
+        #expect(result == augend)
     }
 
     @Test(

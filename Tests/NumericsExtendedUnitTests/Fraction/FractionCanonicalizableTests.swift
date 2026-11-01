@@ -40,9 +40,9 @@ internal struct FractionCanonicalizableTests {
     )
     internal func isCanonicalizable(
         value: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isCanonicalizable == result)
+        #expect(value.isCanonicalizable == expected)
     }
 
     @Test(
@@ -60,9 +60,9 @@ internal struct FractionCanonicalizableTests {
     )
     internal func isCanonicalized(
         value: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isCanonicalized == result)
+        #expect(value.isCanonicalized == expected)
     }
 
     @Test(
@@ -71,9 +71,10 @@ internal struct FractionCanonicalizableTests {
     )
     internal func canonicalizationSucceeds(
         value: Fraction<Int>,
-        result: Fraction<Int>
+        expected: Fraction<Int>
     ) {
-        #expect(value.canonicalized() == result)
+        let result: Fraction<Int> = value.canonicalized()
+        #expect(result == expected)
     }
 
     @Test(
@@ -112,7 +113,8 @@ extension FractionCanonicalizableTests {
         let value: Fraction<Int> = .init(2, Int.min)
         let expected: Fraction<Int> = .init(-1, Int.zero - (Int.min / 2))
         #expect(value.isCanonicalizable == true)
-        #expect(value.canonicalized() == expected)
+        let result: Fraction<Int> = value.canonicalized()
+        #expect(result == expected)
     }
 
     @Test("Irreducible Int minimum denominator is not canonicalizable")
@@ -142,7 +144,8 @@ extension FractionCanonicalizableTests {
     internal func negativeInfinityCanonicalizationFollowsRationalRules() {
         #expect(Fraction<Int>.negativeInfinity.isCanonicalizable == true)
         #expect(Fraction<Int>.negativeInfinity.isCanonicalized == true)
-        #expect(Fraction<Int>.negativeInfinity.canonicalized() == .negativeInfinity)
+        let result: Fraction<Int> = Fraction<Int>.negativeInfinity.canonicalized()
+        #expect(result == .negativeInfinity)
     }
 }
 
@@ -159,7 +162,8 @@ extension FractionCanonicalizableTests {
     internal func negativeZeroCanonicalizationFollowsRationalRules(value: Fraction<Int>) {
         #expect(value.isCanonicalizable == true)
         #expect(value.isCanonicalized == false)
-        #expect(value.canonicalized() == .zero)
+        let result: Fraction<Int> = value.canonicalized()
+        #expect(result == .zero)
     }
 }
 
@@ -170,7 +174,8 @@ extension FractionCanonicalizableTests {
     internal func positiveInfinityCanonicalizationFollowsRationalRules() {
         #expect(Fraction<Int>.infinity.isCanonicalizable == true)
         #expect(Fraction<Int>.infinity.isCanonicalized == true)
-        #expect(Fraction<Int>.infinity.canonicalized() == .infinity)
+        let result: Fraction<Int> = Fraction<Int>.infinity.canonicalized()
+        #expect(result == .infinity)
     }
 }
 
@@ -190,6 +195,7 @@ extension FractionCanonicalizableTests {
     ) {
         #expect(value.isCanonicalizable == true)
         #expect(value.isCanonicalized == isCanonicalized)
-        #expect(value.canonicalized() == .zero)
+        let result: Fraction<Int> = value.canonicalized()
+        #expect(result == .zero)
     }
 }

@@ -27,7 +27,8 @@ internal struct FractionLosslessStringConvertibleTests {
         description: String,
         value: Fraction<Int>
     ) {
-        #expect(Fraction<Int>(description) == value)
+        let result: Fraction<Int>? = Fraction<Int>(description)
+        #expect(result == value)
     }
 
     @Test(
@@ -43,7 +44,8 @@ internal struct FractionLosslessStringConvertibleTests {
         ]
     )
     internal func stringInitializationFails(description: String) {
-        #expect(Fraction<Int>(description) == nil)
+        let result: Fraction<Int>? = Fraction<Int>(description)
+        #expect(result == nil)
     }
 }
 
@@ -58,7 +60,8 @@ extension FractionLosslessStringConvertibleTests {
         ]
     )
     internal func negativeInfinityStringInitializationSucceeds(description: String) {
-        #expect(Fraction<Int>(description) == .negativeInfinity)
+        let result: Fraction<Int>? = Fraction<Int>(description)
+        #expect(result == .negativeInfinity)
     }
 }
 
@@ -88,7 +91,8 @@ extension FractionLosslessStringConvertibleTests {
         description: String,
         value: Fraction<Int>
     ) {
-        #expect(Fraction<Int>(description) == value)
+        let result: Fraction<Int>? = Fraction<Int>(description)
+        #expect(result == value)
     }
 }
 
@@ -105,7 +109,8 @@ extension FractionLosslessStringConvertibleTests {
         ]
     )
     internal func positiveInfinityStringInitializationSucceeds(description: String) {
-        #expect(Fraction<Int>(description) == .infinity)
+        let result: Fraction<Int>? = Fraction<Int>(description)
+        #expect(result == .infinity)
     }
 }
 
@@ -140,6 +145,7 @@ extension FractionLosslessStringConvertibleTests {
         description: String,
         value: Fraction<Int>
     ) {
-        #expect(Fraction<Int>(description) == value)
+        let result: Fraction<Int>? = Fraction<Int>(description)
+        #expect(result == value)
     }
 }

@@ -40,9 +40,9 @@ internal struct FractionNormalizableTests {
     )
     internal func isNormalizable(
         value: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isNormalizable == result)
+        #expect(value.isNormalizable == expected)
     }
 
     @Test(
@@ -60,9 +60,9 @@ internal struct FractionNormalizableTests {
     )
     internal func isNormalized(
         value: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isNormalized == result)
+        #expect(value.isNormalized == expected)
     }
 
     @Test(
@@ -71,9 +71,10 @@ internal struct FractionNormalizableTests {
     )
     internal func normalizationSucceeds(
         value: Fraction<Int>,
-        result: Fraction<Int>
+        expected: Fraction<Int>
     ) {
-        #expect(value.normalized() == result)
+        let result: Fraction<Int> = value.normalized()
+        #expect(result == expected)
     }
 
     @Test(
@@ -118,9 +119,9 @@ extension FractionNormalizableTests {
     )
     internal func intMinimumTermsDetermineNormalizability(
         value: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isNormalizable == result)
+        #expect(value.isNormalizable == expected)
     }
 }
 
@@ -143,7 +144,8 @@ extension FractionNormalizableTests {
     internal func negativeInfinityNormalizationFollowsRationalRules() {
         #expect(Fraction<Int>.negativeInfinity.isNormalizable == true)
         #expect(Fraction<Int>.negativeInfinity.isNormalized == true)
-        #expect(Fraction<Int>.negativeInfinity.normalized() == .negativeInfinity)
+        let result: Fraction<Int> = Fraction<Int>.negativeInfinity.normalized()
+        #expect(result == .negativeInfinity)
     }
 }
 
@@ -159,11 +161,12 @@ extension FractionNormalizableTests {
     )
     internal func negativeZeroNormalizationFollowsRationalRules(
         value: Fraction<Int>,
-        result: Fraction<Int>
+        expected: Fraction<Int>
     ) {
         #expect(value.isNormalizable == true)
         #expect(value.isNormalized == false)
-        #expect(value.normalized() == result)
+        let result: Fraction<Int> = value.normalized()
+        #expect(result == expected)
     }
 }
 
@@ -174,7 +177,8 @@ extension FractionNormalizableTests {
     internal func positiveInfinityNormalizationFollowsRationalRules() {
         #expect(Fraction<Int>.infinity.isNormalizable == true)
         #expect(Fraction<Int>.infinity.isNormalized == true)
-        #expect(Fraction<Int>.infinity.normalized() == .infinity)
+        let result: Fraction<Int> = Fraction<Int>.infinity.normalized()
+        #expect(result == .infinity)
     }
 }
 
@@ -191,6 +195,7 @@ extension FractionNormalizableTests {
     internal func positiveZeroNormalizationFollowsRationalRules(value: Fraction<Int>) {
         #expect(value.isNormalizable == true)
         #expect(value.isNormalized == true)
-        #expect(value.normalized() == value)
+        let result: Fraction<Int> = value.normalized()
+        #expect(result == value)
     }
 }

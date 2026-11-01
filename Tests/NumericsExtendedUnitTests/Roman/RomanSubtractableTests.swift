@@ -28,7 +28,8 @@ internal struct RomanSubtractableTests {
         subtrahend: Roman.Subtrahend,
         difference: Roman
     ) {
-        #expect(minuend - subtrahend == difference)
+        let result: Roman = minuend - subtrahend
+        #expect(result == difference)
     }
 
     @Test(
@@ -54,7 +55,8 @@ internal struct RomanSubtractableTests {
         subtrahend: Roman.Subtrahend,
         difference: Roman
     ) throws {
-        #expect(try minuend.subtracting(subtrahend) == difference)
+        let result: Roman = try minuend.subtracting(subtrahend)
+        #expect(result == difference)
     }
 
     @Test(
@@ -85,7 +87,8 @@ extension RomanSubtractableTests {
         let reversedDifferenceReport: Roman.OverflowReport<Roman.Difference> = subtrahend.subtractingReportingOverflow(
             minuend
         )
-        #expect(minuend - subtrahend == difference)
+        let result: Roman = minuend - subtrahend
+        #expect(result == difference)
         #expect(reversedDifferenceReport.partialValue != difference)
         #expect(reversedDifferenceReport.overflow == true)
     }
@@ -102,7 +105,8 @@ extension RomanSubtractableTests {
         ] as Array<Roman>
     )
     internal func subtractingPositiveZeroPreservesMinuend(minuend: Roman) {
-        #expect(minuend - Roman.zero == minuend)
+        let result: Roman = minuend - Roman.zero
+        #expect(result == minuend)
     }
 
     @Test(
@@ -113,6 +117,7 @@ extension RomanSubtractableTests {
         ] as Array<Roman>
     )
     internal func subtractingSelfReturnsPositiveZero(value: Roman) {
-        #expect(value - value == Roman.zero)
+        let result: Roman = value - value
+        #expect(result == Roman.zero)
     }
 }

@@ -62,9 +62,10 @@ internal struct FractionRaisableTests {
     internal func isPowerOf(
         value: Fraction<Int>,
         other: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: other) == result)
+        let result: Bool = value.isPower(of: other)
+        #expect(result == expected)
     }
 
     @Test(
@@ -76,7 +77,8 @@ internal struct FractionRaisableTests {
         exponent: Fraction<Int>.Exponent,
         power: Fraction<Int>
     ) {
-        #expect(base ** exponent == power)
+        let result: Fraction<Int> = base ** exponent
+        #expect(result == power)
     }
 
     @Test(
@@ -102,7 +104,8 @@ internal struct FractionRaisableTests {
         exponent: Fraction<Int>.Exponent,
         power: Fraction<Int>
     ) throws {
-        #expect(try base.raising(to: exponent) == power)
+        let result: Fraction<Int> = try base.raising(to: exponent)
+        #expect(result == power)
     }
 
     @Test(
@@ -127,7 +130,8 @@ internal struct FractionRaisableTests {
         base: Fraction<Int>,
         power: Fraction<Int>
     ) {
-        #expect(base.squared() == power)
+        let result: Fraction<Int> = base.squared()
+        #expect(result == power)
     }
 
     @Test(
@@ -151,7 +155,8 @@ internal struct FractionRaisableTests {
         base: Fraction<Int>,
         power: Fraction<Int>
     ) {
-        #expect(base.cubed() == power)
+        let result: Fraction<Int> = base.cubed()
+        #expect(result == power)
     }
 
     @Test(
@@ -204,13 +209,16 @@ extension FractionRaisableTests {
         base: Fraction<Int>,
         power: Fraction<Int>
     ) {
-        #expect(base ** -1 == power)
+        let result: Fraction<Int> = base ** -1
+        #expect(result == power)
     }
 
     @Test("Int minimum exponent uses unsigned magnitude")
     internal func intMinimumExponentUsesUnsignedMagnitude() {
-        #expect(Fraction<Int>(1, 1) ** Int.min == .one)
-        #expect(Fraction<Int>(-1, 1) ** Int.min == .one)
+        let firstResult: Fraction<Int> = Fraction<Int>(1, 1) ** Int.min
+        #expect(firstResult == .one)
+        let secondResult: Fraction<Int> = Fraction<Int>(-1, 1) ** Int.min
+        #expect(secondResult == .one)
     }
 }
 
@@ -219,9 +227,12 @@ extension FractionRaisableTests {
 extension FractionRaisableTests {
     @Test("NaN power predicate follows rational rules")
     internal func nanPowerPredicateFollowsRationalRules() {
-        #expect(Fraction<Int>(1, 1).isPower(of: .nan) == true)
-        #expect(Fraction<Int>(2, 1).isPower(of: .nan) == false)
-        #expect(Fraction<Int>.nan.isPower(of: Fraction<Int>(2, 1)) == false)
+        let firstResult: Bool = Fraction<Int>(1, 1).isPower(of: .nan)
+        #expect(firstResult == true)
+        let secondResult: Bool = Fraction<Int>(2, 1).isPower(of: .nan)
+        #expect(secondResult == false)
+        let thirdResult: Bool = Fraction<Int>.nan.isPower(of: Fraction<Int>(2, 1))
+        #expect(thirdResult == false)
     }
 
     @Test(
@@ -270,7 +281,8 @@ extension FractionRaisableTests {
         ]
     )
     internal func raisingToNegativeZeroReturnsOne(base: Fraction<Int>) {
-        #expect(base ** Fraction<Int>.Exponent.negativeZero == 1)
+        let result: Fraction<Int> = base ** Fraction<Int>.Exponent.negativeZero
+        #expect(result == 1)
     }
 
     @Test(
@@ -286,9 +298,10 @@ extension FractionRaisableTests {
     )
     internal func negativeInfinityBasePowerPredicateFollowsRationalRules(
         value: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: .negativeInfinity) == result)
+        let result: Bool = value.isPower(of: .negativeInfinity)
+        #expect(result == expected)
     }
 
     @Test(
@@ -306,7 +319,8 @@ extension FractionRaisableTests {
         exponent: Fraction<Int>.Exponent,
         power: Fraction<Int>
     ) {
-        #expect(base ** exponent == power)
+        let result: Fraction<Int> = base ** exponent
+        #expect(result == power)
     }
 }
 
@@ -328,7 +342,8 @@ extension FractionRaisableTests {
         exponent: Fraction<Int>.Exponent,
         power: Fraction<Int>
     ) {
-        #expect(Fraction<Int>(-1, 1) ** exponent == power)
+        let result: Fraction<Int> = Fraction<Int>(-1, 1) ** exponent
+        #expect(result == power)
     }
 
     @Test(
@@ -341,9 +356,10 @@ extension FractionRaisableTests {
     )
     internal func negativeOneBasePowerPredicateFollowsSignedRules(
         value: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: Fraction<Int>(-1, 1)) == result)
+        let result: Bool = value.isPower(of: Fraction<Int>(-1, 1))
+        #expect(result == expected)
     }
 }
 
@@ -363,9 +379,10 @@ extension FractionRaisableTests {
     )
     internal func negativeZeroBasePowerPredicateFollowsRationalRules(
         value: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: Fraction<Int>(0, -1)) == result)
+        let result: Bool = value.isPower(of: Fraction<Int>(0, -1))
+        #expect(result == expected)
     }
 
     @Test(
@@ -383,7 +400,8 @@ extension FractionRaisableTests {
         exponent: Fraction<Int>.Exponent,
         power: Fraction<Int>
     ) {
-        #expect(base ** exponent == power)
+        let result: Fraction<Int> = base ** exponent
+        #expect(result == power)
     }
 }
 
@@ -403,9 +421,10 @@ extension FractionRaisableTests {
     )
     internal func positiveInfinityBasePowerPredicateFollowsRationalRules(
         value: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: .infinity) == result)
+        let result: Bool = value.isPower(of: .infinity)
+        #expect(result == expected)
     }
 
     @Test(
@@ -421,7 +440,8 @@ extension FractionRaisableTests {
         exponent: Fraction<Int>.Exponent,
         power: Fraction<Int>
     ) {
-        #expect(base ** exponent == power)
+        let result: Fraction<Int> = base ** exponent
+        #expect(result == power)
     }
 }
 
@@ -442,7 +462,8 @@ extension FractionRaisableTests {
         ]
     )
     internal func raisingToPositiveOnePreservesBase(base: Fraction<Int>) {
-        #expect(base ** 1 == base)
+        let result: Fraction<Int> = base ** 1
+        #expect(result == base)
     }
 
     @Test(
@@ -457,7 +478,8 @@ extension FractionRaisableTests {
         ]
     )
     internal func positiveOneBaseExponentiationReturnsPositiveOne(exponent: Fraction<Int>.Exponent) {
-        #expect(Fraction<Int>(1, 1) ** exponent == .one)
+        let result: Fraction<Int> = Fraction<Int>(1, 1) ** exponent
+        #expect(result == .one)
     }
 
     @Test(
@@ -469,9 +491,10 @@ extension FractionRaisableTests {
     )
     internal func positiveOneBasePowerPredicateFollowsIdentityRule(
         value: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: .one) == result)
+        let result: Bool = value.isPower(of: .one)
+        #expect(result == expected)
     }
 }
 
@@ -492,7 +515,8 @@ extension FractionRaisableTests {
         ]
     )
     internal func raisingToPositiveZeroReturnsOne(base: Fraction<Int>) {
-        #expect(base ** .zero == 1)
+        let result: Fraction<Int> = base ** .zero
+        #expect(result == 1)
     }
 
     @Test(
@@ -508,9 +532,10 @@ extension FractionRaisableTests {
     )
     internal func positiveZeroBasePowerPredicateFollowsRationalRules(
         value: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: .zero) == result)
+        let result: Bool = value.isPower(of: .zero)
+        #expect(result == expected)
     }
 
     @Test(
@@ -527,6 +552,7 @@ extension FractionRaisableTests {
         exponent: Fraction<Int>.Exponent,
         power: Fraction<Int>
     ) {
-        #expect(base ** exponent == power)
+        let result: Fraction<Int> = base ** exponent
+        #expect(result == power)
     }
 }

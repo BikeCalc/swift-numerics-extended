@@ -30,7 +30,8 @@ internal struct FractionAddableTests {
         addend: Fraction<Int>.Addend,
         sum: Fraction<Int>
     ) {
-        #expect(augend + addend == sum)
+        let result: Fraction<Int> = augend + addend
+        #expect(result == sum)
     }
 
     @Test(
@@ -56,7 +57,8 @@ internal struct FractionAddableTests {
         addend: Fraction<Int>.Addend,
         sum: Fraction<Int>
     ) throws {
-        #expect(try augend.adding(addend) == sum)
+        let result: Fraction<Int> = try augend.adding(addend)
+        #expect(result == sum)
     }
 
     @Test(
@@ -84,7 +86,8 @@ extension FractionAddableTests {
         addend: Fraction<Int>.Addend,
         sum _: Fraction<Int>
     ) {
-        #expect(augend + addend == addend + augend)
+        let result: Fraction<Int> = augend + addend
+        #expect(result == addend + augend)
     }
 }
 
@@ -148,7 +151,8 @@ extension FractionAddableTests {
         ]
     )
     internal func addingToNegativeInfinityFollowsRationalRules(addend: Fraction<Int>.Addend) {
-        #expect(Fraction<Int>.negativeInfinity + addend == .negativeInfinity)
+        let result: Fraction<Int> = Fraction<Int>.negativeInfinity + addend
+        #expect(result == .negativeInfinity)
     }
 }
 
@@ -168,7 +172,8 @@ extension FractionAddableTests {
         addend: Fraction<Int>.Addend,
         sum: Fraction<Int>
     ) {
-        #expect(Fraction<Int>.negativeZero + addend == sum)
+        let result: Fraction<Int> = Fraction<Int>.negativeZero + addend
+        #expect(result == sum)
     }
 }
 
@@ -184,7 +189,8 @@ extension FractionAddableTests {
         ]
     )
     internal func addingToPositiveInfinityFollowsRationalRules(addend: Fraction<Int>.Addend) {
-        #expect(Fraction<Int>.infinity + addend == .infinity)
+        let result: Fraction<Int> = Fraction<Int>.infinity + addend
+        #expect(result == .infinity)
     }
 }
 
@@ -219,7 +225,8 @@ extension FractionAddableTests {
         ]
     )
     internal func addingPositiveZeroPreservesAugend(augend: Fraction<Int>) {
-        #expect(augend + .zero == augend)
+        let result: Fraction<Int> = augend + .zero
+        #expect(result == augend)
     }
 
     @Test(
@@ -235,6 +242,7 @@ extension FractionAddableTests {
         addend: Fraction<Int>.Addend,
         sum: Fraction<Int>
     ) {
-        #expect(Fraction<Int>.zero + addend == sum)
+        let result: Fraction<Int> = Fraction<Int>.zero + addend
+        #expect(result == sum)
     }
 }

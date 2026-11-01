@@ -58,9 +58,10 @@ internal struct IntRaisableTests {
     internal func isPowerOf(
         value: Int,
         other: Int,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: other) == result)
+        let result: Bool = value.isPower(of: other)
+        #expect(result == expected)
     }
 
     @Test(
@@ -72,7 +73,8 @@ internal struct IntRaisableTests {
         exponent: Int.Exponent,
         power: Int
     ) {
-        #expect(base ** exponent == power)
+        let result: Int = base ** exponent
+        #expect(result == power)
     }
 
     @Test(
@@ -98,7 +100,8 @@ internal struct IntRaisableTests {
         exponent: Int.Exponent,
         power: Int
     ) throws {
-        #expect(try base.raising(to: exponent) == power)
+        let result: Int = try base.raising(to: exponent)
+        #expect(result == power)
     }
 
     @Test(
@@ -123,7 +126,8 @@ internal struct IntRaisableTests {
         base: Int,
         power: Int
     ) {
-        #expect(base.squared() == power)
+        let result: Int = base.squared()
+        #expect(result == power)
     }
 
     @Test(
@@ -147,7 +151,8 @@ internal struct IntRaisableTests {
         base: Int,
         power: Int
     ) {
-        #expect(base.cubed() == power)
+        let result: Int = base.cubed()
+        #expect(result == power)
     }
 
     @Test(
@@ -196,7 +201,8 @@ extension IntRaisableTests {
         exponent: Int.Exponent,
         power: Int
     ) {
-        #expect(base ** exponent == power)
+        let result: Int = base ** exponent
+        #expect(result == power)
     }
 
     @Test(
@@ -212,7 +218,8 @@ extension IntRaisableTests {
         exponent: Int.Exponent,
         power: Int
     ) {
-        #expect(base ** exponent == power)
+        let result: Int = base ** exponent
+        #expect(result == power)
     }
 }
 
@@ -232,7 +239,8 @@ extension IntRaisableTests {
         base: Int,
         power: Int
     ) {
-        #expect(base ** -1 == power)
+        let result: Int = base ** -1
+        #expect(result == power)
     }
 
     @Test(
@@ -250,7 +258,8 @@ extension IntRaisableTests {
         exponent: Int.Exponent,
         power: Int
     ) {
-        #expect((-1) ** exponent == power)
+        let result: Int = (-1) ** exponent
+        #expect(result == power)
     }
 
     @Test(
@@ -263,9 +272,10 @@ extension IntRaisableTests {
     )
     internal func negativeOneBasePowerPredicateFollowsSignedRules(
         value: Int,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: -1) == result)
+        let result: Bool = value.isPower(of: -1)
+        #expect(result == expected)
     }
 }
 
@@ -286,7 +296,8 @@ extension IntRaisableTests {
         ]
     )
     internal func raisingToNegativeZeroReturnsOne(base: Int) {
-        #expect(base ** Int.Exponent.negativeZero == 1)
+        let result: Int = base ** Int.Exponent.negativeZero
+        #expect(result == 1)
     }
 
     @Test(
@@ -300,9 +311,10 @@ extension IntRaisableTests {
     )
     internal func negativeZeroBasePowerPredicateFollowsIntegerRules(
         value: Int,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: Int.negativeZero) == result)
+        let result: Bool = value.isPower(of: Int.negativeZero)
+        #expect(result == expected)
     }
 
     @Test(
@@ -318,7 +330,8 @@ extension IntRaisableTests {
         exponent: Int.Exponent,
         power: Int
     ) {
-        #expect(base ** exponent == power)
+        let result: Int = base ** exponent
+        #expect(result == power)
     }
 }
 
@@ -339,7 +352,8 @@ extension IntRaisableTests {
         ]
     )
     internal func raisingToPositiveOnePreservesBase(base: Int) {
-        #expect(base ** 1 == base)
+        let result: Int = base ** 1
+        #expect(result == base)
     }
 
     @Test(
@@ -354,7 +368,8 @@ extension IntRaisableTests {
         ]
     )
     internal func positiveOneBaseExponentiationReturnsPositiveOne(exponent: Int.Exponent) {
-        #expect(1 ** exponent == 1)
+        let result: Int = 1 ** exponent
+        #expect(result == 1)
     }
 
     @Test(
@@ -366,9 +381,10 @@ extension IntRaisableTests {
     )
     internal func positiveOneBasePowerPredicateFollowsIdentityRule(
         value: Int,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: 1) == result)
+        let result: Bool = value.isPower(of: 1)
+        #expect(result == expected)
     }
 }
 
@@ -389,7 +405,8 @@ extension IntRaisableTests {
         ]
     )
     internal func raisingToPositiveZeroReturnsOne(base: Int) {
-        #expect(base ** Int.Exponent.zero == 1)
+        let result: Int = base ** Int.Exponent.zero
+        #expect(result == 1)
     }
 
     @Test(
@@ -403,9 +420,10 @@ extension IntRaisableTests {
     )
     internal func positiveZeroBasePowerPredicateFollowsIntegerRules(
         value: Int,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: Int.zero) == result)
+        let result: Bool = value.isPower(of: Int.zero)
+        #expect(result == expected)
     }
 
     @Test(
@@ -421,6 +439,7 @@ extension IntRaisableTests {
         exponent: Int.Exponent,
         power: Int
     ) {
-        #expect(base ** exponent == power)
+        let result: Int = base ** exponent
+        #expect(result == power)
     }
 }

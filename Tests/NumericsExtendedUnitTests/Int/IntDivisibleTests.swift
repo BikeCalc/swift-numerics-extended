@@ -50,10 +50,10 @@ internal struct IntDivisibleTests {
     )
     internal func parityPredicates(
         value: Int,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isEven == result)
-        #expect(value.isOdd == !result)
+        #expect(value.isEven == expected)
+        #expect(value.isOdd == !expected)
     }
 
     @Test(
@@ -67,9 +67,9 @@ internal struct IntDivisibleTests {
     )
     internal func reciprocal(
         dividend: Int,
-        result: Int?
+        expected: Int?
     ) {
-        #expect(dividend.reciprocal == result)
+        #expect(dividend.reciprocal == expected)
     }
 
     @Test(
@@ -84,9 +84,10 @@ internal struct IntDivisibleTests {
     internal func isDivisibleBy(
         dividend: Int,
         divisor: Int,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(dividend.isDivisible(by: divisor) == result)
+        let result: Bool = dividend.isDivisible(by: divisor)
+        #expect(result == expected)
     }
 
     @Test(
@@ -101,9 +102,10 @@ internal struct IntDivisibleTests {
     internal func isFactorOf(
         factor: Int,
         value: Int,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(factor.isFactor(of: value) == result)
+        let result: Bool = factor.isFactor(of: value)
+        #expect(result == expected)
     }
 
     @Test(
@@ -115,7 +117,8 @@ internal struct IntDivisibleTests {
         divisor: Int.Divisor,
         quotient: Int
     ) {
-        #expect(dividend / divisor == quotient)
+        let result: Int = dividend / divisor
+        #expect(result == quotient)
     }
 
     @Test(
@@ -141,7 +144,8 @@ internal struct IntDivisibleTests {
         divisor: Int.RemainderDivisor,
         remainder: Int
     ) {
-        #expect(dividend % divisor == remainder)
+        let result: Int = dividend % divisor
+        #expect(result == remainder)
     }
 
     @Test(
@@ -167,7 +171,8 @@ internal struct IntDivisibleTests {
         divisor: Int.Divisor,
         quotient: Int
     ) throws {
-        #expect(try dividend.dividing(by: divisor) == quotient)
+        let result: Int = try dividend.dividing(by: divisor)
+        #expect(result == quotient)
     }
 
     @Test(
@@ -192,7 +197,8 @@ internal struct IntDivisibleTests {
         dividend: Int,
         quotient: Int
     ) {
-        #expect(dividend.halved() == quotient)
+        let result: Int = dividend.halved()
+        #expect(result == quotient)
     }
 
     @Test(
@@ -219,7 +225,8 @@ extension IntDivisibleTests {
         divisor: Int.Divisor,
         quotient _: Int
     ) {
-        #expect(dividend / divisor != divisor / dividend)
+        let result: Int = dividend / divisor
+        #expect(result != divisor / dividend)
     }
 
     @Test(
@@ -237,7 +244,8 @@ extension IntDivisibleTests {
         dividend: Int,
         quotient: Int
     ) {
-        #expect(dividend.halved() == quotient)
+        let result: Int = dividend.halved()
+        #expect(result == quotient)
     }
 
     @Test(
@@ -254,7 +262,8 @@ extension IntDivisibleTests {
         divisor: Int.Divisor,
         quotient: Int
     ) {
-        #expect(dividend / divisor == quotient)
+        let result: Int = dividend / divisor
+        #expect(result == quotient)
     }
 }
 
@@ -274,7 +283,8 @@ extension IntDivisibleTests {
         dividend: Int,
         quotient: Int
     ) {
-        #expect(dividend / -1 == quotient)
+        let result: Int = dividend / -1
+        #expect(result == quotient)
     }
 
     @Test(
@@ -286,9 +296,9 @@ extension IntDivisibleTests {
     )
     internal func negativeOneInvertibilityFollowsIntegerRules(
         dividend: Int,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(dividend.isInvertible == result)
+        #expect(dividend.isInvertible == expected)
     }
 
     @Test(
@@ -301,7 +311,8 @@ extension IntDivisibleTests {
         ]
     )
     internal func remainderByNegativeOneReturnsPositiveZero(dividend: Int) {
-        #expect(dividend % -1 == Int.zero)
+        let result: Int = dividend % -1
+        #expect(result == Int.zero)
     }
 }
 
@@ -328,7 +339,8 @@ extension IntDivisibleTests {
         ]
     )
     internal func dividingNegativeZeroByNonzeroValueReturnsNegativeZero(divisor: Int.Divisor) {
-        #expect(Int.negativeZero / divisor == Int.negativeZero)
+        let result: Int = Int.negativeZero / divisor
+        #expect(result == Int.negativeZero)
     }
 }
 
@@ -345,7 +357,8 @@ extension IntDivisibleTests {
         ]
     )
     internal func dividingByPositiveOnePreservesDividend(dividend: Int) {
-        #expect(dividend / 1 == dividend)
+        let result: Int = dividend / 1
+        #expect(result == dividend)
     }
 
     @Test(
@@ -357,9 +370,9 @@ extension IntDivisibleTests {
     )
     internal func positiveOneInvertibilityFollowsIntegerRules(
         dividend: Int,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(dividend.isInvertible == result)
+        #expect(dividend.isInvertible == expected)
     }
 
     @Test(
@@ -372,7 +385,8 @@ extension IntDivisibleTests {
         ]
     )
     internal func remainderByPositiveOneReturnsPositiveZero(dividend: Int) {
-        #expect(dividend % 1 == Int.zero)
+        let result: Int = dividend % 1
+        #expect(result == Int.zero)
     }
 }
 
@@ -399,7 +413,8 @@ extension IntDivisibleTests {
         ]
     )
     internal func dividingPositiveZeroByNonzeroValueReturnsPositiveZero(divisor: Int.Divisor) {
-        #expect(Int.zero / divisor == Int.zero)
+        let result: Int = Int.zero / divisor
+        #expect(result == Int.zero)
     }
 
     @Test(
@@ -412,6 +427,7 @@ extension IntDivisibleTests {
         ]
     )
     internal func remainderBySelfReturnsPositiveZero(value: Int) {
-        #expect(value % value == Int.zero)
+        let result: Int = value % value
+        #expect(result == Int.zero)
     }
 }

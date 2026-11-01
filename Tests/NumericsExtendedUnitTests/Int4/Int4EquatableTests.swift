@@ -28,9 +28,10 @@ internal struct Int4EquatableTests {
     internal func equalitySucceeds(
         lhs: Int4,
         rhs: Int4,
-        result: Bool
+        expected: Bool
     ) {
-        #expect((lhs == rhs) == result)
+        let result: Bool = lhs == rhs
+        #expect(result == expected)
     }
 
     @Test(
@@ -40,9 +41,10 @@ internal struct Int4EquatableTests {
     internal func inequalitySucceeds(
         lhs: Int4,
         rhs: Int4,
-        result: Bool
+        expected: Bool
     ) {
-        #expect((lhs != rhs) == !result)
+        let result: Bool = lhs != rhs
+        #expect(result == !expected)
     }
 
     @Test(
@@ -52,9 +54,10 @@ internal struct Int4EquatableTests {
     internal func isEqualSucceeds(
         lhs: Int4,
         rhs: Int4,
-        result: Bool
+        expected: Bool
     ) throws {
-        #expect(try lhs.isEqual(to: rhs) == result)
+        let result: Bool = try lhs.isEqual(to: rhs)
+        #expect(result == expected)
     }
 
     @Test(
@@ -64,9 +67,10 @@ internal struct Int4EquatableTests {
     internal func isUnequalSucceeds(
         lhs: Int4,
         rhs: Int4,
-        result: Bool
+        expected: Bool
     ) throws {
-        #expect(try lhs.isUnequal(to: rhs) == !result)
+        let result: Bool = try lhs.isUnequal(to: rhs)
+        #expect(result == !expected)
     }
 }
 
@@ -84,12 +88,16 @@ extension Int4EquatableTests {
     internal func negativeZeroEqualityFollowsIntegerRules(
         lhs: Int4,
         rhs: Int4,
-        result: Bool
+        expected: Bool
     ) throws {
-        #expect((lhs == rhs) == result)
-        #expect((lhs != rhs) == !result)
-        #expect(try lhs.isEqual(to: rhs) == result)
-        #expect(try lhs.isUnequal(to: rhs) == !result)
+        let equalityResult: Bool = lhs == rhs
+        #expect(equalityResult == expected)
+        let inequalityResult: Bool = lhs != rhs
+        #expect(inequalityResult == !expected)
+        let isEqualResult: Bool = try lhs.isEqual(to: rhs)
+        #expect(isEqualResult == expected)
+        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        #expect(isUnequalResult == !expected)
     }
 }
 
@@ -107,11 +115,15 @@ extension Int4EquatableTests {
     internal func positiveZeroEqualityFollowsIntegerRules(
         lhs: Int4,
         rhs: Int4,
-        result: Bool
+        expected: Bool
     ) throws {
-        #expect((lhs == rhs) == result)
-        #expect((lhs != rhs) == !result)
-        #expect(try lhs.isEqual(to: rhs) == result)
-        #expect(try lhs.isUnequal(to: rhs) == !result)
+        let equalityResult: Bool = lhs == rhs
+        #expect(equalityResult == expected)
+        let inequalityResult: Bool = lhs != rhs
+        #expect(inequalityResult == !expected)
+        let isEqualResult: Bool = try lhs.isEqual(to: rhs)
+        #expect(isEqualResult == expected)
+        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        #expect(isUnequalResult == !expected)
     }
 }

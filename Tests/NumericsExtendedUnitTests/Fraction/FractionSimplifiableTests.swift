@@ -40,9 +40,9 @@ internal struct FractionSimplifiableTests {
     )
     internal func isSimplifiable(
         value: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isSimplifiable == result)
+        #expect(value.isSimplifiable == expected)
     }
 
     @Test(
@@ -60,9 +60,9 @@ internal struct FractionSimplifiableTests {
     )
     internal func isSimplified(
         value: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isSimplified == result)
+        #expect(value.isSimplified == expected)
     }
 
     @Test(
@@ -71,9 +71,10 @@ internal struct FractionSimplifiableTests {
     )
     internal func simplificationSucceeds(
         value: Fraction<Int>,
-        result: Fraction<Int>
+        expected: Fraction<Int>
     ) {
-        #expect(value.simplified() == result)
+        let result: Fraction<Int> = value.simplified()
+        #expect(result == expected)
     }
 
     @Test(
@@ -111,7 +112,8 @@ extension FractionSimplifiableTests {
     internal func intMinimumTermsSimplifyWithoutOverflow() {
         let value: Fraction<Int> = .init(Int.min, Int.min)
         let expected: Fraction<Int> = .init(-1, -1)
-        #expect(value.simplified() == expected)
+        let result: Fraction<Int> = value.simplified()
+        #expect(result == expected)
     }
 }
 
@@ -134,7 +136,8 @@ extension FractionSimplifiableTests {
     internal func negativeInfinitySimplificationFollowsRationalRules() {
         #expect(Fraction<Int>.negativeInfinity.isSimplifiable == true)
         #expect(Fraction<Int>.negativeInfinity.isSimplified == true)
-        #expect(Fraction<Int>.negativeInfinity.simplified() == .negativeInfinity)
+        let result: Fraction<Int> = Fraction<Int>.negativeInfinity.simplified()
+        #expect(result == .negativeInfinity)
     }
 }
 
@@ -154,7 +157,8 @@ extension FractionSimplifiableTests {
     ) {
         #expect(value.isSimplifiable == true)
         #expect(value.isSimplified == isSimplified)
-        #expect(value.simplified() == .negativeZero)
+        let result: Fraction<Int> = value.simplified()
+        #expect(result == .negativeZero)
     }
 }
 
@@ -165,7 +169,8 @@ extension FractionSimplifiableTests {
     internal func positiveInfinitySimplificationFollowsRationalRules() {
         #expect(Fraction<Int>.infinity.isSimplifiable == true)
         #expect(Fraction<Int>.infinity.isSimplified == true)
-        #expect(Fraction<Int>.infinity.simplified() == .infinity)
+        let result: Fraction<Int> = Fraction<Int>.infinity.simplified()
+        #expect(result == .infinity)
     }
 }
 
@@ -185,6 +190,7 @@ extension FractionSimplifiableTests {
     ) {
         #expect(value.isSimplifiable == true)
         #expect(value.isSimplified == isSimplified)
-        #expect(value.simplified() == .zero)
+        let result: Fraction<Int> = value.simplified()
+        #expect(result == .zero)
     }
 }

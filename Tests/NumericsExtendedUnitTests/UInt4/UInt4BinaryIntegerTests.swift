@@ -59,11 +59,11 @@ internal struct UInt4BinaryIntegerTests {
     internal func bitwiseAndEqualSucceeds(
         value: UInt4,
         mask: UInt4,
-        result: UInt4
+        expected: UInt4
     ) {
-        var maskedValue: UInt4 = value
-        maskedValue &= mask
-        #expect(maskedValue == result)
+        var result: UInt4 = value
+        result &= mask
+        #expect(result == expected)
     }
 
     @Test(
@@ -76,11 +76,11 @@ internal struct UInt4BinaryIntegerTests {
     internal func bitwiseOrEqualSucceeds(
         value: UInt4,
         mask: UInt4,
-        result: UInt4
+        expected: UInt4
     ) {
-        var maskedValue: UInt4 = value
-        maskedValue |= mask
-        #expect(maskedValue == result)
+        var result: UInt4 = value
+        result |= mask
+        #expect(result == expected)
     }
 
     @Test(
@@ -93,10 +93,10 @@ internal struct UInt4BinaryIntegerTests {
     internal func bitwiseXorEqualSucceeds(
         value: UInt4,
         mask: UInt4,
-        result: UInt4
+        expected: UInt4
     ) {
-        var maskedValue: UInt4 = value
-        maskedValue ^= mask
-        #expect(maskedValue == result)
+        var result: UInt4 = value
+        result ^= mask
+        #expect(result == expected)
     }
 }

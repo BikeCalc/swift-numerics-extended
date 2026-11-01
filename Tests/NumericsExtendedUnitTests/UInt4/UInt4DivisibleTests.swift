@@ -40,10 +40,10 @@ internal struct UInt4DivisibleTests {
     )
     internal func parityPredicates(
         value: UInt4,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isEven == result)
-        #expect(value.isOdd == !result)
+        #expect(value.isEven == expected)
+        #expect(value.isOdd == !expected)
     }
 
     @Test(
@@ -55,9 +55,9 @@ internal struct UInt4DivisibleTests {
     )
     internal func reciprocal(
         dividend: UInt4,
-        result: UInt4?
+        expected: UInt4?
     ) {
-        #expect(dividend.reciprocal == result)
+        #expect(dividend.reciprocal == expected)
     }
 
     @Test(
@@ -70,9 +70,10 @@ internal struct UInt4DivisibleTests {
     internal func isDivisibleBy(
         dividend: UInt4,
         divisor: UInt4,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(dividend.isDivisible(by: divisor) == result)
+        let result: Bool = dividend.isDivisible(by: divisor)
+        #expect(result == expected)
     }
 
     @Test(
@@ -85,9 +86,10 @@ internal struct UInt4DivisibleTests {
     internal func isFactorOf(
         factor: UInt4,
         value: UInt4,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(factor.isFactor(of: value) == result)
+        let result: Bool = factor.isFactor(of: value)
+        #expect(result == expected)
     }
 
     @Test(
@@ -99,7 +101,8 @@ internal struct UInt4DivisibleTests {
         divisor: UInt4.Divisor,
         quotient: UInt4
     ) {
-        #expect(dividend / divisor == quotient)
+        let result: UInt4 = dividend / divisor
+        #expect(result == quotient)
     }
 
     @Test(
@@ -125,7 +128,8 @@ internal struct UInt4DivisibleTests {
         divisor: UInt4.RemainderDivisor,
         remainder: UInt4
     ) {
-        #expect(dividend % divisor == remainder)
+        let result: UInt4 = dividend % divisor
+        #expect(result == remainder)
     }
 
     @Test(
@@ -151,7 +155,8 @@ internal struct UInt4DivisibleTests {
         divisor: UInt4.Divisor,
         quotient: UInt4
     ) throws {
-        #expect(try dividend.dividing(by: divisor) == quotient)
+        let result: UInt4 = try dividend.dividing(by: divisor)
+        #expect(result == quotient)
     }
 
     @Test(
@@ -176,7 +181,8 @@ internal struct UInt4DivisibleTests {
         dividend: UInt4,
         quotient: UInt4
     ) {
-        #expect(dividend.halved() == quotient)
+        let result: UInt4 = dividend.halved()
+        #expect(result == quotient)
     }
 
     @Test(
@@ -203,7 +209,8 @@ extension UInt4DivisibleTests {
         divisor: UInt4.Divisor,
         quotient _: UInt4
     ) {
-        #expect(dividend / divisor != divisor / dividend)
+        let result: UInt4 = dividend / divisor
+        #expect(result != divisor / dividend)
     }
 
     @Test(
@@ -218,7 +225,8 @@ extension UInt4DivisibleTests {
         dividend: UInt4,
         quotient: UInt4
     ) {
-        #expect(dividend.halved() == quotient)
+        let result: UInt4 = dividend.halved()
+        #expect(result == quotient)
     }
 }
 
@@ -233,7 +241,8 @@ extension UInt4DivisibleTests {
         ] as Array<UInt4>
     )
     internal func dividingByPositiveOnePreservesDividend(dividend: UInt4) {
-        #expect(dividend / 1 == dividend)
+        let result: UInt4 = dividend / 1
+        #expect(result == dividend)
     }
 
     @Test(
@@ -245,9 +254,9 @@ extension UInt4DivisibleTests {
     )
     internal func positiveOneInvertibilityFollowsUnsignedIntegerRules(
         dividend: UInt4,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(dividend.isInvertible == result)
+        #expect(dividend.isInvertible == expected)
     }
 
     @Test(
@@ -258,7 +267,8 @@ extension UInt4DivisibleTests {
         ] as Array<UInt4>
     )
     internal func remainderByPositiveOneReturnsPositiveZero(dividend: UInt4) {
-        #expect(dividend % 1 == UInt4.zero)
+        let result: UInt4 = dividend % 1
+        #expect(result == UInt4.zero)
     }
 }
 
@@ -278,7 +288,8 @@ extension UInt4DivisibleTests {
         ] as Array<UInt4.Divisor>
     )
     internal func dividingPositiveZeroByNonzeroValueReturnsPositiveZero(divisor: UInt4.Divisor) {
-        #expect(UInt4.zero / divisor == UInt4.zero)
+        let result: UInt4 = UInt4.zero / divisor
+        #expect(result == UInt4.zero)
     }
 
     @Test(
@@ -289,6 +300,7 @@ extension UInt4DivisibleTests {
         ] as Array<UInt4>
     )
     internal func remainderBySelfReturnsPositiveZero(value: UInt4) {
-        #expect(value % value == UInt4.zero)
+        let result: UInt4 = value % value
+        #expect(result == UInt4.zero)
     }
 }

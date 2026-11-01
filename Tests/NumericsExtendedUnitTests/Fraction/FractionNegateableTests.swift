@@ -38,7 +38,8 @@ internal struct FractionNegateableTests {
         value: Fraction<Int>,
         negation: Fraction<Int>
     ) {
-        #expect(-value == negation)
+        let result: Fraction<Int> = -value
+        #expect(result == negation)
     }
 
     @Test(
@@ -49,7 +50,8 @@ internal struct FractionNegateableTests {
         value: Fraction<Int>,
         negation: Fraction<Int>
     ) {
-        #expect(value.negating() == negation)
+        let result: Fraction<Int> = value.negating()
+        #expect(result == negation)
     }
 
     @Test(
@@ -76,9 +78,9 @@ internal struct FractionNegateableTests {
     )
     internal func isNegative(
         value: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isNegative == result)
+        #expect(value.isNegative == expected)
     }
 
     @Test(
@@ -92,9 +94,9 @@ internal struct FractionNegateableTests {
     )
     internal func isPositive(
         value: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPositive == result)
+        #expect(value.isPositive == expected)
     }
 
     @Test(
@@ -108,9 +110,9 @@ internal struct FractionNegateableTests {
     )
     internal func isSigned(
         value: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isSigned == result)
+        #expect(value.isSigned == expected)
     }
 
     @Test(
@@ -129,9 +131,10 @@ internal struct FractionNegateableTests {
     internal func isOpposite(
         value: Fraction<Int>,
         other: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isOpposite(of: other) == result)
+        let result: Bool = value.isOpposite(of: other)
+        #expect(result == expected)
     }
 }
 
@@ -141,7 +144,8 @@ extension FractionNegateableTests {
         arguments: Self.additiveInverseArguments
     )
     internal func negatingTwiceReturnsOriginalValue(value: Fraction<Int>) {
-        #expect(value.negating().negating() == value)
+        let result: Fraction<Int> = value.negating().negating()
+        #expect(result == value)
     }
 }
 
@@ -177,8 +181,10 @@ extension FractionNegateableTests {
         ]
     )
     internal func nanOppositeFollowsRationalRules(other: Fraction<Int>) {
-        #expect(Fraction<Int>.nan.isOpposite(of: other) == false)
-        #expect(other.isOpposite(of: .nan) == false)
+        let firstResult: Bool = Fraction<Int>.nan.isOpposite(of: other)
+        #expect(firstResult == false)
+        let secondResult: Bool = other.isOpposite(of: .nan)
+        #expect(secondResult == false)
     }
 
     @Test("Negating NaN returns NaN")
@@ -212,9 +218,10 @@ extension FractionNegateableTests {
     )
     internal func negativeInfinityOppositeFollowsRationalRules(
         other: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(Fraction<Int>.negativeInfinity.isOpposite(of: other) == result)
+        let result: Bool = Fraction<Int>.negativeInfinity.isOpposite(of: other)
+        #expect(result == expected)
     }
 
     @Test("Negating negative infinity follows rational rules")
@@ -256,9 +263,10 @@ extension FractionNegateableTests {
     )
     internal func negativeZeroOppositeFollowsStoredRepresentationRules(
         other: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(Fraction<Int>.negativeZero.isOpposite(of: other) == result)
+        let result: Bool = Fraction<Int>.negativeZero.isOpposite(of: other)
+        #expect(result == expected)
     }
 
     @Test(
@@ -298,9 +306,10 @@ extension FractionNegateableTests {
     )
     internal func positiveInfinityOppositeFollowsRationalRules(
         other: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(Fraction<Int>.infinity.isOpposite(of: other) == result)
+        let result: Bool = Fraction<Int>.infinity.isOpposite(of: other)
+        #expect(result == expected)
     }
 
     @Test("Negating positive infinity follows rational rules")
@@ -350,9 +359,10 @@ extension FractionNegateableTests {
     )
     internal func positiveZeroOppositeFollowsStoredRepresentationRules(
         other: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(Fraction<Int>.zero.isOpposite(of: other) == result)
+        let result: Bool = Fraction<Int>.zero.isOpposite(of: other)
+        #expect(result == expected)
     }
 
     @Test(

@@ -40,9 +40,9 @@ internal struct FractionRationalTests {
     )
     internal func isOne(
         value: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isOne == result)
+        #expect(value.isOne == expected)
     }
 
     @Test(
@@ -56,9 +56,9 @@ internal struct FractionRationalTests {
     )
     internal func isWhole(
         value: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isWhole == result)
+        #expect(value.isWhole == expected)
     }
 
     @Test(
@@ -72,9 +72,9 @@ internal struct FractionRationalTests {
     )
     internal func isProper(
         value: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isProper == result)
+        #expect(value.isProper == expected)
     }
 
     @Test(
@@ -88,9 +88,9 @@ internal struct FractionRationalTests {
     )
     internal func isImproper(
         value: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isImproper == result)
+        #expect(value.isImproper == expected)
     }
 
     @Test(
@@ -104,9 +104,9 @@ internal struct FractionRationalTests {
     )
     internal func isUnit(
         value: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isUnit == result)
+        #expect(value.isUnit == expected)
     }
 
     @Test(
@@ -120,9 +120,9 @@ internal struct FractionRationalTests {
     )
     internal func quotient(
         value: Fraction<Int>,
-        result: Double
+        expected: Double
     ) {
-        #expect(value.quotient == result)
+        #expect(value.quotient == expected)
     }
 
     @Test(
@@ -137,9 +137,10 @@ internal struct FractionRationalTests {
     internal func isLike(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(lhs.isLike(rhs) == result)
+        let result: Bool = lhs.isLike(rhs)
+        #expect(result == expected)
     }
 }
 

@@ -34,7 +34,8 @@ internal struct DoubleSubtractableTests {
         subtrahend: Double.Subtrahend,
         difference: Double
     ) {
-        #expect(minuend - subtrahend == difference)
+        let result: Double = minuend - subtrahend
+        #expect(result == difference)
     }
 
     @Test(
@@ -60,7 +61,8 @@ internal struct DoubleSubtractableTests {
         subtrahend: Double.Subtrahend,
         difference: Double
     ) throws {
-        #expect(try minuend.subtracting(subtrahend) == difference)
+        let result: Double = try minuend.subtracting(subtrahend)
+        #expect(result == difference)
     }
 
     @Test(
@@ -88,7 +90,8 @@ extension DoubleSubtractableTests {
         subtrahend: Double.Subtrahend,
         difference _: Double
     ) {
-        #expect(minuend - subtrahend != subtrahend - minuend)
+        let result: Double = minuend - subtrahend
+        #expect(result != subtrahend - minuend)
     }
 }
 
@@ -156,7 +159,8 @@ extension DoubleSubtractableTests {
         subtrahend: Double.Subtrahend,
         difference: Double
     ) {
-        #expect(minuend - subtrahend == difference)
+        let result: Double = minuend - subtrahend
+        #expect(result == difference)
     }
 }
 
@@ -198,7 +202,8 @@ extension DoubleSubtractableTests {
         subtrahend: Double.Subtrahend,
         difference: Double
     ) {
-        #expect(minuend - subtrahend == difference)
+        let result: Double = minuend - subtrahend
+        #expect(result == difference)
     }
 }
 
@@ -219,7 +224,8 @@ extension DoubleSubtractableTests {
         ]
     )
     internal func subtractingPositiveZeroPreservesMinuend(minuend: Double) {
-        #expect(minuend - Double.zero == minuend)
+        let result: Double = minuend - Double.zero
+        #expect(result == minuend)
     }
 
     @Test(

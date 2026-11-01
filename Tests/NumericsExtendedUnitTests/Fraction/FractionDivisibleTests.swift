@@ -47,9 +47,9 @@ internal struct FractionDivisibleTests {
     )
     internal func reciprocal(
         dividend: Fraction<Int>,
-        result: Fraction<Int>?
+        expected: Fraction<Int>?
     ) {
-        #expect(dividend.reciprocal == result)
+        #expect(dividend.reciprocal == expected)
     }
 
     @Test(
@@ -64,9 +64,10 @@ internal struct FractionDivisibleTests {
     internal func isDivisibleBy(
         dividend: Fraction<Int>,
         divisor: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(dividend.isDivisible(by: divisor) == result)
+        let result: Bool = dividend.isDivisible(by: divisor)
+        #expect(result == expected)
     }
 
     @Test(
@@ -81,9 +82,10 @@ internal struct FractionDivisibleTests {
     internal func isFactorOf(
         factor: Fraction<Int>,
         value: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(factor.isFactor(of: value) == result)
+        let result: Bool = factor.isFactor(of: value)
+        #expect(result == expected)
     }
 
     @Test(
@@ -95,7 +97,8 @@ internal struct FractionDivisibleTests {
         divisor: Fraction<Int>.Divisor,
         quotient: Fraction<Int>
     ) {
-        #expect(dividend / divisor == quotient)
+        let result: Fraction<Int> = dividend / divisor
+        #expect(result == quotient)
     }
 
     @Test(
@@ -121,7 +124,8 @@ internal struct FractionDivisibleTests {
         divisor: Fraction<Int>.RemainderDivisor,
         remainder: Fraction<Int>
     ) {
-        #expect(dividend % divisor == remainder)
+        let result: Fraction<Int> = dividend % divisor
+        #expect(result == remainder)
     }
 
     @Test(
@@ -147,7 +151,8 @@ internal struct FractionDivisibleTests {
         divisor: Fraction<Int>.Divisor,
         quotient: Fraction<Int>
     ) throws {
-        #expect(try dividend.dividing(by: divisor) == quotient)
+        let result: Fraction<Int> = try dividend.dividing(by: divisor)
+        #expect(result == quotient)
     }
 
     @Test(
@@ -172,7 +177,8 @@ internal struct FractionDivisibleTests {
         dividend: Fraction<Int>,
         quotient: Fraction<Int>
     ) {
-        #expect(dividend.halved() == quotient)
+        let result: Fraction<Int> = dividend.halved()
+        #expect(result == quotient)
     }
 
     @Test(
@@ -202,7 +208,8 @@ extension FractionDivisibleTests {
         dividend: Fraction<Int>,
         divisor: Fraction<Int>.Divisor
     ) {
-        #expect(dividend / divisor != divisor / dividend)
+        let result: Fraction<Int> = dividend / divisor
+        #expect(result != divisor / dividend)
     }
 }
 
@@ -220,8 +227,10 @@ extension FractionDivisibleTests {
         ]
     )
     internal func nanDivisibilityFollowsRationalRules(other: Fraction<Int>) {
-        #expect(Fraction<Int>.nan.isDivisible(by: other) == false)
-        #expect(Fraction<Int>.nan.isFactor(of: other) == false)
+        let isDivisibleResult: Bool = Fraction<Int>.nan.isDivisible(by: other)
+        #expect(isDivisibleResult == false)
+        let isFactorResult: Bool = Fraction<Int>.nan.isFactor(of: other)
+        #expect(isFactorResult == false)
     }
 
     @Test("Reciprocal of NaN returns nil")
@@ -419,8 +428,10 @@ extension FractionDivisibleTests {
         ]
     )
     internal func negativeInfinityDivisibilityFollowsRationalRules(other: Fraction<Int>) {
-        #expect(Fraction<Int>.negativeInfinity.isDivisible(by: other) == false)
-        #expect(Fraction<Int>.negativeInfinity.isFactor(of: other) == false)
+        let isDivisibleResult: Bool = Fraction<Int>.negativeInfinity.isDivisible(by: other)
+        #expect(isDivisibleResult == false)
+        let isFactorResult: Bool = Fraction<Int>.negativeInfinity.isFactor(of: other)
+        #expect(isFactorResult == false)
     }
 
     @Test("Reciprocal of negative infinity returns negative zero")
@@ -444,7 +455,8 @@ extension FractionDivisibleTests {
         divisor: Fraction<Int>.Divisor,
         quotient: Fraction<Int>
     ) {
-        #expect(Fraction<Int>.negativeInfinity / divisor == quotient)
+        let result: Fraction<Int> = Fraction<Int>.negativeInfinity / divisor
+        #expect(result == quotient)
     }
 
     @Test(
@@ -458,7 +470,8 @@ extension FractionDivisibleTests {
         dividend: Fraction<Int>,
         quotient: Fraction<Int>
     ) {
-        #expect(dividend / Fraction<Int>.negativeInfinity == quotient)
+        let result: Fraction<Int> = dividend / Fraction<Int>.negativeInfinity
+        #expect(result == quotient)
     }
 
     @Test(
@@ -471,7 +484,8 @@ extension FractionDivisibleTests {
         ]
     )
     internal func remainderByNegativeInfinityPreservesDividend(dividend: Fraction<Int>) {
-        #expect(dividend % Fraction<Int>.negativeInfinity == dividend)
+        let result: Fraction<Int> = dividend % Fraction<Int>.negativeInfinity
+        #expect(result == dividend)
     }
 }
 
@@ -491,8 +505,10 @@ extension FractionDivisibleTests {
         dividend: Fraction<Int>,
         quotient: Fraction<Int>
     ) {
-        #expect(dividend / -1 == quotient)
-        #expect(quotient.isCanonicallyEqual(to: -dividend) == true)
+        let operatorResult: Fraction<Int> = dividend / -1
+        #expect(operatorResult == quotient)
+        let isCanonicallyEqualResult: Bool = quotient.isCanonicallyEqual(to: -dividend)
+        #expect(isCanonicallyEqualResult == true)
     }
 }
 
@@ -514,8 +530,10 @@ extension FractionDivisibleTests {
         isDivisible: Bool,
         isFactor: Bool
     ) {
-        #expect(Fraction<Int>.negativeZero.isDivisible(by: other) == isDivisible)
-        #expect(Fraction<Int>.negativeZero.isFactor(of: other) == isFactor)
+        let isDivisibleResult: Bool = Fraction<Int>.negativeZero.isDivisible(by: other)
+        #expect(isDivisibleResult == isDivisible)
+        let isFactorResult: Bool = Fraction<Int>.negativeZero.isFactor(of: other)
+        #expect(isFactorResult == isFactor)
     }
 
     @Test("Reciprocal of negative zero returns nil")
@@ -539,7 +557,8 @@ extension FractionDivisibleTests {
         divisor: Fraction<Int>.Divisor,
         quotient: Fraction<Int>
     ) {
-        #expect(Fraction<Int>.negativeZero / divisor == quotient)
+        let result: Fraction<Int> = Fraction<Int>.negativeZero / divisor
+        #expect(result == quotient)
     }
 
     @Test(
@@ -553,7 +572,8 @@ extension FractionDivisibleTests {
         dividend: Fraction<Int>,
         quotient: Fraction<Int>
     ) {
-        #expect(dividend / Fraction<Int>.negativeZero == quotient)
+        let result: Fraction<Int> = dividend / Fraction<Int>.negativeZero
+        #expect(result == quotient)
     }
 }
 
@@ -571,8 +591,10 @@ extension FractionDivisibleTests {
         ]
     )
     internal func positiveInfinityDivisibilityFollowsRationalRules(other: Fraction<Int>) {
-        #expect(Fraction<Int>.infinity.isDivisible(by: other) == false)
-        #expect(Fraction<Int>.infinity.isFactor(of: other) == false)
+        let isDivisibleResult: Bool = Fraction<Int>.infinity.isDivisible(by: other)
+        #expect(isDivisibleResult == false)
+        let isFactorResult: Bool = Fraction<Int>.infinity.isFactor(of: other)
+        #expect(isFactorResult == false)
     }
 
     @Test("Reciprocal of positive infinity returns positive zero")
@@ -596,7 +618,8 @@ extension FractionDivisibleTests {
         divisor: Fraction<Int>.Divisor,
         quotient: Fraction<Int>
     ) {
-        #expect(Fraction<Int>.infinity / divisor == quotient)
+        let result: Fraction<Int> = Fraction<Int>.infinity / divisor
+        #expect(result == quotient)
     }
 
     @Test(
@@ -610,7 +633,8 @@ extension FractionDivisibleTests {
         dividend: Fraction<Int>,
         quotient: Fraction<Int>
     ) {
-        #expect(dividend / Fraction<Int>.infinity == quotient)
+        let result: Fraction<Int> = dividend / Fraction<Int>.infinity
+        #expect(result == quotient)
     }
 
     @Test(
@@ -623,7 +647,8 @@ extension FractionDivisibleTests {
         ]
     )
     internal func remainderByPositiveInfinityPreservesDividend(dividend: Fraction<Int>) {
-        #expect(dividend % Fraction<Int>.infinity == dividend)
+        let result: Fraction<Int> = dividend % Fraction<Int>.infinity
+        #expect(result == dividend)
     }
 }
 
@@ -640,7 +665,8 @@ extension FractionDivisibleTests {
         ]
     )
     internal func dividingByPositiveOnePreservesDividend(dividend: Fraction<Int>) {
-        #expect(dividend / 1 == dividend)
+        let result: Fraction<Int> = dividend / 1
+        #expect(result == dividend)
     }
 }
 
@@ -656,7 +682,8 @@ extension FractionDivisibleTests {
         ]
     )
     internal func dividingPositiveZeroByNonzeroValueReturnsPositiveOrNegativeZero(divisor: Fraction<Int>.Divisor) {
-        #expect((Fraction<Int>.zero / divisor).isZero == true)
+        let result: Fraction<Int> = Fraction<Int>.zero / divisor
+        #expect(result.isZero == true)
     }
 
     @Test(
@@ -674,8 +701,10 @@ extension FractionDivisibleTests {
         isDivisible: Bool,
         isFactor: Bool
     ) {
-        #expect(Fraction<Int>.zero.isDivisible(by: other) == isDivisible)
-        #expect(Fraction<Int>.zero.isFactor(of: other) == isFactor)
+        let isDivisibleResult: Bool = Fraction<Int>.zero.isDivisible(by: other)
+        #expect(isDivisibleResult == isDivisible)
+        let isFactorResult: Bool = Fraction<Int>.zero.isFactor(of: other)
+        #expect(isFactorResult == isFactor)
     }
 
     @Test("Reciprocal of positive zero returns nil")
@@ -699,7 +728,8 @@ extension FractionDivisibleTests {
         divisor: Fraction<Int>.Divisor,
         quotient: Fraction<Int>
     ) {
-        #expect(Fraction<Int>.zero / divisor == quotient)
+        let result: Fraction<Int> = Fraction<Int>.zero / divisor
+        #expect(result == quotient)
     }
 
     @Test(
@@ -713,7 +743,8 @@ extension FractionDivisibleTests {
         dividend: Fraction<Int>,
         quotient: Fraction<Int>
     ) {
-        #expect(dividend / Fraction<Int>.zero == quotient)
+        let result: Fraction<Int> = dividend / Fraction<Int>.zero
+        #expect(result == quotient)
     }
 
     @Test(

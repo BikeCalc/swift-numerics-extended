@@ -33,8 +33,10 @@ internal struct DoubleEquatableTests {
         lhs: Double,
         rhs: Double
     ) throws {
-        #expect(try lhs.isEqual(to: rhs) == (lhs == rhs))
-        #expect(try lhs.isUnequal(to: rhs) == (lhs != rhs))
+        let isEqualResult: Bool = lhs.isEqual(to: rhs)
+        #expect(isEqualResult == (lhs == rhs))
+        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        #expect(isUnequalResult == (lhs != rhs))
     }
 }
 
@@ -53,10 +55,14 @@ extension DoubleEquatableTests {
         lhs: Double,
         rhs: Double
     ) throws {
-        #expect((lhs == rhs) == false)
-        #expect((lhs != rhs) == true)
-        #expect(try lhs.isEqual(to: rhs) == false)
-        #expect(try lhs.isUnequal(to: rhs) == true)
+        let equalityResult: Bool = lhs == rhs
+        #expect(equalityResult == false)
+        let inequalityResult: Bool = lhs != rhs
+        #expect(inequalityResult == true)
+        let isEqualResult: Bool = lhs.isEqual(to: rhs)
+        #expect(isEqualResult == false)
+        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        #expect(isUnequalResult == true)
     }
 }
 
@@ -73,12 +79,16 @@ extension DoubleEquatableTests {
     internal func negativeInfinityEqualityFollowsFloatingPointRules(
         lhs: Double,
         rhs: Double,
-        result: Bool
+        expected: Bool
     ) throws {
-        #expect((lhs == rhs) == result)
-        #expect((lhs != rhs) == !result)
-        #expect(try lhs.isEqual(to: rhs) == result)
-        #expect(try lhs.isUnequal(to: rhs) == !result)
+        let equalityResult: Bool = lhs == rhs
+        #expect(equalityResult == expected)
+        let inequalityResult: Bool = lhs != rhs
+        #expect(inequalityResult == !expected)
+        let isEqualResult: Bool = lhs.isEqual(to: rhs)
+        #expect(isEqualResult == expected)
+        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        #expect(isUnequalResult == !expected)
     }
 }
 
@@ -96,12 +106,16 @@ extension DoubleEquatableTests {
     internal func negativeZeroEqualityFollowsFloatingPointRules(
         lhs: Double,
         rhs: Double,
-        result: Bool
+        expected: Bool
     ) throws {
-        #expect((lhs == rhs) == result)
-        #expect((lhs != rhs) == !result)
-        #expect(try lhs.isEqual(to: rhs) == result)
-        #expect(try lhs.isUnequal(to: rhs) == !result)
+        let equalityResult: Bool = lhs == rhs
+        #expect(equalityResult == expected)
+        let inequalityResult: Bool = lhs != rhs
+        #expect(inequalityResult == !expected)
+        let isEqualResult: Bool = lhs.isEqual(to: rhs)
+        #expect(isEqualResult == expected)
+        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        #expect(isUnequalResult == !expected)
     }
 }
 
@@ -118,12 +132,16 @@ extension DoubleEquatableTests {
     internal func positiveInfinityEqualityFollowsFloatingPointRules(
         lhs: Double,
         rhs: Double,
-        result: Bool
+        expected: Bool
     ) throws {
-        #expect((lhs == rhs) == result)
-        #expect((lhs != rhs) == !result)
-        #expect(try lhs.isEqual(to: rhs) == result)
-        #expect(try lhs.isUnequal(to: rhs) == !result)
+        let equalityResult: Bool = lhs == rhs
+        #expect(equalityResult == expected)
+        let inequalityResult: Bool = lhs != rhs
+        #expect(inequalityResult == !expected)
+        let isEqualResult: Bool = lhs.isEqual(to: rhs)
+        #expect(isEqualResult == expected)
+        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        #expect(isUnequalResult == !expected)
     }
 }
 
@@ -141,11 +159,15 @@ extension DoubleEquatableTests {
     internal func positiveZeroEqualityFollowsFloatingPointRules(
         lhs: Double,
         rhs: Double,
-        result: Bool
+        expected: Bool
     ) throws {
-        #expect((lhs == rhs) == result)
-        #expect((lhs != rhs) == !result)
-        #expect(try lhs.isEqual(to: rhs) == result)
-        #expect(try lhs.isUnequal(to: rhs) == !result)
+        let equalityResult: Bool = lhs == rhs
+        #expect(equalityResult == expected)
+        let inequalityResult: Bool = lhs != rhs
+        #expect(inequalityResult == !expected)
+        let isEqualResult: Bool = lhs.isEqual(to: rhs)
+        #expect(isEqualResult == expected)
+        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        #expect(isUnequalResult == !expected)
     }
 }

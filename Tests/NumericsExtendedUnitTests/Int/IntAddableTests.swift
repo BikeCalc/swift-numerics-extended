@@ -30,7 +30,8 @@ internal struct IntAddableTests {
         addend: Int.Addend,
         sum: Int
     ) {
-        #expect(augend + addend == sum)
+        let result: Int = augend + addend
+        #expect(result == sum)
     }
 
     @Test(
@@ -56,7 +57,8 @@ internal struct IntAddableTests {
         addend: Int.Addend,
         sum: Int
     ) throws {
-        #expect(try augend.adding(addend) == sum)
+        let result: Int = try augend.adding(addend)
+        #expect(result == sum)
     }
 
     @Test(
@@ -84,7 +86,8 @@ extension IntAddableTests {
         addend: Int.Addend,
         sum _: Int
     ) {
-        #expect(augend + addend == addend + augend)
+        let result: Int = augend + addend
+        #expect(result == addend + augend)
     }
 }
 
@@ -101,7 +104,8 @@ extension IntAddableTests {
         ]
     )
     internal func addingNegativeZeroPreservesAugend(augend: Int) {
-        #expect(augend + Int.negativeZero == augend)
+        let result: Int = augend + Int.negativeZero
+        #expect(result == augend)
     }
 }
 
@@ -121,7 +125,8 @@ extension IntAddableTests {
         augend: Int,
         addend: Int.Addend
     ) {
-        #expect(augend + addend == Int.zero)
+        let result: Int = augend + addend
+        #expect(result == Int.zero)
     }
 
     @Test(
@@ -134,6 +139,7 @@ extension IntAddableTests {
         ]
     )
     internal func addingPositiveZeroPreservesAugend(augend: Int) {
-        #expect(augend + Int.zero == augend)
+        let result: Int = augend + Int.zero
+        #expect(result == augend)
     }
 }

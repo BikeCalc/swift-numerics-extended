@@ -36,9 +36,10 @@ internal struct DoubleRoundableTests {
     internal func roundedToSucceeds(
         value: Double,
         decimalPlace: Double.DecimalPlace,
-        result: Double
+        expected: Double
     ) {
-        #expect(value.rounded(to: decimalPlace) == result)
+        let result: Double = value.rounded(to: decimalPlace)
+        #expect(result == expected)
     }
 
     @Test(
@@ -48,11 +49,11 @@ internal struct DoubleRoundableTests {
     internal func roundToSucceeds(
         value: Double,
         decimalPlace: Double.DecimalPlace,
-        result: Double
+        expected: Double
     ) {
-        var roundedValue: Double = value
-        roundedValue.round(to: decimalPlace)
-        #expect(roundedValue == result)
+        var result: Double = value
+        result.round(to: decimalPlace)
+        #expect(result == expected)
     }
 }
 
@@ -69,9 +70,10 @@ extension DoubleRoundableTests {
     internal func roundingMidpointFollowsAwayFromZeroRule(
         value: Double,
         decimalPlace: Double.DecimalPlace,
-        result: Double
+        expected: Double
     ) {
-        #expect(value.rounded(to: decimalPlace) == result)
+        let result: Double = value.rounded(to: decimalPlace)
+        #expect(result == expected)
     }
 
     @Test(
@@ -87,7 +89,8 @@ extension DoubleRoundableTests {
         value: Double,
         decimalPlace: Double.DecimalPlace
     ) {
-        #expect(value.rounded(to: decimalPlace) == value)
+        let result: Double = value.rounded(to: decimalPlace)
+        #expect(result == value)
     }
 }
 
@@ -121,7 +124,8 @@ extension DoubleRoundableTests {
         ]
     )
     internal func roundingNegativeInfinityFollowsFloatingPointRules(decimalPlace: Double.DecimalPlace) {
-        #expect(Double.negativeInfinity.rounded(to: decimalPlace) == .negativeInfinity)
+        let result: Double = Double.negativeInfinity.rounded(to: decimalPlace)
+        #expect(result == .negativeInfinity)
     }
 }
 
@@ -139,9 +143,9 @@ extension DoubleRoundableTests {
         value: Double,
         decimalPlace: Double.DecimalPlace
     ) {
-        let roundedValue: Double = value.rounded(to: decimalPlace)
-        #expect(roundedValue == Double.zero)
-        #expect(roundedValue.sign == .minus)
+        let result: Double = value.rounded(to: decimalPlace)
+        #expect(result == Double.zero)
+        #expect(result.sign == .minus)
     }
 }
 
@@ -156,7 +160,8 @@ extension DoubleRoundableTests {
         ]
     )
     internal func roundingPositiveInfinityFollowsFloatingPointRules(decimalPlace: Double.DecimalPlace) {
-        #expect(Double.infinity.rounded(to: decimalPlace) == .infinity)
+        let result: Double = Double.infinity.rounded(to: decimalPlace)
+        #expect(result == .infinity)
     }
 }
 
@@ -174,8 +179,8 @@ extension DoubleRoundableTests {
         value: Double,
         decimalPlace: Double.DecimalPlace
     ) {
-        let roundedValue: Double = value.rounded(to: decimalPlace)
-        #expect(roundedValue == Double.zero)
-        #expect(roundedValue.sign == .plus)
+        let result: Double = value.rounded(to: decimalPlace)
+        #expect(result == Double.zero)
+        #expect(result.sign == .plus)
     }
 }

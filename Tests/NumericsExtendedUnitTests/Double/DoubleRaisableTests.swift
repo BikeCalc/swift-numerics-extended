@@ -78,9 +78,10 @@ internal struct DoubleRaisableTests {
     internal func isPowerOf(
         value: Double,
         other: Double,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: other) == result)
+        let result: Bool = value.isPower(of: other)
+        #expect(result == expected)
     }
 
     @Test(
@@ -92,7 +93,8 @@ internal struct DoubleRaisableTests {
         exponent: Double.Exponent,
         power: Double
     ) {
-        #expect(base ** exponent == power)
+        let result: Double = base ** exponent
+        #expect(result == power)
     }
 
     @Test(
@@ -118,7 +120,8 @@ internal struct DoubleRaisableTests {
         exponent: Double.Exponent,
         power: Double
     ) throws {
-        #expect(try base.raising(to: exponent) == power)
+        let result: Double = try base.raising(to: exponent)
+        #expect(result == power)
     }
 
     @Test(
@@ -143,7 +146,8 @@ internal struct DoubleRaisableTests {
         base: Double,
         power: Double
     ) {
-        #expect(base.squared() == power)
+        let result: Double = base.squared()
+        #expect(result == power)
     }
 
     @Test(
@@ -167,7 +171,8 @@ internal struct DoubleRaisableTests {
         base: Double,
         power: Double
     ) {
-        #expect(base.cubed() == power)
+        let result: Double = base.cubed()
+        #expect(result == power)
     }
 
     @Test(
@@ -223,14 +228,18 @@ extension DoubleRaisableTests {
         base: Double,
         power: Double
     ) {
-        #expect(base ** -1 == power)
+        let result: Double = base ** -1
+        #expect(result == power)
     }
 
     @Test("NaN power predicate follows floating-point rules")
     internal func nanPowerPredicateFollowsFloatingPointRules() {
-        #expect(1.0.isPower(of: Double.nan) == true)
-        #expect(2.0.isPower(of: Double.nan) == false)
-        #expect(Double.nan.isPower(of: 2.0) == false)
+        let firstResult: Bool = 1.0.isPower(of: Double.nan)
+        #expect(firstResult == true)
+        let secondResult: Bool = 2.0.isPower(of: Double.nan)
+        #expect(secondResult == false)
+        let thirdResult: Bool = Double.nan.isPower(of: 2.0)
+        #expect(thirdResult == false)
     }
 
     @Test(
@@ -283,7 +292,8 @@ extension DoubleRaisableTests {
         ]
     )
     internal func raisingToNegativeZeroReturnsOne(base: Double) {
-        #expect(base ** Double.Exponent.negativeZero == 1.0)
+        let result: Double = base ** Double.Exponent.negativeZero
+        #expect(result == 1.0)
     }
 
     @Test(
@@ -299,9 +309,10 @@ extension DoubleRaisableTests {
     )
     internal func negativeInfinityBasePowerPredicateFollowsFloatingPointRules(
         value: Double,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: Double.negativeInfinity) == result)
+        let result: Bool = value.isPower(of: Double.negativeInfinity)
+        #expect(result == expected)
     }
 
     @Test(
@@ -319,7 +330,8 @@ extension DoubleRaisableTests {
         exponent: Double.Exponent,
         power: Double
     ) {
-        #expect(base ** exponent == power)
+        let result: Double = base ** exponent
+        #expect(result == power)
     }
 
     @Test(
@@ -357,7 +369,8 @@ extension DoubleRaisableTests {
         exponent: Double.Exponent,
         power: Double
     ) {
-        #expect((-1.0) ** exponent == power)
+        let result: Double = (-1.0) ** exponent
+        #expect(result == power)
     }
 
     @Test(
@@ -370,9 +383,10 @@ extension DoubleRaisableTests {
     )
     internal func negativeOneBasePowerPredicateFollowsSignedRules(
         value: Double,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: -1.0) == result)
+        let result: Bool = value.isPower(of: -1.0)
+        #expect(result == expected)
     }
 }
 
@@ -392,9 +406,10 @@ extension DoubleRaisableTests {
     )
     internal func negativeZeroBasePowerPredicateFollowsFloatingPointRules(
         value: Double,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: .negativeZero) == result)
+        let result: Bool = value.isPower(of: .negativeZero)
+        #expect(result == expected)
     }
 
     @Test(
@@ -412,7 +427,8 @@ extension DoubleRaisableTests {
         exponent: Double.Exponent,
         power: Double
     ) {
-        #expect(base ** exponent == power)
+        let result: Double = base ** exponent
+        #expect(result == power)
     }
 
     @Test(
@@ -448,9 +464,10 @@ extension DoubleRaisableTests {
     )
     internal func positiveInfinityBasePowerPredicateFollowsFloatingPointRules(
         value: Double,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: Double.infinity) == result)
+        let result: Bool = value.isPower(of: Double.infinity)
+        #expect(result == expected)
     }
 
     @Test(
@@ -466,7 +483,8 @@ extension DoubleRaisableTests {
         exponent: Double.Exponent,
         power: Double
     ) {
-        #expect(base ** exponent == power)
+        let result: Double = base ** exponent
+        #expect(result == power)
     }
 }
 
@@ -491,7 +509,8 @@ extension DoubleRaisableTests {
         ]
     )
     internal func raisingToPositiveOnePreservesBase(base: Double) {
-        #expect(base ** 1 == base)
+        let result: Double = base ** 1
+        #expect(result == base)
     }
 
     @Test(
@@ -506,7 +525,8 @@ extension DoubleRaisableTests {
         ]
     )
     internal func positiveOneBaseExponentiationReturnsPositiveOne(exponent: Double.Exponent) {
-        #expect(1.0 ** exponent == 1.0)
+        let result: Double = 1.0 ** exponent
+        #expect(result == 1.0)
     }
 
     @Test(
@@ -518,9 +538,10 @@ extension DoubleRaisableTests {
     )
     internal func positiveOneBasePowerPredicateFollowsIdentityRule(
         value: Double,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: 1.0) == result)
+        let result: Bool = value.isPower(of: 1.0)
+        #expect(result == expected)
     }
 }
 
@@ -545,7 +566,8 @@ extension DoubleRaisableTests {
         ]
     )
     internal func raisingToPositiveZeroReturnsOne(base: Double) {
-        #expect(base ** Double.Exponent.zero == 1.0)
+        let result: Double = base ** Double.Exponent.zero
+        #expect(result == 1.0)
     }
 
     @Test(
@@ -561,9 +583,10 @@ extension DoubleRaisableTests {
     )
     internal func positiveZeroBasePowerPredicateFollowsFloatingPointRules(
         value: Double,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPower(of: Double.zero) == result)
+        let result: Bool = value.isPower(of: Double.zero)
+        #expect(result == expected)
     }
 
     @Test(
@@ -580,6 +603,7 @@ extension DoubleRaisableTests {
         exponent: Double.Exponent,
         power: Double
     ) {
-        #expect(base ** exponent == power)
+        let result: Double = base ** exponent
+        #expect(result == power)
     }
 }

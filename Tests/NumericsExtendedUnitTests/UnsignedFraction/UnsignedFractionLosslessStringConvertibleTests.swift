@@ -23,7 +23,8 @@ internal struct UnsignedFractionLosslessStringConvertibleTests {
         ]
     )
     internal func negativeFiniteStringInitializationFails(description: String) {
-        #expect(Fraction<UInt>(description) == nil)
+        let result: Fraction<UInt>? = Fraction<UInt>(description)
+        #expect(result == nil)
     }
 }
 
@@ -38,7 +39,8 @@ extension UnsignedFractionLosslessStringConvertibleTests {
         ]
     )
     internal func negativeInfinityStringInitializationFails(description: String) {
-        #expect(Fraction<UInt>(description) == nil)
+        let result: Fraction<UInt>? = Fraction<UInt>(description)
+        #expect(result == nil)
     }
 }
 
@@ -62,6 +64,7 @@ extension UnsignedFractionLosslessStringConvertibleTests {
         ]
     )
     internal func negativeZeroStringInitializationFails(description: String) {
-        #expect(Fraction<UInt>(description) == nil)
+        let result: Fraction<UInt>? = Fraction<UInt>(description)
+        #expect(result == nil)
     }
 }

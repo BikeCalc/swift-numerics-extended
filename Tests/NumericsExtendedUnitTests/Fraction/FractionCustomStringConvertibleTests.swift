@@ -25,9 +25,9 @@ internal struct FractionCustomStringConvertibleTests {
     )
     internal func descriptionSucceeds(
         value: Fraction<Int>,
-        result: String
+        expected: String
     ) {
-        #expect(value.description == result)
+        #expect(value.description == expected)
     }
 }
 
@@ -61,9 +61,9 @@ extension FractionCustomStringConvertibleTests {
     )
     internal func negativeZeroDescription(
         value: Fraction<Int>,
-        result: String
+        expected: String
     ) {
-        #expect(value.description == result)
+        #expect(value.description == expected)
     }
 }
 
@@ -88,8 +88,8 @@ extension FractionCustomStringConvertibleTests {
     )
     internal func positiveZeroDescription(
         value: Fraction<Int>,
-        result: String
+        expected: String
     ) {
-        #expect(value.description == result)
+        #expect(value.description == expected)
     }
 }

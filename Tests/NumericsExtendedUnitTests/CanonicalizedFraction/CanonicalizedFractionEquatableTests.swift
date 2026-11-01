@@ -30,11 +30,12 @@ internal struct CanonicalizedFractionEquatableTests {
     internal func equalitySucceeds(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-        #expect((lhsWrapper == rhsWrapper) == result)
+        let result: Bool = lhsWrapper == rhsWrapper
+        #expect(result == expected)
     }
 
     @Test(
@@ -44,11 +45,12 @@ internal struct CanonicalizedFractionEquatableTests {
     internal func inequalitySucceeds(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-        #expect((lhsWrapper != rhsWrapper) == !result)
+        let result: Bool = lhsWrapper != rhsWrapper
+        #expect(result == !expected)
     }
 
     @Test(
@@ -58,11 +60,12 @@ internal struct CanonicalizedFractionEquatableTests {
     internal func isEqualSucceeds(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) throws {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-        #expect(try lhsWrapper.isEqual(to: rhsWrapper) == result)
+        let result: Bool = try lhsWrapper.isEqual(to: rhsWrapper)
+        #expect(result == expected)
     }
 
     @Test(
@@ -72,11 +75,12 @@ internal struct CanonicalizedFractionEquatableTests {
     internal func isUnequalSucceeds(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) throws {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-        #expect(try lhsWrapper.isUnequal(to: rhsWrapper) == !result)
+        let result: Bool = try lhsWrapper.isUnequal(to: rhsWrapper)
+        #expect(result == !expected)
     }
 }
 
@@ -94,14 +98,18 @@ extension CanonicalizedFractionEquatableTests {
     internal func nanEqualityFollowsRationalRules(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) throws {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-        #expect((lhsWrapper == rhsWrapper) == result)
-        #expect((lhsWrapper != rhsWrapper) == !result)
-        #expect(try lhsWrapper.isEqual(to: rhsWrapper) == result)
-        #expect(try lhsWrapper.isUnequal(to: rhsWrapper) == !result)
+        let equalityResult: Bool = lhsWrapper == rhsWrapper
+        #expect(equalityResult == expected)
+        let inequalityResult: Bool = lhsWrapper != rhsWrapper
+        #expect(inequalityResult == !expected)
+        let isEqualResult: Bool = try lhsWrapper.isEqual(to: rhsWrapper)
+        #expect(isEqualResult == expected)
+        let isUnequalResult: Bool = try lhsWrapper.isUnequal(to: rhsWrapper)
+        #expect(isUnequalResult == !expected)
     }
 }
 
@@ -118,14 +126,18 @@ extension CanonicalizedFractionEquatableTests {
     internal func negativeInfinityEqualityFollowsRationalRules(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) throws {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-        #expect((lhsWrapper == rhsWrapper) == result)
-        #expect((lhsWrapper != rhsWrapper) == !result)
-        #expect(try lhsWrapper.isEqual(to: rhsWrapper) == result)
-        #expect(try lhsWrapper.isUnequal(to: rhsWrapper) == !result)
+        let equalityResult: Bool = lhsWrapper == rhsWrapper
+        #expect(equalityResult == expected)
+        let inequalityResult: Bool = lhsWrapper != rhsWrapper
+        #expect(inequalityResult == !expected)
+        let isEqualResult: Bool = try lhsWrapper.isEqual(to: rhsWrapper)
+        #expect(isEqualResult == expected)
+        let isUnequalResult: Bool = try lhsWrapper.isUnequal(to: rhsWrapper)
+        #expect(isUnequalResult == !expected)
     }
 }
 
@@ -144,14 +156,18 @@ extension CanonicalizedFractionEquatableTests {
     internal func negativeZeroEqualityFollowsRationalRules(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) throws {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-        #expect((lhsWrapper == rhsWrapper) == result)
-        #expect((lhsWrapper != rhsWrapper) == !result)
-        #expect(try lhsWrapper.isEqual(to: rhsWrapper) == result)
-        #expect(try lhsWrapper.isUnequal(to: rhsWrapper) == !result)
+        let equalityResult: Bool = lhsWrapper == rhsWrapper
+        #expect(equalityResult == expected)
+        let inequalityResult: Bool = lhsWrapper != rhsWrapper
+        #expect(inequalityResult == !expected)
+        let isEqualResult: Bool = try lhsWrapper.isEqual(to: rhsWrapper)
+        #expect(isEqualResult == expected)
+        let isUnequalResult: Bool = try lhsWrapper.isUnequal(to: rhsWrapper)
+        #expect(isUnequalResult == !expected)
     }
 }
 
@@ -168,14 +184,18 @@ extension CanonicalizedFractionEquatableTests {
     internal func positiveInfinityEqualityFollowsRationalRules(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) throws {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-        #expect((lhsWrapper == rhsWrapper) == result)
-        #expect((lhsWrapper != rhsWrapper) == !result)
-        #expect(try lhsWrapper.isEqual(to: rhsWrapper) == result)
-        #expect(try lhsWrapper.isUnequal(to: rhsWrapper) == !result)
+        let equalityResult: Bool = lhsWrapper == rhsWrapper
+        #expect(equalityResult == expected)
+        let inequalityResult: Bool = lhsWrapper != rhsWrapper
+        #expect(inequalityResult == !expected)
+        let isEqualResult: Bool = try lhsWrapper.isEqual(to: rhsWrapper)
+        #expect(isEqualResult == expected)
+        let isUnequalResult: Bool = try lhsWrapper.isUnequal(to: rhsWrapper)
+        #expect(isUnequalResult == !expected)
     }
 }
 
@@ -194,13 +214,17 @@ extension CanonicalizedFractionEquatableTests {
     internal func positiveZeroEqualityFollowsRationalRules(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) throws {
         let lhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: lhs)
         let rhsWrapper: Canonicalized<Fraction<Int>> = .init(wrappedValue: rhs)
-        #expect((lhsWrapper == rhsWrapper) == result)
-        #expect((lhsWrapper != rhsWrapper) == !result)
-        #expect(try lhsWrapper.isEqual(to: rhsWrapper) == result)
-        #expect(try lhsWrapper.isUnequal(to: rhsWrapper) == !result)
+        let equalityResult: Bool = lhsWrapper == rhsWrapper
+        #expect(equalityResult == expected)
+        let inequalityResult: Bool = lhsWrapper != rhsWrapper
+        #expect(inequalityResult == !expected)
+        let isEqualResult: Bool = try lhsWrapper.isEqual(to: rhsWrapper)
+        #expect(isEqualResult == expected)
+        let isUnequalResult: Bool = try lhsWrapper.isUnequal(to: rhsWrapper)
+        #expect(isUnequalResult == !expected)
     }
 }

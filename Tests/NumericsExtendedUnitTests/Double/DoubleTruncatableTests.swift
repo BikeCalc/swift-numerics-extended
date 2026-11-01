@@ -36,9 +36,10 @@ internal struct DoubleTruncatableTests {
     internal func truncatedToSucceeds(
         value: Double,
         decimalPlace: Double.DecimalPlace,
-        result: Double
+        expected: Double
     ) {
-        #expect(value.truncated(to: decimalPlace) == result)
+        let result: Double = value.truncated(to: decimalPlace)
+        #expect(result == expected)
     }
 
     @Test(
@@ -48,11 +49,11 @@ internal struct DoubleTruncatableTests {
     internal func truncateToSucceeds(
         value: Double,
         decimalPlace: Double.DecimalPlace,
-        result: Double
+        expected: Double
     ) {
-        var truncatedValue: Double = value
-        truncatedValue.truncate(to: decimalPlace)
-        #expect(truncatedValue == result)
+        var result: Double = value
+        result.truncate(to: decimalPlace)
+        #expect(result == expected)
     }
 }
 
@@ -69,9 +70,10 @@ extension DoubleTruncatableTests {
     internal func truncatingFollowsTowardZeroRule(
         value: Double,
         decimalPlace: Double.DecimalPlace,
-        result: Double
+        expected: Double
     ) {
-        #expect(value.truncated(to: decimalPlace) == result)
+        let result: Double = value.truncated(to: decimalPlace)
+        #expect(result == expected)
     }
 
     @Test(
@@ -87,7 +89,8 @@ extension DoubleTruncatableTests {
         value: Double,
         decimalPlace: Double.DecimalPlace
     ) {
-        #expect(value.truncated(to: decimalPlace) == value)
+        let result: Double = value.truncated(to: decimalPlace)
+        #expect(result == value)
     }
 }
 
@@ -121,7 +124,8 @@ extension DoubleTruncatableTests {
         ]
     )
     internal func truncatingNegativeInfinityFollowsFloatingPointRules(decimalPlace: Double.DecimalPlace) {
-        #expect(Double.negativeInfinity.truncated(to: decimalPlace) == .negativeInfinity)
+        let result: Double = Double.negativeInfinity.truncated(to: decimalPlace)
+        #expect(result == .negativeInfinity)
     }
 }
 
@@ -139,9 +143,9 @@ extension DoubleTruncatableTests {
         value: Double,
         decimalPlace: Double.DecimalPlace
     ) {
-        let truncatedValue: Double = value.truncated(to: decimalPlace)
-        #expect(truncatedValue == Double.zero)
-        #expect(truncatedValue.sign == .minus)
+        let result: Double = value.truncated(to: decimalPlace)
+        #expect(result == Double.zero)
+        #expect(result.sign == .minus)
     }
 }
 
@@ -156,7 +160,8 @@ extension DoubleTruncatableTests {
         ]
     )
     internal func truncatingPositiveInfinityFollowsFloatingPointRules(decimalPlace: Double.DecimalPlace) {
-        #expect(Double.infinity.truncated(to: decimalPlace) == .infinity)
+        let result: Double = Double.infinity.truncated(to: decimalPlace)
+        #expect(result == .infinity)
     }
 }
 
@@ -174,8 +179,8 @@ extension DoubleTruncatableTests {
         value: Double,
         decimalPlace: Double.DecimalPlace
     ) {
-        let truncatedValue: Double = value.truncated(to: decimalPlace)
-        #expect(truncatedValue == Double.zero)
-        #expect(truncatedValue.sign == .plus)
+        let result: Double = value.truncated(to: decimalPlace)
+        #expect(result == Double.zero)
+        #expect(result.sign == .plus)
     }
 }

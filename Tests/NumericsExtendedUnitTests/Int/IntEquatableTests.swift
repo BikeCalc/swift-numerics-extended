@@ -29,8 +29,10 @@ internal struct IntEquatableTests {
         lhs: Int,
         rhs: Int
     ) throws {
-        #expect(try lhs.isEqual(to: rhs) == (lhs == rhs))
-        #expect(try lhs.isUnequal(to: rhs) == (lhs != rhs))
+        let isEqualResult: Bool = try lhs.isEqual(to: rhs)
+        #expect(isEqualResult == (lhs == rhs))
+        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        #expect(isUnequalResult == (lhs != rhs))
     }
 }
 
@@ -48,12 +50,16 @@ extension IntEquatableTests {
     internal func negativeZeroEqualityFollowsIntegerRules(
         lhs: Int,
         rhs: Int,
-        result: Bool
+        expected: Bool
     ) throws {
-        #expect((lhs == rhs) == result)
-        #expect((lhs != rhs) == !result)
-        #expect(try lhs.isEqual(to: rhs) == result)
-        #expect(try lhs.isUnequal(to: rhs) == !result)
+        let equalityResult: Bool = lhs == rhs
+        #expect(equalityResult == expected)
+        let inequalityResult: Bool = lhs != rhs
+        #expect(inequalityResult == !expected)
+        let isEqualResult: Bool = try lhs.isEqual(to: rhs)
+        #expect(isEqualResult == expected)
+        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        #expect(isUnequalResult == !expected)
     }
 }
 
@@ -71,11 +77,15 @@ extension IntEquatableTests {
     internal func positiveZeroEqualityFollowsIntegerRules(
         lhs: Int,
         rhs: Int,
-        result: Bool
+        expected: Bool
     ) throws {
-        #expect((lhs == rhs) == result)
-        #expect((lhs != rhs) == !result)
-        #expect(try lhs.isEqual(to: rhs) == result)
-        #expect(try lhs.isUnequal(to: rhs) == !result)
+        let equalityResult: Bool = lhs == rhs
+        #expect(equalityResult == expected)
+        let inequalityResult: Bool = lhs != rhs
+        #expect(inequalityResult == !expected)
+        let isEqualResult: Bool = try lhs.isEqual(to: rhs)
+        #expect(isEqualResult == expected)
+        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        #expect(isUnequalResult == !expected)
     }
 }

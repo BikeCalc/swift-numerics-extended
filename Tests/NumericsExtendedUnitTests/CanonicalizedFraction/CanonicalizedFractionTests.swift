@@ -31,10 +31,10 @@ internal struct CanonicalizedFractionTests {
     )
     internal func initializationCanonicalizesValues(
         value: Fraction<Int>,
-        result: Fraction<Int>
+        expected: Fraction<Int>
     ) {
         @Canonicalized var canonicalizedValue: Fraction<Int> = value
-        #expect(canonicalizedValue == result)
+        #expect(canonicalizedValue == expected)
     }
 
     @Test(
@@ -43,11 +43,11 @@ internal struct CanonicalizedFractionTests {
     )
     internal func assignmentCanonicalizesValues(
         value: Fraction<Int>,
-        result: Fraction<Int>
+        expected: Fraction<Int>
     ) {
         @Canonicalized var canonicalizedValue: Fraction<Int> = .zero
         canonicalizedValue = value
-        #expect(canonicalizedValue == result)
+        #expect(canonicalizedValue == expected)
     }
 }
 

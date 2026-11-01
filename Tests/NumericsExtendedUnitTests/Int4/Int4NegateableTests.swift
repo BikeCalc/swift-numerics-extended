@@ -37,7 +37,8 @@ internal struct Int4NegateableTests {
         value: Int4,
         negation: Int4
     ) {
-        #expect(-value == negation)
+        let result: Int4 = -value
+        #expect(result == negation)
     }
 
     @Test(
@@ -48,7 +49,8 @@ internal struct Int4NegateableTests {
         value: Int4,
         negation: Int4
     ) {
-        #expect(value.negating() == negation)
+        let result: Int4 = value.negating()
+        #expect(result == negation)
     }
 
     @Test(
@@ -75,9 +77,9 @@ internal struct Int4NegateableTests {
     )
     internal func isNegative(
         value: Int4,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isNegative == result)
+        #expect(value.isNegative == expected)
     }
 
     @Test(
@@ -91,9 +93,9 @@ internal struct Int4NegateableTests {
     )
     internal func isPositive(
         value: Int4,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isPositive == result)
+        #expect(value.isPositive == expected)
     }
 
     @Test(
@@ -107,9 +109,9 @@ internal struct Int4NegateableTests {
     )
     internal func isSigned(
         value: Int4,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isSigned == result)
+        #expect(value.isSigned == expected)
     }
 
     @Test(
@@ -128,9 +130,10 @@ internal struct Int4NegateableTests {
     internal func isOpposite(
         value: Int4,
         other: Int4,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isOpposite(of: other) == result)
+        let result: Bool = value.isOpposite(of: other)
+        #expect(result == expected)
     }
 }
 
@@ -140,7 +143,8 @@ extension Int4NegateableTests {
         arguments: Self.additiveInverseArguments
     )
     internal func negatingTwiceReturnsOriginalValue(value: Int4) {
-        #expect(value.negating().negating() == value)
+        let result: Int4 = value.negating().negating()
+        #expect(result == value)
     }
 }
 
@@ -156,7 +160,8 @@ extension Int4NegateableTests {
 
     @Test("Negative zero opposite follows integer rules")
     internal func negativeZeroOppositeFollowsIntegerRules() {
-        #expect(Int4.negativeZero.isOpposite(of: .negativeZero) == true)
+        let result: Bool = Int4.negativeZero.isOpposite(of: .negativeZero)
+        #expect(result == true)
     }
 
     @Test("Negating negative zero returns negative zero")
@@ -179,7 +184,8 @@ extension Int4NegateableTests {
         arguments: Self.additiveInverseArguments
     )
     internal func addingValueAndItsNegationReturnsPositiveZero(value: Int4) {
-        #expect(value + value.negating() == Int4.zero)
+        let result: Int4 = value + value.negating()
+        #expect(result == Int4.zero)
     }
 
     @Test("Positive zero sign predicates follow integer rules")
@@ -191,7 +197,8 @@ extension Int4NegateableTests {
 
     @Test("Positive zero opposite follows integer rules")
     internal func positiveZeroOppositeFollowsIntegerRules() {
-        #expect(Int4.zero.isOpposite(of: .zero) == true)
+        let result: Bool = Int4.zero.isOpposite(of: .zero)
+        #expect(result == true)
     }
 
     @Test("Negating positive zero returns positive zero")

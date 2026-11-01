@@ -34,9 +34,10 @@ internal struct UInt4MultipliableTests {
     internal func isMultipleOf(
         multiplicand: UInt4,
         multiplier: UInt4,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(multiplicand.isMultiple(of: multiplier) == result)
+        let result: Bool = multiplicand.isMultiple(of: multiplier)
+        #expect(result == expected)
     }
 
     @Test(
@@ -48,7 +49,8 @@ internal struct UInt4MultipliableTests {
         multiplier: UInt4.Multiplier,
         product: UInt4
     ) {
-        #expect(multiplicand * multiplier == product)
+        let result: UInt4 = multiplicand * multiplier
+        #expect(result == product)
     }
 
     @Test(
@@ -74,7 +76,8 @@ internal struct UInt4MultipliableTests {
         multiplier: UInt4.Multiplier,
         product: UInt4
     ) throws {
-        #expect(try multiplicand.multiplying(by: multiplier) == product)
+        let result: UInt4 = try multiplicand.multiplying(by: multiplier)
+        #expect(result == product)
     }
 
     @Test(
@@ -99,7 +102,8 @@ internal struct UInt4MultipliableTests {
         multiplicand: UInt4,
         product: UInt4
     ) {
-        #expect(multiplicand.doubled() == product)
+        let result: UInt4 = multiplicand.doubled()
+        #expect(result == product)
     }
 
     @Test(
@@ -126,7 +130,8 @@ extension UInt4MultipliableTests {
         multiplier: UInt4.Multiplier,
         product _: UInt4
     ) {
-        #expect(multiplicand * multiplier == multiplier * multiplicand)
+        let result: UInt4 = multiplicand * multiplier
+        #expect(result == multiplier * multiplicand)
     }
 }
 
@@ -141,7 +146,8 @@ extension UInt4MultipliableTests {
         ] as Array<UInt4>
     )
     internal func multiplyingByPositiveOnePreservesMultiplicand(multiplicand: UInt4) {
-        #expect(multiplicand * 1 == multiplicand)
+        let result: UInt4 = multiplicand * 1
+        #expect(result == multiplicand)
     }
 
     @Test(
@@ -152,7 +158,8 @@ extension UInt4MultipliableTests {
         ] as Array<UInt4>
     )
     internal func isMultipleOfPositiveOneReturnsTrue(multiplicand: UInt4) {
-        #expect(multiplicand.isMultiple(of: 1) == true)
+        let result: Bool = multiplicand.isMultiple(of: 1)
+        #expect(result == true)
     }
 }
 
@@ -161,7 +168,8 @@ extension UInt4MultipliableTests {
 extension UInt4MultipliableTests {
     @Test("Positive zero is multiple of positive zero")
     internal func positiveZeroIsMultipleOfPositiveZero() {
-        #expect(UInt4.zero.isMultiple(of: UInt4.zero) == true)
+        let result: Bool = UInt4.zero.isMultiple(of: UInt4.zero)
+        #expect(result == true)
     }
 
     @Test(
@@ -172,7 +180,8 @@ extension UInt4MultipliableTests {
         ] as Array<UInt4>
     )
     internal func isMultipleOfPositiveZeroReturnsFalse(multiplicand: UInt4) {
-        #expect(multiplicand.isMultiple(of: UInt4.zero) == false)
+        let result: Bool = multiplicand.isMultiple(of: UInt4.zero)
+        #expect(result == false)
     }
 
     @Test(
@@ -183,6 +192,7 @@ extension UInt4MultipliableTests {
         ] as Array<UInt4>
     )
     internal func multiplyingByPositiveZeroReturnsPositiveZero(multiplicand: UInt4) {
-        #expect(multiplicand * UInt4.zero == UInt4.zero)
+        let result: UInt4 = multiplicand * UInt4.zero
+        #expect(result == UInt4.zero)
     }
 }

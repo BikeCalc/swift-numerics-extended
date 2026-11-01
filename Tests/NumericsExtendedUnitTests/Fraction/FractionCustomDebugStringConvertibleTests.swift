@@ -61,9 +61,9 @@ extension FractionCustomDebugStringConvertibleTests {
     )
     internal func negativeZeroDebugDescription(
         value: Fraction<Int>,
-        result: String
+        expected: String
     ) {
-        #expect(value.debugDescription == result)
+        #expect(value.debugDescription == expected)
     }
 }
 
@@ -88,8 +88,8 @@ extension FractionCustomDebugStringConvertibleTests {
     )
     internal func positiveZeroDebugDescription(
         value: Fraction<Int>,
-        result: String
+        expected: String
     ) {
-        #expect(value.debugDescription == result)
+        #expect(value.debugDescription == expected)
     }
 }

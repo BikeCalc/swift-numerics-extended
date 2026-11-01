@@ -40,9 +40,10 @@ internal struct FractionMultipliableTests {
     internal func isMultipleOf(
         value: Fraction<Int>,
         other: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isMultiple(of: other) == result)
+        let result: Bool = value.isMultiple(of: other)
+        #expect(result == expected)
     }
 
     @Test(
@@ -54,7 +55,8 @@ internal struct FractionMultipliableTests {
         multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
     ) {
-        #expect(multiplicand * multiplier == product)
+        let result: Fraction<Int> = multiplicand * multiplier
+        #expect(result == product)
     }
 
     @Test(
@@ -80,7 +82,8 @@ internal struct FractionMultipliableTests {
         multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
     ) throws {
-        #expect(try multiplicand.multiplying(by: multiplier) == product)
+        let result: Fraction<Int> = try multiplicand.multiplying(by: multiplier)
+        #expect(result == product)
     }
 
     @Test(
@@ -105,7 +108,8 @@ internal struct FractionMultipliableTests {
         multiplicand: Fraction<Int>,
         product: Fraction<Int>
     ) {
-        #expect(multiplicand.doubled() == product)
+        let result: Fraction<Int> = multiplicand.doubled()
+        #expect(result == product)
     }
 
     @Test(
@@ -132,7 +136,8 @@ extension FractionMultipliableTests {
         multiplier: Fraction<Int>.Multiplier,
         product _: Fraction<Int>
     ) {
-        #expect(multiplicand * multiplier == multiplier * multiplicand)
+        let result: Fraction<Int> = multiplicand * multiplier
+        #expect(result == multiplier * multiplicand)
     }
 }
 
@@ -150,8 +155,10 @@ extension FractionMultipliableTests {
         ]
     )
     internal func nanMultiplePredicateFollowsRationalRules(other: Fraction<Int>) {
-        #expect(Fraction<Int>.nan.isMultiple(of: other) == false)
-        #expect(other.isMultiple(of: .nan) == false)
+        let firstResult: Bool = Fraction<Int>.nan.isMultiple(of: other)
+        #expect(firstResult == false)
+        let secondResult: Bool = other.isMultiple(of: .nan)
+        #expect(secondResult == false)
     }
 
     @Test(
@@ -235,7 +242,8 @@ extension FractionMultipliableTests {
         ]
     )
     internal func negativeInfinityMultiplePredicateFollowsRationalRules(other: Fraction<Int>) {
-        #expect(Fraction<Int>.negativeInfinity.isMultiple(of: other) == false)
+        let result: Bool = Fraction<Int>.negativeInfinity.isMultiple(of: other)
+        #expect(result == false)
     }
 
     @Test(
@@ -251,7 +259,8 @@ extension FractionMultipliableTests {
         multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
     ) {
-        #expect(Fraction<Int>.negativeInfinity * multiplier == product)
+        let result: Fraction<Int> = Fraction<Int>.negativeInfinity * multiplier
+        #expect(result == product)
     }
 }
 
@@ -271,7 +280,8 @@ extension FractionMultipliableTests {
         multiplicand: Fraction<Int>,
         product: Fraction<Int>
     ) {
-        #expect(multiplicand * -1 == product)
+        let result: Fraction<Int> = multiplicand * -1
+        #expect(result == product)
     }
 }
 
@@ -288,7 +298,8 @@ extension FractionMultipliableTests {
         ]
     )
     internal func isMultipleOfNegativeZeroReturnsFalse(multiplicand: Fraction<Int>) {
-        #expect(multiplicand.isMultiple(of: .negativeZero) == false)
+        let result: Bool = multiplicand.isMultiple(of: .negativeZero)
+        #expect(result == false)
     }
 
     @Test(
@@ -303,9 +314,10 @@ extension FractionMultipliableTests {
     )
     internal func negativeZeroMultiplePredicateFollowsRationalRules(
         other: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(Fraction<Int>.negativeZero.isMultiple(of: other) == result)
+        let result: Bool = Fraction<Int>.negativeZero.isMultiple(of: other)
+        #expect(result == expected)
     }
 
     @Test(
@@ -321,7 +333,8 @@ extension FractionMultipliableTests {
         multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
     ) {
-        #expect(Fraction<Int>.negativeZero * multiplier == product)
+        let result: Fraction<Int> = Fraction<Int>.negativeZero * multiplier
+        #expect(result == product)
     }
 }
 
@@ -339,7 +352,8 @@ extension FractionMultipliableTests {
         ]
     )
     internal func positiveInfinityMultiplePredicateFollowsRationalRules(other: Fraction<Int>) {
-        #expect(Fraction<Int>.infinity.isMultiple(of: other) == false)
+        let result: Bool = Fraction<Int>.infinity.isMultiple(of: other)
+        #expect(result == false)
     }
 
     @Test(
@@ -355,7 +369,8 @@ extension FractionMultipliableTests {
         multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
     ) {
-        #expect(Fraction<Int>.infinity * multiplier == product)
+        let result: Fraction<Int> = Fraction<Int>.infinity * multiplier
+        #expect(result == product)
     }
 }
 
@@ -372,7 +387,8 @@ extension FractionMultipliableTests {
         ]
     )
     internal func multiplyingByPositiveOnePreservesMultiplicand(multiplicand: Fraction<Int>) {
-        #expect(multiplicand * 1 == multiplicand)
+        let result: Fraction<Int> = multiplicand * 1
+        #expect(result == multiplicand)
     }
 }
 
@@ -389,7 +405,8 @@ extension FractionMultipliableTests {
         ]
     )
     internal func isMultipleOfPositiveZeroReturnsFalse(multiplicand: Fraction<Int>) {
-        #expect(multiplicand.isMultiple(of: .zero) == false)
+        let result: Bool = multiplicand.isMultiple(of: .zero)
+        #expect(result == false)
     }
 
     @Test(
@@ -402,7 +419,8 @@ extension FractionMultipliableTests {
         ]
     )
     internal func multiplyingByPositiveZeroReturnsPositiveOrNegativeZero(multiplicand: Fraction<Int>) {
-        #expect((multiplicand * .zero).isZero == true)
+        let result: Fraction<Int> = multiplicand * .zero
+        #expect(result.isZero == true)
     }
 
     @Test(
@@ -417,9 +435,10 @@ extension FractionMultipliableTests {
     )
     internal func positiveZeroMultiplePredicateFollowsRationalRules(
         other: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(Fraction<Int>.zero.isMultiple(of: other) == result)
+        let result: Bool = Fraction<Int>.zero.isMultiple(of: other)
+        #expect(result == expected)
     }
 
     @Test(
@@ -435,6 +454,7 @@ extension FractionMultipliableTests {
         multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
     ) {
-        #expect(Fraction<Int>.zero * multiplier == product)
+        let result: Fraction<Int> = Fraction<Int>.zero * multiplier
+        #expect(result == product)
     }
 }

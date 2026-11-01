@@ -26,9 +26,9 @@ internal struct RomanStrideableTests {
     internal func advancedBySucceeds(
         value: Roman,
         amount: Roman.Stride,
-        result: Roman
+        expected: Roman
     ) {
-        #expect(value.advanced(by: amount) == result)
+        #expect(value.advanced(by: amount) == expected)
     }
 
     @Test(
@@ -43,9 +43,9 @@ internal struct RomanStrideableTests {
     internal func distanceToSucceeds(
         value: Roman,
         other: Roman,
-        result: Roman.Stride
+        expected: Roman.Stride
     ) {
-        #expect(value.distance(to: other) == result)
+        #expect(value.distance(to: other) == expected)
     }
 }
 

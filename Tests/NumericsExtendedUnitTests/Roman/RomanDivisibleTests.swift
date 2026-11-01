@@ -40,10 +40,10 @@ internal struct RomanDivisibleTests {
     )
     internal func parityPredicates(
         value: Roman,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isEven == result)
-        #expect(value.isOdd == !result)
+        #expect(value.isEven == expected)
+        #expect(value.isOdd == !expected)
     }
 
     @Test(
@@ -55,9 +55,9 @@ internal struct RomanDivisibleTests {
     )
     internal func reciprocal(
         dividend: Roman,
-        result: Roman?
+        expected: Roman?
     ) {
-        #expect(dividend.reciprocal == result)
+        #expect(dividend.reciprocal == expected)
     }
 
     @Test(
@@ -70,9 +70,10 @@ internal struct RomanDivisibleTests {
     internal func isDivisibleBy(
         dividend: Roman,
         divisor: Roman,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(dividend.isDivisible(by: divisor) == result)
+        let result: Bool = dividend.isDivisible(by: divisor)
+        #expect(result == expected)
     }
 
     @Test(
@@ -85,9 +86,10 @@ internal struct RomanDivisibleTests {
     internal func isFactorOf(
         factor: Roman,
         value: Roman,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(factor.isFactor(of: value) == result)
+        let result: Bool = factor.isFactor(of: value)
+        #expect(result == expected)
     }
 
     @Test(
@@ -99,7 +101,8 @@ internal struct RomanDivisibleTests {
         divisor: Roman.Divisor,
         quotient: Roman
     ) {
-        #expect(dividend / divisor == quotient)
+        let result: Roman = dividend / divisor
+        #expect(result == quotient)
     }
 
     @Test(
@@ -125,7 +128,8 @@ internal struct RomanDivisibleTests {
         divisor: Roman.RemainderDivisor,
         remainder: Roman
     ) {
-        #expect(dividend % divisor == remainder)
+        let result: Roman = dividend % divisor
+        #expect(result == remainder)
     }
 
     @Test(
@@ -151,7 +155,8 @@ internal struct RomanDivisibleTests {
         divisor: Roman.Divisor,
         quotient: Roman
     ) throws {
-        #expect(try dividend.dividing(by: divisor) == quotient)
+        let result: Roman = try dividend.dividing(by: divisor)
+        #expect(result == quotient)
     }
 
     @Test(
@@ -176,7 +181,8 @@ internal struct RomanDivisibleTests {
         dividend: Roman,
         quotient: Roman
     ) {
-        #expect(dividend.halved() == quotient)
+        let result: Roman = dividend.halved()
+        #expect(result == quotient)
     }
 
     @Test(
@@ -203,7 +209,8 @@ extension RomanDivisibleTests {
         divisor: Roman.Divisor,
         quotient _: Roman
     ) {
-        #expect(dividend / divisor != divisor / dividend)
+        let result: Roman = dividend / divisor
+        #expect(result != divisor / dividend)
     }
 
     @Test(
@@ -218,7 +225,8 @@ extension RomanDivisibleTests {
         dividend: Roman,
         quotient: Roman
     ) {
-        #expect(dividend.halved() == quotient)
+        let result: Roman = dividend.halved()
+        #expect(result == quotient)
     }
 }
 
@@ -233,7 +241,8 @@ extension RomanDivisibleTests {
         ] as Array<Roman>
     )
     internal func dividingByPositiveOnePreservesDividend(dividend: Roman) {
-        #expect(dividend / 1 == dividend)
+        let result: Roman = dividend / 1
+        #expect(result == dividend)
     }
 
     @Test(
@@ -245,9 +254,9 @@ extension RomanDivisibleTests {
     )
     internal func positiveOneInvertibilityFollowsUnsignedIntegerRules(
         dividend: Roman,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(dividend.isInvertible == result)
+        #expect(dividend.isInvertible == expected)
     }
 
     @Test(
@@ -258,7 +267,8 @@ extension RomanDivisibleTests {
         ] as Array<Roman>
     )
     internal func remainderByPositiveOneReturnsPositiveZero(dividend: Roman) {
-        #expect(dividend % 1 == Roman.zero)
+        let result: Roman = dividend % 1
+        #expect(result == Roman.zero)
     }
 }
 
@@ -278,7 +288,8 @@ extension RomanDivisibleTests {
         ] as Array<Roman.Divisor>
     )
     internal func dividingPositiveZeroByNonzeroValueReturnsPositiveZero(divisor: Roman.Divisor) {
-        #expect(Roman.zero / divisor == Roman.zero)
+        let result: Roman = Roman.zero / divisor
+        #expect(result == Roman.zero)
     }
 
     @Test(
@@ -289,6 +300,7 @@ extension RomanDivisibleTests {
         ] as Array<Roman>
     )
     internal func remainderBySelfReturnsPositiveZero(value: Roman) {
-        #expect(value % value == Roman.zero)
+        let result: Roman = value % value
+        #expect(result == Roman.zero)
     }
 }

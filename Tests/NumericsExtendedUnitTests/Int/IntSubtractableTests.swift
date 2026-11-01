@@ -30,7 +30,8 @@ internal struct IntSubtractableTests {
         subtrahend: Int.Subtrahend,
         difference: Int
     ) {
-        #expect(minuend - subtrahend == difference)
+        let result: Int = minuend - subtrahend
+        #expect(result == difference)
     }
 
     @Test(
@@ -56,7 +57,8 @@ internal struct IntSubtractableTests {
         subtrahend: Int.Subtrahend,
         difference: Int
     ) throws {
-        #expect(try minuend.subtracting(subtrahend) == difference)
+        let result: Int = try minuend.subtracting(subtrahend)
+        #expect(result == difference)
     }
 
     @Test(
@@ -84,7 +86,8 @@ extension IntSubtractableTests {
         subtrahend: Int.Subtrahend,
         difference _: Int
     ) {
-        #expect(minuend - subtrahend != subtrahend - minuend)
+        let result: Int = minuend - subtrahend
+        #expect(result != subtrahend - minuend)
     }
 }
 
@@ -101,7 +104,8 @@ extension IntSubtractableTests {
         ]
     )
     internal func subtractingNegativeZeroPreservesMinuend(minuend: Int) {
-        #expect(minuend - Int.negativeZero == minuend)
+        let result: Int = minuend - Int.negativeZero
+        #expect(result == minuend)
     }
 }
 
@@ -118,7 +122,8 @@ extension IntSubtractableTests {
         ]
     )
     internal func subtractingPositiveZeroPreservesMinuend(minuend: Int) {
-        #expect(minuend - Int.zero == minuend)
+        let result: Int = minuend - Int.zero
+        #expect(result == minuend)
     }
 
     @Test(
@@ -131,6 +136,7 @@ extension IntSubtractableTests {
         ]
     )
     internal func subtractingSelfReturnsPositiveZero(value: Int) {
-        #expect(value - value == Int.zero)
+        let result: Int = value - value
+        #expect(result == Int.zero)
     }
 }

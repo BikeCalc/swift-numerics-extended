@@ -40,9 +40,10 @@ internal struct IntMultipliableTests {
     internal func isMultipleOf(
         multiplicand: Int,
         multiplier: Int,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(multiplicand.isMultiple(of: multiplier) == result)
+        let result: Bool = multiplicand.isMultiple(of: multiplier)
+        #expect(result == expected)
     }
 
     @Test(
@@ -54,7 +55,8 @@ internal struct IntMultipliableTests {
         multiplier: Int.Multiplier,
         product: Int
     ) {
-        #expect(multiplicand * multiplier == product)
+        let result: Int = multiplicand * multiplier
+        #expect(result == product)
     }
 
     @Test(
@@ -80,7 +82,8 @@ internal struct IntMultipliableTests {
         multiplier: Int.Multiplier,
         product: Int
     ) throws {
-        #expect(try multiplicand.multiplying(by: multiplier) == product)
+        let result: Int = try multiplicand.multiplying(by: multiplier)
+        #expect(result == product)
     }
 
     @Test(
@@ -105,7 +108,8 @@ internal struct IntMultipliableTests {
         multiplicand: Int,
         product: Int
     ) {
-        #expect(multiplicand.doubled() == product)
+        let result: Int = multiplicand.doubled()
+        #expect(result == product)
     }
 
     @Test(
@@ -132,7 +136,8 @@ extension IntMultipliableTests {
         multiplier: Int.Multiplier,
         product _: Int
     ) {
-        #expect(multiplicand * multiplier == multiplier * multiplicand)
+        let result: Int = multiplicand * multiplier
+        #expect(result == multiplier * multiplicand)
     }
 }
 
@@ -152,7 +157,8 @@ extension IntMultipliableTests {
         multiplicand: Int,
         product: Int
     ) {
-        #expect(multiplicand * -1 == product)
+        let result: Int = multiplicand * -1
+        #expect(result == product)
     }
 
     @Test(
@@ -165,7 +171,8 @@ extension IntMultipliableTests {
         ]
     )
     internal func isMultipleOfNegativeOneReturnsTrue(multiplicand: Int) {
-        #expect(multiplicand.isMultiple(of: -1) == true)
+        let result: Bool = multiplicand.isMultiple(of: -1)
+        #expect(result == true)
     }
 }
 
@@ -174,7 +181,8 @@ extension IntMultipliableTests {
 extension IntMultipliableTests {
     @Test("Negative zero is multiple of negative zero")
     internal func negativeZeroIsMultipleOfNegativeZero() {
-        #expect(Int.negativeZero.isMultiple(of: Int.negativeZero) == true)
+        let result: Bool = Int.negativeZero.isMultiple(of: Int.negativeZero)
+        #expect(result == true)
     }
 
     @Test(
@@ -187,7 +195,8 @@ extension IntMultipliableTests {
         ]
     )
     internal func isMultipleOfNegativeZeroReturnsFalse(multiplicand: Int) {
-        #expect(multiplicand.isMultiple(of: Int.negativeZero) == false)
+        let result: Bool = multiplicand.isMultiple(of: Int.negativeZero)
+        #expect(result == false)
     }
 
     @Test(
@@ -200,7 +209,8 @@ extension IntMultipliableTests {
         ]
     )
     internal func multiplyingByNegativeZeroReturnsNegativeZero(multiplicand: Int) {
-        #expect(multiplicand * Int.negativeZero == Int.negativeZero)
+        let result: Int = multiplicand * Int.negativeZero
+        #expect(result == Int.negativeZero)
     }
 }
 
@@ -217,7 +227,8 @@ extension IntMultipliableTests {
         ]
     )
     internal func multiplyingByPositiveOnePreservesMultiplicand(multiplicand: Int) {
-        #expect(multiplicand * 1 == multiplicand)
+        let result: Int = multiplicand * 1
+        #expect(result == multiplicand)
     }
 
     @Test(
@@ -230,7 +241,8 @@ extension IntMultipliableTests {
         ]
     )
     internal func isMultipleOfPositiveOneReturnsTrue(multiplicand: Int) {
-        #expect(multiplicand.isMultiple(of: 1) == true)
+        let result: Bool = multiplicand.isMultiple(of: 1)
+        #expect(result == true)
     }
 }
 
@@ -239,7 +251,8 @@ extension IntMultipliableTests {
 extension IntMultipliableTests {
     @Test("Positive zero is multiple of positive zero")
     internal func positiveZeroIsMultipleOfPositiveZero() {
-        #expect(Int.zero.isMultiple(of: Int.zero) == true)
+        let result: Bool = Int.zero.isMultiple(of: Int.zero)
+        #expect(result == true)
     }
 
     @Test(
@@ -252,7 +265,8 @@ extension IntMultipliableTests {
         ]
     )
     internal func isMultipleOfPositiveZeroReturnsFalse(multiplicand: Int) {
-        #expect(multiplicand.isMultiple(of: Int.zero) == false)
+        let result: Bool = multiplicand.isMultiple(of: Int.zero)
+        #expect(result == false)
     }
 
     @Test(
@@ -265,6 +279,7 @@ extension IntMultipliableTests {
         ]
     )
     internal func multiplyingByPositiveZeroReturnsPositiveZero(multiplicand: Int) {
-        #expect(multiplicand * Int.zero == Int.zero)
+        let result: Int = multiplicand * Int.zero
+        #expect(result == Int.zero)
     }
 }

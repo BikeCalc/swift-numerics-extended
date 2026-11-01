@@ -30,9 +30,10 @@ internal struct FractionEquatableTests {
     internal func equalitySucceeds(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect((lhs == rhs) == result)
+        let result: Bool = lhs == rhs
+        #expect(result == expected)
     }
 
     @Test(
@@ -42,9 +43,10 @@ internal struct FractionEquatableTests {
     internal func inequalitySucceeds(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) {
-        #expect((lhs != rhs) == !result)
+        let result: Bool = lhs != rhs
+        #expect(result == !expected)
     }
 
     @Test(
@@ -54,9 +56,10 @@ internal struct FractionEquatableTests {
     internal func isEqualSucceeds(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) throws {
-        #expect(try lhs.isEqual(to: rhs) == result)
+        let result: Bool = try lhs.isEqual(to: rhs)
+        #expect(result == expected)
     }
 
     @Test(
@@ -66,9 +69,10 @@ internal struct FractionEquatableTests {
     internal func isUnequalSucceeds(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) throws {
-        #expect(try lhs.isUnequal(to: rhs) == !result)
+        let result: Bool = try lhs.isUnequal(to: rhs)
+        #expect(result == !expected)
     }
 }
 
@@ -86,12 +90,16 @@ extension FractionEquatableTests {
     internal func nanEqualityFollowsRationalRules(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) throws {
-        #expect((lhs == rhs) == result)
-        #expect((lhs != rhs) == !result)
-        #expect(try lhs.isEqual(to: rhs) == result)
-        #expect(try lhs.isUnequal(to: rhs) == !result)
+        let equalityResult: Bool = lhs == rhs
+        #expect(equalityResult == expected)
+        let inequalityResult: Bool = lhs != rhs
+        #expect(inequalityResult == !expected)
+        let isEqualResult: Bool = try lhs.isEqual(to: rhs)
+        #expect(isEqualResult == expected)
+        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        #expect(isUnequalResult == !expected)
     }
 }
 
@@ -108,12 +116,16 @@ extension FractionEquatableTests {
     internal func negativeInfinityEqualityFollowsRationalRules(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) throws {
-        #expect((lhs == rhs) == result)
-        #expect((lhs != rhs) == !result)
-        #expect(try lhs.isEqual(to: rhs) == result)
-        #expect(try lhs.isUnequal(to: rhs) == !result)
+        let equalityResult: Bool = lhs == rhs
+        #expect(equalityResult == expected)
+        let inequalityResult: Bool = lhs != rhs
+        #expect(inequalityResult == !expected)
+        let isEqualResult: Bool = try lhs.isEqual(to: rhs)
+        #expect(isEqualResult == expected)
+        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        #expect(isUnequalResult == !expected)
     }
 }
 
@@ -131,12 +143,16 @@ extension FractionEquatableTests {
     internal func negativeZeroEqualityFollowsStoredRepresentationRules(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) throws {
-        #expect((lhs == rhs) == result)
-        #expect((lhs != rhs) == !result)
-        #expect(try lhs.isEqual(to: rhs) == result)
-        #expect(try lhs.isUnequal(to: rhs) == !result)
+        let equalityResult: Bool = lhs == rhs
+        #expect(equalityResult == expected)
+        let inequalityResult: Bool = lhs != rhs
+        #expect(inequalityResult == !expected)
+        let isEqualResult: Bool = try lhs.isEqual(to: rhs)
+        #expect(isEqualResult == expected)
+        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        #expect(isUnequalResult == !expected)
     }
 }
 
@@ -153,12 +169,16 @@ extension FractionEquatableTests {
     internal func positiveInfinityEqualityFollowsRationalRules(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) throws {
-        #expect((lhs == rhs) == result)
-        #expect((lhs != rhs) == !result)
-        #expect(try lhs.isEqual(to: rhs) == result)
-        #expect(try lhs.isUnequal(to: rhs) == !result)
+        let equalityResult: Bool = lhs == rhs
+        #expect(equalityResult == expected)
+        let inequalityResult: Bool = lhs != rhs
+        #expect(inequalityResult == !expected)
+        let isEqualResult: Bool = try lhs.isEqual(to: rhs)
+        #expect(isEqualResult == expected)
+        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        #expect(isUnequalResult == !expected)
     }
 }
 
@@ -176,11 +196,15 @@ extension FractionEquatableTests {
     internal func positiveZeroEqualityFollowsStoredRepresentationRules(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>,
-        result: Bool
+        expected: Bool
     ) throws {
-        #expect((lhs == rhs) == result)
-        #expect((lhs != rhs) == !result)
-        #expect(try lhs.isEqual(to: rhs) == result)
-        #expect(try lhs.isUnequal(to: rhs) == !result)
+        let equalityResult: Bool = lhs == rhs
+        #expect(equalityResult == expected)
+        let inequalityResult: Bool = lhs != rhs
+        #expect(inequalityResult == !expected)
+        let isEqualResult: Bool = try lhs.isEqual(to: rhs)
+        #expect(isEqualResult == expected)
+        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        #expect(isUnequalResult == !expected)
     }
 }

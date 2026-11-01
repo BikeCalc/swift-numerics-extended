@@ -34,9 +34,10 @@ internal struct RomanMultipliableTests {
     internal func isMultipleOf(
         multiplicand: Roman,
         multiplier: Roman,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(multiplicand.isMultiple(of: multiplier) == result)
+        let result: Bool = multiplicand.isMultiple(of: multiplier)
+        #expect(result == expected)
     }
 
     @Test(
@@ -48,7 +49,8 @@ internal struct RomanMultipliableTests {
         multiplier: Roman.Multiplier,
         product: Roman
     ) {
-        #expect(multiplicand * multiplier == product)
+        let result: Roman = multiplicand * multiplier
+        #expect(result == product)
     }
 
     @Test(
@@ -74,7 +76,8 @@ internal struct RomanMultipliableTests {
         multiplier: Roman.Multiplier,
         product: Roman
     ) throws {
-        #expect(try multiplicand.multiplying(by: multiplier) == product)
+        let result: Roman = try multiplicand.multiplying(by: multiplier)
+        #expect(result == product)
     }
 
     @Test(
@@ -99,7 +102,8 @@ internal struct RomanMultipliableTests {
         multiplicand: Roman,
         product: Roman
     ) {
-        #expect(multiplicand.doubled() == product)
+        let result: Roman = multiplicand.doubled()
+        #expect(result == product)
     }
 
     @Test(
@@ -126,7 +130,8 @@ extension RomanMultipliableTests {
         multiplier: Roman.Multiplier,
         product _: Roman
     ) {
-        #expect(multiplicand * multiplier == multiplier * multiplicand)
+        let result: Roman = multiplicand * multiplier
+        #expect(result == multiplier * multiplicand)
     }
 }
 
@@ -141,7 +146,8 @@ extension RomanMultipliableTests {
         ] as Array<Roman>
     )
     internal func multiplyingByPositiveOnePreservesMultiplicand(multiplicand: Roman) {
-        #expect(multiplicand * 1 == multiplicand)
+        let result: Roman = multiplicand * 1
+        #expect(result == multiplicand)
     }
 
     @Test(
@@ -152,7 +158,8 @@ extension RomanMultipliableTests {
         ] as Array<Roman>
     )
     internal func isMultipleOfPositiveOneReturnsTrue(multiplicand: Roman) {
-        #expect(multiplicand.isMultiple(of: 1) == true)
+        let result: Bool = multiplicand.isMultiple(of: 1)
+        #expect(result == true)
     }
 }
 
@@ -161,7 +168,8 @@ extension RomanMultipliableTests {
 extension RomanMultipliableTests {
     @Test("Positive zero is multiple of positive zero")
     internal func positiveZeroIsMultipleOfPositiveZero() {
-        #expect(Roman.zero.isMultiple(of: Roman.zero) == true)
+        let result: Bool = Roman.zero.isMultiple(of: Roman.zero)
+        #expect(result == true)
     }
 
     @Test(
@@ -172,7 +180,8 @@ extension RomanMultipliableTests {
         ] as Array<Roman>
     )
     internal func isMultipleOfPositiveZeroReturnsFalse(multiplicand: Roman) {
-        #expect(multiplicand.isMultiple(of: Roman.zero) == false)
+        let result: Bool = multiplicand.isMultiple(of: Roman.zero)
+        #expect(result == false)
     }
 
     @Test(
@@ -183,6 +192,7 @@ extension RomanMultipliableTests {
         ] as Array<Roman>
     )
     internal func multiplyingByPositiveZeroReturnsPositiveZero(multiplicand: Roman) {
-        #expect(multiplicand * Roman.zero == Roman.zero)
+        let result: Roman = multiplicand * Roman.zero
+        #expect(result == Roman.zero)
     }
 }

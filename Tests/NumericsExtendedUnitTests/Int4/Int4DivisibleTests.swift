@@ -50,10 +50,10 @@ internal struct Int4DivisibleTests {
     )
     internal func parityPredicates(
         value: Int4,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(value.isEven == result)
-        #expect(value.isOdd == !result)
+        #expect(value.isEven == expected)
+        #expect(value.isOdd == !expected)
     }
 
     @Test(
@@ -67,9 +67,9 @@ internal struct Int4DivisibleTests {
     )
     internal func reciprocal(
         dividend: Int4,
-        result: Int4?
+        expected: Int4?
     ) {
-        #expect(dividend.reciprocal == result)
+        #expect(dividend.reciprocal == expected)
     }
 
     @Test(
@@ -84,9 +84,10 @@ internal struct Int4DivisibleTests {
     internal func isDivisibleBy(
         dividend: Int4,
         divisor: Int4,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(dividend.isDivisible(by: divisor) == result)
+        let result: Bool = dividend.isDivisible(by: divisor)
+        #expect(result == expected)
     }
 
     @Test(
@@ -101,9 +102,10 @@ internal struct Int4DivisibleTests {
     internal func isFactorOf(
         factor: Int4,
         value: Int4,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(factor.isFactor(of: value) == result)
+        let result: Bool = factor.isFactor(of: value)
+        #expect(result == expected)
     }
 
     @Test(
@@ -115,7 +117,8 @@ internal struct Int4DivisibleTests {
         divisor: Int4.Divisor,
         quotient: Int4
     ) {
-        #expect(dividend / divisor == quotient)
+        let result: Int4 = dividend / divisor
+        #expect(result == quotient)
     }
 
     @Test(
@@ -141,7 +144,8 @@ internal struct Int4DivisibleTests {
         divisor: Int4.Divisor,
         quotient: Int4
     ) throws {
-        #expect(try dividend.dividing(by: divisor) == quotient)
+        let result: Int4 = try dividend.dividing(by: divisor)
+        #expect(result == quotient)
     }
 
     @Test(
@@ -167,7 +171,8 @@ internal struct Int4DivisibleTests {
         divisor: Int4.RemainderDivisor,
         remainder: Int4
     ) {
-        #expect(dividend % divisor == remainder)
+        let result: Int4 = dividend % divisor
+        #expect(result == remainder)
     }
 
     @Test(
@@ -192,7 +197,8 @@ internal struct Int4DivisibleTests {
         dividend: Int4,
         quotient: Int4
     ) {
-        #expect(dividend.halved() == quotient)
+        let result: Int4 = dividend.halved()
+        #expect(result == quotient)
     }
 
     @Test(
@@ -219,7 +225,8 @@ extension Int4DivisibleTests {
         divisor: Int4.Divisor,
         quotient _: Int4
     ) {
-        #expect(dividend / divisor != divisor / dividend)
+        let result: Int4 = dividend / divisor
+        #expect(result != divisor / dividend)
     }
 
     @Test(
@@ -237,7 +244,8 @@ extension Int4DivisibleTests {
         dividend: Int4,
         quotient: Int4
     ) {
-        #expect(dividend.halved() == quotient)
+        let result: Int4 = dividend.halved()
+        #expect(result == quotient)
     }
 
     @Test(
@@ -254,7 +262,8 @@ extension Int4DivisibleTests {
         divisor: Int4.Divisor,
         quotient: Int4
     ) {
-        #expect(dividend / divisor == quotient)
+        let result: Int4 = dividend / divisor
+        #expect(result == quotient)
     }
 }
 
@@ -274,7 +283,8 @@ extension Int4DivisibleTests {
         dividend: Int4,
         quotient: Int4
     ) {
-        #expect(dividend / -1 == quotient)
+        let result: Int4 = dividend / -1
+        #expect(result == quotient)
     }
 
     @Test(
@@ -286,9 +296,9 @@ extension Int4DivisibleTests {
     )
     internal func negativeOneInvertibilityFollowsIntegerRules(
         dividend: Int4,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(dividend.isInvertible == result)
+        #expect(dividend.isInvertible == expected)
     }
 
     @Test(
@@ -301,7 +311,8 @@ extension Int4DivisibleTests {
         ] as Array<Int4>
     )
     internal func remainderByNegativeOneReturnsPositiveZero(dividend: Int4) {
-        #expect(dividend % -1 == Int4.zero)
+        let result: Int4 = dividend % -1
+        #expect(result == Int4.zero)
     }
 }
 
@@ -328,7 +339,8 @@ extension Int4DivisibleTests {
         ] as Array<Int4.Divisor>
     )
     internal func dividingNegativeZeroByNonzeroValueReturnsNegativeZero(divisor: Int4.Divisor) {
-        #expect(Int4.negativeZero / divisor == Int4.negativeZero)
+        let result: Int4 = Int4.negativeZero / divisor
+        #expect(result == Int4.negativeZero)
     }
 }
 
@@ -345,7 +357,8 @@ extension Int4DivisibleTests {
         ] as Array<Int4>
     )
     internal func dividingByPositiveOnePreservesDividend(dividend: Int4) {
-        #expect(dividend / 1 == dividend)
+        let result: Int4 = dividend / 1
+        #expect(result == dividend)
     }
 
     @Test(
@@ -357,9 +370,9 @@ extension Int4DivisibleTests {
     )
     internal func positiveOneInvertibilityFollowsIntegerRules(
         dividend: Int4,
-        result: Bool
+        expected: Bool
     ) {
-        #expect(dividend.isInvertible == result)
+        #expect(dividend.isInvertible == expected)
     }
 
     @Test(
@@ -372,7 +385,8 @@ extension Int4DivisibleTests {
         ] as Array<Int4>
     )
     internal func remainderByPositiveOneReturnsPositiveZero(dividend: Int4) {
-        #expect(dividend % 1 == Int4.zero)
+        let result: Int4 = dividend % 1
+        #expect(result == Int4.zero)
     }
 }
 
@@ -399,7 +413,8 @@ extension Int4DivisibleTests {
         ] as Array<Int4.Divisor>
     )
     internal func dividingPositiveZeroByNonzeroValueReturnsPositiveZero(divisor: Int4.Divisor) {
-        #expect(Int4.zero / divisor == Int4.zero)
+        let result: Int4 = Int4.zero / divisor
+        #expect(result == Int4.zero)
     }
 
     @Test(
@@ -412,6 +427,7 @@ extension Int4DivisibleTests {
         ] as Array<Int4>
     )
     internal func remainderBySelfReturnsPositiveZero(value: Int4) {
-        #expect(value % value == Int4.zero)
+        let result: Int4 = value % value
+        #expect(result == Int4.zero)
     }
 }

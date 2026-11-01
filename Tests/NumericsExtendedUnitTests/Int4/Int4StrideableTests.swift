@@ -29,9 +29,9 @@ internal struct Int4StrideableTests {
     internal func advancedBySucceeds(
         value: Int4,
         amount: Int4.Stride,
-        result: Int4
+        expected: Int4
     ) {
-        #expect(value.advanced(by: amount) == result)
+        #expect(value.advanced(by: amount) == expected)
     }
 
     @Test(
@@ -49,9 +49,9 @@ internal struct Int4StrideableTests {
     internal func distanceToSucceeds(
         value: Int4,
         other: Int4,
-        result: Int4.Stride
+        expected: Int4.Stride
     ) {
-        #expect(value.distance(to: other) == result)
+        #expect(value.distance(to: other) == expected)
     }
 }
 
