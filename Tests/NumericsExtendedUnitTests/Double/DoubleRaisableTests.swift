@@ -213,25 +213,6 @@ extension DoubleRaisableTests {
 // MARK: - NaN
 
 extension DoubleRaisableTests {
-    @Test(
-        "Raising to negative one returns reciprocal",
-        arguments: [
-            (1.0, 1.0),
-            (-1.0, -1.0),
-            (2.0, 0.5),
-            (-2.0, -0.5),
-            (0.5, 2.0),
-            (-0.5, -2.0)
-        ] as Array<(Double, Double)>
-    )
-    internal func raisingToNegativeOneReturnsReciprocal(
-        base: Double,
-        power: Double
-    ) {
-        let result: Double = base ** -1
-        #expect(result == power)
-    }
-
     @Test("NaN power predicate follows floating-point rules")
     internal func nanPowerPredicateFollowsFloatingPointRules() {
         let firstResult: Bool = 1.0.isPower(of: Double.nan)
@@ -354,6 +335,25 @@ extension DoubleRaisableTests {
 // MARK: - Negative One
 
 extension DoubleRaisableTests {
+    @Test(
+        "Raising to negative one returns reciprocal",
+        arguments: [
+            (1.0, 1.0),
+            (-1.0, -1.0),
+            (2.0, 0.5),
+            (-2.0, -0.5),
+            (0.5, 2.0),
+            (-0.5, -2.0)
+        ] as Array<(Double, Double)>
+    )
+    internal func raisingToNegativeOneReturnsReciprocal(
+        base: Double,
+        power: Double
+    ) {
+        let result: Double = base ** -1
+        #expect(result == power)
+    }
+
     @Test(
         "Negative one base exponentiation follows parity rule",
         arguments: [

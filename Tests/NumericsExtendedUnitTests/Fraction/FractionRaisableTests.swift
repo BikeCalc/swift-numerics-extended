@@ -196,23 +196,6 @@ extension FractionRaisableTests {
 // MARK: - IntMin
 
 extension FractionRaisableTests {
-    @Test(
-        "Raising to negative one returns reciprocal",
-        arguments: [
-            (.init(1, 1), .init(1, 1)),
-            (.init(-1, 1), .init(1, -1)),
-            (.init(2, 3), .init(3, 2)),
-            (.init(-2, 3), .init(3, -2))
-        ] as Array<(Fraction<Int>, Fraction<Int>)>
-    )
-    internal func raisingToNegativeOneReturnsReciprocal(
-        base: Fraction<Int>,
-        power: Fraction<Int>
-    ) {
-        let result: Fraction<Int> = base ** -1
-        #expect(result == power)
-    }
-
     @Test("Int minimum exponent uses unsigned magnitude")
     internal func intMinimumExponentUsesUnsignedMagnitude() {
         let firstResult: Fraction<Int> = Fraction<Int>(1, 1) ** Int.min
@@ -327,6 +310,23 @@ extension FractionRaisableTests {
 // MARK: - Negative One
 
 extension FractionRaisableTests {
+    @Test(
+        "Raising to negative one returns reciprocal",
+        arguments: [
+            (.init(1, 1), .init(1, 1)),
+            (.init(-1, 1), .init(1, -1)),
+            (.init(2, 3), .init(3, 2)),
+            (.init(-2, 3), .init(3, -2))
+        ] as Array<(Fraction<Int>, Fraction<Int>)>
+    )
+    internal func raisingToNegativeOneReturnsReciprocal(
+        base: Fraction<Int>,
+        power: Fraction<Int>
+    ) {
+        let result: Fraction<Int> = base ** -1
+        #expect(result == power)
+    }
+
     @Test(
         "Negative one base exponentiation follows parity rule",
         arguments: [
