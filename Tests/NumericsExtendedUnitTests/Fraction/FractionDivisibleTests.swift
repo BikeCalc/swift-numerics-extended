@@ -107,9 +107,9 @@ internal struct FractionDivisibleTests {
         divisor: Fraction<Int>.Divisor,
         quotient: Fraction<Int>
     ) {
-        var runningQuotient: Fraction<Int> = dividend
-        runningQuotient /= divisor
-        #expect(runningQuotient == quotient)
+        var result: Fraction<Int> = dividend
+        result /= divisor
+        #expect(result == quotient)
     }
 
     @Test(
@@ -133,9 +133,9 @@ internal struct FractionDivisibleTests {
         divisor: Fraction<Int>.RemainderDivisor,
         remainder: Fraction<Int>
     ) {
-        var runningRemainder: Fraction<Int> = dividend
-        runningRemainder %= divisor
-        #expect(runningRemainder == remainder)
+        var result: Fraction<Int> = dividend
+        result %= divisor
+        #expect(result == remainder)
     }
 
     @Test(
@@ -159,9 +159,9 @@ internal struct FractionDivisibleTests {
         divisor: Fraction<Int>.Divisor,
         quotient: Fraction<Int>
     ) throws {
-        var runningQuotient: Fraction<Int> = dividend
-        try runningQuotient.divide(by: divisor)
-        #expect(runningQuotient == quotient)
+        var result: Fraction<Int> = dividend
+        try result.divide(by: divisor)
+        #expect(result == quotient)
     }
 
     @Test(
@@ -183,9 +183,9 @@ internal struct FractionDivisibleTests {
         dividend: Fraction<Int>,
         quotient: Fraction<Int>
     ) {
-        var runningQuotient: Fraction<Int> = dividend
-        runningQuotient.halve()
-        #expect(runningQuotient == quotient)
+        var result: Fraction<Int> = dividend
+        result.halve()
+        #expect(result == quotient)
     }
 }
 
@@ -242,7 +242,8 @@ extension FractionDivisibleTests {
         ]
     )
     internal func dividingPositiveZeroByPositiveOrNegativeZeroReturnsNaN(divisor: Fraction<Int>.Divisor) {
-        #expect((Fraction<Int>.zero / divisor).isNaN == true)
+        let result: Fraction<Int> = Fraction<Int>.zero / divisor
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -253,7 +254,8 @@ extension FractionDivisibleTests {
         ]
     )
     internal func dividingNegativeZeroByPositiveOrNegativeZeroReturnsNaN(divisor: Fraction<Int>.Divisor) {
-        #expect((Fraction<Int>.negativeZero / divisor).isNaN == true)
+        let result: Fraction<Int> = Fraction<Int>.negativeZero / divisor
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -264,7 +266,8 @@ extension FractionDivisibleTests {
         ]
     )
     internal func dividingPositiveInfinityByInfinityReturnsNaN(divisor: Fraction<Int>.Divisor) {
-        #expect((Fraction<Int>.infinity / divisor).isNaN == true)
+        let result: Fraction<Int> = Fraction<Int>.infinity / divisor
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -275,7 +278,8 @@ extension FractionDivisibleTests {
         ]
     )
     internal func dividingNegativeInfinityByInfinityReturnsNaN(divisor: Fraction<Int>.Divisor) {
-        #expect((Fraction<Int>.negativeInfinity / divisor).isNaN == true)
+        let result: Fraction<Int> = Fraction<Int>.negativeInfinity / divisor
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -291,7 +295,8 @@ extension FractionDivisibleTests {
         ]
     )
     internal func dividingNaNReturnsNaN(divisor: Fraction<Int>.Divisor) {
-        #expect((Fraction<Int>.nan / divisor).isNaN == true)
+        let result: Fraction<Int> = Fraction<Int>.nan / divisor
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -306,7 +311,8 @@ extension FractionDivisibleTests {
         ]
     )
     internal func dividingByNaNReturnsNaN(dividend: Fraction<Int>) {
-        #expect((dividend / Fraction<Int>.nan).isNaN == true)
+        let result: Fraction<Int> = dividend / Fraction<Int>.nan
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -321,7 +327,8 @@ extension FractionDivisibleTests {
         ]
     )
     internal func remainderOfPositiveInfinityReturnsNaN(divisor: Fraction<Int>.RemainderDivisor) {
-        #expect((Fraction<Int>.infinity % divisor).isNaN == true)
+        let result: Fraction<Int> = Fraction<Int>.infinity % divisor
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -336,7 +343,8 @@ extension FractionDivisibleTests {
         ]
     )
     internal func remainderOfNegativeInfinityReturnsNaN(divisor: Fraction<Int>.RemainderDivisor) {
-        #expect((Fraction<Int>.negativeInfinity % divisor).isNaN == true)
+        let result: Fraction<Int> = Fraction<Int>.negativeInfinity % divisor
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -347,7 +355,8 @@ extension FractionDivisibleTests {
         ]
     )
     internal func remainderByPositiveZeroReturnsNaN(dividend: Fraction<Int>) {
-        #expect((dividend % Fraction<Int>.zero).isNaN == true)
+        let result: Fraction<Int> = dividend % Fraction<Int>.zero
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -358,7 +367,8 @@ extension FractionDivisibleTests {
         ]
     )
     internal func remainderByNegativeZeroReturnsNaN(dividend: Fraction<Int>) {
-        #expect((dividend % Fraction<Int>.negativeZero).isNaN == true)
+        let result: Fraction<Int> = dividend % Fraction<Int>.negativeZero
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -374,7 +384,8 @@ extension FractionDivisibleTests {
         ]
     )
     internal func remainderOfNaNReturnsNaN(divisor: Fraction<Int>.RemainderDivisor) {
-        #expect((Fraction<Int>.nan % divisor).isNaN == true)
+        let result: Fraction<Int> = Fraction<Int>.nan % divisor
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -389,7 +400,8 @@ extension FractionDivisibleTests {
         ]
     )
     internal func remainderByNaNReturnsNaN(dividend: Fraction<Int>) {
-        #expect((dividend % Fraction<Int>.nan).isNaN == true)
+        let result: Fraction<Int> = dividend % Fraction<Int>.nan
+        #expect(result.isNaN == true)
     }
 }
 
@@ -714,8 +726,8 @@ extension FractionDivisibleTests {
         ]
     )
     internal func remainderBySelfReturnsPositiveZero(dividend: Fraction<Int>) {
-        let remainder: Fraction<Int> = dividend % dividend
-        #expect(remainder.isZero == true)
-        #expect(remainder.denominator > 0)
+        let result: Fraction<Int> = dividend % dividend
+        #expect(result.isZero == true)
+        #expect(result.denominator > 0)
     }
 }

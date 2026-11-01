@@ -127,9 +127,9 @@ internal struct IntDivisibleTests {
         divisor: Int.Divisor,
         quotient: Int
     ) {
-        var runningQuotient: Int = dividend
-        runningQuotient /= divisor
-        #expect(runningQuotient == quotient)
+        var result: Int = dividend
+        result /= divisor
+        #expect(result == quotient)
     }
 
     @Test(
@@ -153,9 +153,9 @@ internal struct IntDivisibleTests {
         divisor: Int.RemainderDivisor,
         remainder: Int
     ) {
-        var runningRemainder: Int = dividend
-        runningRemainder %= divisor
-        #expect(runningRemainder == remainder)
+        var result: Int = dividend
+        result %= divisor
+        #expect(result == remainder)
     }
 
     @Test(
@@ -179,9 +179,9 @@ internal struct IntDivisibleTests {
         divisor: Int.Divisor,
         quotient: Int
     ) throws {
-        var runningQuotient: Int = dividend
-        try runningQuotient.divide(by: divisor)
-        #expect(runningQuotient == quotient)
+        var result: Int = dividend
+        try result.divide(by: divisor)
+        #expect(result == quotient)
     }
 
     @Test(
@@ -203,9 +203,9 @@ internal struct IntDivisibleTests {
         dividend: Int,
         quotient: Int
     ) {
-        var runningQuotient: Int = dividend
-        runningQuotient.halve()
-        #expect(runningQuotient == quotient)
+        var result: Int = dividend
+        result.halve()
+        #expect(result == quotient)
     }
 }
 

@@ -78,9 +78,9 @@ internal struct DoubleMultipliableTests {
         multiplier: Double.Multiplier,
         product: Double
     ) {
-        var runningProduct: Double = multiplicand
-        runningProduct *= multiplier
-        #expect(runningProduct == product)
+        var result: Double = multiplicand
+        result *= multiplier
+        #expect(result == product)
     }
 
     @Test(
@@ -104,9 +104,9 @@ internal struct DoubleMultipliableTests {
         multiplier: Double.Multiplier,
         product: Double
     ) throws {
-        var runningProduct: Double = multiplicand
-        try runningProduct.multiply(by: multiplier)
-        #expect(runningProduct == product)
+        var result: Double = multiplicand
+        try result.multiply(by: multiplier)
+        #expect(result == product)
     }
 
     @Test(
@@ -128,9 +128,9 @@ internal struct DoubleMultipliableTests {
         multiplicand: Double,
         product: Double
     ) {
-        var runningProduct: Double = multiplicand
-        runningProduct.double()
-        #expect(runningProduct == product)
+        var result: Double = multiplicand
+        result.double()
+        #expect(result == product)
     }
 }
 
@@ -179,7 +179,8 @@ extension DoubleMultipliableTests {
         multiplicand: Double,
         multiplier: Double.Multiplier
     ) {
-        #expect((multiplicand * multiplier).isNaN == true)
+        let result: Double = multiplicand * multiplier
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -195,7 +196,8 @@ extension DoubleMultipliableTests {
         multiplicand: Double,
         multiplier: Double.Multiplier
     ) {
-        #expect((multiplicand * multiplier).isNaN == true)
+        let result: Double = multiplicand * multiplier
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -210,7 +212,8 @@ extension DoubleMultipliableTests {
         ]
     )
     internal func multiplyingNaNReturnsNaN(multiplier: Double.Multiplier) {
-        #expect((Double.nan * multiplier).isNaN == true)
+        let result: Double = Double.nan * multiplier
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -225,7 +228,8 @@ extension DoubleMultipliableTests {
         ]
     )
     internal func multiplyingByNaNReturnsNaN(multiplicand: Double) {
-        #expect((multiplicand * Double.nan).isNaN == true)
+        let result: Double = multiplicand * Double.nan
+        #expect(result.isNaN == true)
     }
 }
 

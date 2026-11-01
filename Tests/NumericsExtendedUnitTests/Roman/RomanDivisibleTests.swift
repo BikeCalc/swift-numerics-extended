@@ -111,9 +111,9 @@ internal struct RomanDivisibleTests {
         divisor: Roman.Divisor,
         quotient: Roman
     ) {
-        var runningQuotient: Roman = dividend
-        runningQuotient /= divisor
-        #expect(runningQuotient == quotient)
+        var result: Roman = dividend
+        result /= divisor
+        #expect(result == quotient)
     }
 
     @Test(
@@ -137,9 +137,9 @@ internal struct RomanDivisibleTests {
         divisor: Roman.RemainderDivisor,
         remainder: Roman
     ) {
-        var runningRemainder: Roman = dividend
-        runningRemainder %= divisor
-        #expect(runningRemainder == remainder)
+        var result: Roman = dividend
+        result %= divisor
+        #expect(result == remainder)
     }
 
     @Test(
@@ -163,9 +163,9 @@ internal struct RomanDivisibleTests {
         divisor: Roman.Divisor,
         quotient: Roman
     ) throws {
-        var runningQuotient: Roman = dividend
-        try runningQuotient.divide(by: divisor)
-        #expect(runningQuotient == quotient)
+        var result: Roman = dividend
+        try result.divide(by: divisor)
+        #expect(result == quotient)
     }
 
     @Test(
@@ -187,9 +187,9 @@ internal struct RomanDivisibleTests {
         dividend: Roman,
         quotient: Roman
     ) {
-        var runningQuotient: Roman = dividend
-        runningQuotient.halve()
-        #expect(runningQuotient == quotient)
+        var result: Roman = dividend
+        result.halve()
+        #expect(result == quotient)
     }
 }
 

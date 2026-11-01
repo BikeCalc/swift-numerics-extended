@@ -40,9 +40,9 @@ internal struct RomanSubtractableTests {
         subtrahend: Roman.Subtrahend,
         difference: Roman
     ) {
-        var runningDifference: Roman = minuend
-        runningDifference -= subtrahend
-        #expect(runningDifference == difference)
+        var result: Roman = minuend
+        result -= subtrahend
+        #expect(result == difference)
     }
 
     @Test(
@@ -66,9 +66,9 @@ internal struct RomanSubtractableTests {
         subtrahend: Roman.Subtrahend,
         difference: Roman
     ) throws {
-        var runningDifference: Roman = minuend
-        try runningDifference.subtract(subtrahend)
-        #expect(runningDifference == difference)
+        var result: Roman = minuend
+        try result.subtract(subtrahend)
+        #expect(result == difference)
     }
 }
 

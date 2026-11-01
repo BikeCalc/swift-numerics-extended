@@ -104,9 +104,9 @@ internal struct DoubleRaisableTests {
         exponent: Double.Exponent,
         power: Double
     ) {
-        var runningPower: Double = base
-        runningPower **= exponent
-        #expect(runningPower == power)
+        var result: Double = base
+        result **= exponent
+        #expect(result == power)
     }
 
     @Test(
@@ -130,9 +130,9 @@ internal struct DoubleRaisableTests {
         exponent: Double.Exponent,
         power: Double
     ) throws {
-        var runningPower: Double = base
-        try runningPower.raise(to: exponent)
-        #expect(runningPower == power)
+        var result: Double = base
+        try result.raise(to: exponent)
+        #expect(result == power)
     }
 
     @Test(
@@ -154,9 +154,9 @@ internal struct DoubleRaisableTests {
         base: Double,
         power: Double
     ) {
-        var runningPower: Double = base
-        runningPower.square()
-        #expect(runningPower == power)
+        var result: Double = base
+        result.square()
+        #expect(result == power)
     }
 
     @Test(
@@ -178,9 +178,9 @@ internal struct DoubleRaisableTests {
         base: Double,
         power: Double
     ) {
-        var runningPower: Double = base
-        runningPower.cube()
-        #expect(runningPower == power)
+        var result: Double = base
+        result.cube()
+        #expect(result == power)
     }
 }
 
@@ -199,9 +199,9 @@ extension DoubleRaisableTests {
         base: Double,
         exponent: Double.Exponent
     ) {
-        let power: Double = base ** exponent
-        let reversedPower: Double = Double(exponent) ** Double.Exponent(base)
-        #expect(power != reversedPower)
+        let result: Double = base ** exponent
+        let reversedResult: Double = Double(exponent) ** Double.Exponent(base)
+        #expect(result != reversedResult)
     }
 }
 
@@ -245,19 +245,20 @@ extension DoubleRaisableTests {
         base: Double,
         exponent: Double.Exponent
     ) {
-        #expect((base ** exponent).isNaN == true)
+        let result: Double = base ** exponent
+        #expect(result.isNaN == true)
     }
 
     @Test("NaN raised to positive zero returns one")
     internal func nanRaisedToPositiveZeroReturnsOne() {
-        let power: Double = Double.nan ** Double.Exponent.zero
-        #expect(power == 1.0)
+        let result: Double = Double.nan ** Double.Exponent.zero
+        #expect(result == 1.0)
     }
 
     @Test("NaN raised to negative zero returns one")
     internal func nanRaisedToNegativeZeroReturnsOne() {
-        let power: Double = Double.nan ** Double.Exponent.negativeZero
-        #expect(power == 1.0)
+        let result: Double = Double.nan ** Double.Exponent.negativeZero
+        #expect(result == 1.0)
     }
 }
 
@@ -332,9 +333,9 @@ extension DoubleRaisableTests {
         base: Double,
         exponent: Double.Exponent
     ) {
-        let power: Double = base ** exponent
-        #expect(power == Double.zero)
-        #expect(power.sign == .minus)
+        let result: Double = base ** exponent
+        #expect(result == Double.zero)
+        #expect(result.sign == .minus)
     }
 }
 
@@ -425,9 +426,9 @@ extension DoubleRaisableTests {
         base: Double,
         exponent: Double.Exponent
     ) {
-        let power: Double = base ** exponent
-        #expect(power == Double.zero)
-        #expect(power.sign == .minus)
+        let result: Double = base ** exponent
+        #expect(result == Double.zero)
+        #expect(result.sign == .minus)
     }
 }
 

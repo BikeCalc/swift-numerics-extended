@@ -88,9 +88,9 @@ internal struct FractionRaisableTests {
         exponent: Fraction<Int>.Exponent,
         power: Fraction<Int>
     ) {
-        var runningPower: Fraction<Int> = base
-        runningPower **= exponent
-        #expect(runningPower == power)
+        var result: Fraction<Int> = base
+        result **= exponent
+        #expect(result == power)
     }
 
     @Test(
@@ -114,9 +114,9 @@ internal struct FractionRaisableTests {
         exponent: Fraction<Int>.Exponent,
         power: Fraction<Int>
     ) throws {
-        var runningPower: Fraction<Int> = base
-        try runningPower.raise(to: exponent)
-        #expect(runningPower == power)
+        var result: Fraction<Int> = base
+        try result.raise(to: exponent)
+        #expect(result == power)
     }
 
     @Test(
@@ -138,9 +138,9 @@ internal struct FractionRaisableTests {
         base: Fraction<Int>,
         power: Fraction<Int>
     ) {
-        var runningPower: Fraction<Int> = base
-        runningPower.square()
-        #expect(runningPower == power)
+        var result: Fraction<Int> = base
+        result.square()
+        #expect(result == power)
     }
 
     @Test(
@@ -162,9 +162,9 @@ internal struct FractionRaisableTests {
         base: Fraction<Int>,
         power: Fraction<Int>
     ) {
-        var runningPower: Fraction<Int> = base
-        runningPower.cube()
-        #expect(runningPower == power)
+        var result: Fraction<Int> = base
+        result.cube()
+        #expect(result == power)
     }
 }
 
@@ -182,9 +182,9 @@ extension FractionRaisableTests {
         base: Fraction<Int>,
         exponent: Fraction<Int>.Exponent
     ) {
-        let power: Fraction<Int> = base ** exponent
-        let reversedPower: Fraction<Int> = Fraction<Int>(exponent, 1) ** base.numerator
-        #expect(power != reversedPower)
+        let result: Fraction<Int> = base ** exponent
+        let reversedResult: Fraction<Int> = Fraction<Int>(exponent, 1) ** base.numerator
+        #expect(result != reversedResult)
     }
 }
 
@@ -236,19 +236,20 @@ extension FractionRaisableTests {
         base: Fraction<Int>,
         exponent: Fraction<Int>.Exponent
     ) {
-        #expect((base ** exponent).isNaN == true)
+        let result: Fraction<Int> = base ** exponent
+        #expect(result.isNaN == true)
     }
 
     @Test("NaN raised to positive zero returns one")
     internal func nanRaisedToPositiveZeroReturnsOne() {
-        let power: Fraction<Int> = .nan ** .zero
-        #expect(power == .one)
+        let result: Fraction<Int> = .nan ** .zero
+        #expect(result == .one)
     }
 
     @Test("NaN raised to negative zero returns one")
     internal func nanRaisedToNegativeZeroReturnsOne() {
-        let power: Fraction<Int> = .nan ** Fraction<Int>.Exponent.negativeZero
-        #expect(power == .one)
+        let result: Fraction<Int> = .nan ** Fraction<Int>.Exponent.negativeZero
+        #expect(result == .one)
     }
 }
 

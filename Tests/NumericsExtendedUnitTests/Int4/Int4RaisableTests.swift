@@ -80,9 +80,9 @@ internal struct Int4RaisableTests {
         exponent: Int4.Exponent,
         power: Int4
     ) {
-        var runningPower: Int4 = base
-        runningPower **= exponent
-        #expect(runningPower == power)
+        var result: Int4 = base
+        result **= exponent
+        #expect(result == power)
     }
 
     @Test(
@@ -106,9 +106,9 @@ internal struct Int4RaisableTests {
         exponent: Int4.Exponent,
         power: Int4
     ) throws {
-        var runningPower: Int4 = base
-        try runningPower.raise(to: exponent)
-        #expect(runningPower == power)
+        var result: Int4 = base
+        try result.raise(to: exponent)
+        #expect(result == power)
     }
 
     @Test(
@@ -130,9 +130,9 @@ internal struct Int4RaisableTests {
         base: Int4,
         power: Int4
     ) {
-        var runningPower: Int4 = base
-        runningPower.square()
-        #expect(runningPower == power)
+        var result: Int4 = base
+        result.square()
+        #expect(result == power)
     }
 
     @Test(
@@ -154,9 +154,9 @@ internal struct Int4RaisableTests {
         base: Int4,
         power: Int4
     ) {
-        var runningPower: Int4 = base
-        runningPower.cube()
-        #expect(runningPower == power)
+        var result: Int4 = base
+        result.cube()
+        #expect(result == power)
     }
 }
 
@@ -172,9 +172,9 @@ extension Int4RaisableTests {
         base: Int4,
         exponent: Int4.Exponent
     ) {
-        let power: Int4 = base ** exponent
-        let reversedPower: Int4 = exponent ** base
-        #expect(power != reversedPower)
+        let result: Int4 = base ** exponent
+        let reversedResult: Int4 = exponent ** base
+        #expect(result != reversedResult)
     }
 
     @Test(

@@ -60,9 +60,9 @@ internal struct UInt4MultipliableTests {
         multiplier: UInt4.Multiplier,
         product: UInt4
     ) {
-        var runningProduct: UInt4 = multiplicand
-        runningProduct *= multiplier
-        #expect(runningProduct == product)
+        var result: UInt4 = multiplicand
+        result *= multiplier
+        #expect(result == product)
     }
 
     @Test(
@@ -86,9 +86,9 @@ internal struct UInt4MultipliableTests {
         multiplier: UInt4.Multiplier,
         product: UInt4
     ) throws {
-        var runningProduct: UInt4 = multiplicand
-        try runningProduct.multiply(by: multiplier)
-        #expect(runningProduct == product)
+        var result: UInt4 = multiplicand
+        try result.multiply(by: multiplier)
+        #expect(result == product)
     }
 
     @Test(
@@ -110,9 +110,9 @@ internal struct UInt4MultipliableTests {
         multiplicand: UInt4,
         product: UInt4
     ) {
-        var runningProduct: UInt4 = multiplicand
-        runningProduct.double()
-        #expect(runningProduct == product)
+        var result: UInt4 = multiplicand
+        result.double()
+        #expect(result == product)
     }
 }
 

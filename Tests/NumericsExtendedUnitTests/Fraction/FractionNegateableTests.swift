@@ -60,9 +60,9 @@ internal struct FractionNegateableTests {
         value: Fraction<Int>,
         negation: Fraction<Int>
     ) {
-        var runningValue: Fraction<Int> = value
-        runningValue.negate()
-        #expect(runningValue == negation)
+        var result: Fraction<Int> = value
+        result.negate()
+        #expect(result == negation)
     }
 
     @Test(
@@ -183,13 +183,13 @@ extension FractionNegateableTests {
 
     @Test("Negating NaN returns NaN")
     internal func negatingNaNReturnsNaN() {
-        let operatorNegation: Fraction<Int> = -Fraction<Int>.nan
-        let methodNegation: Fraction<Int> = Fraction<Int>.nan.negating()
-        var mutatingNegation: Fraction<Int> = Fraction<Int>.nan
-        mutatingNegation.negate()
-        #expect(operatorNegation.isNaN == true)
-        #expect(methodNegation.isNaN == true)
-        #expect(mutatingNegation.isNaN == true)
+        let operatorResult: Fraction<Int> = -Fraction<Int>.nan
+        let methodResult: Fraction<Int> = Fraction<Int>.nan.negating()
+        var mutatingResult: Fraction<Int> = Fraction<Int>.nan
+        mutatingResult.negate()
+        #expect(operatorResult.isNaN == true)
+        #expect(methodResult.isNaN == true)
+        #expect(mutatingResult.isNaN == true)
     }
 }
 
@@ -219,13 +219,13 @@ extension FractionNegateableTests {
 
     @Test("Negating negative infinity follows rational rules")
     internal func negatingNegativeInfinityFollowsRationalRules() {
-        let operatorNegation: Fraction<Int> = -Fraction<Int>.negativeInfinity
-        let methodNegation: Fraction<Int> = Fraction<Int>.negativeInfinity.negating()
-        var mutatingNegation: Fraction<Int> = Fraction<Int>.negativeInfinity
-        mutatingNegation.negate()
-        #expect(operatorNegation == .infinity)
-        #expect(methodNegation == .infinity)
-        #expect(mutatingNegation == .infinity)
+        let operatorResult: Fraction<Int> = -Fraction<Int>.negativeInfinity
+        let methodResult: Fraction<Int> = Fraction<Int>.negativeInfinity.negating()
+        var mutatingResult: Fraction<Int> = Fraction<Int>.negativeInfinity
+        mutatingResult.negate()
+        #expect(operatorResult == .infinity)
+        #expect(methodResult == .infinity)
+        #expect(mutatingResult == .infinity)
     }
 }
 
@@ -235,9 +235,9 @@ extension FractionNegateableTests {
     @Test("Adding negative zero and its negation returns negative zero")
     internal func addingNegativeZeroAndItsNegationReturnsNegativeZero() {
         let value: Fraction<Int> = .init(0, -2)
-        let sum: Fraction<Int> = value + value.negating()
-        #expect(sum.isZero == true)
-        #expect(sum.denominator < 0)
+        let result: Fraction<Int> = value + value.negating()
+        #expect(result.isZero == true)
+        #expect(result.denominator < 0)
     }
 
     @Test("Negative zero sign predicates follow stored denominator rules")
@@ -269,13 +269,13 @@ extension FractionNegateableTests {
         ]
     )
     internal func negatingNegativeZeroPreservesStoredRepresentation(value: Fraction<Int>) {
-        let operatorNegation: Fraction<Int> = -value
-        let methodNegation: Fraction<Int> = value.negating()
-        var mutatingNegation: Fraction<Int> = value
-        mutatingNegation.negate()
-        #expect(operatorNegation == value)
-        #expect(methodNegation == value)
-        #expect(mutatingNegation == value)
+        let operatorResult: Fraction<Int> = -value
+        let methodResult: Fraction<Int> = value.negating()
+        var mutatingResult: Fraction<Int> = value
+        mutatingResult.negate()
+        #expect(operatorResult == value)
+        #expect(methodResult == value)
+        #expect(mutatingResult == value)
     }
 }
 
@@ -305,13 +305,13 @@ extension FractionNegateableTests {
 
     @Test("Negating positive infinity follows rational rules")
     internal func negatingPositiveInfinityFollowsRationalRules() {
-        let operatorNegation: Fraction<Int> = -Fraction<Int>.infinity
-        let methodNegation: Fraction<Int> = Fraction<Int>.infinity.negating()
-        var mutatingNegation: Fraction<Int> = Fraction<Int>.infinity
-        mutatingNegation.negate()
-        #expect(operatorNegation == .negativeInfinity)
-        #expect(methodNegation == .negativeInfinity)
-        #expect(mutatingNegation == .negativeInfinity)
+        let operatorResult: Fraction<Int> = -Fraction<Int>.infinity
+        let methodResult: Fraction<Int> = Fraction<Int>.infinity.negating()
+        var mutatingResult: Fraction<Int> = Fraction<Int>.infinity
+        mutatingResult.negate()
+        #expect(operatorResult == .negativeInfinity)
+        #expect(methodResult == .negativeInfinity)
+        #expect(mutatingResult == .negativeInfinity)
     }
 }
 
@@ -329,9 +329,9 @@ extension FractionNegateableTests {
         ]
     )
     internal func addingValueAndItsNegationReturnsPositiveZero(value: Fraction<Int>) {
-        let sum: Fraction<Int> = value + value.negating()
-        #expect(sum.isZero == true)
-        #expect(sum.denominator > 0)
+        let result: Fraction<Int> = value + value.negating()
+        #expect(result.isZero == true)
+        #expect(result.denominator > 0)
     }
 
     @Test("Positive zero sign predicates follow stored denominator rules")
@@ -363,12 +363,12 @@ extension FractionNegateableTests {
         ]
     )
     internal func negatingPositiveZeroPreservesStoredRepresentation(value: Fraction<Int>) {
-        let operatorNegation: Fraction<Int> = -value
-        let methodNegation: Fraction<Int> = value.negating()
-        var mutatingNegation: Fraction<Int> = value
-        mutatingNegation.negate()
-        #expect(operatorNegation == value)
-        #expect(methodNegation == value)
-        #expect(mutatingNegation == value)
+        let operatorResult: Fraction<Int> = -value
+        let methodResult: Fraction<Int> = value.negating()
+        var mutatingResult: Fraction<Int> = value
+        mutatingResult.negate()
+        #expect(operatorResult == value)
+        #expect(methodResult == value)
+        #expect(mutatingResult == value)
     }
 }

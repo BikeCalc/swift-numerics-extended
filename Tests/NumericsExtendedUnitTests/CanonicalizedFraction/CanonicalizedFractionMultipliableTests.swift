@@ -30,9 +30,9 @@ internal struct CanonicalizedFractionMultipliableTests {
         multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
     ) {
-        @Canonicalized var runningProduct: Fraction<Int> = multiplicand
-        runningProduct *= multiplier
-        #expect(runningProduct == product)
+        @Canonicalized var result: Fraction<Int> = multiplicand
+        result *= multiplier
+        #expect(result == product)
     }
 
     @Test(
@@ -44,8 +44,8 @@ internal struct CanonicalizedFractionMultipliableTests {
         multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
     ) throws {
-        @Canonicalized var runningProduct: Fraction<Int> = multiplicand
-        try runningProduct.multiply(by: multiplier)
-        #expect(runningProduct == product)
+        @Canonicalized var result: Fraction<Int> = multiplicand
+        try result.multiply(by: multiplier)
+        #expect(result == product)
     }
 }

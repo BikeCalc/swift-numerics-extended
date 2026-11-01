@@ -84,9 +84,9 @@ internal struct IntRaisableTests {
         exponent: Int.Exponent,
         power: Int
     ) {
-        var runningPower: Int = base
-        runningPower **= exponent
-        #expect(runningPower == power)
+        var result: Int = base
+        result **= exponent
+        #expect(result == power)
     }
 
     @Test(
@@ -110,9 +110,9 @@ internal struct IntRaisableTests {
         exponent: Int.Exponent,
         power: Int
     ) throws {
-        var runningPower: Int = base
-        try runningPower.raise(to: exponent)
-        #expect(runningPower == power)
+        var result: Int = base
+        try result.raise(to: exponent)
+        #expect(result == power)
     }
 
     @Test(
@@ -134,9 +134,9 @@ internal struct IntRaisableTests {
         base: Int,
         power: Int
     ) {
-        var runningPower: Int = base
-        runningPower.square()
-        #expect(runningPower == power)
+        var result: Int = base
+        result.square()
+        #expect(result == power)
     }
 
     @Test(
@@ -158,9 +158,9 @@ internal struct IntRaisableTests {
         base: Int,
         power: Int
     ) {
-        var runningPower: Int = base
-        runningPower.cube()
-        #expect(runningPower == power)
+        var result: Int = base
+        result.cube()
+        #expect(result == power)
     }
 }
 
@@ -178,9 +178,9 @@ extension IntRaisableTests {
         base: Int,
         exponent: Int.Exponent
     ) {
-        let power: Int = base ** exponent
-        let reversedPower: Int = exponent ** base
-        #expect(power != reversedPower)
+        let result: Int = base ** exponent
+        let reversedResult: Int = exponent ** base
+        #expect(result != reversedResult)
     }
 
     @Test(

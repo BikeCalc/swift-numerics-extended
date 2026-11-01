@@ -199,9 +199,9 @@ extension FractionRationalTests {
         #expect(value.isProper == false)
         #expect(value.isImproper == false)
         #expect(value.isUnit == false)
-        let quotient: Double = value.quotient
-        #expect(quotient == .zero)
-        #expect(quotient.sign == .minus)
+        let result: Double = value.quotient
+        #expect(result == .zero)
+        #expect(result.sign == .minus)
     }
 }
 
@@ -236,8 +236,8 @@ extension FractionRationalTests {
         #expect(value.isProper == false)
         #expect(value.isImproper == false)
         #expect(value.isUnit == false)
-        let quotient: Double = value.quotient
-        #expect(quotient == .zero)
-        #expect(quotient.sign == .plus)
+        let result: Double = value.quotient
+        #expect(result == .zero)
+        #expect(result.sign == .plus)
     }
 }

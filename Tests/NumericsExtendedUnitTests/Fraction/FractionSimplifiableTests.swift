@@ -82,11 +82,11 @@ internal struct FractionSimplifiableTests {
     )
     internal func simplifySucceeds(
         value: Fraction<Int>,
-        result: Fraction<Int>
+        expected: Fraction<Int>
     ) {
-        var runningValue: Fraction<Int> = value
-        runningValue.simplify()
-        #expect(runningValue == result)
+        var result: Fraction<Int> = value
+        result.simplify()
+        #expect(result == expected)
     }
 
     @Test(
@@ -122,7 +122,8 @@ extension FractionSimplifiableTests {
     internal func nanSimplificationFollowsRationalRules() {
         #expect(Fraction<Int>.nan.isSimplifiable == true)
         #expect(Fraction<Int>.nan.isSimplified == true)
-        #expect(Fraction<Int>.nan.simplified().isNaN == true)
+        let result: Fraction<Int> = Fraction<Int>.nan.simplified()
+        #expect(result.isNaN == true)
     }
 }
 

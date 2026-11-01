@@ -42,9 +42,9 @@ internal struct FractionAddableTests {
         addend: Fraction<Int>.Addend,
         sum: Fraction<Int>
     ) {
-        var runningSum: Fraction<Int> = augend
-        runningSum += addend
-        #expect(runningSum == sum)
+        var result: Fraction<Int> = augend
+        result += addend
+        #expect(result == sum)
     }
 
     @Test(
@@ -68,9 +68,9 @@ internal struct FractionAddableTests {
         addend: Fraction<Int>.Addend,
         sum: Fraction<Int>
     ) throws {
-        var runningSum: Fraction<Int> = augend
-        try runningSum.add(addend)
-        #expect(runningSum == sum)
+        var result: Fraction<Int> = augend
+        try result.add(addend)
+        #expect(result == sum)
     }
 }
 
@@ -93,12 +93,14 @@ extension FractionAddableTests {
 extension FractionAddableTests {
     @Test("Adding positive infinity to negative infinity returns NaN")
     internal func addingPositiveInfinityToNegativeInfinityReturnsNaN() {
-        #expect((Fraction<Int>.negativeInfinity + .infinity).isNaN == true)
+        let result: Fraction<Int> = Fraction<Int>.negativeInfinity + .infinity
+        #expect(result.isNaN == true)
     }
 
     @Test("Adding negative infinity to positive infinity returns NaN")
     internal func addingNegativeInfinityToPositiveInfinityReturnsNaN() {
-        #expect((Fraction<Int>.infinity + .negativeInfinity).isNaN == true)
+        let result: Fraction<Int> = Fraction<Int>.infinity + .negativeInfinity
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -113,7 +115,8 @@ extension FractionAddableTests {
         ]
     )
     internal func addingToNaNReturnsNaN(addend: Fraction<Int>.Addend) {
-        #expect((Fraction<Int>.nan + addend).isNaN == true)
+        let result: Fraction<Int> = Fraction<Int>.nan + addend
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -128,7 +131,8 @@ extension FractionAddableTests {
         ]
     )
     internal func addingNaNReturnsNaN(augend: Fraction<Int>) {
-        #expect((augend + Fraction<Int>.nan).isNaN == true)
+        let result: Fraction<Int> = augend + Fraction<Int>.nan
+        #expect(result.isNaN == true)
     }
 }
 
@@ -200,9 +204,9 @@ extension FractionAddableTests {
         augend: Fraction<Int>,
         addend: Fraction<Int>.Addend
     ) {
-        let sum: Fraction<Int> = augend + addend
-        #expect(sum.isZero == true)
-        #expect(sum.denominator > 0)
+        let result: Fraction<Int> = augend + addend
+        #expect(result.isZero == true)
+        #expect(result.denominator > 0)
     }
 
     @Test(

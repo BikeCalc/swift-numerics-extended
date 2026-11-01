@@ -52,9 +52,9 @@ internal struct CanonicalizedFractionRaisableTests {
         exponent: Fraction<Int>.Exponent,
         power: Fraction<Int>
     ) {
-        @Canonicalized var runningPower: Fraction<Int> = base
-        runningPower **= exponent
-        #expect(runningPower == power)
+        @Canonicalized var result: Fraction<Int> = base
+        result **= exponent
+        #expect(result == power)
     }
 
     @Test(
@@ -66,9 +66,9 @@ internal struct CanonicalizedFractionRaisableTests {
         exponent: Fraction<Int>.Exponent,
         power: Fraction<Int>
     ) throws {
-        @Canonicalized var runningPower: Fraction<Int> = base
-        try runningPower.raise(to: exponent)
-        #expect(runningPower == power)
+        @Canonicalized var result: Fraction<Int> = base
+        try result.raise(to: exponent)
+        #expect(result == power)
     }
 
     @Test(

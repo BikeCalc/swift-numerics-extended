@@ -69,9 +69,9 @@ internal struct RomanRaisableTests {
         exponent: Roman.Exponent,
         power: Roman
     ) {
-        var runningPower: Roman = base
-        runningPower **= exponent
-        #expect(runningPower == power)
+        var result: Roman = base
+        result **= exponent
+        #expect(result == power)
     }
 
     @Test(
@@ -95,9 +95,9 @@ internal struct RomanRaisableTests {
         exponent: Roman.Exponent,
         power: Roman
     ) throws {
-        var runningPower: Roman = base
-        try runningPower.raise(to: exponent)
-        #expect(runningPower == power)
+        var result: Roman = base
+        try result.raise(to: exponent)
+        #expect(result == power)
     }
 
     @Test(
@@ -119,9 +119,9 @@ internal struct RomanRaisableTests {
         base: Roman,
         power: Roman
     ) {
-        var runningPower: Roman = base
-        runningPower.square()
-        #expect(runningPower == power)
+        var result: Roman = base
+        result.square()
+        #expect(result == power)
     }
 
     @Test(
@@ -143,9 +143,9 @@ internal struct RomanRaisableTests {
         base: Roman,
         power: Roman
     ) {
-        var runningPower: Roman = base
-        runningPower.cube()
-        #expect(runningPower == power)
+        var result: Roman = base
+        result.cube()
+        #expect(result == power)
     }
 }
 
@@ -161,9 +161,9 @@ extension RomanRaisableTests {
         base: Roman,
         exponent: Roman.Exponent
     ) {
-        let power: Roman = base ** exponent
-        let reversedPower: Roman = exponent ** base
-        #expect(power != reversedPower)
+        let result: Roman = base ** exponent
+        let reversedResult: Roman = exponent ** base
+        #expect(result != reversedResult)
     }
 }
 

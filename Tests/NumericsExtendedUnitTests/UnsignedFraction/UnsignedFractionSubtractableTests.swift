@@ -27,6 +27,7 @@ extension UnsignedFractionSubtractableTests {
         ]
     )
     internal func subtractingPositiveInfinityReturnsNan(minuend: Fraction<UInt>) {
-        #expect((minuend - .infinity).isNaN == true)
+        let result: Fraction<UInt> = minuend - .infinity
+        #expect(result.isNaN == true)
     }
 }

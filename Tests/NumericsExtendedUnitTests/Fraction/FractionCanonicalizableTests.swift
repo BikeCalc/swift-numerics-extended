@@ -82,11 +82,11 @@ internal struct FractionCanonicalizableTests {
     )
     internal func canonicalizeSucceeds(
         value: Fraction<Int>,
-        result: Fraction<Int>
+        expected: Fraction<Int>
     ) {
-        var runningValue: Fraction<Int> = value
-        runningValue.canonicalize()
-        #expect(runningValue == result)
+        var result: Fraction<Int> = value
+        result.canonicalize()
+        #expect(result == expected)
     }
 
     @Test(
@@ -130,7 +130,8 @@ extension FractionCanonicalizableTests {
     internal func nanCanonicalizationFollowsRationalRules() {
         #expect(Fraction<Int>.nan.isCanonicalizable == true)
         #expect(Fraction<Int>.nan.isCanonicalized == true)
-        #expect(Fraction<Int>.nan.canonicalized().isNaN == true)
+        let result: Fraction<Int> = Fraction<Int>.nan.canonicalized()
+        #expect(result.isNaN == true)
     }
 }
 

@@ -30,10 +30,10 @@ internal struct DoubleDecreasableTests {
     internal func decreasingBySucceeds(
         value: Double,
         percentage: Double,
-        result: Double
+        expected: Double
     ) {
-        let decreasedValue: Double = value.decreasing(by: percentage)
-        #expect(decreasedValue == result)
+        let result: Double = value.decreasing(by: percentage)
+        #expect(result == expected)
     }
 }
 
@@ -48,11 +48,11 @@ extension DoubleDecreasableTests {
     internal func decreasingPositiveValueByNegativePercentageIncreasesValue(
         value: Double,
         percentage: Double,
-        result: Double
+        expected: Double
     ) {
-        let decreasedValue: Double = value.decreasing(by: percentage)
-        #expect(decreasedValue == result)
-        #expect(decreasedValue > value)
+        let result: Double = value.decreasing(by: percentage)
+        #expect(result == expected)
+        #expect(result > value)
     }
 
     @Test(
@@ -65,11 +65,11 @@ extension DoubleDecreasableTests {
     internal func decreasingNegativeValueByNegativePercentageDecreasesValue(
         value: Double,
         percentage: Double,
-        result: Double
+        expected: Double
     ) {
-        let decreasedValue: Double = value.decreasing(by: percentage)
-        #expect(decreasedValue == result)
-        #expect(decreasedValue < value)
+        let result: Double = value.decreasing(by: percentage)
+        #expect(result == expected)
+        #expect(result < value)
     }
 }
 
@@ -90,8 +90,8 @@ extension DoubleDecreasableTests {
         ]
     )
     internal func decreasingByNegativeZeroPreservesValue(value: Double) {
-        let decreasedValue: Double = value.decreasing(by: Double.negativeZero)
-        #expect(decreasedValue == value)
+        let result: Double = value.decreasing(by: Double.negativeZero)
+        #expect(result == value)
     }
 
     @Test(
@@ -107,9 +107,9 @@ extension DoubleDecreasableTests {
         percentage: Double,
         sign: FloatingPointSign
     ) {
-        let decreasedValue: Double = Double.negativeZero.decreasing(by: percentage)
-        #expect(decreasedValue == Double.zero)
-        #expect(decreasedValue.sign == sign)
+        let result: Double = Double.negativeZero.decreasing(by: percentage)
+        #expect(result == Double.zero)
+        #expect(result.sign == sign)
     }
 }
 
@@ -130,8 +130,8 @@ extension DoubleDecreasableTests {
         ]
     )
     internal func decreasingByPositiveZeroPreservesValue(value: Double) {
-        let decreasedValue: Double = value.decreasing(by: Double.zero)
-        #expect(decreasedValue == value)
+        let result: Double = value.decreasing(by: Double.zero)
+        #expect(result == value)
     }
 
     @Test(
@@ -144,8 +144,8 @@ extension DoubleDecreasableTests {
         ]
     )
     internal func decreasingPositiveZeroReturnsPositiveZero(percentage: Double) {
-        let decreasedValue: Double = Double.zero.decreasing(by: percentage)
-        #expect(decreasedValue == Double.zero)
-        #expect(decreasedValue.sign == .plus)
+        let result: Double = Double.zero.decreasing(by: percentage)
+        #expect(result == Double.zero)
+        #expect(result.sign == .plus)
     }
 }

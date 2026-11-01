@@ -59,9 +59,9 @@ internal struct IntNegateableTests {
         value: Int,
         negation: Int
     ) {
-        var runningValue: Int = value
-        runningValue.negate()
-        #expect(runningValue == negation)
+        var result: Int = value
+        result.negate()
+        #expect(result == negation)
     }
 
     @Test(
@@ -161,13 +161,13 @@ extension IntNegateableTests {
 
     @Test("Negating negative zero returns negative zero")
     internal func negatingNegativeZeroReturnsNegativeZero() {
-        let operatorNegation: Int = -Int.negativeZero
-        let methodNegation: Int = Int.negativeZero.negating()
-        var mutatingNegation: Int = Int.negativeZero
-        mutatingNegation.negate()
-        #expect(operatorNegation == .negativeZero)
-        #expect(methodNegation == .negativeZero)
-        #expect(mutatingNegation == .negativeZero)
+        let operatorResult: Int = -Int.negativeZero
+        let methodResult: Int = Int.negativeZero.negating()
+        var mutatingResult: Int = Int.negativeZero
+        mutatingResult.negate()
+        #expect(operatorResult == .negativeZero)
+        #expect(methodResult == .negativeZero)
+        #expect(mutatingResult == .negativeZero)
     }
 }
 
@@ -196,12 +196,12 @@ extension IntNegateableTests {
 
     @Test("Negating positive zero returns positive zero")
     internal func negatingPositiveZeroReturnsPositiveZero() {
-        let operatorNegation: Int = -Int.zero
-        let methodNegation: Int = Int.zero.negating()
-        var mutatingNegation: Int = Int.zero
-        mutatingNegation.negate()
-        #expect(operatorNegation == .zero)
-        #expect(methodNegation == .zero)
-        #expect(mutatingNegation == .zero)
+        let operatorResult: Int = -Int.zero
+        let methodResult: Int = Int.zero.negating()
+        var mutatingResult: Int = Int.zero
+        mutatingResult.negate()
+        #expect(operatorResult == .zero)
+        #expect(methodResult == .zero)
+        #expect(mutatingResult == .zero)
     }
 }

@@ -46,9 +46,9 @@ internal struct DoubleSubtractableTests {
         subtrahend: Double.Subtrahend,
         difference: Double
     ) {
-        var runningDifference: Double = minuend
-        runningDifference -= subtrahend
-        #expect(runningDifference == difference)
+        var result: Double = minuend
+        result -= subtrahend
+        #expect(result == difference)
     }
 
     @Test(
@@ -72,9 +72,9 @@ internal struct DoubleSubtractableTests {
         subtrahend: Double.Subtrahend,
         difference: Double
     ) throws {
-        var runningDifference: Double = minuend
-        try runningDifference.subtract(subtrahend)
-        #expect(runningDifference == difference)
+        var result: Double = minuend
+        try result.subtract(subtrahend)
+        #expect(result == difference)
     }
 }
 
@@ -97,12 +97,14 @@ extension DoubleSubtractableTests {
 extension DoubleSubtractableTests {
     @Test("Subtracting positive infinity from itself returns NaN")
     internal func subtractingPositiveInfinityFromItselfReturnsNaN() {
-        #expect((Double.infinity - .infinity).isNaN == true)
+        let result: Double = Double.infinity - .infinity
+        #expect(result.isNaN == true)
     }
 
     @Test("Subtracting negative infinity from itself returns NaN")
     internal func subtractingNegativeInfinityFromItselfReturnsNaN() {
-        #expect((Double.negativeInfinity - .negativeInfinity).isNaN == true)
+        let result: Double = Double.negativeInfinity - .negativeInfinity
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -117,7 +119,8 @@ extension DoubleSubtractableTests {
         ]
     )
     internal func subtractingFromNaNReturnsNaN(subtrahend: Double.Subtrahend) {
-        #expect((Double.nan - subtrahend).isNaN == true)
+        let result: Double = Double.nan - subtrahend
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -132,7 +135,8 @@ extension DoubleSubtractableTests {
         ]
     )
     internal func subtractingNaNReturnsNaN(minuend: Double) {
-        #expect((minuend - Double.nan).isNaN == true)
+        let result: Double = minuend - Double.nan
+        #expect(result.isNaN == true)
     }
 }
 
@@ -250,8 +254,8 @@ extension DoubleSubtractableTests {
         ]
     )
     internal func subtractingSelfReturnsPositiveZero(value: Double) {
-        let difference: Double = value - value
-        #expect(difference == Double.zero)
-        #expect(difference.sign == .plus)
+        let result: Double = value - value
+        #expect(result == Double.zero)
+        #expect(result.sign == .plus)
     }
 }

@@ -42,9 +42,9 @@ internal struct FractionSubtractableTests {
         subtrahend: Fraction<Int>.Subtrahend,
         difference: Fraction<Int>
     ) {
-        var runningDifference: Fraction<Int> = minuend
-        runningDifference -= subtrahend
-        #expect(runningDifference == difference)
+        var result: Fraction<Int> = minuend
+        result -= subtrahend
+        #expect(result == difference)
     }
 
     @Test(
@@ -68,9 +68,9 @@ internal struct FractionSubtractableTests {
         subtrahend: Fraction<Int>.Subtrahend,
         difference: Fraction<Int>
     ) throws {
-        var runningDifference: Fraction<Int> = minuend
-        try runningDifference.subtract(subtrahend)
-        #expect(runningDifference == difference)
+        var result: Fraction<Int> = minuend
+        try result.subtract(subtrahend)
+        #expect(result == difference)
     }
 }
 
@@ -93,12 +93,14 @@ extension FractionSubtractableTests {
 extension FractionSubtractableTests {
     @Test("Subtracting positive infinity from itself returns NaN")
     internal func subtractingPositiveInfinityFromItselfReturnsNaN() {
-        #expect((Fraction<Int>.infinity - .infinity).isNaN == true)
+        let result: Fraction<Int> = Fraction<Int>.infinity - .infinity
+        #expect(result.isNaN == true)
     }
 
     @Test("Subtracting negative infinity from itself returns NaN")
     internal func subtractingNegativeInfinityFromItselfReturnsNaN() {
-        #expect((Fraction<Int>.negativeInfinity - .negativeInfinity).isNaN == true)
+        let result: Fraction<Int> = Fraction<Int>.negativeInfinity - .negativeInfinity
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -113,7 +115,8 @@ extension FractionSubtractableTests {
         ]
     )
     internal func subtractingFromNaNReturnsNaN(subtrahend: Fraction<Int>.Subtrahend) {
-        #expect((Fraction<Int>.nan - subtrahend).isNaN == true)
+        let result: Fraction<Int> = Fraction<Int>.nan - subtrahend
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -128,7 +131,8 @@ extension FractionSubtractableTests {
         ]
     )
     internal func subtractingNaNReturnsNaN(minuend: Fraction<Int>) {
-        #expect((minuend - Fraction<Int>.nan).isNaN == true)
+        let result: Fraction<Int> = minuend - Fraction<Int>.nan
+        #expect(result.isNaN == true)
     }
 }
 
@@ -234,8 +238,8 @@ extension FractionSubtractableTests {
         ]
     )
     internal func subtractingSelfReturnsPositiveZero(value: Fraction<Int>) {
-        let difference: Fraction<Int> = value - value
-        #expect(difference.isZero == true)
-        #expect(difference.denominator > 0)
+        let result: Fraction<Int> = value - value
+        #expect(result.isZero == true)
+        #expect(result.denominator > 0)
     }
 }

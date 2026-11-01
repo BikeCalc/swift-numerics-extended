@@ -42,9 +42,9 @@ internal struct IntAddableTests {
         addend: Int.Addend,
         sum: Int
     ) {
-        var runningSum: Int = augend
-        runningSum += addend
-        #expect(runningSum == sum)
+        var result: Int = augend
+        result += addend
+        #expect(result == sum)
     }
 
     @Test(
@@ -68,9 +68,9 @@ internal struct IntAddableTests {
         addend: Int.Addend,
         sum: Int
     ) throws {
-        var runningSum: Int = augend
-        try runningSum.add(addend)
-        #expect(runningSum == sum)
+        var result: Int = augend
+        try result.add(addend)
+        #expect(result == sum)
     }
 }
 

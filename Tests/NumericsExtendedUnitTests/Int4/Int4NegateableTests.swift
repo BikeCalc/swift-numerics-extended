@@ -59,9 +59,9 @@ internal struct Int4NegateableTests {
         value: Int4,
         negation: Int4
     ) {
-        var runningValue: Int4 = value
-        runningValue.negate()
-        #expect(runningValue == negation)
+        var result: Int4 = value
+        result.negate()
+        #expect(result == negation)
     }
 
     @Test(
@@ -161,13 +161,13 @@ extension Int4NegateableTests {
 
     @Test("Negating negative zero returns negative zero")
     internal func negatingNegativeZeroReturnsNegativeZero() {
-        let operatorNegation: Int4 = -Int4.negativeZero
-        let methodNegation: Int4 = Int4.negativeZero.negating()
-        var mutatingNegation: Int4 = Int4.negativeZero
-        mutatingNegation.negate()
-        #expect(operatorNegation == .negativeZero)
-        #expect(methodNegation == .negativeZero)
-        #expect(mutatingNegation == .negativeZero)
+        let operatorResult: Int4 = -Int4.negativeZero
+        let methodResult: Int4 = Int4.negativeZero.negating()
+        var mutatingResult: Int4 = Int4.negativeZero
+        mutatingResult.negate()
+        #expect(operatorResult == .negativeZero)
+        #expect(methodResult == .negativeZero)
+        #expect(mutatingResult == .negativeZero)
     }
 }
 
@@ -196,12 +196,12 @@ extension Int4NegateableTests {
 
     @Test("Negating positive zero returns positive zero")
     internal func negatingPositiveZeroReturnsPositiveZero() {
-        let operatorNegation: Int4 = -Int4.zero
-        let methodNegation: Int4 = Int4.zero.negating()
-        var mutatingNegation: Int4 = Int4.zero
-        mutatingNegation.negate()
-        #expect(operatorNegation == .zero)
-        #expect(methodNegation == .zero)
-        #expect(mutatingNegation == .zero)
+        let operatorResult: Int4 = -Int4.zero
+        let methodResult: Int4 = Int4.zero.negating()
+        var mutatingResult: Int4 = Int4.zero
+        mutatingResult.negate()
+        #expect(operatorResult == .zero)
+        #expect(methodResult == .zero)
+        #expect(mutatingResult == .zero)
     }
 }

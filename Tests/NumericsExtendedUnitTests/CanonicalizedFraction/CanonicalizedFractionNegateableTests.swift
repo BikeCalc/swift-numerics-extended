@@ -31,10 +31,10 @@ internal struct CanonicalizedFractionNegateableTests {
         value: Fraction<Int>,
         negation: Fraction<Int>
     ) {
-        @Canonicalized var runningValue: Fraction<Int> = value
-        runningValue.negate()
-        #expect(runningValue == negation)
-        #expect(runningValue.isCanonicalized == true)
+        @Canonicalized var result: Fraction<Int> = value
+        result.negate()
+        #expect(result == negation)
+        #expect(result.isCanonicalized == true)
     }
 }
 
@@ -73,10 +73,10 @@ extension CanonicalizedFractionNegateableTests {
         ]
     )
     internal func negatingNegativeZeroPreservesCanonicalRepresentation(value: Fraction<Int>) {
-        @Canonicalized var runningValue: Fraction<Int> = value
-        runningValue.negate()
-        #expect(runningValue == .zero)
-        #expect(runningValue.isCanonicalized == true)
+        @Canonicalized var result: Fraction<Int> = value
+        result.negate()
+        #expect(result == .zero)
+        #expect(result.isCanonicalized == true)
     }
 }
 
@@ -103,9 +103,9 @@ extension CanonicalizedFractionNegateableTests {
         ]
     )
     internal func negatingPositiveZeroPreservesCanonicalRepresentation(value: Fraction<Int>) {
-        @Canonicalized var runningValue: Fraction<Int> = value
-        runningValue.negate()
-        #expect(runningValue == .zero)
-        #expect(runningValue.isCanonicalized == true)
+        @Canonicalized var result: Fraction<Int> = value
+        result.negate()
+        #expect(result == .zero)
+        #expect(result.isCanonicalized == true)
     }
 }

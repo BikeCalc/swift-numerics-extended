@@ -68,9 +68,9 @@ internal struct UInt4RaisableTests {
         exponent: UInt4.Exponent,
         power: UInt4
     ) {
-        var runningPower: UInt4 = base
-        runningPower **= exponent
-        #expect(runningPower == power)
+        var result: UInt4 = base
+        result **= exponent
+        #expect(result == power)
     }
 
     @Test(
@@ -94,9 +94,9 @@ internal struct UInt4RaisableTests {
         exponent: UInt4.Exponent,
         power: UInt4
     ) throws {
-        var runningPower: UInt4 = base
-        try runningPower.raise(to: exponent)
-        #expect(runningPower == power)
+        var result: UInt4 = base
+        try result.raise(to: exponent)
+        #expect(result == power)
     }
 
     @Test(
@@ -118,9 +118,9 @@ internal struct UInt4RaisableTests {
         base: UInt4,
         power: UInt4
     ) {
-        var runningPower: UInt4 = base
-        runningPower.square()
-        #expect(runningPower == power)
+        var result: UInt4 = base
+        result.square()
+        #expect(result == power)
     }
 
     @Test(
@@ -142,9 +142,9 @@ internal struct UInt4RaisableTests {
         base: UInt4,
         power: UInt4
     ) {
-        var runningPower: UInt4 = base
-        runningPower.cube()
-        #expect(runningPower == power)
+        var result: UInt4 = base
+        result.cube()
+        #expect(result == power)
     }
 }
 
@@ -160,9 +160,9 @@ extension UInt4RaisableTests {
         base: UInt4,
         exponent: UInt4.Exponent
     ) {
-        let power: UInt4 = base ** exponent
-        let reversedPower: UInt4 = exponent ** base
-        #expect(power != reversedPower)
+        let result: UInt4 = base ** exponent
+        let reversedResult: UInt4 = exponent ** base
+        #expect(result != reversedResult)
     }
 }
 

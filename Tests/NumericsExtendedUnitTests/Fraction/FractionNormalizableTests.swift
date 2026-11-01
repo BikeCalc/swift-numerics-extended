@@ -82,11 +82,11 @@ internal struct FractionNormalizableTests {
     )
     internal func normalizeSucceeds(
         value: Fraction<Int>,
-        result: Fraction<Int>
+        expected: Fraction<Int>
     ) {
-        var runningValue: Fraction<Int> = value
-        runningValue.normalize()
-        #expect(runningValue == result)
+        var result: Fraction<Int> = value
+        result.normalize()
+        #expect(result == expected)
     }
 
     @Test(
@@ -131,7 +131,8 @@ extension FractionNormalizableTests {
     internal func nanNormalizationFollowsRationalRules() {
         #expect(Fraction<Int>.nan.isNormalizable == true)
         #expect(Fraction<Int>.nan.isNormalized == true)
-        #expect(Fraction<Int>.nan.normalized().isNaN == true)
+        let result: Fraction<Int> = Fraction<Int>.nan.normalized()
+        #expect(result.isNaN == true)
     }
 }
 

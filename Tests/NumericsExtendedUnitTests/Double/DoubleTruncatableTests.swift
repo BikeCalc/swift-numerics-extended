@@ -105,7 +105,8 @@ extension DoubleTruncatableTests {
         value: Double,
         decimalPlace: Double.DecimalPlace
     ) {
-        #expect(value.truncated(to: decimalPlace).isNaN == true)
+        let result: Double = value.truncated(to: decimalPlace)
+        #expect(result.isNaN == true)
     }
 }
 

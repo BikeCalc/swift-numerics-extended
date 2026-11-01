@@ -40,9 +40,9 @@ internal struct UInt4SubtractableTests {
         subtrahend: UInt4.Subtrahend,
         difference: UInt4
     ) {
-        var runningDifference: UInt4 = minuend
-        runningDifference -= subtrahend
-        #expect(runningDifference == difference)
+        var result: UInt4 = minuend
+        result -= subtrahend
+        #expect(result == difference)
     }
 
     @Test(
@@ -66,9 +66,9 @@ internal struct UInt4SubtractableTests {
         subtrahend: UInt4.Subtrahend,
         difference: UInt4
     ) throws {
-        var runningDifference: UInt4 = minuend
-        try runningDifference.subtract(subtrahend)
-        #expect(runningDifference == difference)
+        var result: UInt4 = minuend
+        try result.subtract(subtrahend)
+        #expect(result == difference)
     }
 }
 

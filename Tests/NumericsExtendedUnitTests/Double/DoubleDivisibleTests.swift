@@ -148,9 +148,9 @@ internal struct DoubleDivisibleTests {
         divisor: Double.Divisor,
         quotient: Double
     ) {
-        var runningQuotient: Double = dividend
-        runningQuotient /= divisor
-        #expect(runningQuotient == quotient)
+        var result: Double = dividend
+        result /= divisor
+        #expect(result == quotient)
     }
 
     @Test(
@@ -174,9 +174,9 @@ internal struct DoubleDivisibleTests {
         divisor: Double.RemainderDivisor,
         remainder: Double
     ) {
-        var runningRemainder: Double = dividend
-        runningRemainder %= divisor
-        #expect(runningRemainder == remainder)
+        var result: Double = dividend
+        result %= divisor
+        #expect(result == remainder)
     }
 
     @Test(
@@ -200,9 +200,9 @@ internal struct DoubleDivisibleTests {
         divisor: Double.Divisor,
         quotient: Double
     ) throws {
-        var runningQuotient: Double = dividend
-        try runningQuotient.divide(by: divisor)
-        #expect(runningQuotient == quotient)
+        var result: Double = dividend
+        try result.divide(by: divisor)
+        #expect(result == quotient)
     }
 
     @Test(
@@ -224,9 +224,9 @@ internal struct DoubleDivisibleTests {
         dividend: Double,
         quotient: Double
     ) {
-        var runningQuotient: Double = dividend
-        runningQuotient.halve()
-        #expect(runningQuotient == quotient)
+        var result: Double = dividend
+        result.halve()
+        #expect(result == quotient)
     }
 }
 
@@ -280,7 +280,8 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func dividingPositiveZeroByPositiveOrNegativeZeroReturnsNaN(divisor: Double.Divisor) {
-        #expect((Double.zero / divisor).isNaN == true)
+        let result: Double = Double.zero / divisor
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -291,7 +292,8 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func dividingNegativeZeroByPositiveOrNegativeZeroReturnsNaN(divisor: Double.Divisor) {
-        #expect((Double.negativeZero / divisor).isNaN == true)
+        let result: Double = Double.negativeZero / divisor
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -302,7 +304,8 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func dividingPositiveInfinityByInfinityReturnsNaN(divisor: Double.Divisor) {
-        #expect((Double.infinity / divisor).isNaN == true)
+        let result: Double = Double.infinity / divisor
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -313,7 +316,8 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func dividingNegativeInfinityByInfinityReturnsNaN(divisor: Double.Divisor) {
-        #expect((Double.negativeInfinity / divisor).isNaN == true)
+        let result: Double = Double.negativeInfinity / divisor
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -329,7 +333,8 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func dividingNaNReturnsNaN(divisor: Double.Divisor) {
-        #expect((Double.nan / divisor).isNaN == true)
+        let result: Double = Double.nan / divisor
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -344,7 +349,8 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func dividingByNaNReturnsNaN(dividend: Double) {
-        #expect((dividend / Double.nan).isNaN == true)
+        let result: Double = dividend / Double.nan
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -359,7 +365,8 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func remainderOfPositiveInfinityReturnsNaN(divisor: Double.RemainderDivisor) {
-        #expect((Double.infinity % divisor).isNaN == true)
+        let result: Double = Double.infinity % divisor
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -374,7 +381,8 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func remainderOfNegativeInfinityReturnsNaN(divisor: Double.RemainderDivisor) {
-        #expect((Double.negativeInfinity % divisor).isNaN == true)
+        let result: Double = Double.negativeInfinity % divisor
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -385,7 +393,8 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func remainderByPositiveZeroReturnsNaN(dividend: Double) {
-        #expect((dividend % Double.zero).isNaN == true)
+        let result: Double = dividend % Double.zero
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -396,7 +405,8 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func remainderByNegativeZeroReturnsNaN(dividend: Double) {
-        #expect((dividend % Double.negativeZero).isNaN == true)
+        let result: Double = dividend % Double.negativeZero
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -412,7 +422,8 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func remainderOfNaNReturnsNaN(divisor: Double.RemainderDivisor) {
-        #expect((Double.nan % divisor).isNaN == true)
+        let result: Double = Double.nan % divisor
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -427,7 +438,8 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func remainderByNaNReturnsNaN(dividend: Double) {
-        #expect((dividend % Double.nan).isNaN == true)
+        let result: Double = dividend % Double.nan
+        #expect(result.isNaN == true)
     }
 }
 
@@ -451,9 +463,9 @@ extension DoubleDivisibleTests {
 
     @Test("Reciprocal of negative infinity returns negative zero")
     internal func reciprocalOfNegativeInfinityReturnsNegativeZero() {
-        let reciprocal: Double? = Double.negativeInfinity.reciprocal
-        #expect(reciprocal == Double.zero)
-        #expect(reciprocal?.sign == .minus)
+        let result: Double? = Double.negativeInfinity.reciprocal
+        #expect(result == Double.zero)
+        #expect(result?.sign == .minus)
     }
 
     @Test("Negative infinity is invertible")
@@ -501,9 +513,9 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func remainderByNegativeInfinityPreservesDividend(dividend: Double) {
-        let remainder: Double = dividend % Double.negativeInfinity
-        #expect(remainder == dividend)
-        #expect(remainder.sign == dividend.sign)
+        let result: Double = dividend % Double.negativeInfinity
+        #expect(result == dividend)
+        #expect(result.sign == dividend.sign)
     }
 }
 
@@ -544,9 +556,9 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func remainderBySelfReturnsNegativeZero(value: Double) {
-        let remainder: Double = value % value
-        #expect(remainder == Double.zero)
-        #expect(remainder.sign == .minus)
+        let result: Double = value % value
+        #expect(result == Double.zero)
+        #expect(result.sign == .minus)
     }
 
     @Test(
@@ -629,9 +641,9 @@ extension DoubleDivisibleTests {
 
     @Test("Reciprocal of positive infinity returns positive zero")
     internal func reciprocalOfPositiveInfinityReturnsPositiveZero() {
-        let reciprocal: Double? = Double.infinity.reciprocal
-        #expect(reciprocal == Double.zero)
-        #expect(reciprocal?.sign == .plus)
+        let result: Double? = Double.infinity.reciprocal
+        #expect(result == Double.zero)
+        #expect(result?.sign == .plus)
     }
 
     @Test("Positive infinity is invertible")
@@ -679,9 +691,9 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func remainderByPositiveInfinityPreservesDividend(dividend: Double) {
-        let remainder: Double = dividend % Double.infinity
-        #expect(remainder == dividend)
-        #expect(remainder.sign == dividend.sign)
+        let result: Double = dividend % Double.infinity
+        #expect(result == dividend)
+        #expect(result.sign == dividend.sign)
     }
 }
 
@@ -719,9 +731,9 @@ extension DoubleDivisibleTests {
         ]
     )
     internal func remainderBySelfReturnsPositiveZero(value: Double) {
-        let remainder: Double = value % value
-        #expect(remainder == Double.zero)
-        #expect(remainder.sign == .plus)
+        let result: Double = value % value
+        #expect(result == Double.zero)
+        #expect(result.sign == .plus)
     }
 
     @Test(

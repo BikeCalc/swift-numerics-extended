@@ -66,9 +66,9 @@ internal struct FractionMultipliableTests {
         multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
     ) {
-        var runningProduct: Fraction<Int> = multiplicand
-        runningProduct *= multiplier
-        #expect(runningProduct == product)
+        var result: Fraction<Int> = multiplicand
+        result *= multiplier
+        #expect(result == product)
     }
 
     @Test(
@@ -92,9 +92,9 @@ internal struct FractionMultipliableTests {
         multiplier: Fraction<Int>.Multiplier,
         product: Fraction<Int>
     ) throws {
-        var runningProduct: Fraction<Int> = multiplicand
-        try runningProduct.multiply(by: multiplier)
-        #expect(runningProduct == product)
+        var result: Fraction<Int> = multiplicand
+        try result.multiply(by: multiplier)
+        #expect(result == product)
     }
 
     @Test(
@@ -116,9 +116,9 @@ internal struct FractionMultipliableTests {
         multiplicand: Fraction<Int>,
         product: Fraction<Int>
     ) {
-        var runningProduct: Fraction<Int> = multiplicand
-        runningProduct.double()
-        #expect(runningProduct == product)
+        var result: Fraction<Int> = multiplicand
+        result.double()
+        #expect(result == product)
     }
 }
 
@@ -167,7 +167,8 @@ extension FractionMultipliableTests {
         multiplicand: Fraction<Int>,
         multiplier: Fraction<Int>.Multiplier
     ) {
-        #expect((multiplicand * multiplier).isNaN == true)
+        let result: Fraction<Int> = multiplicand * multiplier
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -183,7 +184,8 @@ extension FractionMultipliableTests {
         multiplicand: Fraction<Int>,
         multiplier: Fraction<Int>.Multiplier
     ) {
-        #expect((multiplicand * multiplier).isNaN == true)
+        let result: Fraction<Int> = multiplicand * multiplier
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -198,7 +200,8 @@ extension FractionMultipliableTests {
         ]
     )
     internal func multiplyingNaNReturnsNaN(multiplier: Fraction<Int>.Multiplier) {
-        #expect((Fraction<Int>.nan * multiplier).isNaN == true)
+        let result: Fraction<Int> = Fraction<Int>.nan * multiplier
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -213,7 +216,8 @@ extension FractionMultipliableTests {
         ]
     )
     internal func multiplyingByNaNReturnsNaN(multiplicand: Fraction<Int>) {
-        #expect((multiplicand * Fraction<Int>.nan).isNaN == true)
+        let result: Fraction<Int> = multiplicand * Fraction<Int>.nan
+        #expect(result.isNaN == true)
     }
 }
 

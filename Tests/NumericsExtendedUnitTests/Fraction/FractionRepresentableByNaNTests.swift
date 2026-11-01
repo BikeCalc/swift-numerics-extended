@@ -21,7 +21,8 @@ extension FractionRepresentableByNaNTests {
     @Test("NaN is NaN")
     internal func nanIsNaN() {
         #expect(Fraction<Int>.nan.isNaN == true)
-        #expect(Fraction<Int>(0, 0).isNaN == true)
+        let result: Fraction<Int> = Fraction<Int>(0, 0)
+        #expect(result.isNaN == true)
     }
 }
 

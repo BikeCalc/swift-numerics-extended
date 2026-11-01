@@ -46,9 +46,9 @@ internal struct DoubleAddableTests {
         addend: Double.Addend,
         sum: Double
     ) {
-        var runningSum: Double = augend
-        runningSum += addend
-        #expect(runningSum == sum)
+        var result: Double = augend
+        result += addend
+        #expect(result == sum)
     }
 
     @Test(
@@ -72,9 +72,9 @@ internal struct DoubleAddableTests {
         addend: Double.Addend,
         sum: Double
     ) throws {
-        var runningSum: Double = augend
-        try runningSum.add(addend)
-        #expect(runningSum == sum)
+        var result: Double = augend
+        try result.add(addend)
+        #expect(result == sum)
     }
 }
 
@@ -97,12 +97,14 @@ extension DoubleAddableTests {
 extension DoubleAddableTests {
     @Test("Adding positive infinity to negative infinity returns NaN")
     internal func addingPositiveInfinityToNegativeInfinityReturnsNaN() {
-        #expect((Double.negativeInfinity + .infinity).isNaN == true)
+        let result: Double = Double.negativeInfinity + .infinity
+        #expect(result.isNaN == true)
     }
 
     @Test("Adding negative infinity to positive infinity returns NaN")
     internal func addingNegativeInfinityToPositiveInfinityReturnsNaN() {
-        #expect((Double.infinity + .negativeInfinity).isNaN == true)
+        let result: Double = Double.infinity + .negativeInfinity
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -117,7 +119,8 @@ extension DoubleAddableTests {
         ]
     )
     internal func addingToNaNReturnsNaN(addend: Double.Addend) {
-        #expect((Double.nan + addend).isNaN == true)
+        let result: Double = Double.nan + addend
+        #expect(result.isNaN == true)
     }
 
     @Test(
@@ -132,7 +135,8 @@ extension DoubleAddableTests {
         ]
     )
     internal func addingNaNReturnsNaN(augend: Double) {
-        #expect((augend + Double.nan).isNaN == true)
+        let result: Double = augend + Double.nan
+        #expect(result.isNaN == true)
     }
 }
 
@@ -210,9 +214,9 @@ extension DoubleAddableTests {
         augend: Double,
         addend: Double.Addend
     ) {
-        let sum: Double = augend + addend
-        #expect(sum == Double.zero)
-        #expect(sum.sign == .plus)
+        let result: Double = augend + addend
+        #expect(result == Double.zero)
+        #expect(result.sign == .plus)
     }
 
     @Test(

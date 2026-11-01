@@ -68,9 +68,9 @@ internal struct DoubleNegateableTests {
         value: Double,
         negation: Double
     ) {
-        var runningValue: Double = value
-        runningValue.negate()
-        #expect(runningValue == negation)
+        var result: Double = value
+        result.negate()
+        #expect(result == negation)
     }
 
     @Test(
@@ -192,13 +192,13 @@ extension DoubleNegateableTests {
 
     @Test("Negating NaN returns NaN")
     internal func negatingNaNReturnsNaN() {
-        let operatorNegation: Double = -Double.nan
-        let methodNegation: Double = Double.nan.negating()
-        var mutatingNegation: Double = Double.nan
-        mutatingNegation.negate()
-        #expect(operatorNegation.isNaN == true)
-        #expect(methodNegation.isNaN == true)
-        #expect(mutatingNegation.isNaN == true)
+        let operatorResult: Double = -Double.nan
+        let methodResult: Double = Double.nan.negating()
+        var mutatingResult: Double = Double.nan
+        mutatingResult.negate()
+        #expect(operatorResult.isNaN == true)
+        #expect(methodResult.isNaN == true)
+        #expect(mutatingResult.isNaN == true)
     }
 }
 
@@ -228,13 +228,13 @@ extension DoubleNegateableTests {
 
     @Test("Negating negative infinity follows floating-point rules")
     internal func negatingNegativeInfinityFollowsFloatingPointRules() {
-        let operatorNegation: Double = -Double.negativeInfinity
-        let methodNegation: Double = Double.negativeInfinity.negating()
-        var mutatingNegation: Double = Double.negativeInfinity
-        mutatingNegation.negate()
-        #expect(operatorNegation == .infinity)
-        #expect(methodNegation == .infinity)
-        #expect(mutatingNegation == .infinity)
+        let operatorResult: Double = -Double.negativeInfinity
+        let methodResult: Double = Double.negativeInfinity.negating()
+        var mutatingResult: Double = Double.negativeInfinity
+        mutatingResult.negate()
+        #expect(operatorResult == .infinity)
+        #expect(methodResult == .infinity)
+        #expect(mutatingResult == .infinity)
     }
 }
 
@@ -264,16 +264,16 @@ extension DoubleNegateableTests {
 
     @Test("Negating negative zero follows floating-point rules")
     internal func negatingNegativeZeroFollowsFloatingPointRules() {
-        let operatorNegation: Double = -Double.negativeZero
-        let methodNegation: Double = Double.negativeZero.negating()
-        var mutatingNegation: Double = Double.negativeZero
-        mutatingNegation.negate()
-        #expect(operatorNegation == .zero)
-        #expect(operatorNegation.sign == .plus)
-        #expect(methodNegation == .zero)
-        #expect(methodNegation.sign == .plus)
-        #expect(mutatingNegation == .zero)
-        #expect(mutatingNegation.sign == .plus)
+        let operatorResult: Double = -Double.negativeZero
+        let methodResult: Double = Double.negativeZero.negating()
+        var mutatingResult: Double = Double.negativeZero
+        mutatingResult.negate()
+        #expect(operatorResult == .zero)
+        #expect(operatorResult.sign == .plus)
+        #expect(methodResult == .zero)
+        #expect(methodResult.sign == .plus)
+        #expect(mutatingResult == .zero)
+        #expect(mutatingResult.sign == .plus)
     }
 }
 
@@ -303,13 +303,13 @@ extension DoubleNegateableTests {
 
     @Test("Negating positive infinity follows floating-point rules")
     internal func negatingPositiveInfinityFollowsFloatingPointRules() {
-        let operatorNegation: Double = -Double.infinity
-        let methodNegation: Double = Double.infinity.negating()
-        var mutatingNegation: Double = Double.infinity
-        mutatingNegation.negate()
-        #expect(operatorNegation == .negativeInfinity)
-        #expect(methodNegation == .negativeInfinity)
-        #expect(mutatingNegation == .negativeInfinity)
+        let operatorResult: Double = -Double.infinity
+        let methodResult: Double = Double.infinity.negating()
+        var mutatingResult: Double = Double.infinity
+        mutatingResult.negate()
+        #expect(operatorResult == .negativeInfinity)
+        #expect(methodResult == .negativeInfinity)
+        #expect(mutatingResult == .negativeInfinity)
     }
 }
 
@@ -321,9 +321,9 @@ extension DoubleNegateableTests {
         arguments: Self.additiveInverseArguments
     )
     internal func addingValueAndItsNegationReturnsPositiveZero(value: Double) {
-        let sum: Double = value + value.negating()
-        #expect(sum == Double.zero)
-        #expect(sum.sign == .plus)
+        let result: Double = value + value.negating()
+        #expect(result == Double.zero)
+        #expect(result.sign == .plus)
     }
 
     @Test("Positive zero sign predicates follow floating-point rules")
@@ -349,15 +349,15 @@ extension DoubleNegateableTests {
 
     @Test("Negating positive zero follows floating-point rules")
     internal func negatingPositiveZeroFollowsFloatingPointRules() {
-        let operatorNegation: Double = -Double.zero
-        let methodNegation: Double = Double.zero.negating()
-        var mutatingNegation: Double = Double.zero
-        mutatingNegation.negate()
-        #expect(operatorNegation == .zero)
-        #expect(operatorNegation.sign == .minus)
-        #expect(methodNegation == .zero)
-        #expect(methodNegation.sign == .minus)
-        #expect(mutatingNegation == .zero)
-        #expect(mutatingNegation.sign == .minus)
+        let operatorResult: Double = -Double.zero
+        let methodResult: Double = Double.zero.negating()
+        var mutatingResult: Double = Double.zero
+        mutatingResult.negate()
+        #expect(operatorResult == .zero)
+        #expect(operatorResult.sign == .minus)
+        #expect(methodResult == .zero)
+        #expect(methodResult.sign == .minus)
+        #expect(mutatingResult == .zero)
+        #expect(mutatingResult.sign == .minus)
     }
 }
