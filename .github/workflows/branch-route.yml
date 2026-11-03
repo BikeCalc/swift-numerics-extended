@@ -15,10 +15,12 @@ concurrency:
 jobs:
   route:
     name: Validate Branch Route
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v6
+      - name: Get Swift Version
+        run: swift --version
       - name: Check Branch Route
         env:
           BASE_REF: ${{ github.base_ref }}

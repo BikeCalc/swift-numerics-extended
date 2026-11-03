@@ -11,7 +11,7 @@ report problems without editing repository files.
 ## Requirements
 
 Run scripts from the repository root with Swift installed. Contributor validation also requires Git and complete
-repository history, including the revision being checked. CI runs these checks on Ubuntu.
+repository history, including the revision being checked. CI runs these checks on `macos-latest`.
 
 ## Continuous Integration
 

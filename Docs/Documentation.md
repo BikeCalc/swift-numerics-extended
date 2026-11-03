@@ -9,7 +9,7 @@ without publishing it. Generated files stay under `.build/` and are not committe
 
 ## Requirements
 
-Use Swift 6.3 or later with DocC available; CI uses macOS 26. Run commands from the repository root.
+Use Swift 6.3 or later with DocC available; CI uses `macos-latest`. Run commands from the repository root.
 
 Package resolution needs network access when dependencies are not cached. Publishing requires GitHub Pages configured
 for GitHub Actions; local generation does not require deployment permissions.

@@ -17,7 +17,7 @@ concurrency:
 jobs:
   lint:
     name: Lint Source Formatting
-    runs-on: macos-26
+    runs-on: macos-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v6

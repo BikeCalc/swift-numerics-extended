@@ -11,7 +11,7 @@ formatter's rules. Follow the conventions in surrounding code for formatting the
 ## Requirements
 
 Run commands from the repository root in a Git checkout with Swift 6.3 or later. Package resolution needs network access
-when dependencies are not cached. CI uses macOS 26 and the formatter version selected by the package.
+when dependencies are not cached. CI uses `macos-latest` and the formatter version selected by the package.
 
 ## Continuous Integration
 

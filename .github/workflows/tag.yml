@@ -14,10 +14,12 @@ concurrency:
 jobs:
   validate:
     name: Validate Tag
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v6
+      - name: Get Swift Version
+        run: swift --version
       - name: Validate Semantic Version Tag
         env:
           TAG: ${{ github.ref_name }}

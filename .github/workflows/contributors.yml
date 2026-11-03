@@ -18,13 +18,15 @@ concurrency:
 jobs:
   contributors:
     name: Validate Contributors
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Get Swift Version
+        run: swift --version
       - name: Validate Contributors
         env:
           TARGET_SHA: ${{ github.event.pull_request.head.sha || github.sha }}

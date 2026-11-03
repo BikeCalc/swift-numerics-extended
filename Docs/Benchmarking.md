@@ -21,7 +21,7 @@ assigned back to `wrappedValue`. Initial operand construction is not included in
 
 ## Requirements
 
-Use Swift 6.3 or later and run commands from the repository root in a Git checkout. CI uses macOS 26. Comparisons need
+Use Swift 6.3 or later and run commands from the repository root in a Git checkout. CI uses `macos-latest`. Comparisons need
 an available baseline revision and network access for uncached dependencies. Measure both revisions on the same machine
 with a release build to reduce environmental differences.
 

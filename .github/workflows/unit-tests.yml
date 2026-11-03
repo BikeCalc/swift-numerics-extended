@@ -17,7 +17,7 @@ concurrency:
 jobs:
   build:
     name: Run Unit Tests
-    runs-on: macos-26
+    runs-on: macos-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v6

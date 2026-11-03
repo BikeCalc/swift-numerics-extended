@@ -18,7 +18,7 @@ concurrency:
 jobs:
   benchmarks:
     name: Compare Benchmarks
-    runs-on: macos-26
+    runs-on: macos-latest
     timeout-minutes: 20
     steps:
       - name: Checkout Repository
