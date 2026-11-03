@@ -322,6 +322,8 @@ extension Roman: Decodable {
 // MARK: - Divisible
 
 extension Roman: Divisible {
+    public typealias Reciprocal = Self
+
     public typealias Divisor = Self
 
     public typealias Quotient = Self
@@ -330,7 +332,7 @@ extension Roman: Divisible {
 
     public typealias Remainder = Self
 
-    public var reciprocal: Self? {
+    public var reciprocal: Self.Reciprocal? {
         guard self.isInvertible == true else {
             return nil
         }

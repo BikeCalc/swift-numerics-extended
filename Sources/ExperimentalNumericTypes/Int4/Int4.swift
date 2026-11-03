@@ -449,6 +449,8 @@ extension Int4: Decodable {
 // MARK: - Divisible
 
 extension Int4: Divisible {
+    public typealias Reciprocal = Self
+
     public typealias Divisor = Self
 
     public typealias Quotient = Self

@@ -51,11 +51,11 @@ internal struct RomanDivisibleTests {
         arguments: [
             (1, 1),
             (2, nil)
-        ] as Array<(Roman, Roman?)>
+        ] as Array<(Roman, Roman.Reciprocal?)>
     )
     internal func reciprocal(
         dividend: Roman,
-        expected: Roman?
+        expected: Roman.Reciprocal?
     ) {
         #expect(dividend.reciprocal == expected)
     }

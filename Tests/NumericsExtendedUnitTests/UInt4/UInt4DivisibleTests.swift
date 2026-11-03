@@ -51,11 +51,11 @@ internal struct UInt4DivisibleTests {
         arguments: [
             (1, 1),
             (2, nil)
-        ] as Array<(UInt4, UInt4?)>
+        ] as Array<(UInt4, UInt4.Reciprocal?)>
     )
     internal func reciprocal(
         dividend: UInt4,
-        expected: UInt4?
+        expected: UInt4.Reciprocal?
     ) {
         #expect(dividend.reciprocal == expected)
     }

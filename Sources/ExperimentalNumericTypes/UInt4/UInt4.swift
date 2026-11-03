@@ -422,6 +422,8 @@ extension UInt4: Decodable {
 // MARK: - Divisible
 
 extension UInt4: Divisible {
+    public typealias Reciprocal = Self
+
     public typealias Divisor = Self
 
     public typealias Quotient = Self

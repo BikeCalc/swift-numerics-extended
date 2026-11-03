@@ -43,11 +43,11 @@ internal struct FractionDivisibleTests {
             (.init(-1, 1), Fraction<Int>(1, -1)),
             (.init(2, 1), Fraction<Int>(1, 2)),
             (.init(-2, 1), Fraction<Int>(1, -2))
-        ] as Array<(Fraction<Int>, Fraction<Int>?)>
+        ] as Array<(Fraction<Int>, Fraction<Int>.Reciprocal?)>
     )
     internal func reciprocal(
         dividend: Fraction<Int>,
-        expected: Fraction<Int>?
+        expected: Fraction<Int>.Reciprocal?
     ) {
         #expect(dividend.reciprocal == expected)
     }
