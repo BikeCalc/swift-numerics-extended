@@ -73,6 +73,23 @@ internal struct Int4DivisibleTests {
     }
 
     @Test(
+        "Is invertible",
+        arguments: [
+            (1, true),
+            (-1, true),
+            (2, false),
+            (-2, false)
+        ] as Array<(Int4, Bool)>
+    )
+    internal func isInvertible(
+        dividend: Int4,
+        expected: Bool
+    ) {
+        let result: Bool = dividend.isInvertible
+        #expect(result == expected)
+    }
+
+    @Test(
         "Is divisible by",
         arguments: [
             (6, 3, true),

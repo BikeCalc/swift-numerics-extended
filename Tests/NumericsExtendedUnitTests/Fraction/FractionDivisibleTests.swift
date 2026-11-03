@@ -53,6 +53,20 @@ internal struct FractionDivisibleTests {
     }
 
     @Test(
+        "Is invertible",
+        arguments: [
+            .init(2, 1),
+            .init(3, 1),
+            .init(-2, 1),
+            .init(-3, 1)
+        ] as Array<Fraction<Int>>
+    )
+    internal func isInvertible(dividend: Fraction<Int>) {
+        let result: Bool = dividend.isInvertible
+        #expect(result == true)
+    }
+
+    @Test(
         "Is divisible by",
         arguments: [
             (.init(6, 1), .init(3, 1), true),
