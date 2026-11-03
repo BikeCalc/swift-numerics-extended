@@ -20,6 +20,8 @@ extension UInt8: Addable {
 // MARK: - Divisible
 
 extension UInt8: Divisible {
+    public typealias Reciprocal = Self
+
     public typealias Divisor = Self
 
     public typealias Quotient = Self

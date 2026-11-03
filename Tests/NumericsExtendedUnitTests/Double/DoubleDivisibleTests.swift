@@ -59,11 +59,11 @@ internal struct DoubleDivisibleTests {
             (0.25, 4.0),
             (-0.5, -2.0),
             (-0.25, -4.0)
-        ] as Array<(Double, Double?)>
+        ] as Array<(Double, Double.Reciprocal?)>
     )
     internal func reciprocal(
         dividend: Double,
-        expected: Double?
+        expected: Double.Reciprocal?
     ) {
         #expect(dividend.reciprocal == expected)
     }
@@ -474,7 +474,7 @@ extension DoubleDivisibleTests {
 
     @Test("Reciprocal of negative infinity returns negative zero")
     internal func reciprocalOfNegativeInfinityReturnsNegativeZero() {
-        let result: Double? = Double.negativeInfinity.reciprocal
+        let result: Double.Reciprocal? = Double.negativeInfinity.reciprocal
         #expect(result == Double.zero)
         #expect(result?.sign == .minus)
     }
@@ -659,7 +659,7 @@ extension DoubleDivisibleTests {
 
     @Test("Reciprocal of positive infinity returns positive zero")
     internal func reciprocalOfPositiveInfinityReturnsPositiveZero() {
-        let result: Double? = Double.infinity.reciprocal
+        let result: Double.Reciprocal? = Double.infinity.reciprocal
         #expect(result == Double.zero)
         #expect(result?.sign == .plus)
     }

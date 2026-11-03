@@ -21,16 +21,19 @@ where Self: Decreasable {
 }
 
 extension FloatingPoint
-where Self: Divisible {
+where Self: Divisible, Self.Reciprocal == Self {
     /// Returns the reciprocal of this instance.
-    public var reciprocal: Self? {
+    public var reciprocal: Self.Reciprocal? {
         guard self.isInvertible == true else {
             return nil
         }
 
         return 1 / self
     }
+}
 
+extension FloatingPoint
+where Self: Divisible {
     /// A boolean value indicating whether this instance is invertible.
     public var isInvertible: Bool {
         return self.isZero == false

@@ -462,6 +462,8 @@ where Term: Decodable {
 // MARK: - Divisible
 
 extension Fraction: Divisible {
+    public typealias Reciprocal = Self
+
     public typealias Divisor = Self
 
     public typealias Quotient = Self
@@ -474,7 +476,7 @@ extension Fraction: Divisible {
     ///
     /// A finite reciprocal exchanges the stored numerator and denominator. The reciprocal of positive or negative
     /// infinity is zero with the corresponding sign.
-    public var reciprocal: Self? {
+    public var reciprocal: Self.Reciprocal? {
         guard self.isInvertible == true else {
             return nil
         }
@@ -1085,7 +1087,7 @@ extension Fraction: Raisable {
 
         if rhs < 0 {
             // The checks above ensure that a negative-exponent base has a reciprocal.
-            guard let reciprocal: Self = lhs.reciprocal else {
+            guard let reciprocal: Self.Reciprocal = lhs.reciprocal else {
                 preconditionFailure("A nonzero, non-NaN fraction must have a reciprocal.")
             }
 

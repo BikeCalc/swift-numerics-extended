@@ -63,11 +63,11 @@ internal struct IntDivisibleTests {
             (-1, -1),
             (2, nil),
             (-2, nil)
-        ] as Array<(Int, Int?)>
+        ] as Array<(Int, Int.Reciprocal?)>
     )
     internal func reciprocal(
         dividend: Int,
-        expected: Int?
+        expected: Int.Reciprocal?
     ) {
         #expect(dividend.reciprocal == expected)
     }

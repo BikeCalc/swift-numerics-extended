@@ -20,6 +20,8 @@ extension Int: Addable {
 // MARK: - Divisible
 
 extension Int: Divisible {
+    public typealias Reciprocal = Self
+
     public typealias Divisor = Self
 
     public typealias Quotient = Self
