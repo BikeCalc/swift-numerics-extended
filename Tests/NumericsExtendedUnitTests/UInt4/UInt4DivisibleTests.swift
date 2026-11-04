@@ -47,35 +47,6 @@ internal struct UInt4DivisibleTests {
     }
 
     @Test(
-        "Reciprocal",
-        arguments: [
-            (1, 1),
-            (2, nil)
-        ] as Array<(UInt4, UInt4.Reciprocal?)>
-    )
-    internal func reciprocal(
-        dividend: UInt4,
-        expected: UInt4.Reciprocal?
-    ) {
-        #expect(dividend.reciprocal == expected)
-    }
-
-    @Test(
-        "Is invertible",
-        arguments: [
-            (1, true),
-            (2, false)
-        ] as Array<(UInt4, Bool)>
-    )
-    internal func isInvertible(
-        dividend: UInt4,
-        expected: Bool
-    ) {
-        let result: Bool = dividend.isInvertible
-        #expect(result == expected)
-    }
-
-    @Test(
         "Is divisible by",
         arguments: [
             (6, 3, true),
@@ -261,20 +232,6 @@ extension UInt4DivisibleTests {
     }
 
     @Test(
-        "Positive one invertibility follows unsigned integer rules",
-        arguments: [
-            (1, true),
-            (2, false)
-        ] as Array<(UInt4, Bool)>
-    )
-    internal func positiveOneInvertibilityFollowsUnsignedIntegerRules(
-        dividend: UInt4,
-        expected: Bool
-    ) {
-        #expect(dividend.isInvertible == expected)
-    }
-
-    @Test(
         "Remainder by positive one returns positive zero",
         arguments: [
             6,
@@ -290,11 +247,6 @@ extension UInt4DivisibleTests {
 // MARK: - Positive Zero
 
 extension UInt4DivisibleTests {
-    @Test("Positive zero is not invertible")
-    internal func positiveZeroIsNotInvertible() {
-        #expect(UInt4.zero.isInvertible == false)
-    }
-
     @Test(
         "Dividing positive zero by nonzero value returns positive zero",
         arguments: [

@@ -47,35 +47,6 @@ internal struct RomanDivisibleTests {
     }
 
     @Test(
-        "Reciprocal",
-        arguments: [
-            (1, 1),
-            (2, nil)
-        ] as Array<(Roman, Roman.Reciprocal?)>
-    )
-    internal func reciprocal(
-        dividend: Roman,
-        expected: Roman.Reciprocal?
-    ) {
-        #expect(dividend.reciprocal == expected)
-    }
-
-    @Test(
-        "Is invertible",
-        arguments: [
-            (1, true),
-            (2, false)
-        ] as Array<(Roman, Bool)>
-    )
-    internal func isInvertible(
-        dividend: Roman,
-        expected: Bool
-    ) {
-        let result: Bool = dividend.isInvertible
-        #expect(result == expected)
-    }
-
-    @Test(
         "Is divisible by",
         arguments: [
             (6, 3, true),
@@ -261,20 +232,6 @@ extension RomanDivisibleTests {
     }
 
     @Test(
-        "Positive one invertibility follows unsigned integer rules",
-        arguments: [
-            (1, true),
-            (2, false)
-        ] as Array<(Roman, Bool)>
-    )
-    internal func positiveOneInvertibilityFollowsUnsignedIntegerRules(
-        dividend: Roman,
-        expected: Bool
-    ) {
-        #expect(dividend.isInvertible == expected)
-    }
-
-    @Test(
         "Remainder by positive one returns positive zero",
         arguments: [
             6,
@@ -290,11 +247,6 @@ extension RomanDivisibleTests {
 // MARK: - Positive Zero
 
 extension RomanDivisibleTests {
-    @Test("Positive zero is not invertible")
-    internal func positiveZeroIsNotInvertible() {
-        #expect(Roman.zero.isInvertible == false)
-    }
-
     @Test(
         "Dividing positive zero by nonzero value returns positive zero",
         arguments: [

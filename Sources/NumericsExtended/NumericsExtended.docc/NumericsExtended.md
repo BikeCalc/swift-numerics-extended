@@ -33,6 +33,7 @@ releases.
 - ``/CoreNumericProtocols/Subtractable``
 - ``/CoreNumericProtocols/Multipliable``
 - ``/CoreNumericProtocols/Divisible``
+- ``/CoreNumericProtocols/Invertible``
 - ``/CoreNumericProtocols/Negateable``
 - ``/CoreNumericProtocols/Raisable``
 - ``/CoreNumericProtocols/ReportableAsOverflow``

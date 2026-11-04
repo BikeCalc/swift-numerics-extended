@@ -20,8 +20,6 @@ extension Int8: Addable {
 // MARK: - Divisible
 
 extension Int8: Divisible {
-    public typealias Reciprocal = Self
-
     public typealias Divisor = Self
 
     public typealias Quotient = Self
@@ -29,6 +27,12 @@ extension Int8: Divisible {
     public typealias RemainderDivisor = Self
 
     public typealias Remainder = Self
+}
+
+// MARK: - Invertible
+
+extension Int8: Invertible {
+    public typealias Reciprocal = Self
 }
 
 // MARK: - Multipliable

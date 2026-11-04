@@ -9,7 +9,7 @@
 import CoreNumericProtocols
 
 extension UnsignedInteger
-where Self: Divisible, Self.Reciprocal == Self {
+where Self: Invertible, Self.Reciprocal == Self {
     /// Returns the reciprocal of this instance.
     public var reciprocal: Self.Reciprocal? {
         guard self.isInvertible == true else {
@@ -18,10 +18,7 @@ where Self: Divisible, Self.Reciprocal == Self {
 
         return self
     }
-}
 
-extension UnsignedInteger
-where Self: Divisible {
     /// A boolean value indicating whether this instance is invertible.
     public var isInvertible: Bool {
         return self == 1

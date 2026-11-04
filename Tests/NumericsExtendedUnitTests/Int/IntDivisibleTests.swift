@@ -57,39 +57,6 @@ internal struct IntDivisibleTests {
     }
 
     @Test(
-        "Reciprocal",
-        arguments: [
-            (1, 1),
-            (-1, -1),
-            (2, nil),
-            (-2, nil)
-        ] as Array<(Int, Int.Reciprocal?)>
-    )
-    internal func reciprocal(
-        dividend: Int,
-        expected: Int.Reciprocal?
-    ) {
-        #expect(dividend.reciprocal == expected)
-    }
-
-    @Test(
-        "Is invertible",
-        arguments: [
-            (1, true),
-            (-1, true),
-            (2, false),
-            (-2, false)
-        ] as Array<(Int, Bool)>
-    )
-    internal func isInvertible(
-        dividend: Int,
-        expected: Bool
-    ) {
-        let result: Bool = dividend.isInvertible
-        #expect(result == expected)
-    }
-
-    @Test(
         "Is divisible by",
         arguments: [
             (6, 3, true),
@@ -305,20 +272,6 @@ extension IntDivisibleTests {
     }
 
     @Test(
-        "Negative one invertibility follows integer rules",
-        arguments: [
-            (-1, true),
-            (-2, false)
-        ] as Array<(Int, Bool)>
-    )
-    internal func negativeOneInvertibilityFollowsIntegerRules(
-        dividend: Int,
-        expected: Bool
-    ) {
-        #expect(dividend.isInvertible == expected)
-    }
-
-    @Test(
         "Remainder by negative one returns positive zero",
         arguments: [
             6,
@@ -336,17 +289,6 @@ extension IntDivisibleTests {
 // MARK: - Negative Zero
 
 extension IntDivisibleTests {
-    @Test(
-        "Negative zero is not invertible",
-        arguments: [
-            0,
-            -0
-        ] as Array<Int>
-    )
-    internal func negativeZeroIsNotInvertible(dividend: Int) {
-        #expect(dividend.isInvertible == false)
-    }
-
     @Test(
         "Dividing negative zero by nonzero value returns negative zero",
         arguments: [
@@ -379,20 +321,6 @@ extension IntDivisibleTests {
     }
 
     @Test(
-        "Positive one invertibility follows integer rules",
-        arguments: [
-            (1, true),
-            (2, false)
-        ] as Array<(Int, Bool)>
-    )
-    internal func positiveOneInvertibilityFollowsIntegerRules(
-        dividend: Int,
-        expected: Bool
-    ) {
-        #expect(dividend.isInvertible == expected)
-    }
-
-    @Test(
         "Remainder by positive one returns positive zero",
         arguments: [
             6,
@@ -410,17 +338,6 @@ extension IntDivisibleTests {
 // MARK: - Positive Zero
 
 extension IntDivisibleTests {
-    @Test(
-        "Positive zero is not invertible",
-        arguments: [
-            0,
-            -0
-        ] as Array<Int>
-    )
-    internal func positiveZeroIsNotInvertible(dividend: Int) {
-        #expect(dividend.isInvertible == false)
-    }
-
     @Test(
         "Dividing positive zero by nonzero value returns positive zero",
         arguments: [

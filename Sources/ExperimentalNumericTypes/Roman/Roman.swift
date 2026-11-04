@@ -322,8 +322,6 @@ extension Roman: Decodable {
 // MARK: - Divisible
 
 extension Roman: Divisible {
-    public typealias Reciprocal = Self
-
     public typealias Divisor = Self
 
     public typealias Quotient = Self
@@ -331,18 +329,6 @@ extension Roman: Divisible {
     public typealias RemainderDivisor = Self
 
     public typealias Remainder = Self
-
-    public var reciprocal: Self.Reciprocal? {
-        guard self.isInvertible == true else {
-            return nil
-        }
-
-        return self
-    }
-
-    public var isInvertible: Bool {
-        return self == 1
-    }
 
     public func isDivisible(by other: Self) -> Bool {
         guard other.isZero == false else {
@@ -454,6 +440,24 @@ extension Roman: ExpressibleByIntegerLiteral {
 extension Roman: Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(self.value.hashValue)
+    }
+}
+
+// MARK: - Invertible
+
+extension Roman: Invertible {
+    public typealias Reciprocal = Self
+
+    public var reciprocal: Self.Reciprocal? {
+        guard self.isInvertible == true else {
+            return nil
+        }
+
+        return self
+    }
+
+    public var isInvertible: Bool {
+        return self == 1
     }
 }
 

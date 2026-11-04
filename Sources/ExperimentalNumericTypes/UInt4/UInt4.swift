@@ -422,8 +422,6 @@ extension UInt4: Decodable {
 // MARK: - Divisible
 
 extension UInt4: Divisible {
-    public typealias Reciprocal = Self
-
     public typealias Divisor = Self
 
     public typealias Quotient = Self
@@ -641,6 +639,12 @@ extension UInt4: Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(self.value.hashValue)
     }
+}
+
+// MARK: - Invertible
+
+extension UInt4: Invertible {
+    public typealias Reciprocal = Self
 }
 
 // MARK: - LosslessStringConvertible

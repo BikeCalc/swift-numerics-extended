@@ -22,8 +22,6 @@ extension UInt128: Addable {
 
 @available(iOS 18.0, macCatalyst 18.0, macOS 15.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
 extension UInt128: Divisible {
-    public typealias Reciprocal = Self
-
     public typealias Divisor = Self
 
     public typealias Quotient = Self
@@ -31,6 +29,13 @@ extension UInt128: Divisible {
     public typealias RemainderDivisor = Self
 
     public typealias Remainder = Self
+}
+
+// MARK: - Invertible
+
+@available(iOS 18.0, macCatalyst 18.0, macOS 15.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
+extension UInt128: Invertible {
+    public typealias Reciprocal = Self
 }
 
 // MARK: - Multipliable

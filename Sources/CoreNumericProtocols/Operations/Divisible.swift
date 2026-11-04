@@ -8,9 +8,6 @@
 
 /// A type that supports division.
 public protocol Divisible: Equatable {
-    /// The type used to represent a reciprocal.
-    associatedtype Reciprocal
-
     /// The type used to represent divisors for quotient operations.
     associatedtype Divisor
 
@@ -22,12 +19,6 @@ public protocol Divisible: Equatable {
 
     /// The type used to represent the result of remainder operations.
     associatedtype Remainder
-
-    /// Returns the reciprocal of this instance, or `nil` when no reciprocal is representable.
-    var reciprocal: Self.Reciprocal? { get }
-
-    /// A boolean value indicating whether this instance is invertible.
-    var isInvertible: Bool { get }
 
     /// Returns a boolean value indicating whether this value is divisible by the specified value.
     ///
