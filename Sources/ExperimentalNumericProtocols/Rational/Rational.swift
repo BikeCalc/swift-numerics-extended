@@ -25,6 +25,7 @@ public protocol Rational:
     Comparable,
     CustomStringConvertible,
     Hashable,
+    Invertible,
     Numeric,
     Operatable,
     RepresentableByInfinity,

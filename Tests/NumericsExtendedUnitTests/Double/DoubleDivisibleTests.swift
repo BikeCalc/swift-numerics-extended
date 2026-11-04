@@ -49,43 +49,6 @@ internal struct DoubleDivisibleTests {
     ]
 
     @Test(
-        "Reciprocal",
-        arguments: [
-            (2.0, 0.5),
-            (4.0, 0.25),
-            (-2.0, -0.5),
-            (-4.0, -0.25),
-            (0.5, 2.0),
-            (0.25, 4.0),
-            (-0.5, -2.0),
-            (-0.25, -4.0)
-        ] as Array<(Double, Double.Reciprocal?)>
-    )
-    internal func reciprocal(
-        dividend: Double,
-        expected: Double.Reciprocal?
-    ) {
-        #expect(dividend.reciprocal == expected)
-    }
-
-    @Test(
-        "Is invertible",
-        arguments: [
-            2.0,
-            3.0,
-            -2.0,
-            -3.0,
-            0.5,
-            1.5,
-            -0.5,
-            -1.5
-        ] as Array<Double>
-    )
-    internal func isInvertible(dividend: Double) {
-        #expect(dividend.isInvertible == true)
-    }
-
-    @Test(
         "Is divisible by",
         arguments: [
             (6.0, 3.0, true),
@@ -269,16 +232,6 @@ extension DoubleDivisibleTests {
         #expect(isDivisibleResult == false)
         let isFactorResult: Bool = Double.nan.isFactor(of: other)
         #expect(isFactorResult == false)
-    }
-
-    @Test("Reciprocal of NaN returns nil")
-    internal func reciprocalOfNaNReturnsNil() {
-        #expect(Double.nan.reciprocal == nil)
-    }
-
-    @Test("NaN is not invertible")
-    internal func nanIsNotInvertible() {
-        #expect(Double.nan.isInvertible == false)
     }
 
     @Test(
@@ -472,18 +425,6 @@ extension DoubleDivisibleTests {
         #expect(isFactorResult == false)
     }
 
-    @Test("Reciprocal of negative infinity returns negative zero")
-    internal func reciprocalOfNegativeInfinityReturnsNegativeZero() {
-        let result: Double.Reciprocal? = Double.negativeInfinity.reciprocal
-        #expect(result == Double.zero)
-        #expect(result?.sign == .minus)
-    }
-
-    @Test("Negative infinity is invertible")
-    internal func negativeInfinityIsInvertible() {
-        #expect(Double.negativeInfinity.isInvertible == true)
-    }
-
     @Test(
         "Dividing negative infinity follows floating-point rules",
         arguments: [
@@ -595,16 +536,6 @@ extension DoubleDivisibleTests {
         #expect(isFactorResult == isFactor)
     }
 
-    @Test("Reciprocal of negative zero returns nil")
-    internal func reciprocalOfNegativeZeroReturnsNil() {
-        #expect(Double.negativeZero.reciprocal == nil)
-    }
-
-    @Test("Negative zero is not invertible")
-    internal func negativeZeroIsNotInvertible() {
-        #expect(Double.negativeZero.isInvertible == false)
-    }
-
     @Test(
         "Dividing negative zero follows floating-point rules",
         arguments: [
@@ -655,18 +586,6 @@ extension DoubleDivisibleTests {
         #expect(isDivisibleResult == false)
         let isFactorResult: Bool = Double.infinity.isFactor(of: other)
         #expect(isFactorResult == false)
-    }
-
-    @Test("Reciprocal of positive infinity returns positive zero")
-    internal func reciprocalOfPositiveInfinityReturnsPositiveZero() {
-        let result: Double.Reciprocal? = Double.infinity.reciprocal
-        #expect(result == Double.zero)
-        #expect(result?.sign == .plus)
-    }
-
-    @Test("Positive infinity is invertible")
-    internal func positiveInfinityIsInvertible() {
-        #expect(Double.infinity.isInvertible == true)
     }
 
     @Test(
@@ -791,16 +710,6 @@ extension DoubleDivisibleTests {
         #expect(isDivisibleResult == isDivisible)
         let isFactorResult: Bool = Double.zero.isFactor(of: other)
         #expect(isFactorResult == isFactor)
-    }
-
-    @Test("Reciprocal of positive zero returns nil")
-    internal func reciprocalOfPositiveZeroReturnsNil() {
-        #expect(Double.zero.reciprocal == nil)
-    }
-
-    @Test("Positive zero is not invertible")
-    internal func positiveZeroIsNotInvertible() {
-        #expect(Double.zero.isInvertible == false)
     }
 
     @Test(

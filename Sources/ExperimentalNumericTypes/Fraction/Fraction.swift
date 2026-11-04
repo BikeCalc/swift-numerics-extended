@@ -462,8 +462,6 @@ where Term: Decodable {
 // MARK: - Divisible
 
 extension Fraction: Divisible {
-    public typealias Reciprocal = Self
-
     public typealias Divisor = Self
 
     public typealias Quotient = Self
@@ -471,27 +469,6 @@ extension Fraction: Divisible {
     public typealias RemainderDivisor = Self
 
     public typealias Remainder = Self
-
-    /// The reciprocal of this value, or `nil` when this value is zero or NaN.
-    ///
-    /// A finite reciprocal exchanges the stored numerator and denominator. The reciprocal of positive or negative
-    /// infinity is zero with the corresponding sign.
-    public var reciprocal: Self.Reciprocal? {
-        guard self.isInvertible == true else {
-            return nil
-        }
-
-        return .init(self.denominator, self.numerator)
-    }
-
-    /// A boolean value indicating whether this value has a reciprocal.
-    ///
-    /// Every value except zero and NaN has a reciprocal. In particular, infinity is invertible under the extended
-    /// arithmetic semantics because its reciprocal is signed zero.
-    public var isInvertible: Bool {
-        return self.isZero == false
-            && self.isNaN == false
-    }
 
     /// Returns a boolean value indicating whether this value is exactly divisible by the specified value.
     ///
@@ -688,6 +665,33 @@ extension Fraction: Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(self.numerator)
         hasher.combine(self.denominator)
+    }
+}
+
+// MARK: - Invertible
+
+extension Fraction: Invertible {
+    public typealias Reciprocal = Self
+
+    /// The reciprocal of this value, or `nil` when this value is zero or NaN.
+    ///
+    /// A finite reciprocal exchanges the stored numerator and denominator. The reciprocal of positive or negative
+    /// infinity is zero with the corresponding sign.
+    public var reciprocal: Self.Reciprocal? {
+        guard self.isInvertible == true else {
+            return nil
+        }
+
+        return .init(self.denominator, self.numerator)
+    }
+
+    /// A boolean value indicating whether this value has a reciprocal.
+    ///
+    /// Every value except zero and NaN has a reciprocal. In particular, infinity is invertible under the extended
+    /// arithmetic semantics because its reciprocal is signed zero.
+    public var isInvertible: Bool {
+        return self.isZero == false
+            && self.isNaN == false
     }
 }
 

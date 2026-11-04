@@ -24,8 +24,6 @@ extension Float32: Decreasable {}
 // MARK: - Divisible
 
 extension Float32: Divisible {
-    public typealias Reciprocal = Self
-
     public typealias Divisor = Self
 
     public typealias Quotient = Self
@@ -45,6 +43,12 @@ extension Float32: Divisible {
 // MARK: - Increasable
 
 extension Float32: Increasable {}
+
+// MARK: - Invertible
+
+extension Float32: Invertible {
+    public typealias Reciprocal = Self
+}
 
 // MARK: - Multipliable
 

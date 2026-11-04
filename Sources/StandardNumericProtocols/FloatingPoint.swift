@@ -21,25 +21,7 @@ where Self: Decreasable {
 }
 
 extension FloatingPoint
-where Self: Divisible, Self.Reciprocal == Self {
-    /// Returns the reciprocal of this instance.
-    public var reciprocal: Self.Reciprocal? {
-        guard self.isInvertible == true else {
-            return nil
-        }
-
-        return 1 / self
-    }
-}
-
-extension FloatingPoint
 where Self: Divisible {
-    /// A boolean value indicating whether this instance is invertible.
-    public var isInvertible: Bool {
-        return self.isZero == false
-            && self.isNaN == false
-    }
-
     /// Returns a boolean value indicating whether dividing this value by the specified value produces an exactly zero
     /// floating-point remainder.
     ///
@@ -172,6 +154,24 @@ where Self: Increasable {
     /// - Returns: The increased value.
     public func increasing(by percentage: Self) -> Self {
         return self + self * percentage / 100
+    }
+}
+
+extension FloatingPoint
+where Self: Invertible, Self.Reciprocal == Self {
+    /// Returns the reciprocal of this instance.
+    public var reciprocal: Self.Reciprocal? {
+        guard self.isInvertible == true else {
+            return nil
+        }
+
+        return 1 / self
+    }
+
+    /// A boolean value indicating whether this instance is invertible.
+    public var isInvertible: Bool {
+        return self.isZero == false
+            && self.isNaN == false
     }
 }
 

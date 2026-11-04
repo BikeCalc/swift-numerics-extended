@@ -449,8 +449,6 @@ extension Int4: Decodable {
 // MARK: - Divisible
 
 extension Int4: Divisible {
-    public typealias Reciprocal = Self
-
     public typealias Divisor = Self
 
     public typealias Quotient = Self
@@ -658,6 +656,12 @@ extension Int4: Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(self.value.hashValue)
     }
+}
+
+// MARK: - Invertible
+
+extension Int4: Invertible {
+    public typealias Reciprocal = Self
 }
 
 // MARK: - LosslessStringConvertible
