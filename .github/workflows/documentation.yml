@@ -30,11 +30,11 @@ jobs:
         run: swift Scripts/BuildDocumentation.swift
       - name: Setup GitHub Pages
         id: pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
       - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ".build/github-pages"
       - name: Deploy Documentation
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
