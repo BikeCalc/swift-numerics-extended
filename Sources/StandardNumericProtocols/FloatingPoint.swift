@@ -161,17 +161,18 @@ extension FloatingPoint
 where Self: Invertible, Self.Reciprocal == Self {
     /// Returns the reciprocal of this instance.
     public var reciprocal: Self.Reciprocal? {
-        guard self.isInvertible == true else {
+        let result: Self = 1 / self
+
+        guard result.isNormal == true || self.isZero == true || self.isFinite == false else {
             return nil
         }
 
-        return 1 / self
+        return result
     }
 
     /// A boolean value indicating whether this instance is invertible.
     public var isInvertible: Bool {
-        return self.isZero == false
-            && self.isNaN == false
+        return self.reciprocal != nil
     }
 }
 
