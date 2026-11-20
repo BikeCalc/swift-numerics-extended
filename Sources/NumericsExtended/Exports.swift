@@ -11,5 +11,6 @@
 @_exported import ExperimentalNumericConstants
 @_exported import ExperimentalNumericProtocols
 @_exported import ExperimentalNumericTypes
+@_exported import NumericsIntegration
 @_exported import StandardNumericProtocols
 @_exported import StandardNumericTypes

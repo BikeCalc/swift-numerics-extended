@@ -144,6 +144,7 @@ fileprivate struct DocumentationBuilder {
             "--target", "StandardNumericProtocols",
             "--target", "StandardNumericTypes",
             "--target", "NumericsExtended",
+            "--target", "NumericsIntegration",
             "--output-path", ".build/github-pages",
             "--transform-for-static-hosting",
             "--hosting-base-path", "swift-numerics-extended"
