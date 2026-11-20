@@ -52,17 +52,69 @@ internal struct DoubleInvertibleTests {
     }
 }
 
+// MARK: - Greatest Finite Magnitude
+
+extension DoubleInvertibleTests {
+    @Test(
+        "Reciprocal of greatest finite magnitude returns nil",
+        arguments: [
+            .greatestFiniteMagnitude,
+            -.greatestFiniteMagnitude
+        ] as Array<Double>
+    )
+    internal func reciprocalOfGreatestFiniteMagnitudeReturnsNil(dividend: Double) {
+        #expect(dividend.reciprocal == nil)
+    }
+
+    @Test(
+        "Greatest Finite Magnitude is not invertible",
+        arguments: [
+            .greatestFiniteMagnitude,
+            -.greatestFiniteMagnitude
+        ] as Array<Double>
+    )
+    internal func greatestFiniteMagnitudeIsNotInvertible(dividend: Double) {
+        #expect(dividend.isInvertible == false)
+    }
+}
+
+// MARK: - Least Nonzero Magnitude
+
+extension DoubleInvertibleTests {
+    @Test(
+        "Reciprocal of least nonzero magnitude returns nil",
+        arguments: [
+            .leastNonzeroMagnitude,
+            -.leastNonzeroMagnitude
+        ] as Array<Double>
+    )
+    internal func reciprocalOfLeastNonzeroMagnitudeReturnsNil(dividend: Double) {
+        #expect(dividend.reciprocal == nil)
+    }
+
+    @Test(
+        "Least Nonzero Magnitude is not invertible",
+        arguments: [
+            .leastNonzeroMagnitude,
+            -.leastNonzeroMagnitude
+        ] as Array<Double>
+    )
+    internal func leastNonzeroMagnitudeIsNotInvertible(dividend: Double) {
+        #expect(dividend.isInvertible == false)
+    }
+}
+
 // MARK: - NaN
 
 extension DoubleInvertibleTests {
-    @Test("Reciprocal of NaN returns nil")
-    internal func reciprocalOfNaNReturnsNil() {
-        #expect(Double.nan.reciprocal == nil)
+    @Test("Reciprocal of NaN returns NaN")
+    internal func reciprocalOfNaNReturnsNaN() {
+        #expect(Double.nan.reciprocal?.isNaN == true)
     }
 
-    @Test("NaN is not invertible")
-    internal func nanIsNotInvertible() {
-        #expect(Double.nan.isInvertible == false)
+    @Test("NaN is invertible")
+    internal func nanIsInvertible() {
+        #expect(Double.nan.isInvertible == true)
     }
 }
 
@@ -85,14 +137,14 @@ extension DoubleInvertibleTests {
 // MARK: - Negative Zero
 
 extension DoubleInvertibleTests {
-    @Test("Reciprocal of negative zero returns nil")
-    internal func reciprocalOfNegativeZeroReturnsNil() {
-        #expect(Double.negativeZero.reciprocal == nil)
+    @Test("Reciprocal of negative zero returns negative infinity")
+    internal func reciprocalOfNegativeZeroReturnsNegativeInfinity() {
+        #expect(Double.negativeZero.reciprocal == Double.negativeInfinity)
     }
 
-    @Test("Negative zero is not invertible")
-    internal func negativeZeroIsNotInvertible() {
-        #expect(Double.negativeZero.isInvertible == false)
+    @Test("Negative zero is invertible")
+    internal func negativeZeroIsInvertible() {
+        #expect(Double.negativeZero.isInvertible == true)
     }
 }
 
@@ -115,13 +167,13 @@ extension DoubleInvertibleTests {
 // MARK: - Positive Zero
 
 extension DoubleInvertibleTests {
-    @Test("Reciprocal of positive zero returns nil")
-    internal func reciprocalOfPositiveZeroReturnsNil() {
-        #expect(Double.zero.reciprocal == nil)
+    @Test("Reciprocal of positive zero returns positive infinity")
+    internal func reciprocalOfPositiveZeroReturnsPositiveInfinity() {
+        #expect(Double.zero.reciprocal == Double.infinity)
     }
 
-    @Test("Positive zero is not invertible")
-    internal func positiveZeroIsNotInvertible() {
-        #expect(Double.zero.isInvertible == false)
+    @Test("Positive zero is invertible")
+    internal func positiveZeroIsInvertible() {
+        #expect(Double.zero.isInvertible == true)
     }
 }
