@@ -22,6 +22,7 @@ releases.
 
 ### Articles
 
+- <doc:NumericsIntegration>
 - <doc:UnderstandingFourBitIntegers>
 - <doc:UnderstandingRationalTypes>
 - <doc:UnderstandingRomanNumerals>

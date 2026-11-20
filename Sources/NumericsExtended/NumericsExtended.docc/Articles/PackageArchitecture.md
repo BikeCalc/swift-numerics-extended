@@ -37,50 +37,50 @@ NumericsIntegrationTests
 those architectural boundaries internally.
 
 ```text
-                                  +-------------------------------+
-                                  |        NumericsExtended       |
-                                  +---------------+---------------+
+                                                   +-------------------------------+
+                                                   |        NumericsExtended       |
+                                                   +-------------------------------+
+                                                                   |
+                                 +---------------------------------+---------------------------------+
+                                 |                                 |                                 |
+                                 v                                 v                                 v
+                 +-------------------------------+ +-------------------------------+ +-------------------------------+
+                 |    ExperimentalNumericTypes   | |  ExperimentalNumericConstants | |      NumericsIntegration      |
+                 +-------------------------------+ +-------------------------------+ +-------------------------------+
+                                 |                                                                   |
+                +---------------------------------+                                                  |
+                |                                 |                                                  |
+                v                                 v                                                  |
++-------------------------------+ +-------------------------------+                                  |
+|      StandardNumericTypes     | |  ExperimentalNumericProtocols |                                  |
++-------------------------------+ +-------------------------------+                                  |
+                |                                 |                                                  |
+                v                                 |                                                  |
++-------------------------------+                 |                                                  |
+|    StandardNumericProtocols   |                 |                                                  |
++-------------------------------+                 |                                                  |
+                |                                 |                                                  |
+                +---------------------------------+<-------------------------------------------------+
                                                   |
-                                 +----------------+----------------+
-                                 |                                 |
-                                 v                                 v
-                 +-------------------------------+ +-------------------------------+
-                 |   ExperimentalNumericTypes    | | ExperimentalNumericConstants  |
-                 +---------------+---------------+ +-------------------------------+
-                                 |
-                +----------------+----------------+
-                |                                 |
-                v                                 v
-+-------------------------------+ +-------------------------------+
-|     StandardNumericTypes      | | ExperimentalNumericProtocols  |
-+---------------+---------------+ +---------------+---------------+
-                |                                 |
-                v                                 |
-+-------------------------------+                 |
-|   StandardNumericProtocols    |                 |
-+---------------+---------------+                 |
-                |                                 |
-                +--------------->+<---------------+
-                                 |
-                                 v
-                 +-------------------------------+
-                 |     CoreNumericProtocols      |
-                 +---------------+---------------+
-                                 |
-                                 v
-                 +-------------------------------+
-                 |     CoreNumericOperators      |
-                 +-------------------------------+
+                                                  v
+                                  +-------------------------------+
+                                  |      CoreNumericProtocols     |
+                                  +-------------------------------+
+                                                  |
+                                                  v
+                                  +-------------------------------+
+                                  |      CoreNumericOperators     |
+                                  +-------------------------------+
 ```
 
-Read each arrow downward from a target to one of its direct dependencies. Some direct edges are omitted to keep the
+Follow each arrow from a target to one of its direct dependencies. Some direct edges are omitted to keep the
 routes readable, so the absence of an arrow does not prove that two targets are unrelated. Vertical placement keeps the
 dependency flow clear rather than assigning targets to semantic tiers; consult the package manifest for the complete,
 authoritative definitions.
 
-## Swift Numerics Compatibility
+## Numerics Integration
 
-`NumericsIntegrationTests` checks our approximate-equality protocol against Apple’s
-[Swift Numerics](https://github.com/apple/swift-numerics). Only this test target depends on its `Numerics` product;
-library targets remain independent. These checks cover approximate comparison, not compatibility between every API in
-both packages.
+`NumericsIntegration` connects Swift Numerics types to the protocols in `CoreNumericProtocols`. It depends on that
+target and the external `Numerics` product. `NumericsExtended` depends on and re-exports `NumericsIntegration`.
+
+See <doc:NumericsIntegration> for setup, supported capabilities, and behavior.
