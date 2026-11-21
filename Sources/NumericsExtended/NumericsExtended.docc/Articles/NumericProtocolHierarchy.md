@@ -1,12 +1,12 @@
 # Numeric Protocol Hierarchy
 
-Explore how Swift's numeric protocol hierarchy supports standard-library and Numerics Extended types.
+Explore how Swift's numeric protocol hierarchy supports standard-library, Swift Numerics, and Numerics Extended types.
 
 ## Overview
 
 Swift's numeric protocols form several branches that converge on `Numeric`, including the floating-point,
 signed-integer, and binary-integer hierarchies. Numerics Extended adds package-owned entry points to that structure:
-`Fraction` conforms to `Rational`, while `Roman` conforms to `SymbolicInteger`.
+`Fraction<Int>` conforms to `Rational`, while `Roman` conforms to `SymbolicInteger`.
 
 `Fraction` also conditionally conforms to `SignedNumeric` when its `Term` conforms to `SignedInteger`. `Rational` and
 `SymbolicInteger` incorporate additional Core Numeric Protocol requirements, whereas standard-library protocols cannot
@@ -15,7 +15,7 @@ this refinement hierarchy.
 
 ```text
 +---------------------+ +---------------------+             +---------------------+ +---------------------+             +---------------------+
-|      Fraction       | |       Double        |             |         Int         | |        UInt         |             |        Roman        |
+|    Fraction<Int>    | |       Double        |             |         Int         | |        UInt         |             |        Roman        |
 +----------+----------+ +----------+----------+             +----------+----------+ +----------+----------+             +----------+----------+
            |                       |                                   |                       |                                   |
            |                       |                       +-----------+---------->+<----------+-----------+                       |
@@ -32,14 +32,14 @@ this refinement hierarchy.
            |            |    FloatingPoint    |            |            |    BinaryInteger    |                                    |
            |            +----------+----------+            |            +----------+----------+                                    |
            |                       |                       |                       |                                               |
-           +---------------------->+---------->+<----------+                       |                                               |
-           |                                   |                                   |                                               |
-           v                                   v                                   |                                               |
-+---------------------+             +---------------------+                        |                                               |
-|      Rational       |             |    SignedNumeric    |                        |                                               |
-+----------+----------+             +----------+----------+                        |                                               |
-           |                                   |                                   |                                               |
-           +---------------------------------->+---------------->+<----------------+<----------------------------------------------+
+           +---------------------->+<----------------------+                       |                                               |
+           |                       |                                               |                                               |
+           v                       v                                               |                                               |
++---------------------+ +---------------------+                                    |                                               |
+|      Rational       | |    SignedNumeric    |                                    |                                               |
++----------+----------+ +----------+----------+                                    |                                               |
+           |                       |                                               |                                               |
+           +---------------------->+---------------------------->+<----------------+<----------------------------------------------+
                                                                  |
                                                                  v
                                                       +---------------------+
@@ -55,6 +55,89 @@ this refinement hierarchy.
                                                       +---------------------+
                                                       |      Equatable      |
                                                       +---------------------+
+```
+
+Swift Numerics extends `Double` with a conformance to `Real`, alongside its standard-library conformances.
+
+```text
+            +---------------------+
+            |        Double       |
+            +---------------------+
+                       |
+           +-----------+-----------+
+           |                       |
+           v                       v
++---------------------+ +---------------------+
+| BinaryFloatingPoint | |         Real        |
++---------------------+ +---------------------+
+           |                       |
+           +<----------------------+-----------------------+
+           |                       |                       |
+           v                       v                       v
++---------------------+ +---------------------+ +---------------------+
+|    FloatingPoint    | |   AlgebraicField    | |    RealFunctions    |
++---------------------+ +---------------------+ +---------------------+
+           |                       |                       |
+           +---------->+<----------+                       |
+                       |                                   |
+                       v                                   v
+            +---------------------+             +---------------------+
+            |    SignedNumeric    |             | ElementaryFunctions |
+            +---------------------+             +---------------------+
+                       |                                   |
+                       v                                   |
+            +---------------------+                        |
+            |       Numeric       |                        |
+            +---------------------+                        |
+                       |                                   |
+                       +---------------->+<----------------+
+                                         |
+                                         v
+                              +---------------------+
+                              |  AdditiveArithmetic |
+                              +---------------------+
+                                         |
+                                         v
+                              +---------------------+
+                              |      Equatable      |
+                              +---------------------+
+```
+
+`Complex<Double>` connects to the standard-library hierarchy through `AlgebraicField` and `ElementaryFunctions`.
+
+```text
+            +---------------------+
+            |   Complex<Double>   |
+            +---------------------+
+                       |
+           +-----------+-----------+
+           |                       |
+           v                       v
++---------------------+ +---------------------+
+|   AlgebraicField    | | ElementaryFunctions |
++---------------------+ +---------------------+
+           |                       |
+           v                       |
++---------------------+            |
+|    SignedNumeric    |            |
++---------------------+            |
+           |                       |
+           v                       |
++---------------------+            |
+|       Numeric       |            |
++---------------------+            |
+           |                       |
+           +---------->+<----------+
+                       |
+                       v
+            +---------------------+
+            | AdditiveArithmetic  |
+            +---------------------+
+                       |
+                       v
+            +---------------------+
+            |      Equatable      |
+            +---------------------+
 ```
 
 Read each arrow downward from a concrete type to a protocol or from a refining protocol to one of its requirements.
