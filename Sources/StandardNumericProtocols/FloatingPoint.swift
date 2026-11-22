@@ -159,7 +159,10 @@ where Self: Increasable {
 
 extension FloatingPoint
 where Self: Invertible, Self.Reciprocal == Self {
-    /// Returns the reciprocal of this instance.
+    /// Returns the reciprocal using Swift Numerics' floating-point representability policy.
+    ///
+    /// Zero returns signed infinity, infinity returns signed zero, and NaN returns NaN. For finite nonzero
+    /// values, returns `nil` when the quotient is not normal, including overflow and subnormal results.
     public var reciprocal: Self.Reciprocal? {
         let result: Self = 1 / self
 
@@ -170,7 +173,7 @@ where Self: Invertible, Self.Reciprocal == Self {
         return result
     }
 
-    /// A boolean value indicating whether this instance is invertible.
+    /// A boolean value indicating whether the reciprocal is non-nil, including for zero and NaN.
     public var isInvertible: Bool {
         return self.reciprocal != nil
     }
