@@ -4,19 +4,23 @@ Use Swift Numerics types with Numerics Extended protocols.
 
 ## Overview
 
-Numerics Integration adds Numerics Extended protocol conformances to Apple's `Complex` type. These conformances let
-complex values participate in generic algorithms that require individual numeric capabilities.
+Numerics Integration adds Numerics Extended protocol conformances to Swift Numerics' `Complex` type and
+approximate-equality conformances to standard floating-point types. These conformances let values participate in generic
+algorithms that require individual numeric capabilities.
 
 ## Using the Integration
 
 Add the `NumericsExtended` and Swift Numerics `Numerics` products to your target's dependencies. Import
-`NumericsExtended` to make the conformances available, and import `Numerics` to use Apple's types and APIs. No separate
-integration product or import is required.
+`NumericsExtended` to make the conformances available, and import `Numerics` to use Swift Numerics' types and APIs. No
+separate integration product or import is required.
 
 Swift Numerics is included as a package dependency of Numerics Extended. Its APIs are not re-exported by
 `NumericsExtended`.
 
 ## Supported Capabilities
+
+`Float16`, `Float32`, and `Float64` conform to ``/CoreNumericProtocols/ApproximatelyEquatable``, using Swift Numerics'
+existing comparison methods.
 
 `Complex` conforms to the following protocols:
 
@@ -33,7 +37,3 @@ The conformances reuse Swift Numerics' implementations of arithmetic, approximat
 Approximate comparisons use `Complex`'s maximum-component magnitude and Swift Numerics' tolerance and nonfinite-value
 rules. `isInvertible` is true when Swift Numerics returns a non-nil reciprocal; it does not impose a separate
 invertibility rule.
-
-The integration does not add `Multipliable`, `Divisible`, or `Raisable` conformances to `Complex`. Those protocols
-require additional operations, such as multiple checking, remainders, or power checking, beyond Apple's arithmetic
-operators. Swift Numerics' own multiplication, division, and power APIs remain available.
