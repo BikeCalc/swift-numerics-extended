@@ -15,11 +15,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
-    name: Deploy Documentation
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
+    name: Build Documentation
     runs-on: macos-latest
     steps:
       - name: Checkout Repository
@@ -35,6 +32,15 @@ jobs:
         uses: actions/upload-pages-artifact@v5
         with:
           path: ".build/github-pages"
+
+  deploy:
+    name: Deploy Documentation
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy Documentation
         id: deployment
         uses: actions/deploy-pages@v5
