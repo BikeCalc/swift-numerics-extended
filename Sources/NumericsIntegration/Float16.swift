@@ -6,12 +6,16 @@
 // See LICENSE.md for license information
 // See CONTRIBUTORS.txt for the list of Numerics Extended project authors
 
+import CoreNumericProtocols
 import Numerics
-import NumericsExtended
 
-// Test-only conformance: Apple's existing method satisfies the protocol without a replacement overload.
-extension Float32: ApproximatelyEquatable {
+// MARK: - ApproximatelyEquatable
+
+#if !((os(macOS) || targetEnvironment(macCatalyst)) && arch(x86_64))
+@available(iOS 14, macCatalyst 14, macOS 11, tvOS 14, watchOS 7, *)
+extension Float16: ApproximatelyEquatable {
     public typealias AbsoluteTolerance = Self
 
     public typealias RelativeTolerance = Self
 }
+#endif

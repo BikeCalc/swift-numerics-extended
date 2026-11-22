@@ -1,0 +1,60 @@
+// This source file is part of the Numerics Extended open source project
+//
+// Copyright (c) 2021-2026 A. H. de Quatre Ltd. and the Numerics Extended project authors
+// Licensed under Apache License v2.0 with Runtime Library Exception
+//
+// See LICENSE.md for license information
+// See CONTRIBUTORS.txt for the list of Numerics Extended project authors
+
+import Numerics
+import NumericsExtended
+import Testing
+
+#if !((os(macOS) || targetEnvironment(macCatalyst)) && arch(x86_64))
+@Suite("Float16 ApproximatelyEquatable Tests")
+internal struct Float16ApproximatelyEquatableTests {
+    internal init() {}
+
+    @Test(
+        "Approximate equality uses the protocol's tolerances",
+        arguments: [
+            (1, 1.25, 0.5, 0, true),
+            (8, 9, 0, 0.25, true),
+            (1, 2, 0.125, 0.125, false)
+        ] as Array<(Float16, Float16, Float16, Float16, Bool)>
+    )
+    internal func approximateEquality(
+        lhs: Float16,
+        rhs: Float16,
+        absoluteTolerance: Float16,
+        relativeTolerance: Float16,
+        expected: Bool
+    ) {
+        let result: Bool = Self.approximatelyEqual(
+            lhs,
+            rhs,
+            absoluteTolerance: absoluteTolerance,
+            relativeTolerance: relativeTolerance
+        )
+        #expect(result == expected)
+    }
+}
+
+// MARK: - Generic Protocol Calls
+
+extension Float16ApproximatelyEquatableTests {
+    private static func approximatelyEqual<Value>(
+        _ lhs: Value,
+        _ rhs: Value,
+        absoluteTolerance: Value.AbsoluteTolerance,
+        relativeTolerance: Value.RelativeTolerance
+    ) -> Bool
+    where Value: ApproximatelyEquatable {
+        return lhs.isApproximatelyEqual(
+            to: rhs,
+            absoluteTolerance: absoluteTolerance,
+            relativeTolerance: relativeTolerance
+        )
+    }
+}
+#endif
