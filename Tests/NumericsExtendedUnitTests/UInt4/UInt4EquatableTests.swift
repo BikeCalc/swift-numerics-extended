@@ -53,8 +53,8 @@ internal struct UInt4EquatableTests {
         lhs: UInt4,
         rhs: UInt4,
         expected: Bool
-    ) throws {
-        let result: Bool = try lhs.isEqual(to: rhs)
+    ) {
+        let result: Bool = lhs.isEqual(to: rhs)
         #expect(result == expected)
     }
 
@@ -66,8 +66,8 @@ internal struct UInt4EquatableTests {
         lhs: UInt4,
         rhs: UInt4,
         expected: Bool
-    ) throws {
-        let result: Bool = try lhs.isUnequal(to: rhs)
+    ) {
+        let result: Bool = lhs.isUnequal(to: rhs)
         #expect(result == !expected)
     }
 }
@@ -86,14 +86,14 @@ extension UInt4EquatableTests {
         lhs: UInt4,
         rhs: UInt4,
         expected: Bool
-    ) throws {
+    ) {
         let equalityResult: Bool = lhs == rhs
         #expect(equalityResult == expected)
         let inequalityResult: Bool = lhs != rhs
         #expect(inequalityResult == !expected)
-        let isEqualResult: Bool = try lhs.isEqual(to: rhs)
+        let isEqualResult: Bool = lhs.isEqual(to: rhs)
         #expect(isEqualResult == expected)
-        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        let isUnequalResult: Bool = lhs.isUnequal(to: rhs)
         #expect(isUnequalResult == !expected)
     }
 }

@@ -32,10 +32,10 @@ internal struct DoubleEquatableTests {
     internal func equalityPredicates(
         lhs: Double,
         rhs: Double
-    ) throws {
-        let isEqualResult: Bool = lhs.isEqual(to: rhs)
+    ) {
+        let isEqualResult: Bool = Self.genericIsEqual(lhs, rhs)
         #expect(isEqualResult == (lhs == rhs))
-        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        let isUnequalResult: Bool = lhs.isUnequal(to: rhs)
         #expect(isUnequalResult == (lhs != rhs))
     }
 }
@@ -54,14 +54,14 @@ extension DoubleEquatableTests {
     internal func nanEqualityFollowsFloatingPointRules(
         lhs: Double,
         rhs: Double
-    ) throws {
+    ) {
         let equalityResult: Bool = lhs == rhs
         #expect(equalityResult == false)
         let inequalityResult: Bool = lhs != rhs
         #expect(inequalityResult == true)
-        let isEqualResult: Bool = lhs.isEqual(to: rhs)
+        let isEqualResult: Bool = Self.genericIsEqual(lhs, rhs)
         #expect(isEqualResult == false)
-        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        let isUnequalResult: Bool = lhs.isUnequal(to: rhs)
         #expect(isUnequalResult == true)
     }
 }
@@ -80,14 +80,14 @@ extension DoubleEquatableTests {
         lhs: Double,
         rhs: Double,
         expected: Bool
-    ) throws {
+    ) {
         let equalityResult: Bool = lhs == rhs
         #expect(equalityResult == expected)
         let inequalityResult: Bool = lhs != rhs
         #expect(inequalityResult == !expected)
-        let isEqualResult: Bool = lhs.isEqual(to: rhs)
+        let isEqualResult: Bool = Self.genericIsEqual(lhs, rhs)
         #expect(isEqualResult == expected)
-        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        let isUnequalResult: Bool = lhs.isUnequal(to: rhs)
         #expect(isUnequalResult == !expected)
     }
 }
@@ -107,14 +107,14 @@ extension DoubleEquatableTests {
         lhs: Double,
         rhs: Double,
         expected: Bool
-    ) throws {
+    ) {
         let equalityResult: Bool = lhs == rhs
         #expect(equalityResult == expected)
         let inequalityResult: Bool = lhs != rhs
         #expect(inequalityResult == !expected)
-        let isEqualResult: Bool = lhs.isEqual(to: rhs)
+        let isEqualResult: Bool = Self.genericIsEqual(lhs, rhs)
         #expect(isEqualResult == expected)
-        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        let isUnequalResult: Bool = lhs.isUnequal(to: rhs)
         #expect(isUnequalResult == !expected)
     }
 }
@@ -133,14 +133,14 @@ extension DoubleEquatableTests {
         lhs: Double,
         rhs: Double,
         expected: Bool
-    ) throws {
+    ) {
         let equalityResult: Bool = lhs == rhs
         #expect(equalityResult == expected)
         let inequalityResult: Bool = lhs != rhs
         #expect(inequalityResult == !expected)
-        let isEqualResult: Bool = lhs.isEqual(to: rhs)
+        let isEqualResult: Bool = Self.genericIsEqual(lhs, rhs)
         #expect(isEqualResult == expected)
-        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        let isUnequalResult: Bool = lhs.isUnequal(to: rhs)
         #expect(isUnequalResult == !expected)
     }
 }
@@ -160,14 +160,24 @@ extension DoubleEquatableTests {
         lhs: Double,
         rhs: Double,
         expected: Bool
-    ) throws {
+    ) {
         let equalityResult: Bool = lhs == rhs
         #expect(equalityResult == expected)
         let inequalityResult: Bool = lhs != rhs
         #expect(inequalityResult == !expected)
-        let isEqualResult: Bool = lhs.isEqual(to: rhs)
+        let isEqualResult: Bool = Self.genericIsEqual(lhs, rhs)
         #expect(isEqualResult == expected)
-        let isUnequalResult: Bool = try lhs.isUnequal(to: rhs)
+        let isUnequalResult: Bool = lhs.isUnequal(to: rhs)
         #expect(isUnequalResult == !expected)
+    }
+}
+
+extension DoubleEquatableTests {
+    private static func genericIsEqual<Value>(
+        _ lhs: Value,
+        _ rhs: Value
+    ) -> Bool
+    where Value: Equatable {
+        return lhs.isEqual(to: rhs)
     }
 }

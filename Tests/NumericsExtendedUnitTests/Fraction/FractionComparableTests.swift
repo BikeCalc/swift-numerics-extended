@@ -49,10 +49,10 @@ internal struct FractionComparableTests {
         isLessThanOrEqualExpected _: Bool,
         isGreaterExpected _: Bool,
         isGreaterThanOrEqualExpected _: Bool
-    ) throws {
+    ) {
         let lessThanResult: Bool = lhs < rhs
         #expect(lessThanResult == isLessExpected)
-        let isLessResult: Bool = try lhs.isLess(than: rhs)
+        let isLessResult: Bool = lhs.isLess(than: rhs)
         #expect(isLessResult == isLessExpected)
     }
 
@@ -67,10 +67,10 @@ internal struct FractionComparableTests {
         isLessThanOrEqualExpected: Bool,
         isGreaterExpected _: Bool,
         isGreaterThanOrEqualExpected _: Bool
-    ) throws {
+    ) {
         let lessThanOrEqualResult: Bool = lhs <= rhs
         #expect(lessThanOrEqualResult == isLessThanOrEqualExpected)
-        let isLessThanOrEqualResult: Bool = try lhs.isLessThanOrEqual(to: rhs)
+        let isLessThanOrEqualResult: Bool = lhs.isLessThanOrEqual(to: rhs)
         #expect(isLessThanOrEqualResult == isLessThanOrEqualExpected)
     }
 
@@ -85,10 +85,10 @@ internal struct FractionComparableTests {
         isLessThanOrEqualExpected _: Bool,
         isGreaterExpected: Bool,
         isGreaterThanOrEqualExpected _: Bool
-    ) throws {
+    ) {
         let greaterThanResult: Bool = lhs > rhs
         #expect(greaterThanResult == isGreaterExpected)
-        let isGreaterResult: Bool = try lhs.isGreater(than: rhs)
+        let isGreaterResult: Bool = lhs.isGreater(than: rhs)
         #expect(isGreaterResult == isGreaterExpected)
     }
 
@@ -103,10 +103,10 @@ internal struct FractionComparableTests {
         isLessThanOrEqualExpected _: Bool,
         isGreaterExpected _: Bool,
         isGreaterThanOrEqualExpected: Bool
-    ) throws {
+    ) {
         let greaterThanOrEqualResult: Bool = lhs >= rhs
         #expect(greaterThanOrEqualResult == isGreaterThanOrEqualExpected)
-        let isGreaterThanOrEqualResult: Bool = try lhs.isGreaterThanOrEqual(to: rhs)
+        let isGreaterThanOrEqualResult: Bool = lhs.isGreaterThanOrEqual(to: rhs)
         #expect(isGreaterThanOrEqualResult == isGreaterThanOrEqualExpected)
     }
 
@@ -118,9 +118,9 @@ internal struct FractionComparableTests {
         value: Fraction<Int>,
         lowerBound: Fraction<Int>,
         upperBound: Fraction<Int>
-    ) throws {
+    ) {
         let range: ClosedRange<Fraction<Int>> = lowerBound ... upperBound
-        let result: Bool = try value.isWithin(range)
+        let result: Bool = value.isWithin(range)
         #expect(result == range.contains(value))
     }
 
@@ -132,8 +132,8 @@ internal struct FractionComparableTests {
         value: Fraction<Int>,
         lowerBound: Fraction<Int>,
         upperBound: Fraction<Int>
-    ) throws {
-        let result: Bool = try value.isWithin(lowerBound, upperBound) == true
+    ) {
+        let result: Bool = value.isWithin(lowerBound, upperBound) == true
         #expect(result == (value >= lowerBound && value <= upperBound))
     }
 
@@ -145,8 +145,8 @@ internal struct FractionComparableTests {
         value: Fraction<Int>,
         lowerBound: Fraction<Int>,
         upperBound: Fraction<Int>
-    ) throws {
-        let result: Bool = try value.isBetween(lowerBound, upperBound) == true
+    ) {
+        let result: Bool = value.isBetween(lowerBound, upperBound) == true
         #expect(result == (value > lowerBound && value < upperBound))
     }
 }
@@ -182,7 +182,7 @@ extension FractionComparableTests {
     internal func nanComparisonFollowsRationalRules(
         lhs: Fraction<Int>,
         rhs: Fraction<Int>
-    ) throws {
+    ) {
         let lessThanResult: Bool = lhs < rhs
         #expect(lessThanResult == false)
         let greaterThanResult: Bool = lhs > rhs
@@ -191,13 +191,13 @@ extension FractionComparableTests {
         #expect(lessThanOrEqualResult == false)
         let greaterThanOrEqualResult: Bool = lhs >= rhs
         #expect(greaterThanOrEqualResult == false)
-        let isLessResult: Bool = try lhs.isLess(than: rhs)
+        let isLessResult: Bool = lhs.isLess(than: rhs)
         #expect(isLessResult == false)
-        let isLessThanOrEqualResult: Bool = try lhs.isLessThanOrEqual(to: rhs)
+        let isLessThanOrEqualResult: Bool = lhs.isLessThanOrEqual(to: rhs)
         #expect(isLessThanOrEqualResult == false)
-        let isGreaterResult: Bool = try lhs.isGreater(than: rhs)
+        let isGreaterResult: Bool = lhs.isGreater(than: rhs)
         #expect(isGreaterResult == false)
-        let isGreaterThanOrEqualResult: Bool = try lhs.isGreaterThanOrEqual(to: rhs)
+        let isGreaterThanOrEqualResult: Bool = lhs.isGreaterThanOrEqual(to: rhs)
         #expect(isGreaterThanOrEqualResult == false)
     }
 }
@@ -220,7 +220,7 @@ extension FractionComparableTests {
         isLessThanOrEqualExpected: Bool,
         isGreaterExpected: Bool,
         isGreaterThanOrEqualExpected: Bool
-    ) throws {
+    ) {
         let lessThanResult: Bool = lhs < rhs
         #expect(lessThanResult == isLessExpected)
         let lessThanOrEqualResult: Bool = lhs <= rhs
@@ -229,13 +229,13 @@ extension FractionComparableTests {
         #expect(greaterThanResult == isGreaterExpected)
         let greaterThanOrEqualResult: Bool = lhs >= rhs
         #expect(greaterThanOrEqualResult == isGreaterThanOrEqualExpected)
-        let isLessResult: Bool = try lhs.isLess(than: rhs)
+        let isLessResult: Bool = lhs.isLess(than: rhs)
         #expect(isLessResult == isLessExpected)
-        let isLessThanOrEqualResult: Bool = try lhs.isLessThanOrEqual(to: rhs)
+        let isLessThanOrEqualResult: Bool = lhs.isLessThanOrEqual(to: rhs)
         #expect(isLessThanOrEqualResult == isLessThanOrEqualExpected)
-        let isGreaterResult: Bool = try lhs.isGreater(than: rhs)
+        let isGreaterResult: Bool = lhs.isGreater(than: rhs)
         #expect(isGreaterResult == isGreaterExpected)
-        let isGreaterThanOrEqualResult: Bool = try lhs.isGreaterThanOrEqual(to: rhs)
+        let isGreaterThanOrEqualResult: Bool = lhs.isGreaterThanOrEqual(to: rhs)
         #expect(isGreaterThanOrEqualResult == isGreaterThanOrEqualExpected)
     }
 }
@@ -259,7 +259,7 @@ extension FractionComparableTests {
         isLessThanOrEqualExpected: Bool,
         isGreaterExpected: Bool,
         isGreaterThanOrEqualExpected: Bool
-    ) throws {
+    ) {
         let lessThanResult: Bool = lhs < rhs
         #expect(lessThanResult == isLessExpected)
         let lessThanOrEqualResult: Bool = lhs <= rhs
@@ -268,13 +268,13 @@ extension FractionComparableTests {
         #expect(greaterThanResult == isGreaterExpected)
         let greaterThanOrEqualResult: Bool = lhs >= rhs
         #expect(greaterThanOrEqualResult == isGreaterThanOrEqualExpected)
-        let isLessResult: Bool = try lhs.isLess(than: rhs)
+        let isLessResult: Bool = lhs.isLess(than: rhs)
         #expect(isLessResult == isLessExpected)
-        let isLessThanOrEqualResult: Bool = try lhs.isLessThanOrEqual(to: rhs)
+        let isLessThanOrEqualResult: Bool = lhs.isLessThanOrEqual(to: rhs)
         #expect(isLessThanOrEqualResult == isLessThanOrEqualExpected)
-        let isGreaterResult: Bool = try lhs.isGreater(than: rhs)
+        let isGreaterResult: Bool = lhs.isGreater(than: rhs)
         #expect(isGreaterResult == isGreaterExpected)
-        let isGreaterThanOrEqualResult: Bool = try lhs.isGreaterThanOrEqual(to: rhs)
+        let isGreaterThanOrEqualResult: Bool = lhs.isGreaterThanOrEqual(to: rhs)
         #expect(isGreaterThanOrEqualResult == isGreaterThanOrEqualExpected)
     }
 }
@@ -297,7 +297,7 @@ extension FractionComparableTests {
         isLessThanOrEqualExpected: Bool,
         isGreaterExpected: Bool,
         isGreaterThanOrEqualExpected: Bool
-    ) throws {
+    ) {
         let lessThanResult: Bool = lhs < rhs
         #expect(lessThanResult == isLessExpected)
         let lessThanOrEqualResult: Bool = lhs <= rhs
@@ -306,13 +306,13 @@ extension FractionComparableTests {
         #expect(greaterThanResult == isGreaterExpected)
         let greaterThanOrEqualResult: Bool = lhs >= rhs
         #expect(greaterThanOrEqualResult == isGreaterThanOrEqualExpected)
-        let isLessResult: Bool = try lhs.isLess(than: rhs)
+        let isLessResult: Bool = lhs.isLess(than: rhs)
         #expect(isLessResult == isLessExpected)
-        let isLessThanOrEqualResult: Bool = try lhs.isLessThanOrEqual(to: rhs)
+        let isLessThanOrEqualResult: Bool = lhs.isLessThanOrEqual(to: rhs)
         #expect(isLessThanOrEqualResult == isLessThanOrEqualExpected)
-        let isGreaterResult: Bool = try lhs.isGreater(than: rhs)
+        let isGreaterResult: Bool = lhs.isGreater(than: rhs)
         #expect(isGreaterResult == isGreaterExpected)
-        let isGreaterThanOrEqualResult: Bool = try lhs.isGreaterThanOrEqual(to: rhs)
+        let isGreaterThanOrEqualResult: Bool = lhs.isGreaterThanOrEqual(to: rhs)
         #expect(isGreaterThanOrEqualResult == isGreaterThanOrEqualExpected)
     }
 }
@@ -336,7 +336,7 @@ extension FractionComparableTests {
         isLessThanOrEqualExpected: Bool,
         isGreaterExpected: Bool,
         isGreaterThanOrEqualExpected: Bool
-    ) throws {
+    ) {
         let lessThanResult: Bool = lhs < rhs
         #expect(lessThanResult == isLessExpected)
         let lessThanOrEqualResult: Bool = lhs <= rhs
@@ -345,13 +345,13 @@ extension FractionComparableTests {
         #expect(greaterThanResult == isGreaterExpected)
         let greaterThanOrEqualResult: Bool = lhs >= rhs
         #expect(greaterThanOrEqualResult == isGreaterThanOrEqualExpected)
-        let isLessResult: Bool = try lhs.isLess(than: rhs)
+        let isLessResult: Bool = lhs.isLess(than: rhs)
         #expect(isLessResult == isLessExpected)
-        let isLessThanOrEqualResult: Bool = try lhs.isLessThanOrEqual(to: rhs)
+        let isLessThanOrEqualResult: Bool = lhs.isLessThanOrEqual(to: rhs)
         #expect(isLessThanOrEqualResult == isLessThanOrEqualExpected)
-        let isGreaterResult: Bool = try lhs.isGreater(than: rhs)
+        let isGreaterResult: Bool = lhs.isGreater(than: rhs)
         #expect(isGreaterResult == isGreaterExpected)
-        let isGreaterThanOrEqualResult: Bool = try lhs.isGreaterThanOrEqual(to: rhs)
+        let isGreaterThanOrEqualResult: Bool = lhs.isGreaterThanOrEqual(to: rhs)
         #expect(isGreaterThanOrEqualResult == isGreaterThanOrEqualExpected)
     }
 }

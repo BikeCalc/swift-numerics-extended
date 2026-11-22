@@ -11,8 +11,7 @@ extension Equatable {
     ///
     /// - Parameter rhs: Another value to compare.
     /// - Returns: A boolean indicating whether the two values are equal.
-    /// - Throws: An error if the conforming type cannot perform the equality comparison.
-    public func isEqual(to rhs: Self) throws -> Bool {
+    public func isEqual(to rhs: Self) -> Bool {
         return self == rhs
     }
 
@@ -20,8 +19,7 @@ extension Equatable {
     ///
     /// - Parameter rhs: Another value to compare.
     /// - Returns: A boolean indicating whether the two values are unequal.
-    /// - Throws: An error if the conforming type cannot perform the equality comparison.
-    public func isUnequal(to rhs: Self) throws -> Bool {
+    public func isUnequal(to rhs: Self) -> Bool {
         return self != rhs
     }
 }

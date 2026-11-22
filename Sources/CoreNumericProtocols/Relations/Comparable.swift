@@ -11,8 +11,7 @@ extension Comparable {
     ///
     /// - Parameter rhs: Another value to compare.
     /// - Returns: A boolean indicating whether this value is less than the specified value.
-    /// - Throws: An error if the conforming type cannot perform the comparison.
-    public func isLess(than rhs: Self) throws -> Bool {
+    public func isLess(than rhs: Self) -> Bool {
         return self < rhs
     }
 
@@ -20,8 +19,7 @@ extension Comparable {
     ///
     /// - Parameter rhs: Another value to compare.
     /// - Returns: A boolean indicating whether this value is less than or equal to the specified value.
-    /// - Throws: An error if the conforming type cannot perform the comparison.
-    public func isLessThanOrEqual(to rhs: Self) throws -> Bool {
+    public func isLessThanOrEqual(to rhs: Self) -> Bool {
         return self <= rhs
     }
 
@@ -29,8 +27,7 @@ extension Comparable {
     ///
     /// - Parameter rhs: Another value to compare.
     /// - Returns: A boolean indicating whether this value is greater than the specified value.
-    /// - Throws: An error if the conforming type cannot perform the comparison.
-    public func isGreater(than rhs: Self) throws -> Bool {
+    public func isGreater(than rhs: Self) -> Bool {
         return self > rhs
     }
 
@@ -38,8 +35,7 @@ extension Comparable {
     ///
     /// - Parameter rhs: Another value to compare.
     /// - Returns: A boolean indicating whether this value is greater than or equal to the specified value.
-    /// - Throws: An error if the conforming type cannot perform the comparison.
-    public func isGreaterThanOrEqual(to rhs: Self) throws -> Bool {
+    public func isGreaterThanOrEqual(to rhs: Self) -> Bool {
         return self >= rhs
     }
 
@@ -47,9 +43,8 @@ extension Comparable {
     ///
     /// - Parameter closedRange: An interval from a lower bound up to, and including, an upper bound.
     /// - Returns: A boolean value.
-    /// - Throws: An error if the conforming type cannot perform the comparison.
-    public func isWithin(_ closedRange: ClosedRange<Self>) throws -> Bool {
-        return try self.isGreaterThanOrEqual(to: closedRange.lowerBound) == true
+    public func isWithin(_ closedRange: ClosedRange<Self>) -> Bool {
+        return self.isGreaterThanOrEqual(to: closedRange.lowerBound) == true
             && self.isLessThanOrEqual(to: closedRange.upperBound) == true
     }
 
@@ -59,18 +54,17 @@ extension Comparable {
     ///   - lowerBound: The lower bound value.
     ///   - upperBound: The upper bound value.
     /// - Returns: A boolean value.
-    /// - Throws: An error if the conforming type cannot perform the comparison.
     /// - Precondition: `lowerBound` must be less than `upperBound`.
     public func isWithin(
         _ lowerBound: Self,
         _ upperBound: Self
-    ) throws -> Bool {
-        let boundsAreOrdered: Bool = try lowerBound.isLess(than: upperBound)
+    ) -> Bool {
+        let boundsAreOrdered: Bool = lowerBound.isLess(than: upperBound)
         precondition(
             boundsAreOrdered == true,
             "Lower bound must be less than upper bound."
         )
-        return try self.isGreaterThanOrEqual(to: lowerBound) == true
+        return self.isGreaterThanOrEqual(to: lowerBound) == true
             && self.isLessThanOrEqual(to: upperBound) == true
     }
 
@@ -80,18 +74,17 @@ extension Comparable {
     ///   - lowerBound: The lower bound value.
     ///   - upperBound: The upper bound value.
     /// - Returns: A boolean value.
-    /// - Throws: An error if the conforming type cannot perform the comparison.
     /// - Precondition: `lowerBound` must be less than `upperBound`.
     public func isBetween(
         _ lowerBound: Self,
         _ upperBound: Self
-    ) throws -> Bool {
-        let boundsAreOrdered: Bool = try lowerBound.isLess(than: upperBound)
+    ) -> Bool {
+        let boundsAreOrdered: Bool = lowerBound.isLess(than: upperBound)
         precondition(
             boundsAreOrdered == true,
             "Lower bound must be less than upper bound."
         )
-        return try lowerBound.isLess(than: self) == true
+        return lowerBound.isLess(than: self) == true
             && self.isLess(than: upperBound) == true
     }
 }
