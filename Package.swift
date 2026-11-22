@@ -104,8 +104,19 @@ let package: Package = .init(
                 "ExperimentalNumericConstants",
                 "ExperimentalNumericProtocols",
                 "ExperimentalNumericTypes",
+                "NumericsIntegration",
                 "StandardNumericProtocols",
                 "StandardNumericTypes"
+            ]
+        ),
+        .target(
+            name: "NumericsIntegration",
+            dependencies: [
+                "CoreNumericProtocols",
+                .product(
+                    name: "Numerics",
+                    package: "swift-numerics"
+                )
             ]
         ),
         .target(
