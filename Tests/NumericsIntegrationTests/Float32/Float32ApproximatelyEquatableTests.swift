@@ -15,21 +15,21 @@ internal struct Float32ApproximatelyEquatableTests {
     internal init() {}
 
     @Test(
-        "Approximate equality uses the protocol's tolerances",
+        "Is approximately equal",
         arguments: [
             (1, 1.25, 0.5, 0, true),
             (8, 9, 0, 0.25, true),
             (1, 2, 0.125, 0.125, false)
         ] as Array<(Float32, Float32, Float32, Float32, Bool)>
     )
-    internal func approximateEquality(
+    internal func isApproximatelyEqual(
         lhs: Float32,
         rhs: Float32,
         absoluteTolerance: Float32,
         relativeTolerance: Float32,
         expected: Bool
     ) {
-        let result: Bool = Self.approximatelyEqual(
+        let result: Bool = Self.genericApproximatelyEqual(
             lhs,
             rhs,
             absoluteTolerance: absoluteTolerance,
@@ -37,12 +37,8 @@ internal struct Float32ApproximatelyEquatableTests {
         )
         #expect(result == expected)
     }
-}
 
-// MARK: - Generic Protocol Calls
-
-extension Float32ApproximatelyEquatableTests {
-    private static func approximatelyEqual<Value>(
+    private static func genericApproximatelyEqual<Value>(
         _ lhs: Value,
         _ rhs: Value,
         absoluteTolerance: Value.AbsoluteTolerance,

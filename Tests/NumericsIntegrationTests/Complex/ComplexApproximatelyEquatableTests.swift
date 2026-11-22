@@ -15,21 +15,21 @@ internal struct ComplexApproximatelyEquatableTests {
     internal init() {}
 
     @Test(
-        "Approximate equality uses the protocol's tolerances",
+        "Is approximately equal",
         arguments: [
             (.init(1, 2), .init(1.25, 2.25), 0.5, 0, true),
             (.init(8, 16), .init(9, 18), 0, 0.25, true),
             (.init(1, 2), .init(2, 4), 0.125, 0.125, false)
         ] as Array<(Complex<Double>, Complex<Double>, Double, Double, Bool)>
     )
-    internal func approximateEquality(
+    internal func isApproximatelyEqual(
         lhs: Complex<Double>,
         rhs: Complex<Double>,
         absoluteTolerance: Double,
         relativeTolerance: Double,
         expected: Bool
     ) {
-        let result: Bool = Self.approximatelyEqual(
+        let result: Bool = Self.genericApproximatelyEqual(
             lhs,
             rhs,
             absoluteTolerance: absoluteTolerance,
@@ -39,10 +39,10 @@ internal struct ComplexApproximatelyEquatableTests {
     }
 }
 
-// MARK: - Generic Protocol Calls
+// MARK: - Helpers
 
 extension ComplexApproximatelyEquatableTests {
-    private static func approximatelyEqual<Value>(
+    private static func genericApproximatelyEqual<Value>(
         _ lhs: Value,
         _ rhs: Value,
         absoluteTolerance: Value.AbsoluteTolerance,
