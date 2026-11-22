@@ -18,11 +18,11 @@ releases.
 
 - <doc:Installation>
 - <doc:PackageArchitecture>
+- <doc:NumericsIntegration>
 - <doc:NumericProtocolHierarchy>
 
 ### Articles
 
-- <doc:NumericsIntegration>
 - <doc:UnderstandingFourBitIntegers>
 - <doc:UnderstandingRationalTypes>
 - <doc:UnderstandingRomanNumerals>
