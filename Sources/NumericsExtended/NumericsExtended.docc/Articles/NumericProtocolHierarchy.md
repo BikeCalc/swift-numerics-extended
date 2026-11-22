@@ -13,6 +13,12 @@ signed-integer, and binary-integer hierarchies. Numerics Extended adds package-o
 be retroactively changed to refine those package protocols. Those orthogonal Core requirements therefore remain outside
 this refinement hierarchy.
 
+`Double`, `Int`, and `UInt` represent these standard-library types, which follow their respective protocol paths:
+
+- Floating-point: `Float16`, `Float32`, `Float64`, and `Float80`, where available.
+- Signed integers: `Int`, `Int8`, `Int16`, `Int32`, `Int64`, and `Int128`.
+- Unsigned integers: `UInt`, `UInt8`, `UInt16`, `UInt32`, `UInt64`, and `UInt128`.
+
 ```text
 +---------------------+ +---------------------+             +---------------------+ +---------------------+             +---------------------+
 |    Fraction<Int>    | |       Double        |             |         Int         | |        UInt         |             |        Roman        |
