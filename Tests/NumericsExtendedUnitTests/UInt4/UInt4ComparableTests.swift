@@ -39,10 +39,10 @@ internal struct UInt4ComparableTests {
         isLessThanOrEqualExpected _: Bool,
         isGreaterExpected _: Bool,
         isGreaterThanOrEqualExpected _: Bool
-    ) throws {
+    ) {
         let lessThanResult: Bool = lhs < rhs
         #expect(lessThanResult == isLessExpected)
-        let isLessResult: Bool = try lhs.isLess(than: rhs)
+        let isLessResult: Bool = lhs.isLess(than: rhs)
         #expect(isLessResult == isLessExpected)
     }
 
@@ -57,10 +57,10 @@ internal struct UInt4ComparableTests {
         isLessThanOrEqualExpected: Bool,
         isGreaterExpected _: Bool,
         isGreaterThanOrEqualExpected _: Bool
-    ) throws {
+    ) {
         let lessThanOrEqualResult: Bool = lhs <= rhs
         #expect(lessThanOrEqualResult == isLessThanOrEqualExpected)
-        let isLessThanOrEqualResult: Bool = try lhs.isLessThanOrEqual(to: rhs)
+        let isLessThanOrEqualResult: Bool = lhs.isLessThanOrEqual(to: rhs)
         #expect(isLessThanOrEqualResult == isLessThanOrEqualExpected)
     }
 
@@ -75,10 +75,10 @@ internal struct UInt4ComparableTests {
         isLessThanOrEqualExpected _: Bool,
         isGreaterExpected: Bool,
         isGreaterThanOrEqualExpected _: Bool
-    ) throws {
+    ) {
         let greaterThanResult: Bool = lhs > rhs
         #expect(greaterThanResult == isGreaterExpected)
-        let isGreaterResult: Bool = try lhs.isGreater(than: rhs)
+        let isGreaterResult: Bool = lhs.isGreater(than: rhs)
         #expect(isGreaterResult == isGreaterExpected)
     }
 
@@ -93,10 +93,10 @@ internal struct UInt4ComparableTests {
         isLessThanOrEqualExpected _: Bool,
         isGreaterExpected _: Bool,
         isGreaterThanOrEqualExpected: Bool
-    ) throws {
+    ) {
         let greaterThanOrEqualResult: Bool = lhs >= rhs
         #expect(greaterThanOrEqualResult == isGreaterThanOrEqualExpected)
-        let isGreaterThanOrEqualResult: Bool = try lhs.isGreaterThanOrEqual(to: rhs)
+        let isGreaterThanOrEqualResult: Bool = lhs.isGreaterThanOrEqual(to: rhs)
         #expect(isGreaterThanOrEqualResult == isGreaterThanOrEqualExpected)
     }
 
@@ -108,9 +108,9 @@ internal struct UInt4ComparableTests {
         value: UInt4,
         lowerBound: UInt4,
         upperBound: UInt4
-    ) throws {
+    ) {
         let range: ClosedRange<UInt4> = lowerBound ... upperBound
-        let result: Bool = try value.isWithin(range)
+        let result: Bool = value.isWithin(range)
         #expect(result == range.contains(value))
     }
 
@@ -122,8 +122,8 @@ internal struct UInt4ComparableTests {
         value: UInt4,
         lowerBound: UInt4,
         upperBound: UInt4
-    ) throws {
-        let result: Bool = try value.isWithin(lowerBound, upperBound) == true
+    ) {
+        let result: Bool = value.isWithin(lowerBound, upperBound) == true
         #expect(result == (value >= lowerBound && value <= upperBound))
     }
 
@@ -135,8 +135,8 @@ internal struct UInt4ComparableTests {
         value: UInt4,
         lowerBound: UInt4,
         upperBound: UInt4
-    ) throws {
-        let result: Bool = try value.isBetween(lowerBound, upperBound) == true
+    ) {
+        let result: Bool = value.isBetween(lowerBound, upperBound) == true
         #expect(result == (value > lowerBound && value < upperBound))
     }
 }

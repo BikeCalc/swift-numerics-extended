@@ -61,10 +61,10 @@ internal struct DoubleComparableTests {
         isLessThanOrEqualExpected _: Bool,
         isGreaterExpected _: Bool,
         isGreaterThanOrEqualExpected _: Bool
-    ) throws {
+    ) {
         let lessThanResult: Bool = lhs < rhs
         #expect(lessThanResult == isLessExpected)
-        let isLessResult: Bool = lhs.isLess(than: rhs)
+        let isLessResult: Bool = Self.genericIsLess(lhs, rhs)
         #expect(isLessResult == isLessExpected)
     }
 
@@ -79,10 +79,10 @@ internal struct DoubleComparableTests {
         isLessThanOrEqualExpected: Bool,
         isGreaterExpected _: Bool,
         isGreaterThanOrEqualExpected _: Bool
-    ) throws {
+    ) {
         let lessThanOrEqualResult: Bool = lhs <= rhs
         #expect(lessThanOrEqualResult == isLessThanOrEqualExpected)
-        let isLessThanOrEqualResult: Bool = try lhs.isLessThanOrEqual(to: rhs)
+        let isLessThanOrEqualResult: Bool = lhs.isLessThanOrEqual(to: rhs)
         #expect(isLessThanOrEqualResult == isLessThanOrEqualExpected)
     }
 
@@ -97,10 +97,10 @@ internal struct DoubleComparableTests {
         isLessThanOrEqualExpected _: Bool,
         isGreaterExpected: Bool,
         isGreaterThanOrEqualExpected _: Bool
-    ) throws {
+    ) {
         let greaterThanResult: Bool = lhs > rhs
         #expect(greaterThanResult == isGreaterExpected)
-        let isGreaterResult: Bool = try lhs.isGreater(than: rhs)
+        let isGreaterResult: Bool = lhs.isGreater(than: rhs)
         #expect(isGreaterResult == isGreaterExpected)
     }
 
@@ -115,10 +115,10 @@ internal struct DoubleComparableTests {
         isLessThanOrEqualExpected _: Bool,
         isGreaterExpected _: Bool,
         isGreaterThanOrEqualExpected: Bool
-    ) throws {
+    ) {
         let greaterThanOrEqualResult: Bool = lhs >= rhs
         #expect(greaterThanOrEqualResult == isGreaterThanOrEqualExpected)
-        let isGreaterThanOrEqualResult: Bool = try lhs.isGreaterThanOrEqual(to: rhs)
+        let isGreaterThanOrEqualResult: Bool = lhs.isGreaterThanOrEqual(to: rhs)
         #expect(isGreaterThanOrEqualResult == isGreaterThanOrEqualExpected)
     }
 
@@ -130,9 +130,9 @@ internal struct DoubleComparableTests {
         value: Double,
         lowerBound: Double,
         upperBound: Double
-    ) throws {
+    ) {
         let range: ClosedRange<Double> = lowerBound ... upperBound
-        let result: Bool = try value.isWithin(range)
+        let result: Bool = value.isWithin(range)
         #expect(result == range.contains(value))
     }
 
@@ -144,8 +144,8 @@ internal struct DoubleComparableTests {
         value: Double,
         lowerBound: Double,
         upperBound: Double
-    ) throws {
-        let result: Bool = try value.isWithin(lowerBound, upperBound) == true
+    ) {
+        let result: Bool = value.isWithin(lowerBound, upperBound) == true
         #expect(result == (value >= lowerBound && value <= upperBound))
     }
 
@@ -157,8 +157,8 @@ internal struct DoubleComparableTests {
         value: Double,
         lowerBound: Double,
         upperBound: Double
-    ) throws {
-        let result: Bool = try value.isBetween(lowerBound, upperBound) == true
+    ) {
+        let result: Bool = value.isBetween(lowerBound, upperBound) == true
         #expect(result == (value > lowerBound && value < upperBound))
     }
 }
@@ -167,12 +167,12 @@ internal struct DoubleComparableTests {
 
 extension DoubleComparableTests {
     @Test("NaN is outside ordered bounds")
-    internal func nanIsOutsideOrderedBounds() throws {
-        let firstResult: Bool = try Double.nan.isWithin(1.0 ... 2.0)
+    internal func nanIsOutsideOrderedBounds() {
+        let firstResult: Bool = Double.nan.isWithin(1.0 ... 2.0)
         #expect(firstResult == false)
-        let secondResult: Bool = try Double.nan.isWithin(1.0, 2.0)
+        let secondResult: Bool = Double.nan.isWithin(1.0, 2.0)
         #expect(secondResult == false)
-        let isBetweenResult: Bool = try Double.nan.isBetween(1.0, 2.0)
+        let isBetweenResult: Bool = Double.nan.isBetween(1.0, 2.0)
         #expect(isBetweenResult == false)
     }
 
@@ -187,7 +187,7 @@ extension DoubleComparableTests {
     internal func nanComparisonFollowsFloatingPointRules(
         lhs: Double,
         rhs: Double
-    ) throws {
+    ) {
         let lessThanResult: Bool = lhs < rhs
         #expect(lessThanResult == false)
         let greaterThanResult: Bool = lhs > rhs
@@ -196,13 +196,13 @@ extension DoubleComparableTests {
         #expect(lessThanOrEqualResult == false)
         let greaterThanOrEqualResult: Bool = lhs >= rhs
         #expect(greaterThanOrEqualResult == false)
-        let isLessResult: Bool = lhs.isLess(than: rhs)
+        let isLessResult: Bool = Self.genericIsLess(lhs, rhs)
         #expect(isLessResult == false)
-        let isLessThanOrEqualResult: Bool = try lhs.isLessThanOrEqual(to: rhs)
+        let isLessThanOrEqualResult: Bool = lhs.isLessThanOrEqual(to: rhs)
         #expect(isLessThanOrEqualResult == false)
-        let isGreaterResult: Bool = try lhs.isGreater(than: rhs)
+        let isGreaterResult: Bool = lhs.isGreater(than: rhs)
         #expect(isGreaterResult == false)
-        let isGreaterThanOrEqualResult: Bool = try lhs.isGreaterThanOrEqual(to: rhs)
+        let isGreaterThanOrEqualResult: Bool = lhs.isGreaterThanOrEqual(to: rhs)
         #expect(isGreaterThanOrEqualResult == false)
     }
 }
@@ -225,7 +225,7 @@ extension DoubleComparableTests {
         isLessThanOrEqualExpected: Bool,
         isGreaterExpected: Bool,
         isGreaterThanOrEqualExpected: Bool
-    ) throws {
+    ) {
         let lessThanResult: Bool = lhs < rhs
         #expect(lessThanResult == isLessExpected)
         let lessThanOrEqualResult: Bool = lhs <= rhs
@@ -234,13 +234,13 @@ extension DoubleComparableTests {
         #expect(greaterThanResult == isGreaterExpected)
         let greaterThanOrEqualResult: Bool = lhs >= rhs
         #expect(greaterThanOrEqualResult == isGreaterThanOrEqualExpected)
-        let isLessResult: Bool = lhs.isLess(than: rhs)
+        let isLessResult: Bool = Self.genericIsLess(lhs, rhs)
         #expect(isLessResult == isLessExpected)
-        let isLessThanOrEqualResult: Bool = try lhs.isLessThanOrEqual(to: rhs)
+        let isLessThanOrEqualResult: Bool = lhs.isLessThanOrEqual(to: rhs)
         #expect(isLessThanOrEqualResult == isLessThanOrEqualExpected)
-        let isGreaterResult: Bool = try lhs.isGreater(than: rhs)
+        let isGreaterResult: Bool = lhs.isGreater(than: rhs)
         #expect(isGreaterResult == isGreaterExpected)
-        let isGreaterThanOrEqualResult: Bool = try lhs.isGreaterThanOrEqual(to: rhs)
+        let isGreaterThanOrEqualResult: Bool = lhs.isGreaterThanOrEqual(to: rhs)
         #expect(isGreaterThanOrEqualResult == isGreaterThanOrEqualExpected)
     }
 }
@@ -263,7 +263,7 @@ extension DoubleComparableTests {
         isLessThanOrEqualExpected: Bool,
         isGreaterExpected: Bool,
         isGreaterThanOrEqualExpected: Bool
-    ) throws {
+    ) {
         let lessThanResult: Bool = lhs < rhs
         #expect(lessThanResult == isLessExpected)
         let lessThanOrEqualResult: Bool = lhs <= rhs
@@ -272,13 +272,13 @@ extension DoubleComparableTests {
         #expect(greaterThanResult == isGreaterExpected)
         let greaterThanOrEqualResult: Bool = lhs >= rhs
         #expect(greaterThanOrEqualResult == isGreaterThanOrEqualExpected)
-        let isLessResult: Bool = lhs.isLess(than: rhs)
+        let isLessResult: Bool = Self.genericIsLess(lhs, rhs)
         #expect(isLessResult == isLessExpected)
-        let isLessThanOrEqualResult: Bool = try lhs.isLessThanOrEqual(to: rhs)
+        let isLessThanOrEqualResult: Bool = lhs.isLessThanOrEqual(to: rhs)
         #expect(isLessThanOrEqualResult == isLessThanOrEqualExpected)
-        let isGreaterResult: Bool = try lhs.isGreater(than: rhs)
+        let isGreaterResult: Bool = lhs.isGreater(than: rhs)
         #expect(isGreaterResult == isGreaterExpected)
-        let isGreaterThanOrEqualResult: Bool = try lhs.isGreaterThanOrEqual(to: rhs)
+        let isGreaterThanOrEqualResult: Bool = lhs.isGreaterThanOrEqual(to: rhs)
         #expect(isGreaterThanOrEqualResult == isGreaterThanOrEqualExpected)
     }
 }
@@ -301,7 +301,7 @@ extension DoubleComparableTests {
         isLessThanOrEqualExpected: Bool,
         isGreaterExpected: Bool,
         isGreaterThanOrEqualExpected: Bool
-    ) throws {
+    ) {
         let lessThanResult: Bool = lhs < rhs
         #expect(lessThanResult == isLessExpected)
         let lessThanOrEqualResult: Bool = lhs <= rhs
@@ -310,13 +310,13 @@ extension DoubleComparableTests {
         #expect(greaterThanResult == isGreaterExpected)
         let greaterThanOrEqualResult: Bool = lhs >= rhs
         #expect(greaterThanOrEqualResult == isGreaterThanOrEqualExpected)
-        let isLessResult: Bool = lhs.isLess(than: rhs)
+        let isLessResult: Bool = Self.genericIsLess(lhs, rhs)
         #expect(isLessResult == isLessExpected)
-        let isLessThanOrEqualResult: Bool = try lhs.isLessThanOrEqual(to: rhs)
+        let isLessThanOrEqualResult: Bool = lhs.isLessThanOrEqual(to: rhs)
         #expect(isLessThanOrEqualResult == isLessThanOrEqualExpected)
-        let isGreaterResult: Bool = try lhs.isGreater(than: rhs)
+        let isGreaterResult: Bool = lhs.isGreater(than: rhs)
         #expect(isGreaterResult == isGreaterExpected)
-        let isGreaterThanOrEqualResult: Bool = try lhs.isGreaterThanOrEqual(to: rhs)
+        let isGreaterThanOrEqualResult: Bool = lhs.isGreaterThanOrEqual(to: rhs)
         #expect(isGreaterThanOrEqualResult == isGreaterThanOrEqualExpected)
     }
 }
@@ -339,7 +339,7 @@ extension DoubleComparableTests {
         isLessThanOrEqualExpected: Bool,
         isGreaterExpected: Bool,
         isGreaterThanOrEqualExpected: Bool
-    ) throws {
+    ) {
         let lessThanResult: Bool = lhs < rhs
         #expect(lessThanResult == isLessExpected)
         let lessThanOrEqualResult: Bool = lhs <= rhs
@@ -348,13 +348,23 @@ extension DoubleComparableTests {
         #expect(greaterThanResult == isGreaterExpected)
         let greaterThanOrEqualResult: Bool = lhs >= rhs
         #expect(greaterThanOrEqualResult == isGreaterThanOrEqualExpected)
-        let isLessResult: Bool = lhs.isLess(than: rhs)
+        let isLessResult: Bool = Self.genericIsLess(lhs, rhs)
         #expect(isLessResult == isLessExpected)
-        let isLessThanOrEqualResult: Bool = try lhs.isLessThanOrEqual(to: rhs)
+        let isLessThanOrEqualResult: Bool = lhs.isLessThanOrEqual(to: rhs)
         #expect(isLessThanOrEqualResult == isLessThanOrEqualExpected)
-        let isGreaterResult: Bool = try lhs.isGreater(than: rhs)
+        let isGreaterResult: Bool = lhs.isGreater(than: rhs)
         #expect(isGreaterResult == isGreaterExpected)
-        let isGreaterThanOrEqualResult: Bool = try lhs.isGreaterThanOrEqual(to: rhs)
+        let isGreaterThanOrEqualResult: Bool = lhs.isGreaterThanOrEqual(to: rhs)
         #expect(isGreaterThanOrEqualResult == isGreaterThanOrEqualExpected)
+    }
+}
+
+extension DoubleComparableTests {
+    private static func genericIsLess<Value>(
+        _ lhs: Value,
+        _ rhs: Value
+    ) -> Bool
+    where Value: Comparable {
+        return lhs.isLess(than: rhs)
     }
 }
