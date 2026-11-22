@@ -1,0 +1,23 @@
+{
+  "originHash": "5f8c2dd2b1aeb1174ba7306fc432815d50091f8fe71f2f0c929d5b16bcd77e93",
+  "pins": [
+    {
+      "identity": "decimalannex",
+      "kind": "remoteSourceControl",
+      "location": "https://github.com/xwu/DecimalAnnex.git",
+      "state": {
+        "revision": "baef9ff4ad67f87082fa6aa8c5a1e154d1a284ac"
+      }
+    },
+    {
+      "identity": "swift-numerics",
+      "kind": "remoteSourceControl",
+      "location": "https://github.com/apple/swift-numerics.git",
+      "state": {
+        "revision": "0c0290ff6b24942dadb83a929ffaaa1481df04a2",
+        "version": "1.1.1"
+      }
+    }
+  ],
+  "version": 3
+}
